@@ -1,4 +1,6 @@
 SET(ba_lib_SOURCES
+	particles/Particles.cpp
+	System.cpp
 	Trajectory.cpp
 )
 

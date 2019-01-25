@@ -8,6 +8,7 @@
 * A few Boost modules:
     * Boost Log (libboost-log-dev) 
     * Boost Signals2 (libboost-signals-dev)
+    * Boost Filesystem (libboost-filesystem-dev)
 
 ### Compilation
 

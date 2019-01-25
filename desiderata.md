@@ -30,3 +30,7 @@ traj_A_only = traj.take(type="A")
 traj_small_x_only = traj.take(???)
 ```
 * We can add heuristics to make baggianalysis understand what kind of configurations we are dealing with
+
+## Architecture
+
+* The System class should be a template of at least the type of particles (point particles, anisotropic particles, rigid bodies, *etc.*).
