@@ -30,3 +30,7 @@ Here is a list of options that can be passed to cmake during the pre-compilation
 * `-DPython=On`			Enables Python bindings
 * `-DDebug=ON`				Compiles with debug symbols and without optimisation flags
 * `-DG=ON`					Compiles with debug symbols + optimisation flags
+
+## Acknowledgements
+
+* Eigen 3.3.4 is included in the source tree
