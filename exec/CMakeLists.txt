@@ -9,5 +9,7 @@ SET(ba_SOURCES
 	main.cpp
 )
 
+INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/lib )
+
 ADD_EXECUTABLE(${exe_name} ${ba_SOURCES})
 TARGET_LINK_LIBRARIES(${exe_name} _baggianalysis)
