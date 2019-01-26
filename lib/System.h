@@ -8,7 +8,7 @@
 #ifndef SYSTEM_H_
 #define SYSTEM_H_
 
-#include "particles/Particles.h"
+#include "Particles.h"
 
 namespace ba {
 

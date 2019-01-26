@@ -1,5 +1,5 @@
 SET(ba_lib_SOURCES
-	particles/Particles.cpp
+	Particles.cpp
 	System.cpp
 	Trajectory.cpp
 )

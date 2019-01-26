@@ -8,7 +8,7 @@
 #ifndef PARTICLES_PARTICLES_H_
 #define PARTICLES_PARTICLES_H_
 
-#include "../defs.h"
+#include "defs.h"
 
 namespace ba {
 
@@ -17,6 +17,7 @@ public:
 	Particles();
 	virtual ~Particles();
 
+	std::vector<uint> types;
 	vector_vec3 positions;
 	vector_vec3 velocities;
 };
