@@ -1,4 +1,5 @@
 SET(ba_lib_SOURCES
+	observables/MSD.cpp
 	parsers/OxDNAParser.cpp
 	Particles.cpp
 	System.cpp

@@ -54,9 +54,15 @@ void Trajectory::initialise() {
 		throw std::runtime_error(error);
 	}
 
-	std::shared_ptr<System> new_system(new System);
-	while(OxDNAParser::parse(new_system, topology, trajectory)) {
-		frames.push_back(new_system);
+	bool done = false;
+	while(!done) {
+		auto new_system = OxDNAParser::parse(topology, trajectory);
+		if(new_system == nullptr) {
+			done = true;
+		}
+		else {
+			frames.push_back(new_system);
+		}
 	}
 
 	topology.close();

@@ -19,7 +19,7 @@ public:
 	OxDNAParser() = delete;
 	virtual ~OxDNAParser() = delete;
 
-	static bool parse(std::shared_ptr<System> syst, std::ifstream &topology, std::ifstream &configuration);
+	static std::shared_ptr<System> parse(std::ifstream &topology, std::ifstream &configuration);
 };
 
 } /* namespace ba */

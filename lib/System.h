@@ -17,6 +17,8 @@ public:
 	System();
 	virtual ~System();
 
+	vec3 com();
+
 public:
 	ullint time = 0;
 	Particles particles;

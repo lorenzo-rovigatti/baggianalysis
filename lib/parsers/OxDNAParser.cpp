@@ -14,7 +14,7 @@ namespace ba {
 
 using namespace std;
 
-bool OxDNAParser::parse(shared_ptr<System> syst, ifstream &topology, ifstream &configuration) {
+shared_ptr<System> OxDNAParser::parse(ifstream &topology, ifstream &configuration) {
 	int N;
 	topology >> N;
 
@@ -23,7 +23,9 @@ bool OxDNAParser::parse(shared_ptr<System> syst, ifstream &topology, ifstream &c
 
 	// timestep line
 	getline(configuration, line);
-	if(!configuration.good()) return false;
+	if(!configuration.good()) return nullptr;
+
+	std::shared_ptr<System> syst(new System);
 
 	boost::split(split, line, boost::is_any_of(" "));
 	try {
@@ -49,7 +51,7 @@ bool OxDNAParser::parse(shared_ptr<System> syst, ifstream &topology, ifstream &c
 		else {
 			parsed = true;
 			getline(configuration, line);
-			if(line.size() > 0) {
+			if(configuration.good() && line.size() > 0) {
 				boost::split(split, line, boost::is_any_of(" "));
 				vec3 position = vec3(
 						boost::lexical_cast<double>(split[0]),
@@ -70,7 +72,12 @@ bool OxDNAParser::parse(shared_ptr<System> syst, ifstream &topology, ifstream &c
 		}
 	}
 
-	return parsed;
+	if(parsed) {
+		return syst;
+	}
+	else {
+		return nullptr;
+	}
 }
 
 } /* namespace ba */
