@@ -17,10 +17,9 @@ public:
 	System();
 	virtual ~System();
 
+public:
+	ullint time = 0;
 	Particles particles;
-
-protected:
-
 };
 
 } /* namespace ba */

@@ -1,11 +1,12 @@
 SET(ba_lib_SOURCES
+	parsers/OxDNAParser.cpp
 	Particles.cpp
 	System.cpp
 	Trajectory.cpp
 )
 
 ADD_LIBRARY(_baggianalysis SHARED ${ba_lib_SOURCES})
-#TARGET_LINK_LIBRARIES(_baggianalysis ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
+TARGET_LINK_LIBRARIES(_baggianalysis ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
 
 SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES PREFIX "")
 

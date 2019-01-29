@@ -11,6 +11,8 @@
 #define SQR(x) ((x) * (x))
 #define CUB(x) ((x) * (x) * (x))
 
+#include <memory>
+
 #include <Eigen/Dense>
 #include <Eigen/StdVector>
 

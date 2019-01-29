@@ -4,6 +4,7 @@
 	* spherical and anisotropic
 	* single file or split into separate files
 	* different box types
+	* lazy loading?
 2. Standard analysis
 	* S(q), g(r)
 	* MSD, density-density correlation functions, Van Hove
