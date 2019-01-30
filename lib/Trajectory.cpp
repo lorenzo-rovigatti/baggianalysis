@@ -9,26 +9,21 @@
 #include "parsers/OxDNAParser.h"
 #include "System.h"
 
+#include <boost/filesystem.hpp>
 #include <fstream>
 
 namespace ba {
 
+namespace bfs = boost::filesystem;
 using namespace std;
 
-Trajectory::Trajectory() {
+Trajectory::Trajectory(shared_ptr<BaseParser> parser) :
+				_parser(parser) {
 
 }
 
 Trajectory::~Trajectory() {
 
-}
-
-void Trajectory::setTopologyFile(std::string topology_file) {
-	_topology_file = topology_file;
-}
-
-void Trajectory::setTrajectoryFile(std::string trajectory_file) {
-	_trajectory_file = trajectory_file;
 }
 
 void Trajectory::add_filter(std::shared_ptr<BaseFilter> filter) {
@@ -39,32 +34,17 @@ void Trajectory::add_filter(std::shared_ptr<BaseFilter> filter) {
 	_filters.push_back(filter);
 }
 
-void Trajectory::initialise() {
-	if(_topology_file == "") {
-		throw std::runtime_error("Uninitialised topology file");
-	}
-
-	ifstream topology(_topology_file);
-
-	if(!topology.good()) {
-		std::string error = boost::str(boost::format("Topology file '%s' not found") % _topology_file);
-		throw std::runtime_error(error);
-	}
-
-	if(_trajectory_file == "") {
-		throw std::runtime_error("Uninitialised trajectory file");
-	}
-
-	ifstream trajectory(_trajectory_file);
+void Trajectory::initialise_from_trajectory_file(std::string trajectory_file) {
+	ifstream trajectory(trajectory_file);
 
 	if(!trajectory.good()) {
-		std::string error = boost::str(boost::format("Trajectory file '%s' not found") % _trajectory_file);
+		std::string error = boost::str(boost::format("Unreadable trajectory file '%s'") % trajectory_file);
 		throw std::runtime_error(error);
 	}
 
 	bool done = false;
 	while(!done) {
-		auto new_system = OxDNAParser::parse(topology, trajectory);
+		auto new_system = _parser->parse(trajectory);
 		if(new_system == nullptr) {
 			done = true;
 		}
@@ -76,8 +56,49 @@ void Trajectory::initialise() {
 		}
 	}
 
-	topology.close();
 	trajectory.close();
+
+	BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
+}
+
+void Trajectory::initialise_from_folder(std::string folder, std::string prefix) {
+	bfs::path path(folder);
+
+	if(!bfs::exists(path)) {
+		std::string error = boost::str(boost::format("The '%s' folder does not exist") % folder);
+		throw std::runtime_error(error);
+	}
+
+	if(!bfs::is_directory(path)) {
+		std::string error = boost::str(boost::format("'%s' is not a folder") % folder);
+		throw std::runtime_error(error);
+	}
+
+	std::vector<std::string> files;
+
+	for(auto &entry : bfs::directory_iterator(path)) {
+		bool starts_with_prefix = (entry.path().filename().string().rfind(prefix, 0) == 0);
+		if(bfs::is_regular_file(entry) && starts_with_prefix) {
+			files.push_back(entry.path().string());
+		}
+	}
+
+	std::sort(files.begin(), files.end());
+
+	for(auto f : files) {
+		ifstream conf_file(f);
+		auto new_system = _parser->parse(conf_file);
+		conf_file.close();
+
+		if(new_system == nullptr) {
+			std::string error = boost::str(boost::format("The '%s' configuration is either empty or invalid") % f);
+			throw std::runtime_error(error);
+		}
+		for(auto filter : _filters) {
+			new_system = filter->filter(new_system);
+		}
+		frames.push_back(new_system);
+	}
 
 	BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
 }

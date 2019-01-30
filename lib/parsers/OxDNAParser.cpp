@@ -14,9 +14,28 @@ namespace ba {
 
 using namespace std;
 
-shared_ptr<System> OxDNAParser::parse(ifstream &topology, ifstream &configuration) {
-	int N;
+OxDNAParser::OxDNAParser(std::string topology_file) :
+				BaseParser(),
+				_topology_file(topology_file) {
+
+}
+
+OxDNAParser::~OxDNAParser() {
+
+}
+
+shared_ptr<System> OxDNAParser::parse(ifstream &configuration) {
+	ifstream topology(_topology_file);
+
+	if(!topology.good()) {
+		std::string error = boost::str(boost::format("Topology file '%s' not found") % _topology_file);
+		throw std::runtime_error(error);
+	}
+
+	uint N;
 	topology >> N;
+
+	topology.close();
 
 	string line;
 	vector<string> split;
@@ -53,23 +72,20 @@ shared_ptr<System> OxDNAParser::parse(ifstream &topology, ifstream &configuratio
 			getline(configuration, line);
 			if(configuration.good() && line.size() > 0) {
 				boost::split(split, line, boost::is_any_of(" "));
-				vec3 position = vec3(
-						boost::lexical_cast<double>(split[0]),
-						boost::lexical_cast<double>(split[1]),
-						boost::lexical_cast<double>(split[2])
-				);
+				vec3 position = vec3(boost::lexical_cast<double>(split[0]), boost::lexical_cast<double>(split[1]), boost::lexical_cast<double>(split[2]));
 
-				vec3 velocity = vec3(
-						boost::lexical_cast<double>(split[9]),
-						boost::lexical_cast<double>(split[10]),
-						boost::lexical_cast<double>(split[11])
-				);
+				vec3 velocity = vec3(boost::lexical_cast<double>(split[9]), boost::lexical_cast<double>(split[10]), boost::lexical_cast<double>(split[11]));
 
 				syst->particles.types.push_back(0);
 				syst->particles.positions.push_back(position);
 				syst->particles.velocities.push_back(velocity);
 			}
 		}
+	}
+
+	if(syst->particles.N() != N) {
+		string error = boost::str(boost::format("The number of particles found in the configuration file (%d) is different from what specified in the topology file (%d)") % syst->particles.N() % N);
+		throw std::runtime_error(error);
 	}
 
 	if(parsed) {

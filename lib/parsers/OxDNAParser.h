@@ -8,18 +8,21 @@
 #ifndef PARSERS_OXDNAPARSER_H_
 #define PARSERS_OXDNAPARSER_H_
 
-#include "../System.h"
+#include "BaseParser.h"
 
 #include <fstream>
 
 namespace ba {
 
-class OxDNAParser {
+class OxDNAParser: public BaseParser {
 public:
-	OxDNAParser() = delete;
-	virtual ~OxDNAParser() = delete;
+	OxDNAParser(std::string topology_file);
+	virtual ~OxDNAParser();
 
-	static std::shared_ptr<System> parse(std::ifstream &topology, std::ifstream &configuration);
+	virtual std::shared_ptr<System> parse(std::ifstream &configuration) override;
+
+protected:
+	std::string _topology_file;
 };
 
 } /* namespace ba */

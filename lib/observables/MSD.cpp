@@ -108,7 +108,6 @@ double MSD::_conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System
 	vec3 com_diff(0., 0., 0.);
 	if(remove_com) {
 		com_diff = second->com() - first->com();
-		cout << com_diff.dot(com_diff) << endl;
 	}
 	for(uint i = 0; i < N; i++) {
 		vec3 diff = second->particles.positions[i] - first->particles.positions[i] - com_diff;

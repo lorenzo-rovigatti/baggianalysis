@@ -15,7 +15,7 @@ namespace ba {
 struct MSDOptions {
 	uint points_per_cycle = 0;
 	std::string output_file = "msd.dat";
-	bool remove_com = true;
+	bool remove_com = false;
 };
 
 class MSD {

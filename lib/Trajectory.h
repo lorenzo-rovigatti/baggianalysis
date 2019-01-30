@@ -8,29 +8,26 @@
 #ifndef TRAJECTORY_H_
 #define TRAJECTORY_H_
 
-#include "System.h"
 #include "filters/BaseFilter.h"
+#include "parsers/BaseParser.h"
+#include "System.h"
 
 namespace ba {
 
 class Trajectory {
 public:
-	Trajectory();
+	Trajectory(std::shared_ptr<BaseParser> parser);
 	virtual ~Trajectory();
 
-	void setTopologyFile(std::string topology_file);
-	void setTrajectoryFile(std::string trajectory_file);
-
 	void add_filter(std::shared_ptr<BaseFilter> filter);
-	void initialise();
+	void initialise_from_folder(std::string folder, std::string prefix);
+	void initialise_from_trajectory_file(std::string trajectory_file);
 
 public:
 	std::vector<std::shared_ptr<System>> frames;
 
 protected:
-	std::string _topology_file;
-	std::string _trajectory_file;
-
+	std::shared_ptr<BaseParser> _parser;
 	std::vector<std::shared_ptr<BaseFilter>> _filters;
 };
 
