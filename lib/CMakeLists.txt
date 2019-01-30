@@ -1,4 +1,8 @@
 SET(ba_lib_SOURCES
+	filters/BaseFilter.cpp
+	filters/FilterByReducingToCOM.cpp
+	filters/FilterByType.cpp
+	filters/SubtractCOM.cpp
 	observables/MSD.cpp
 	parsers/OxDNAParser.cpp
 	Particles.cpp

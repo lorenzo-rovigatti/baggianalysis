@@ -11,6 +11,8 @@
 #define SQR(x) ((x) * (x))
 #define CUB(x) ((x) * (x) * (x))
 
+#define DEFAULT_PARTICLE_TYPE 0
+
 #include <memory>
 
 #include <Eigen/Dense>
@@ -28,5 +30,7 @@ using vector_scalar = std::vector<double>;
 
 using uint = unsigned int;
 using ullint = unsigned long long int;
+
+using particle_type = uint;
 
 #endif /* LIB_DEFS_H_ */

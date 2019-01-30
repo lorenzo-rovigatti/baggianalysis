@@ -31,6 +31,14 @@ void Trajectory::setTrajectoryFile(std::string trajectory_file) {
 	_trajectory_file = trajectory_file;
 }
 
+void Trajectory::add_filter(std::shared_ptr<BaseFilter> filter) {
+	if(frames.size() > 0) {
+		BOOST_LOG_TRIVIAL(warning)<<"Adding filters to trajectories that have been already initialised does not make much sense...";
+	}
+
+	_filters.push_back(filter);
+}
+
 void Trajectory::initialise() {
 	if(_topology_file == "") {
 		throw std::runtime_error("Uninitialised topology file");
@@ -61,6 +69,9 @@ void Trajectory::initialise() {
 			done = true;
 		}
 		else {
+			for(auto filter : _filters) {
+				new_system = filter->filter(new_system);
+			}
 			frames.push_back(new_system);
 		}
 	}
@@ -68,7 +79,8 @@ void Trajectory::initialise() {
 	topology.close();
 	trajectory.close();
 
-	BOOST_LOG_TRIVIAL(info) << "Loaded " << frames.size() << " frames";
+	BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
 }
 
-} /* namespace ba */
+}
+/* namespace ba */

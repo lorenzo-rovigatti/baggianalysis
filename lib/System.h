@@ -17,7 +17,10 @@ public:
 	System();
 	virtual ~System();
 
-	vec3 com();
+	std::shared_ptr<System> empty_copy();
+
+	vec3 com() const;
+	vec3 average_velocity() const;
 
 public:
 	ullint time = 0;

@@ -17,7 +17,9 @@ public:
 	Particles();
 	virtual ~Particles();
 
-	std::vector<uint> types;
+	uint N() const;
+
+	std::vector<particle_type> types;
 	vector_vec3 positions;
 	vector_vec3 velocities;
 };

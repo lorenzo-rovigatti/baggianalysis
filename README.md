@@ -32,6 +32,14 @@ Here is a list of options that can be passed to cmake during the pre-compilation
 * `-DDebug=ON`				Compiles with debug symbols and without optimisation flags
 * `-DG=ON`					Compiles with debug symbols + optimisation flags
 
+## Features
+
+* Support many configuration types
+* Filters: after being parsed, configurations can be modified by the so-called *filters*. Some available filters are:
+	* select particles of certain types only (FilterByType)
+	* remove the centre-of-mass position and velocity (SubtractCOM)
+	* reduce the configuration so that it contains only a single particle with position and velocity given by the centre-of-mass position and velocity (FilterByReducingToCOM)
+
 ## Acknowledgements
 
 * Eigen 3.3.4 is included in the source tree

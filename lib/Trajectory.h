@@ -9,6 +9,7 @@
 #define TRAJECTORY_H_
 
 #include "System.h"
+#include "filters/BaseFilter.h"
 
 namespace ba {
 
@@ -20,6 +21,7 @@ public:
 	void setTopologyFile(std::string topology_file);
 	void setTrajectoryFile(std::string trajectory_file);
 
+	void add_filter(std::shared_ptr<BaseFilter> filter);
 	void initialise();
 
 public:
@@ -29,6 +31,7 @@ protected:
 	std::string _topology_file;
 	std::string _trajectory_file;
 
+	std::vector<std::shared_ptr<BaseFilter>> _filters;
 };
 
 } /* namespace ba */

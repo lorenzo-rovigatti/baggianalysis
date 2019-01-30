@@ -17,4 +17,8 @@ Particles::~Particles() {
 
 }
 
+uint Particles::N() const {
+	return types.size();
+}
+
 } /* namespace ba */

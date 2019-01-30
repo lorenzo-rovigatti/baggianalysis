@@ -17,13 +17,30 @@ System::~System() {
 
 }
 
-vec3 System::com() {
+std::shared_ptr<System> System::empty_copy() {
+	std::shared_ptr<System> new_syst(new System());
+
+	new_syst->time = this->time;
+
+	return new_syst;
+}
+
+vec3 System::com() const {
 	vec3 com(0., 0., 0.);
 	for(auto &pos : particles.positions) {
 		com += pos;
 	}
-	com /= particles.positions.size();
+	com /= particles.N();
 	return com;
+}
+
+vec3 System::average_velocity() const {
+	vec3 v_avg(0., 0., 0.);
+	for(auto &vel : particles.velocities) {
+		v_avg += vel;
+	}
+	v_avg /= particles.N();
+	return v_avg;
 }
 
 } /* namespace ba */

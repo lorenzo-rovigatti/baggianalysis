@@ -39,9 +39,10 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 	uint N_first_conf = 0;
 	uint idx = 0;
 	for(auto frame : _trajectory->frames) {
-		uint N_conf = frame->particles.positions.size();
+		uint N_conf = frame->particles.N();
 		if(N_first_conf == 0) {
 			N_first_conf = N_conf;
+			BOOST_LOG_TRIVIAL(info) << "Computing the MSD on configurations composed of " << N_conf << " particles";
 		}
 
 		if(N_conf != N_first_conf) {
@@ -57,7 +58,7 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 
 			current_cycle_base = frame;
 
-			// loop over configurations which were the bases of past cycles
+			// loop over configurations that were the bases of past cycles
 			for(auto past_base : past_cycle_bases) {
 				double cc_MSD = _conf_conf_MSD(current_cycle_base, past_base, opts.remove_com);
 				ullint time_diff = current_cycle_base->time - past_base->time;
@@ -103,7 +104,7 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 
 double MSD::_conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System> second, bool remove_com) {
 	double cc_MSD = 0.;
-	uint N = first->particles.positions.size();
+	uint N = first->particles.N();
 	vec3 com_diff(0., 0., 0.);
 	if(remove_com) {
 		com_diff = second->com() - first->com();
