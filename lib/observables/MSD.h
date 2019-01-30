@@ -15,6 +15,7 @@ namespace ba {
 struct MSDOptions {
 	uint points_per_cycle = 0;
 	std::string output_file = "msd.dat";
+	bool remove_com = true;
 };
 
 class MSD {
@@ -29,7 +30,7 @@ public:
 	void compute_and_print(const MSDOptions &opts);
 
 protected:
-	double _conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System> second);
+	double _conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System> second, bool remove_com);
 
 protected:
 	std::shared_ptr<Trajectory> _trajectory;

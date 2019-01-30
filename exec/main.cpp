@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
 
 	auto opts = ba::MSD::default_options();
 	opts.points_per_cycle = 20;
+	opts.remove_com = true;
 	msd.compute_and_print(opts);
 
 	return 0;

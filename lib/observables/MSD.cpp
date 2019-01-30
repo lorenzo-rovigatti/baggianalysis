@@ -59,7 +59,7 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 
 			// loop over configurations which were the bases of past cycles
 			for(auto past_base : past_cycle_bases) {
-				double cc_MSD = _conf_conf_MSD(current_cycle_base, past_base);
+				double cc_MSD = _conf_conf_MSD(current_cycle_base, past_base, opts.remove_com);
 				ullint time_diff = current_cycle_base->time - past_base->time;
 				auto it = MSD.find(time_diff);
 				if(it == MSD.end()) {
@@ -73,7 +73,7 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 			}
 		}
 
-		double cc_MSD = _conf_conf_MSD(current_cycle_base, frame);
+		double cc_MSD = _conf_conf_MSD(current_cycle_base, frame, opts.remove_com);
 		ullint time_diff = frame->time - current_cycle_base->time;
 		auto it = MSD.find(time_diff);
 		if(it == MSD.end()) {
@@ -94,7 +94,6 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 	for(auto pair : MSD) {
 		if(pair.first > 0) {
 			double value = pair.second / n_conf[pair.first];
-			cout << value << endl;
 			output_file << pair.first << " " << value << endl;
 		}
 	}
@@ -102,11 +101,16 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 	output_file.close();
 }
 
-double MSD::_conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System> second) {
+double MSD::_conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System> second, bool remove_com) {
 	double cc_MSD = 0.;
 	uint N = first->particles.positions.size();
+	vec3 com_diff(0., 0., 0.);
+	if(remove_com) {
+		com_diff = second->com() - first->com();
+		cout << com_diff.dot(com_diff) << endl;
+	}
 	for(uint i = 0; i < N; i++) {
-		vec3 diff = second->particles.positions[i] - first->particles.positions[i];
+		vec3 diff = second->particles.positions[i] - first->particles.positions[i] - com_diff;
 		cc_MSD += diff.dot(diff);
 	}
 
