@@ -11,29 +11,31 @@
 #include <filters/FilterByType.h>
 #include <filters/SubtractCOM.h>
 #include <observables/MSD.h>
-#include <parsers/OxDNAParser.h>
+#include <parsers/LJKAParser.h>
 
 int main(int argc, char *argv[]) {
 	if(argc < 3) {
-		std::cerr << "Usage is " << argv[0] << " topology trajectory" << std::endl;
+		std::cerr << "Usage is " << argv[0] << " folder ppc" << std::endl;
 		return 1;
 	}
 
-	std::shared_ptr<ba::BaseParser> parser(new ba::OxDNAParser(argv[1]));
-
+	std::shared_ptr<ba::BaseParser> parser(new ba::LJKAParser());
 	std::shared_ptr<ba::Trajectory> trajectory(new ba::Trajectory(parser));
 
-//	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::FilterByReducingToCOM));
-//	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::SubtractCOM));
+	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::SubtractCOM()));
+//	std::vector<particle_type> allowed_types = {0};
+//	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::FilterByType(allowed_types)));
+//	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::FilterByReducingToCOM()));
 
-	trajectory->initialise_from_trajectory_file(argv[2]);
-//	trajectory->initialise_from_folder(argv[2], "conf_");
+//	trajectory->initialise_from_trajectory_file(argv[2]);
+	trajectory->initialise_from_folder(argv[1], "Cnf-");
 
 	ba::MSD msd(trajectory);
 
 	auto opts = ba::MSD::default_options();
-	opts.points_per_cycle = 20;
-	opts.remove_com = true;
+	opts.points_per_cycle = atoi(argv[2]);
+	opts.remove_com = false;
+	opts.output_file = "msd_total.dat";
 	msd.compute_and_print(opts);
 
 	return 0;

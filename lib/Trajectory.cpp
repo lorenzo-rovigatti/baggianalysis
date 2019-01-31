@@ -83,7 +83,7 @@ void Trajectory::initialise_from_folder(std::string folder, std::string prefix) 
 		}
 	}
 
-	std::sort(files.begin(), files.end());
+	uint N_files = files.size();
 
 	for(auto f : files) {
 		ifstream conf_file(f);
@@ -98,7 +98,15 @@ void Trajectory::initialise_from_folder(std::string folder, std::string prefix) 
 			new_system = filter->filter(new_system);
 		}
 		frames.push_back(new_system);
+		uint N_frames = frames.size();
+		if(N_frames % (N_files / 10) == 0) BOOST_LOG_TRIVIAL(info)<< "Parsed " << N_frames * 100 / N_files << "% of the configurations (" << N_frames << "/" << N_files << ")";
 	}
+
+	// we sort all the frames according to their timestep
+	auto sorting_function = [prefix](const shared_ptr<System> &s1, const shared_ptr<System> &s2) -> bool {
+		return (s1->time < s2->time);
+	};
+	std::sort(frames.begin(), frames.end(), sorting_function);
 
 	BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
 }
