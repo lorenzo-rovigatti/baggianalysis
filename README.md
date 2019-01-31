@@ -40,6 +40,10 @@ Here is a list of options that can be passed to cmake during the pre-compilation
 	* remove the centre-of-mass position and velocity (SubtractCOM)
 	* reduce the configuration so that it contains only a single particle with position and velocity given by the centre-of-mass position and velocity (FilterByReducingToCOM)
 
+## Notes
+
+* The timestep associated to a configuration **must** be an integer number. If your preferred format stores it as a floating-precision number, your parser will have to find a way of converting that to an integer. This is *by design*, as the time of a configuration is used as a key in several maps around the code, and floating-point numbers are not good at that. Moreover, integer numbers can be stored without losing any precision, in contrast with floats.
+
 ## Acknowledgements
 
 * Eigen 3.3.4 is included in the source tree

@@ -61,14 +61,12 @@ shared_ptr<System> OxDNAParser::parse(ifstream &configuration) {
 	// energy line
 	getline(configuration, line);
 
-	bool parsed = false;
 	bool end = false;
 	while(configuration.good() && !end) {
 		if(configuration.peek() == 't') {
 			end = true;
 		}
 		else {
-			parsed = true;
 			getline(configuration, line);
 			if(configuration.good() && line.size() > 0) {
 				boost::split(split, line, boost::is_any_of(" "));
@@ -88,12 +86,7 @@ shared_ptr<System> OxDNAParser::parse(ifstream &configuration) {
 		throw std::runtime_error(error);
 	}
 
-	if(parsed) {
-		return syst;
-	}
-	else {
-		return nullptr;
-	}
+	return syst;
 }
 
 } /* namespace ba */

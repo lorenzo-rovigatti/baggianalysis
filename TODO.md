@@ -8,3 +8,4 @@ This is a list of things that will have to be changed as soon as I have some tim
 ## Architectural changes
 
 * As it is now, parsers' parse method must handle both reading from files containing whole trajectories as well as single configurations. This makes things confusing and more prone to bugs.
+* How do we store the particle type? Now we use integers, but what about software that handles "real" atoms such as gromacs? 
