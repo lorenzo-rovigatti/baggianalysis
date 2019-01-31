@@ -99,7 +99,7 @@ void Trajectory::initialise_from_folder(std::string folder, std::string prefix) 
 		}
 		frames.push_back(new_system);
 		uint N_frames = frames.size();
-		if(N_frames % (N_files / 10) == 0) BOOST_LOG_TRIVIAL(info)<< "Parsed " << N_frames * 100 / N_files << "% of the configurations (" << N_frames << "/" << N_files << ")";
+		if(N_frames > 10 && N_frames % (N_files / 10) == 0) BOOST_LOG_TRIVIAL(info)<< "Parsed " << N_frames * 100 / N_files << "% of the configurations (" << N_frames << "/" << N_files << ")";
 	}
 
 	// we sort all the frames according to their timestep

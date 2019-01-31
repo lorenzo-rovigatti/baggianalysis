@@ -11,6 +11,7 @@
 #include <filters/FilterByType.h>
 #include <filters/SubtractCOM.h>
 #include <observables/MSD.h>
+#include <parsers/GroParser.h>
 #include <parsers/LJKAParser.h>
 
 int main(int argc, char *argv[]) {
@@ -19,7 +20,7 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	std::shared_ptr<ba::BaseParser> parser(new ba::LJKAParser());
+	std::shared_ptr<ba::BaseParser> parser(new ba::GroParser(0.001));
 	std::shared_ptr<ba::Trajectory> trajectory(new ba::Trajectory(parser));
 
 	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::SubtractCOM()));
@@ -28,7 +29,7 @@ int main(int argc, char *argv[]) {
 //	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::FilterByReducingToCOM()));
 
 //	trajectory->initialise_from_trajectory_file(argv[2]);
-	trajectory->initialise_from_folder(argv[1], "Cnf-");
+	trajectory->initialise_from_folder(argv[1], "Cnf3500-");
 
 	ba::MSD msd(trajectory);
 
