@@ -7,6 +7,7 @@
 
 #include <filters/FilterByReducingToCOM.h>
 #include <filters/FilterByType.h>
+#include <filters/FixParticlePath.h>
 #include <filters/SubtractCOM.h>
 #include <observables/MSD.h>
 #include <parsers/GroParser.h>
@@ -24,6 +25,7 @@ int main(int argc, char *argv[]) {
 //	std::shared_ptr<ba::FullTrajectory> trajectory(new ba::FullTrajectory(parser));
 	std::shared_ptr<ba::LazyTrajectory> trajectory(new ba::LazyTrajectory(parser));
 
+	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::FixParticlePath()));
 	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::SubtractCOM()));
 //	std::vector<particle_type> allowed_types = {0};
 //	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::FilterByType(allowed_types)));

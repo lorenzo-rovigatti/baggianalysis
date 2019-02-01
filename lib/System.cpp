@@ -21,6 +21,7 @@ std::shared_ptr<System> System::empty_copy() const {
 	std::shared_ptr<System> new_syst(new System());
 
 	new_syst->time = this->time;
+	new_syst->box = this->box;
 
 	return new_syst;
 }
