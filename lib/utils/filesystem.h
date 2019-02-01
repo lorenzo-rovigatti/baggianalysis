@@ -16,7 +16,7 @@ namespace ba {
 
 namespace utils {
 
-std::vector<std::string> glob(const std::string& path);
+std::vector<std::string> glob(const std::string& path, bool natural_sorting);
 
 }
 

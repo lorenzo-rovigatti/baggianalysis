@@ -7,13 +7,15 @@
 
 #include "filesystem.h"
 
+#include "natural_sort.hpp"
+
 namespace ba {
 
 namespace utils {
 
 using namespace std;
 
-std::vector<std::string> glob(const std::string& path) {
+std::vector<std::string> glob(const std::string& path, bool natural_sorting) {
 	glob_t glob_result;
 	glob(path.c_str(), GLOB_TILDE, NULL, &glob_result);
 
@@ -22,6 +24,10 @@ std::vector<std::string> glob(const std::string& path) {
 		ret.push_back(string(glob_result.gl_pathv[i]));
 	}
 	globfree(&glob_result);
+
+	if(natural_sorting) {
+		SI::natural::sort(ret);
+	}
 
 	return ret;
 }

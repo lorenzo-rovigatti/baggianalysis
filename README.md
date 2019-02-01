@@ -47,3 +47,4 @@ Here is a list of options that can be passed to cmake during the pre-compilation
 ## Acknowledgements
 
 * Eigen 3.3.4 is included in the source tree
+* Natural sorting of files is carried out with the [NaturalSort](https://github.com/scopeInfinity/NaturalSort) library

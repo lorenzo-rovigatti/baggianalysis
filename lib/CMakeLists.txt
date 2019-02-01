@@ -10,7 +10,8 @@ SET(ba_lib_SOURCES
 	parsers/OxDNAParser.cpp
 	Particles.cpp
 	System.cpp
-	Trajectory.cpp
+	trajectories/BaseTrajectory.cpp
+	trajectories/FullTrajectory.cpp
 	utils/filesystem.cpp
 )
 

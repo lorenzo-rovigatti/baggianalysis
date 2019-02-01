@@ -14,7 +14,7 @@ using namespace std;
 
 namespace ba {
 
-MSD::MSD(std::shared_ptr<Trajectory> trajectory) :
+MSD::MSD(std::shared_ptr<BaseTrajectory> trajectory) :
 				_trajectory(trajectory) {
 
 }
@@ -38,7 +38,10 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 
 	uint N_first_conf = 0;
 	uint idx = 0;
-	for(auto frame : _trajectory->frames) {
+
+
+	auto frame = _trajectory->next_frame();
+	while(frame != nullptr) {
 		uint N_conf = frame->particles.N();
 		if(N_first_conf == 0) {
 			N_first_conf = N_conf;
@@ -87,6 +90,7 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 		}
 
 		idx++;
+		frame = _trajectory->next_frame();
 	}
 
 	// print the MSD

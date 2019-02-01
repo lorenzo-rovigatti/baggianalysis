@@ -8,7 +8,7 @@
 #ifndef OBSERVABLES_MSD_H_
 #define OBSERVABLES_MSD_H_
 
-#include "../Trajectory.h"
+#include "../trajectories/BaseTrajectory.h"
 
 namespace ba {
 
@@ -20,7 +20,7 @@ struct MSDOptions {
 
 class MSD {
 public:
-	MSD(std::shared_ptr<Trajectory> trajectory);
+	MSD(std::shared_ptr<BaseTrajectory> trajectory);
 	virtual ~MSD();
 
 	static MSDOptions default_options() {
@@ -33,7 +33,7 @@ protected:
 	double _conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System> second, bool remove_com);
 
 protected:
-	std::shared_ptr<Trajectory> _trajectory;
+	std::shared_ptr<BaseTrajectory> _trajectory;
 };
 
 } /* namespace ba */

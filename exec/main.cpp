@@ -5,14 +5,13 @@
  *      Author: lorenzo
  */
 
-#include <Trajectory.h>
-
 #include <filters/FilterByReducingToCOM.h>
 #include <filters/FilterByType.h>
 #include <filters/SubtractCOM.h>
 #include <observables/MSD.h>
 #include <parsers/GroParser.h>
 #include <parsers/LJKAParser.h>
+#include "../lib/trajectories/FullTrajectory.h"
 
 int main(int argc, char *argv[]) {
 	if(argc < 3) {
@@ -21,7 +20,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	std::shared_ptr<ba::BaseParser> parser(new ba::GroParser(0.001));
-	std::shared_ptr<ba::Trajectory> trajectory(new ba::Trajectory(parser));
+	std::shared_ptr<ba::FullTrajectory> trajectory(new ba::FullTrajectory(parser));
 
 	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::SubtractCOM()));
 //	std::vector<particle_type> allowed_types = {0};

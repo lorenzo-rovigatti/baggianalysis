@@ -5,11 +5,11 @@
  *      Author: lorenzo
  */
 
-#include "Trajectory.h"
+#include "FullTrajectory.h"
 
-#include "parsers/OxDNAParser.h"
-#include "System.h"
-#include "utils/filesystem.h"
+#include "../parsers/OxDNAParser.h"
+#include "../System.h"
+#include "../utils/filesystem.h"
 
 #include <boost/filesystem.hpp>
 #include <fstream>
@@ -19,24 +19,24 @@ namespace ba {
 namespace bfs = boost::filesystem;
 using namespace std;
 
-Trajectory::Trajectory(shared_ptr<BaseParser> parser) :
-				_parser(parser) {
+FullTrajectory::FullTrajectory(shared_ptr<BaseParser> parser) :
+				BaseTrajectory(parser) {
 
 }
 
-Trajectory::~Trajectory() {
+FullTrajectory::~FullTrajectory() {
 
 }
 
-void Trajectory::add_filter(shared_ptr<BaseFilter> filter) {
+void FullTrajectory::add_filter(shared_ptr<BaseFilter> filter) {
 	if(frames.size() > 0) {
 		BOOST_LOG_TRIVIAL(warning)<<"Adding filters to trajectories that have been already initialised does not make much sense...";
 	}
 
-	_filters.push_back(filter);
+	BaseTrajectory::add_filter(filter);
 }
 
-void Trajectory::initialise_from_trajectory_file(string trajectory_file) {
+void FullTrajectory::initialise_from_trajectory_file(string trajectory_file) {
 	ifstream trajectory(trajectory_file);
 
 	if(!trajectory.good()) {
@@ -60,10 +60,12 @@ void Trajectory::initialise_from_trajectory_file(string trajectory_file) {
 
 	trajectory.close();
 
+	_current_system = frames.begin();
+
 	BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
 }
 
-void Trajectory::initialise_from_folder(string folder, string pattern) {
+void FullTrajectory::initialise_from_folder(string folder, string pattern) {
 	bfs::path path(folder);
 
 	if(!bfs::exists(path)) {
@@ -77,7 +79,7 @@ void Trajectory::initialise_from_folder(string folder, string pattern) {
 	}
 
 	bfs::path tot_path = bfs::path(folder) / bfs::path(pattern);
-	vector<string> files = utils::glob(tot_path.string());
+	vector<string> files = utils::glob(tot_path.string(), false);
 
 	uint N_files = files.size();
 
@@ -98,13 +100,26 @@ void Trajectory::initialise_from_folder(string folder, string pattern) {
 		if(N_frames > 10 && N_frames % (N_files / 10) == 0) BOOST_LOG_TRIVIAL(info)<< "Parsed " << N_frames * 100 / N_files << "% of the configurations (" << N_frames << "/" << N_files << ")";
 	}
 
-	// we sort all the frames according to their timestep
+	// we sort the frames according to their timestep
 	auto sorting_function = [pattern](const shared_ptr<System> &s1, const shared_ptr<System> &s2) -> bool {
 		return (s1->time < s2->time);
 	};
 	sort(frames.begin(), frames.end(), sorting_function);
 
+	_current_system = frames.begin();
+
 	BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
+}
+
+std::shared_ptr<System> FullTrajectory::next_frame() {
+	if(_current_system != frames.end()) {
+		auto syst = *_current_system;
+		_current_system++;
+		return syst;
+	}
+	else {
+		return nullptr;
+	}
 }
 
 }
