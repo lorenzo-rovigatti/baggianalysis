@@ -7,7 +7,6 @@
 
 #include "FullTrajectory.h"
 
-#include "../parsers/OxDNAParser.h"
 #include "../System.h"
 #include "../utils/filesystem.h"
 
@@ -111,7 +110,7 @@ void FullTrajectory::initialise_from_folder(string folder, string pattern) {
 	BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
 }
 
-std::shared_ptr<System> FullTrajectory::next_frame() {
+shared_ptr<System> FullTrajectory::next_frame() {
 	if(_current_system != frames.end()) {
 		auto syst = *_current_system;
 		_current_system++;
@@ -120,6 +119,10 @@ std::shared_ptr<System> FullTrajectory::next_frame() {
 	else {
 		return nullptr;
 	}
+}
+
+void FullTrajectory::reset() {
+	_current_system = frames.begin();
 }
 
 }

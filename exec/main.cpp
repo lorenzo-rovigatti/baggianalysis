@@ -12,6 +12,7 @@
 #include <parsers/GroParser.h>
 #include <parsers/LJKAParser.h>
 #include "../lib/trajectories/FullTrajectory.h"
+#include "../lib/trajectories/LazyTrajectory.h"
 
 int main(int argc, char *argv[]) {
 	if(argc < 3) {
@@ -20,7 +21,8 @@ int main(int argc, char *argv[]) {
 	}
 
 	std::shared_ptr<ba::BaseParser> parser(new ba::GroParser(0.001));
-	std::shared_ptr<ba::FullTrajectory> trajectory(new ba::FullTrajectory(parser));
+//	std::shared_ptr<ba::FullTrajectory> trajectory(new ba::FullTrajectory(parser));
+	std::shared_ptr<ba::LazyTrajectory> trajectory(new ba::LazyTrajectory(parser));
 
 	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::SubtractCOM()));
 //	std::vector<particle_type> allowed_types = {0};

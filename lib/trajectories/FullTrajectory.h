@@ -22,6 +22,7 @@ public:
 	void initialise_from_trajectory_file(std::string trajectory_file) override;
 
 	virtual std::shared_ptr<System> next_frame() override;
+	virtual void reset() override;
 
 public:
 	std::vector<std::shared_ptr<System>> frames;

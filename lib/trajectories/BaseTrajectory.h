@@ -24,6 +24,7 @@ public:
 	virtual void initialise_from_trajectory_file(std::string trajectory_file) = 0;
 
 	virtual std::shared_ptr<System> next_frame() = 0;
+	virtual void reset() = 0;
 
 protected:
 	std::shared_ptr<BaseParser> _parser;

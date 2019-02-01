@@ -11,6 +11,7 @@ SET(ba_lib_SOURCES
 	Particles.cpp
 	System.cpp
 	trajectories/BaseTrajectory.cpp
+	trajectories/LazyTrajectory.cpp
 	trajectories/FullTrajectory.cpp
 	utils/filesystem.cpp
 )
