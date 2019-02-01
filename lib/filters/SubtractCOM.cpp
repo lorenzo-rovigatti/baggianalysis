@@ -19,7 +19,7 @@ SubtractCOM::~SubtractCOM() {
 
 }
 
-shared_ptr<System> SubtractCOM::filter(std::shared_ptr<System> syst) {
+shared_ptr<System> SubtractCOM::filter(std::shared_ptr<const System> syst) {
 	shared_ptr<System> new_syst(syst->empty_copy());
 
 	vec3 com = syst->com();

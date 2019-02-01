@@ -17,7 +17,7 @@ public:
 	System();
 	virtual ~System();
 
-	std::shared_ptr<System> empty_copy();
+	std::shared_ptr<System> empty_copy() const;
 
 	vec3 com() const;
 	vec3 average_velocity() const;

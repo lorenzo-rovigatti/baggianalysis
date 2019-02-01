@@ -17,7 +17,7 @@ public:
 	FilterByType(std::vector<particle_type> allowed_types);
 	virtual ~FilterByType();
 
-	virtual std::shared_ptr<System> filter(std::shared_ptr<System> syst) override;
+	virtual std::shared_ptr<System> filter(std::shared_ptr<const System> syst) override;
 
 protected:
 	std::vector<particle_type> _allowed_types;

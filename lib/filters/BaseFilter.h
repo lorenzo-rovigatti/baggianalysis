@@ -17,7 +17,7 @@ public:
 	BaseFilter();
 	virtual ~BaseFilter();
 
-	virtual std::shared_ptr<System> filter(std::shared_ptr<System> syst) = 0;
+	virtual std::shared_ptr<System> filter(std::shared_ptr<const System> syst) = 0;
 };
 
 } /* namespace ashell */

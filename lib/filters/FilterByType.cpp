@@ -23,7 +23,7 @@ FilterByType::~FilterByType() {
 
 }
 
-shared_ptr<System> FilterByType::filter(std::shared_ptr<System> syst) {
+shared_ptr<System> FilterByType::filter(std::shared_ptr<const System> syst) {
 	shared_ptr<System> new_syst(syst->empty_copy());
 
 	for(uint i = 0; i < syst->particles.N(); i++) {

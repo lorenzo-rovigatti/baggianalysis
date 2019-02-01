@@ -17,7 +17,7 @@ public:
 	SubtractCOM();
 	virtual ~SubtractCOM();
 
-	virtual std::shared_ptr<System> filter(std::shared_ptr<System> syst) override;
+	virtual std::shared_ptr<System> filter(std::shared_ptr<const System> syst) override;
 };
 
 } /* namespace ba */

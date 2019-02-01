@@ -19,7 +19,7 @@ FilterByReducingToCOM::~FilterByReducingToCOM() {
 
 }
 
-shared_ptr<System> FilterByReducingToCOM::filter(std::shared_ptr<System> syst) {
+shared_ptr<System> FilterByReducingToCOM::filter(std::shared_ptr<const System> syst) {
 	shared_ptr<System> new_syst(syst->empty_copy());
 	new_syst->particles.types.push_back(DEFAULT_PARTICLE_TYPE);
 	new_syst->particles.positions.push_back(syst->com());
