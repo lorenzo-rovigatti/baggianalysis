@@ -21,9 +21,6 @@ public:
 
 protected:
 	double _dt;
-
-protected:
-	std::size_t _time_pos_in_string(std::string &s);
 };
 
 } /* namespace ba */

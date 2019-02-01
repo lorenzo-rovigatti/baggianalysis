@@ -111,12 +111,19 @@ shared_ptr<System> GroParser::parse(ifstream &configuration) {
 
 	// box line
 	getline(configuration, line);
+	string to_split = boost::trim_copy(line);
+	boost::split(split, to_split, boost::is_any_of(" "), boost::algorithm::token_compress_on);
+	try {
+		syst->box[0] = boost::lexical_cast<double>(boost::trim_copy(split[0]));
+		syst->box[1] = boost::lexical_cast<double>(boost::trim_copy(split[1]));
+		syst->box[2] = boost::lexical_cast<double>(boost::trim_copy(split[2]));
+	}
+	catch(boost::bad_lexical_cast &e) {
+		string error = boost::str(boost::format("The box line '%s' found in the .gro configuration is not valid") % line);
+		throw std::runtime_error(error);
+	}
 
 	return syst;
-}
-
-std::size_t GroParser::_time_pos_in_string(std::string &s) {
-	return s.find("t=");
 }
 
 } /* namespace ba */

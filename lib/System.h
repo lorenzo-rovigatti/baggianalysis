@@ -25,6 +25,7 @@ public:
 public:
 	ullint time = 0;
 	Particles particles;
+	vec3 box = vec3(0., 0., 0.);
 };
 
 } /* namespace ba */

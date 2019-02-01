@@ -57,6 +57,16 @@ shared_ptr<System> OxDNAParser::parse(ifstream &configuration) {
 
 	// box line
 	getline(configuration, line);
+	boost::split(split, line, boost::is_any_of(" "));
+	try {
+		syst->box[0] = boost::lexical_cast<double>(boost::trim_copy(split[2]));
+		syst->box[1] = boost::lexical_cast<double>(boost::trim_copy(split[3]));
+		syst->box[2] = boost::lexical_cast<double>(boost::trim_copy(split[4]));
+	}
+	catch(boost::bad_lexical_cast &e) {
+		string error = boost::str(boost::format("The box line '%s' found in the oxDNA configuration is not valid") % line);
+		throw std::runtime_error(error);
+	}
 
 	// energy line
 	getline(configuration, line);
