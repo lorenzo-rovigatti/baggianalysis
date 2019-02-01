@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 //	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::FilterByReducingToCOM()));
 
 //	trajectory->initialise_from_trajectory_file(argv[2]);
-	trajectory->initialise_from_folder(argv[1], "Cnf3500-");
+	trajectory->initialise_from_folder(argv[1], "Cnf3500-*.gro");
 
 	ba::MSD msd(trajectory);
 

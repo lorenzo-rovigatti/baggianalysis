@@ -11,6 +11,7 @@ SET(ba_lib_SOURCES
 	Particles.cpp
 	System.cpp
 	Trajectory.cpp
+	utils/filesystem.cpp
 )
 
 ADD_LIBRARY(_baggianalysis SHARED ${ba_lib_SOURCES})

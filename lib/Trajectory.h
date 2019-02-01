@@ -20,7 +20,7 @@ public:
 	virtual ~Trajectory();
 
 	void add_filter(std::shared_ptr<BaseFilter> filter);
-	void initialise_from_folder(std::string folder, std::string prefix);
+	void initialise_from_folder(std::string folder, std::string pattern);
 	void initialise_from_trajectory_file(std::string trajectory_file);
 
 public:

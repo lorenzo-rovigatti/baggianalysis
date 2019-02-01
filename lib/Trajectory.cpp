@@ -6,8 +6,10 @@
  */
 
 #include "Trajectory.h"
+
 #include "parsers/OxDNAParser.h"
 #include "System.h"
+#include "utils/filesystem.h"
 
 #include <boost/filesystem.hpp>
 #include <fstream>
@@ -26,7 +28,7 @@ Trajectory::~Trajectory() {
 
 }
 
-void Trajectory::add_filter(std::shared_ptr<BaseFilter> filter) {
+void Trajectory::add_filter(shared_ptr<BaseFilter> filter) {
 	if(frames.size() > 0) {
 		BOOST_LOG_TRIVIAL(warning)<<"Adding filters to trajectories that have been already initialised does not make much sense...";
 	}
@@ -34,12 +36,12 @@ void Trajectory::add_filter(std::shared_ptr<BaseFilter> filter) {
 	_filters.push_back(filter);
 }
 
-void Trajectory::initialise_from_trajectory_file(std::string trajectory_file) {
+void Trajectory::initialise_from_trajectory_file(string trajectory_file) {
 	ifstream trajectory(trajectory_file);
 
 	if(!trajectory.good()) {
-		std::string error = boost::str(boost::format("Unreadable trajectory file '%s'") % trajectory_file);
-		throw std::runtime_error(error);
+		string error = boost::str(boost::format("Unreadable trajectory file '%s'") % trajectory_file);
+		throw runtime_error(error);
 	}
 
 	bool done = false;
@@ -61,27 +63,21 @@ void Trajectory::initialise_from_trajectory_file(std::string trajectory_file) {
 	BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
 }
 
-void Trajectory::initialise_from_folder(std::string folder, std::string prefix) {
+void Trajectory::initialise_from_folder(string folder, string pattern) {
 	bfs::path path(folder);
 
 	if(!bfs::exists(path)) {
-		std::string error = boost::str(boost::format("The '%s' folder does not exist") % folder);
-		throw std::runtime_error(error);
+		string error = boost::str(boost::format("The '%s' folder does not exist") % folder);
+		throw runtime_error(error);
 	}
 
 	if(!bfs::is_directory(path)) {
-		std::string error = boost::str(boost::format("'%s' is not a folder") % folder);
-		throw std::runtime_error(error);
+		string error = boost::str(boost::format("'%s' is not a folder") % folder);
+		throw runtime_error(error);
 	}
 
-	std::vector<std::string> files;
-
-	for(auto &entry : bfs::directory_iterator(path)) {
-		bool starts_with_prefix = (entry.path().filename().string().rfind(prefix, 0) == 0);
-		if(bfs::is_regular_file(entry) && starts_with_prefix) {
-			files.push_back(entry.path().string());
-		}
-	}
+	bfs::path tot_path = bfs::path(folder) / bfs::path(pattern);
+	vector<string> files = utils::glob(tot_path.string());
 
 	uint N_files = files.size();
 
@@ -91,8 +87,8 @@ void Trajectory::initialise_from_folder(std::string folder, std::string prefix) 
 		conf_file.close();
 
 		if(new_system == nullptr) {
-			std::string error = boost::str(boost::format("The '%s' configuration is either empty or invalid") % f);
-			throw std::runtime_error(error);
+			string error = boost::str(boost::format("The '%s' configuration is either empty or invalid") % f);
+			throw runtime_error(error);
 		}
 		for(auto filter : _filters) {
 			new_system = filter->filter(new_system);
@@ -103,10 +99,10 @@ void Trajectory::initialise_from_folder(std::string folder, std::string prefix) 
 	}
 
 	// we sort all the frames according to their timestep
-	auto sorting_function = [prefix](const shared_ptr<System> &s1, const shared_ptr<System> &s2) -> bool {
+	auto sorting_function = [pattern](const shared_ptr<System> &s1, const shared_ptr<System> &s2) -> bool {
 		return (s1->time < s2->time);
 	};
-	std::sort(frames.begin(), frames.end(), sorting_function);
+	sort(frames.begin(), frames.end(), sorting_function);
 
 	BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
 }
