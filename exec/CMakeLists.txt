@@ -1,12 +1,8 @@
 # BEGIN TO COMPILE STUFF
-IF(CMAKE_BUILD_TYPE MATCHES Debug)
-	SET(exe_name baggianalysis_debug)
-ELSE()
-	SET(exe_name baggianalysis)
-ENDIF()
+SET(exe_name msd)
 
 SET(ba_SOURCES
-	main.cpp
+	msd.cpp
 )
 
 INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/lib )
