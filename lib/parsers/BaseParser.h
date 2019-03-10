@@ -9,6 +9,7 @@
 #define PARSERS_BASEPARSER_H_
 
 #include "../System.h"
+#include "../python_defs.h"
 
 #include <fstream>
 
@@ -21,6 +22,26 @@ public:
 
 	virtual std::shared_ptr<System> parse(std::ifstream &configuration) = 0;
 };
+
+#ifdef PYTHON_BINDINGS
+
+class PyBaseParser : public BaseParser {
+public:
+	using BaseParser::BaseParser;
+
+	std::shared_ptr<System> parse(std::ifstream &configuration) override {
+		PYBIND11_OVERLOAD_PURE(
+				std::shared_ptr<System>,
+				BaseParser,
+				parse,
+				configuration
+		);
+	}
+};
+
+void export_BaseParser(py::module &m);
+
+#endif
 
 } /* namespace ba */
 

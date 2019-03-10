@@ -34,3 +34,7 @@ ADD_CUSTOM_COMMAND(
                 ${CMAKE_SOURCE_DIR}/tests/test.py
                 ${CMAKE_CURRENT_BINARY_DIR})
                 
+IF(Python)
+	pybind11_add_module(baggianalysis SHARED python_bindings.cpp)
+	TARGET_LINK_LIBRARIES(baggianalysis PRIVATE _baggianalysis)
+ENDIF(Python)
