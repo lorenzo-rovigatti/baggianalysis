@@ -17,7 +17,15 @@ SET(ba_lib_SOURCES
 	utils/filesystem.cpp
 )
 
-ADD_LIBRARY(_baggianalysis SHARED ${ba_lib_SOURCES})
+IF(Python)
+	ADD_LIBRARY(_baggianalysis STATIC ${ba_lib_SOURCES})
+	SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES POSITION_INDEPENDENT_CODE ON)
+	pybind11_add_module(baggianalysis SHARED python_bindings.cpp)
+	TARGET_LINK_LIBRARIES(baggianalysis PRIVATE _baggianalysis)
+ELSE(Python)
+	ADD_LIBRARY(_baggianalysis SHARED ${ba_lib_SOURCES})
+ENDIF(Python)
+
 TARGET_LINK_LIBRARIES(_baggianalysis ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
 
 SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES PREFIX "")
@@ -33,8 +41,3 @@ ADD_CUSTOM_COMMAND(
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_SOURCE_DIR}/tests/test.py
                 ${CMAKE_CURRENT_BINARY_DIR})
-                
-IF(Python)
-	pybind11_add_module(baggianalysis SHARED python_bindings.cpp)
-	TARGET_LINK_LIBRARIES(baggianalysis PRIVATE _baggianalysis)
-ENDIF(Python)

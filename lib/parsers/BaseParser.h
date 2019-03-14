@@ -15,7 +15,7 @@
 
 namespace ba {
 
-class BaseParser {
+class PYBIND11_EXPORT BaseParser {
 public:
 	BaseParser();
 	virtual ~BaseParser();

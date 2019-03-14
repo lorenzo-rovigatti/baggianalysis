@@ -13,6 +13,10 @@
 
 #define DEFAULT_PARTICLE_TYPE 0
 
+#ifndef PYTHON_BINDINGS
+#define PYBIND11_EXPORT
+#endif
+
 #include <memory>
 
 #include <Eigen/Dense>
