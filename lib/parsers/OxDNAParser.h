@@ -25,6 +25,12 @@ protected:
 	std::string _topology_file;
 };
 
+#ifdef PYTHON_BINDINGS
+
+void export_OxDNAParser(py::module &m);
+
+#endif
+
 } /* namespace ba */
 
 #endif /* PARSERS_OXDNAPARSER_H_ */

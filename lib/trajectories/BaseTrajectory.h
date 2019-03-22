@@ -31,6 +31,55 @@ protected:
 	std::vector<std::shared_ptr<BaseFilter>> _filters;
 };
 
+#ifdef PYTHON_BINDINGS
+
+class PyBaseTrajectory : public BaseTrajectory {
+public:
+	using BaseTrajectory::BaseTrajectory;
+
+	void initialise_from_folder(std::string folder, std::string pattern) override {
+		PYBIND11_OVERLOAD_PURE( // @suppress("Unused return value")
+				void,
+				BaseTrajectory,
+				initialise_from_folder,
+				folder,
+				pattern
+		);
+	}
+
+	void initialise_from_trajectory_file(std::string trajectory_file) override {
+		PYBIND11_OVERLOAD_PURE( // @suppress("Unused return value")
+				void,
+				BaseTrajectory,
+				initialise_from_trajectory_file,
+				trajectory_file
+		);
+	}
+
+	std::shared_ptr<System> next_frame() override {
+		PYBIND11_OVERLOAD_PURE( // @suppress("Unused return value")
+				std::shared_ptr<System>,
+				BaseTrajectory,
+				next_frame,
+		);
+
+		// suppress warnings
+		return std::shared_ptr<System>(new System());
+	}
+
+	void reset() override {
+		PYBIND11_OVERLOAD_PURE( // @suppress("Unused return value")
+				void,
+				BaseTrajectory,
+				reset,
+		);
+	}
+};
+
+void export_BaseTrajectory(py::module &m);
+
+#endif
+
 } /* namespace ba */
 
 #endif /* TRAJECTORIES_BASETRAJECTORY_H_ */

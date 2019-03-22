@@ -9,6 +9,7 @@
 #define SYSTEM_H_
 
 #include "Particles.h"
+#include "python_defs.h"
 
 namespace ba {
 
@@ -27,6 +28,12 @@ public:
 	Particles particles;
 	vec3 box = vec3(0., 0., 0.);
 };
+
+#ifdef PYTHON_BINDINGS
+
+void export_System(py::module &m);
+
+#endif
 
 } /* namespace ba */
 

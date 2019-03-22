@@ -99,4 +99,16 @@ shared_ptr<System> OxDNAParser::parse(ifstream &configuration) {
 	return syst;
 }
 
+#ifdef PYTHON_BINDINGS
+
+void export_OxDNAParser(py::module &m) {
+	pybind11::class_<OxDNAParser, BaseParser, std::shared_ptr<OxDNAParser>> parser(m, "OxDNAParser");
+
+	parser
+		.def(py::init<std::string>())
+		.def("parse", &OxDNAParser::parse);
+}
+
+#endif
+
 } /* namespace ba */

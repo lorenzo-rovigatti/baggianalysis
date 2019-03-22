@@ -64,10 +64,7 @@ shared_ptr<System> LazyTrajectory::next_frame() {
 
 	if(_type == TRAJECTORY_FILE) {
 		new_system = _parser->parse(_trajectory_file);
-		if(new_system == nullptr) {
-			_trajectory_file.close();
-		}
-		else {
+		if(new_system != nullptr) {
 			for(auto filter : _filters) {
 				new_system = filter->filter(new_system);
 			}
@@ -96,11 +93,23 @@ shared_ptr<System> LazyTrajectory::next_frame() {
 
 void LazyTrajectory::reset() {
 	if(_type == TRAJECTORY_FILE) {
-		_trajectory_file.seekg(0);
+		_trajectory_file.clear();
+		_trajectory_file.seekg(0, ios::beg);
 	}
 	else if(_type == FOLDER) {
 		_current_file = _files.begin();
 	}
 }
+
+#ifdef PYTHON_BINDINGS
+
+void export_LazyTrajectory(py::module &m) {
+	pybind11::class_<LazyTrajectory, BaseTrajectory, std::shared_ptr<LazyTrajectory>> parser(m, "LazyTrajectory");
+
+	parser
+		.def(py::init<shared_ptr<BaseParser>>());
+}
+
+#endif
 
 } /* namespace ba */

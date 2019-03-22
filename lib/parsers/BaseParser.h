@@ -9,13 +9,12 @@
 #define PARSERS_BASEPARSER_H_
 
 #include "../System.h"
-#include "../python_defs.h"
 
 #include <fstream>
 
 namespace ba {
 
-class PYBIND11_EXPORT BaseParser {
+class BaseParser {
 public:
 	BaseParser();
 	virtual ~BaseParser();
@@ -36,6 +35,9 @@ public:
 				parse,
 				configuration
 		);
+
+		// suppress warnings
+		return std::shared_ptr<System>(new System());
 	}
 };
 
