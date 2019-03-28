@@ -49,5 +49,5 @@ Here is a list of options that can be passed to cmake during the pre-compilation
 
 ## Acknowledgements
 
-* Eigen 3.3.4 is included in the source tree
+* The [glm 0.9.9](https://glm.g-truc.net/0.9.9/index.html) and [Eigen 3.3.4](http://eigen.tuxfamily.org/index.php?title=Main_Page) libraries are included in the source tree
 * Natural sorting of files is carried out with the [NaturalSort](https://github.com/scopeInfinity/NaturalSort) library

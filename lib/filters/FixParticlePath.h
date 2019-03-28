@@ -12,7 +12,7 @@
 
 namespace ba {
 
-using particle_shift = Eigen::Vector3i;
+using particle_shift = glm::ivec3;
 
 class FixParticlePath: public BaseFilter {
 public:
@@ -23,7 +23,7 @@ public:
 
 protected:
 	std::shared_ptr<const System> _previous_frame = nullptr;
-	std::vector<particle_shift, Eigen::aligned_allocator<particle_shift> > _shifts;
+	std::vector<particle_shift> _shifts;
 };
 
 } /* namespace ba */

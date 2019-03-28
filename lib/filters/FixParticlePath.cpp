@@ -35,7 +35,7 @@ shared_ptr<System> FixParticlePath::filter(std::shared_ptr<const System> syst) {
 		for(uint i = 0; i < syst->particles.N(); i++) {
 			new_syst->particles.types.push_back(syst->particles.types[i]);
 			new_syst->particles.velocities.push_back(syst->particles.velocities[i]);
-			vec3 shift = _shifts[i].cast<double>().array() * syst->box.array();
+			vec3 shift = vec3(_shifts[i]) * syst->box;
 			vec3 new_pos = syst->particles.positions[i] + shift;
 
 			vec3 diff = new_pos - _previous_frame->particles.positions[i];

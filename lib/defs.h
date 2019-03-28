@@ -19,17 +19,17 @@
 
 #include <memory>
 
-#include <Eigen/Dense>
-#include <Eigen/StdVector>
+#include <glm/vec3.hpp>
+#include <glm/common.hpp>
+#include <glm/geometric.hpp>
 
 #include <boost/format.hpp>
 #include <boost/log/trivial.hpp>
 #include <iostream>
 
-using vec3 = Eigen::Vector3d;
-using mat3 = Eigen::Matrix3d;
+using vec3 = glm::dvec3;
 
-using vector_vec3 = std::vector<vec3, Eigen::aligned_allocator<vec3> >;
+using vector_vec3 = std::vector<vec3>;
 using vector_scalar = std::vector<double>;
 
 using uint = unsigned int;
