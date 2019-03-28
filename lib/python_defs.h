@@ -11,6 +11,9 @@
 #ifdef PYTHON_BINDINGS
 
 #include <pybind11/include/pybind11/pybind11.h>
+#include <pybind11/include/pybind11/stl.h>
+
+#include "python/python_glm.h"
 
 namespace py = pybind11;
 
