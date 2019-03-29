@@ -53,7 +53,8 @@ void export_System(py::module &m) {
 		.def(py::init<>())
 		.def("empty_copy", &System::empty_copy)
 		.def("com", &System::com)
-		.def("average_velocity", &System::average_velocity);
+		.def("average_velocity", &System::average_velocity)
+		.def_readwrite("particles", &System::particles);
 }
 
 #endif

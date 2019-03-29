@@ -39,7 +39,6 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 	uint N_first_conf = 0;
 	uint idx = 0;
 
-
 	auto frame = _trajectory->next_frame();
 	while(frame != nullptr) {
 		uint N_conf = frame->particles.N();

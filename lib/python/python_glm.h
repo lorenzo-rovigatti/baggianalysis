@@ -31,7 +31,7 @@ public:
 
 	// Python -> c++ conversion
 	bool load(handle src, bool convert) {
-		if(!convert and !array_t<double>::check_(src)) {
+		if(!convert and !array_t<scalar>::check_(src)) {
 			return false;
 		}
 

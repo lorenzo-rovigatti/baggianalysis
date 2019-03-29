@@ -12,10 +12,14 @@
 
 #include <pybind11/include/pybind11/pybind11.h>
 #include <pybind11/include/pybind11/stl.h>
+#include <pybind11/include/pybind11/stl_bind.h>
 
 #include "python/python_glm.h"
 
 namespace py = pybind11;
+
+//PYBIND11_MAKE_OPAQUE(vector_vec3);
+//PYBIND11_MAKE_OPAQUE(vector_scalar);
 
 #endif
 
