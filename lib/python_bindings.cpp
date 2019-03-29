@@ -12,6 +12,7 @@
 
 PYBIND11_MODULE(baggianalysis, m) {
 	ba::export_System(m);
+	ba::export_Particles(m);
 
 	ba::export_BaseParser(m);
 	ba::export_OxDNAParser(m);

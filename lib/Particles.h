@@ -9,6 +9,7 @@
 #define PARTICLES_PARTICLES_H_
 
 #include "defs.h"
+#include "python_defs.h"
 
 namespace ba {
 
@@ -23,6 +24,12 @@ public:
 	vector_vec3 positions;
 	vector_vec3 velocities;
 };
+
+#ifdef PYTHON_BINDINGS
+
+void export_Particles(py::module &m);
+
+#endif
 
 } /* namespace ba */
 

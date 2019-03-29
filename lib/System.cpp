@@ -47,7 +47,7 @@ vec3 System::average_velocity() const {
 #ifdef PYTHON_BINDINGS
 
 void export_System(py::module &m) {
-	pybind11::class_<System, std::shared_ptr<System>> parser(m, "System");
+	py::class_<System, std::shared_ptr<System>> parser(m, "System");
 
 	parser
 		.def(py::init<>())

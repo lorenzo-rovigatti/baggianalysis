@@ -23,7 +23,7 @@ The code can be compiled with the following commands:
 	cmake ..			# here you can specify additional options, see next section
 	make -j4			# compile baggianalysis. The -jX make option makes it compile the code in parallel by using X threads.
 
-At the end of the compilation the final executable (baggianalysis) will be placed in the build/bin folder.
+At the end of the compilation the final executable (baggianalysis) will be placed in the build/bin folder. If Python bindings are enabled, `make install` will run the `setup.py install --user` command to make the library accessible by the user.
 
 ### cmake options
 

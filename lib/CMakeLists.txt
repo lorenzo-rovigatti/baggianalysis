@@ -22,6 +22,27 @@ IF(Python)
 	SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES POSITION_INDEPENDENT_CODE ON)
 	pybind11_add_module(baggianalysis SHARED python_bindings.cpp)
 	TARGET_LINK_LIBRARIES(baggianalysis PRIVATE _baggianalysis)
+	
+	// the library should be in a folder with the same name to make it easier to use Python's distutils
+	SET_TARGET_PROPERTIES(baggianalysis 
+		PROPERTIES 
+			SUFFIX ".so"
+			LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/baggianalysis"
+	)
+	
+	// copy the files required to install the library with Python's distutils
+	CONFIGURE_FILE(python/__init__.py
+		${CMAKE_CURRENT_BINARY_DIR}/baggianalysis/__init__.py
+	)
+
+	SET(SETUP_PY "${CMAKE_CURRENT_BINARY_DIR}/baggianalysis/setup.py")
+	CONFIGURE_FILE(python/setup.py
+		${SETUP_PY}
+	)
+
+	// setup the make install target to run setup.py (in user mode, no root permissions required)
+	FIND_PROGRAM(PYTHON "python3")
+	INSTALL(CODE "execute_process(COMMAND ${PYTHON} ${SETUP_PY} install --user)")
 ELSE(Python)
 	ADD_LIBRARY(_baggianalysis SHARED ${ba_lib_SOURCES})
 ENDIF(Python)
@@ -40,4 +61,5 @@ ADD_CUSTOM_COMMAND(
         TARGET _baggianalysis POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_SOURCE_DIR}/tests/test.py
-                ${CMAKE_CURRENT_BINARY_DIR})
+                ${CMAKE_CURRENT_BINARY_DIR}
+)
