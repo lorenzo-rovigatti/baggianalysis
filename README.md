@@ -46,6 +46,7 @@ Here is a list of options that can be passed to cmake during the pre-compilation
 * By default, the core library is compiled dynamically. However, if Python bindings are enabled, the core library is compiled statically.
 * The timestep associated to a configuration **must** be an integer number. If your preferred format stores it as a floating-precision number, your parser will have to find a way of converting that to an integer. This is *by design*, as the time of a configuration is used as a key in several maps around the code, and floating-point numbers are not good at that. Moreover, integer numbers can be stored without losing any precision, in contrast with floats.
 * Normal trajectories need not load all the frames at once. Trajectories that do are called "full trajectories". Many observables, in general, do not require to have access to all frames at once, which means that frames can parsed (and hence loaded) one by one when needed (lazy loading). This allows to work on big trajectories without consuming up too much memory.
+* Lists of 3D vectors are copied when accessed from the Python's side. This means that their c++ counterparts (which are `std::vector`s) cannot be modified by using `append` or similar Python methods. 
 
 ## Acknowledgements
 

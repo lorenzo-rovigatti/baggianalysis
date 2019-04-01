@@ -7,11 +7,12 @@ trajectory.initialise_from_trajectory_file("trajectory.dat")
 
 system = trajectory.next_frame()
 
-pos = system.particles.positions[0]
+poss = system.particles.positions
 
 v = np.array([1., 0., 1.])
 # system.particles.positions[0] = v
 
-system.particles.positions.append(v)
+poss.append(v)
 
-print(system.particles.positions[-1])
+print(poss)
+print(system.particles.positions)
