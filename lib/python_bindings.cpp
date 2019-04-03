@@ -7,6 +7,7 @@
 
 #include "parsers/OxDNAParser.h"
 #include "trajectories/LazyTrajectory.h"
+#include "observables/MSD.h"
 
 #include "python_defs.h"
 
@@ -19,4 +20,6 @@ PYBIND11_MODULE(baggianalysis, m) {
 
 	ba::export_BaseTrajectory(m);
 	ba::export_LazyTrajectory(m);
+
+	ba::export_MSD(m);
 }

@@ -14,7 +14,7 @@ using namespace std;
 
 namespace ba {
 
-MSD::MSD(std::shared_ptr<BaseTrajectory> trajectory) :
+MSD::MSD(shared_ptr<BaseTrajectory> trajectory) :
 				_trajectory(trajectory) {
 
 }
@@ -119,5 +119,26 @@ double MSD::_conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System
 
 	return cc_MSD / N;
 }
+
+#ifdef PYTHON_BINDINGS
+
+void export_MSD(py::module &m) {
+	py::class_<MSDOptions> MSDOptions(m, "MSDOptions");
+
+	MSDOptions
+		.def(py::init<>())
+		.def_readwrite("points_per_cycle", &MSDOptions::points_per_cycle)
+		.def_readwrite("output_file", &MSDOptions::output_file)
+		.def_readwrite("remove_com", &MSDOptions::remove_com);
+
+	py::class_<MSD, std::shared_ptr<MSD>> MSD(m, "MSD");
+
+	MSD
+		.def(py::init<shared_ptr<BaseTrajectory>>())
+		.def("compute_and_print", &MSD::compute_and_print)
+		.def_static("default_options", &MSD::default_options);
+}
+
+#endif
 
 } /* namespace ba */

@@ -5,14 +5,7 @@ parser = ba.OxDNAParser("topology.dat")
 trajectory = ba.LazyTrajectory(parser)
 trajectory.initialise_from_trajectory_file("trajectory.dat")
 
-system = trajectory.next_frame()
-
-poss = system.particles.positions
-
-v = np.array([1., 0., 1.])
-#system.particles.positions[0] = v
-
-poss.append(v)
-
-print(poss)
-print(system.particles.positions)
+msd = ba.MSD(trajectory)
+options = msd.default_options()
+options.points_per_cycle = 20
+msd.compute_and_print(options)

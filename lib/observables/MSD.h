@@ -36,6 +36,12 @@ protected:
 	std::shared_ptr<BaseTrajectory> _trajectory;
 };
 
+#ifdef PYTHON_BINDINGS
+
+void export_MSD(py::module &m);
+
+#endif
+
 } /* namespace ba */
 
 #endif /* OBSERVABLES_MSD_H_ */
