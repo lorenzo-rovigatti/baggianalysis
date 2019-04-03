@@ -65,9 +65,9 @@ shared_ptr<System> LJKAParser::parse(ifstream &configuration) {
 		vec3 position = vec3(boost::lexical_cast<double>(split[0]), boost::lexical_cast<double>(split[1]), boost::lexical_cast<double>(split[2]));
 
 		particle_type type = (i < NA) ? 0 : 1;
-		syst->particles.types.push_back(type);
-		syst->particles.positions.push_back(position);
-		syst->particles.velocities.push_back(vec3(0., 0., 0.));
+		syst->particles.types().push_back(type);
+		syst->particles.positions().push_back(position);
+		syst->particles.velocities().push_back(vec3(0., 0., 0.));
 	}
 
 	return syst;

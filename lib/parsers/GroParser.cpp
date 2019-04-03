@@ -82,14 +82,14 @@ shared_ptr<System> GroParser::parse(ifstream &configuration) {
 			p_type = std::distance(inserted_name.begin(), it);
 		}
 
-		syst->particles.types.push_back(p_type);
+		syst->particles.types().push_back(p_type);
 
 		string x = boost::trim_copy(line.substr(20, 8));
 		string y = boost::trim_copy(line.substr(28, 8));
 		string z = boost::trim_copy(line.substr(36, 8));
 
 		try {
-			syst->particles.positions.push_back(vec3(boost::lexical_cast<double>(x), boost::lexical_cast<double>(y), boost::lexical_cast<double>(z)));
+			syst->particles.positions().push_back(vec3(boost::lexical_cast<double>(x), boost::lexical_cast<double>(y), boost::lexical_cast<double>(z)));
 		}
 		catch(boost::bad_lexical_cast &e) {
 			string error = boost::str(boost::format("The position of the %u-th particle (%s, %s, %s) cannot be cast to a vector of floating-point numbers") % i % x % y % z);
@@ -101,7 +101,7 @@ shared_ptr<System> GroParser::parse(ifstream &configuration) {
 		string vz = boost::trim_copy(line.substr(60, 8));
 
 		try {
-			syst->particles.velocities.push_back(vec3(boost::lexical_cast<double>(vx), boost::lexical_cast<double>(vy), boost::lexical_cast<double>(vz)));
+			syst->particles.velocities().push_back(vec3(boost::lexical_cast<double>(vx), boost::lexical_cast<double>(vy), boost::lexical_cast<double>(vz)));
 		}
 		catch(boost::bad_lexical_cast &e) {
 			string error = boost::str(boost::format("The velocity of the %u-th particle (%s, %s, %s) cannot be cast to a vector of floating-point numbers") % i % vx % vy % vz);

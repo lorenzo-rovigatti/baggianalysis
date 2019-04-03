@@ -84,9 +84,9 @@ shared_ptr<System> OxDNAParser::parse(ifstream &configuration) {
 
 				vec3 velocity = vec3(boost::lexical_cast<double>(split[9]), boost::lexical_cast<double>(split[10]), boost::lexical_cast<double>(split[11]));
 
-				syst->particles.types.push_back(0);
-				syst->particles.positions.push_back(position);
-				syst->particles.velocities.push_back(velocity);
+				syst->particles.types().push_back(0);
+				syst->particles.positions().push_back(position);
+				syst->particles.velocities().push_back(velocity);
 			}
 		}
 	}

@@ -21,9 +21,9 @@ FilterByReducingToCOM::~FilterByReducingToCOM() {
 
 shared_ptr<System> FilterByReducingToCOM::filter(std::shared_ptr<const System> syst) {
 	shared_ptr<System> new_syst(syst->empty_copy());
-	new_syst->particles.types.push_back(DEFAULT_PARTICLE_TYPE);
-	new_syst->particles.positions.push_back(syst->com());
-	new_syst->particles.velocities.push_back(syst->average_velocity());
+	new_syst->particles.types().push_back(DEFAULT_PARTICLE_TYPE);
+	new_syst->particles.positions().push_back(syst->com());
+	new_syst->particles.velocities().push_back(syst->average_velocity());
 
 	return new_syst;
 }

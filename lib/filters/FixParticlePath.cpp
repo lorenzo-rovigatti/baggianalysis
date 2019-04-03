@@ -33,12 +33,12 @@ shared_ptr<System> FixParticlePath::filter(std::shared_ptr<const System> syst) {
 		}
 
 		for(uint i = 0; i < syst->particles.N(); i++) {
-			new_syst->particles.types.push_back(syst->particles.types[i]);
-			new_syst->particles.velocities.push_back(syst->particles.velocities[i]);
+			new_syst->particles.types().push_back(syst->particles.types()[i]);
+			new_syst->particles.velocities().push_back(syst->particles.velocities()[i]);
 			vec3 shift = vec3(_shifts[i]) * syst->box;
-			vec3 new_pos = syst->particles.positions[i] + shift;
+			vec3 new_pos = syst->particles.positions()[i] + shift;
 
-			vec3 diff = new_pos - _previous_frame->particles.positions[i];
+			vec3 diff = new_pos - _previous_frame->particles.positions()[i];
 			for(uint d = 0; d < 3; d++) {
 				double half_box = 0.5 * syst->box[d];
 				if(diff[d] > half_box) {
@@ -50,7 +50,7 @@ shared_ptr<System> FixParticlePath::filter(std::shared_ptr<const System> syst) {
 					_shifts[i][d]++;
 				}
 			}
-			new_syst->particles.positions.push_back(new_pos);
+			new_syst->particles.positions().push_back(new_pos);
 		}
 	}
 	else {

@@ -113,7 +113,7 @@ double MSD::_conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System
 		com_diff = second->com() - first->com();
 	}
 	for(uint i = 0; i < N; i++) {
-		vec3 diff = second->particles.positions[i] - first->particles.positions[i] - com_diff;
+		vec3 diff = second->particles.positions()[i] - first->particles.positions()[i] - com_diff;
 		cc_MSD += glm::dot(diff, diff);
 	}
 

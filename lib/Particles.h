@@ -20,9 +20,34 @@ public:
 
 	uint N() const;
 
-	std::vector<particle_type> types;
-	vector_vec3 positions;
-	vector_vec3 velocities;
+	const std::vector<particle_type> &types() const {
+		return _types;
+	}
+
+	std::vector<particle_type> &types() {
+		return _types;
+	}
+
+	const vector_vec3 &positions() const {
+		return _positions;
+	}
+
+	vector_vec3 &positions() {
+		return _positions;
+	}
+
+	const vector_vec3 &velocities() const {
+		return _velocities;
+	}
+
+	vector_vec3 &velocities() {
+		return _velocities;
+	}
+
+private:
+	std::vector<particle_type> _types;
+	vector_vec3 _positions;
+	vector_vec3 _velocities;
 };
 
 #ifdef PYTHON_BINDINGS

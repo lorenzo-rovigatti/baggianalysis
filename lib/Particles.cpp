@@ -18,7 +18,7 @@ Particles::~Particles() {
 }
 
 uint Particles::N() const {
-	return types.size();
+	return types().size();
 }
 
 #ifdef PYTHON_BINDINGS
@@ -26,12 +26,16 @@ uint Particles::N() const {
 void export_Particles(py::module &m) {
 	py::class_<Particles, std::shared_ptr<Particles>> parser(m, "Particles");
 
+	// these are needed when binding methods that are overloaded
+	using types_type = const std::vector<particle_type> &(Particles::*) () const;
+	using vectors_type = const vector_vec3 &(Particles::*) () const;
+
 	parser
 		.def(py::init<>())
 		.def("N", &Particles::N)
-		.def_readwrite("types", &Particles::types)
-		.def_readwrite("positions", &Particles::positions)
-		.def_readwrite("velocities", &Particles::velocities);
+		.def_property_readonly("types", static_cast<types_type>(&Particles::types))
+		.def_property_readonly("positions", static_cast<vectors_type>(&Particles::positions))
+		.def_property_readonly("velocities", static_cast<vectors_type>(&Particles::velocities));
 }
 
 #endif

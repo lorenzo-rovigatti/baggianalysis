@@ -28,7 +28,7 @@ std::shared_ptr<System> System::empty_copy() const {
 
 vec3 System::com() const {
 	vec3 com(0., 0., 0.);
-	for(auto &pos : particles.positions) {
+	for(auto &pos : particles.positions()) {
 		com += pos;
 	}
 	com /= particles.N();
@@ -37,7 +37,7 @@ vec3 System::com() const {
 
 vec3 System::average_velocity() const {
 	vec3 v_avg(0., 0., 0.);
-	for(auto &vel : particles.velocities) {
+	for(auto &vel : particles.velocities()) {
 		v_avg += vel;
 	}
 	v_avg /= particles.N();
