@@ -35,6 +35,6 @@ using vector_scalar = std::vector<double>;
 using uint = unsigned int;
 using ullint = unsigned long long int;
 
-using particle_type = uint;
+using particle_type = std::string;
 
 #endif /* LIB_DEFS_H_ */

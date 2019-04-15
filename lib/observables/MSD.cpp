@@ -8,7 +8,6 @@
 #include "MSD.h"
 
 #include <fstream>
-#include <map>
 
 using namespace std;
 
@@ -23,13 +22,12 @@ MSD::~MSD() {
 
 }
 
-void MSD::compute_and_print(const MSDOptions &opts) {
-	if(opts.points_per_cycle < 1) {
-		string error = boost::str(boost::format("The MSD's points per cycle (%d) should larger than 0") % opts.points_per_cycle);
+std::map<ullint, double> MSD::compute(uint points_per_cycle, bool remove_com) {
+	if(points_per_cycle < 1) {
+		string error = boost::str(boost::format("The MSD's points per cycle (%d) should larger than 0") % points_per_cycle);
 		throw std::runtime_error(error);
 	}
 
-	uint ppc = opts.points_per_cycle;
 	map<ullint, double> MSD;
 	map<ullint, uint> n_conf;
 
@@ -52,7 +50,7 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 			throw std::runtime_error(error);
 		}
 
-		if(idx % ppc == 0) {
+		if(idx % points_per_cycle == 0) {
 			if(idx > 0) {
 				// save the old cycle base
 				past_cycle_bases.push_back(current_cycle_base);
@@ -62,7 +60,7 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 
 			// loop over configurations that were the bases of past cycles
 			for(auto past_base : past_cycle_bases) {
-				double cc_MSD = _conf_conf_MSD(current_cycle_base, past_base, opts.remove_com);
+				double cc_MSD = _conf_conf_MSD(current_cycle_base, past_base, remove_com);
 				ullint time_diff = current_cycle_base->time - past_base->time;
 				auto it = MSD.find(time_diff);
 				if(it == MSD.end()) {
@@ -76,7 +74,7 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 			}
 		}
 
-		double cc_MSD = _conf_conf_MSD(current_cycle_base, frame, opts.remove_com);
+		double cc_MSD = _conf_conf_MSD(current_cycle_base, frame, remove_com);
 		ullint time_diff = frame->time - current_cycle_base->time;
 		auto it = MSD.find(time_diff);
 		if(it == MSD.end()) {
@@ -92,17 +90,28 @@ void MSD::compute_and_print(const MSDOptions &opts) {
 		frame = _trajectory->next_frame();
 	}
 
-	// print the MSD
-	ofstream output_file(opts.output_file);
-
-	for(auto pair : MSD) {
+	for(auto &pair : MSD) {
 		if(pair.first > 0) {
-			double value = pair.second / n_conf[pair.first];
-			output_file << pair.first << " " << value << endl;
+			pair.second /= n_conf[pair.first];
 		}
 	}
 
-	output_file.close();
+	return MSD;
+}
+
+void MSD::compute_and_print(uint points_per_cycle, bool remove_com, std::string output_file) {
+	auto MSD = compute(points_per_cycle, remove_com);
+
+	// print the MSD
+	ofstream output(output_file);
+
+	for(auto pair : MSD) {
+		if(pair.first > 0) {
+			output << pair.first << " " << pair.second << endl;
+		}
+	}
+
+	output.close();
 }
 
 double MSD::_conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System> second, bool remove_com) {
@@ -123,20 +132,12 @@ double MSD::_conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System
 #ifdef PYTHON_BINDINGS
 
 void export_MSD(py::module &m) {
-	py::class_<MSDOptions> MSDOptions(m, "MSDOptions");
-
-	MSDOptions
-		.def(py::init<>())
-		.def_readwrite("points_per_cycle", &MSDOptions::points_per_cycle)
-		.def_readwrite("output_file", &MSDOptions::output_file)
-		.def_readwrite("remove_com", &MSDOptions::remove_com);
-
 	py::class_<MSD, std::shared_ptr<MSD>> MSD(m, "MSD");
 
 	MSD
 		.def(py::init<shared_ptr<BaseTrajectory>>())
-		.def("compute_and_print", &MSD::compute_and_print)
-		.def_static("default_options", &MSD::default_options);
+		.def("compute", &MSD::compute)
+		.def("compute_and_print", &MSD::compute_and_print);
 }
 
 #endif

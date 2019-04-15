@@ -41,7 +41,7 @@ shared_ptr<System> LJKAParser::parse(ifstream &configuration) {
 		NA = boost::lexical_cast<uint>(boost::trim_copy(split[3]));
 	}
 	catch(boost::bad_lexical_cast &e) {
-		string error = boost::str(boost::format("The timestep value '%s' found in the oxDNA configuration cannot be cast to an integer") % split[2]);
+		string error = boost::str(boost::format("The timestep value '%s' found in the LJKA configuration cannot be cast to an integer") % split[2]);
 		throw std::runtime_error(error);
 	}
 
@@ -64,7 +64,7 @@ shared_ptr<System> LJKAParser::parse(ifstream &configuration) {
 		boost::split(split, line, boost::is_any_of(" "));
 		vec3 position = vec3(boost::lexical_cast<double>(split[0]), boost::lexical_cast<double>(split[1]), boost::lexical_cast<double>(split[2]));
 
-		particle_type type = (i < NA) ? 0 : 1;
+		particle_type type = (i < NA) ? "0" : "1";
 		syst->particles.types().push_back(type);
 		syst->particles.positions().push_back(position);
 		syst->particles.velocities().push_back(vec3(0., 0., 0.));

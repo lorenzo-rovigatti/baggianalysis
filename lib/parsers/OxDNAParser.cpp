@@ -81,10 +81,9 @@ shared_ptr<System> OxDNAParser::parse(ifstream &configuration) {
 			if(configuration.good() && line.size() > 0) {
 				boost::split(split, line, boost::is_any_of(" "));
 				vec3 position = vec3(boost::lexical_cast<double>(split[0]), boost::lexical_cast<double>(split[1]), boost::lexical_cast<double>(split[2]));
-
 				vec3 velocity = vec3(boost::lexical_cast<double>(split[9]), boost::lexical_cast<double>(split[10]), boost::lexical_cast<double>(split[11]));
 
-				syst->particles.types().push_back(0);
+				syst->particles.types().push_back("0");
 				syst->particles.positions().push_back(position);
 				syst->particles.velocities().push_back(velocity);
 			}

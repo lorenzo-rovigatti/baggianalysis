@@ -71,18 +71,7 @@ shared_ptr<System> GroParser::parse(ifstream &configuration) {
 		string atom_name = line.substr(10, 5);
 		string atom_number = line.substr(15, 5);
 
-		boost::trim(atom_name);
-		auto it = find(inserted_name.begin(), inserted_name.end(), atom_name);
-		particle_type p_type;
-		if(it == inserted_name.end()) {
-			p_type = inserted_name.size();
-			inserted_name.push_back(atom_name);
-		}
-		else {
-			p_type = std::distance(inserted_name.begin(), it);
-		}
-
-		syst->particles.types().push_back(p_type);
+		syst->particles.types().push_back(atom_name);
 
 		string x = boost::trim_copy(line.substr(20, 8));
 		string y = boost::trim_copy(line.substr(28, 8));

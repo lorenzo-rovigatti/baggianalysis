@@ -12,6 +12,7 @@
 #include <observables/MSD.h>
 #include <parsers/GroParser.h>
 #include <parsers/LJKAParser.h>
+#include <parsers/OxDNAParser.h>
 #include "../lib/trajectories/FullTrajectory.h"
 #include "../lib/trajectories/LazyTrajectory.h"
 
@@ -21,15 +22,16 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	std::shared_ptr<ba::BaseParser> parser(new ba::GroParser(0.001));
+//	std::shared_ptr<ba::BaseParser> parser(new ba::GroParser(0.001));
+	std::shared_ptr<ba::BaseParser> parser(new ba::OxDNAParser("topology.dat"));
 	std::shared_ptr<ba::LazyTrajectory> trajectory(new ba::LazyTrajectory(parser));
 
 	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::FixParticlePath()));
 	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::SubtractCOM()));
 
-	int species = atoi(argv[4]);
-	if(species != -1) {
-		std::vector<particle_type> allowed_types = {(uint) species};
+	std::string species(argv[4]);
+	if(atoi(argv[4]) != -1) {
+		std::vector<particle_type> allowed_types = {species};
 		trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::FilterByType(allowed_types)));
 	}
 
@@ -42,11 +44,10 @@ int main(int argc, char *argv[]) {
 
 	ba::MSD msd(trajectory);
 
-	auto opts = ba::MSD::default_options();
-	opts.points_per_cycle = atoi(argv[2]);
-	opts.remove_com = false;
-	opts.output_file = std::string(argv[3]);
-	msd.compute_and_print(opts);
+	uint points_per_cycle = atoi(argv[2]);
+	bool remove_com = false;
+	std::string output_file(argv[3]);
+	msd.compute_and_print(points_per_cycle, remove_com, output_file);
 
 	return 0;
 }

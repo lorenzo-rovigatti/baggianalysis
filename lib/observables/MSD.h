@@ -10,24 +10,17 @@
 
 #include "../trajectories/BaseTrajectory.h"
 
-namespace ba {
+#include <map>
 
-struct MSDOptions {
-	uint points_per_cycle = 0;
-	std::string output_file = "msd.dat";
-	bool remove_com = false;
-};
+namespace ba {
 
 class MSD {
 public:
 	MSD(std::shared_ptr<BaseTrajectory> trajectory);
 	virtual ~MSD();
 
-	static MSDOptions default_options() {
-		return MSDOptions();
-	}
-
-	void compute_and_print(const MSDOptions &opts);
+	std::map<ullint, double> compute(uint points_per_cycle, bool remove_com);
+	void compute_and_print(uint points_per_cycle, bool remove_com, std::string output_file);
 
 protected:
 	double _conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System> second, bool remove_com);
