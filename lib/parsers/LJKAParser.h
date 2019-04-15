@@ -20,6 +20,12 @@ public:
 	virtual std::shared_ptr<System> parse(std::ifstream &configuration) override;
 };
 
+#ifdef PYTHON_BINDINGS
+
+void export_LJKAParser(py::module &m);
+
+#endif
+
 } /* namespace ba */
 
 #endif /* PARSERS_LJKAPARSER_H_ */

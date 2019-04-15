@@ -23,6 +23,12 @@ protected:
 	std::vector<particle_type> _allowed_types;
 };
 
+#ifdef PYTHON_BINDINGS
+
+void export_FilterByType(py::module &m);
+
+#endif
+
 } /* namespace ashell */
 
 #endif /* FILTERS_FILTERBYTYPE_H_ */

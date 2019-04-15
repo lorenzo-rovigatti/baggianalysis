@@ -38,4 +38,16 @@ shared_ptr<System> FilterByType::filter(std::shared_ptr<const System> syst) {
 	return new_syst;
 }
 
+#ifdef PYTHON_BINDINGS
+
+void export_FilterByType(py::module &m) {
+	pybind11::class_<FilterByType, BaseFilter, std::shared_ptr<FilterByType>> filter(m, "FilterByType");
+
+	filter
+		.def(py::init<std::vector<particle_type>>())
+		.def("filter", &FilterByType::filter);
+}
+
+#endif
+
 } /* namespace ashell */

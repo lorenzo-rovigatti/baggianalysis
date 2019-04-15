@@ -24,6 +24,9 @@ public:
 
 #ifdef PYTHON_BINDINGS
 
+/**
+ * @brief Trampoline class for BaseParser.
+ */
 class PyBaseParser : public BaseParser {
 public:
 	using BaseParser::BaseParser;

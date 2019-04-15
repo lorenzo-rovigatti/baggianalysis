@@ -34,4 +34,16 @@ shared_ptr<System> SubtractCOM::filter(std::shared_ptr<const System> syst) {
 	return new_syst;
 }
 
+#ifdef PYTHON_BINDINGS
+
+void export_SubtractCOM(py::module &m) {
+	pybind11::class_<SubtractCOM, BaseFilter, std::shared_ptr<SubtractCOM>> filter(m, "SubtractCOM");
+
+	filter
+		.def(py::init<>())
+		.def("filter", &SubtractCOM::filter);
+}
+
+#endif
+
 } /* namespace ba */

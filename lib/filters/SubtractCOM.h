@@ -20,6 +20,12 @@ public:
 	virtual std::shared_ptr<System> filter(std::shared_ptr<const System> syst) override;
 };
 
+#ifdef PYTHON_BINDINGS
+
+void export_SubtractCOM(py::module &m);
+
+#endif
+
 } /* namespace ba */
 
 #endif /* FILTERS_SUBTRACTCOM_H_ */

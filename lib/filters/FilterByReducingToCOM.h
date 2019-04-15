@@ -20,6 +20,12 @@ public:
 	virtual std::shared_ptr<System> filter(std::shared_ptr<const System> syst) override;
 };
 
+#ifdef PYTHON_BINDINGS
+
+void export_FilterByReducingToCOM(py::module &m);
+
+#endif
+
 } /* namespace ba */
 
 #endif /* FILTERS_FILTERBYREDUCINGTOCOM_H_ */

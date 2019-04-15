@@ -26,6 +26,12 @@ protected:
 	std::vector<particle_shift> _shifts;
 };
 
+#ifdef PYTHON_BINDINGS
+
+void export_FixParticlePath(py::module &m);
+
+#endif
+
 } /* namespace ba */
 
 #endif /* FILTERS_FIXPARTICLEPATH_H_ */

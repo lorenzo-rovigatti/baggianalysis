@@ -63,4 +63,16 @@ shared_ptr<System> FixParticlePath::filter(std::shared_ptr<const System> syst) {
 	return new_syst;
 }
 
+#ifdef PYTHON_BINDINGS
+
+void export_FixParticlePath(py::module &m) {
+	pybind11::class_<FixParticlePath, BaseFilter, std::shared_ptr<FixParticlePath>> filter(m, "FixParticlePath");
+
+	filter
+		.def(py::init<>())
+		.def("filter", &FixParticlePath::filter);
+}
+
+#endif
+
 } /* namespace ba */

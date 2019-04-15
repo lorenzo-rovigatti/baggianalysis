@@ -126,4 +126,16 @@ shared_ptr<System> GroParser::parse(ifstream &configuration) {
 	return syst;
 }
 
+#ifdef PYTHON_BINDINGS
+
+void export_GroParser(py::module &m) {
+	pybind11::class_<GroParser, BaseParser, std::shared_ptr<GroParser>> parser(m, "GroParser");
+
+	parser
+		.def(py::init<double>())
+		.def("parse", &GroParser::parse);
+}
+
+#endif
+
 } /* namespace ba */
