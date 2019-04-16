@@ -8,12 +8,11 @@
 #ifndef SYSTEM_H_
 #define SYSTEM_H_
 
-#include "Particles.h"
-#include "python_defs.h"
+#include "particles/ParticleSet.h"
 
 namespace ba {
 
-class System {
+class System : public ParticleSet {
 public:
 	System();
 	virtual ~System();
@@ -25,7 +24,6 @@ public:
 
 public:
 	ullint time = 0;
-	Particles particles;
 	vec3 box = vec3(0., 0., 0.);
 };
 

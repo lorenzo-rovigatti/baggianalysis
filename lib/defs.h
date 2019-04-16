@@ -11,7 +11,7 @@
 #define SQR(x) ((x) * (x))
 #define CUB(x) ((x) * (x) * (x))
 
-#define DEFAULT_PARTICLE_TYPE 0
+#define DEFAULT_PARTICLE_TYPE "0"
 
 #ifndef PYTHON_BINDINGS
 #define PYBIND11_EXPORT

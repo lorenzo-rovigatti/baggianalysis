@@ -39,7 +39,7 @@ std::map<ullint, double> MSD::compute(uint points_per_cycle, bool remove_com) {
 
 	auto frame = _trajectory->next_frame();
 	while(frame != nullptr) {
-		uint N_conf = frame->particles.N();
+		uint N_conf = frame->N();
 		if(N_first_conf == 0) {
 			N_first_conf = N_conf;
 			BOOST_LOG_TRIVIAL(info) << "Computing the MSD on configurations composed of " << N_conf << " particles";
@@ -116,13 +116,13 @@ void MSD::compute_and_print(uint points_per_cycle, bool remove_com, std::string 
 
 double MSD::_conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System> second, bool remove_com) {
 	double cc_MSD = 0.;
-	uint N = first->particles.N();
+	uint N = first->N();
 	vec3 com_diff(0., 0., 0.);
 	if(remove_com) {
 		com_diff = second->com() - first->com();
 	}
 	for(uint i = 0; i < N; i++) {
-		vec3 diff = second->particles.positions()[i] - first->particles.positions()[i] - com_diff;
+		vec3 diff = second->particles()[i]->position() - first->particles()[i]->position() - com_diff;
 		cc_MSD += glm::dot(diff, diff);
 	}
 

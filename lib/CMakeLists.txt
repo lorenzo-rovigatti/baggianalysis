@@ -9,7 +9,8 @@ SET(ba_lib_SOURCES
 	parsers/GroParser.cpp
 	parsers/LJKAParser.cpp
 	parsers/OxDNAParser.cpp
-	Particles.cpp
+	particles/Particle.cpp
+	particles/ParticleSet.cpp
 	System.cpp
 	trajectories/BaseTrajectory.cpp
 	trajectories/LazyTrajectory.cpp

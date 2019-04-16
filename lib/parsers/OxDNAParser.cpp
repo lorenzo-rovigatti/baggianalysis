@@ -83,15 +83,14 @@ shared_ptr<System> OxDNAParser::parse(ifstream &configuration) {
 				vec3 position = vec3(boost::lexical_cast<double>(split[0]), boost::lexical_cast<double>(split[1]), boost::lexical_cast<double>(split[2]));
 				vec3 velocity = vec3(boost::lexical_cast<double>(split[9]), boost::lexical_cast<double>(split[10]), boost::lexical_cast<double>(split[11]));
 
-				syst->particles.types().push_back("0");
-				syst->particles.positions().push_back(position);
-				syst->particles.velocities().push_back(velocity);
+				shared_ptr<Particle> new_particle(new Particle("0", position, velocity));
+				syst->add_particle(new_particle);
 			}
 		}
 	}
 
-	if(syst->particles.N() != N) {
-		string error = boost::str(boost::format("The number of particles found in the configuration file (%d) is different from what specified in the topology file (%d)") % syst->particles.N() % N);
+	if(syst->N() != N) {
+		string error = boost::str(boost::format("The number of particles found in the configuration file (%d) is different from what specified in the topology file (%d)") % syst->N() % N);
 		throw std::runtime_error(error);
 	}
 

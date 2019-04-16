@@ -28,19 +28,19 @@ std::shared_ptr<System> System::empty_copy() const {
 
 vec3 System::com() const {
 	vec3 com(0., 0., 0.);
-	for(auto &pos : particles.positions()) {
-		com += pos;
+	for(auto p : particles()) {
+		com += p->position();
 	}
-	com /= particles.N();
+	com /= this->N();
 	return com;
 }
 
 vec3 System::average_velocity() const {
 	vec3 v_avg(0., 0., 0.);
-	for(auto &vel : particles.velocities()) {
-		v_avg += vel;
+	for(auto p : particles()) {
+		v_avg += p->velocity();
 	}
-	v_avg /= particles.N();
+	v_avg /= this->N();
 	return v_avg;
 }
 
@@ -53,8 +53,7 @@ void export_System(py::module &m) {
 		.def(py::init<>())
 		.def("empty_copy", &System::empty_copy)
 		.def("com", &System::com)
-		.def("average_velocity", &System::average_velocity)
-		.def_readwrite("particles", &System::particles);
+		.def("average_velocity", &System::average_velocity);
 }
 
 #endif

@@ -22,8 +22,9 @@
 
 PYBIND11_MODULE(baggianalysis, m) {
 	// utility classes
+	ba::export_Particle(m);
+	ba::export_ParticleSet(m);
 	ba::export_System(m);
-	ba::export_Particles(m);
 
 	// parsers
 	ba::export_BaseParser(m);
