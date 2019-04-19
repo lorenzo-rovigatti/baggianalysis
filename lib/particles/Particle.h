@@ -23,24 +23,24 @@ public:
 		return _type;
 	}
 
-	particle_type &type() {
-		return _type;
+	void set_type(const particle_type &nt) {
+		_type = nt;
 	}
 
 	const vec3 &position() const {
 		return _position;
 	}
 
-	vec3 &position() {
-		return _position;
+	void set_position(const vec3 &np) {
+		_position = np;
 	}
 
 	const vec3 &velocity() const {
 		return _velocity;
 	}
 
-	vec3 &velocity() {
-		return _velocity;
+	void set_velocity(const vec3 &nv) {
+		_velocity = nv;
 	}
 
 protected:

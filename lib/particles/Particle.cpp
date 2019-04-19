@@ -31,10 +31,10 @@ void export_Particle(py::module &m) {
 
 	parser
 		.def(py::init<>())
-		.def(py::init<particle_type, vec3, vec3>());
-//		.def_readwrite("type", &Particle::_type)
-//		.def_readwrite("position", &Particle::_position)
-//		.def_readwrite("velocity", &Particle::_velocity);
+		.def(py::init<particle_type, vec3, vec3>())
+		.def_property("type", &Particle::type, &Particle::set_type)
+		.def_property("position", &Particle::position, &Particle::set_position)
+		.def_property("velocity", &Particle::velocity, &Particle::set_velocity);
 }
 
 #endif

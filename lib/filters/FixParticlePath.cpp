@@ -51,7 +51,7 @@ shared_ptr<System> FixParticlePath::filter(std::shared_ptr<const System> syst) {
 					_shifts[i][d]++;
 				}
 			}
-			new_particle->position() = new_pos;
+			new_particle->set_position(new_pos);
 			new_syst->add_particle(new_particle);
 		}
 	}
