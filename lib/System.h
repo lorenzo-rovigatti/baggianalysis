@@ -19,9 +19,6 @@ public:
 
 	std::shared_ptr<System> empty_copy() const;
 
-	vec3 com() const;
-	vec3 average_velocity() const;
-
 public:
 	ullint time = 0;
 	vec3 box = vec3(0., 0., 0.);

@@ -9,8 +9,9 @@
 
 namespace ba {
 
-System::System() {
-
+System::System() :
+		ParticleSet() {
+	set_name("system");
 }
 
 System::~System() {
@@ -26,24 +27,6 @@ std::shared_ptr<System> System::empty_copy() const {
 	return new_syst;
 }
 
-vec3 System::com() const {
-	vec3 com(0., 0., 0.);
-	for(auto p : particles()) {
-		com += p->position();
-	}
-	com /= this->N();
-	return com;
-}
-
-vec3 System::average_velocity() const {
-	vec3 v_avg(0., 0., 0.);
-	for(auto p : particles()) {
-		v_avg += p->velocity();
-	}
-	v_avg /= this->N();
-	return v_avg;
-}
-
 #ifdef PYTHON_BINDINGS
 
 void export_System(py::module &m) {
@@ -51,9 +34,7 @@ void export_System(py::module &m) {
 
 	parser
 		.def(py::init<>())
-		.def("empty_copy", &System::empty_copy)
-		.def("com", &System::com)
-		.def("average_velocity", &System::average_velocity);
+		.def("empty_copy", &System::empty_copy);
 }
 
 #endif

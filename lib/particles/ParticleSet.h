@@ -17,16 +17,23 @@ public:
 	ParticleSet();
 	virtual ~ParticleSet();
 
+	std::string name() const;
+	void set_name(const std::string &name);
+
 	uint N() const;
 	std::vector<particle_type> types() const;
 	vector_vec3 positions() const;
 	vector_vec3 velocities() const;
 
-	const std::vector<std::shared_ptr<Particle>> &particles() const;
+	vec3 com() const;
+	vec3 average_velocity() const;
 
+	const std::vector<std::shared_ptr<Particle>> &particles() const;
 	void add_particle(std::shared_ptr<Particle> p);
 
 protected:
+	std::string _name;
+
 	std::vector<std::shared_ptr<Particle>> _particles;
 	std::vector<ParticleSet> _subsets;
 };

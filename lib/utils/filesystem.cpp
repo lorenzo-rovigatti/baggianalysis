@@ -7,7 +7,7 @@
 
 #include "filesystem.h"
 
-#include "natural_sort.hpp"
+#include "natural_sort.h"
 
 namespace ba {
 
