@@ -74,16 +74,19 @@ std::map<ullint, double> MSD::compute(uint points_per_cycle, bool remove_com) {
 			}
 		}
 
-		double cc_MSD = _conf_conf_MSD(current_cycle_base, frame, remove_com);
-		ullint time_diff = frame->time - current_cycle_base->time;
-		auto it = MSD.find(time_diff);
-		if(it == MSD.end()) {
-			MSD[time_diff] = cc_MSD;
-			n_conf[time_diff] = 1;
-		}
-		else {
-			MSD[time_diff] += cc_MSD;
-			n_conf[time_diff]++;
+		// don't compute the MSD of a configuration with itself
+		if(current_cycle_base != frame) {
+			double cc_MSD = _conf_conf_MSD(current_cycle_base, frame, remove_com);
+			ullint time_diff = frame->time - current_cycle_base->time;
+			auto it = MSD.find(time_diff);
+			if(it == MSD.end()) {
+				MSD[time_diff] = cc_MSD;
+				n_conf[time_diff] = 1;
+			}
+			else {
+				MSD[time_diff] += cc_MSD;
+				n_conf[time_diff]++;
+			}
 		}
 
 		idx++;
