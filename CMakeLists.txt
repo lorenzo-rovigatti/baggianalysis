@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
-OPTION(Python "Enable Python bindings" OFF)
+OPTION(Python "Enable Python bindings" ON)
 OPTION(Debug "Set to ON to compile with debug symbols" OFF)
 OPTION(G "Set to ON to compile with optimisations and debug symbols" OFF)
 OPTION(MOSIX "Make baggianalysis compatible with MOSIX" OFF)
@@ -88,6 +88,12 @@ ENDMACRO(CURRENT_DATE)
 
 CURRENT_DATE(today)
 ADD_DEFINITIONS(-D'GIT_VERSION="${revision}"' -D'BUILD_TIME="${today}"')
+
+ADD_CUSTOM_TARGET(test_quick
+    ${CMAKE_CURRENT_SOURCE_DIR}/tests/TestSuite.py test_list_file.txt
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests
+    COMMENT "Running build integration tests" VERBATIM
+)
 
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 

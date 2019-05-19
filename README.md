@@ -29,9 +29,13 @@ At the end of the compilation the final executable (baggianalysis) will be place
 
 Here is a list of options that can be passed to cmake during the pre-compilation stage:
 
-* `-DPython=On`			Enables Python bindings
-* `-DDebug=On`				Compiles with debug symbols and without optimisation flags
-* `-DG=On`					Compiles with debug symbols + optimisation flags
+* `-DPython=On|Off`		Enables|disables Python bindings (defaults to `On`)
+* `-DDebug=On|Off`			Compiles with|without debug symbols and without|with optimisation flags (defaults to `Off`)
+* `-DG=On|Off`				Compiles with|without debug symbols and optimisation flags (defaults to `Off')
+
+### Test suite
+
+baggianalysis contains a very simple testing suite that checks whether the Python bindings and core functionalities work. The test suite is run by using the `make test_quick` command. 
 
 ## Features
 
