@@ -245,29 +245,11 @@ class System(object):
             if p.returncode == 139: 
                 Logger.log("%s segmentation fault (return code %d)" % (self.log_prefix, p.returncode), Logger.WARNING)
             else: 
-                Logger.log("%s %s returned %d" % (self.log_prefix, self.executable, p.returncode), Logger.WARNING)
+                Logger.log("%s %s returned %d and the following output:" % (self.log_prefix, self.executable, p.returncode), Logger.WARNING)
+                for line in p.stderr:
+                    print("\t" + line.strip("\n"))
             error = True
 
-        # TODO add support for this            
-        # check the logfile for errors
-#         log_file = os.path.join(self.folder, get_log_name(self.level))
-#         if os.path.exists(log_file):
-#             f = open(log_file)
-#             for l in f.readlines():
-#                 if l.startswith("ERROR"): 
-#                     Logger.log("%s %s error: %s" % (self.executable, self.log_prefix, l.strip()), Logger.WARNING)
-#                     error = True
-#             f.close()
-        
-        # TODO and maybe for this as well
-        # check the standard output for nans and infs
-#         for l in p.stdout.readlines():
-#             tokens = ["nan", "inf"]
-#             for t in tokens: 
-#                 if t in l: 
-#                     Logger.log("%s %s generated a '%s': %s" % (self.log_prefix, self.executable, t, l), Logger.WARNING)
-#                     error = True
-        
         # we don't run tests if the simulation was not successful. We put this here so that all
         # above messages can be printed independently of each other
         if error: 

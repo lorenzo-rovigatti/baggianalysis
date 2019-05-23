@@ -8,7 +8,7 @@ SET(ba_lib_SOURCES
 	parsers/BaseParser.cpp
 	parsers/GroParser.cpp
 	parsers/LJKAParser.cpp
-	parsers/OxDNAParser.cpp
+	parsers/GenericOxDNAParser.cpp
 	particles/Particle.cpp
 	particles/ParticleSet.cpp
 	System.cpp
@@ -61,6 +61,6 @@ ENDIF(APPLE)
 ADD_CUSTOM_COMMAND(
         TARGET _baggianalysis POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_SOURCE_DIR}/tests/test.py
+                ${CMAKE_SOURCE_DIR}/tests
                 ${CMAKE_CURRENT_BINARY_DIR}
 )

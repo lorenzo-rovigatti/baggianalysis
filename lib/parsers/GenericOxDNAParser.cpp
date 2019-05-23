@@ -5,7 +5,7 @@
  *      Author: lorenzo
  */
 
-#include "OxDNAParser.h"
+#include "GenericOxDNAParser.h"
 
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
@@ -14,17 +14,17 @@ namespace ba {
 
 using namespace std;
 
-OxDNAParser::OxDNAParser(std::string topology_file) :
+GenericOxDNAParser::GenericOxDNAParser(std::string topology_file) :
 				BaseParser(),
 				_topology_file(topology_file) {
 
 }
 
-OxDNAParser::~OxDNAParser() {
+GenericOxDNAParser::~GenericOxDNAParser() {
 
 }
 
-shared_ptr<System> OxDNAParser::parse(ifstream &configuration) {
+shared_ptr<System> GenericOxDNAParser::parse(ifstream &configuration) {
 	ifstream topology(_topology_file);
 
 	if(!topology.good()) {
@@ -99,12 +99,12 @@ shared_ptr<System> OxDNAParser::parse(ifstream &configuration) {
 
 #ifdef PYTHON_BINDINGS
 
-void export_OxDNAParser(py::module &m) {
-	pybind11::class_<OxDNAParser, BaseParser, std::shared_ptr<OxDNAParser>> parser(m, "OxDNAParser");
+void export_GenericOxDNAParser(py::module &m) {
+	pybind11::class_<GenericOxDNAParser, BaseParser, std::shared_ptr<GenericOxDNAParser>> parser(m, "GenericOxDNAParser");
 
 	parser
 		.def(py::init<std::string>())
-		.def("parse", &OxDNAParser::parse);
+		.def("parse", &GenericOxDNAParser::parse);
 }
 
 #endif

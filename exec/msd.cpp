@@ -12,7 +12,7 @@
 #include <observables/MSD.h>
 #include <parsers/GroParser.h>
 #include <parsers/LJKAParser.h>
-#include <parsers/OxDNAParser.h>
+#include "../lib/parsers/GenericOxDNAParser.h"
 #include "../lib/trajectories/FullTrajectory.h"
 #include "../lib/trajectories/LazyTrajectory.h"
 
@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
 	}
 
 //	std::shared_ptr<ba::BaseParser> parser(new ba::GroParser(0.001));
-	std::shared_ptr<ba::BaseParser> parser(new ba::OxDNAParser("topology.dat"));
+	std::shared_ptr<ba::BaseParser> parser(new ba::GenericOxDNAParser("topology.dat"));
 	std::shared_ptr<ba::LazyTrajectory> trajectory(new ba::LazyTrajectory(parser));
 
 	trajectory->add_filter(std::shared_ptr<ba::BaseFilter>(new ba::FixParticlePath()));

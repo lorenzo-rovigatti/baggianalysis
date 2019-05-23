@@ -5,8 +5,8 @@
  *      Author: lorenzo
  */
 
-#ifndef PARSERS_OXDNAPARSER_H_
-#define PARSERS_OXDNAPARSER_H_
+#ifndef PARSERS_GENERICOXDNAPARSER_H_
+#define PARSERS_GENERICOXDNAPARSER_H_
 
 #include "BaseParser.h"
 
@@ -14,10 +14,10 @@
 
 namespace ba {
 
-class OxDNAParser: public BaseParser {
+class GenericOxDNAParser: public BaseParser {
 public:
-	OxDNAParser(std::string topology_file);
-	virtual ~OxDNAParser();
+	GenericOxDNAParser(std::string topology_file);
+	virtual ~GenericOxDNAParser();
 
 	virtual std::shared_ptr<System> parse(std::ifstream &configuration) override;
 
@@ -27,10 +27,10 @@ protected:
 
 #ifdef PYTHON_BINDINGS
 
-void export_OxDNAParser(py::module &m);
+void export_GenericOxDNAParser(py::module &m);
 
 #endif
 
 } /* namespace ba */
 
-#endif /* PARSERS_OXDNAPARSER_H_ */
+#endif /* PARSERS_GENERICOXDNAPARSER_H_ */

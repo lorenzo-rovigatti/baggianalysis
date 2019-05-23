@@ -7,8 +7,6 @@
 
 #include "parsers/GroParser.h"
 #include "parsers/LJKAParser.h"
-#include "parsers/OxDNAParser.h"
-
 #include "filters/SubtractCOM.h"
 #include "filters/FilterByReducingToCOM.h"
 #include "filters/FilterByType.h"
@@ -17,6 +15,7 @@
 #include "trajectories/LazyTrajectory.h"
 
 #include "observables/MSD.h"
+#include "parsers/GenericOxDNAParser.h"
 
 #include "python_defs.h"
 
@@ -30,7 +29,7 @@ PYBIND11_MODULE(baggianalysis, m) {
 	ba::export_BaseParser(m);
 	ba::export_GroParser(m);
 	ba::export_LJKAParser(m);
-	ba::export_OxDNAParser(m);
+	ba::export_GenericOxDNAParser(m);
 
 	// filters
 	ba::export_BaseFilter(m);
