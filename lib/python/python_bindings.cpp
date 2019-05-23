@@ -5,19 +5,21 @@
  *      Author: lorenzo
  */
 
-#include "parsers/GroParser.h"
-#include "parsers/LJKAParser.h"
-#include "filters/SubtractCOM.h"
-#include "filters/FilterByReducingToCOM.h"
-#include "filters/FilterByType.h"
-#include "filters/FixParticlePath.h"
+#include "../filters/SubtractCOM.h"
+#include "../filters/FilterByReducingToCOM.h"
+#include "../filters/FilterByType.h"
+#include "../filters/FixParticlePath.h"
 
-#include "trajectories/LazyTrajectory.h"
+#include "../observables/PoreSize.h"
+#include "../observables/MSD.h"
 
-#include "observables/MSD.h"
-#include "parsers/GenericOxDNAParser.h"
+#include "../parsers/GenericOxDNAParser.h"
+#include "../parsers/GroParser.h"
+#include "../parsers/LJKAParser.h"
 
-#include "python_defs.h"
+#include "../trajectories/LazyTrajectory.h"
+
+#include "../python_defs.h"
 
 PYBIND11_MODULE(baggianalysis, m) {
 	// utility classes
@@ -43,5 +45,6 @@ PYBIND11_MODULE(baggianalysis, m) {
 	ba::export_LazyTrajectory(m);
 
 	// observables
+	ba::export_PoreSize(m);
 	ba::export_MSD(m);
 }

@@ -17,11 +17,11 @@ Download the baggianalysis archive or clone it via `git`. If you do the latter, 
 
 The code can be compiled with the following commands:
 
-	cd baggianalysis	# enter the ashell folder
-	mkdir build		# create a new build folder. It is good practice to compile out-of-source
+	cd baggianalysis   # enter the baggianalysis folder
+	mkdir build        # create a new build folder. It is good practice to compile out-of-source
 	cd build
-	cmake ..			# here you can specify additional options, see next section
-	make -j4			# compile baggianalysis. The -jX make option makes it compile the code in parallel by using X threads.
+	cmake ..           # here you can specify additional options, see next section
+	make -j4           # compile baggianalysis. The -jX make option makes it compile the code in parallel by using X threads.
 
 At the end of the compilation the final executable (baggianalysis) will be placed in the build/bin folder. If Python bindings are enabled, `make install` will run the `setup.py install --user` command to make the library accessible by the user.
 
@@ -29,9 +29,9 @@ At the end of the compilation the final executable (baggianalysis) will be place
 
 Here is a list of options that can be passed to cmake during the pre-compilation stage:
 
-* `-DPython=On|Off`		Enables|disables Python bindings (defaults to `On`)
-* `-DDebug=On|Off`			Compiles with|without debug symbols and without|with optimisation flags (defaults to `Off`)
-* `-DG=On|Off`				Compiles with|without debug symbols and optimisation flags (defaults to `Off')
+* `-DPython=On|Off` enables|disables Python bindings (defaults to `On`)
+* `-DDebug=On|Off` compiles with|without debug symbols and without|with optimisation flags (defaults to `Off`)
+* `-DG=On|Off` compiles with|without debug symbols and optimisation flags (defaults to `Off`)
 
 ### Test suite
 
@@ -54,5 +54,5 @@ baggianalysis contains a very simple testing suite that checks whether the Pytho
 
 ## Acknowledgements
 
-* The [glm 0.9.9](https://glm.g-truc.net/0.9.9/index.html) and [Eigen 3.3.4](http://eigen.tuxfamily.org/index.php?title=Main_Page) libraries are included in the source tree
+* The [glm 0.9.9](https://glm.g-truc.net/0.9.9/index.html) library is explicitly included in the source tree, while [pybind 2.2.4](https://github.com/pybind/pybind11) (commit 9a19306) is automatically downloaded as a submodule
 * Natural sorting of files is carried out with the [NaturalSort](https://github.com/scopeInfinity/NaturalSort) library

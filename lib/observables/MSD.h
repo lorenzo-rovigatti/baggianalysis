@@ -16,6 +16,7 @@ namespace ba {
 
 class MSD {
 public:
+	// TODO: pass the trajectory directly to the compute and compute_and_print methods
 	MSD(std::shared_ptr<BaseTrajectory> trajectory);
 	virtual ~MSD();
 

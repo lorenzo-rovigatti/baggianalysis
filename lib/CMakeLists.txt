@@ -4,6 +4,7 @@ SET(ba_lib_SOURCES
 	filters/FilterByType.cpp
 	filters/FixParticlePath.cpp
 	filters/SubtractCOM.cpp
+	observables/PoreSize.cpp
 	observables/MSD.cpp
 	parsers/BaseParser.cpp
 	parsers/GroParser.cpp
@@ -21,7 +22,7 @@ SET(ba_lib_SOURCES
 IF(Python)
 	ADD_LIBRARY(_baggianalysis STATIC ${ba_lib_SOURCES})
 	SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES POSITION_INDEPENDENT_CODE ON)
-	pybind11_add_module(baggianalysis SHARED python_bindings.cpp)
+	pybind11_add_module(baggianalysis SHARED python/python_bindings.cpp)
 	TARGET_LINK_LIBRARIES(baggianalysis PRIVATE _baggianalysis)
 	
 	# the library should be in a folder with the same name to make it easier to use Python's distutils
@@ -49,6 +50,9 @@ ELSE(Python)
 ENDIF(Python)
 
 TARGET_LINK_LIBRARIES(_baggianalysis ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
+
+# TODO add an IF to handle the absence of nlopt
+TARGET_LINK_LIBRARIES(_baggianalysis -lnlopt)
 
 SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES PREFIX "")
 

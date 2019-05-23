@@ -2,8 +2,10 @@
 
 This is a list of things that will have to be changed as soon as I have some time to spare
 
+* Make it possible to use `for(auto frame : trajectory)`
+* Write utility functions to extract random numbers (so that, for instance, the seed and the type of rng can be set program-wide instead of module-wide)
 * Use getters and setters to incapsulate members
-* Add a method that split a string into tokens and trim each token
+* Add a method that splits a string into tokens and trims each token
 
 ## Architectural changes
 

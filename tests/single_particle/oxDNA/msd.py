@@ -3,8 +3,6 @@
 import numpy as np
 import baggianalysis as ba
 
-LIMIT = 1e-6
-
 parser = ba.GenericOxDNAParser("topology.dat")
 trajectory = ba.LazyTrajectory(parser)
 trajectory.initialise_from_trajectory_file("trajectory.dat")
