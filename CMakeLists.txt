@@ -48,8 +48,7 @@ if(CMAKE_VERSION VERSION_LESS "2.9")
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 ENDIF()
 
-# the BOOST_LOG_DYN_LINK definition is required in order to build a python-readable
-# dynamic library
+# the BOOST_LOG_DYN_LINK definition is required in order to build a python-readable dynamic library
 ADD_DEFINITIONS(-Wall -DBOOST_LOG_DYN_LINK -Wno-int-in-bool-context)
 
 IF(NOT CMAKE_BUILD_TYPE MATCHES Debug)

@@ -4,7 +4,6 @@ SET(ba_lib_SOURCES
 	filters/FilterByType.cpp
 	filters/FixParticlePath.cpp
 	filters/SubtractCOM.cpp
-	observables/PoreSize.cpp
 	observables/MSD.cpp
 	parsers/BaseParser.cpp
 	parsers/GroParser.cpp
@@ -19,8 +18,61 @@ SET(ba_lib_SOURCES
 	utils/filesystem.cpp
 )
 
+# The lines that follow the following variables:
+#   NLOPT_FOUND
+#   NLOPT_INCLUDE_DIRS
+#   NLOPT_LIBRARIES
+#   NLOPT_DEFINITIONS
+#   NLOPT_VERSION
+#
+# and the following targets:
+#   NLOPT::nlopt
+
+FIND_PACKAGE(PkgConfig QUIET)
+
+# Check to see if pkgconfig is installed.
+PKG_CHECK_MODULES(PC_NLOPT nlopt QUIET)
+
+# Definitions
+SET(NLOPT_DEFINITIONS ${PC_NLOPT_CFLAGS_OTHER})
+
+# Include directories
+FIND_PATH(NLOPT_INCLUDE_DIRS
+    NAMES nlopt.h
+    HINTS ${PC_NLOPT_INCLUDEDIR}
+    PATHS "${CMAKE_INSTALL_PREFIX}/include")
+
+# Libraries
+FIND_LIBRARY(NLOPT_LIBRARIES
+    NAMES nlopt nlopt_cxx
+    HINTS ${PC_NLOPT_LIBDIR})
+
+# Version
+SET(NLOPT_VERSION ${PC_NLOPT_VERSION})
+
+# Set (NAME)_FOUND if all the variables and the version are satisfied.
+INCLUDE(FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(NLOPT
+    FAIL_MESSAGE  DEFAULT_MSG
+    REQUIRED_VARS NLOPT_INCLUDE_DIRS NLOPT_LIBRARIES
+    VERSION_VAR   NLOPT_VERSION)
+
+SET(with_nlopt_SOURCES
+	observables/PoreSize.cpp
+)
+
+IF(NLOPT_FOUND)
+	SET(ba_lib_SOURCES
+		${ba_lib_SOURCES}
+		${with_nlopt_SOURCES}
+	)
+ELSE()
+	MESSAGE(WARNING "nlopt not found, the following modules will not be compiled: ${with_nlopt_SOURCES}")
+ENDIF()
+
 IF(Python)
 	ADD_LIBRARY(_baggianalysis STATIC ${ba_lib_SOURCES})
+	TARGET_LINK_LIBRARIES(_baggianalysis ${PYTHON_LIBRARIES})
 	SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES POSITION_INDEPENDENT_CODE ON)
 	pybind11_add_module(baggianalysis SHARED python/python_bindings.cpp)
 	TARGET_LINK_LIBRARIES(baggianalysis PRIVATE _baggianalysis)
@@ -49,10 +101,12 @@ ELSE(Python)
 	ADD_LIBRARY(_baggianalysis SHARED ${ba_lib_SOURCES})
 ENDIF(Python)
 
-TARGET_LINK_LIBRARIES(_baggianalysis ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
+TARGET_LINK_LIBRARIES(_baggianalysis ${Boost_LIBRARIES})
 
-# TODO add an IF to handle the absence of nlopt
-TARGET_LINK_LIBRARIES(_baggianalysis -lnlopt)
+IF(NLOPT_FOUND)
+	INCLUDE_DIRECTORIES( ${NLOPT_INCLUDE_DIRS} )
+	TARGET_LINK_LIBRARIES(_baggianalysis ${NLOPT_LIBRARIES})
+ENDIF()
 
 SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES PREFIX "")
 

@@ -226,6 +226,8 @@ void export_PoreSize(py::module &m) {
 
 	parser
 		.def(py::init<int>())
+		.def("set_r_cut", &PoreSize::set_r_cut)
+		.def("set_particle_radius", &PoreSize::set_particle_radius)
 		.def("radius", &PoreSize::radius)
 		.def("compute", &PoreSize::compute);
 }
