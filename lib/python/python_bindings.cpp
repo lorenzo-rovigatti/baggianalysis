@@ -18,6 +18,7 @@
 #include "../parsers/LAMMPSDumpParser.h"
 #include "../parsers/LJKAParser.h"
 
+#include "../trajectories/FullTrajectory.h"
 #include "../trajectories/LazyTrajectory.h"
 
 #include "../python_defs.h"
@@ -44,6 +45,7 @@ PYBIND11_MODULE(baggianalysis, m) {
 
 	// trajectories
 	ba::export_BaseTrajectory(m);
+	ba::export_FullTrajectory(m);
 	ba::export_LazyTrajectory(m);
 
 	// observables

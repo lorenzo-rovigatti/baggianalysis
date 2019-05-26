@@ -31,6 +31,12 @@ protected:
 	std::vector<std::shared_ptr<System>>::iterator _current_system;
 };
 
+#ifdef PYTHON_BINDINGS
+
+void export_FullTrajectory(py::module &m);
+
+#endif
+
 } /* namespace ba */
 
 #endif /* TRAJECTORIES_FULLTRAJECTORY_H_ */
