@@ -52,10 +52,10 @@ std::shared_ptr<System> GroParser::parse(std::ifstream &configuration) {
 	std::getline(configuration, line);
 	uint N;
 	try {
-		N =  boost::lexical_cast<uint>(boost::trim_copy(line));
+		N = boost::lexical_cast<uint>(boost::trim_copy(line));
 	}
 	catch(boost::bad_lexical_cast &e) {
-		std::string error = boost::str(boost::format("The number of particles '%s' found in the .gro configuration cannot be cast to an integer") % split[2]);
+		std::string error = boost::str(boost::format("The number of particles '%s' found in the .gro configuration cannot be cast to an integer") % line);
 		throw std::runtime_error(error);
 	}
 

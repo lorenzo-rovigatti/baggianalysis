@@ -6,9 +6,10 @@ SET(ba_lib_SOURCES
 	filters/SubtractCOM.cpp
 	observables/MSD.cpp
 	parsers/BaseParser.cpp
+	parsers/GenericOxDNAParser.cpp
 	parsers/GroParser.cpp
 	parsers/LJKAParser.cpp
-	parsers/GenericOxDNAParser.cpp
+	parsers/LAMMPSDumpParser.cpp
 	particles/Particle.cpp
 	particles/ParticleSet.cpp
 	System.cpp

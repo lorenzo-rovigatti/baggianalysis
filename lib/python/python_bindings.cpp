@@ -15,6 +15,7 @@
 
 #include "../parsers/GenericOxDNAParser.h"
 #include "../parsers/GroParser.h"
+#include "../parsers/LAMMPSDumpParser.h"
 #include "../parsers/LJKAParser.h"
 
 #include "../trajectories/LazyTrajectory.h"
@@ -29,9 +30,10 @@ PYBIND11_MODULE(baggianalysis, m) {
 
 	// parsers
 	ba::export_BaseParser(m);
-	ba::export_GroParser(m);
-	ba::export_LJKAParser(m);
 	ba::export_GenericOxDNAParser(m);
+	ba::export_GroParser(m);
+	ba::export_LAMMPSDumpParser(m);
+	ba::export_LJKAParser(m);
 
 	// filters
 	ba::export_BaseFilter(m);
