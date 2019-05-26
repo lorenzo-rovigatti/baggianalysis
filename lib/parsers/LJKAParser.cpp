@@ -27,7 +27,7 @@ std::shared_ptr<System> LJKAParser::parse(std::ifstream &configuration) {
 	uint N, NA;
 
 	// line containing the timestep and the number of particles
-	getline(configuration, line);
+	std::getline(configuration, line);
 	if(!configuration.good()) return nullptr;
 
 	std::shared_ptr<System> syst(new System);
@@ -44,7 +44,7 @@ std::shared_ptr<System> LJKAParser::parse(std::ifstream &configuration) {
 	}
 
 	// box line
-	getline(configuration, line);
+	std::getline(configuration, line);
 	std::string to_split = boost::trim_copy(line);
 	boost::split(split, to_split, boost::is_any_of(" "));
 	try {
@@ -58,7 +58,7 @@ std::shared_ptr<System> LJKAParser::parse(std::ifstream &configuration) {
 	}
 
 	for(uint i = 0; i < N; i++) {
-		getline(configuration, line);
+		std::getline(configuration, line);
 		boost::split(split, line, boost::is_any_of(" "));
 		vec3 position = vec3(boost::lexical_cast<double>(split[0]), boost::lexical_cast<double>(split[1]), boost::lexical_cast<double>(split[2]));
 

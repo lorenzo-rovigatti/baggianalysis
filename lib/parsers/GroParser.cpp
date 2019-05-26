@@ -27,7 +27,7 @@ std::shared_ptr<System> GroParser::parse(std::ifstream &configuration) {
 	std::vector<std::string> split;
 
 	// timestep line
-	getline(configuration, line);
+	std::getline(configuration, line);
 	if(!configuration.good()) return nullptr;
 
 	std::shared_ptr<System> syst(new System);
@@ -49,7 +49,7 @@ std::shared_ptr<System> GroParser::parse(std::ifstream &configuration) {
 	}
 
 	// number of particles line
-	getline(configuration, line);
+	std::getline(configuration, line);
 	uint N;
 	try {
 		N =  boost::lexical_cast<uint>(boost::trim_copy(line));
@@ -61,7 +61,7 @@ std::shared_ptr<System> GroParser::parse(std::ifstream &configuration) {
 
 	std::vector<std::string> inserted_name;
 	for(uint i = 0; i < N; i++) {
-		getline(configuration, line);
+		std::getline(configuration, line);
 
 		// taken by http://manual.gromacs.org/archive/5.0.3/online/gro.html
 		std::string residue_number = line.substr(0, 5);
@@ -100,7 +100,7 @@ std::shared_ptr<System> GroParser::parse(std::ifstream &configuration) {
 	}
 
 	// box line
-	getline(configuration, line);
+	std::getline(configuration, line);
 	std::string to_split = boost::trim_copy(line);
 	boost::split(split, to_split, boost::is_any_of(" "), boost::algorithm::token_compress_on);
 	try {

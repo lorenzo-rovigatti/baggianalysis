@@ -39,7 +39,7 @@ std::shared_ptr<System> GenericOxDNAParser::parse(std::ifstream &configuration) 
 	std::vector<std::string> split;
 
 	// timestep line
-	getline(configuration, line);
+	std::getline(configuration, line);
 	if(!configuration.good()) return nullptr;
 
 	std::shared_ptr<System> syst(new System);
@@ -54,7 +54,7 @@ std::shared_ptr<System> GenericOxDNAParser::parse(std::ifstream &configuration) 
 	}
 
 	// box line
-	getline(configuration, line);
+	std::getline(configuration, line);
 	boost::split(split, line, boost::is_any_of(" "));
 	try {
 		syst->box[0] = boost::lexical_cast<double>(boost::trim_copy(split[2]));
@@ -67,7 +67,7 @@ std::shared_ptr<System> GenericOxDNAParser::parse(std::ifstream &configuration) 
 	}
 
 	// energy line
-	getline(configuration, line);
+	std::getline(configuration, line);
 
 	bool end = false;
 	while(configuration.good() && !end) {
@@ -75,7 +75,7 @@ std::shared_ptr<System> GenericOxDNAParser::parse(std::ifstream &configuration) 
 			end = true;
 		}
 		else {
-			getline(configuration, line);
+			std::getline(configuration, line);
 			if(configuration.good() && line.size() > 0) {
 				boost::split(split, line, boost::is_any_of(" "));
 				vec3 position = vec3(boost::lexical_cast<double>(split[0]), boost::lexical_cast<double>(split[1]), boost::lexical_cast<double>(split[2]));
