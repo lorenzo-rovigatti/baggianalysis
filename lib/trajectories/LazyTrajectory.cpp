@@ -37,23 +37,10 @@ void LazyTrajectory::initialise_from_trajectory_file(string trajectory_file) {
 	}
 }
 
-void LazyTrajectory::initialise_from_folder(string folder, string pattern) {
+void LazyTrajectory::initialise_from_filelist(std::vector<std::string> filelist) {
 	_type = FOLDER;
 
-	bfs::path path(folder);
-
-	if(!bfs::exists(path)) {
-		string error = boost::str(boost::format("The '%s' folder does not exist") % folder);
-		throw runtime_error(error);
-	}
-
-	if(!bfs::is_directory(path)) {
-		string error = boost::str(boost::format("'%s' is not a folder") % folder);
-		throw runtime_error(error);
-	}
-
-	bfs::path tot_path = bfs::path(folder) / bfs::path(pattern);
-	_files = utils::glob(tot_path.string(), true);
+	_files = filelist;
 	_current_file = _files.begin();
 
 	BOOST_LOG_TRIVIAL(info)<<"Found " << _files.size() << " files";

@@ -64,25 +64,10 @@ void FullTrajectory::initialise_from_trajectory_file(string trajectory_file) {
 	BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
 }
 
-void FullTrajectory::initialise_from_folder(string folder, string pattern) {
-	bfs::path path(folder);
+void FullTrajectory::initialise_from_filelist(std::vector<std::string> filelist) {
+	uint N_files = filelist.size();
 
-	if(!bfs::exists(path)) {
-		string error = boost::str(boost::format("The '%s' folder does not exist") % folder);
-		throw runtime_error(error);
-	}
-
-	if(!bfs::is_directory(path)) {
-		string error = boost::str(boost::format("'%s' is not a folder") % folder);
-		throw runtime_error(error);
-	}
-
-	bfs::path tot_path = bfs::path(folder) / bfs::path(pattern);
-	vector<string> files = utils::glob(tot_path.string(), false);
-
-	uint N_files = files.size();
-
-	for(auto f : files) {
+	for(auto f : filelist) {
 		ifstream conf_file(f);
 		auto new_system = _parser->parse(conf_file);
 		conf_file.close();
@@ -100,7 +85,7 @@ void FullTrajectory::initialise_from_folder(string folder, string pattern) {
 	}
 
 	// we sort the frames according to their timestep
-	auto sorting_function = [pattern](const shared_ptr<System> &s1, const shared_ptr<System> &s2) -> bool {
+	auto sorting_function = [](const shared_ptr<System> &s1, const shared_ptr<System> &s2) -> bool {
 		return (s1->time < s2->time);
 	};
 	sort(frames.begin(), frames.end(), sorting_function);

@@ -19,8 +19,8 @@ public:
 	LazyTrajectory(std::shared_ptr<BaseParser> parser);
 	virtual ~LazyTrajectory();
 
-	void initialise_from_folder(std::string folder, std::string pattern) override;
-	void initialise_from_trajectory_file(std::string trajectory_file) override;
+	virtual void initialise_from_filelist(std::vector<std::string> filelist) override;
+	virtual void initialise_from_trajectory_file(std::string trajectory_file) override;
 
 	virtual std::shared_ptr<System> next_frame() override;
 	virtual void reset() override;

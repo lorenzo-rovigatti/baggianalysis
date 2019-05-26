@@ -20,7 +20,8 @@ public:
 	virtual ~BaseTrajectory();
 
 	virtual void add_filter(std::shared_ptr<BaseFilter> filter);
-	virtual void initialise_from_folder(std::string folder, std::string pattern) = 0;
+	virtual void initialise_from_folder(std::string folder, std::string pattern);
+	virtual void initialise_from_filelist(std::vector<std::string> filelist) = 0;
 	virtual void initialise_from_trajectory_file(std::string trajectory_file) = 0;
 
 	virtual std::shared_ptr<System> next_frame() = 0;
@@ -37,13 +38,12 @@ class PyBaseTrajectory : public BaseTrajectory {
 public:
 	using BaseTrajectory::BaseTrajectory;
 
-	void initialise_from_folder(std::string folder, std::string pattern) override {
+	void initialise_from_filelist(std::vector<std::string> filelist) override {
 		PYBIND11_OVERLOAD_PURE( // @suppress("Unused return value")
 				void,
 				BaseTrajectory,
-				initialise_from_folder,
-				folder,
-				pattern
+				initialise_from_filelist,
+				filelist
 		);
 	}
 
