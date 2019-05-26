@@ -12,8 +12,6 @@
 
 namespace ba {
 
-using namespace std;
-
 GenericOxDNAParser::GenericOxDNAParser(std::string topology_file) :
 				BaseParser(),
 				_topology_file(topology_file) {
@@ -24,8 +22,8 @@ GenericOxDNAParser::~GenericOxDNAParser() {
 
 }
 
-shared_ptr<System> GenericOxDNAParser::parse(ifstream &configuration) {
-	ifstream topology(_topology_file);
+std::shared_ptr<System> GenericOxDNAParser::parse(std::ifstream &configuration) {
+	std::ifstream topology(_topology_file);
 
 	if(!topology.good()) {
 		std::string error = boost::str(boost::format("Topology file '%s' not found") % _topology_file);
@@ -37,8 +35,8 @@ shared_ptr<System> GenericOxDNAParser::parse(ifstream &configuration) {
 
 	topology.close();
 
-	string line;
-	vector<string> split;
+	std::string line;
+	std::vector<std::string> split;
 
 	// timestep line
 	getline(configuration, line);
@@ -51,7 +49,7 @@ shared_ptr<System> GenericOxDNAParser::parse(ifstream &configuration) {
 		syst->time = boost::lexical_cast<ullint>(boost::trim_copy(split[2]));
 	}
 	catch(boost::bad_lexical_cast &e) {
-		string error = boost::str(boost::format("The timestep value '%s' found in the oxDNA configuration cannot be cast to an integer") % split[2]);
+		std::string error = boost::str(boost::format("The timestep value '%s' found in the oxDNA configuration cannot be cast to an integer") % split[2]);
 		throw std::runtime_error(error);
 	}
 
@@ -64,7 +62,7 @@ shared_ptr<System> GenericOxDNAParser::parse(ifstream &configuration) {
 		syst->box[2] = boost::lexical_cast<double>(boost::trim_copy(split[4]));
 	}
 	catch(boost::bad_lexical_cast &e) {
-		string error = boost::str(boost::format("The box line '%s' found in the oxDNA configuration is not valid") % line);
+		std::string error = boost::str(boost::format("The box line '%s' found in the oxDNA configuration is not valid") % line);
 		throw std::runtime_error(error);
 	}
 
@@ -83,14 +81,14 @@ shared_ptr<System> GenericOxDNAParser::parse(ifstream &configuration) {
 				vec3 position = vec3(boost::lexical_cast<double>(split[0]), boost::lexical_cast<double>(split[1]), boost::lexical_cast<double>(split[2]));
 				vec3 velocity = vec3(boost::lexical_cast<double>(split[9]), boost::lexical_cast<double>(split[10]), boost::lexical_cast<double>(split[11]));
 
-				shared_ptr<Particle> new_particle(new Particle("0", position, velocity));
+				std::shared_ptr<Particle> new_particle(new Particle("0", position, velocity));
 				syst->add_particle(new_particle);
 			}
 		}
 	}
 
 	if(syst->N() != N) {
-		string error = boost::str(boost::format("The number of particles found in the configuration file (%d) is different from what specified in the topology file (%d)") % syst->N() % N);
+		std::string error = boost::str(boost::format("The number of particles found in the configuration file (%d) is different from what specified in the topology file (%d)") % syst->N() % N);
 		throw std::runtime_error(error);
 	}
 

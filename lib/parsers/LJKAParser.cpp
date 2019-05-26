@@ -12,8 +12,6 @@
 
 namespace ba {
 
-using namespace std;
-
 LJKAParser::LJKAParser() :
 				BaseParser() {
 
@@ -23,9 +21,9 @@ LJKAParser::~LJKAParser() {
 
 }
 
-shared_ptr<System> LJKAParser::parse(ifstream &configuration) {
-	string line;
-	vector<string> split;
+std::shared_ptr<System> LJKAParser::parse(std::ifstream &configuration) {
+	std::string line;
+	std::vector<std::string> split;
 	uint N, NA;
 
 	// line containing the timestep and the number of particles
@@ -41,13 +39,13 @@ shared_ptr<System> LJKAParser::parse(ifstream &configuration) {
 		NA = boost::lexical_cast<uint>(boost::trim_copy(split[3]));
 	}
 	catch(boost::bad_lexical_cast &e) {
-		string error = boost::str(boost::format("The timestep value '%s' found in the LJKA configuration cannot be cast to an integer") % split[2]);
+		std::string error = boost::str(boost::format("The timestep value '%s' found in the LJKA configuration cannot be cast to an integer") % split[2]);
 		throw std::runtime_error(error);
 	}
 
 	// box line
 	getline(configuration, line);
-	string to_split = boost::trim_copy(line);
+	std::string to_split = boost::trim_copy(line);
 	boost::split(split, to_split, boost::is_any_of(" "));
 	try {
 		syst->box[0] = boost::lexical_cast<double>(boost::trim_copy(split[0]));
@@ -55,7 +53,7 @@ shared_ptr<System> LJKAParser::parse(ifstream &configuration) {
 		syst->box[2] = boost::lexical_cast<double>(boost::trim_copy(split[2]));
 	}
 	catch(boost::bad_lexical_cast &e) {
-		string error = boost::str(boost::format("The box line '%s' found in the LJKA configuration is not valid") % line);
+		std::string error = boost::str(boost::format("The box line '%s' found in the LJKA configuration is not valid") % line);
 		throw std::runtime_error(error);
 	}
 
@@ -65,7 +63,7 @@ shared_ptr<System> LJKAParser::parse(ifstream &configuration) {
 		vec3 position = vec3(boost::lexical_cast<double>(split[0]), boost::lexical_cast<double>(split[1]), boost::lexical_cast<double>(split[2]));
 
 		particle_type type = (i < NA) ? "0" : "1";
-		shared_ptr<Particle> new_particle(new Particle(type, position, vec3(0., 0., 0.)));
+		std::shared_ptr<Particle> new_particle(new Particle(type, position, vec3(0., 0., 0.)));
 		syst->add_particle(new_particle);
 	}
 
