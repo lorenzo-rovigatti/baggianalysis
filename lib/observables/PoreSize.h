@@ -19,6 +19,7 @@ public:
 
 	void set_r_cut(double r_cut);
 	void set_particle_radius(double particle_radius);
+	void set_maxtime(double maxtime);
 
 	/// calculates the radius of the largest sphere centred in "centre" that does not overlap with any of the particles
 	double radius(const vec3 &centre);
@@ -34,6 +35,7 @@ protected:
 	double _r_cut;
 	double _particle_radius;
 	double _particle_radius_sqr;
+	double _maxtime;
 	glm::ivec3 _N_cells_side;
 	std::vector<int> _next;
 	std::vector<int> _heads;
