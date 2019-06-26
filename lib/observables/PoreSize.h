@@ -37,6 +37,7 @@ public:
 	 * @param particle_radius the radius that will be used to compute the pore size
 	 */
 	void set_particle_radius(double particle_radius);
+	void set_maxtime(double maxtime);
 
 	/**
 	 * @brief Calculates the radius of the largest sphere centred in "centre" that does not overlap with any of the particles
@@ -61,6 +62,7 @@ private:
 	double _r_cut;
 	double _particle_radius;
 	double _particle_radius_sqr;
+	double _maxtime;
 	glm::ivec3 _N_cells_side;
 	std::vector<int> _next;
 	std::vector<int> _heads;

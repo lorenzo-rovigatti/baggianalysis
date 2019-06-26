@@ -21,6 +21,7 @@ PoreSize::PoreSize(int N_attempts) :
 				_N_attempts(N_attempts) {
 	set_r_cut(1.0);
 	set_particle_radius(1.0);
+	set_maxtime(1.0);
 }
 
 PoreSize::~PoreSize() {
@@ -34,6 +35,10 @@ void PoreSize::set_r_cut(double r_cut) {
 void PoreSize::set_particle_radius(double particle_radius) {
 	_particle_radius = particle_radius;
 	_particle_radius_sqr = SQR(particle_radius);
+}
+
+void PoreSize::set_maxtime(double maxtime) {
+	_maxtime = maxtime;
 }
 
 double PoreSize::radius(const vec3 &centre) {
@@ -93,6 +98,7 @@ vector_scalar PoreSize::compute(std::shared_ptr<BaseTrajectory> trajectory) {
 	opt.set_lower_bounds(lower_bounds);
 	opt.set_max_objective(radius_wrapper, (void *) this);
 	opt.set_xtol_rel(1e-4);
+	opt.set_maxtime(_maxtime);
 
 	auto frame = trajectory->next_frame();
 	while(frame != nullptr) {
@@ -228,6 +234,7 @@ void export_PoreSize(py::module &m) {
 		.def(py::init<int>())
 		.def("set_r_cut", &PoreSize::set_r_cut)
 		.def("set_particle_radius", &PoreSize::set_particle_radius)
+		.def("set_maxtime", &PoreSize::set_maxtime)
 		.def("radius", &PoreSize::radius)
 		.def("compute", &PoreSize::compute);
 }
