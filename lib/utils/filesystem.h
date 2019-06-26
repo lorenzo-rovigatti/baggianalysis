@@ -16,7 +16,16 @@ namespace ba {
 
 namespace utils {
 
-std::vector<std::string> glob(const std::string& path, bool natural_sorting);
+/**
+ * @brief Thin C++ wrapper around C's glob function
+ *
+ * The second argument optionally sorts the entries.
+ *
+ * @param pattern matching pattern
+ * @param natural_sorting sort the entries according to natural sorting criteria
+ * @return the list of entries matching the given pattern
+ */
+std::vector<std::string> glob(const std::string& pattern, bool natural_sorting=false);
 
 }
 

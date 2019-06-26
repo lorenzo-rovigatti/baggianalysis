@@ -14,21 +14,57 @@ namespace ba {
 
 class ParticleSet {
 public:
+	/**
+	 * @brief Construct the object
+	 */
 	ParticleSet();
 	virtual ~ParticleSet();
 
+	/// Return the name of the set
 	std::string name() const;
+	/// Set the name of the set
 	void set_name(const std::string &name);
 
+	/// Return the number of particles
 	uint N() const;
+
+	/**
+	 * @brief Return a vector containing all particle types
+	 *
+	 * The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios.
+	 *
+	 * @return a vector of particle types
+	 */
 	std::vector<particle_type> types() const;
+
+	/**
+	 * @brief Return a vector containing all particle positions
+	 *
+	 * The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios.
+	 *
+	 * @return a vector of particle positions
+	 */
 	vector_vec3 positions() const;
+
+	/**
+	 * @brief Return a vector containing all particle velocities
+	 *
+	 * The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios.
+	 *
+	 * @return a vector of particle velocities
+	 */
 	vector_vec3 velocities() const;
 
+	/// Return the centre of mass of the set
 	vec3 com() const;
+
+	/// Return the average velocity of the set
 	vec3 average_velocity() const;
 
+	/// Return all the particles stored in the set
 	const std::vector<std::shared_ptr<Particle>> &particles() const;
+
+	/// Add a particle to the set
 	void add_particle(std::shared_ptr<Particle> p);
 
 protected:

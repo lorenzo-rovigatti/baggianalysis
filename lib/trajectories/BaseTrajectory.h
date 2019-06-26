@@ -16,12 +16,45 @@ namespace ba {
 
 class BaseTrajectory {
 public:
+	/**
+	 * @brief Construct the object
+	 *
+	 * @param parser the parser that should be used to construct frames
+	 */
 	BaseTrajectory(std::shared_ptr<BaseParser> parser);
 	virtual ~BaseTrajectory();
 
+	/**
+	 * @brief Add a filter to the list of filters used to modify each frame
+	 *
+	 * The order according to which filters are added to the trajectory is important, since they are applied to the single frames in a "first-in first-out" fashion.
+	 *
+	 * @param filter the new filter
+	 */
 	virtual void add_filter(std::shared_ptr<BaseFilter> filter);
+
+	/**
+	 * @brief Initialise the trajectory from the files contained in the given folder and whose names match the given pattern
+	 *
+	 * The list of files that will be parsed is generated with C's glob function (see "man glob" for additional details).
+	 *
+	 * @param folder the name of the folder
+	 * @param pattern the glob-compatible pattern used to select the files of interest
+	 */
 	virtual void initialise_from_folder(std::string folder, std::string pattern);
+
+	/**
+	 * @brief Initialise the trajectory using the given list of files
+	 *
+	 * @param filelist the list of file to be parsed
+	 */
 	virtual void initialise_from_filelist(std::vector<std::string> filelist) = 0;
+
+	/**
+	 * @brief Initialise the trajectory from a single file containing one or more frames
+	 *
+	 * @param trajectory_file the file to be parsed
+	 */
 	virtual void initialise_from_trajectory_file(std::string trajectory_file) = 0;
 
 	virtual std::shared_ptr<System> next_frame() = 0;
