@@ -20,7 +20,7 @@ double constraint(unsigned n, const double *x, double *grad, void *f_data);
 PoreSize::PoreSize(int N_attempts) :
 				_N_attempts(N_attempts) {
 	set_r_cut(1.0);
-	set_particle_radius(1.0);
+	set_particle_radius(0.5);
 	set_maxtime(1.0);
 }
 
@@ -92,10 +92,18 @@ vector_scalar PoreSize::compute(std::shared_ptr<BaseTrajectory> trajectory) {
 	std::mt19937 rng(12345);
 	std::uniform_real_distribution<double> uniform(0., 1.);
 
-	// initialise the optimisation machinery
-	nlopt::opt opt(nlopt::LN_COBYLA, 3);
+	// initialise the optimisation machinery. This is the local solver used by the augmented Lagrangian method (https://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#augmented-lagrangian-algorithm)
+	nlopt::opt local_opt(nlopt::LN_SBPLX, 3);
+	local_opt.set_xtol_rel(1e-6);
+	local_opt.set_maxtime(1.);
+
+	nlopt::opt opt(nlopt::LN_AUGLAG, 3);
+	opt.set_local_optimizer(local_opt);
+
+	// we restrict the solver to the region of space comprised between 0 and the box size
 	std::vector<double> lower_bounds({0., 0., 0.});
 	opt.set_lower_bounds(lower_bounds);
+
 	opt.set_max_objective(radius_wrapper, (void *) this);
 	opt.set_xtol_rel(1e-4);
 	opt.set_maxtime(_maxtime);
