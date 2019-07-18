@@ -17,6 +17,7 @@ SET(ba_lib_SOURCES
 	trajectories/LazyTrajectory.cpp
 	trajectories/FullTrajectory.cpp
 	utils/filesystem.cpp
+	utils/Random.cpp
 )
 
 # The lines that follow the following variables:

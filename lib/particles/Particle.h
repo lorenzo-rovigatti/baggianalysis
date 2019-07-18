@@ -11,6 +11,8 @@
 #include "../defs.h"
 #include "../python_defs.h"
 
+#include <set>
+
 namespace ba {
 
 class Particle {
@@ -52,6 +54,8 @@ public:
 		_velocity = nv;
 	}
 
+	void add_bonded_neighbour(std::shared_ptr<Particle> new_neighbour);
+
 protected:
 	static int _current_index;
 
@@ -59,6 +63,8 @@ protected:
 	particle_type _type;
 	vec3 _position;
 	vec3 _velocity;
+
+	std::set<std::shared_ptr<Particle>> _bonded_neighbours;
 };
 
 #ifdef PYTHON_BINDINGS

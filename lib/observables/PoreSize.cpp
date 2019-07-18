@@ -7,10 +7,11 @@
 
 #include "PoreSize.h"
 
+#include "../utils/Random.h"
+
 #include <glm/gtx/component_wise.hpp>
 #include <nlopt.hpp>
 #include <cfloat>
-#include <random>
 
 namespace ba {
 
@@ -87,11 +88,6 @@ double PoreSize::radius(const vec3 &centre) {
 vector_scalar PoreSize::compute(std::shared_ptr<BaseTrajectory> trajectory) {
 	vector_scalar results;
 
-	std::random_device dev;
-	// deterministic runs for debugging purposes, use dev() to "randomly" initialise the rng
-	std::mt19937 rng(12345);
-	std::uniform_real_distribution<double> uniform(0., 1.);
-
 	// initialise the optimisation machinery. This is the local solver used by the augmented Lagrangian method (https://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#augmented-lagrangian-algorithm)
 	nlopt::opt local_opt(nlopt::LN_SBPLX, 3);
 	local_opt.set_xtol_rel(1e-6);
@@ -120,7 +116,7 @@ vector_scalar PoreSize::compute(std::shared_ptr<BaseTrajectory> trajectory) {
 			if(i > 0 && (i % (_N_attempts / 10) == 0)) {
 				std::cerr << i << " steps completed" << std::endl;
 			}
-			current_position = vec3(uniform(rng) * frame->box[0], uniform(rng) * frame->box[1], uniform(rng) * frame->box[2]);
+			current_position = vec3(BARANDOM.uniform() * frame->box[0], BARANDOM.uniform() * frame->box[1], BARANDOM.uniform() * frame->box[2]);
 
 			// if the random position is inside one of the particles we disregard it
 			if(radius(current_position) > 0.) {
