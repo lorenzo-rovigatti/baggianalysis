@@ -4,7 +4,11 @@ SET(ba_lib_SOURCES
 	filters/FilterByType.cpp
 	filters/FixParticlePath.cpp
 	filters/SubtractCOM.cpp
+	neighbour_finders/CutoffFinder.cpp
+	neighbour_finders/NNFinder.cpp
+	observables/BondOrderParameters.cpp
 	observables/MSD.cpp
+	observables/PoreSize.cpp
 	parsers/BaseParser.cpp
 	parsers/GenericOxDNAParser.cpp
 	parsers/GroParser.cpp

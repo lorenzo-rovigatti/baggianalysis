@@ -9,6 +9,7 @@
     * Boost Log (libboost-log-dev) 
     * Boost Signals2 (libboost-signals-dev)
     * Boost Filesystem (libboost-filesystem-dev)
+    * Boost Math (libboost-math-dev)
 * If Python bindings are enabled, Python 3's header file are required (python3-dev)
 
 ### Compilation

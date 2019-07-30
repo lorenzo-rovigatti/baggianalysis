@@ -38,6 +38,11 @@ void Particle::add_bonded_neighbour(std::shared_ptr<Particle> new_neighbour) {
 	new_neighbour->_bonded_neighbours.insert(new_neighbour);
 }
 
+void Particle::add_neighbour(std::shared_ptr<Particle> new_neighbour) {
+	_neighbours.insert(new_neighbour);
+	new_neighbour->_neighbours.insert(new_neighbour);
+}
+
 #ifdef PYTHON_BINDINGS
 
 void export_Particle(py::module &m) {
@@ -47,7 +52,10 @@ void export_Particle(py::module &m) {
 		.def(py::init<>())
 		.def(py::init<particle_type, vec3, vec3>())
 		.def(py::init<int, particle_type, vec3, vec3>())
+		.def("bonded_neighbours", &Particle::bonded_neighbours)
 		.def("add_bonded_neighbour", &Particle::add_bonded_neighbour)
+		.def("neighbours", &Particle::neighbours)
+		.def("add_neighbour", &Particle::add_neighbour)
 		.def_property("index", &Particle::index, &Particle::set_index)
 		.def_property("type", &Particle::type, &Particle::set_type)
 		.def_property("position", &Particle::position, &Particle::set_position)

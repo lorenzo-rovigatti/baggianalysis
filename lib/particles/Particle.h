@@ -54,7 +54,17 @@ public:
 		_velocity = nv;
 	}
 
+	const std::set<std::shared_ptr<Particle>> bonded_neighbours() const {
+		return _bonded_neighbours;
+	}
+
 	void add_bonded_neighbour(std::shared_ptr<Particle> new_neighbour);
+
+	const std::set<std::shared_ptr<Particle>> neighbours() const {
+		return _neighbours;
+	}
+
+	void add_neighbour(std::shared_ptr<Particle> new_neighbour);
 
 protected:
 	static int _current_index;
@@ -65,6 +75,7 @@ protected:
 	vec3 _velocity;
 
 	std::set<std::shared_ptr<Particle>> _bonded_neighbours;
+	std::set<std::shared_ptr<Particle>> _neighbours;
 };
 
 #ifdef PYTHON_BINDINGS
