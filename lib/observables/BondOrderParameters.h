@@ -22,7 +22,7 @@ public:
 	std::vector<vector_scalar> compute(std::shared_ptr<System> frame);
 
 private:
-	vector_scalar _particle_bops(std::shared_ptr<Particle> p);
+	vector_scalar _particle_bops(std::shared_ptr<Particle> p, const vec3 &box);
 
 	std::set<int> _orders_to_compute;
 };

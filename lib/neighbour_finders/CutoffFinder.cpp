@@ -34,6 +34,7 @@ void CutoffFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particl
 
 			if(distance_sqr < _cutoff_sqr) {
 				p->add_neighbour(q);
+				q->add_neighbour(p);
 			}
 		}
 	}

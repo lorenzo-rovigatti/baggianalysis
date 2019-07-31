@@ -13,7 +13,9 @@ class MyParser(ba.BaseParser):
         
         with open(conf) as f:
             line = f.readline()
-            syst.box = [float(x) for x in line.split()[2:]]
+            spl = line.split()
+            syst.time = int(spl[0])
+            syst.box = [float(x) for x in spl[2:]]
             
             for line in f.readlines():
                 pos = [float(x) for x in line.split()]
@@ -28,7 +30,7 @@ parser = MyParser()
 syst = parser.parse(sys.argv[1])
 
 nf = ba.CutoffFinder(1.5)
-nf.set_neighbours(syst.writable_particles(), syst.box)
+nf.set_neighbours(syst.particles(), syst.box)
 
 bop_obs = ba.BondOrderParameters({4, 6})
 bops = bop_obs.compute(syst)

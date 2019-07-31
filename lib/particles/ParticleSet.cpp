@@ -54,7 +54,7 @@ vector_vec3 ParticleSet::velocities() const {
 
 vec3 ParticleSet::com() const {
 	vec3 com(0., 0., 0.);
-	for(auto p : particles()) {
+	for(auto p : _particles) {
 		com += p->position();
 	}
 	com /= this->N();
@@ -63,14 +63,14 @@ vec3 ParticleSet::com() const {
 
 vec3 ParticleSet::average_velocity() const {
 	vec3 v_avg(0., 0., 0.);
-	for(auto p : particles()) {
+	for(auto p : _particles) {
 		v_avg += p->velocity();
 	}
 	v_avg /= this->N();
 	return v_avg;
 }
 
-std::vector<std::shared_ptr<Particle>> &ParticleSet::writable_particles() {
+std::vector<std::shared_ptr<Particle>> &ParticleSet::particles() {
 	return _particles;
 }
 
@@ -95,8 +95,8 @@ void export_ParticleSet(py::module &m) {
 		.def("velocities", &ParticleSet::velocities)
 		.def("com", &ParticleSet::com)
 		.def("average_velocity", &ParticleSet::average_velocity)
-		.def("particles", &ParticleSet::particles)
-		.def("writable_particles", &ParticleSet::writable_particles)
+		// here we tell pybind11 which of the two particles() methods we want to have bindings for
+		.def("particles", (std::vector<std::shared_ptr<Particle>> &(ParticleSet::*)())(&ParticleSet::particles))
 		.def("add_particle", &ParticleSet::add_particle)
 		.def_property("name", &ParticleSet::name, &ParticleSet::set_name);
 }

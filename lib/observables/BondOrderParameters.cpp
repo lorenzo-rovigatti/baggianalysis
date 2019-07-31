@@ -24,14 +24,18 @@ std::vector<vector_scalar> BondOrderParameters::compute(std::shared_ptr<System> 
 	std::vector<vector_scalar> results;
 
 	for(auto p : frame->particles()) {
-		results.emplace_back(_particle_bops(p));
+		results.emplace_back(_particle_bops(p, frame->box));
 	}
 
 	return results;
 }
 
-vector_scalar BondOrderParameters::_particle_bops(std::shared_ptr<Particle> p) {
+vector_scalar BondOrderParameters::_particle_bops(std::shared_ptr<Particle> p, const vec3 &box) {
 	vector_scalar result;
+
+	for(auto q : p->neighbours()) {
+
+	}
 
 	return result;
 }

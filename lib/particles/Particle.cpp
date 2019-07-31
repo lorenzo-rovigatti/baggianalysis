@@ -40,7 +40,6 @@ void Particle::add_bonded_neighbour(std::shared_ptr<Particle> new_neighbour) {
 
 void Particle::add_neighbour(std::shared_ptr<Particle> new_neighbour) {
 	_neighbours.insert(new_neighbour);
-	new_neighbour->_neighbours.insert(new_neighbour);
 }
 
 #ifdef PYTHON_BINDINGS
