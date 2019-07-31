@@ -10,6 +10,10 @@
 #include "../filters/FilterByType.h"
 #include "../filters/FixParticlePath.h"
 
+#include "../neighbour_finders/CutoffFinder.h"
+#include "../neighbour_finders/NeighbourFinder.h"
+
+#include "../observables/BondOrderParameters.h"
 #include "../observables/PoreSize.h"
 #include "../observables/MSD.h"
 
@@ -49,6 +53,11 @@ PYBIND11_MODULE(baggianalysis, m) {
 	ba::export_LazyTrajectory(m);
 
 	// observables
+	ba::export_BondOrderParameters(m);
 	ba::export_PoreSize(m);
 	ba::export_MSD(m);
+
+	// neighbour finders
+	ba::export_CutoffFinder(m);
+	ba::export_NeighbourFinder(m);
 }

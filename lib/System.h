@@ -9,7 +9,6 @@
 #define SYSTEM_H_
 
 #include "particles/ParticleSet.h"
-#include "neighbour_finders/NNFinder.h"
 
 namespace ba {
 
@@ -20,15 +19,9 @@ public:
 
 	std::shared_ptr<System> empty_copy() const;
 
-	void set_neighbours();
-
 public:
 	ullint time = 0;
 	vec3 box = vec3(0., 0., 0.);
-
-private:
-	bool _neighbours_set = false;
-	std::shared_ptr<NNFinder> _nn_finder;
 };
 
 #ifdef PYTHON_BINDINGS

@@ -5,7 +5,7 @@ SET(ba_lib_SOURCES
 	filters/FixParticlePath.cpp
 	filters/SubtractCOM.cpp
 	neighbour_finders/CutoffFinder.cpp
-	neighbour_finders/NNFinder.cpp
+	neighbour_finders/NeighbourFinder.cpp
 	observables/BondOrderParameters.cpp
 	observables/MSD.cpp
 	observables/PoreSize.cpp
