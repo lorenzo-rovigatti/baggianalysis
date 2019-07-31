@@ -58,6 +58,6 @@ PYBIND11_MODULE(baggianalysis, m) {
 	ba::export_MSD(m);
 
 	// neighbour finders
-	ba::export_CutoffFinder(m);
 	ba::export_NeighbourFinder(m);
+	ba::export_CutoffFinder(m);
 }

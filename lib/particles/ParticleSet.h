@@ -62,6 +62,7 @@ public:
 	vec3 average_velocity() const;
 
 	/// Return all the particles stored in the set
+	std::vector<std::shared_ptr<Particle>> &writable_particles();
 	const std::vector<std::shared_ptr<Particle>> &particles() const;
 
 	/// Add a particle to the set

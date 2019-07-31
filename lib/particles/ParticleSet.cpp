@@ -70,6 +70,10 @@ vec3 ParticleSet::average_velocity() const {
 	return v_avg;
 }
 
+std::vector<std::shared_ptr<Particle>> &ParticleSet::writable_particles() {
+	return _particles;
+}
+
 const std::vector<std::shared_ptr<Particle>> &ParticleSet::particles() const {
 	return _particles;
 }
@@ -92,6 +96,7 @@ void export_ParticleSet(py::module &m) {
 		.def("com", &ParticleSet::com)
 		.def("average_velocity", &ParticleSet::average_velocity)
 		.def("particles", &ParticleSet::particles)
+		.def("writable_particles", &ParticleSet::writable_particles)
 		.def("add_particle", &ParticleSet::add_particle)
 		.def_property("name", &ParticleSet::name, &ParticleSet::set_name);
 }

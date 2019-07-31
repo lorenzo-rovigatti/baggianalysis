@@ -11,3 +11,4 @@ This is a list of things that will have to be changed as soon as I have some tim
 * As it is now, parsers' parse method must handle both reading from files containing whole trajectories as well as single configurations. This makes things confusing and more prone to bugs.
 * How do we store the particle type? Now we use integers, but what about software that handles "real" atoms such as gromacs? 
 * As of now, we can handle cuboid boxes with PBC only. We need to add a class hierarchy to support additional box types.
+* How do we pass particles around? As of now, a ParticleSet offers two methods to access the underlying _particles member, particles() and writable_particles(). The first one is const, whereas the second one is not. Can we design something better?

@@ -30,11 +30,13 @@ std::shared_ptr<System> System::empty_copy() const {
 #ifdef PYTHON_BINDINGS
 
 void export_System(py::module &m) {
-	py::class_<System, std::shared_ptr<System>> parser(m, "System");
+	py::class_<System, ParticleSet, std::shared_ptr<System>> parser(m, "System");
 
 	parser
 		.def(py::init<>())
-		.def("empty_copy", &System::empty_copy);
+		.def("empty_copy", &System::empty_copy)
+		.def_readwrite("time", &System::time)
+		.def_readwrite("box", &System::box);
 }
 
 #endif
