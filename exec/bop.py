@@ -29,8 +29,11 @@ class MyParser(ba.BaseParser):
 parser = MyParser()
 syst = parser.parse(sys.argv[1])
 
-nf = ba.CutoffFinder(1.5)
+nf = ba.CutoffFinder(1.4)
 nf.set_neighbours(syst.particles(), syst.box)
 
-bop_obs = ba.BondOrderParameters({4, 6})
+bop_obs = ba.BondOrderParameters({1, 2, 3, 4, 5, 6, 7, 8})
 bops = bop_obs.compute(syst)
+
+for i, p_bops in enumerate(bops):
+    print(str(i) + " " + " ".join([str(x) for x in p_bops]))

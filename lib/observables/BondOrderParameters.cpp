@@ -8,6 +8,8 @@
 #include "BondOrderParameters.h"
 
 #include <boost/math/special_functions/spherical_harmonic.hpp>
+#include <complex>
+#include <map>
 
 namespace ba {
 
@@ -21,23 +23,72 @@ BondOrderParameters::~BondOrderParameters() {
 }
 
 std::vector<vector_scalar> BondOrderParameters::compute(std::shared_ptr<System> frame) {
-	std::vector<vector_scalar> results;
+	// first we compute the bond-order parameters for each particle
+	std::map<std::shared_ptr<Particle>, particle_bops> bops;
+	for(auto p : frame->particles()) {
+		bops[p] = particle_bops();
+		_set_particle_bops(p, bops[p], frame->box);
+	}
+
+	std::vector<vector_scalar> results(frame->N());
+	auto res_it = results.begin();
 
 	for(auto p : frame->particles()) {
-		results.emplace_back(_particle_bops(p, frame->box));
+		for(auto order : _orders_to_compute) {
+			double ql_sqr_avg = 0.;
+			for(int m = -order; m <= order; m++) {
+				int m_idx = m + order;
+				std::complex<double> qlm_avg = bops[p][order][m_idx];
+
+				for(auto q : p->neighbours()) {
+					qlm_avg += bops[q][order][m_idx];
+				}
+
+				qlm_avg /= p->neighbours().size() + 1.;
+				ql_sqr_avg += std::norm(qlm_avg);
+			}
+
+			ql_sqr_avg *= (4. * M_PI) / (2. * order + 1.);
+			res_it->push_back(std::sqrt(ql_sqr_avg));
+		}
+
+		res_it++;
 	}
 
 	return results;
 }
 
-vector_scalar BondOrderParameters::_particle_bops(std::shared_ptr<Particle> p, const vec3 &box) {
-	vector_scalar result;
-
-	for(auto q : p->neighbours()) {
-
+void BondOrderParameters::_set_particle_bops(std::shared_ptr<Particle> p, particle_bops &bops, const vec3 &box) {
+	for(auto order : _orders_to_compute) {
+		bops[order] = std::vector<std::complex<double>>(2 * order + 1, 0.);
 	}
 
-	return result;
+	int N_neighbours = p->neighbours().size();
+	for(auto q : p->neighbours()) {
+		vec3 distance = p->position() - q->position();
+		// periodic boundary conditions
+		distance -= glm::round(distance / box) * box;
+
+		double theta = std::acos(distance[2] / glm::length(distance));
+		double phi = std::atan2(distance[1], distance[0]);
+		if(phi < 0.) {
+			phi += 2*M_PI;
+		}
+
+		for(auto order : _orders_to_compute) {
+			for(int m = -order; m <= order; m++) {
+				int m_idx = m + order;
+
+				bops[order][m_idx] += boost::math::spherical_harmonic(order, m, theta, phi);
+			}
+		}
+	}
+
+	for(auto order : _orders_to_compute) {
+		for(auto &v : bops[order]) {
+			v /= N_neighbours;
+		}
+	}
 }
 
 #ifdef PYTHON_BINDINGS
