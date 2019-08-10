@@ -25,6 +25,9 @@ class MyParser(ba.BaseParser):
         return syst
             
     
+if len(sys.argv) < 2:
+    print("Usage is %s input" % sys.argv[0], file=sys.stderr)
+    exit(0)
 
 parser = MyParser()
 syst = parser.parse(sys.argv[1])

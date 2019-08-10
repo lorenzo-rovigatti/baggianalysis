@@ -24,10 +24,10 @@ BondOrderParameters::~BondOrderParameters() {
 
 std::vector<vector_scalar> BondOrderParameters::compute(std::shared_ptr<System> frame) {
 	// first we compute the bond-order parameters for each particle
-	std::map<std::shared_ptr<Particle>, particle_bops> bops;
+	std::map<int, particle_bops> bops;
 	for(auto p : frame->particles()) {
-		bops[p] = particle_bops();
-		_set_particle_bops(p, bops[p], frame->box);
+		bops[p->index()] = particle_bops();
+		_set_particle_bops(p, bops[p->index()], frame->box);
 	}
 
 	std::vector<vector_scalar> results(frame->N());
@@ -38,10 +38,10 @@ std::vector<vector_scalar> BondOrderParameters::compute(std::shared_ptr<System> 
 			double ql_sqr_avg = 0.;
 			for(int m = -order; m <= order; m++) {
 				int m_idx = m + order;
-				std::complex<double> qlm_avg = bops[p][order][m_idx];
+				std::complex<double> qlm_avg = bops[p->index()][order][m_idx];
 
 				for(auto q : p->neighbours()) {
-					qlm_avg += bops[q][order][m_idx];
+					qlm_avg += bops[q->index()][order][m_idx];
 				}
 
 				qlm_avg /= p->neighbours().size() + 1.;
