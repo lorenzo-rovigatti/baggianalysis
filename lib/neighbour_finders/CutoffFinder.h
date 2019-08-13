@@ -10,6 +10,8 @@
 
 #include "NeighbourFinder.h"
 
+#include "../utils/CellLists.h"
+
 namespace ba {
 
 class CutoffFinder: public NeighbourFinder {
@@ -22,6 +24,8 @@ public:
 private:
 	double _cutoff;
 	double _cutoff_sqr;
+
+	CellLists _lists;
 };
 
 #ifdef PYTHON_BINDINGS

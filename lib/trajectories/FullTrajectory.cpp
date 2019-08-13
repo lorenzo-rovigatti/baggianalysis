@@ -61,7 +61,12 @@ void FullTrajectory::initialise_from_trajectory_file(string trajectory_file) {
 
 	_current_system = frames.begin();
 
-	BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
+	if(frames.size() == 1) {
+		BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frame";
+	}
+	else {
+		BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
+	}
 }
 
 void FullTrajectory::initialise_from_filelist(std::vector<std::string> filelist) {
