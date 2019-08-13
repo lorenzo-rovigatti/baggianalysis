@@ -28,7 +28,7 @@ void Random::reset_seed(unsigned int seed) {
 }
 
 double Random::uniform() {
-	static std::uniform_int_distribution<int> dist(0., 1.);
+	static std::uniform_real_distribution<double> dist(0., 1.);
 	return dist(_rng);
 }
 
