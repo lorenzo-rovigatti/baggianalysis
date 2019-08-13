@@ -19,7 +19,8 @@ double radius_wrapper(unsigned n, const double *x, double *grad, void *f_data);
 double constraint(unsigned n, const double *x, double *grad, void *f_data);
 
 PoreSize::PoreSize(int N_attempts) :
-				_N_attempts(N_attempts) {
+				_N_attempts(N_attempts),
+				_lists(true) {
 	set_r_cut(1.0);
 	set_particle_radius(0.5);
 	set_maxtime(1.0);
@@ -43,27 +44,27 @@ void PoreSize::set_maxtime(double maxtime) {
 }
 
 double PoreSize::radius(const vec3 &centre) {
-	auto centre_cell = _get_cell(centre);
+	auto centre_cell = _lists.get_cell(centre);
 
 	bool done = false;
 	double R_sqr = -1;
 	// here we loop on the various cells, shell after shell
-	for(unsigned int i = 0; i < _cell_shifts.size() && !done; i++) {
+	for(unsigned int i = 0; i < _lists.cell_shifts().size() && !done; i++) {
 		// the current shell might contain a particle that is closer than one found in the previous shell. We thus tell the code
 		// to analyse also this shell and then quit the loop
 		if(R_sqr > 0.) {
 			done = true;
 		}
 
-		auto &shifts = _cell_shifts[i];
+		auto &shifts = _lists.cell_shifts()[i];
 		for(auto &cell_shift : shifts) {
 			auto cell = centre_cell + cell_shift;
-			cell[0] = (cell[0] + _N_cells_side[0]) % _N_cells_side[0];
-			cell[1] = (cell[1] + _N_cells_side[1]) % _N_cells_side[1];
-			cell[2] = (cell[2] + _N_cells_side[2]) % _N_cells_side[2];
-			int cell_idx = cell[0] + _N_cells_side[0] * (cell[1] + cell[2] * _N_cells_side[1]);
+			cell[0] = (cell[0] + _lists.N_cells_side[0]) % _lists.N_cells_side[0];
+			cell[1] = (cell[1] + _lists.N_cells_side[1]) % _lists.N_cells_side[1];
+			cell[2] = (cell[2] + _lists.N_cells_side[2]) % _lists.N_cells_side[2];
+			int cell_idx = cell[0] + _lists.N_cells_side[0] * (cell[1] + cell[2] * _lists.N_cells_side[1]);
 
-			int current = _heads[cell_idx];
+			int current = _lists.heads[cell_idx];
 			while(current != -1) {
 				vec3 distance = centre - current_frame->particles()[current]->position();
 				// periodic boundary conditions
@@ -77,7 +78,7 @@ double PoreSize::radius(const vec3 &centre) {
 					R_sqr = distance_sqr;
 				}
 
-				current = _next[current];
+				current = _lists.next[current];
 			}
 		}
 	}
@@ -107,7 +108,7 @@ vector_scalar PoreSize::compute(std::shared_ptr<BaseTrajectory> trajectory) {
 	auto frame = trajectory->next_frame();
 	while(frame != nullptr) {
 		current_frame = frame;
-		_init_cells();
+		_lists.init_cells(current_frame->particles(), current_frame->box, _r_cut);
 
 		std::vector<double> upper_bounds({frame->box[0], frame->box[1], frame->box[2]});
 		opt.set_upper_bounds(upper_bounds);
@@ -144,69 +145,6 @@ vector_scalar PoreSize::compute(std::shared_ptr<BaseTrajectory> trajectory) {
 	}
 
 	return results;
-}
-
-void PoreSize::_init_cells() {
-	_next.clear();
-	_heads.clear();
-	_cell_shifts.clear();
-
-	_N_cells_side = glm::floor(current_frame->box / _r_cut);
-	for(int i = 0; i < 3; i++) {
-		// everything becomes easier if the number of cells per side is odd
-		if((_N_cells_side[i] % 2) == 0) {
-			_N_cells_side[i]--;
-		}
-		if(_N_cells_side[i] < 3) {
-			_N_cells_side[i] = 3;
-		}
-	}
-	int N_cells = _N_cells_side[0] * _N_cells_side[1] * _N_cells_side[2];
-	_next.resize(current_frame->N(), -1);
-	_heads.resize(N_cells, -1);
-
-	std::cerr << "Number of cells: " << N_cells << ", cells per box side: <" << _N_cells_side[0] << ", " << _N_cells_side[1] << ", " << _N_cells_side[2] << ">" << std::endl;
-
-	for(unsigned int i = 0; i < current_frame->N(); i++) {
-		int cell_idx = _get_cell_index(current_frame->particles()[i]->position());
-		_next[i] = _heads[cell_idx];
-		_heads[cell_idx] = i;
-	}
-
-	// here we generate lists of all possible shifts according to their order (the shell around the central cell they belong to)
-	int max_shift = (glm::compMax(_N_cells_side) - 1) / 2;
-	_cell_shifts.resize(max_shift);
-	vec3 shift;
-	for(shift[0] = -_N_cells_side[0] / 2; shift[0] <= _N_cells_side[0] / 2; shift[0]++) {
-		for(shift[1] = -_N_cells_side[1] / 2; shift[1] <= _N_cells_side[1] / 2; shift[1]++) {
-			for(shift[2] = -_N_cells_side[2] / 2; shift[2] <= _N_cells_side[2] / 2; shift[2]++) {
-				auto shift_abs = glm::abs(shift);
-				int shift_order = glm::compMax(shift_abs) - 1;
-				if(shift_order == -1) {
-					shift_order = 0;
-				}
-				_cell_shifts[shift_order].push_back(shift);
-			}
-		}
-	}
-
-	std::cerr << "Maximum shift order: " << max_shift << ", number of shifts per order:";
-	for(auto &shift : _cell_shifts) {
-		std::cerr << " " << shift.size();
-	}
-	std::cerr << std::endl;
-}
-
-int PoreSize::_get_cell_index(const vec3 &pos) const {
-	int res = (int) ((pos[0] / current_frame->box[0] - floor(pos[0] / current_frame->box[0])) * (1.0 - DBL_EPSILON) * _N_cells_side[0]);
-	res += _N_cells_side[0] * ((int) ((pos[1] / current_frame->box[1] - floor(pos[1] / current_frame->box[1])) * (1.0 - DBL_EPSILON) * _N_cells_side[1]));
-	res += _N_cells_side[0] * _N_cells_side[1] * ((int) ((pos[2] / current_frame->box[2] - floor(pos[2] / current_frame->box[2])) * (1.0 - DBL_EPSILON) * _N_cells_side[2]));
-	return res;
-}
-
-glm::ivec3 PoreSize::_get_cell(const vec3 &pos) const {
-	int cell_index = _get_cell_index(pos);
-	return glm::ivec3(cell_index % _N_cells_side[0], (cell_index / _N_cells_side[0]) % _N_cells_side[1], cell_index / (_N_cells_side[0] * _N_cells_side[1]));
 }
 
 double radius_wrapper(unsigned n, const double *x, double *grad, void *f_data) {

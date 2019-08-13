@@ -10,6 +10,8 @@
 
 #include "../trajectories/BaseTrajectory.h"
 
+#include "../utils/CellLists.h"
+
 namespace ba {
 
 class PoreSize {
@@ -63,14 +65,8 @@ private:
 	double _particle_radius;
 	double _particle_radius_sqr;
 	double _maxtime;
-	glm::ivec3 _N_cells_side;
-	std::vector<int> _next;
-	std::vector<int> _heads;
-	std::vector<std::vector<glm::ivec3>> _cell_shifts;
 
-	void _init_cells();
-	int _get_cell_index(const vec3 &pos) const;
-	glm::ivec3 _get_cell(const vec3 &pos) const;
+	CellLists _lists;
 };
 
 #ifdef PYTHON_BINDINGS
