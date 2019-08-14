@@ -31,13 +31,25 @@ class SANNFinder: public NeighbourFinder {
 	};
 
 public:
-	SANNFinder();
+	enum SymmetryPolicy {
+		NO_ACTION,
+		SYMMETRISE_BY_ADDING,
+		SYMMETRISE_BY_REMOVING
+	};
+
+	SANNFinder(double max_distance, SymmetryPolicy policy);
 	virtual ~SANNFinder();
 
-	virtual void set_neighbours(std::vector<std::shared_ptr<Particle>> particles, const vec3 &box) override;
+	void set_neighbours(std::vector<std::shared_ptr<Particle>> particles, const vec3 &box) override;
 
 private:
+	double _max_distance;
 	CellLists _lists;
+	SymmetryPolicy _policy;
+
+	// TODO: move the logic of making the neighbour lists symmetric to NeighbourFinder
+	void _symmetrise_by_adding(std::vector<std::shared_ptr<Particle>> particles);
+	void _symmetrise_by_removing(std::vector<std::shared_ptr<Particle>> particles);
 };
 
 #ifdef PYTHON_BINDINGS

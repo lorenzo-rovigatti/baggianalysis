@@ -37,6 +37,10 @@ void Particle::add_neighbour(std::shared_ptr<Particle> new_neighbour) {
 	_neighbours.insert(new_neighbour);
 }
 
+void Particle::remove_neighbour(std::shared_ptr<Particle> to_remove) {
+	_neighbours.erase(to_remove);
+}
+
 #ifdef PYTHON_BINDINGS
 
 void export_Particle(py::module &m) {

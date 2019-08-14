@@ -9,9 +9,11 @@
 
 namespace ba {
 
-SANNFinder::SANNFinder() :
+SANNFinder::SANNFinder(double max_distance, SymmetryPolicy policy) :
 				NeighbourFinder(),
-				_lists(true) {
+				_max_distance(max_distance),
+				_lists(true),
+				_policy(policy) {
 
 }
 
@@ -20,7 +22,7 @@ SANNFinder::~SANNFinder() {
 }
 
 void SANNFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particles, const vec3 &box) {
-	double cutoff = 2.0;
+	double cutoff = _max_distance;
 	double cutoff_sqr = SQR(cutoff);
 
 	_lists.init_cells(particles, box, cutoff);
@@ -91,6 +93,42 @@ void SANNFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particles
 			p->add_neighbour(possible_neighbours[i].q);
 		}
 	}
+
+	// symmetrise the neighbour lists as requested by the user
+	switch(_policy) {
+	case SYMMETRISE_BY_ADDING:
+		_symmetrise_by_adding(particles);
+		break;
+	case SYMMETRISE_BY_REMOVING:
+		_symmetrise_by_removing(particles);
+		break;
+	default:
+		break;
+	}
+}
+
+void SANNFinder::_symmetrise_by_adding(std::vector<std::shared_ptr<Particle>> particles) {
+	for(auto p : particles) {
+		for(auto q : p->neighbours()) {
+			auto q_neighs = q->neighbours();
+			auto p_it = std::find(q_neighs.begin(), q_neighs.end(), p);
+			if(p_it == q_neighs.end()) {
+				q->add_neighbour(p);
+			}
+		}
+	}
+}
+
+void SANNFinder::_symmetrise_by_removing(std::vector<std::shared_ptr<Particle>> particles) {
+	for(auto p : particles) {
+		for(auto q : p->neighbours()) {
+			auto q_neighs = q->neighbours();
+			auto p_it = std::find(q_neighs.begin(), q_neighs.end(), p);
+			if(p_it == q_neighs.end()) {
+				p->remove_neighbour(q);
+			}
+		}
+	}
 }
 
 #ifdef PYTHON_BINDINGS
@@ -99,7 +137,13 @@ void export_SANNFinder(py::module &m) {
 	pybind11::class_<SANNFinder, NeighbourFinder, std::shared_ptr<SANNFinder>> finder(m, "SANNFinder");
 
 	finder
-		.def(py::init<>());
+		.def(py::init<double, SANNFinder::SymmetryPolicy>());
+
+	py::enum_<SANNFinder::SymmetryPolicy>(finder, "SymmetryPolicy")
+	    .value("NO_ACTION", SANNFinder::SymmetryPolicy::NO_ACTION)
+	    .value("SYMMETRISE_BY_ADDING", SANNFinder::SymmetryPolicy::SYMMETRISE_BY_ADDING)
+		.value("SYMMETRISE_BY_REMOVING", SANNFinder::SymmetryPolicy::SYMMETRISE_BY_REMOVING)
+	    .export_values();
 }
 
 #endif

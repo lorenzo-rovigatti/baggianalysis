@@ -49,17 +49,18 @@ public:
 		_velocity = nv;
 	}
 
-	const std::set<std::shared_ptr<Particle>> bonded_neighbours() const {
+	const std::set<std::shared_ptr<Particle>> &bonded_neighbours() const {
 		return _bonded_neighbours;
 	}
 
 	void add_bonded_neighbour(std::shared_ptr<Particle> new_neighbour);
 
-	const std::set<std::shared_ptr<Particle>> neighbours() const {
+	const std::set<std::shared_ptr<Particle>> &neighbours() const {
 		return _neighbours;
 	}
 
 	void add_neighbour(std::shared_ptr<Particle> new_neighbour);
+	void remove_neighbour(std::shared_ptr<Particle> to_remove);
 
 protected:
 	static int _current_index;
