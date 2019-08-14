@@ -45,10 +45,10 @@ void export_Particle(py::module &m) {
 	particle
 		.def(py::init<>())
 		.def(py::init<particle_type, vec3, vec3>())
-		.def("bonded_neighbours", &Particle::bonded_neighbours)
 		.def("add_bonded_neighbour", &Particle::add_bonded_neighbour)
-		.def("neighbours", &Particle::neighbours)
 		.def("add_neighbour", &Particle::add_neighbour)
+		.def_property_readonly("bonded_neighbours", &Particle::bonded_neighbours)
+		.def_property_readonly("neighbours", &Particle::neighbours)
 		.def_property_readonly("index", &Particle::index)
 		.def_property("type", &Particle::type, &Particle::set_type)
 		.def_property("position", &Particle::position, &Particle::set_position)

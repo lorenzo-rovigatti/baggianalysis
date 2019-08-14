@@ -28,7 +28,7 @@ void CutoffFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particl
 
 	for(auto p : particles) {
 		auto p_cell = _lists.get_cell(p->position());
-		for(auto order : std::array<int, 2>{0, 1}) {
+		for(auto order : std::array<int, 2> { 0, 1 }) {
 			for(auto shift : _lists.cell_shifts()[order]) {
 				auto cell = p_cell + shift;
 				cell[0] = (cell[0] + _lists.N_cells_side[0]) % _lists.N_cells_side[0];

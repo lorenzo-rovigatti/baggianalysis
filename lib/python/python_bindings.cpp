@@ -12,6 +12,7 @@
 
 #include "../neighbour_finders/CutoffFinder.h"
 #include "../neighbour_finders/NeighbourFinder.h"
+#include "../neighbour_finders/SANNFinder.h"
 
 #include "../observables/BondOrderParameters.h"
 #include "../observables/PoreSize.h"
@@ -60,4 +61,5 @@ PYBIND11_MODULE(baggianalysis, m) {
 	// neighbour finders
 	ba::export_NeighbourFinder(m);
 	ba::export_CutoffFinder(m);
+	ba::export_SANNFinder(m);
 }

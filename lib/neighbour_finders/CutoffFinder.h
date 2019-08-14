@@ -19,7 +19,7 @@ public:
 	CutoffFinder(double cutoff);
 	virtual ~CutoffFinder();
 
-	virtual void set_neighbours(std::vector<std::shared_ptr<Particle>> particles, const vec3 &box);
+	void set_neighbours(std::vector<std::shared_ptr<Particle>> particles, const vec3 &box) override;
 
 private:
 	double _cutoff;
