@@ -8,8 +8,6 @@
 #include "BondOrderParameters.h"
 
 #include <boost/math/special_functions/spherical_harmonic.hpp>
-#include <complex>
-#include <map>
 
 namespace ba {
 
@@ -64,29 +62,31 @@ void BondOrderParameters::_set_particle_bops(std::shared_ptr<Particle> p, partic
 	}
 
 	int N_neighbours = p->neighbours().size();
-	for(auto q : p->neighbours()) {
-		vec3 distance = p->position() - q->position();
-		// periodic boundary conditions
-		distance -= glm::round(distance / box) * box;
+	if(N_neighbours > 0) {
+		for(auto q : p->neighbours()) {
+			vec3 distance = p->position() - q->position();
+			// periodic boundary conditions
+			distance -= glm::round(distance / box) * box;
 
-		double theta = std::acos(distance[2] / glm::length(distance));
-		double phi = std::atan2(distance[1], distance[0]);
-		if(phi < 0.) {
-			phi += 2*M_PI;
+			double theta = std::acos(distance[2] / glm::length(distance));
+			double phi = std::atan2(distance[1], distance[0]);
+			if(phi < 0.) {
+				phi += 2*M_PI;
+			}
+
+			for(auto order : _orders_to_compute) {
+				for(int m = -order; m <= order; m++) {
+					int m_idx = m + order;
+
+					bops[order][m_idx] += boost::math::spherical_harmonic(order, m, theta, phi);
+				}
+			}
 		}
 
 		for(auto order : _orders_to_compute) {
-			for(int m = -order; m <= order; m++) {
-				int m_idx = m + order;
-
-				bops[order][m_idx] += boost::math::spherical_harmonic(order, m, theta, phi);
+			for(auto &v : bops[order]) {
+				v /= N_neighbours;
 			}
-		}
-	}
-
-	for(auto order : _orders_to_compute) {
-		for(auto &v : bops[order]) {
-			v /= N_neighbours;
 		}
 	}
 }

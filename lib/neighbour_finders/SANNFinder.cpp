@@ -31,7 +31,7 @@ void SANNFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particles
 		std::vector<Neighbour> possible_neighbours;
 
 		auto p_cell = _lists.get_cell(p->position());
-		for(auto order : std::array<int, 2> { 0, 1 }) {
+		for(auto order : std::array<int, 2> { 0 }) {
 			for(auto shift : _lists.cell_shifts()[order]) {
 				auto cell = p_cell + shift;
 				cell[0] = (cell[0] + _lists.N_cells_side[0]) % _lists.N_cells_side[0];
@@ -59,34 +59,39 @@ void SANNFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particles
 			}
 		}
 
-		if(possible_neighbours.size() < 3) {
-			std::string error = boost::str(boost::format("Particle %d has fewer than 3 neighbours") % p->index());
-			throw std::runtime_error(error);
-		}
-
-		// sort according to the relative distance between each neighbour and p
-		std::sort(possible_neighbours.begin(), possible_neighbours.end());
-
-		// this will be the radius of the neighbour shell of particle p, which is defined as the sum of the distances of all n neighbours divided by (n - 2)
-		double radius;
-		// we start by considering the first 3 neighbours
-		double distance_sum = 0.;
 		size_t neigh_number;
-		for(neigh_number = 0; neigh_number < 3; neigh_number++) {
-			distance_sum += possible_neighbours[neigh_number].distance;
-		}
-		radius = distance_sum;
 
-		// now we iteratively include neighbours one by one until the SANN radius is smaller than the distance of the next neighbour
-		while((neigh_number < possible_neighbours.size()) && (radius > possible_neighbours[neigh_number].distance)) {
-			distance_sum += possible_neighbours[neigh_number].distance;
-			neigh_number++;
-			radius = distance_sum / (neigh_number - 2.);
+		if(possible_neighbours.size() < 3) {
+			std::string error = boost::str(boost::format("Particle %d has fewer than 3 neighbours (%d)") % p->index() % possible_neighbours.size());
+			BOOST_LOG_TRIVIAL(warning) << error;
+			neigh_number = possible_neighbours.size();
+//			throw std::runtime_error(error);
 		}
+		else {
+			// sort according to the relative distance between each neighbour and p
+			std::sort(possible_neighbours.begin(), possible_neighbours.end());
 
-		if(neigh_number == possible_neighbours.size()) {
-			std::string error = boost::str(boost::format("The SANN radius of particle %d has not converged (%d neighbours are not enough)") % p->index() % neigh_number);
-			throw std::runtime_error(error);
+			// this will be the radius of the neighbour shell of particle p, which is defined as the sum of the distances of all n neighbours divided by (n - 2)
+			double radius;
+			// we start by considering the first 3 neighbours
+			double distance_sum = 0.;
+			for(neigh_number = 0; neigh_number < 3; neigh_number++) {
+				distance_sum += possible_neighbours[neigh_number].distance;
+			}
+			radius = distance_sum;
+
+			// now we iteratively include neighbours one by one until the SANN radius is smaller than the distance of the next neighbour
+			while((neigh_number < possible_neighbours.size()) && (radius > possible_neighbours[neigh_number].distance)) {
+				distance_sum += possible_neighbours[neigh_number].distance;
+				neigh_number++;
+				radius = distance_sum / (neigh_number - 2.);
+			}
+
+			if(neigh_number == possible_neighbours.size()) {
+				std::string error = boost::str(boost::format("The SANN radius of particle %d has not converged (%d neighbours are not enough)") % p->index() % neigh_number);
+				BOOST_LOG_TRIVIAL(warning) << error;
+				//throw std::runtime_error(error);
+			}
 		}
 
 		for(size_t i = 0; i < neigh_number; i++) {
@@ -121,12 +126,17 @@ void SANNFinder::_symmetrise_by_adding(std::vector<std::shared_ptr<Particle>> pa
 
 void SANNFinder::_symmetrise_by_removing(std::vector<std::shared_ptr<Particle>> particles) {
 	for(auto p : particles) {
+		std::vector<std::shared_ptr<Particle>> to_remove;
 		for(auto q : p->neighbours()) {
 			auto q_neighs = q->neighbours();
 			auto p_it = std::find(q_neighs.begin(), q_neighs.end(), p);
 			if(p_it == q_neighs.end()) {
-				p->remove_neighbour(q);
+				to_remove.push_back(q);
 			}
+		}
+
+		for(auto q : to_remove) {
+			p->remove_neighbour(q);
 		}
 	}
 }
