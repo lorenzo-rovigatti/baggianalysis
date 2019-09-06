@@ -4,7 +4,7 @@ import baggianalysis as ba
 import numpy as np
 import sys
 
-if len(sys.argv) < 2:
+if len(sys.argv) < 3:
     print("Usage is %s input N_attempts" % sys.argv[0], file=sys.stderr)
     exit(0)
     

@@ -1,5 +1,6 @@
 SET(ba_lib_SOURCES
 	filters/BaseFilter.cpp
+	filters/FilterByFunction.cpp
 	filters/FilterByReducingToCOM.cpp
 	filters/FilterByType.cpp
 	filters/FixParticlePath.cpp

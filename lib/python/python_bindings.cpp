@@ -5,10 +5,11 @@
  *      Author: lorenzo
  */
 
-#include "../filters/SubtractCOM.h"
+#include "../filters/FilterByFunction.h"
 #include "../filters/FilterByReducingToCOM.h"
 #include "../filters/FilterByType.h"
 #include "../filters/FixParticlePath.h"
+#include "../filters/SubtractCOM.h"
 
 #include "../neighbour_finders/CutoffFinder.h"
 #include "../neighbour_finders/NeighbourFinder.h"
@@ -43,10 +44,11 @@ PYBIND11_MODULE(baggianalysis, m) {
 
 	// filters
 	ba::export_BaseFilter(m);
-	ba::export_SubtractCOM(m);
+	ba::export_FilterByFunction(m);
 	ba::export_FilterByReducingToCOM(m);
 	ba::export_FilterByType(m);
 	ba::export_FixParticlePath(m);
+	ba::export_SubtractCOM(m);
 
 	// trajectories
 	ba::export_BaseTrajectory(m);
