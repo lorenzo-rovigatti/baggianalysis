@@ -20,6 +20,7 @@ public:
 	virtual ~BaseParser();
 
 	virtual std::shared_ptr<System> parse(std::ifstream &configuration) = 0;
+	virtual std::shared_ptr<System> open_parse_close(std::string conf_name);
 };
 
 #ifdef PYTHON_BINDINGS
@@ -33,10 +34,22 @@ public:
 
 	std::shared_ptr<System> parse(std::ifstream &configuration) override {
 		PYBIND11_OVERLOAD_PURE(
-				std::shared_ptr<System>,
-				BaseParser,
-				parse,
-				configuration
+			std::shared_ptr<System>,
+			BaseParser,
+			parse,
+			configuration
+		);
+
+		// suppress warnings
+		return std::shared_ptr<System>(new System());
+	}
+
+	std::shared_ptr<System> open_parse_close(std::string conf_name) override {
+		PYBIND11_OVERLOAD(
+			std::shared_ptr<System>,
+			BaseParser,
+			open_parse_close,
+			conf_name
 		);
 
 		// suppress warnings

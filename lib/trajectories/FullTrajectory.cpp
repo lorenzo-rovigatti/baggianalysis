@@ -73,9 +73,7 @@ void FullTrajectory::initialise_from_filelist(std::vector<std::string> filelist)
 	uint N_files = filelist.size();
 
 	for(auto f : filelist) {
-		ifstream conf_file(f);
-		auto new_system = _parser->parse(conf_file);
-		conf_file.close();
+		auto new_system = _parser->open_parse_close(f);
 
 		if(new_system == nullptr) {
 			string error = boost::str(boost::format("The '%s' configuration is either empty or invalid") % f);
@@ -126,5 +124,4 @@ void export_FullTrajectory(py::module &m) {
 
 #endif
 
-}
-/* namespace ba */
+} /* namespace ba */

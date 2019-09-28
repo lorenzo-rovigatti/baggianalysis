@@ -59,9 +59,7 @@ shared_ptr<System> LazyTrajectory::next_frame() {
 	}
 	else if(_type == FOLDER) {
 		if(_current_file != _files.end()) {
-			ifstream conf_file(*_current_file);
-			new_system = _parser->parse(conf_file);
-			conf_file.close();
+			new_system = _parser->open_parse_close(*_current_file);
 
 			for(auto filter : _filters) {
 				new_system = filter->filter(new_system);
