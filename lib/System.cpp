@@ -30,7 +30,7 @@ std::shared_ptr<System> System::empty_copy() const {
 #ifdef PYTHON_BINDINGS
 
 void export_System(py::module &m) {
-	py::class_<System, ParticleSet, std::shared_ptr<System>> system(m, "System");
+	py::class_<System, ParticleSet, std::shared_ptr<System>> system(m, "System", py::dynamic_attr());
 
 	system
 		.def(py::init<>())

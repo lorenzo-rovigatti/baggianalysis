@@ -42,16 +42,18 @@ baggianalysis contains a very simple testing suite that checks whether the Pytho
 
 * Support many configuration types
 * Filters: after being parsed, configurations can be modified by the so-called *filters*. Some available filters are:
-	* select particles of certain types only (FilterByType)
-	* remove the centre-of-mass position and velocity (SubtractCOM)
-	* reduce the configuration so that it contains only a single particle with position and velocity given by the centre-of-mass position and velocity (FilterByReducingToCOM)
+	* filter particles according to a custom lambda function (`FilterByFunction`)
+	* select particles of certain types only (`FilterByType`)
+	* remove the centre-of-mass position and velocity (`SubtractCOM`)
+	* reduce the configuration so that it contains only a single particle with position and velocity given by the centre-of-mass position and velocity (`FilterByReducingToCOM`)
 
 ## Notes
 
 * By default, the core library is compiled dynamically. However, if Python bindings are enabled, the core library is compiled statically.
 * The timestep associated to a configuration **must** be an integer number. If your preferred format stores it as a floating-precision number, your parser will have to find a way of converting that to an integer. This is *by design*, as the time of a configuration is used as a key in several maps around the code, and floating-point numbers are not good at that. Moreover, integer numbers can be stored without losing any precision, in contrast with floats.
 * Normal trajectories need not load all the frames at once. Trajectories that do are called "full trajectories". Many observables, in general, do not require to have access to all frames at once, which means that frames can parsed (and hence loaded) one by one when needed (lazy loading). This allows to work on big trajectories without consuming up too much memory.
-* Lists of 3D vectors are copied when accessed from the Python's side. This means that their c++ counterparts (which are `std::vector`s) cannot be modified by using `append` or similar Python methods. 
+* Lists of 3D vectors are copied when accessed from the Python's side. This means that their c++ counterparts (which are `std::vector`s) are not modified when `append` or similar Python methods are used.
+* The `System` and `Particle` classes support dynamic attributes (that is, one can add any attributes to instances of these classes from the Python side).  
 
 ## Acknowledgements
 

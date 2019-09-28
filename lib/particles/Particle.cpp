@@ -44,7 +44,7 @@ void Particle::remove_neighbour(std::shared_ptr<Particle> to_remove) {
 #ifdef PYTHON_BINDINGS
 
 void export_Particle(py::module &m) {
-	py::class_<Particle, std::shared_ptr<Particle>> particle(m, "Particle");
+	py::class_<Particle, std::shared_ptr<Particle>> particle(m, "Particle", py::dynamic_attr());
 
 	particle
 		.def(py::init<>())
