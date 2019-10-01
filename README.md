@@ -54,7 +54,7 @@ baggianalysis contains a very simple testing suite that checks whether the Pytho
 * Normal trajectories need not load all the frames at once. Trajectories that do are called "full trajectories". Many observables, in general, do not require to have access to all frames at once, which means that frames can parsed (and hence loaded) one by one when needed (lazy loading). This allows to work on big trajectories without consuming up too much memory.
 * Lists of 3D vectors are copied when accessed from the Python's side. This means that their c++ counterparts (which are `std::vector`s) are not modified when `append` or similar Python methods are used.
 * The `System` and `Particle` classes support dynamic attributes (that is, one can add any attributes to instances of these classes from the Python side).
-* Simple Python parsers can be used to either parse single `System`s or to initialise trajectories from file lists and folders only.
+* Simple Python parsers can be used to either parse single `System`s or to initialise trajectories from file lists and folders only. In order to do so, parsers should inherit from `BaseParser` and override the `parse_file` method, which takes a string as its only argument.
 
 ## Acknowledgements
 

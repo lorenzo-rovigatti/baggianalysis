@@ -17,9 +17,9 @@ BaseParser::~BaseParser() {
 
 }
 
-std::shared_ptr<System> BaseParser::open_parse_close(std::string conf_name) {
+std::shared_ptr<System> BaseParser::parse_file(std::string conf_name) {
 	std::ifstream conf_file(conf_name);
-	auto new_system = this->parse(conf_file);
+	auto new_system = this->parse_stream(conf_file);
 	conf_file.close();
 
 	return new_system;
@@ -32,8 +32,7 @@ void export_BaseParser(py::module &m) {
 
 	parser
 		.def(py::init<>())
-		.def("parse", &BaseParser::parse)
-		.def("open_parse_close", &BaseParser::open_parse_close);
+		.def("parse_file", &BaseParser::parse_file);
 }
 
 #endif

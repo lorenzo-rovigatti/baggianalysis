@@ -21,7 +21,7 @@ LJKAParser::~LJKAParser() {
 
 }
 
-std::shared_ptr<System> LJKAParser::parse(std::ifstream &configuration) {
+std::shared_ptr<System> LJKAParser::parse_stream(std::ifstream &configuration) {
 	std::string line;
 	std::vector<std::string> split;
 	uint N, NA;
@@ -77,7 +77,7 @@ void export_LJKAParser(py::module &m) {
 
 	parser
 		.def(py::init<>())
-		.def("parse", &LJKAParser::parse);
+		.def("parse", &LJKAParser::parse_stream);
 }
 
 #endif

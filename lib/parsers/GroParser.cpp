@@ -22,7 +22,7 @@ GroParser::~GroParser() {
 
 }
 
-std::shared_ptr<System> GroParser::parse(std::ifstream &configuration) {
+std::shared_ptr<System> GroParser::parse_stream(std::ifstream &configuration) {
 	std::string line;
 	std::vector<std::string> split;
 
@@ -123,7 +123,7 @@ void export_GroParser(py::module &m) {
 
 	parser
 		.def(py::init<double>())
-		.def("parse", &GroParser::parse);
+		.def("parse", &GroParser::parse_stream);
 }
 
 #endif

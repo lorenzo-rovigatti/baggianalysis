@@ -21,7 +21,7 @@ LAMMPSDumpParser::~LAMMPSDumpParser() {
 
 }
 
-std::shared_ptr<System> LAMMPSDumpParser::parse(std::ifstream &configuration) {
+std::shared_ptr<System> LAMMPSDumpParser::parse_stream(std::ifstream &configuration) {
 	std::shared_ptr<System> syst(new System);
 
 	auto header_data = _parse_headers(configuration, syst);
@@ -124,7 +124,7 @@ void export_LAMMPSDumpParser(py::module &m) {
 
 	parser
 		.def(py::init<>())
-		.def("parse", &LAMMPSDumpParser::parse);
+		.def("parse", &LAMMPSDumpParser::parse_stream);
 }
 
 #endif
