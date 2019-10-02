@@ -120,7 +120,7 @@ LAMMPSDumpParser::HeaderData LAMMPSDumpParser::_parse_headers(std::ifstream &con
 #ifdef PYTHON_BINDINGS
 
 void export_LAMMPSDumpParser(py::module &m) {
-	pybind11::class_<LAMMPSDumpParser, BaseParser, std::shared_ptr<LAMMPSDumpParser>> parser(m, "LAMMPSDumpParser");
+	py::class_<LAMMPSDumpParser, BaseParser, std::shared_ptr<LAMMPSDumpParser>> parser(m, "LAMMPSDumpParser");
 
 	parser
 		.def(py::init<>())

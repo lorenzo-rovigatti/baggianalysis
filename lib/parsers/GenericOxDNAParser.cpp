@@ -98,7 +98,7 @@ std::shared_ptr<System> GenericOxDNAParser::parse_stream(std::ifstream &configur
 #ifdef PYTHON_BINDINGS
 
 void export_GenericOxDNAParser(py::module &m) {
-	pybind11::class_<GenericOxDNAParser, BaseParser, std::shared_ptr<GenericOxDNAParser>> parser(m, "GenericOxDNAParser");
+	py::class_<GenericOxDNAParser, BaseParser, std::shared_ptr<GenericOxDNAParser>> parser(m, "GenericOxDNAParser");
 
 	parser
 		.def(py::init<std::string>())

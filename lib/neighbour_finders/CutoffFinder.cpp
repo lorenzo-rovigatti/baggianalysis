@@ -62,7 +62,7 @@ void CutoffFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particl
 #ifdef PYTHON_BINDINGS
 
 void export_CutoffFinder(py::module &m) {
-	pybind11::class_<CutoffFinder, NeighbourFinder, std::shared_ptr<CutoffFinder>> finder(m, "CutoffFinder");
+	py::class_<CutoffFinder, NeighbourFinder, std::shared_ptr<CutoffFinder>> finder(m, "CutoffFinder");
 
 	finder
 		.def(py::init<double>());

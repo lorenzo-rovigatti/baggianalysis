@@ -116,7 +116,7 @@ void FullTrajectory::reset() {
 #ifdef PYTHON_BINDINGS
 
 void export_FullTrajectory(py::module &m) {
-	pybind11::class_<FullTrajectory, BaseTrajectory, std::shared_ptr<FullTrajectory>> parser(m, "FullTrajectory");
+	py::class_<FullTrajectory, BaseTrajectory, std::shared_ptr<FullTrajectory>> parser(m, "FullTrajectory");
 
 	parser
 		.def(py::init<shared_ptr<BaseParser>>()).

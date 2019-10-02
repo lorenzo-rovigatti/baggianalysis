@@ -89,7 +89,7 @@ void LazyTrajectory::reset() {
 #ifdef PYTHON_BINDINGS
 
 void export_LazyTrajectory(py::module &m) {
-	pybind11::class_<LazyTrajectory, BaseTrajectory, std::shared_ptr<LazyTrajectory>> parser(m, "LazyTrajectory");
+	py::class_<LazyTrajectory, BaseTrajectory, std::shared_ptr<LazyTrajectory>> parser(m, "LazyTrajectory");
 
 	parser
 		.def(py::init<shared_ptr<BaseParser>>());

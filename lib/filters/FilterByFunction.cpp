@@ -35,7 +35,7 @@ std::shared_ptr<System> FilterByFunction::filter(std::shared_ptr<const System> s
 #ifdef PYTHON_BINDINGS
 
 void export_FilterByFunction(py::module &m) {
-	pybind11::class_<FilterByFunction, BaseFilter, std::shared_ptr<FilterByFunction>> filter(m, "FilterByFunction");
+	py::class_<FilterByFunction, BaseFilter, std::shared_ptr<FilterByFunction>> filter(m, "FilterByFunction");
 
 	filter
 		.def(py::init<FilterType>())

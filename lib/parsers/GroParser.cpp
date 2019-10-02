@@ -119,7 +119,7 @@ std::shared_ptr<System> GroParser::parse_stream(std::ifstream &configuration) {
 #ifdef PYTHON_BINDINGS
 
 void export_GroParser(py::module &m) {
-	pybind11::class_<GroParser, BaseParser, std::shared_ptr<GroParser>> parser(m, "GroParser");
+	py::class_<GroParser, BaseParser, std::shared_ptr<GroParser>> parser(m, "GroParser");
 
 	parser
 		.def(py::init<double>())

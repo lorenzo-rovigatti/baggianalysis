@@ -31,7 +31,7 @@ shared_ptr<System> FilterByReducingToCOM::filter(std::shared_ptr<const System> s
 #ifdef PYTHON_BINDINGS
 
 void export_FilterByReducingToCOM(py::module &m) {
-	pybind11::class_<FilterByReducingToCOM, BaseFilter, std::shared_ptr<FilterByReducingToCOM>> filter(m, "FilterByReducingToCOM");
+	py::class_<FilterByReducingToCOM, BaseFilter, std::shared_ptr<FilterByReducingToCOM>> filter(m, "FilterByReducingToCOM");
 
 	filter
 		.def(py::init<>())

@@ -8,7 +8,7 @@ class MyParser(ba.BaseParser):
     def __init__(self):
         pass
     
-    def parse(self, conf):
+    def parse_file(self, conf):
         syst = ba.System()
         
         with open(conf) as f:

@@ -20,7 +20,7 @@ NeighbourFinder::~NeighbourFinder() {
 #ifdef PYTHON_BINDINGS
 
 void export_NeighbourFinder(py::module &m) {
-	pybind11::class_<NeighbourFinder, PyNeighbourFinder, std::shared_ptr<NeighbourFinder>> finder(m, "NeighbourFinder");
+	py::class_<NeighbourFinder, PyNeighbourFinder, std::shared_ptr<NeighbourFinder>> finder(m, "NeighbourFinder");
 
 	finder
 		.def(py::init<>())

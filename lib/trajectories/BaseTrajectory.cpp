@@ -50,7 +50,7 @@ void BaseTrajectory::initialise_from_folder(std::string folder, std::string patt
 #ifdef PYTHON_BINDINGS
 
 void export_BaseTrajectory(py::module &m) {
-	pybind11::class_<BaseTrajectory, PyBaseTrajectory, std::shared_ptr<BaseTrajectory>> parser(m, "BaseTrajectory");
+	py::class_<BaseTrajectory, PyBaseTrajectory, std::shared_ptr<BaseTrajectory>> parser(m, "BaseTrajectory");
 
 	parser
 		.def(py::init<std::shared_ptr<BaseParser>>())

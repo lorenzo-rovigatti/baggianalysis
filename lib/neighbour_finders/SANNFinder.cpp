@@ -144,7 +144,7 @@ void SANNFinder::_symmetrise_by_removing(std::vector<std::shared_ptr<Particle>> 
 #ifdef PYTHON_BINDINGS
 
 void export_SANNFinder(py::module &m) {
-	pybind11::class_<SANNFinder, NeighbourFinder, std::shared_ptr<SANNFinder>> finder(m, "SANNFinder");
+	py::class_<SANNFinder, NeighbourFinder, std::shared_ptr<SANNFinder>> finder(m, "SANNFinder");
 
 	finder
 		.def(py::init<double, SANNFinder::SymmetryPolicy>());

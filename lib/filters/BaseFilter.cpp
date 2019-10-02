@@ -20,7 +20,7 @@ BaseFilter::~BaseFilter() {
 #ifdef PYTHON_BINDINGS
 
 void export_BaseFilter(py::module &m) {
-	pybind11::class_<BaseFilter, PyBaseFilter, std::shared_ptr<BaseFilter>> filter(m, "BaseFilter");
+	py::class_<BaseFilter, PyBaseFilter, std::shared_ptr<BaseFilter>> filter(m, "BaseFilter");
 
 	filter
 		.def(py::init<>())

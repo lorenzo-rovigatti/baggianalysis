@@ -28,7 +28,7 @@ std::shared_ptr<System> BaseParser::parse_file(std::string conf_name) {
 #ifdef PYTHON_BINDINGS
 
 void export_BaseParser(py::module &m) {
-	pybind11::class_<BaseParser, PyBaseParser, std::shared_ptr<BaseParser>> parser(m, "BaseParser");
+	py::class_<BaseParser, PyBaseParser, std::shared_ptr<BaseParser>> parser(m, "BaseParser");
 
 	parser
 		.def(py::init<>())
