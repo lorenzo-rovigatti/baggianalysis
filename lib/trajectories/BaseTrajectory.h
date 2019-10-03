@@ -40,13 +40,14 @@ public:
 	 *
 	 * @param folder the name of the folder
 	 * @param pattern the glob-compatible pattern used to select the files of interest
+	 * @param natural_sorting whether the files found in the folder should be sorted or not
 	 */
-	virtual void initialise_from_folder(std::string folder, std::string pattern);
+	virtual void initialise_from_folder(std::string folder, std::string pattern, bool natural_sorting);
 
 	/**
 	 * @brief Initialise the trajectory using the given list of files
 	 *
-	 * @param filelist the list of file to be parsed
+	 * @param filelist the list of files to be parsed
 	 */
 	virtual void initialise_from_filelist(std::vector<std::string> filelist) = 0;
 

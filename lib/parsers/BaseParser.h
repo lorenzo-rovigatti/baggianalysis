@@ -19,7 +19,20 @@ public:
 	BaseParser();
 	virtual ~BaseParser();
 
+	/**
+	 * @brief Build a new System by parsing an already open stream
+	 *
+	 * @param configuration the stream to be parsed
+	 * @return a new System
+	 */
 	virtual std::shared_ptr<System> parse_stream(std::ifstream &configuration) = 0;
+
+	/**
+	 * @brief Build a new System by opening and then parsing a file
+	 *
+	 * @param configuration the name of the file to be parsed
+	 * @return a new System
+	 */
 	virtual std::shared_ptr<System> parse_file(std::string conf_name);
 };
 

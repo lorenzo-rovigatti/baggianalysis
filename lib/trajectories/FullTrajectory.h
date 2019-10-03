@@ -18,7 +18,16 @@ public:
 	virtual ~FullTrajectory();
 
 	virtual void add_filter(std::shared_ptr<BaseFilter> filter) override;
+
+	/**
+	 * @brief Initialise the trajectory using the given list of files.
+	 *
+	 * This method sorts the frames according to their timesteps after they have been all parsed.
+	 *
+	 * @param filelist the list of files to be parsed
+	 */
 	virtual void initialise_from_filelist(std::vector<std::string> filelist) override;
+
 	virtual void initialise_from_trajectory_file(std::string trajectory_file) override;
 
 	virtual std::shared_ptr<System> next_frame() override;

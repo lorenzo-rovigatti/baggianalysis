@@ -28,7 +28,7 @@ void BaseTrajectory::add_filter(std::shared_ptr<BaseFilter> filter) {
 	_filters.push_back(filter);
 }
 
-void BaseTrajectory::initialise_from_folder(std::string folder, std::string pattern) {
+void BaseTrajectory::initialise_from_folder(std::string folder, std::string pattern, bool natural_sorting) {
 	bfs::path path(folder);
 
 	if(!bfs::exists(path)) {
@@ -42,7 +42,7 @@ void BaseTrajectory::initialise_from_folder(std::string folder, std::string patt
 	}
 
 	bfs::path tot_path = bfs::path(folder) / bfs::path(pattern);
-	std::vector<std::string> files = utils::glob(tot_path.string(), false);
+	std::vector<std::string> files = utils::glob(tot_path.string(), natural_sorting);
 
 	initialise_from_filelist(files);
 }

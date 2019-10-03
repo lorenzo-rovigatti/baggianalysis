@@ -91,7 +91,7 @@ void FullTrajectory::initialise_from_filelist(std::vector<std::string> filelist)
 	auto sorting_function = [](const shared_ptr<System> &s1, const shared_ptr<System> &s2) -> bool {
 		return (s1->time < s2->time);
 	};
-	sort(frames.begin(), frames.end(), sorting_function);
+	stable_sort(frames.begin(), frames.end(), sorting_function);
 
 	_current_system = frames.begin();
 

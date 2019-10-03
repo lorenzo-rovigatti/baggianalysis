@@ -17,6 +17,12 @@ public:
 	BaseFilter();
 	virtual ~BaseFilter();
 
+	/**
+	 * @brief Build a new System by applying some procedure to an already existing System.
+	 *
+	 * @param syst the System the filter will be applied to
+	 * @return a copy of the System, filtered according to some procedure
+	 */
 	virtual std::shared_ptr<System> filter(std::shared_ptr<const System> syst) = 0;
 };
 
