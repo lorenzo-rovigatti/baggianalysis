@@ -35,7 +35,7 @@ shared_ptr<System> FixParticlePath::filter(std::shared_ptr<const System> syst) {
 		for(uint i = 0; i < syst->N(); i++) {
 			auto p = syst->particles()[i];
 
-			shared_ptr<Particle> new_particle(new Particle(*p.get()));
+			shared_ptr<Particle> new_particle(std::make_shared<Particle>(*p.get()));
 			vec3 shift = vec3(_shifts[i]) * syst->box;
 			vec3 new_pos = p->position() + shift;
 
@@ -58,7 +58,7 @@ shared_ptr<System> FixParticlePath::filter(std::shared_ptr<const System> syst) {
 	else {
 		_shifts.resize(syst->N(), particle_shift(0, 0, 0));
 		for(auto p : syst->particles()) {
-			shared_ptr<Particle> new_particle(new Particle(*p.get()));
+			shared_ptr<Particle> new_particle(std::make_shared<Particle>(*p.get()));
 			new_syst->add_particle(p);
 		}
 	}

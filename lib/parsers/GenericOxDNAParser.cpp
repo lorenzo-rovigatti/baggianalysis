@@ -42,7 +42,7 @@ std::shared_ptr<System> GenericOxDNAParser::parse_stream(std::ifstream &configur
 	std::getline(configuration, line);
 	if(!configuration.good()) return nullptr;
 
-	std::shared_ptr<System> syst(new System);
+	std::shared_ptr<System> syst(std::make_shared<System>());
 
 	boost::split(split, line, boost::is_any_of(" "));
 	try {
@@ -81,7 +81,7 @@ std::shared_ptr<System> GenericOxDNAParser::parse_stream(std::ifstream &configur
 				vec3 position = vec3(boost::lexical_cast<double>(split[0]), boost::lexical_cast<double>(split[1]), boost::lexical_cast<double>(split[2]));
 				vec3 velocity = vec3(boost::lexical_cast<double>(split[9]), boost::lexical_cast<double>(split[10]), boost::lexical_cast<double>(split[11]));
 
-				std::shared_ptr<Particle> new_particle(new Particle("0", position, velocity));
+				std::shared_ptr<Particle> new_particle(std::make_shared<Particle>("0", position, velocity));
 				syst->add_particle(new_particle);
 			}
 		}

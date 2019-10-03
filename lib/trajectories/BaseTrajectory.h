@@ -97,7 +97,7 @@ public:
 		);
 
 		// suppress warnings
-		return std::shared_ptr<System>(new System());
+		return std::shared_ptr<System>(std::make_shared<System>());
 	}
 
 	void reset() override {

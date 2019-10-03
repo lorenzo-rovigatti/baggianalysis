@@ -19,7 +19,7 @@ System::~System() {
 }
 
 std::shared_ptr<System> System::empty_copy() const {
-	std::shared_ptr<System> new_syst(new System());
+	std::shared_ptr<System> new_syst(std::make_shared<System>());
 
 	new_syst->time = this->time;
 	new_syst->box = this->box;

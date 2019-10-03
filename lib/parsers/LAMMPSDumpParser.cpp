@@ -22,7 +22,7 @@ LAMMPSDumpParser::~LAMMPSDumpParser() {
 }
 
 std::shared_ptr<System> LAMMPSDumpParser::parse_stream(std::ifstream &configuration) {
-	std::shared_ptr<System> syst(new System);
+	std::shared_ptr<System> syst(std::make_shared<System>());
 
 	auto header_data = _parse_headers(configuration, syst);
 
@@ -45,7 +45,7 @@ std::shared_ptr<System> LAMMPSDumpParser::parse_stream(std::ifstream &configurat
 		std::vector<std::string> split;
 		boost::split(split, to_split, boost::is_any_of(" "), boost::algorithm::token_compress_on);
 
-		std::shared_ptr<Particle> new_particle(new Particle());
+		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>());
 		new_particle->set_type(split[1]);
 
 		try {

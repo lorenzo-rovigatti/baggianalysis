@@ -26,7 +26,7 @@ shared_ptr<System> SubtractCOM::filter(std::shared_ptr<const System> syst) {
 	vec3 v_avg = syst->average_velocity();
 
 	for(auto p : syst->particles()) {
-		shared_ptr<Particle> new_particle(new Particle(*p.get()));
+		shared_ptr<Particle> new_particle(std::make_shared<Particle>(*p.get()));
 		new_particle->set_position(new_particle->position() - com);
 		new_particle->set_velocity(new_particle->velocity() - v_avg);
 		new_syst->add_particle(new_particle);

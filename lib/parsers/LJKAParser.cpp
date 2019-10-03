@@ -30,7 +30,7 @@ std::shared_ptr<System> LJKAParser::parse_stream(std::ifstream &configuration) {
 	std::getline(configuration, line);
 	if(!configuration.good()) return nullptr;
 
-	std::shared_ptr<System> syst(new System);
+	std::shared_ptr<System> syst(std::make_shared<System>());
 
 	boost::split(split, line, boost::is_any_of(" "));
 	try {
@@ -63,7 +63,7 @@ std::shared_ptr<System> LJKAParser::parse_stream(std::ifstream &configuration) {
 		vec3 position = vec3(boost::lexical_cast<double>(split[0]), boost::lexical_cast<double>(split[1]), boost::lexical_cast<double>(split[2]));
 
 		particle_type type = (i < NA) ? "0" : "1";
-		std::shared_ptr<Particle> new_particle(new Particle(type, position, vec3(0., 0., 0.)));
+		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(type, position, vec3(0., 0., 0.)));
 		syst->add_particle(new_particle);
 	}
 

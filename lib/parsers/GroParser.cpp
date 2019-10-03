@@ -30,7 +30,7 @@ std::shared_ptr<System> GroParser::parse_stream(std::ifstream &configuration) {
 	std::getline(configuration, line);
 	if(!configuration.good()) return nullptr;
 
-	std::shared_ptr<System> syst(new System);
+	std::shared_ptr<System> syst(std::make_shared<System>());
 
 	auto time_pos = line.find("t=");
 	if(time_pos == std::string::npos) {
@@ -69,7 +69,7 @@ std::shared_ptr<System> GroParser::parse_stream(std::ifstream &configuration) {
 		std::string atom_name = line.substr(10, 5);
 		std::string atom_number = line.substr(15, 5);
 
-		std::shared_ptr<Particle> new_particle(new Particle());
+		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>());
 		new_particle->set_type(atom_name);
 
 		std::string x = boost::trim_copy(line.substr(20, 8));

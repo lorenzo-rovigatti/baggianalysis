@@ -29,7 +29,7 @@ shared_ptr<System> FilterByType::filter(std::shared_ptr<const System> syst) {
 	for(auto p : syst->particles()) {
 		particle_type p_type = p->type();
 		if(find(_allowed_types.begin(), _allowed_types.end(), p_type) != _allowed_types.end()) {
-			shared_ptr<Particle> new_particle(new Particle(*p.get()));
+			shared_ptr<Particle> new_particle(std::make_shared<Particle>(*p.get()));
 			new_syst->add_particle(new_particle);
 		}
 	}

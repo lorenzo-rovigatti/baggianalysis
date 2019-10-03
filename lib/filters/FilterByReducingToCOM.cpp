@@ -22,7 +22,7 @@ FilterByReducingToCOM::~FilterByReducingToCOM() {
 shared_ptr<System> FilterByReducingToCOM::filter(std::shared_ptr<const System> syst) {
 	shared_ptr<System> new_syst(syst->empty_copy());
 
-	shared_ptr<Particle> new_particle(new Particle(DEFAULT_PARTICLE_TYPE, syst->com(), syst->average_velocity()));
+	shared_ptr<Particle> new_particle(std::make_shared<Particle>(DEFAULT_PARTICLE_TYPE, syst->com(), syst->average_velocity()));
 	new_syst->add_particle(new_particle);
 
 	return new_syst;

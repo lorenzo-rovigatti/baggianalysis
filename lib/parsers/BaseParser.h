@@ -41,7 +41,7 @@ public:
 		);
 
 		// suppress warnings
-		return std::shared_ptr<System>(new System());
+		return std::shared_ptr<System>(std::make_shared<System>());
 	}
 
 	std::shared_ptr<System> parse_file(std::string conf_name) override {
@@ -53,7 +53,7 @@ public:
 		);
 
 		// suppress warnings
-		return std::shared_ptr<System>(new System());
+		return std::shared_ptr<System>(std::make_shared<System>());
 	}
 };
 
