@@ -27,6 +27,14 @@ std::shared_ptr<System> System::empty_copy() const {
 	return new_syst;
 }
 
+std::vector<std::shared_ptr<ParticleSet>> &System::molecules() {
+	return _molecules;
+}
+
+const std::vector<std::shared_ptr<ParticleSet>> &System::molecules() const {
+	return _molecules;
+}
+
 #ifdef PYTHON_BINDINGS
 
 void export_System(py::module &m) {
@@ -35,8 +43,11 @@ void export_System(py::module &m) {
 	system
 		.def(py::init<>())
 		.def("empty_copy", &System::empty_copy)
+		// here we tell pybind11 which of the two molecules() methods we want to have bindings for
+		.def("molecules", (std::vector<std::shared_ptr<ParticleSet>> &(System::*)())(&System::molecules))
 		.def_readwrite("time", &System::time)
 		.def_readwrite("box", &System::box);
+
 }
 
 #endif

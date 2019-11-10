@@ -8,9 +8,12 @@
 #ifndef PARTICLES_PARTICLESET_H_
 #define PARTICLES_PARTICLESET_H_
 
-#include "Particle.h"
+#include "../defs.h"
+#include "../python_defs.h"
 
 namespace ba {
+
+class Particle;
 
 class ParticleSet {
 public:
@@ -22,6 +25,7 @@ public:
 
 	/// Return the name of the set
 	std::string name() const;
+
 	/// Set the name of the set
 	void set_name(const std::string &name);
 
@@ -63,17 +67,24 @@ public:
 
 	/// Return all the particles stored in the set
 	std::vector<std::shared_ptr<Particle>> &particles();
+
 	/// Return all the particles stored in the set (const version)
 	const std::vector<std::shared_ptr<Particle>> &particles() const;
 
 	/// Add a particle to the set
 	void add_particle(std::shared_ptr<Particle> p);
 
+	/// Return all the subsets stored in the set
+	std::vector<std::shared_ptr<ParticleSet>> &subsets();
+
+	/// Return all the subsets stored in the set (const version)
+	const std::vector<std::shared_ptr<ParticleSet>> &subsets() const;
+
 protected:
 	std::string _name;
 
 	std::vector<std::shared_ptr<Particle>> _particles;
-	std::vector<ParticleSet> _subsets;
+	std::vector<std::shared_ptr<ParticleSet>> _subsets;
 };
 
 #ifdef PYTHON_BINDINGS

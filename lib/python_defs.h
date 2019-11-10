@@ -20,6 +20,4 @@ namespace py = pybind11;
 
 #endif
 
-
-
 #endif /* PYTHON_DEFS_H_ */

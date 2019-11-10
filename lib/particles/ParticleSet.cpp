@@ -7,6 +7,8 @@
 
 #include "ParticleSet.h"
 
+#include "Particle.h"
+
 #include <algorithm>
 
 namespace ba {
@@ -82,12 +84,20 @@ void ParticleSet::add_particle(std::shared_ptr<Particle> p) {
 	_particles.push_back(p);
 }
 
+std::vector<std::shared_ptr<ParticleSet>> &ParticleSet::subsets() {
+	return _subsets;
+}
+
+const std::vector<std::shared_ptr<ParticleSet>> &ParticleSet::subsets() const {
+	return _subsets;
+}
+
 #ifdef PYTHON_BINDINGS
 
 void export_ParticleSet(py::module &m) {
-	py::class_<ParticleSet, std::shared_ptr<ParticleSet>> parser(m, "ParticleSet");
+	py::class_<ParticleSet, std::shared_ptr<ParticleSet>> particle_set(m, "ParticleSet");
 
-	parser
+	particle_set
 		.def(py::init<>())
 		.def("N", &ParticleSet::N)
 		.def("types", &ParticleSet::types)

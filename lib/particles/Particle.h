@@ -15,6 +15,8 @@
 
 namespace ba {
 
+class ParticleSet;
+
 class Particle {
 public:
 	Particle();
@@ -62,6 +64,11 @@ public:
 	void add_neighbour(std::shared_ptr<Particle> new_neighbour);
 	void remove_neighbour(std::shared_ptr<Particle> to_remove);
 
+	std::shared_ptr<ParticleSet> molecule() const {
+		return _molecule;
+	}
+	void set_molecule(std::shared_ptr<ParticleSet> new_molecule);
+
 protected:
 	static int _current_index;
 
@@ -72,6 +79,8 @@ protected:
 
 	std::set<std::shared_ptr<Particle>> _bonded_neighbours;
 	std::set<std::shared_ptr<Particle>> _neighbours;
+
+	std::shared_ptr<ParticleSet> _molecule;
 };
 
 #ifdef PYTHON_BINDINGS

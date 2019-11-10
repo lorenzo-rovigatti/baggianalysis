@@ -7,6 +7,8 @@
 
 #include "Particle.h"
 
+#include "ParticleSet.h"
+
 namespace ba {
 
 int Particle::_current_index = 0;
@@ -39,6 +41,10 @@ void Particle::add_neighbour(std::shared_ptr<Particle> new_neighbour) {
 
 void Particle::remove_neighbour(std::shared_ptr<Particle> to_remove) {
 	_neighbours.erase(to_remove);
+}
+
+void Particle::set_molecule(std::shared_ptr<ParticleSet> new_molecule) {
+	_molecule = new_molecule;
 }
 
 #ifdef PYTHON_BINDINGS
