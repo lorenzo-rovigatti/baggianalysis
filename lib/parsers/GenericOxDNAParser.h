@@ -19,7 +19,7 @@ public:
 	GenericOxDNAParser(std::string topology_file);
 	virtual ~GenericOxDNAParser();
 
-	virtual std::shared_ptr<System> parse_stream(std::ifstream &configuration) override;
+	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override;
 
 protected:
 	std::string _topology_file;

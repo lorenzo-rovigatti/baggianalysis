@@ -22,7 +22,7 @@ GenericOxDNAParser::~GenericOxDNAParser() {
 
 }
 
-std::shared_ptr<System> GenericOxDNAParser::parse_stream(std::ifstream &configuration) {
+std::shared_ptr<System> GenericOxDNAParser::_parse_stream(std::ifstream &configuration) {
 	std::ifstream topology(_topology_file);
 
 	if(!topology.good()) {
@@ -102,7 +102,7 @@ void export_GenericOxDNAParser(py::module &m) {
 
 	parser
 		.def(py::init<std::string>())
-		.def("parse", &GenericOxDNAParser::parse_stream);
+		.def("parse", &GenericOxDNAParser::_parse_stream);
 }
 
 #endif

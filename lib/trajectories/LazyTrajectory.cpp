@@ -50,14 +50,14 @@ shared_ptr<System> LazyTrajectory::next_frame() {
 	std::shared_ptr<System> new_system = nullptr;
 
 	if(_type == TRAJECTORY_FILE) {
-		new_system = _parser->parse_stream(_trajectory_file);
+		new_system = _parser->make_system(_trajectory_file);
 		if(new_system != nullptr) {
 			new_system = _filtered_system(new_system);
 		}
 	}
 	else if(_type == FOLDER) {
 		if(_current_file != _files.end()) {
-			new_system = _parser->parse_file(*_current_file);
+			new_system = _parser->make_system(*_current_file);
 			new_system = _filtered_system(new_system);
 
 			_current_file++;

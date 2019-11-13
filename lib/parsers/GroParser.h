@@ -17,7 +17,7 @@ public:
 	GroParser(double dt);
 	virtual ~GroParser();
 
-	virtual std::shared_ptr<System> parse_stream(std::ifstream &configuration) override;
+	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override;
 
 protected:
 	double _dt;

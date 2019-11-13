@@ -17,7 +17,7 @@ public:
 	LJKAParser();
 	virtual ~LJKAParser();
 
-	virtual std::shared_ptr<System> parse_stream(std::ifstream &configuration) override;
+	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override;
 };
 
 #ifdef PYTHON_BINDINGS

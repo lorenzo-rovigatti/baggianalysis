@@ -17,7 +17,7 @@ public:
 	LAMMPSDumpParser();
 	virtual ~LAMMPSDumpParser();
 
-	virtual std::shared_ptr<System> parse_stream(std::ifstream &configuration) override;
+	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override;
 
 private:
 	struct HeaderData {

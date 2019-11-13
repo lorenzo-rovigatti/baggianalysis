@@ -45,7 +45,7 @@ void FullTrajectory::initialise_from_trajectory_file(string trajectory_file) {
 
 	bool done = false;
 	while(!done) {
-		auto new_system = _parser->parse_stream(trajectory);
+		auto new_system = _parser->make_system(trajectory);
 		if(new_system == nullptr) {
 			done = true;
 		}
@@ -70,7 +70,7 @@ void FullTrajectory::initialise_from_filelist(std::vector<std::string> filelist)
 	uint N_files = filelist.size();
 
 	for(auto f : filelist) {
-		auto new_system = _parser->parse_file(f);
+		auto new_system = _parser->make_system(f);
 
 		if(new_system == nullptr) {
 			string error = boost::str(boost::format("The '%s' configuration is either empty or invalid") % f);

@@ -25,7 +25,7 @@ public:
 	 * @param configuration the stream to be parsed
 	 * @return a new System
 	 */
-	virtual std::shared_ptr<System> parse_stream(std::ifstream &configuration) = 0;
+	std::shared_ptr<System> make_system(std::ifstream &configuration);
 
 	/**
 	 * @brief Build a new System by opening and then parsing a file
@@ -33,7 +33,20 @@ public:
 	 * @param configuration the name of the file to be parsed
 	 * @return a new System
 	 */
-	virtual std::shared_ptr<System> parse_file(std::string conf_name);
+	std::shared_ptr<System> make_system(std::string conf_name);
+
+	/**
+	 * @brief Build a system out of the given file
+	 *
+	 * This method is defined public because it has to be exported to python
+	 *
+	 * @param conf_name the name of the file to be parsed
+	 * @return a new System
+	 */
+	virtual std::shared_ptr<System> _parse_file(std::string conf_name);
+
+protected:
+	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration) = 0;
 };
 
 #ifdef PYTHON_BINDINGS
@@ -45,24 +58,12 @@ class PyBaseParser : public BaseParser {
 public:
 	using BaseParser::BaseParser;
 
-	std::shared_ptr<System> parse_stream(std::ifstream &configuration) override {
+	std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override {
 		PYBIND11_OVERLOAD_PURE(
 			std::shared_ptr<System>,
 			BaseParser,
 			parse,
 			configuration
-		);
-
-		// suppress warnings
-		return std::shared_ptr<System>(std::make_shared<System>());
-	}
-
-	std::shared_ptr<System> parse_file(std::string conf_name) override {
-		PYBIND11_OVERLOAD(
-			std::shared_ptr<System>,
-			BaseParser,
-			parse_file,
-			conf_name
 		);
 
 		// suppress warnings
