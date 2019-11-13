@@ -22,18 +22,22 @@ using Bond = std::array<int, 2>;
 using Angle = std::array<int, 3>;
 using Dihedral = std::array<int, 4>;
 
-class Topology {
+class Topology : public std::enable_shared_from_this<Topology> {
 public:
-	Topology();
 	virtual ~Topology();
+
+	static std::shared_ptr<Topology> empty_topology();
 
 	void add_bond(int p, int q);
 	void add_angle(int p, int q, int r);
 	void add_dihedral(int p, int q, int r, int s);
 
-	void apply(std::shared_ptr<System> &system);
+	void apply(std::shared_ptr<System> system);
 
 protected:
+	Topology();
+	Topology(const Topology &) = delete;
+
 	void _check_index(std::shared_ptr<System> &particle_set, int idx);
 
 	std::set<int> _indexes;

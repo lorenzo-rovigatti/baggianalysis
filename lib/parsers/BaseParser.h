@@ -14,10 +14,14 @@
 
 namespace ba {
 
+class Topology;
+
 class BaseParser {
 public:
 	BaseParser();
 	virtual ~BaseParser();
+
+	void set_topology(std::shared_ptr<Topology> new_topology);
 
 	/**
 	 * @brief Build a new System by parsing an already open stream
@@ -47,6 +51,10 @@ public:
 
 protected:
 	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration) = 0;
+
+	void _apply_topology(std::shared_ptr<System> system);
+
+	std::shared_ptr<Topology> _topology = nullptr;
 };
 
 #ifdef PYTHON_BINDINGS

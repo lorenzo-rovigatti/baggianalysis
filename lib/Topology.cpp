@@ -23,6 +23,10 @@ Topology::~Topology() {
 
 }
 
+std::shared_ptr<Topology> Topology::empty_topology() {
+	return std::shared_ptr<Topology>(new Topology());
+}
+
 void Topology::add_bond(int p, int q) {
 	Bond new_bond({p, q});
 	_indexes.insert(new_bond.begin(), new_bond.end());
@@ -39,7 +43,7 @@ void Topology::add_dihedral(int p, int q, int r, int s) {
 	_dihedrals.emplace_back(new_dihedral);
 }
 
-void Topology::apply(std::shared_ptr<System> &system) {
+void Topology::apply(std::shared_ptr<System> system) {
 	auto &particles = system->particles();
 
 	// reset all the molecules
@@ -137,7 +141,7 @@ void export_Topology(py::module &m) {
 	py::class_<Topology, std::shared_ptr<Topology>> topology(m, "Topology");
 
 	topology
-		.def(py::init<>())
+		.def_static("empty_topology", &Topology::empty_topology)
 		.def("add_bond", &Topology::add_bond)
 		.def("add_angle", &Topology::add_angle)
 		.def("add_dihedral", &Topology::add_dihedral)
