@@ -64,6 +64,8 @@ public:
 protected:
 	std::shared_ptr<BaseParser> _parser;
 	std::vector<std::shared_ptr<BaseFilter>> _filters;
+
+	virtual std::shared_ptr<System> _filtered_system(std::shared_ptr<System> system);
 };
 
 #ifdef PYTHON_BINDINGS

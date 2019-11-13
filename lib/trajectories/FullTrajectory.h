@@ -33,7 +33,6 @@ public:
 	virtual std::shared_ptr<System> next_frame() override;
 	virtual void reset() override;
 
-public:
 	std::vector<std::shared_ptr<System>> frames;
 
 protected:

@@ -50,10 +50,7 @@ void FullTrajectory::initialise_from_trajectory_file(string trajectory_file) {
 			done = true;
 		}
 		else {
-			for(auto filter : _filters) {
-				new_system = filter->filter(new_system);
-			}
-			frames.push_back(new_system);
+			frames.push_back(_filtered_system(new_system));
 		}
 	}
 
@@ -79,10 +76,7 @@ void FullTrajectory::initialise_from_filelist(std::vector<std::string> filelist)
 			string error = boost::str(boost::format("The '%s' configuration is either empty or invalid") % f);
 			throw runtime_error(error);
 		}
-		for(auto filter : _filters) {
-			new_system = filter->filter(new_system);
-		}
-		frames.push_back(new_system);
+		frames.push_back(_filtered_system(new_system));
 		uint N_frames = frames.size();
 		if(N_frames > 10 && N_frames % (N_files / 10) == 0) BOOST_LOG_TRIVIAL(info)<< "Parsed " << N_frames * 100 / N_files << "% of the configurations (" << N_frames << "/" << N_files << ")";
 	}

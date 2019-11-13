@@ -52,18 +52,13 @@ shared_ptr<System> LazyTrajectory::next_frame() {
 	if(_type == TRAJECTORY_FILE) {
 		new_system = _parser->parse_stream(_trajectory_file);
 		if(new_system != nullptr) {
-			for(auto filter : _filters) {
-				new_system = filter->filter(new_system);
-			}
+			new_system = _filtered_system(new_system);
 		}
 	}
 	else if(_type == FOLDER) {
 		if(_current_file != _files.end()) {
 			new_system = _parser->parse_file(*_current_file);
-
-			for(auto filter : _filters) {
-				new_system = filter->filter(new_system);
-			}
+			new_system = _filtered_system(new_system);
 
 			_current_file++;
 		}

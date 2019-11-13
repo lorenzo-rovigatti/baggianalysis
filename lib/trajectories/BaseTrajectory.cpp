@@ -47,6 +47,14 @@ void BaseTrajectory::initialise_from_folder(std::string folder, std::string patt
 	initialise_from_filelist(files);
 }
 
+std::shared_ptr<System> BaseTrajectory::_filtered_system(std::shared_ptr<System> system) {
+	for(auto filter : _filters) {
+		system = filter->filter(system);
+	}
+
+	return system;
+}
+
 #ifdef PYTHON_BINDINGS
 
 void export_BaseTrajectory(py::module &m) {
