@@ -101,8 +101,7 @@ void export_GenericOxDNAParser(py::module &m) {
 	py::class_<GenericOxDNAParser, BaseParser, std::shared_ptr<GenericOxDNAParser>> parser(m, "GenericOxDNAParser");
 
 	parser
-		.def(py::init<std::string>())
-		.def("parse", &GenericOxDNAParser::_parse_stream);
+		.def(py::init<std::string>());
 }
 
 #endif

@@ -24,7 +24,8 @@
 #include "../parsers/LAMMPSDumpParser.h"
 #include "../parsers/LJKAParser.h"
 
-#include "../Topology.h"
+#include "../topology/Topology.h"
+#include "../topology/TopologyParsers.h"
 
 #include "../trajectories/FullTrajectory.h"
 #include "../trajectories/LazyTrajectory.h"
@@ -37,6 +38,7 @@ PYBIND11_MODULE(baggianalysis, m) {
 	ba::export_ParticleSet(m);
 	ba::export_System(m);
 	ba::export_Topology(m);
+	ba::export_TopologyParsers(m);
 
 	// parsers
 	ba::export_BaseParser(m);

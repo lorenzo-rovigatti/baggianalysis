@@ -19,7 +19,8 @@ SET(ba_lib_SOURCES
 	particles/Particle.cpp
 	particles/ParticleSet.cpp
 	System.cpp
-	Topology.cpp
+	topology/Topology.cpp
+	topology/TopologyParsers.cpp
 	trajectories/BaseTrajectory.cpp
 	trajectories/LazyTrajectory.cpp
 	trajectories/FullTrajectory.cpp

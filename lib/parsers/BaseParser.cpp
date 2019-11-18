@@ -7,7 +7,7 @@
 
 #include "BaseParser.h"
 
-#include "../Topology.h"
+#include "../topology/Topology.h"
 
 namespace ba {
 

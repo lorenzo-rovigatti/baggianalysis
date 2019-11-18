@@ -123,8 +123,7 @@ void export_LAMMPSDumpParser(py::module &m) {
 	py::class_<LAMMPSDumpParser, BaseParser, std::shared_ptr<LAMMPSDumpParser>> parser(m, "LAMMPSDumpParser");
 
 	parser
-		.def(py::init<>())
-		.def("parse", &LAMMPSDumpParser::_parse_stream);
+		.def(py::init<>());
 }
 
 #endif

@@ -76,8 +76,7 @@ void export_LJKAParser(py::module &m) {
 	py::class_<LJKAParser, BaseParser, std::shared_ptr<LJKAParser>> parser(m, "LJKAParser");
 
 	parser
-		.def(py::init<>())
-		.def("parse", &LJKAParser::_parse_stream);
+		.def(py::init<>());
 }
 
 #endif

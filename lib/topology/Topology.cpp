@@ -7,8 +7,8 @@
 
 #include "Topology.h"
 
-#include "System.h"
-#include "particles/Particle.h"
+#include "../System.h"
+#include "../particles/Particle.h"
 
 #include <boost/bimap.hpp>
 #include <algorithm>
@@ -23,8 +23,15 @@ Topology::~Topology() {
 
 }
 
-std::shared_ptr<Topology> Topology::empty_topology() {
+std::shared_ptr<Topology> Topology::make_empty_topology() {
 	return std::shared_ptr<Topology>(new Topology());
+}
+
+std::shared_ptr<Topology> Topology::make_topology_from_file(std::string filename, TopologyParser parser) {
+	std::shared_ptr<Topology> new_topology = std::shared_ptr<Topology>(new Topology());
+	parser(filename, new_topology);
+
+	return new_topology;
 }
 
 void Topology::add_bond(int p, int q) {
@@ -141,7 +148,8 @@ void export_Topology(py::module &m) {
 	py::class_<Topology, std::shared_ptr<Topology>> topology(m, "Topology");
 
 	topology
-		.def_static("empty_topology", &Topology::empty_topology)
+		.def_static("make_empty_topology", &Topology::make_empty_topology)
+		.def_static("make_topology_from_file", &Topology::make_topology_from_file)
 		.def("add_bond", &Topology::add_bond)
 		.def("add_angle", &Topology::add_angle)
 		.def("add_dihedral", &Topology::add_dihedral)

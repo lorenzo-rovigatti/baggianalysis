@@ -8,8 +8,8 @@
 #ifndef TOPOLOGY_H_
 #define TOPOLOGY_H_
 
-#include "defs.h"
-#include "python_defs.h"
+#include "../defs.h"
+#include "../python_defs.h"
 
 #include <array>
 #include <set>
@@ -22,11 +22,15 @@ using Bond = std::array<int, 2>;
 using Angle = std::array<int, 3>;
 using Dihedral = std::array<int, 4>;
 
-class Topology : public std::enable_shared_from_this<Topology> {
+class Topology;
+using TopologyParser = std::function<void(std::string, std::shared_ptr<Topology>)>;
+
+class Topology: public std::enable_shared_from_this<Topology> {
 public:
 	virtual ~Topology();
 
-	static std::shared_ptr<Topology> empty_topology();
+	static std::shared_ptr<Topology> make_empty_topology();
+	static std::shared_ptr<Topology> make_topology_from_file(std::string filename, TopologyParser parser);
 
 	void add_bond(int p, int q);
 	void add_angle(int p, int q, int r);

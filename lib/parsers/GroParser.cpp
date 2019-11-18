@@ -122,8 +122,7 @@ void export_GroParser(py::module &m) {
 	py::class_<GroParser, BaseParser, std::shared_ptr<GroParser>> parser(m, "GroParser");
 
 	parser
-		.def(py::init<double>())
-		.def("parse", &GroParser::_parse_stream);
+		.def(py::init<double>());
 }
 
 #endif
