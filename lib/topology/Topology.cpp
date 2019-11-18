@@ -93,8 +93,9 @@ void Topology::apply(std::shared_ptr<System> system) {
 		};
 
 		// assign the same cluster to particles connected by bonds and create new clusters for unpaired particles
-		for(auto particle: system->particles()) {		// if the particle is not in the this->_indexes vector it means that it is not involved in any bonds and hence it's the only particle containined in its associated molecules
-			if(std::find(_indexes.begin(), _indexes.end(), particle->index()) == _indexes.end()) {
+		for(auto particle: system->particles()) {
+			// if particle is not involved in any bonds and hence it's the only particle contained in its associated molecules
+			if(particle->bonded_neighbours().size() > 0) {
 				index_to_cluster[particle->index()] = particle->index();
 			}
 			else {
@@ -119,7 +120,7 @@ void Topology::apply(std::shared_ptr<System> system) {
 	}
 
 	if(N_in_system != system->N()) {
-		std::string error = boost::str(boost::format("The topology was initialised on a System containing %d particles and hence it cannot apply to a System containing %u particles") % N_in_system % system->N());
+		std::string error = boost::str(boost::format("The topology was initialised on a System containing %u particles and hence it cannot be applied to a System containing %u particles") % N_in_system % system->N());
 		throw std::runtime_error(error);
 	}
 
