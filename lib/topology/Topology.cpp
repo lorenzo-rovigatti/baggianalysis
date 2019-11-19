@@ -95,7 +95,7 @@ void Topology::apply(std::shared_ptr<System> system) {
 		// assign the same cluster to particles connected by bonds and create new clusters for unpaired particles
 		for(auto particle: system->particles()) {
 			// if particle is not involved in any bonds and hence it's the only particle contained in its associated molecules
-			if(particle->bonded_neighbours().size() > 0) {
+			if(particle->bonded_neighbours().size() == 0) {
 				index_to_cluster[particle->index()] = particle->index();
 			}
 			else {
