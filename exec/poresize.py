@@ -13,6 +13,7 @@ trajectory = ba.FullTrajectory(parser)
 trajectory.initialise_from_trajectory_file(sys.argv[1])
 
 obs = ba.PoreSize(int(sys.argv[2]))
-results = obs.compute(trajectory)
+obs.analyse_trajectory(trajectory)
+results = obs.result()
 
 print("\n".join([str(x) for x in results]))

@@ -12,6 +12,7 @@
 namespace ba {
 
 BondOrderParameters::BondOrderParameters(std::set<int> orders_to_compute) :
+				SystemObservable<std::vector<vector_scalar>>(),
 				_orders_to_compute(orders_to_compute) {
 
 }
@@ -20,7 +21,7 @@ BondOrderParameters::~BondOrderParameters() {
 
 }
 
-std::vector<vector_scalar> BondOrderParameters::compute(std::shared_ptr<System> frame) {
+void BondOrderParameters::analyse_system(std::shared_ptr<System> frame) {
 	// first we compute the bond-order parameters for each particle
 	std::map<int, particle_bops> bops;
 	for(auto p : frame->particles()) {
@@ -28,8 +29,8 @@ std::vector<vector_scalar> BondOrderParameters::compute(std::shared_ptr<System> 
 		_set_particle_bops(p, bops[p->index()], frame->box);
 	}
 
-	std::vector<vector_scalar> results(frame->N());
-	auto res_it = results.begin();
+	_result.resize(frame->N());
+	auto res_it = _result.begin();
 
 	for(auto p : frame->particles()) {
 		for(auto order : _orders_to_compute) {
@@ -52,8 +53,6 @@ std::vector<vector_scalar> BondOrderParameters::compute(std::shared_ptr<System> 
 
 		res_it++;
 	}
-
-	return results;
 }
 
 void BondOrderParameters::_set_particle_bops(std::shared_ptr<Particle> p, particle_bops &bops, const vec3 &box) {
@@ -94,11 +93,12 @@ void BondOrderParameters::_set_particle_bops(std::shared_ptr<Particle> p, partic
 #ifdef PYTHON_BINDINGS
 
 void export_BondOrderParameters(py::module &m) {
-	py::class_<BondOrderParameters, std::shared_ptr<BondOrderParameters>> parser(m, "BondOrderParameters");
+	py::class_<BondOrderParameters, std::shared_ptr<BondOrderParameters>> obs(m, "BondOrderParameters");
 
-	parser
-		.def(py::init<std::set<int>>())
-		.def("compute", &BondOrderParameters::compute);
+	obs
+		.def(py::init<std::set<int>>());
+
+	PY_EXPORT_SYSTEM_OBS(obs, BondOrderParameters);
 }
 
 #endif

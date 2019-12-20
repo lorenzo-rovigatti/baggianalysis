@@ -8,38 +8,26 @@
 #ifndef OBSERVABLES_PORESIZE_H_
 #define OBSERVABLES_PORESIZE_H_
 
-#include "../trajectories/BaseTrajectory.h"
+#include "interfaces/SystemObservable.h"
 
 #include "../utils/CellLists.h"
 
+#include <nlopt.hpp>
+
 namespace ba {
 
-class PoreSize {
+class PoreSize: public SystemObservable<vector_scalar> {
 public:
 	/**
 	 * @brief Construct the object
 	 *
 	 * @param N_attempts the number of randomly chosen points on which the pore size is to be computed
+	 * @param r_cut the minimum size of the cells used to compute the pore size. It impacts the code's performances and nothing else
+	 * @param particle_radius the distance between a particle's centre and its surface
+	 * @param maxtime the timeout (in seconds) for the optimisation procedure
 	 */
-	PoreSize(int N_attempts);
+	PoreSize(int N_attempts, double r_cut = 1.0, double particle_radius = 0.5, double max_time = 1.0);
 	virtual ~PoreSize();
-
-	/**
-	 * @brief Set the minimum size of the cells used to compute the pore size
-	 *
-	 * This method impacts only the code's performances.
-	 */
-	void set_r_cut(double r_cut);
-
-	/**
-	 * @brief Set the size of the particles
-	 *
-	 * Since all particles are supposed to be spherical, this size is meant to be the distance between a particle's centre and its surface and therefore controls the pore size.
-	 *
-	 * @param particle_radius the radius that will be used to compute the pore size
-	 */
-	void set_particle_radius(double particle_radius);
-	void set_maxtime(double maxtime);
 
 	/**
 	 * @brief Calculates the radius of the largest sphere centred in "centre" that does not overlap with any of the particles
@@ -47,12 +35,12 @@ public:
 	double radius(const vec3 &centre);
 
 	/**
-	 *	@brief Compute the pore size of the given trajectory, sampled at randomly chosen points.
+	 *	@brief Compute the pore size of the given system, sampled at randomly chosen points.
 	 *
-	 * @param trajectory the trajectory to be analysed
-	 * @return a vector containing all the computed pore sizes. The size of the vector is equal or less than the number of attempts times the number of frames in the trajectory
+	 * @param frame the system to be analysed
+	 * @return a vector containing all the computed pore sizes. The size of the vector is equal or less than the number of attempts
 	 */
-	vector_scalar compute(std::shared_ptr<BaseTrajectory> trajectory);
+	void analyse_system(std::shared_ptr<System> frame) override;
 
 public:
 	// TODO: make the radius_wrapper and constraint functions friend to this class and make these two class members private
@@ -67,6 +55,9 @@ private:
 	double _maxtime;
 
 	CellLists _lists;
+
+	nlopt::opt _local_opt;
+	nlopt::opt _opt;
 };
 
 #ifdef PYTHON_BINDINGS

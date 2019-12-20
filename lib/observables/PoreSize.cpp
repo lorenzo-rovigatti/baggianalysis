@@ -10,7 +10,6 @@
 #include "../utils/Random.h"
 
 #include <glm/gtx/component_wise.hpp>
-#include <nlopt.hpp>
 #include <cfloat>
 
 namespace ba {
@@ -18,29 +17,34 @@ namespace ba {
 double radius_wrapper(unsigned n, const double *x, double *grad, void *f_data);
 double constraint(unsigned n, const double *x, double *grad, void *f_data);
 
-PoreSize::PoreSize(int N_attempts) :
+PoreSize::PoreSize(int N_attempts, double r_cut, double particle_radius, double max_time) :
+				SystemObservable<vector_scalar>(),
 				_N_attempts(N_attempts),
+				_r_cut(r_cut),
+				_particle_radius(particle_radius),
+				_particle_radius_sqr(SQR(particle_radius)),
+				_maxtime(max_time),
 				_lists(true) {
-	set_r_cut(1.0);
-	set_particle_radius(0.5);
-	set_maxtime(1.0);
+
+	// initialise the optimisation machinery. This is the local solver used by the augmented Lagrangian method (https://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#augmented-lagrangian-algorithm)
+	_local_opt = nlopt::opt(nlopt::LN_SBPLX, 3);
+	_local_opt.set_xtol_rel(1e-6);
+	_local_opt.set_maxtime(1.);
+
+	_opt = nlopt::opt(nlopt::LN_AUGLAG, 3);
+	_opt.set_local_optimizer(_local_opt);
+
+	// we restrict the solver to the region of space comprised between 0 and the box size
+	std::vector<double> lower_bounds( { 0., 0., 0. });
+	_opt.set_lower_bounds(lower_bounds);
+
+	_opt.set_max_objective(radius_wrapper, (void *) this);
+	_opt.set_xtol_rel(1e-4);
+	_opt.set_maxtime(_maxtime);
 }
 
 PoreSize::~PoreSize() {
 
-}
-
-void PoreSize::set_r_cut(double r_cut) {
-	_r_cut = r_cut;
-}
-
-void PoreSize::set_particle_radius(double particle_radius) {
-	_particle_radius = particle_radius;
-	_particle_radius_sqr = SQR(particle_radius);
-}
-
-void PoreSize::set_maxtime(double maxtime) {
-	_maxtime = maxtime;
 }
 
 double PoreSize::radius(const vec3 &centre) {
@@ -86,65 +90,40 @@ double PoreSize::radius(const vec3 &centre) {
 	return sqrt(R_sqr) - _particle_radius;
 }
 
-vector_scalar PoreSize::compute(std::shared_ptr<BaseTrajectory> trajectory) {
-	vector_scalar results;
+void PoreSize::analyse_system(std::shared_ptr<System> frame) {
+	current_frame = frame;
+	_lists.init_cells(current_frame->particles(), current_frame->box, _r_cut);
 
-	// initialise the optimisation machinery. This is the local solver used by the augmented Lagrangian method (https://nlopt.readthedocs.io/en/latest/NLopt_Algorithms/#augmented-lagrangian-algorithm)
-	nlopt::opt local_opt(nlopt::LN_SBPLX, 3);
-	local_opt.set_xtol_rel(1e-6);
-	local_opt.set_maxtime(1.);
+	std::vector<double> upper_bounds( { frame->box[0], frame->box[1], frame->box[2] });
+	_opt.set_upper_bounds(upper_bounds);
 
-	nlopt::opt opt(nlopt::LN_AUGLAG, 3);
-	opt.set_local_optimizer(local_opt);
+	for(int i = 0; i < _N_attempts; i++) {
+		if(i > 0 && (i % (_N_attempts / 10) == 0)) {
+			std::cerr << i << " steps completed" << std::endl;
+		}
+		current_position = vec3(BARANDOM.uniform() * frame->box[0], BARANDOM.uniform() * frame->box[1], BARANDOM.uniform() * frame->box[2]);
 
-	// we restrict the solver to the region of space comprised between 0 and the box size
-	std::vector<double> lower_bounds({0., 0., 0.});
-	opt.set_lower_bounds(lower_bounds);
+		// if the random position is inside one of the particles we disregard it
+		if(radius(current_position) > 0.) {
+			_opt.remove_inequality_constraints();
+			_opt.add_inequality_constraint(constraint, this, 1e-6);
 
-	opt.set_max_objective(radius_wrapper, (void *) this);
-	opt.set_xtol_rel(1e-4);
-	opt.set_maxtime(_maxtime);
+			std::vector<double> starting_position( { current_position[0], current_position[1], current_position[2] });
+			double maximum_radius;
 
-	auto frame = trajectory->next_frame();
-	while(frame != nullptr) {
-		current_frame = frame;
-		_lists.init_cells(current_frame->particles(), current_frame->box, _r_cut);
-
-		std::vector<double> upper_bounds({frame->box[0], frame->box[1], frame->box[2]});
-		opt.set_upper_bounds(upper_bounds);
-
-		for(int i = 0; i < _N_attempts; i++) {
-			if(i > 0 && (i % (_N_attempts / 10) == 0)) {
-				std::cerr << i << " steps completed" << std::endl;
+			try {
+				_opt.optimize(starting_position, maximum_radius);
 			}
-			current_position = vec3(BARANDOM.uniform() * frame->box[0], BARANDOM.uniform() * frame->box[1], BARANDOM.uniform() * frame->box[2]);
+			catch(std::exception &e) {
+				std::cerr << "nlopt failed: " << e.what() << std::endl;
+				exit(1);
+			}
 
-			// if the random position is inside one of the particles we disregard it
-			if(radius(current_position) > 0.) {
-				opt.remove_inequality_constraints();
-				opt.add_inequality_constraint(constraint, this, 1e-6);
-
-				std::vector<double> starting_position({current_position[0], current_position[1], current_position[2]});
-				double maximum_radius;
-
-				try {
-					opt.optimize(starting_position, maximum_radius);
-				}
-				catch(std::exception &e) {
-					std::cerr << "nlopt failed: " << e.what() << std::endl;
-					exit(1);
-				}
-
-				if(maximum_radius > 0.) {
-					results.push_back(maximum_radius);
-				}
+			if(maximum_radius > 0.) {
+				_result.push_back(maximum_radius);
 			}
 		}
-
-		frame = trajectory->next_frame();
 	}
-
-	return results;
 }
 
 double radius_wrapper(unsigned n, const double *x, double *grad, void *f_data) {
@@ -170,15 +149,13 @@ double constraint(unsigned n, const double *x, double *grad, void *f_data) {
 #ifdef PYTHON_BINDINGS
 
 void export_PoreSize(py::module &m) {
-	py::class_<PoreSize, std::shared_ptr<PoreSize>> parser(m, "PoreSize");
+	py::class_<PoreSize, std::shared_ptr<PoreSize>> obs(m, "PoreSize");
 
-	parser
-		.def(py::init<int>())
-		.def("set_r_cut", &PoreSize::set_r_cut)
-		.def("set_particle_radius", &PoreSize::set_particle_radius)
-		.def("set_maxtime", &PoreSize::set_maxtime)
-		.def("radius", &PoreSize::radius)
-		.def("compute", &PoreSize::compute);
+	// here we explicitly list all the arguments so that we can specify that the latter three take default values
+	obs.def(py::init<int, double, double, double>(), py::arg("N_attempts"), py::arg("r_cut") = 1.0, py::arg("particle_radius") = 0.5, py::arg("max_time") = 1.0)
+			.def("radius", &PoreSize::radius);
+
+	PY_EXPORT_SYSTEM_OBS(obs, PoreSize);
 }
 
 #endif

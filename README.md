@@ -55,6 +55,7 @@ baggianalysis contains a very simple testing suite that checks whether the Pytho
 * Lists of 3D vectors are copied when accessed from the Python's side. This means that their c++ counterparts (which are `std::vector`s) are not modified when `append` or similar Python methods are used.
 * The `System` and `Particle` classes support dynamic attributes (that is, one can add any attributes to instances of these classes from the Python side).
 * Simple Python parsers can be used to either parse single `System`s or to initialise trajectories from file lists and folders only. In order to do so, parsers should inherit from `BaseParser` and override the `parse_file` method, which takes a string as its only argument.
+* Molecules built by the `Topology` class are named `molXXX`, where `XXX` is an index that runs from zero to the number of molecules minus one.
 
 ## Acknowledgements
 

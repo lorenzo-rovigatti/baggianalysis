@@ -37,7 +37,8 @@ nf = ba.SANNFinder(2.0, ba.SANNFinder.SYMMETRISE_BY_REMOVING)
 nf.set_neighbours(syst.particles(), syst.box)
 
 bop_obs = ba.BondOrderParameters({1, 2, 3, 4, 5, 6, 7, 8})
-bops = bop_obs.compute(syst)
+bop_obs.analyse_system(syst)
+bops = bop_obs.result()
 
 for i, p_bops in enumerate(bops):
     print("%d %s" % (i, " ".join([str(x) for x in p_bops])))

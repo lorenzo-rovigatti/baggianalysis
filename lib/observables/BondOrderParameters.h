@@ -14,16 +14,18 @@
 #include <map>
 #include <complex>
 
+#include "interfaces/SystemObservable.h"
+
 namespace ba {
 
 using particle_bops = std::map<int, std::vector<std::complex<double>>>;
 
-class BondOrderParameters {
+class BondOrderParameters: public SystemObservable<std::vector<vector_scalar>> {
 public:
 	BondOrderParameters(std::set<int> orders_to_compute);
 	virtual ~BondOrderParameters();
 
-	std::vector<vector_scalar> compute(std::shared_ptr<System> frame);
+	void analyse_system(std::shared_ptr<System> frame) override;
 
 private:
 	void _set_particle_bops(std::shared_ptr<Particle> p, particle_bops &bops, const vec3 &box);

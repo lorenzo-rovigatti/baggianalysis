@@ -10,7 +10,6 @@
 #include "../System.h"
 #include "../particles/Particle.h"
 
-#include <boost/bimap.hpp>
 #include <algorithm>
 
 namespace ba {
@@ -94,7 +93,7 @@ void Topology::apply(std::shared_ptr<System> system) {
 
 		// assign the same cluster to particles connected by bonds and create new clusters for unpaired particles
 		for(auto particle: system->particles()) {
-			// if particle is not involved in any bonds and hence it's the only particle contained in its associated molecules
+			// if particle is not involved in any bonds it's the only particle contained in its associated molecule
 			if(particle->bonded_neighbours().size() == 0) {
 				index_to_cluster[particle->index()] = particle->index();
 			}
@@ -132,6 +131,7 @@ void Topology::apply(std::shared_ptr<System> system) {
 			particle->molecule() = new_molecule;
 		}
 
+		std::string mol_name = boost::str(boost::format("mol%u") % system->molecules().size());
 		system->molecules().emplace_back(new_molecule);
 	}
 }
