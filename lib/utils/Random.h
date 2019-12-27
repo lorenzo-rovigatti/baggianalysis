@@ -10,6 +10,8 @@
 
 #define BARANDOM (ba::Random::instance())
 
+#include "../defs.h"
+
 #include <random>
 
 namespace ba {
@@ -26,6 +28,7 @@ public:
 
 	void reset_seed(unsigned int);
 	double uniform();
+	vec3 random_vector_on_sphere();
 
 private:
 	Random();

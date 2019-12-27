@@ -16,6 +16,7 @@
 #include "../neighbour_finders/SANNFinder.h"
 
 #include "../observables/BondOrderParameters.h"
+#include "../observables/FormFactor.h"
 #include "../observables/PoreSize.h"
 #include "../observables/MSD.h"
 
@@ -62,6 +63,7 @@ PYBIND11_MODULE(baggianalysis, m) {
 
 	// observables
 	ba::export_BondOrderParameters(m);
+	ba::export_FormFactor(m);
 	ba::export_PoreSize(m);
 	ba::export_MSD(m);
 

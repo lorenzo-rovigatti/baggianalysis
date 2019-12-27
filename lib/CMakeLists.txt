@@ -9,6 +9,7 @@ SET(ba_lib_SOURCES
 	neighbour_finders/NeighbourFinder.cpp
 	neighbour_finders/SANNFinder.cpp
 	observables/BondOrderParameters.cpp
+	observables/FormFactor.cpp
 	observables/MSD.cpp
 	observables/PoreSize.cpp
 	parsers/BaseParser.cpp

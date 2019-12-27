@@ -24,7 +24,7 @@ void BaseParser::set_topology(std::shared_ptr<Topology> new_topology) {
 }
 
 void BaseParser::_apply_topology(std::shared_ptr<System> system) {
-	if(_topology != nullptr) {
+	if(_topology != nullptr && system != nullptr) {
 		_topology->apply(system);
 	}
 }

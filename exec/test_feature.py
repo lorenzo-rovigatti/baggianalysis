@@ -6,7 +6,7 @@ import sys
 
 if len(sys.argv) < 3:
     print("Usage is %s topology configuration" % sys.argv[0], file=sys.stderr)
-    exit(0)
+    exit(1)
     
 parser = ba.GenericOxDNAParser(sys.argv[1])
 trajectory = ba.FullTrajectory(parser)

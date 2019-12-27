@@ -116,6 +116,8 @@ void Topology::apply(std::shared_ptr<System> system) {
 		for(auto pair: cluster_to_molecule) {
 			_molecules.emplace_back(pair.second);
 		}
+
+		BOOST_LOG_TRIVIAL(info)<<"Topology: Found " << _molecules.size() << " molecules";
 	}
 
 	if(N_in_system != system->N()) {
