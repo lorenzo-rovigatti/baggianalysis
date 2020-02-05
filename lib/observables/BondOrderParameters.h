@@ -23,6 +23,7 @@ using particle_bops = std::map<int, std::vector<std::complex<double>>>;
 class BondOrderParameters: public SystemObservable<std::vector<vector_scalar>> {
 public:
 	BondOrderParameters(std::set<int> orders_to_compute);
+	BondOrderParameters() = delete;
 	virtual ~BondOrderParameters();
 
 	void analyse_system(std::shared_ptr<System> frame) override;

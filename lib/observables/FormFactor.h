@@ -15,6 +15,7 @@ namespace ba {
 class FormFactor: public SystemObservable<std::map<double, double>> {
 public:
 	FormFactor(vector_scalar q_modules, int q_repetitions, bool compute_on_molecules);
+	FormFactor() = delete;
 	virtual ~FormFactor();
 
 	void analyse_system(std::shared_ptr<System> system) override;
@@ -34,7 +35,7 @@ protected:
 void export_FormFactor(py::module &m);
 
 #endif
-\
+
 } /* namespace ba */
 
 #endif /* OBSERVABLES_FORMFACTOR_H_ */

@@ -27,6 +27,7 @@ public:
 	 * @param maxtime the timeout (in seconds) for the optimisation procedure
 	 */
 	PoreSize(int N_attempts, double r_cut = 1.0, double particle_radius = 0.5, double max_time = 1.0);
+	PoreSize() = delete;
 	virtual ~PoreSize();
 
 	/**

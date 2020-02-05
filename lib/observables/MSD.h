@@ -17,6 +17,7 @@ namespace ba {
 class MSD: public TrajectoryObservable<std::map<ullint, double>> {
 public:
 	MSD(uint points_per_cycle, bool remove_com);
+	MSD() = delete;
 	virtual ~MSD();
 
 	void analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) override;
