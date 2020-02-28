@@ -7,8 +7,7 @@
 
 #include "LAMMPSDumpParser.h"
 
-#include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
+#include "../utils/strings.h"
 
 namespace ba {
 
@@ -42,15 +41,16 @@ std::shared_ptr<System> LAMMPSDumpParser::_parse_stream(std::ifstream &configura
 			throw std::runtime_error(error);
 		}
 
-		std::string to_split = boost::trim_copy(line);
-		std::vector<std::string> split;
-		boost::split(split, to_split, boost::is_any_of(" "), boost::algorithm::token_compress_on);
+		std::string to_split = utils::trim(line);
+		auto split = utils::split(to_split);
 
 		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>());
 		new_particle->set_type(split[1]);
 
 		try {
-			vec3 pos(boost::lexical_cast<double>(split[2]), boost::lexical_cast<double>(split[3]), boost::lexical_cast<double>(split[4]));
+			vec3 pos(utils::lexical_cast<double>(split[2]),
+					utils::lexical_cast<double>(split[3]),
+					utils::lexical_cast<double>(split[4]));
 			if(_rescaled_coords) {
 				pos *= header_data.box;
 			}
@@ -82,12 +82,12 @@ LAMMPSDumpParser::HeaderData LAMMPSDumpParser::_parse_headers(std::ifstream &con
 		if(boost::starts_with(line, "ITEM:")) {
 			if(boost::contains(line, "TIMESTEP")) {
 				std::getline(configuration, line);
-				hd.time_step = boost::lexical_cast<ullint>(boost::trim_copy(line));
+				hd.time_step = utils::lexical_cast<ullint>(utils::trim(line));
 			}
 			else if(boost::contains(line, "NUMBER OF ATOMS")) {
 				std::getline(configuration, line);
 				try {
-					hd.N = boost::lexical_cast<uint>(boost::trim_copy(line));
+					hd.N = utils::lexical_cast<uint>(utils::trim(line));
 				}
 				catch(boost::bad_lexical_cast &e) {
 					std::string error = boost::str(boost::format("The number of particles '%s' found in the LAMMPS dump configuration cannot be cast to an integer") % line);
@@ -98,12 +98,11 @@ LAMMPSDumpParser::HeaderData LAMMPSDumpParser::_parse_headers(std::ifstream &con
 				// the next three lines contains the box dimensions along the three axes
 				for(uint i = 0; i < 3; i++) {
 					std::getline(configuration, line);
-					std::string to_split = boost::trim_copy(line);
-					std::vector<std::string> split;
-					boost::split(split, to_split, boost::is_any_of(" "), boost::algorithm::token_compress_on);
+					std::string to_split = utils::trim(line);
+					auto split = utils::split(to_split);
 					try {
-						double lower = boost::lexical_cast<double>(boost::trim_copy(split[0]));
-						double upper = boost::lexical_cast<double>(boost::trim_copy(split[1]));
+						double lower = utils::lexical_cast<double>(split[0]);
+						double upper = utils::lexical_cast<double>(split[1]);
 						hd.box[i] = upper - lower;
 					}
 					catch(boost::bad_lexical_cast &e) {

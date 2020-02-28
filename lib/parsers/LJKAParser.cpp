@@ -7,8 +7,7 @@
 
 #include "LJKAParser.h"
 
-#include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
+#include "../utils/strings.h"
 
 namespace ba {
 
@@ -23,7 +22,6 @@ LJKAParser::~LJKAParser() {
 
 std::shared_ptr<System> LJKAParser::_parse_stream(std::ifstream &configuration) {
 	std::string line;
-	std::vector<std::string> split;
 	uint N, NA;
 
 	// line containing the timestep and the number of particles
@@ -32,11 +30,11 @@ std::shared_ptr<System> LJKAParser::_parse_stream(std::ifstream &configuration) 
 
 	std::shared_ptr<System> syst(std::make_shared<System>());
 
-	boost::split(split, line, boost::is_any_of(" "));
+	auto split = utils::split(line);
 	try {
-		syst->time = boost::lexical_cast<ullint>(boost::trim_copy(split[0]));
-		N = boost::lexical_cast<uint>(boost::trim_copy(split[2]));
-		NA = boost::lexical_cast<uint>(boost::trim_copy(split[3]));
+		syst->time = utils::lexical_cast<ullint>(utils::trim(split[0]));
+		N = utils::lexical_cast<uint>(utils::trim(split[2]));
+		NA = utils::lexical_cast<uint>(utils::trim(split[3]));
 	}
 	catch(boost::bad_lexical_cast &e) {
 		std::string error = boost::str(boost::format("The timestep value '%s' found in the LJKA configuration cannot be cast to an integer") % split[2]);
@@ -45,12 +43,12 @@ std::shared_ptr<System> LJKAParser::_parse_stream(std::ifstream &configuration) 
 
 	// box line
 	std::getline(configuration, line);
-	std::string to_split = boost::trim_copy(line);
-	boost::split(split, to_split, boost::is_any_of(" "));
+	std::string to_split = utils::trim(line);
+	split = utils::split(to_split);
 	try {
-		syst->box[0] = boost::lexical_cast<double>(boost::trim_copy(split[0]));
-		syst->box[1] = boost::lexical_cast<double>(boost::trim_copy(split[1]));
-		syst->box[2] = boost::lexical_cast<double>(boost::trim_copy(split[2]));
+		syst->box[0] = utils::lexical_cast<double>(utils::trim(split[0]));
+		syst->box[1] = utils::lexical_cast<double>(utils::trim(split[1]));
+		syst->box[2] = utils::lexical_cast<double>(utils::trim(split[2]));
 	}
 	catch(boost::bad_lexical_cast &e) {
 		std::string error = boost::str(boost::format("The box line '%s' found in the LJKA configuration is not valid") % line);
@@ -59,8 +57,8 @@ std::shared_ptr<System> LJKAParser::_parse_stream(std::ifstream &configuration) 
 
 	for(uint i = 0; i < N; i++) {
 		std::getline(configuration, line);
-		boost::split(split, line, boost::is_any_of(" "));
-		vec3 position = vec3(boost::lexical_cast<double>(split[0]), boost::lexical_cast<double>(split[1]), boost::lexical_cast<double>(split[2]));
+		split = utils::split(line);
+		vec3 position = vec3(utils::lexical_cast<double>(split[0]), utils::lexical_cast<double>(split[1]), utils::lexical_cast<double>(split[2]));
 
 		particle_type type = (i < NA) ? "0" : "1";
 		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(type, position, vec3(0., 0., 0.)));

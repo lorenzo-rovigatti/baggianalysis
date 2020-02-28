@@ -7,15 +7,33 @@
 
 #include "LAMMPSDataFileParser.h"
 
-#include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
+#include "../utils/strings.h"
 
 namespace ba {
 
-LAMMPSDataFileParser::LAMMPSDataFileParser(bool rescaled_coords) :
+LAMMPSDataFileParser::LAMMPSDataFileParser(std::string atom_style) :
 				BaseParser(),
-				_rescaled_coords(rescaled_coords) {
+				_atom_style(atom_style) {
 
+	_LAMMPS_section_keywords = std::vector<std::string> {
+			"Atoms", "Velocities", "Masses", "Ellipsoids", "Lines", "Triangles", "Bodies",
+			"Bonds", "Angles", "Dihedrals", "Impropers",
+			"Pair Coeffs", "PairIJ Coeffs", "Bond Coeffs", "Angle Coeffs", "Dihedral Coeffs", "Improper Coeffs",
+			"BondBond Coeffs", "BondAngle Coeffs", "MiddleBondTorsion Coeffs", "EndBondTorsion Coeffs", "AngleTorsion Coeffs", "AngleAngleTorsion Coeffs", "BondBond13 Coeffs", "AngleAngle Coeffs"
+	};
+
+	if(_atom_style == "bond") {
+		_id_index = 2;
+		_pos_starting_index = 3;
+	}
+	else if(_atom_style == "atomic") {
+		_id_index = 1;
+		_pos_starting_index = 2;
+	}
+	else {
+		std::string error = boost::str(boost::format("Unsupported LAMMPS atom_style '%s'") % atom_style);
+		throw std::runtime_error(error);
+	}
 }
 
 LAMMPSDataFileParser::~LAMMPSDataFileParser() {
@@ -35,29 +53,36 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 	syst->time = 0;
 	syst->box = header_data.box;
 
+	std::string line;
+	do {
+		line = _read_line(configuration);
+	} while(line != "Atoms");
+
 	for(uint i = 0; i < header_data.N_atoms; i++) {
-		std::string line;
-		std::getline(configuration, line);
+		line = _read_line(configuration);
 		if(!configuration.good()) {
 			std::string error = boost::str(boost::format("The line relative to the %u-th particle cannot be read") % i);
 			throw std::runtime_error(error);
 		}
+		// skip empty lines
+		if(line.size() == 0) {
+			i--;
+			continue;
+		}
 
-		std::string to_split = boost::trim_copy(line);
-		std::vector<std::string> split;
-		boost::split(split, to_split, boost::is_any_of(" "), boost::algorithm::token_compress_on);
+		auto split = utils::split(line);
 
 		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>());
-		new_particle->set_type(split[1]);
+		new_particle->set_type(split[_id_index]);
 
 		try {
-			vec3 pos(boost::lexical_cast<double>(split[2]), boost::lexical_cast<double>(split[3]), boost::lexical_cast<double>(split[4]));
-			if(_rescaled_coords) {
-				pos *= header_data.box;
-			}
+			vec3 pos(
+					utils::lexical_cast<double>(split[_pos_starting_index]),
+					utils::lexical_cast<double>(split[_pos_starting_index + 1]),
+					utils::lexical_cast<double>(split[_pos_starting_index + 2]));
 			new_particle->set_position(pos);
 		}
-		catch(boost::bad_lexical_cast &e) {
+		catch (boost::bad_lexical_cast &e) {
 			std::string error = boost::str(boost::format("The position of the %u-th particle (%s, %s, %s) cannot be cast to a vector of floating-point numbers") % i % split[2] % split[3] % split[4]);
 			throw std::runtime_error(error);
 		}
@@ -71,69 +96,48 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 LAMMPSDataFileParser::HeaderData LAMMPSDataFileParser::_parse_headers(std::ifstream &configuration, std::shared_ptr<System> syst) {
 	LAMMPSDataFileParser::HeaderData hd;
 
-	std::vector<std::string> stops_on = {
-			"Atoms", "Velocities", "Masses", "Ellipsoids", "Lines", "Triangles", "Bodies",
-			"Bonds", "Angles", "Dihedrals", "Impropers",
-			"Pair Coeffs", "PairIJ Coeffs", "Bond Coeffs", "Angle Coeffs", "Dihedral Coeffs", "Improper Coeffs",
-			"BondBond Coeffs", "BondAngle Coeffs", "MiddleBondTorsion Coeffs", "EndBondTorsion Coeffs", "AngleTorsion Coeffs", "AngleAngleTorsion Coeffs", "BondBond13 Coeffs", "AngleAngle Coeffs"
-	};
-
+	// this list (taken from LAMMPS docs) may turn out to be useful in the future
 	std::vector<std::string> header_entries = {
-
+			"atoms", "bonds", "angles", "dihedrals", "impropers", "atom types", "bond types", "angle types",
+			"dihedral types", "improper types", "extra bond per atom", "extra angle per atom", "extra dihedral per atom",
+			"extra improper per atom", "extra special per atom", "ellipsoids", "lines", "triangles", "bodies",
+			"xlo xhi", "ylo yhi", "zlo zhi", "xy xz yz"
 	};
+
+	std::string line;
+	// according to the docs, the first line of the header should be always skipped
+	std::getline(configuration, line);
 
 	bool done = false;
 	while(!done) {
-		std::string line;
-		std::getline(configuration, line);
-		if(!configuration.good()) {
-			hd.empty = true;
-			// early return
-			return hd;
-		}
+		line = _read_line(configuration);
 
-		if(std::find(stops_on.begin(), stops_on.end(), line) != stops_on.end()) {
+		if(!configuration.good() || std::find(_LAMMPS_section_keywords.begin(), _LAMMPS_section_keywords.end(), line) != _LAMMPS_section_keywords.end()) {
 			done = true;
 		}
 		else {
 			if(line.size() > 0) {
-				std::vector<std::string> split;
-				boost::split(split, line, boost::is_any_of(" "), boost::algorithm::token_compress_on);
-			}
-			if(boost::starts_with(line, "ITEM:")) {
-				if(boost::contains(line, "TIMESTEP")) {
-					std::getline(configuration, line);
+				auto split = utils::split(line);
+				if(boost::ends_with(line, "atoms")) {
+					hd.N_atoms = utils::lexical_cast<int>(split[0]);
 				}
-				else if(boost::contains(line, "NUMBER OF ATOMS")) {
-					std::getline(configuration, line);
-					try {
-						hd.N_atoms = boost::lexical_cast<uint>(boost::trim_copy(line));
-					}
-					catch(boost::bad_lexical_cast &e) {
-						std::string error = boost::str(boost::format("The number of particles '%s' found in the LAMMPS dump configuration cannot be cast to an integer") % line);
-						throw std::runtime_error(error);
-					}
+				else if(boost::ends_with(line, "bonds")) {
+					hd.N_bonds = utils::lexical_cast<int>(split[0]);
 				}
-				else if(boost::contains(line, "BOX BOUNDS")) {
-					// the next three lines contains the box dimensions along the three axes
-					for(uint i = 0; i < 3; i++) {
-						std::getline(configuration, line);
-						std::string to_split = boost::trim_copy(line);
-						std::vector<std::string> split;
-						boost::split(split, to_split, boost::is_any_of(" "), boost::algorithm::token_compress_on);
-						try {
-							double lower = boost::lexical_cast<double>(boost::trim_copy(split[0]));
-							double upper = boost::lexical_cast<double>(boost::trim_copy(split[1]));
-							hd.box[i] = upper - lower;
-						}
-						catch(boost::bad_lexical_cast &e) {
-							std::string error = boost::str(boost::format("The box line '%s' found in the LAMMPS dump configuration is not valid") % line);
-							throw std::runtime_error(error);
-						}
-					}
+				else if(boost::ends_with(line, "atom types")) {
+					hd.atom_types = utils::lexical_cast<int>(split[0]);
 				}
-				else if(boost::contains(line, "ITEM: ATOMS")) {
-					done = true;
+				else if(boost::ends_with(line, "bond types")) {
+					hd.bond_types = utils::lexical_cast<int>(split[0]);
+				}
+				else if(boost::ends_with(line, "xlo xhi")) {
+					hd.box[0] = _parse_box_line(split);
+				}
+				else if(boost::ends_with(line, "ylo yhi")) {
+					hd.box[1] = _parse_box_line(split);
+				}
+				else if(boost::ends_with(line, "zlo zhi")) {
+					hd.box[2] = _parse_box_line(split);
 				}
 			}
 		}
@@ -142,12 +146,31 @@ LAMMPSDataFileParser::HeaderData LAMMPSDataFileParser::_parse_headers(std::ifstr
 	return hd;
 }
 
+double LAMMPSDataFileParser::_parse_box_line(std::vector<std::string> split_line) {
+	try {
+		double lower = utils::lexical_cast<double>(split_line[0]);
+		double upper = utils::lexical_cast<double>(split_line[1]);
+		return upper - lower;
+	}
+	catch (boost::bad_lexical_cast &e) {
+		std::string error = boost::str(boost::format("The box values '%s %s' found in the LAMMPS dump configuration are not valid") % split_line[0] % split_line[1]);
+		throw std::runtime_error(error);
+	}
+}
+
+std::string LAMMPSDataFileParser::_read_line(std::ifstream &configuration) {
+	std::string line;
+	std::getline(configuration, line);
+	// remove possible comments and trim the resulting string
+	return utils::trim(utils::split(line, "#")[0]);
+}
+
 #ifdef PYTHON_BINDINGS
 
 void export_LAMMPSDataFileParser(py::module &m) {
 	py::class_<LAMMPSDataFileParser, BaseParser, std::shared_ptr<LAMMPSDataFileParser>> parser(m, "LAMMPSDataFileParser");
 
-	parser.def(py::init<bool>());
+	parser.def(py::init<std::string>());
 }
 
 #endif

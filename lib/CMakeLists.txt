@@ -30,6 +30,7 @@ SET(ba_lib_SOURCES
 	utils/CellLists.cpp
 	utils/filesystem.cpp
 	utils/Random.cpp
+	utils/strings.cpp
 )
 
 # The lines that follow the following variables:

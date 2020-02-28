@@ -7,8 +7,7 @@
 
 #include "GroParser.h"
 
-#include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
+#include "../utils/strings.h"
 
 namespace ba {
 
@@ -24,7 +23,6 @@ GroParser::~GroParser() {
 
 std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 	std::string line;
-	std::vector<std::string> split;
 
 	// timestep line
 	std::getline(configuration, line);
@@ -39,12 +37,12 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 	}
 
 	try {
-		std::string time_string = boost::trim_copy(line.substr(time_pos + 2));
-		double time_double = boost::lexical_cast<double>(time_string);
+		std::string time_string = utils::trim(line.substr(time_pos + 2));
+		double time_double = utils::lexical_cast<double>(time_string);
 		syst->time = std::round(time_double / _dt);
 	}
 	catch(boost::bad_lexical_cast &e) {
-		std::string error = boost::str(boost::format("The timestep '%s' found in the .gro configuration cannot be cast to a double") % split[2]);
+		std::string error = boost::str(boost::format("The timestep '%s' found in the .gro configuration cannot be cast to a double") % line.substr(time_pos + 2));
 		throw std::runtime_error(error);
 	}
 
@@ -52,7 +50,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 	std::getline(configuration, line);
 	uint N;
 	try {
-		N = boost::lexical_cast<uint>(boost::trim_copy(line));
+		N = utils::lexical_cast<uint>(utils::trim(line));
 	}
 	catch(boost::bad_lexical_cast &e) {
 		std::string error = boost::str(boost::format("The number of particles '%s' found in the .gro configuration cannot be cast to an integer") % line);
@@ -72,24 +70,24 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>());
 		new_particle->set_type(atom_name);
 
-		std::string x = boost::trim_copy(line.substr(20, 8));
-		std::string y = boost::trim_copy(line.substr(28, 8));
-		std::string z = boost::trim_copy(line.substr(36, 8));
+		std::string x = utils::trim(line.substr(20, 8));
+		std::string y = utils::trim(line.substr(28, 8));
+		std::string z = utils::trim(line.substr(36, 8));
 
 		try {
-			new_particle->set_position(vec3(boost::lexical_cast<double>(x), boost::lexical_cast<double>(y), boost::lexical_cast<double>(z)));
+			new_particle->set_position(vec3(utils::lexical_cast<double>(x), utils::lexical_cast<double>(y), utils::lexical_cast<double>(z)));
 		}
 		catch(boost::bad_lexical_cast &e) {
 			std::string error = boost::str(boost::format("The position of the %u-th particle (%s, %s, %s) cannot be cast to a vector of floating-point numbers") % i % x % y % z);
 			throw std::runtime_error(error);
 		}
 
-		std::string vx = boost::trim_copy(line.substr(44, 8));
-		std::string vy = boost::trim_copy(line.substr(52, 8));
-		std::string vz = boost::trim_copy(line.substr(60, 8));
+		std::string vx = utils::trim(line.substr(44, 8));
+		std::string vy = utils::trim(line.substr(52, 8));
+		std::string vz = utils::trim(line.substr(60, 8));
 
 		try {
-			new_particle->set_velocity(vec3(boost::lexical_cast<double>(vx), boost::lexical_cast<double>(vy), boost::lexical_cast<double>(vz)));
+			new_particle->set_velocity(vec3(utils::lexical_cast<double>(vx), utils::lexical_cast<double>(vy), utils::lexical_cast<double>(vz)));
 		}
 		catch(boost::bad_lexical_cast &e) {
 			std::string error = boost::str(boost::format("The velocity of the %u-th particle (%s, %s, %s) cannot be cast to a vector of floating-point numbers") % i % vx % vy % vz);
@@ -101,12 +99,12 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 
 	// box line
 	std::getline(configuration, line);
-	std::string to_split = boost::trim_copy(line);
-	boost::split(split, to_split, boost::is_any_of(" "), boost::algorithm::token_compress_on);
+	std::string to_split = utils::trim(line);
+	auto split = utils::split(to_split);
 	try {
-		syst->box[0] = boost::lexical_cast<double>(boost::trim_copy(split[0]));
-		syst->box[1] = boost::lexical_cast<double>(boost::trim_copy(split[1]));
-		syst->box[2] = boost::lexical_cast<double>(boost::trim_copy(split[2]));
+		syst->box[0] = utils::lexical_cast<double>(split[0]);
+		syst->box[1] = utils::lexical_cast<double>(split[1]);
+		syst->box[2] = utils::lexical_cast<double>(split[2]);
 	}
 	catch(boost::bad_lexical_cast &e) {
 		std::string error = boost::str(boost::format("The box line '%s' found in the .gro configuration is not valid") % line);

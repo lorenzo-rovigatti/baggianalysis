@@ -7,8 +7,7 @@
 
 #include "GenericOxDNAParser.h"
 
-#include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
+#include "../utils/strings.h"
 
 namespace ba {
 
@@ -36,7 +35,6 @@ std::shared_ptr<System> GenericOxDNAParser::_parse_stream(std::ifstream &configu
 	topology.close();
 
 	std::string line;
-	std::vector<std::string> split;
 
 	// timestep line
 	std::getline(configuration, line);
@@ -44,9 +42,9 @@ std::shared_ptr<System> GenericOxDNAParser::_parse_stream(std::ifstream &configu
 
 	std::shared_ptr<System> syst(std::make_shared<System>());
 
-	boost::split(split, line, boost::is_any_of(" "));
+	auto split = utils::split(line);
 	try {
-		syst->time = boost::lexical_cast<ullint>(boost::trim_copy(split[2]));
+		syst->time = utils::lexical_cast<ullint>(split[2]);
 	}
 	catch(boost::bad_lexical_cast &e) {
 		std::string error = boost::str(boost::format("The timestep value '%s' found in the oxDNA configuration cannot be cast to an integer") % split[2]);
@@ -55,11 +53,11 @@ std::shared_ptr<System> GenericOxDNAParser::_parse_stream(std::ifstream &configu
 
 	// box line
 	std::getline(configuration, line);
-	boost::split(split, line, boost::is_any_of(" "));
+	split = utils::split(line);
 	try {
-		syst->box[0] = boost::lexical_cast<double>(boost::trim_copy(split[2]));
-		syst->box[1] = boost::lexical_cast<double>(boost::trim_copy(split[3]));
-		syst->box[2] = boost::lexical_cast<double>(boost::trim_copy(split[4]));
+		syst->box[0] = utils::lexical_cast<double>(split[2]);
+		syst->box[1] = utils::lexical_cast<double>(split[3]);
+		syst->box[2] = utils::lexical_cast<double>(split[4]);
 	}
 	catch(boost::bad_lexical_cast &e) {
 		std::string error = boost::str(boost::format("The box line '%s' found in the oxDNA configuration is not valid") % line);
@@ -77,9 +75,13 @@ std::shared_ptr<System> GenericOxDNAParser::_parse_stream(std::ifstream &configu
 		else {
 			std::getline(configuration, line);
 			if(configuration.good() && line.size() > 0) {
-				boost::split(split, line, boost::is_any_of(" "));
-				vec3 position = vec3(boost::lexical_cast<double>(split[0]), boost::lexical_cast<double>(split[1]), boost::lexical_cast<double>(split[2]));
-				vec3 velocity = vec3(boost::lexical_cast<double>(split[9]), boost::lexical_cast<double>(split[10]), boost::lexical_cast<double>(split[11]));
+				split = utils::split(line);
+				vec3 position = vec3(utils::lexical_cast<double>(split[0]),
+						utils::lexical_cast<double>(split[1]),
+						utils::lexical_cast<double>(split[2]));
+				vec3 velocity = vec3(utils::lexical_cast<double>(split[9]),
+						utils::lexical_cast<double>(split[10]),
+						utils::lexical_cast<double>(split[11]));
 
 				std::shared_ptr<Particle> new_particle(std::make_shared<Particle>("0", position, velocity));
 				syst->add_particle(new_particle);

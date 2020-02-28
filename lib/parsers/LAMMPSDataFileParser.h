@@ -16,7 +16,7 @@ namespace ba {
  */
 class LAMMPSDataFileParser: public BaseParser {
 public:
-	LAMMPSDataFileParser(bool rescaled_coords=false);
+	LAMMPSDataFileParser(std::string atom_style);
 	virtual ~LAMMPSDataFileParser();
 
 	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override;
@@ -32,8 +32,14 @@ private:
 	};
 
 	HeaderData _parse_headers(std::ifstream &configuration, std::shared_ptr<System> syst);
+	double _parse_box_line(std::vector<std::string> split_line);
+	std::string _read_line(std::ifstream &configuration);
 
-	bool _rescaled_coords;
+	std::string _atom_style;
+	std::vector<std::string> _LAMMPS_section_keywords;
+
+	int _id_index;
+	int _pos_starting_index;
 };
 
 #ifdef PYTHON_BINDINGS

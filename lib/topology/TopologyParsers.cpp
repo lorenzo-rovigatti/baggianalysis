@@ -7,8 +7,8 @@
 
 #include "TopologyParsers.h"
 
-#include <boost/algorithm/string.hpp>
-#include <boost/lexical_cast.hpp>
+#include "../utils/strings.h"
+
 #include <fstream>
 
 namespace ba {
@@ -20,28 +20,25 @@ void parse_microgel_bondfile(std::string filename, std::shared_ptr<Topology> top
 	std::getline(input, line);
 	std::getline(input, line);
 
-	std::vector<std::string> split;
 	while(input.good()) {
 		std::getline(input, line);
-		boost::trim(line);
-		boost::split(split, line, boost::is_any_of(" "));
+		auto split = utils::split(utils::trim(line));
 
 		if(split.size() == 2) {
 			// the first line contains idx n_neighs
-			int p_idx = boost::lexical_cast<int>(boost::trim_copy(split[0])) - 1;
-			uint n_neighs = boost::lexical_cast<uint>(boost::trim_copy(split[1]));
+			int p_idx = utils::lexical_cast<int>(split[0]) - 1;
+			uint n_neighs = utils::lexical_cast<uint>(split[1]);
 
 			// the second line contains the indexes of all neighbours
 			std::getline(input, line);
-			boost::trim(line);
-			boost::split(split, line, boost::is_any_of(" "));
+			split = utils::split(utils::trim(line));
 			if(split.size() != n_neighs) {
 				std::string error = boost::str(boost::format("Particle %d seems to have %u neighbours, should be %u") % p_idx % split.size() % n_neighs);
 				throw std::runtime_error(error);
 			}
 
 			for(uint i = 0; i < split.size(); i++) {
-				int q_idx = boost::lexical_cast<int>(boost::trim_copy(split[i])) - 1;
+				int q_idx = utils::lexical_cast<int>(split[i]) - 1;
 				topology->add_bond(p_idx, q_idx);
 			}
 		}
