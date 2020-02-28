@@ -14,7 +14,7 @@ namespace ba {
 
 class LAMMPSDumpParser: public BaseParser {
 public:
-	LAMMPSDumpParser();
+	LAMMPSDumpParser(bool rescaled_coords=false);
 	virtual ~LAMMPSDumpParser();
 
 	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override;
@@ -28,6 +28,8 @@ private:
 	};
 
 	HeaderData _parse_headers(std::ifstream &configuration, std::shared_ptr<System> syst);
+
+	bool _rescaled_coords;
 };
 
 #ifdef PYTHON_BINDINGS

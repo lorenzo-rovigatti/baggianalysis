@@ -17,6 +17,7 @@ SET(ba_lib_SOURCES
 	parsers/GenericOxDNAParser.cpp
 	parsers/GroParser.cpp
 	parsers/LJKAParser.cpp
+	parsers/LAMMPSDataFileParser.cpp
 	parsers/LAMMPSDumpParser.cpp
 	particles/Particle.cpp
 	particles/ParticleSet.cpp
