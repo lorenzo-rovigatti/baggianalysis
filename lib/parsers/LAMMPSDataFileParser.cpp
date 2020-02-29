@@ -23,11 +23,11 @@ LAMMPSDataFileParser::LAMMPSDataFileParser(std::string atom_style) :
 	};
 
 	if(_atom_style == "bond") {
-		_id_index = 2;
+		_type_index = 2;
 		_pos_starting_index = 3;
 	}
 	else if(_atom_style == "atomic") {
-		_id_index = 1;
+		_type_index = 1;
 		_pos_starting_index = 2;
 	}
 	else {
@@ -43,7 +43,7 @@ LAMMPSDataFileParser::~LAMMPSDataFileParser() {
 std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &configuration) {
 	std::shared_ptr<System> syst(std::make_shared<System>());
 
-	auto header_data = _parse_headers(configuration, syst);
+	auto header_data = _parse_headers(configuration);
 
 	if(header_data.empty) {
 		return nullptr;
@@ -72,8 +72,12 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 
 		auto split = utils::split(line);
 
-		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>());
-		new_particle->set_type(split[_id_index]);
+		// the first column always contains the atom index
+		int p_idx = utils::lexical_cast<int>(split[0]);
+		std::string p_type = split[_type_index];
+
+		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(p_idx));
+		new_particle->set_type(p_type);
 
 		try {
 			vec3 pos(
@@ -90,10 +94,12 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 		syst->add_particle(new_particle);
 	}
 
+	syst->sort_particles_by_id();
+
 	return syst;
 }
 
-LAMMPSDataFileParser::HeaderData LAMMPSDataFileParser::_parse_headers(std::ifstream &configuration, std::shared_ptr<System> syst) {
+LAMMPSDataFileParser::HeaderData LAMMPSDataFileParser::_parse_headers(std::ifstream &configuration) {
 	LAMMPSDataFileParser::HeaderData hd;
 
 	// this list (taken from LAMMPS docs) may turn out to be useful in the future

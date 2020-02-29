@@ -31,14 +31,14 @@ private:
 		bool empty = false;
 	};
 
-	HeaderData _parse_headers(std::ifstream &configuration, std::shared_ptr<System> syst);
+	HeaderData _parse_headers(std::ifstream &configuration);
 	double _parse_box_line(std::vector<std::string> split_line);
 	std::string _read_line(std::ifstream &configuration);
 
 	std::string _atom_style;
 	std::vector<std::string> _LAMMPS_section_keywords;
 
-	int _id_index;
+	int _type_index;
 	int _pos_starting_index;
 };
 

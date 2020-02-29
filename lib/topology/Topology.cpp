@@ -50,8 +50,6 @@ void Topology::add_dihedral(int p, int q, int r, int s) {
 }
 
 void Topology::apply(std::shared_ptr<System> system) {
-	auto &particles = system->particles();
-
 	// reset all the molecules
 	system->molecules().clear();
 
@@ -60,12 +58,15 @@ void Topology::apply(std::shared_ptr<System> system) {
 		auto p_idx = bond[0];
 		auto q_idx = bond[1];
 
-		_check_index(system, p_idx);
-		_check_index(system, q_idx);
-
-		auto p = particles[p_idx];
-		auto q = particles[q_idx];
-		p->add_bonded_neighbour(q);
+		try {
+			auto p = system->particle_by_id(p_idx);
+			auto q = system->particle_by_id(q_idx);
+			p->add_bonded_neighbour(q);
+		}
+		catch (std::runtime_error &e) {
+			std::string error = boost::str(boost::format("The following error occurred while applying the topology to a System:\n\t'%s'") % e.what());
+			throw std::runtime_error(error);
+		}
 	}
 
 	static uint N_in_system = 0;
@@ -128,20 +129,13 @@ void Topology::apply(std::shared_ptr<System> system) {
 	for(auto &molecule: _molecules) {
 		std::shared_ptr<ParticleSet> new_molecule = std::make_shared<ParticleSet>();
 		for(auto index: molecule) {
-			auto particle = system->particles()[index];
+			auto particle = system->particle_by_id(index);
 			new_molecule->add_particle(particle);
 			particle->molecule() = new_molecule;
 		}
 
 		std::string mol_name = boost::str(boost::format("mol%u") % system->molecules().size());
 		system->molecules().emplace_back(new_molecule);
-	}
-}
-
-void Topology::_check_index(std::shared_ptr<System> &particle_set, int idx) {
-	if(idx < 0 || idx >= (int) particle_set->N()) {
-		std::string error = boost::str(boost::format("Invalid index %d found in the topology") % idx);
-		throw std::runtime_error(error);
 	}
 }
 

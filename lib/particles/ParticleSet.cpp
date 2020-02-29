@@ -81,15 +81,30 @@ const std::vector<std::shared_ptr<Particle>> &ParticleSet::particles() const {
 }
 
 void ParticleSet::add_particle(std::shared_ptr<Particle> p) {
+	if(_particles_by_id.count(p->index()) > 0) {
+		std::string error = boost::str(boost::format("A particle with index '%d' has already been added to this System") % p->index());
+		throw std::runtime_error(error);
+	}
+
 	_particles.push_back(p);
+	_particles_by_id.emplace(p->index(), p);
 }
 
-std::vector<std::shared_ptr<ParticleSet>> &ParticleSet::subsets() {
-	return _subsets;
+std::shared_ptr<Particle> ParticleSet::particle_by_id(int index) const {
+	if(_particles_by_id.count(index) == 0) {
+		std::string error = boost::str(boost::format("A particle with index '%d' does not exist") % index);
+		throw std::runtime_error(error);
+	}
+
+	return _particles_by_id.at(index);
 }
 
-const std::vector<std::shared_ptr<ParticleSet>> &ParticleSet::subsets() const {
-	return _subsets;
+void ParticleSet::sort_particles_by_id() {
+	auto comp_operator = [](const std::shared_ptr<Particle> &a, const std::shared_ptr<Particle> &b) -> bool {
+		return a->index() < b->index();
+	};
+
+	std::sort(_particles.begin(), _particles.end(), comp_operator);
 }
 
 #ifdef PYTHON_BINDINGS
@@ -108,6 +123,8 @@ void export_ParticleSet(py::module &m) {
 		// here we tell pybind11 which of the two particles() methods we want to have bindings for
 		.def("particles", (std::vector<std::shared_ptr<Particle>> &(ParticleSet::*)())(&ParticleSet::particles))
 		.def("add_particle", &ParticleSet::add_particle)
+		.def("particle_by_id", &ParticleSet::particle_by_id)
+		.def("sort_particles_by_id", &ParticleSet::sort_particles_by_id)
 		.def_property("name", &ParticleSet::name, &ParticleSet::set_name);
 }
 

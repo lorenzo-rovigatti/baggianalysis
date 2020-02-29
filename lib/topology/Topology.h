@@ -42,8 +42,6 @@ protected:
 	Topology();
 	Topology(const Topology &) = delete;
 
-	void _check_index(std::shared_ptr<System> &particle_set, int idx);
-
 	std::set<int> _indexes;
 	std::vector<Bond> _bonds;
 	std::vector<Angle> _angles;

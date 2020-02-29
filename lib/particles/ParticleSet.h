@@ -74,17 +74,17 @@ public:
 	/// Add a particle to the set
 	void add_particle(std::shared_ptr<Particle> p);
 
-	/// Return all the subsets stored in the set
-	std::vector<std::shared_ptr<ParticleSet>> &subsets();
+	/// Return the particle with the given id. Throw an exception if the particle does not exist.
+	std::shared_ptr<Particle> particle_by_id(int index) const;
 
-	/// Return all the subsets stored in the set (const version)
-	const std::vector<std::shared_ptr<ParticleSet>> &subsets() const;
+	/// Sort the particles according to their index.
+	void sort_particles_by_id();
 
 protected:
 	std::string _name;
 
 	std::vector<std::shared_ptr<Particle>> _particles;
-	std::vector<std::shared_ptr<ParticleSet>> _subsets;
+	std::map<int, std::shared_ptr<Particle>> _particles_by_id;
 };
 
 #ifdef PYTHON_BINDINGS

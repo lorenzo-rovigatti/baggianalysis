@@ -8,6 +8,7 @@
 #include "TopologyParsers.h"
 
 #include "../utils/strings.h"
+#include "../parsers/LAMMPSDataFileParser.h"
 
 #include <fstream>
 
@@ -47,10 +48,99 @@ void parse_microgel_bondfile(std::string filename, std::shared_ptr<Topology> top
 	input.close();
 }
 
+void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topology) {
+	std::ifstream input(filename);
+
+	std::string line;
+	std::getline(input, line);
+
+	uint N_bonds = 0;
+	uint N_angles = 0;
+	uint N_dihedrals = 0;
+
+	std::vector<std::string> stop_on = {"Angles", "Bonds", "Dihedrals"};
+
+	enum status {
+		HEADERS,
+		ANGLES,
+		BONDS,
+		DIHEDRALS
+	};
+
+	while(input.good()) {
+		std::getline(input, line);
+		line = utils::trim(utils::split(line, "#")[0]);
+
+		auto split = utils::split(line);
+		if(boost::ends_with(line, "angles")) {
+			N_angles = utils::lexical_cast<int>(split[0]);
+		}
+		else if(boost::ends_with(line, "bonds")) {
+			N_bonds = utils::lexical_cast<int>(split[0]);
+		}
+		else if(boost::ends_with(line, "dihedrals")) {
+			N_dihedrals = utils::lexical_cast<int>(split[0]);
+		}
+
+		if(line == "Angles") {
+			for(uint i = 0; i < N_angles; i++) {
+				std::getline(input, line);
+				// skip empty lines
+				if(line.size() == 0) {
+					i--;
+					continue;
+				}
+
+				auto split = utils::split(line);
+				topology->add_angle(
+						utils::lexical_cast<int>(split[2]),
+						utils::lexical_cast<int>(split[3]),
+						utils::lexical_cast<int>(split[4]));
+			}
+		}
+		else if(line == "Bonds") {
+			for(uint i = 0; i < N_bonds; i++) {
+				std::getline(input, line);
+				// skip empty lines
+				if(line.size() == 0) {
+					i--;
+					continue;
+				}
+
+				auto split = utils::split(line);
+				int id_1 = utils::lexical_cast<int>(split[2]);
+				int id_2 = utils::lexical_cast<int>(split[3]);
+				topology->add_bond(id_1, id_2);
+				topology->add_bond(id_2, id_1);
+			}
+		}
+		else if(line == "Dihedrals") {
+			for(uint i = 0; i < N_dihedrals; i++) {
+				std::getline(input, line);
+				// skip empty lines
+				if(line.size() == 0) {
+					i--;
+					continue;
+				}
+
+				auto split = utils::split(line);
+				topology->add_dihedral(
+						utils::lexical_cast<int>(split[2]),
+						utils::lexical_cast<int>(split[3]),
+						utils::lexical_cast<int>(split[4]),
+						utils::lexical_cast<int>(split[5]));
+			}
+		}
+	}
+
+	input.close();
+}
+
 #ifdef PYTHON_BINDINGS
 
 void export_TopologyParsers(py::module &m) {
 	m.def("parse_microgel_bondfile", &parse_microgel_bondfile);
+	m.def("parse_LAMMPS_topology", &parse_LAMMPS_topology);
 }
 
 #endif

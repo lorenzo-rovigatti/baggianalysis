@@ -18,12 +18,21 @@ Particle::Particle() :
 
 }
 
+Particle::Particle(int index) :
+				Particle(index, DEFAULT_PARTICLE_TYPE, vec3(0., 0., 0.), vec3(0., 0., 0.)) {
+
+}
+
 Particle::Particle(particle_type t, vec3 pos, vec3 vel) :
-				_index(Particle::_current_index),
+				Particle(Particle::_current_index, DEFAULT_PARTICLE_TYPE, vec3(0., 0., 0.), vec3(0., 0., 0.)) {
+	Particle::_current_index++;
+}
+
+Particle::Particle(int index, particle_type t, vec3 pos, vec3 vel) :
+				_index(index),
 				_type(t),
 				_position(pos),
 				_velocity(vel) {
-	Particle::_current_index++;
 }
 
 Particle::~Particle() {
@@ -54,7 +63,9 @@ void export_Particle(py::module &m) {
 
 	particle
 		.def(py::init<>())
+		.def(py::init<int>())
 		.def(py::init<particle_type, vec3, vec3>())
+		.def(py::init<int, particle_type, vec3, vec3>())
 		.def("add_bonded_neighbour", &Particle::add_bonded_neighbour)
 		.def("add_neighbour", &Particle::add_neighbour)
 		.def_property_readonly("bonded_neighbours", &Particle::bonded_neighbours)

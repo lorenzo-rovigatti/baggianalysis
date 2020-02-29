@@ -20,7 +20,9 @@ class ParticleSet;
 class Particle {
 public:
 	Particle();
+	Particle(int index);
 	Particle(particle_type nt, vec3 pos, vec3 vel);
+	Particle(int index, particle_type nt, vec3 pos, vec3 vel);
 	virtual ~Particle();
 
 	int index() const {

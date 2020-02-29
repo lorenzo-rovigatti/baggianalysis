@@ -13,6 +13,7 @@
 namespace ba {
 
 void parse_microgel_bondfile(std::string, std::shared_ptr<Topology>);
+void parse_LAMMPS_topology(std::string, std::shared_ptr<Topology>);
 
 #ifdef PYTHON_BINDINGS
 

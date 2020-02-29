@@ -20,14 +20,14 @@ public:
 
 	std::shared_ptr<System> empty_copy() const;
 
-	ullint time = 0;
-	vec3 box = vec3(0., 0., 0.);
-
 	/// Return all the subsets stored in the set
 	std::vector<std::shared_ptr<ParticleSet>> &molecules();
 
 	/// Return all the subsets stored in the set (const version)
 	const std::vector<std::shared_ptr<ParticleSet>> &molecules() const;
+
+	ullint time = 0;
+	vec3 box = vec3(0., 0., 0.);
 
 private:
 	std::vector<std::shared_ptr<ParticleSet>> _molecules;
