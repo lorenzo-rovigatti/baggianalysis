@@ -89,11 +89,11 @@ IF(Python)
 	ADD_LIBRARY(_baggianalysis STATIC ${ba_lib_SOURCES})
 	TARGET_LINK_LIBRARIES(_baggianalysis ${PYTHON_LIBRARIES})
 	SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES POSITION_INDEPENDENT_CODE ON)
-	pybind11_add_module(baggianalysis SHARED python/python_bindings.cpp)
-	TARGET_LINK_LIBRARIES(baggianalysis PRIVATE _baggianalysis)
+	pybind11_add_module(core SHARED python/python_bindings.cpp)
+	TARGET_LINK_LIBRARIES(core PRIVATE _baggianalysis)
 	
 	# the library should be in a folder with the same name to make it easier to use Python's distutils
-	SET_TARGET_PROPERTIES(baggianalysis 
+	SET_TARGET_PROPERTIES(core 
 		PROPERTIES 
 			SUFFIX ".so"
 			LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/baggianalysis"
@@ -128,7 +128,7 @@ SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES PREFIX "")
 # by default, libraries have extension ".dylib" on Mac OS X, but these are
 # not recognized by python as modules
 IF(APPLE)
-    SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES SUFFIX ".so")
+    SET_TARGET_PROPERTIES(core PROPERTIES SUFFIX ".so")
 ENDIF(APPLE)
 
 ADD_CUSTOM_COMMAND(

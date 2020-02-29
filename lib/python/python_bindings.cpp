@@ -16,6 +16,7 @@
 #include "../neighbour_finders/SANNFinder.h"
 
 #include "../observables/BondOrderParameters.h"
+#include "../observables/ConvexHull.h"
 #include "../observables/FormFactor.h"
 #include "../observables/PoreSize.h"
 #include "../observables/MSD.h"
@@ -34,7 +35,52 @@
 
 #include "../python_defs.h"
 
-PYBIND11_MODULE(baggianalysis, m) {
+PYBIND11_MODULE(core, m) {
+	m.doc() = R"pbdoc(
+        Core classes
+        ------------
+
+        .. currentmodule:: baggianalysis.core
+
+        .. autosummary::
+           :nosignatures:
+
+           Particle
+           ParticleSet
+           System
+           Topology
+           parse_microgel_bondfile
+           parse_LAMMPS_topology
+           
+           BaseParser
+           GenericOxDNAParser
+           GroParser
+           LAMMPSDataFileParser
+           LAMMPSDumpParser
+           LJKAParser
+
+           BaseFilter
+           FilterByFunction
+           FilterByReducingToCOM
+           FilterByType
+           FixParticlePath
+           SubtractCOM
+
+           BaseTrajectory
+           FullTrajectory
+           LazyTrajectory
+
+           BondOrderParameters
+           ConvexHull
+           FormFactor
+           PoreSize
+           MSD
+
+           NeighbourFinder
+           CutoffFinder
+           SANNFinder
+    )pbdoc";
+
 	// utility classes
 	ba::export_Particle(m);
 	ba::export_ParticleSet(m);
@@ -65,6 +111,7 @@ PYBIND11_MODULE(baggianalysis, m) {
 
 	// observables
 	ba::export_BondOrderParameters(m);
+	ba::export_ConvexHull(m);
 	ba::export_FormFactor(m);
 	ba::export_PoreSize(m);
 	ba::export_MSD(m);

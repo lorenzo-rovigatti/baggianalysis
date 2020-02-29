@@ -1,1 +1,1 @@
-from .baggianalysis import *
+from .core import *

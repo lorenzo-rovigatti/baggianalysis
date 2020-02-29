@@ -56,7 +56,7 @@ void ConvexHull::analyse_system(std::shared_ptr<System> system) {
 
 #ifdef PYTHON_BINDINGS
 
-void export_FormFactor(py::module &m) {
+void export_ConvexHull(py::module &m) {
 	py::class_<ConvexHull, std::shared_ptr<ConvexHull>> obs(m, "ConvexHull");
 
 	obs

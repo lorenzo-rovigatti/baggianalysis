@@ -38,15 +38,20 @@ const std::vector<std::shared_ptr<ParticleSet>> &System::molecules() const {
 #ifdef PYTHON_BINDINGS
 
 void export_System(py::module &m) {
-	py::class_<System, ParticleSet, std::shared_ptr<System>> system(m, "System", py::dynamic_attr());
+	py::class_<System, ParticleSet, std::shared_ptr<System>> system(m, "System", py::dynamic_attr(), R"pbdoc(
+		 Store a configuration. 
+	)pbdoc");
 
-	system
-		.def(py::init<>())
-		.def("empty_copy", &System::empty_copy)
-		// here we tell pybind11 which of the two molecules() methods we want to have bindings for
-		.def("molecules", (std::vector<std::shared_ptr<ParticleSet>> &(System::*)())(&System::molecules))
-		.def_readwrite("time", &System::time)
-		.def_readwrite("box", &System::box);
+	system.def(py::init<>(), R"pbdoc(
+		 Default constructor. 
+	)pbdoc");
+	system.def("empty_copy", &System::empty_copy, R"pbdoc(
+		 Return a copy of this sytem (same time and box, no particles). 
+	)pbdoc");
+	// here we tell pybind11 which of the two molecules() methods we want to have bindings for
+	system.def("molecules", (std::vector<std::shared_ptr<ParticleSet>> &(System::*)())(&System::molecules));
+	system.def_readwrite("time", &System::time);
+	system.def_readwrite("box", &System::box);
 
 }
 

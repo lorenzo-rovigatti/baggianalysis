@@ -1,5 +1,7 @@
 # baggianalysis
 
+Baggianalysis is a library to facilitate the analysis of molecular simulations.
+
 ### Requirements
 
 * CMake >= 2.8
