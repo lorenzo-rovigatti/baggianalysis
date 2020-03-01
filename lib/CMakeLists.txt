@@ -1,4 +1,6 @@
 SET(ba_lib_SOURCES
+	exporters/BaseExporter.cpp
+	exporters/LAMMPSDataFileExporter.cpp
 	filters/BaseFilter.cpp
 	filters/FilterByFunction.cpp
 	filters/FilterByReducingToCOM.cpp

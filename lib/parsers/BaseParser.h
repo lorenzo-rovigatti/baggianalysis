@@ -70,7 +70,7 @@ public:
 		PYBIND11_OVERLOAD_PURE(
 			std::shared_ptr<System>,
 			BaseParser,
-			parse,
+			_parse_stream,
 			configuration
 		);
 
