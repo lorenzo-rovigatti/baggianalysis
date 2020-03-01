@@ -37,8 +37,13 @@
 
 PYBIND11_MODULE(core, m) {
 	m.doc() = R"pbdoc(
-        Core classes
-        ------------
+        The core module
+        ===============
+
+        This module contains the Python bindings of the c++ classes
+
+        Particles and sets of particles
+        -------------------------------
 
         .. currentmodule:: baggianalysis.core
 
@@ -48,9 +53,22 @@ PYBIND11_MODULE(core, m) {
            Particle
            ParticleSet
            System
+
+        Topology
+        --------
+
+        .. autosummary::
+           :nosignatures:
+
            Topology
            parse_microgel_bondfile
            parse_LAMMPS_topology
+
+        Parsers
+        -------
+
+        .. autosummary::
+           :nosignatures:
            
            BaseParser
            GenericOxDNAParser
@@ -59,6 +77,12 @@ PYBIND11_MODULE(core, m) {
            LAMMPSDumpParser
            LJKAParser
 
+        Filters
+        -------
+
+        .. autosummary::
+           :nosignatures:
+
            BaseFilter
            FilterByFunction
            FilterByReducingToCOM
@@ -66,9 +90,21 @@ PYBIND11_MODULE(core, m) {
            FixParticlePath
            SubtractCOM
 
+        Trajectories
+        ------------
+
+        .. autosummary::
+           :nosignatures:
+
            BaseTrajectory
            FullTrajectory
            LazyTrajectory
+
+        Observables
+        -----------
+
+        .. autosummary::
+           :nosignatures:
 
            BondOrderParameters
            ConvexHull
@@ -76,9 +112,16 @@ PYBIND11_MODULE(core, m) {
            PoreSize
            MSD
 
+        Neighbour finders
+        -----------------
+
+        .. autosummary::
+           :nosignatures:
+
            NeighbourFinder
            CutoffFinder
            SANNFinder
+
     )pbdoc";
 
 	// utility classes

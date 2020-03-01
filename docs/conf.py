@@ -19,6 +19,7 @@ import os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
+from recommonmark.transform import AutoStructify
 
 # -- General configuration ------------------------------------------------
 
@@ -33,6 +34,8 @@ extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.autosummary',
     'sphinx.ext.napoleon',
+    'sphinx.ext.mathjax',
+    'recommonmark'
 ]
 
 autosummary_generate = True
@@ -43,7 +46,10 @@ templates_path = ['_templates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 # source_suffix = ['.rst', '.md']
-source_suffix = '.rst'
+source_suffix = {
+    '.rst' : 'restructuredtext',
+    '.md' : 'markdown'
+}
 
 # The encoding of source files.
 #source_encoding = 'utf-8-sig'
@@ -292,3 +298,15 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}
+
+# app setup hook
+def setup(app):
+    app.add_config_value('recommonmark_config', {
+        #'url_resolver': lambda url: github_doc_root + url,
+        'auto_toc_tree_section': 'Contents',
+        'enable_math': False,
+        'enable_inline_math': False,
+        'enable_eval_rst': True,
+    }, True)
+    app.add_transform(AutoStructify)
+    

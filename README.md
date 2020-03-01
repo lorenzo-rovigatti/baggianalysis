@@ -13,6 +13,7 @@ Baggianalysis is a library to facilitate the analysis of molecular simulations.
     * Boost Filesystem (libboost-filesystem-dev)
     * Boost Math (libboost-math-dev)
 * If Python bindings are enabled, Python 3's header file are required (python3-dev)
+* [Sphinx](https://www.sphinx-doc.org/en/master) and [recommonmark](https://recommonmark.readthedocs.io/en/latest/) are required to generate the Python bindings' documentation
 
 ### Compilation
 
