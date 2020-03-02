@@ -96,6 +96,20 @@ void ParticleSet::add_particle(std::shared_ptr<Particle> p) {
 	_particles_by_id.emplace(p->index(), p);
 }
 
+void ParticleSet::remove_particle(std::shared_ptr<Particle> p) {
+	for(auto neigh : p->bonded_neighbours()) {
+		neigh->remove_bonded_neighbour(p);
+	}
+
+	_particles_by_id.erase(p->index());
+	auto p_it = std::find(_particles.begin(), _particles.end(), p);
+	_particles.erase(p_it, p_it + 1);
+}
+
+void ParticleSet::remove_particle_by_id(int p_id) {
+	remove_particle(particle_by_id(p_id));
+}
+
 std::shared_ptr<Particle> ParticleSet::particle_by_id(int index) const {
 	if(_particles_by_id.count(index) == 0) {
 		std::string error = boost::str(boost::format("A particle with index '%d' does not exist") % index);
@@ -129,6 +143,8 @@ void export_ParticleSet(py::module &m) {
 		// here we tell pybind11 which of the two particles() methods we want to have bindings for
 		.def("particles", (std::vector<std::shared_ptr<Particle>> &(ParticleSet::*)())(&ParticleSet::particles))
 		.def("add_particle", &ParticleSet::add_particle)
+		.def("remove_particle", &ParticleSet::remove_particle)
+		.def("remove_particle_by_id", &ParticleSet::remove_particle_by_id)
 		.def("particle_by_id", &ParticleSet::particle_by_id)
 		.def("sort_particles_by_id", &ParticleSet::sort_particles_by_id)
 		.def_property("name", &ParticleSet::name, &ParticleSet::set_name);

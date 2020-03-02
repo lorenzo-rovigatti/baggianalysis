@@ -112,6 +112,8 @@ const std::set<Bond> &Topology::bonds() const {
 }
 
 void Topology::_fill_molecules(std::shared_ptr<System> system) {
+	_molecules.clear();
+
 	// these maps might be substituted by a single boost::bimap
 	std::map<int, int> index_to_cluster;
 	std::map<int, std::set<int>> cluster_to_molecule;

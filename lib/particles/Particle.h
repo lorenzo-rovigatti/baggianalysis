@@ -58,6 +58,7 @@ public:
 	}
 
 	void add_bonded_neighbour(std::shared_ptr<Particle> new_neighbour);
+	void remove_bonded_neighbour(std::shared_ptr<Particle> to_remove);
 
 	const std::set<std::shared_ptr<Particle>> &neighbours() const {
 		return _neighbours;

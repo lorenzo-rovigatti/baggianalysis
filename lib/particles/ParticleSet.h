@@ -83,6 +83,20 @@ public:
 	/// Add a particle to the set
 	void add_particle(std::shared_ptr<Particle> p);
 
+	/**
+	 * @brief Remove a particle from the set.
+	 *
+	 * @param p the particle to be removed
+	 */
+	void remove_particle(std::shared_ptr<Particle> p);
+
+	/**
+	 * @brief Remove the particle with the given id from the set.
+	 *
+	 * @param p_id the index of the particle to be removed
+	 */
+	void remove_particle_by_id(int p_id);
+
 	/// Return the particle with the given id. Throw an exception if the particle does not exist.
 	std::shared_ptr<Particle> particle_by_id(int index) const;
 

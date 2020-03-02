@@ -44,6 +44,10 @@ void Particle::add_bonded_neighbour(std::shared_ptr<Particle> new_neighbour) {
 	new_neighbour->_bonded_neighbours.insert(shared_from_this());
 }
 
+void Particle::remove_bonded_neighbour(std::shared_ptr<Particle> to_remove) {
+	_bonded_neighbours.erase(to_remove);
+}
+
 void Particle::add_neighbour(std::shared_ptr<Particle> new_neighbour) {
 	_neighbours.insert(new_neighbour);
 }
