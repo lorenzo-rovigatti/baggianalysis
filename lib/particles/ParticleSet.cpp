@@ -36,6 +36,12 @@ uint ParticleSet::N() const {
 	return _particles.size();
 }
 
+std::vector<int> ParticleSet::indexes() const {
+	vector<int> ids;
+	std::transform(_particles.begin(), _particles.end(), back_inserter(ids), [](const auto &p) {return p->index();});
+	return ids;
+}
+
 vector<particle_type> ParticleSet::types() const {
 	vector<particle_type> ts;
 	std::transform(_particles.begin(), _particles.end(), back_inserter(ts), [](const auto &p) {return p->type();});

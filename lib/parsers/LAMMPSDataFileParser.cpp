@@ -15,12 +15,13 @@ LAMMPSDataFileParser::LAMMPSDataFileParser(std::string atom_style) :
 				BaseParser(),
 				_atom_style(atom_style) {
 
-	_LAMMPS_section_keywords = std::vector<std::string> {
+	_LAMMPS_section_keywords = std::vector<std::string>( {
 			"Atoms", "Velocities", "Masses", "Ellipsoids", "Lines", "Triangles", "Bodies",
 			"Bonds", "Angles", "Dihedrals", "Impropers",
 			"Pair Coeffs", "PairIJ Coeffs", "Bond Coeffs", "Angle Coeffs", "Dihedral Coeffs", "Improper Coeffs",
-			"BondBond Coeffs", "BondAngle Coeffs", "MiddleBondTorsion Coeffs", "EndBondTorsion Coeffs", "AngleTorsion Coeffs", "AngleAngleTorsion Coeffs", "BondBond13 Coeffs", "AngleAngle Coeffs"
-	};
+			"BondBond Coeffs", "BondAngle Coeffs", "MiddleBondTorsion Coeffs", "EndBondTorsion Coeffs",
+			"AngleTorsion Coeffs", "AngleAngleTorsion Coeffs", "BondBond13 Coeffs", "AngleAngle Coeffs"
+	});
 
 	if(_atom_style == "bond") {
 		_type_index = 2;
@@ -86,7 +87,7 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 					utils::lexical_cast<double>(split[_pos_starting_index + 2]));
 			new_particle->set_position(pos);
 		}
-		catch (boost::bad_lexical_cast &e) {
+		catch(boost::bad_lexical_cast &e) {
 			std::string error = boost::str(boost::format("The position of the %u-th particle (%s, %s, %s) cannot be cast to a vector of floating-point numbers") % i % split[2] % split[3] % split[4]);
 			throw std::runtime_error(error);
 		}
@@ -158,7 +159,7 @@ double LAMMPSDataFileParser::_parse_box_line(std::vector<std::string> split_line
 		double upper = utils::lexical_cast<double>(split_line[1]);
 		return upper - lower;
 	}
-	catch (boost::bad_lexical_cast &e) {
+	catch(boost::bad_lexical_cast &e) {
 		std::string error = boost::str(boost::format("The box values '%s %s' found in the LAMMPS dump configuration are not valid") % split_line[0] % split_line[1]);
 		throw std::runtime_error(error);
 	}

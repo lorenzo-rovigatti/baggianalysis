@@ -33,6 +33,15 @@ public:
 	uint N() const;
 
 	/**
+	 * @brief Return a vector containing the index of all the particles
+	 *
+	 * The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios.
+	 *
+	 * @return a vector of particle indexes
+	 */
+	std::vector<int> indexes() const;
+
+	/**
 	 * @brief Return a vector containing all particle types
 	 *
 	 * The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios.

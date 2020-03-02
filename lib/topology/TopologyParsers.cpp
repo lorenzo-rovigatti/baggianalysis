@@ -111,7 +111,6 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 				int id_1 = utils::lexical_cast<int>(split[2]);
 				int id_2 = utils::lexical_cast<int>(split[3]);
 				topology->add_bond(id_1, id_2);
-				topology->add_bond(id_2, id_1);
 			}
 		}
 		else if(line == "Dihedrals") {

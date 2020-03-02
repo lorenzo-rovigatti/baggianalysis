@@ -17,7 +17,7 @@ namespace ba {
 
 class ParticleSet;
 
-class Particle {
+class Particle: public std::enable_shared_from_this<Particle> {
 public:
 	Particle();
 	Particle(int index);

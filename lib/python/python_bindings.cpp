@@ -5,6 +5,9 @@
  *      Author: lorenzo
  */
 
+#include "../exporters/BaseExporter.h"
+#include "../exporters/LAMMPSDataFileExporter.h"
+
 #include "../filters/FilterByFunction.h"
 #include "../filters/FilterByReducingToCOM.h"
 #include "../filters/FilterByType.h"
@@ -77,6 +80,15 @@ PYBIND11_MODULE(core, m) {
            LAMMPSDumpParser
            LJKAParser
 
+        Exporters
+        ---------
+
+        .. autosummary::
+           :nosignatures:
+           
+           BaseExporter
+           LAMMPSDataFileExporter
+
         Filters
         -------
 
@@ -138,6 +150,10 @@ PYBIND11_MODULE(core, m) {
 	ba::export_LAMMPSDataFileParser(m);
 	ba::export_LAMMPSDumpParser(m);
 	ba::export_LJKAParser(m);
+
+	// exporters
+	ba::export_BaseExporter(m);
+	ba::export_LAMMPSDataFileExporter(m);
 
 	// filters
 	ba::export_BaseFilter(m);

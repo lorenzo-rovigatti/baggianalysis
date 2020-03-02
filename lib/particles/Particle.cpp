@@ -41,7 +41,7 @@ Particle::~Particle() {
 
 void Particle::add_bonded_neighbour(std::shared_ptr<Particle> new_neighbour) {
 	_bonded_neighbours.insert(new_neighbour);
-	new_neighbour->_bonded_neighbours.insert(new_neighbour);
+	new_neighbour->_bonded_neighbours.insert(shared_from_this());
 }
 
 void Particle::add_neighbour(std::shared_ptr<Particle> new_neighbour) {
@@ -68,6 +68,7 @@ void export_Particle(py::module &m) {
 		.def(py::init<int, particle_type, vec3, vec3>())
 		.def("add_bonded_neighbour", &Particle::add_bonded_neighbour)
 		.def("add_neighbour", &Particle::add_neighbour)
+		.def_property_readonly("molecule", &Particle::molecule)
 		.def_property_readonly("bonded_neighbours", &Particle::bonded_neighbours)
 		.def_property_readonly("neighbours", &Particle::neighbours)
 		.def_property_readonly("index", &Particle::index)

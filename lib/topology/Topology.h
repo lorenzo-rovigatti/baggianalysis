@@ -27,6 +27,7 @@ using TopologyParser = std::function<void(std::string, std::shared_ptr<Topology>
 
 class Topology: public std::enable_shared_from_this<Topology> {
 public:
+	Topology(std::shared_ptr<System> system);
 	virtual ~Topology();
 
 	static std::shared_ptr<Topology> make_empty_topology();
@@ -38,14 +39,17 @@ public:
 
 	void apply(std::shared_ptr<System> system);
 
+	const std::set<Bond> &bonds() const;
+
 protected:
 	Topology();
 	Topology(const Topology &) = delete;
 
-	std::set<int> _indexes;
-	std::vector<Bond> _bonds;
-	std::vector<Angle> _angles;
-	std::vector<Dihedral> _dihedrals;
+	void _fill_molecules(std::shared_ptr<System> system);
+
+	std::set<Bond> _bonds;
+	std::set<Angle> _angles;
+	std::set<Dihedral> _dihedrals;
 
 	std::vector<std::set<int>> _molecules;
 };
