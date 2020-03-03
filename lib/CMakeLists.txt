@@ -14,7 +14,6 @@ SET(ba_lib_SOURCES
 	observables/ConvexHull.cpp
 	observables/FormFactor.cpp
 	observables/MSD.cpp
-	observables/PoreSize.cpp
 	parsers/BaseParser.cpp
 	parsers/GenericOxDNAParser.cpp
 	parsers/GroParser.cpp
@@ -79,6 +78,7 @@ SET(with_nlopt_SOURCES
 )
 
 IF(NLOPT_FOUND)
+	ADD_DEFINITIONS(-DNLOPT_FOUND)
 	SET(ba_lib_SOURCES
 		${ba_lib_SOURCES}
 		${with_nlopt_SOURCES}

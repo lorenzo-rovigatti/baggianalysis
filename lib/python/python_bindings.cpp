@@ -21,8 +21,11 @@
 #include "../observables/BondOrderParameters.h"
 #include "../observables/ConvexHull.h"
 #include "../observables/FormFactor.h"
-#include "../observables/PoreSize.h"
 #include "../observables/MSD.h"
+
+#ifdef NLOPT_FOUND
+#include "../observables/PoreSize.h"
+#endif
 
 #include "../parsers/GenericOxDNAParser.h"
 #include "../parsers/GroParser.h"
