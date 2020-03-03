@@ -44,7 +44,8 @@ std::shared_ptr<System> LAMMPSDumpParser::_parse_stream(std::ifstream &configura
 		std::string to_split = utils::trim(line);
 		auto split = utils::split(to_split);
 
-		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>());
+		int p_idx = utils::lexical_cast<int>(split[0]);
+		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(p_idx));
 		new_particle->set_type(split[1]);
 
 		try {
