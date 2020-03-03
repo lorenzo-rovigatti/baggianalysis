@@ -175,8 +175,10 @@ PYBIND11_MODULE(core, m) {
 	ba::export_BondOrderParameters(m);
 	ba::export_ConvexHull(m);
 	ba::export_FormFactor(m);
-	ba::export_PoreSize(m);
 	ba::export_MSD(m);
+#ifdef NLOPT_FOUND
+	ba::export_PoreSize(m);
+#endif
 
 	// neighbour finders
 	ba::export_NeighbourFinder(m);
