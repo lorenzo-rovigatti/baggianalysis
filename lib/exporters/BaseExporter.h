@@ -20,7 +20,7 @@ public:
 	BaseExporter();
 	virtual ~BaseExporter();
 
-	virtual void write(std::shared_ptr<System> system, std::string suffix) = 0;
+	virtual void write(std::shared_ptr<System> system, std::string) = 0;
 };
 
 #ifdef PYTHON_BINDINGS
@@ -32,13 +32,13 @@ class PyBaseExporter : public BaseExporter {
 public:
 	using BaseExporter::BaseExporter;
 
-	void write(std::shared_ptr<System> system, std::string suffix) override {
+	void write(std::shared_ptr<System> system, std::string str_param) override {
 		PYBIND11_OVERLOAD_PURE( // @suppress("Unused return value")
 			void,
 			BaseExporter,
 			write,
 			system,
-			suffix
+			str_param
 		);
 	}
 };

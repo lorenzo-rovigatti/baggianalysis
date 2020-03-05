@@ -6,6 +6,7 @@
  */
 
 #include "../exporters/BaseExporter.h"
+#include "../exporters/Cogli1Exporter.h"
 #include "../exporters/LAMMPSDataFileExporter.h"
 
 #include "../filters/FilterByFunction.h"
@@ -90,6 +91,7 @@ PYBIND11_MODULE(core, m) {
            :nosignatures:
            
            BaseExporter
+           Cogli1Exporter
            LAMMPSDataFileExporter
 
         Filters
@@ -156,6 +158,7 @@ PYBIND11_MODULE(core, m) {
 
 	// exporters
 	ba::export_BaseExporter(m);
+	ba::export_Cogli1Exporter(m);
 	ba::export_LAMMPSDataFileExporter(m);
 
 	// filters
