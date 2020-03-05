@@ -44,6 +44,11 @@ void BaseTrajectory::initialise_from_folder(std::string folder, std::string patt
 	bfs::path tot_path = bfs::path(folder) / bfs::path(pattern);
 	std::vector<std::string> files = utils::glob(tot_path.string(), natural_sorting);
 
+	if(files.size() == 0) {
+		std::string error = boost::str(boost::format("Pattern '%s' did not return any filename, cannot initialise a trajectory from an empty file list!") % tot_path.string());
+		throw std::runtime_error(error);
+	}
+
 	initialise_from_filelist(files);
 }
 

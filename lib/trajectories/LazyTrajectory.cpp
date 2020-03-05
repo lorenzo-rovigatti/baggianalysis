@@ -38,6 +38,11 @@ void LazyTrajectory::initialise_from_trajectory_file(string trajectory_file) {
 }
 
 void LazyTrajectory::initialise_from_filelist(std::vector<std::string> filelist) {
+	if(filelist.size() == 0) {
+		string error = boost::str(boost::format("Trying to initialise a trajectory from an empty filelist"));
+		throw runtime_error(error);
+	}
+
 	_type = FOLDER;
 
 	_files = filelist;
