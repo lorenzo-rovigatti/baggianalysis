@@ -24,7 +24,7 @@ Particle::Particle(int index) :
 }
 
 Particle::Particle(particle_type t, vec3 pos, vec3 vel) :
-				Particle(Particle::_current_index, DEFAULT_PARTICLE_TYPE, vec3(0., 0., 0.), vec3(0., 0., 0.)) {
+				Particle(Particle::_current_index, t, pos, vel) {
 	Particle::_current_index++;
 }
 

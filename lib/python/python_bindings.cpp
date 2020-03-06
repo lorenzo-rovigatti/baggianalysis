@@ -16,6 +16,7 @@
 #include "../filters/SubtractCOM.h"
 
 #include "../neighbour_finders/CutoffFinder.h"
+#include "../neighbour_finders/FixedNumberFinder.h"
 #include "../neighbour_finders/NeighbourFinder.h"
 #include "../neighbour_finders/SANNFinder.h"
 
@@ -136,6 +137,7 @@ PYBIND11_MODULE(core, m) {
            :nosignatures:
 
            NeighbourFinder
+           FixedNumberFinder
            CutoffFinder
            SANNFinder
 
@@ -185,6 +187,7 @@ PYBIND11_MODULE(core, m) {
 
 	// neighbour finders
 	ba::export_NeighbourFinder(m);
+	ba::export_FixedNumberFinder(m);
 	ba::export_CutoffFinder(m);
 	ba::export_SANNFinder(m);
 }

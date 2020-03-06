@@ -9,6 +9,7 @@ SET(ba_lib_SOURCES
 	filters/FixParticlePath.cpp
 	filters/SubtractCOM.cpp
 	neighbour_finders/CutoffFinder.cpp
+	neighbour_finders/FixedNumberFinder.cpp
 	neighbour_finders/NeighbourFinder.cpp
 	neighbour_finders/SANNFinder.cpp
 	observables/BondOrderParameters.cpp

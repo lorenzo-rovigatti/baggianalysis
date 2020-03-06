@@ -62,10 +62,18 @@ void CutoffFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particl
 #ifdef PYTHON_BINDINGS
 
 void export_CutoffFinder(py::module &m) {
-	py::class_<CutoffFinder, NeighbourFinder, std::shared_ptr<CutoffFinder>> finder(m, "CutoffFinder");
+	py::class_<CutoffFinder, NeighbourFinder, std::shared_ptr<CutoffFinder>> finder(m, "CutoffFinder", R"pbdoc(
+        Define as neighbours of a particle all those particles that are at closer than the given cutoff. 
+    )pbdoc");
 
-	finder
-		.def(py::init<double>());
+	finder.def(py::init<double>(), R"pbdoc(
+        Constructor.
+
+        Parameters
+        ----------
+		cutoff : double
+            The smallest cutoff that will be used to look for neighbours
+    )pbdoc");
 }
 
 #endif

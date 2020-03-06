@@ -12,6 +12,24 @@
 
 namespace ba {
 
+/**
+ * @brief A utility struct used by some finders.
+ */
+struct Neighbour {
+	Neighbour(std::shared_ptr<Particle> n_q, double n_distance) :
+					q(n_q),
+					distance(n_distance) {
+
+	}
+
+	friend bool operator<(const Neighbour &l, const Neighbour &r) {
+		return l.distance < r.distance;
+	}
+
+	std::shared_ptr<Particle> q;
+	double distance;
+};
+
 class NeighbourFinder {
 public:
 	NeighbourFinder();
