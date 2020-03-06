@@ -17,6 +17,11 @@ namespace ba {
 void parse_microgel_bondfile(std::string filename, std::shared_ptr<Topology> topology) {
 	std::ifstream input(filename);
 
+	if(!input.good()) {
+		std::string error = boost::str(boost::format("The topology file '%s' is unreadable") % filename);
+		throw std::runtime_error(error);
+	}
+
 	std::string line;
 	std::getline(input, line);
 	std::getline(input, line);
@@ -50,6 +55,11 @@ void parse_microgel_bondfile(std::string filename, std::shared_ptr<Topology> top
 
 void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topology) {
 	std::ifstream input(filename);
+
+	if(!input.good()) {
+		std::string error = boost::str(boost::format("The topology file '%s' is unreadable") % filename);
+		throw std::runtime_error(error);
+	}
 
 	std::string line;
 	std::getline(input, line);
