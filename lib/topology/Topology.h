@@ -47,6 +47,9 @@ protected:
 
 	void _fill_molecules(std::shared_ptr<System> system);
 
+	/// the number of particles contained in the system that this topology was initialised for
+	uint _N_in_system;
+
 	std::set<Bond> _bonds;
 	std::set<Angle> _angles;
 	std::set<Dihedral> _dihedrals;

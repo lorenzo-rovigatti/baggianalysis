@@ -14,7 +14,7 @@
 
 namespace ba {
 
-Topology::Topology() {
+Topology::Topology() : _N_in_system(0) {
 
 }
 
@@ -81,15 +81,13 @@ void Topology::apply(std::shared_ptr<System> system) {
 		}
 	}
 
-	static uint N_in_system = 0;
 	// we build the molecules only once
 	if(_molecules.size() == 0) {
-		N_in_system = system->N();
 		_fill_molecules(system);
 	}
 
-	if(N_in_system != system->N()) {
-		std::string error = boost::str(boost::format("The topology was initialised on a System containing %u particles and hence it cannot be applied to a System containing %u particles") % N_in_system % system->N());
+	if(_N_in_system != system->N()) {
+		std::string error = boost::str(boost::format("The topology was initialised on a System containing %u particles and hence it cannot be applied to a System containing %u particles") % _N_in_system % system->N());
 		throw std::runtime_error(error);
 	}
 
@@ -112,6 +110,7 @@ const std::set<Bond> &Topology::bonds() const {
 }
 
 void Topology::_fill_molecules(std::shared_ptr<System> system) {
+	_N_in_system = system->N();
 	_molecules.clear();
 
 	// these maps might be substituted by a single boost::bimap

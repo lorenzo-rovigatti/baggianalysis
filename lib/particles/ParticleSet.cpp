@@ -135,6 +135,7 @@ void export_ParticleSet(py::module &m) {
 	particle_set
 		.def(py::init<>())
 		.def("N", &ParticleSet::N)
+		.def("indexes", &ParticleSet::indexes)
 		.def("types", &ParticleSet::types)
 		.def("positions", &ParticleSet::positions)
 		.def("velocities", &ParticleSet::velocities)

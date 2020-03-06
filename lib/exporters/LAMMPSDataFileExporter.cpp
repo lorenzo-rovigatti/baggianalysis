@@ -32,6 +32,7 @@ void LAMMPSDataFileExporter::write(std::shared_ptr<System> system, std::string s
 	types.erase(std::unique(types.begin(), types.end()), types.end());
 
 	Topology topology(system);
+	topology.apply(system);
 	uint N_bonds = topology.bonds().size();
 
 	std::string filename = _basename + suffix;
