@@ -66,6 +66,18 @@ class PyBaseParser : public BaseParser {
 public:
 	using BaseParser::BaseParser;
 
+	std::shared_ptr<System> _parse_file(std::string conf_name) override {
+		PYBIND11_OVERLOAD(
+			std::shared_ptr<System>,
+			BaseParser,
+			_parse_file,
+			conf_name
+		);
+
+		// suppress warnings
+		return std::shared_ptr<System>(std::make_shared<System>());
+	}
+
 	std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override {
 		PYBIND11_OVERLOAD_PURE(
 			std::shared_ptr<System>,
