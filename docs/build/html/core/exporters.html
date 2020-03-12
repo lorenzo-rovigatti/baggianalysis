@@ -55,27 +55,77 @@
 <dt id="baggianalysis.core.BaseExporter">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">BaseExporter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseExporter</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseExporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interface for configuration-exporting classes.</p>
-<p>Default constructor.</p>
+<p>The default constructor does not take any parameters.</p>
 <dl class="method">
 <dt id="baggianalysis.core.BaseExporter.write">
 <code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseExporter</em>, <em class="sig-param">arg0: baggianalysis.core.System</em>, <em class="sig-param">arg1: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseExporter.write" title="Permalink to this definition">¶</a></dt>
-<dd><p>Print out the configuration.</p>
+<dd><blockquote>
+<div><p>Print out the configuration.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>system</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a>) – The <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a> to be printed.</p></li>
+<li><p><strong>str_param</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – A string that is be used by subclasses to construct the output filename.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="baggianalysis.core.Cogli1Exporter">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">Cogli1Exporter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.Cogli1Exporter</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.Cogli1Exporter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">Cogli1Exporter</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Cogli1Exporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export configurations to the cogli1 file format, used for visualisation purposes.</p>
-<p>Constructor.</p>
+<p>Overloaded function.</p>
+<ol class="arabic">
+<li><p>__init__(self: baggianalysis.core.Cogli1Exporter) -&gt; None</p>
+<blockquote>
+<div><p>This constructor makes the exporter print each particle as a red sphere of radius 0.5.</p>
+</div></blockquote>
+</li>
+<li><p>__init__(self: baggianalysis.core.Cogli1Exporter, arg0: Callable[[baggianalysis.core.Particle], str]) -&gt; None</p></li>
+</ol>
+<p>This constructor takes as a parameter a callable that maps each particle into a string that will be printed by the exporter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mapper</strong> (<em>callable</em>) – A callable that takes a particle and returns the corresponding cogli1 string.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="baggianalysis.core.Cogli1Exporter.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseExporter</em>, <em class="sig-param">arg0: baggianalysis.core.System</em>, <em class="sig-param">arg1: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.Cogli1Exporter.write" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Print out the configuration.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>system</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a>) – The <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a> to be printed.</p></li>
+<li><p><strong>str_param</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – A string that is be used by subclasses to construct the output filename.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="baggianalysis.core.LAMMPSDataFileExporter">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LAMMPSDataFileExporter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.LAMMPSDataFileExporter</em>, <em class="sig-param">arg0: str</em>, <em class="sig-param">arg1: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.LAMMPSDataFileExporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export configurations to the LAMMPS data file format.</p>
-<p>Constructor.</p>
+<blockquote>
+<div><p>This constructor requires two mandatory arguments.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>atom_style</strong> (<em>string</em>) – The atom style to be used in printing the data file (see <a class="reference external" href="https://lammps.sandia.gov/doc/atom_style.html">here</a> for details). As of now, only the “atomic” and “bond” styles are supported.</p></li>
+<li><p><strong>basename</strong> (<em>string</em>) – The prefix that will be used to build the filename of the output file. Can be empty.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </div>

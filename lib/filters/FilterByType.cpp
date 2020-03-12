@@ -42,9 +42,7 @@ shared_ptr<System> FilterByType::filter(std::shared_ptr<const System> syst) {
 void export_FilterByType(py::module &m) {
 	py::class_<FilterByType, BaseFilter, std::shared_ptr<FilterByType>> filter(m, "FilterByType");
 
-	filter
-		.def(py::init<std::vector<particle_type>>())
-		.def("filter", &FilterByType::filter);
+	filter.def(py::init<std::vector<particle_type>>());
 }
 
 #endif

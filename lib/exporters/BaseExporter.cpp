@@ -25,10 +25,18 @@ void export_BaseExporter(py::module &m) {
 	)pbdoc");
 
 	exporter.def(py::init<>(), R"pbdoc(
-		 Default constructor. 
+		 The default constructor does not take any parameters.
 	)pbdoc");
+
 	exporter.def("write", &BaseExporter::write, R"pbdoc(
-		 Print out the configuration. 
+		 Print out the configuration.
+
+         Parameters
+         ----------
+             system: :class:`System`
+                 The :class:`System` to be printed.
+             str_param: str
+                 A string that is be used by subclasses to construct the output filename. 
 	)pbdoc");
 }
 

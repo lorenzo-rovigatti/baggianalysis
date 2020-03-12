@@ -35,11 +35,18 @@ std::shared_ptr<System> FilterByFunction::filter(std::shared_ptr<const System> s
 #ifdef PYTHON_BINDINGS
 
 void export_FilterByFunction(py::module &m) {
-	py::class_<FilterByFunction, BaseFilter, std::shared_ptr<FilterByFunction>> filter(m, "FilterByFunction");
+	py::class_<FilterByFunction, BaseFilter, std::shared_ptr<FilterByFunction>> filter(m, "FilterByFunction", R"pbdoc(
+        Filter that uses a user-provided callable to choose which particles will be included in the new system
+	)pbdoc");
 
-	filter
-		.def(py::init<FilterType>())
-		.def("filter", &FilterByFunction::filter);
+	filter.def(py::init<FilterType>(), R"pbdoc(
+        The constructor takes as a parameter a callable that will be used to decided which particles will be included in the new system.
+
+        Parameters
+        ----------
+        function : callable
+            A callable that takes a particle and returns True if the particle should be included in the new system, False otherwise.
+	)pbdoc");
 }
 
 #endif

@@ -40,9 +40,7 @@ shared_ptr<System> SubtractCOM::filter(std::shared_ptr<const System> syst) {
 void export_SubtractCOM(py::module &m) {
 	py::class_<SubtractCOM, BaseFilter, std::shared_ptr<SubtractCOM>> filter(m, "SubtractCOM");
 
-	filter
-		.def(py::init<>())
-		.def("filter", &SubtractCOM::filter);
+	filter.def(py::init<>());
 }
 
 #endif

@@ -44,7 +44,7 @@
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.FilterByFunction" title="baggianalysis.core.FilterByFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterByFunction</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Filter that uses a user-provided callable to choose which particles will be included in the new system</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.FilterByReducingToCOM" title="baggianalysis.core.FilterByReducingToCOM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterByReducingToCOM</span></code></a></p></td>
 <td><p></p></td>
@@ -73,52 +73,34 @@
 <dl class="class">
 <dt id="baggianalysis.core.FilterByFunction">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FilterByFunction</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FilterByFunction, arg0: Callable[[baggianalysis.core.Particle], bool]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.FilterByFunction" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="baggianalysis.core.FilterByFunction.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FilterByFunction</em>, <em class="sig-param">arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.FilterByFunction.filter" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<dd><p>Filter that uses a user-provided callable to choose which particles will be included in the new system</p>
+<p>The constructor takes as a parameter a callable that will be used to decided which particles will be included in the new system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>function</strong> (<em>callable</em>) – A callable that takes a particle and returns True if the particle should be included in the new system, False otherwise.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="class">
 <dt id="baggianalysis.core.FilterByReducingToCOM">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FilterByReducingToCOM</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FilterByReducingToCOM</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.FilterByReducingToCOM" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="baggianalysis.core.FilterByReducingToCOM.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FilterByReducingToCOM</em>, <em class="sig-param">arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.FilterByReducingToCOM.filter" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-</dd></dl>
 
 <dl class="class">
 <dt id="baggianalysis.core.FilterByType">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FilterByType</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FilterByType, arg0: List[str]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.FilterByType" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="baggianalysis.core.FilterByType.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FilterByType</em>, <em class="sig-param">arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.FilterByType.filter" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-</dd></dl>
 
 <dl class="class">
 <dt id="baggianalysis.core.FixParticlePath">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FixParticlePath</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FixParticlePath</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.FixParticlePath" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="baggianalysis.core.FixParticlePath.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FixParticlePath</em>, <em class="sig-param">arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.FixParticlePath.filter" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-</dd></dl>
 
 <dl class="class">
 <dt id="baggianalysis.core.SubtractCOM">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">SubtractCOM</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.SubtractCOM</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.SubtractCOM" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="baggianalysis.core.SubtractCOM.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.SubtractCOM</em>, <em class="sig-param">arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.SubtractCOM.filter" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
-
-</dd></dl>
 
 </div>
 

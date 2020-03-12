@@ -73,9 +73,7 @@ shared_ptr<System> FixParticlePath::filter(std::shared_ptr<const System> syst) {
 void export_FixParticlePath(py::module &m) {
 	py::class_<FixParticlePath, BaseFilter, std::shared_ptr<FixParticlePath>> filter(m, "FixParticlePath");
 
-	filter
-		.def(py::init<>())
-		.def("filter", &FixParticlePath::filter);
+	filter.def(py::init<>());
 }
 
 #endif

@@ -14,6 +14,7 @@ namespace ba {
 
 class LAMMPSDataFileExporter: public BaseExporter {
 public:
+	LAMMPSDataFileExporter() = delete;
 	LAMMPSDataFileExporter(std::string atom_style, std::string basename);
 	virtual ~LAMMPSDataFileExporter();
 

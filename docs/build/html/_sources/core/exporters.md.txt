@@ -17,6 +17,7 @@
 .. autoclass:: Cogli1Exporter
     :members:
     :undoc-members:
+    :inherited-members:
     
 .. autoclass:: LAMMPSDataFileExporter
     :members:

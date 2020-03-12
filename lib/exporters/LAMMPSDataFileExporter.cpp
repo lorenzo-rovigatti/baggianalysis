@@ -105,7 +105,14 @@ void export_LAMMPSDataFileExporter(py::module &m) {
 	)pbdoc");
 
 	exporter.def(py::init<std::string, std::string>(), R"pbdoc(
-		 Constructor. 
+		This constructor requires two mandatory arguments.
+
+        Parameters
+        ----------
+            atom_style : str
+                The atom style to be used in printing the data file (see `here <https://lammps.sandia.gov/doc/atom_style.html>`_ for details). As of now, only the "atomic" and "bond" styles are supported.
+            basename : str
+                The prefix that will be used to build the filename of the output file. Can be empty. 
 	)pbdoc");
 }
 
