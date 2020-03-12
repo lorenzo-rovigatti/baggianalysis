@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Topology-related classes and utility functions &#8212; baggianalysis 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Configuration parsers" href="parsers.html" />
+    <link rel="prev" title="Particle-related classes" href="particles.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="topology-related-classes-and-utility-functions">
+<h1>Topology-related classes and utility functions<a class="headerlink" href="#topology-related-classes-and-utility-functions" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.Topology" title="baggianalysis.core.Topology"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Topology</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.parse_microgel_bondfile" title="baggianalysis.core.parse_microgel_bondfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_microgel_bondfile</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.parse_LAMMPS_topology" title="baggianalysis.core.parse_LAMMPS_topology"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_LAMMPS_topology</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="baggianalysis.core.Topology">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">Topology</code><a class="headerlink" href="#baggianalysis.core.Topology" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="baggianalysis.core.Topology.add_angle">
+<code class="sig-name descname">add_angle</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.Topology</em>, <em class="sig-param">arg0: int</em>, <em class="sig-param">arg1: int</em>, <em class="sig-param">arg2: int</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.Topology.add_angle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Topology.add_bond">
+<code class="sig-name descname">add_bond</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.Topology</em>, <em class="sig-param">arg0: int</em>, <em class="sig-param">arg1: int</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.Topology.add_bond" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Topology.add_dihedral">
+<code class="sig-name descname">add_dihedral</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.Topology</em>, <em class="sig-param">arg0: int</em>, <em class="sig-param">arg1: int</em>, <em class="sig-param">arg2: int</em>, <em class="sig-param">arg3: int</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.Topology.add_dihedral" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Topology.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.Topology</em>, <em class="sig-param">arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.Topology.apply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Topology.bonds">
+<em class="property">property </em><code class="sig-name descname">bonds</code><a class="headerlink" href="#baggianalysis.core.Topology.bonds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Topology.make_empty_topology">
+<code class="sig-name descname">make_empty_topology</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; baggianalysis.core.Topology<a class="headerlink" href="#baggianalysis.core.Topology.make_empty_topology" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Topology.make_topology_from_file">
+<code class="sig-name descname">make_topology_from_file</code><span class="sig-paren">(</span><em class="sig-param">arg0: str, arg1: Callable[[str, baggianalysis.core.Topology], None]</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.Topology<a class="headerlink" href="#baggianalysis.core.Topology.make_topology_from_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="baggianalysis.core.parse_microgel_bondfile">
+<code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">parse_microgel_bondfile</code><span class="sig-paren">(</span><em class="sig-param">arg0: str</em>, <em class="sig-param">arg1: baggianalysis.core.Topology</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.parse_microgel_bondfile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="baggianalysis.core.parse_LAMMPS_topology">
+<code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">parse_LAMMPS_topology</code><span class="sig-paren">(</span><em class="sig-param">arg0: str</em>, <em class="sig-param">arg1: baggianalysis.core.Topology</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.parse_LAMMPS_topology" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">baggianalysis</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="core.html">The core module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="particles.html">Particle-related classes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Topology-related classes and utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers.html">Configuration parsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exporters.html">Configuration exporters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html">Particle filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trajectories.html">Trajectory classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="observables.html">Observables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="core.html">The core module</a><ul>
+      <li>Previous: <a href="particles.html" title="previous chapter">Particle-related classes</a></li>
+      <li>Next: <a href="parsers.html" title="next chapter">Configuration parsers</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Lorenzo Rovigatti.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/core/topology.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -9,11 +9,6 @@
 
 namespace ba {
 
-FixedNumberFinder::FixedNumberFinder(uint N) :
-				FixedNumberFinder(N, 1.5) {
-
-}
-
 FixedNumberFinder::FixedNumberFinder(uint N, double initial_cutoff) :
 				_N(N),
 				_cutoff(initial_cutoff),
@@ -81,24 +76,15 @@ void export_FixedNumberFinder(py::module &m) {
         Define as neighbours of a particle the N particles that are closest to it. By default, a cutoff of 1.5 is used to look for neighbours. If not enough neighbours are found, the cutoff is increased. 
     )pbdoc");
 
-	finder.def(py::init<int>(), R"pbdoc(
+	finder.def(py::init<int, double>(), py::arg("N"), py::arg("cutoff") = 1.5, R"pbdoc(
         Constructor.
 
         Parameters
         ----------
         N : int
-            The number of neighbours N that each particle will have at the end of the finding procedure
-    )pbdoc");
-
-	finder.def(py::init<int>(), R"pbdoc(
-        Constructor.
-
-        Parameters
-        ----------
-        N : int
-            The number of neighbours N that each particle will have at the end of the finding procedure
-		cutoff : double
-            The smallest cutoff that will be used to look for neighbours
+            The number of neighbours N that each particle will have at the end of the finding procedure.
+        cutoff : float
+            The smallest cutoff that will be used to look for neighbours.
 	)pbdoc");
 }
 

@@ -28,8 +28,9 @@
 									<listOptionValue builtIn="false" value="PY_MAJOR_VERSION=3"/>
 									<listOptionValue builtIn="false" value="PY_MINOR_VERSION=5"/>
 								</option>
-								<option id="gnu.c.compiler.option.include.paths.2132293911" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+								<option id="gnu.c.compiler.option.include.paths.2132293911" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/baggianalysis/extern}&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/include/python3.6"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.345752765" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -38,6 +39,7 @@
 								<option id="gnu.cpp.compiler.option.debugging.level.103833027" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.695048570" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/baggianalysis/extern}&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/include/python3.6"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.915471491" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__cplusplus=201402L"/>
@@ -56,8 +58,9 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.archiver.1531229070" name="Cross GCC Archiver" superClass="cdt.managedbuild.tool.gnu.cross.archiver"/>
 							<tool id="cdt.managedbuild.tool.gnu.cross.assembler.363412930" name="Cross GCC Assembler" superClass="cdt.managedbuild.tool.gnu.cross.assembler">
-								<option id="gnu.both.asm.option.include.paths.1400878720" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+								<option id="gnu.both.asm.option.include.paths.1400878720" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/baggianalysis/extern}&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/include/python3.6"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1081382060" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
@@ -102,8 +105,9 @@
 									<listOptionValue builtIn="false" value="PY_MAJOR_VERSION=3"/>
 									<listOptionValue builtIn="false" value="PY_MINOR_VERSION=5"/>
 								</option>
-								<option id="gnu.c.compiler.option.include.paths.134734142" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+								<option id="gnu.c.compiler.option.include.paths.134734142" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/baggianalysis/extern}&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/include/python3.6"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.664262249" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -112,6 +116,7 @@
 								<option id="gnu.cpp.compiler.option.debugging.level.1389808948" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.2012333135" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/baggianalysis/extern}&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/include/python3.6"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1509788610" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__cplusplus=201402L"/>
@@ -128,8 +133,9 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.archiver.1006109542" name="Cross GCC Archiver" superClass="cdt.managedbuild.tool.gnu.cross.archiver"/>
 							<tool id="cdt.managedbuild.tool.gnu.cross.assembler.1311648088" name="Cross GCC Assembler" superClass="cdt.managedbuild.tool.gnu.cross.assembler">
-								<option id="gnu.both.asm.option.include.paths.2072040571" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+								<option id="gnu.both.asm.option.include.paths.2072040571" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/baggianalysis/extern}&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/include/python3.6"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1581152060" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
@@ -174,8 +180,9 @@
 									<listOptionValue builtIn="false" value="PY_MAJOR_VERSION=3"/>
 									<listOptionValue builtIn="false" value="PY_MINOR_VERSION=5"/>
 								</option>
-								<option id="gnu.c.compiler.option.include.paths.1463611382" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+								<option id="gnu.c.compiler.option.include.paths.1463611382" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/baggianalysis/extern}&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/include/python3.6"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1904385844" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
@@ -184,6 +191,7 @@
 								<option id="gnu.cpp.compiler.option.debugging.level.889293166" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.525617100" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/baggianalysis/extern}&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/include/python3.6"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.972448194" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="__cplusplus=201402L"/>
@@ -200,8 +208,9 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.archiver.153973" name="Cross GCC Archiver" superClass="cdt.managedbuild.tool.gnu.cross.archiver"/>
 							<tool id="cdt.managedbuild.tool.gnu.cross.assembler.1118321640" name="Cross GCC Assembler" superClass="cdt.managedbuild.tool.gnu.cross.assembler">
-								<option id="gnu.both.asm.option.include.paths.1438211842" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
+								<option id="gnu.both.asm.option.include.paths.1438211842" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/baggianalysis/extern}&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/include/python3.6"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.162061727" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>

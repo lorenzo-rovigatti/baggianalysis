@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Configuration exporters &#8212; baggianalysis 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Particle filters" href="filters.html" />
+    <link rel="prev" title="Configuration parsers" href="parsers.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="configuration-exporters">
+<h1>Configuration exporters<a class="headerlink" href="#configuration-exporters" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.BaseExporter" title="baggianalysis.core.BaseExporter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseExporter</span></code></a></p></td>
+<td><p>Interface for configuration-exporting classes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.Cogli1Exporter" title="baggianalysis.core.Cogli1Exporter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cogli1Exporter</span></code></a></p></td>
+<td><p>Export configurations to the cogli1 file format, used for visualisation purposes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.LAMMPSDataFileExporter" title="baggianalysis.core.LAMMPSDataFileExporter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDataFileExporter</span></code></a></p></td>
+<td><p>Export configurations to the LAMMPS data file format.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="baggianalysis.core.BaseExporter">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">BaseExporter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseExporter</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseExporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface for configuration-exporting classes.</p>
+<p>Default constructor.</p>
+<dl class="method">
+<dt id="baggianalysis.core.BaseExporter.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseExporter</em>, <em class="sig-param">arg0: baggianalysis.core.System</em>, <em class="sig-param">arg1: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseExporter.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print out the configuration.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baggianalysis.core.Cogli1Exporter">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">Cogli1Exporter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.Cogli1Exporter</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.Cogli1Exporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export configurations to the cogli1 file format, used for visualisation purposes.</p>
+<p>Constructor.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="baggianalysis.core.LAMMPSDataFileExporter">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LAMMPSDataFileExporter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.LAMMPSDataFileExporter</em>, <em class="sig-param">arg0: str</em>, <em class="sig-param">arg1: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.LAMMPSDataFileExporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export configurations to the LAMMPS data file format.</p>
+<p>Constructor.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">baggianalysis</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="core.html">The core module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="particles.html">Particle-related classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topology.html">Topology-related classes and utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers.html">Configuration parsers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuration exporters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html">Particle filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trajectories.html">Trajectory classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="observables.html">Observables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="core.html">The core module</a><ul>
+      <li>Previous: <a href="parsers.html" title="previous chapter">Configuration parsers</a></li>
+      <li>Next: <a href="filters.html" title="next chapter">Particle filters</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Lorenzo Rovigatti.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/core/exporters.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

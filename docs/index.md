@@ -1,11 +1,8 @@
+# Baggianalysis
+
 ```eval_rst
 .. toctree::
-    :maxdepth: 2
+   :maxdepth: 2
    
-```
-
-```eval_rst
-.. automodule:: baggianalysis.core
-    :members:
-
+   core/core.md
 ```

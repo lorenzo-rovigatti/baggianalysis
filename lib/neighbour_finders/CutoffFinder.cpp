@@ -71,8 +71,8 @@ void export_CutoffFinder(py::module &m) {
 
         Parameters
         ----------
-		cutoff : double
-            The smallest cutoff that will be used to look for neighbours
+        cutoff : double
+            The smallest cutoff that will be used to look for neighbours.
     )pbdoc");
 }
 

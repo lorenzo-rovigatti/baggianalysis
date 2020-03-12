@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Particle-related classes &#8212; baggianalysis 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Topology-related classes and utility functions" href="topology.html" />
+    <link rel="prev" title="The core module" href="core.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="particle-related-classes">
+<h1>Particle-related classes<a class="headerlink" href="#particle-related-classes" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Particle</span></code></a></p></td>
+<td><p>Overloaded function.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ParticleSet</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-obj docutils literal notranslate"><span class="pre">System</span></code></a></p></td>
+<td><p>Store a configuration.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="baggianalysis.core.Particle">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">Particle</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Particle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: baggianalysis.core.Particle) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.Particle, arg0: int) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.Particle, arg0: str, arg1: glm::tvec3&lt;scalar, P&gt;, arg2: glm::tvec3&lt;scalar, P&gt;) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.Particle, arg0: int, arg1: str, arg2: glm::tvec3&lt;scalar, P&gt;, arg3: glm::tvec3&lt;scalar, P&gt;) -&gt; None</p></li>
+</ol>
+<dl class="method">
+<dt id="baggianalysis.core.Particle.add_bonded_neighbour">
+<code class="sig-name descname">add_bonded_neighbour</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.Particle</em>, <em class="sig-param">arg0: baggianalysis.core.Particle</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.Particle.add_bonded_neighbour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Particle.add_neighbour">
+<code class="sig-name descname">add_neighbour</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.Particle</em>, <em class="sig-param">arg0: baggianalysis.core.Particle</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.Particle.add_neighbour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Particle.bonded_neighbours">
+<em class="property">property </em><code class="sig-name descname">bonded_neighbours</code><a class="headerlink" href="#baggianalysis.core.Particle.bonded_neighbours" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Particle.index">
+<em class="property">property </em><code class="sig-name descname">index</code><a class="headerlink" href="#baggianalysis.core.Particle.index" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Particle.molecule">
+<em class="property">property </em><code class="sig-name descname">molecule</code><a class="headerlink" href="#baggianalysis.core.Particle.molecule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Particle.neighbours">
+<em class="property">property </em><code class="sig-name descname">neighbours</code><a class="headerlink" href="#baggianalysis.core.Particle.neighbours" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Particle.position">
+<em class="property">property </em><code class="sig-name descname">position</code><a class="headerlink" href="#baggianalysis.core.Particle.position" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Particle.type">
+<em class="property">property </em><code class="sig-name descname">type</code><a class="headerlink" href="#baggianalysis.core.Particle.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Particle.velocity">
+<em class="property">property </em><code class="sig-name descname">velocity</code><a class="headerlink" href="#baggianalysis.core.Particle.velocity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baggianalysis.core.ParticleSet">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">ParticleSet</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.ParticleSet" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="baggianalysis.core.ParticleSet.N">
+<code class="sig-name descname">N</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#baggianalysis.core.ParticleSet.N" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.ParticleSet.add_particle">
+<code class="sig-name descname">add_particle</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em>, <em class="sig-param">arg0: baggianalysis.core.Particle</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.ParticleSet.add_particle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.ParticleSet.average_velocity">
+<code class="sig-name descname">average_velocity</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em><span class="sig-paren">)</span> &#x2192; glm::tvec3&lt;scalar, P&gt;<a class="headerlink" href="#baggianalysis.core.ParticleSet.average_velocity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.ParticleSet.com">
+<code class="sig-name descname">com</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em><span class="sig-paren">)</span> &#x2192; glm::tvec3&lt;scalar, P&gt;<a class="headerlink" href="#baggianalysis.core.ParticleSet.com" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.ParticleSet.indexes">
+<code class="sig-name descname">indexes</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em><span class="sig-paren">)</span> &#x2192; List[int]<a class="headerlink" href="#baggianalysis.core.ParticleSet.indexes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.ParticleSet.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#baggianalysis.core.ParticleSet.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.ParticleSet.particle_by_id">
+<code class="sig-name descname">particle_by_id</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em>, <em class="sig-param">arg0: int</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.Particle<a class="headerlink" href="#baggianalysis.core.ParticleSet.particle_by_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.ParticleSet.particles">
+<code class="sig-name descname">particles</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em><span class="sig-paren">)</span> &#x2192; List[baggianalysis.core.Particle]<a class="headerlink" href="#baggianalysis.core.ParticleSet.particles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.ParticleSet.positions">
+<code class="sig-name descname">positions</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em><span class="sig-paren">)</span> &#x2192; List[glm::tvec3&lt;scalar, P&gt;]<a class="headerlink" href="#baggianalysis.core.ParticleSet.positions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.ParticleSet.remove_particle">
+<code class="sig-name descname">remove_particle</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em>, <em class="sig-param">arg0: baggianalysis.core.Particle</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.ParticleSet.remove_particle" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.ParticleSet.remove_particle_by_id">
+<code class="sig-name descname">remove_particle_by_id</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em>, <em class="sig-param">arg0: int</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.ParticleSet.remove_particle_by_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.ParticleSet.sort_particles_by_id">
+<code class="sig-name descname">sort_particles_by_id</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.ParticleSet.sort_particles_by_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.ParticleSet.types">
+<code class="sig-name descname">types</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em><span class="sig-paren">)</span> &#x2192; List[str]<a class="headerlink" href="#baggianalysis.core.ParticleSet.types" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.ParticleSet.velocities">
+<code class="sig-name descname">velocities</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.ParticleSet</em><span class="sig-paren">)</span> &#x2192; List[glm::tvec3&lt;scalar, P&gt;]<a class="headerlink" href="#baggianalysis.core.ParticleSet.velocities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baggianalysis.core.System">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">System</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.System" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store a configuration.</p>
+<p>Default constructor.</p>
+<dl class="method">
+<dt id="baggianalysis.core.System.box">
+<em class="property">property </em><code class="sig-name descname">box</code><a class="headerlink" href="#baggianalysis.core.System.box" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.System.empty_copy">
+<code class="sig-name descname">empty_copy</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.System.empty_copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a copy of this sytem (same time and box, no particles).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.System.molecules">
+<code class="sig-name descname">molecules</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; List[baggianalysis.core.ParticleSet]<a class="headerlink" href="#baggianalysis.core.System.molecules" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.System.time">
+<em class="property">property </em><code class="sig-name descname">time</code><a class="headerlink" href="#baggianalysis.core.System.time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">baggianalysis</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="core.html">The core module</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Particle-related classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topology.html">Topology-related classes and utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers.html">Configuration parsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exporters.html">Configuration exporters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html">Particle filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trajectories.html">Trajectory classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="observables.html">Observables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="core.html">The core module</a><ul>
+      <li>Previous: <a href="core.html" title="previous chapter">The core module</a></li>
+      <li>Next: <a href="topology.html" title="next chapter">Topology-related classes and utility functions</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Lorenzo Rovigatti.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/core/particles.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

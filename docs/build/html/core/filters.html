@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Particle filters &#8212; baggianalysis 0.0.1 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Trajectory classes" href="trajectories.html" />
+    <link rel="prev" title="Configuration exporters" href="exporters.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="particle-filters">
+<h1>Particle filters<a class="headerlink" href="#particle-filters" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseFilter</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.FilterByFunction" title="baggianalysis.core.FilterByFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterByFunction</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.FilterByReducingToCOM" title="baggianalysis.core.FilterByReducingToCOM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterByReducingToCOM</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.FilterByType" title="baggianalysis.core.FilterByType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterByType</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.FixParticlePath" title="baggianalysis.core.FixParticlePath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FixParticlePath</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.SubtractCOM" title="baggianalysis.core.SubtractCOM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SubtractCOM</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="class">
+<dt id="baggianalysis.core.BaseFilter">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">BaseFilter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseFilter</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseFilter" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="baggianalysis.core.BaseFilter.filter">
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseFilter</em>, <em class="sig-param">arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.BaseFilter.filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baggianalysis.core.FilterByFunction">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FilterByFunction</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FilterByFunction, arg0: Callable[[baggianalysis.core.Particle], bool]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.FilterByFunction" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="baggianalysis.core.FilterByFunction.filter">
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FilterByFunction</em>, <em class="sig-param">arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.FilterByFunction.filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baggianalysis.core.FilterByReducingToCOM">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FilterByReducingToCOM</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FilterByReducingToCOM</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.FilterByReducingToCOM" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="baggianalysis.core.FilterByReducingToCOM.filter">
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FilterByReducingToCOM</em>, <em class="sig-param">arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.FilterByReducingToCOM.filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baggianalysis.core.FilterByType">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FilterByType</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FilterByType, arg0: List[str]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.FilterByType" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="baggianalysis.core.FilterByType.filter">
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FilterByType</em>, <em class="sig-param">arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.FilterByType.filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baggianalysis.core.FixParticlePath">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FixParticlePath</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FixParticlePath</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.FixParticlePath" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="baggianalysis.core.FixParticlePath.filter">
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FixParticlePath</em>, <em class="sig-param">arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.FixParticlePath.filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="baggianalysis.core.SubtractCOM">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">SubtractCOM</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.SubtractCOM</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.SubtractCOM" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="baggianalysis.core.SubtractCOM.filter">
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.SubtractCOM</em>, <em class="sig-param">arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.SubtractCOM.filter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">baggianalysis</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="core.html">The core module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="particles.html">Particle-related classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topology.html">Topology-related classes and utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers.html">Configuration parsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exporters.html">Configuration exporters</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Particle filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trajectories.html">Trajectory classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="observables.html">Observables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="core.html">The core module</a><ul>
+      <li>Previous: <a href="exporters.html" title="previous chapter">Configuration exporters</a></li>
+      <li>Next: <a href="trajectories.html" title="next chapter">Trajectory classes</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Lorenzo Rovigatti.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/core/filters.md.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
