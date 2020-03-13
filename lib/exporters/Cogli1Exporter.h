@@ -12,7 +12,13 @@
 
 namespace ba {
 
-using Cogli1Mapper = std::function<std::string(Particle *)>;
+struct Cogli1Particle {
+	bool show = true;
+	double size = 0.5;
+	std::string color = "red";
+};
+
+using Cogli1Mapper = std::function<Cogli1Particle(Particle *)>;
 
 class Cogli1Exporter: public BaseExporter {
 public:
@@ -24,7 +30,7 @@ public:
 
 private:
 	Cogli1Mapper _mapper = [](Particle *p) {
-		return boost::str(boost::format("%lf %lf %lf @ 0.5 C[red]") % p->position()[0] % p->position()[1] % p->position()[2]);
+		return Cogli1Particle();
 	};
 };
 

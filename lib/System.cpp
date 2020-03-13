@@ -43,7 +43,7 @@ void export_System(py::module &m) {
 	)pbdoc");
 
 	system.def(py::init<>(), R"pbdoc(
-		 Default constructor. 
+		 The constructor takes no arguments. 
 	)pbdoc");
 	system.def("empty_copy", &System::empty_copy, R"pbdoc(
 		 Return a copy of this sytem (same time and box, no particles). 

@@ -77,7 +77,7 @@ void export_FixedNumberFinder(py::module &m) {
     )pbdoc");
 
 	finder.def(py::init<int, double>(), py::arg("N"), py::arg("cutoff") = 1.5, R"pbdoc(
-        Constructor.
+        The constructor takes two mandatory arguments.
 
         Parameters
         ----------

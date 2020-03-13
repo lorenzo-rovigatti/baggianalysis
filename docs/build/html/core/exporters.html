@@ -66,7 +66,7 @@
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>system</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a>) – The <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a> to be printed.</p></li>
-<li><p><strong>str_param</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – A string that is be used by subclasses to construct the output filename.</p></li>
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The name of the output file.</p></li>
 </ul>
 </dd>
 </dl>
@@ -85,45 +85,66 @@
 <div><p>This constructor makes the exporter print each particle as a red sphere of radius 0.5.</p>
 </div></blockquote>
 </li>
-<li><p>__init__(self: baggianalysis.core.Cogli1Exporter, arg0: Callable[[baggianalysis.core.Particle], str]) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.Cogli1Exporter, arg0: Callable[[baggianalysis.core.Particle], baggianalysis.core.Cogli1Particle]) -&gt; None</p></li>
 </ol>
-<p>This constructor takes as a parameter a callable that maps each particle into a string that will be printed by the exporter.</p>
+<p>This constructor takes as a parameter a callable that maps each particle into a <a class="reference internal" href="#baggianalysis.core.Cogli1Particle" title="baggianalysis.core.Cogli1Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cogli1Particle</span></code></a> that will be
+interpreted by the exporter and printed in cogli1 format.</p>
+<p>An example of such a callable is the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">cogli1_mapper</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="n">c_p</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">Cogli1Particle</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">c_p</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">c_p</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> \<span class="s2">&quot;0,1,0</span><span class="se">\&quot;</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">c_p</span><span class="o">.</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="n">c_p</span>
+</pre></div>
+</div>
+<p>The function defined above will give all those particles that have an x coordinate larger than 0 a size of 1.0 and a green color.
+Particles with a y coordinate larger than 0 will be hidden. The other particles will be red and have a size of 0.5.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>mapper</strong> (<em>callable</em>) – A callable that takes a particle and returns the corresponding cogli1 string.</p>
+<dd class="field-odd"><p><strong>mapper</strong> (<em>callable</em>) – A callable that takes a particle and returns a <a class="reference internal" href="#baggianalysis.core.Cogli1Particle" title="baggianalysis.core.Cogli1Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cogli1Particle</span></code></a>.</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="baggianalysis.core.Cogli1Particle">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">Cogli1Particle</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.Cogli1Particle</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.Cogli1Particle" title="Permalink to this definition">¶</a></dt>
+<dd><p>A utility class used by <a class="reference internal" href="#baggianalysis.core.Cogli1Exporter" title="baggianalysis.core.Cogli1Exporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cogli1Exporter</span></code></a> to customise its output.</p>
+<p>By default, the particle is visible, has a size of 0.5 and a red color.</p>
 <dl class="method">
-<dt id="baggianalysis.core.Cogli1Exporter.write">
-<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseExporter</em>, <em class="sig-param">arg0: baggianalysis.core.System</em>, <em class="sig-param">arg1: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.Cogli1Exporter.write" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div><p>Print out the configuration.</p>
-</div></blockquote>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>system</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a>) – The <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a> to be printed.</p></li>
-<li><p><strong>str_param</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – A string that is be used by subclasses to construct the output filename.</p></li>
-</ul>
-</dd>
-</dl>
+<dt id="baggianalysis.core.Cogli1Particle.color">
+<em class="property">property </em><code class="sig-name descname">color</code><a class="headerlink" href="#baggianalysis.core.Cogli1Particle.color" title="Permalink to this definition">¶</a></dt>
+<dd><p>The color of the particle. It can be a name (“red”) or an RGB string (“1,0,0”). Defaults to “red”.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Cogli1Particle.show">
+<em class="property">property </em><code class="sig-name descname">show</code><a class="headerlink" href="#baggianalysis.core.Cogli1Particle.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>If true, the particle will be printed by the exporter. Defaults to True.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="baggianalysis.core.Cogli1Particle.size">
+<em class="property">property </em><code class="sig-name descname">size</code><a class="headerlink" href="#baggianalysis.core.Cogli1Particle.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The size of the particle. For spheres this corresponds to the radius. Defaults to 0.5.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="baggianalysis.core.LAMMPSDataFileExporter">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LAMMPSDataFileExporter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.LAMMPSDataFileExporter</em>, <em class="sig-param">arg0: str</em>, <em class="sig-param">arg1: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.LAMMPSDataFileExporter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LAMMPSDataFileExporter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.LAMMPSDataFileExporter</em>, <em class="sig-param">arg0: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.LAMMPSDataFileExporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export configurations to the LAMMPS data file format.</p>
 <blockquote>
-<div><p>This constructor requires two mandatory arguments.</p>
+<div><p>This constructor takes one mandatory argument.</p>
 </div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>atom_style</strong> (<em>string</em>) – The atom style to be used in printing the data file (see <a class="reference external" href="https://lammps.sandia.gov/doc/atom_style.html">here</a> for details). As of now, only the “atomic” and “bond” styles are supported.</p></li>
-<li><p><strong>basename</strong> (<em>string</em>) – The prefix that will be used to build the filename of the output file. Can be empty.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>atom_style</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The atom style to be used in printing the data file (see <a class="reference external" href="https://lammps.sandia.gov/doc/atom_style.html">here</a> for details). As of now, only the “atomic” and “bond” styles are supported.</p>
 </dd>
 </dl>
 </dd></dl>
