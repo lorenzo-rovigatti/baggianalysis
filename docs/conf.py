@@ -122,7 +122,7 @@ todo_include_todos = False
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'alabaster'
+html_theme = 'pyramid'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -306,8 +306,8 @@ def setup(app):
     app.add_config_value('recommonmark_config', {
         #'url_resolver': lambda url: github_doc_root + url,
         'auto_toc_tree_section': 'Contents',
-        'enable_math': False,
-        'enable_inline_math': False,
+        'enable_math': True,
+        'enable_inline_math': True,
         'enable_eval_rst': True,
     }, True)
     app.add_transform(AutoStructify)

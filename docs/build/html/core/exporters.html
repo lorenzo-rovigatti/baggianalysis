@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <title>Configuration exporters &#8212; baggianalysis 0.0.1 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -16,20 +16,34 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Particle filters" href="filters.html" />
     <link rel="prev" title="Configuration parsers" href="parsers.html" />
-   
-  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
 
   </head><body>
-  
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="filters.html" title="Particle filters"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="parsers.html" title="Configuration parsers"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">baggianalysis 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="core.html" accesskey="U">The core module</a> &#187;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          
-
           <div class="body" role="main">
             
   <div class="section" id="configuration-exporters">
@@ -79,12 +93,11 @@
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">Cogli1Exporter</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Cogli1Exporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Export configurations to the cogli1 file format, used for visualisation purposes.</p>
 <p>Overloaded function.</p>
-<ol class="arabic">
-<li><p>__init__(self: baggianalysis.core.Cogli1Exporter) -&gt; None</p>
-<blockquote>
-<div><p>This constructor makes the exporter print each particle as a red sphere of radius 0.5.</p>
-</div></blockquote>
-</li>
+<ol class="arabic simple">
+<li><p>__init__(self: baggianalysis.core.Cogli1Exporter) -&gt; None</p></li>
+</ol>
+<p>This constructor makes the exporter print each particle as a red sphere of radius 0.5.</p>
+<ol class="arabic simple" start="2">
 <li><p>__init__(self: baggianalysis.core.Cogli1Exporter, arg0: Callable[[baggianalysis.core.Particle], baggianalysis.core.Cogli1Particle]) -&gt; None</p></li>
 </ol>
 <p>This constructor takes as a parameter a callable that maps each particle into a <a class="reference internal" href="#baggianalysis.core.Cogli1Particle" title="baggianalysis.core.Cogli1Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cogli1Particle</span></code></a> that will be
@@ -94,7 +107,7 @@ interpreted by the exporter and printed in cogli1 format.</p>
     <span class="n">c_p</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">Cogli1Particle</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">c_p</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mf">1.0</span>
-        <span class="n">c_p</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> \<span class="s2">&quot;0,1,0</span><span class="se">\&quot;</span>
+        <span class="n">c_p</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;0,1,0&quot;</span>
     <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">c_p</span><span class="o">.</span><span class="n">show</span> <span class="o">=</span> <span class="kc">False</span>
 
@@ -153,46 +166,23 @@ Particles with a y coordinate larger than 0 will be hidden. The other particles 
 
 
           </div>
-          
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">baggianalysis</a></h1>
-
-
-
-
-
-
-
-
-<h3>Navigation</h3>
-<ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="core.html">The core module</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="particles.html">Particle-related classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="topology.html">Topology-related classes and utility functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parsers.html">Configuration parsers</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuration exporters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.html">Particle filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trajectories.html">Trajectory classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="observables.html">Observables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
-</ul>
-</li>
-</ul>
-
-<div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="core.html">The core module</a><ul>
-      <li>Previous: <a href="parsers.html" title="previous chapter">Configuration parsers</a></li>
-      <li>Next: <a href="filters.html" title="next chapter">Particle filters</a></li>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="parsers.html"
+                        title="previous chapter">Configuration parsers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="filters.html"
+                        title="next chapter">Particle filters</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/core/exporters.md.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -203,32 +193,29 @@ Particles with a y coordinate larger than 0 will be hidden. The other particles 
     </div>
 </div>
 <script>$('#searchbox').show(0);</script>
-
-
-
-
-
-
-
-
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2020, Lorenzo Rovigatti.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.3</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
-      
-      |
-      <a href="../_sources/core/exporters.md.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="filters.html" title="Particle filters"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="parsers.html" title="Configuration parsers"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">baggianalysis 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="core.html" >The core module</a> &#187;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Lorenzo Rovigatti.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.3.
+    </div>
   </body>
 </html>

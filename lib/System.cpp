@@ -38,7 +38,7 @@ const std::vector<std::shared_ptr<ParticleSet>> &System::molecules() const {
 #ifdef PYTHON_BINDINGS
 
 void export_System(py::module &m) {
-	py::class_<System, ParticleSet, std::shared_ptr<System>> system(m, "System", py::dynamic_attr(), R"pbdoc(
+	py::class_<System, ParticleSet, std::shared_ptr<System>> system(m, "System", R"pbdoc(
 		 Store a configuration. 
 	)pbdoc");
 

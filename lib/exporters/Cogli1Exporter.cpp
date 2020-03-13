@@ -66,7 +66,7 @@ void export_Cogli1Exporter(py::module &m) {
 	)pbdoc");
 
 	exporter.def(py::init<>(), R"pbdoc(
-		This constructor makes the exporter print each particle as a red sphere of radius 0.5.
+This constructor makes the exporter print each particle as a red sphere of radius 0.5.
 	)pbdoc");
 
 	// docstrings of overloaded constructors need to be unindented or they won't be formatted correctly by sphinx

@@ -63,7 +63,7 @@ void Particle::set_molecule(std::shared_ptr<ParticleSet> new_molecule) {
 #ifdef PYTHON_BINDINGS
 
 void export_Particle(py::module &m) {
-	py::class_<Particle, std::shared_ptr<Particle>> particle(m, "Particle", py::dynamic_attr());
+	py::class_<Particle, std::shared_ptr<Particle>> particle(m, "Particle");
 
 	particle
 		.def(py::init<>())

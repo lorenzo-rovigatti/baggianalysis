@@ -112,9 +112,8 @@ void FullTrajectory::reset() {
 void export_FullTrajectory(py::module &m) {
 	py::class_<FullTrajectory, BaseTrajectory, std::shared_ptr<FullTrajectory>> parser(m, "FullTrajectory");
 
-	parser
-		.def(py::init<shared_ptr<BaseParser>>()).
-		def_readonly("frames", &FullTrajectory::frames);
+	parser.def(py::init<shared_ptr<BaseParser>>());
+	parser.def_readonly("frames", &FullTrajectory::frames);
 }
 
 #endif
