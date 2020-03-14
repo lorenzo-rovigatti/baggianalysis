@@ -63,10 +63,22 @@ Note that baggianalysis provides a [LazyTrajectory](core/trajectories.html#baggi
 * The [Topology](core/topology.html#baggianalysis.core.Topology) class can be used to manage the topology of a configuration. Topologies can be initialised in two ways:
 	* by hand, using the [make_empty_topology()](core/topology.html#baggianalysis.core.Topology.make_empty_topology) static method to create a new topology and then adding bonds one after the other with the [add_bond(p_index, q_index)](core/topology.html#baggianalysis.core.Topology.add_bond) method
 	* by using an helper function to parse the topology out of a file through the [make_topology_from_file()](core/topology.html#baggianalysis.core.Topology.make_topology_from_file) static method. Baggianalysis comes with some [ready-made](core/topology.md) functions that can be used to parse topologies.
+	
+## Library API
 
 ```eval_rst
 .. toctree::
    :maxdepth: 2
    
    core/core.md
+```
+
+## Extending baggianalysis
+
+```eval_rst
+.. toctree::
+   :maxdepth: 2
+   
+   extending/parser.md
+   extending/topology.md
 ```

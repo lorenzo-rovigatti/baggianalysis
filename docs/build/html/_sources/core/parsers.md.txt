@@ -18,6 +18,7 @@ All parsers inherit from [BaseParser](#baggianalysis.core.BaseParser) and overri
 .. autoclass:: BaseParser
     :members:
     :undoc-members:
+    :private-members:
     
 .. autoclass:: GenericOxDNAParser
     :members:

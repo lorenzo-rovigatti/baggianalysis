@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>The core module &mdash; baggianalysis 0.0.1 documentation</title>
+  <title>Writing a function to parse custom topologies &mdash; baggianalysis 0.0.1 documentation</title>
   
 
   
@@ -35,8 +35,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Particle-related classes" href="particles.html" />
-    <link rel="prev" title="Baggianalysis" href="../index.html" /> 
+    <link rel="prev" title="Writing a parser" href="parser.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -84,22 +83,22 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">The core module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="particles.html">Particle-related classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="topology.html">Topology-related classes and utility functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="parsers.html">Configuration parsers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="exporters.html">Configuration exporters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.html">Particle filters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="trajectories.html">Trajectory classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="observables.html">Observables</a></li>
-<li class="toctree-l2"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../core/core.html">The core module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../core/particles.html">Particle-related classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/topology.html">Topology-related classes and utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/parsers.html">Configuration parsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/exporters.html">Configuration exporters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/filters.html">Particle filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/trajectories.html">Trajectory classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/observables.html">Observables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core/neighbours.html">Neighbour finders</a></li>
 </ul>
 </li>
 </ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../extending/parser.html">Writing a parser</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../extending/topology.html">Writing a function to parse custom topologies</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="parser.html">Writing a parser</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Writing a function to parse custom topologies</a></li>
 </ul>
 
             
@@ -145,13 +144,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>The core module</li>
+      <li>Writing a function to parse custom topologies</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/core/core.md.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/extending/topology.md.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -164,21 +163,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="the-core-module">
-<h1>The core module<a class="headerlink" href="#the-core-module" title="Permalink to this headline">¶</a></h1>
-<p>This module contains the Python bindings of the C++ code. The documentation for all the library’s classes and functions has been split up in several categories. However, this organisation is only logical, since all the objects described here are contained in the same module and should be accessed as <code class="docutils literal notranslate"><span class="pre">ba.core.*</span></code>.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="particles.html">Particle-related classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="topology.html">Topology-related classes and utility functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parsers.html">Configuration parsers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="exporters.html">Configuration exporters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="filters.html">Particle filters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="trajectories.html">Trajectory classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="observables.html">Observables</a></li>
-<li class="toctree-l1"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
-</ul>
-</div>
+  <div class="section" id="writing-a-function-to-parse-custom-topologies">
+<h1>Writing a function to parse custom topologies<a class="headerlink" href="#writing-a-function-to-parse-custom-topologies" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
@@ -189,10 +175,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="particles.html" class="btn btn-neutral float-right" title="Particle-related classes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="../index.html" class="btn btn-neutral float-left" title="Baggianalysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="parser.html" class="btn btn-neutral float-left" title="Writing a parser" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
