@@ -19,12 +19,6 @@ The documentation for the Python bindings can be found in `docs/build/html/index
 
 ### Compilation
 
-Clone the repo via `git` with the following command:
-
-	git clone --recursive https://github.com/lorenzo-rovigatti/baggianalysis.git
-	
-The `--recursive` option is required to download the submodules.
-
 The code can be compiled with the following commands:
 
 	cd baggianalysis   # enter the baggianalysis folder
@@ -67,7 +61,7 @@ baggianalysis contains a very simple testing suite that checks whether the Pytho
 
 ## Acknowledgements
 
-* The [glm 0.9.9](https://glm.g-truc.net/0.9.9/index.html) library is included in the source tree, while [pybind 2.2.4](https://github.com/pybind/pybind11) (commit 9a19306) is automatically downloaded as a submodule.
+* The [glm 0.9.9](https://glm.g-truc.net/0.9.9/index.html) and [pybind 2.4.3](https://github.com/pybind/pybind11) libraries are included in the source tree.
 * Natural sorting of files is carried out with the [NaturalSort](https://github.com/scopeInfinity/NaturalSort) library.
 * [akuukka's quickhull](https://github.com/akuukka/quickhull) library is included in the source tree.
 
