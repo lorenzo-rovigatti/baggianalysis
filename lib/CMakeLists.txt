@@ -104,6 +104,10 @@ IF(Python)
 	)
 	
 	# copy the files required to install the library with Python's distutils
+	CONFIGURE_FILE(python/__version__.py
+		${CMAKE_CURRENT_BINARY_DIR}/baggianalysis/__version__.py
+	)
+	
 	CONFIGURE_FILE(python/__init__.py
 		${CMAKE_CURRENT_BINARY_DIR}/baggianalysis/__init__.py
 	)
@@ -112,7 +116,7 @@ IF(Python)
 	CONFIGURE_FILE(python/setup.py
 		${SETUP_PY}
 	)
-
+	
 	# setup the make install target to run setup.py (in user mode, no root permissions required)
 	FIND_PROGRAM(PYTHON "python3")
 	INSTALL(CODE "execute_process(COMMAND ${PYTHON} ${SETUP_PY} install --user)")

@@ -1,4 +1,5 @@
 from distutils.core import setup
+from __version__ import __version__
 
 import sys
 if sys.version_info < (3,0):
@@ -6,7 +7,7 @@ if sys.version_info < (3,0):
 
 setup(
     name = 'cmake_cpp_pybind11',
-    version = '${revision}',
+    version = __version__,
     packages = [ 'baggianalysis' ],
     package_dir = {
         '': '${CMAKE_CURRENT_BINARY_DIR}'
