@@ -67,7 +67,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 		std::string atom_name = line.substr(10, 5);
 		std::string atom_number = line.substr(15, 5);
 
-		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>());
+		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(syst->available_index()));
 		new_particle->set_type(atom_name);
 
 		std::string x = utils::trim(line.substr(20, 8));

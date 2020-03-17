@@ -19,9 +19,10 @@ class ParticleSet;
 
 class Particle: public std::enable_shared_from_this<Particle> {
 public:
-	Particle();
+	Particle() = delete;
 	Particle(int index);
-	Particle(particle_type nt, vec3 pos, vec3 vel);
+	Particle(int index, particle_type nt);
+	Particle(int index, particle_type nt, vec3 pos);
 	Particle(int index, particle_type nt, vec3 pos, vec3 vel);
 	virtual ~Particle();
 
@@ -76,9 +77,9 @@ protected:
 	static int _current_index;
 
 	int _index;
-	particle_type _type;
-	vec3 _position;
-	vec3 _velocity;
+	particle_type _type = DEFAULT_PARTICLE_TYPE;
+	vec3 _position = vec3(0., 0., 0.);
+	vec3 _velocity = vec3(0., 0., 0.);
 
 	std::set<std::shared_ptr<Particle>> _bonded_neighbours;
 	std::set<std::shared_ptr<Particle>> _neighbours;

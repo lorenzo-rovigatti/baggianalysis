@@ -27,6 +27,17 @@ std::shared_ptr<System> System::empty_copy() const {
 	return new_syst;
 }
 
+int System::available_index() const {
+	auto idxs = indexes();
+	auto largest_idx_it = std::max_element(idxs.begin(), idxs.end());
+	if(largest_idx_it == idxs.end()) {
+		return 0;
+	}
+	else {
+		return *largest_idx_it + 1;
+	}
+}
+
 std::vector<std::shared_ptr<ParticleSet>> &System::molecules() {
 	return _molecules;
 }
@@ -47,6 +58,9 @@ void export_System(py::module &m) {
 	)pbdoc");
 	system.def("empty_copy", &System::empty_copy, R"pbdoc(
 		 Return a copy of this sytem (same time and box, no particles). 
+	)pbdoc");
+	system.def("available_index", &System::available_index, R"pbdoc(
+		 Return particle index that is available (that is, that is not used by any of the particles already present in the system).
 	)pbdoc");
 	// here we tell pybind11 which of the two molecules() methods we want to have bindings for
 	system.def("molecules", (std::vector<std::shared_ptr<ParticleSet>> &(System::*)())(&System::molecules));

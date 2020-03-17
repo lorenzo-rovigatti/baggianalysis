@@ -20,6 +20,8 @@ public:
 
 	std::shared_ptr<System> empty_copy() const;
 
+	int available_index() const;
+
 	/// Return all the subsets stored in the set
 	std::vector<std::shared_ptr<ParticleSet>> &molecules();
 

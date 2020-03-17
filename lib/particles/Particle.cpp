@@ -11,21 +11,21 @@
 
 namespace ba {
 
-int Particle::_current_index = 0;
-
-Particle::Particle() :
-				Particle(DEFAULT_PARTICLE_TYPE, vec3(0., 0., 0.), vec3(0., 0., 0.)) {
-
-}
-
 Particle::Particle(int index) :
-				Particle(index, DEFAULT_PARTICLE_TYPE, vec3(0., 0., 0.), vec3(0., 0., 0.)) {
+				_index(index) {
 
 }
 
-Particle::Particle(particle_type t, vec3 pos, vec3 vel) :
-				Particle(Particle::_current_index, t, pos, vel) {
-	Particle::_current_index++;
+Particle::Particle(int index, particle_type t) :
+				_index(index),
+				_type(t) {
+
+}
+
+Particle::Particle(int index, particle_type t, vec3 pos) :
+				_index(index),
+				_type(t),
+				_position(pos) {
 }
 
 Particle::Particle(int index, particle_type t, vec3 pos, vec3 vel) :
@@ -65,20 +65,18 @@ void Particle::set_molecule(std::shared_ptr<ParticleSet> new_molecule) {
 void export_Particle(py::module &m) {
 	py::class_<Particle, std::shared_ptr<Particle>> particle(m, "Particle");
 
-	particle
-		.def(py::init<>())
-		.def(py::init<int>())
-		.def(py::init<particle_type, vec3, vec3>())
-		.def(py::init<int, particle_type, vec3, vec3>())
-		.def("add_bonded_neighbour", &Particle::add_bonded_neighbour)
-		.def("add_neighbour", &Particle::add_neighbour)
-		.def_property_readonly("molecule", &Particle::molecule)
-		.def_property_readonly("bonded_neighbours", &Particle::bonded_neighbours)
-		.def_property_readonly("neighbours", &Particle::neighbours)
-		.def_property_readonly("index", &Particle::index)
-		.def_property("type", &Particle::type, &Particle::set_type)
-		.def_property("position", &Particle::position, &Particle::set_position)
-		.def_property("velocity", &Particle::velocity, &Particle::set_velocity);
+	particle.def(py::init<int>());
+	particle.def(py::init<int, particle_type>());
+	particle.def(py::init<int, particle_type, vec3, vec3>());
+	particle.def("add_bonded_neighbour", &Particle::add_bonded_neighbour);
+	particle.def("add_neighbour", &Particle::add_neighbour);
+	particle.def_property_readonly("molecule", &Particle::molecule);
+	particle.def_property_readonly("bonded_neighbours", &Particle::bonded_neighbours);
+	particle.def_property_readonly("neighbours", &Particle::neighbours);
+	particle.def_property_readonly("index", &Particle::index);
+	particle.def_property("type", &Particle::type, &Particle::set_type);
+	particle.def_property("position", &Particle::position, &Particle::set_position);
+	particle.def_property("velocity", &Particle::velocity, &Particle::set_velocity);
 }
 
 #endif

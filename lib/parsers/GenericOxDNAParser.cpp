@@ -68,6 +68,7 @@ std::shared_ptr<System> GenericOxDNAParser::_parse_stream(std::ifstream &configu
 	std::getline(configuration, line);
 
 	bool end = false;
+	int current_index = 0;
 	while(configuration.good() && !end) {
 		if(configuration.peek() == 't') {
 			end = true;
@@ -83,8 +84,9 @@ std::shared_ptr<System> GenericOxDNAParser::_parse_stream(std::ifstream &configu
 						utils::lexical_cast<double>(split[10]),
 						utils::lexical_cast<double>(split[11]));
 
-				std::shared_ptr<Particle> new_particle(std::make_shared<Particle>("0", position, velocity));
+				std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(current_index, "0", position, velocity));
 				syst->add_particle(new_particle);
+				current_index++;
 			}
 		}
 	}
