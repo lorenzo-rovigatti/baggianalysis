@@ -191,9 +191,9 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>__init__(self: baggianalysis.core.Particle) -&gt; None</p></li>
 <li><p>__init__(self: baggianalysis.core.Particle, arg0: int) -&gt; None</p></li>
-<li><p>__init__(self: baggianalysis.core.Particle, arg0: str, arg1: glm::tvec3&lt;scalar, P&gt;, arg2: glm::tvec3&lt;scalar, P&gt;) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.Particle, arg0: int, arg1: str) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.Particle, arg0: int, arg1: str, arg2: glm::tvec3&lt;scalar, P&gt;) -&gt; None</p></li>
 <li><p>__init__(self: baggianalysis.core.Particle, arg0: int, arg1: str, arg2: glm::tvec3&lt;scalar, P&gt;, arg3: glm::tvec3&lt;scalar, P&gt;) -&gt; None</p></li>
 </ol>
 <dl class="method">
@@ -326,6 +326,22 @@
 <p>Store a configuration.</p>
 <p>The constructor takes no arguments.</p>
 <dl class="method">
+<dt id="baggianalysis.core.System.available_index">
+<code class="sig-name descname">available_index</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; int<a class="headerlink" href="#baggianalysis.core.System.available_index" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Return a particle index that can be used in the context of this system (that is, that is not used by any of the particles already present in the system).</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A number that can be used as a valid index for a new particle.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
 <dt id="baggianalysis.core.System.box">
 <em class="property">property </em><code class="sig-name descname">box</code><a class="headerlink" href="#baggianalysis.core.System.box" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -333,13 +349,34 @@
 <dl class="method">
 <dt id="baggianalysis.core.System.empty_copy">
 <code class="sig-name descname">empty_copy</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.System.empty_copy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a copy of this sytem (same time and box, no particles).</p>
+<dd><blockquote>
+<div><p>Return a copy of this system (same time and box, no particles).</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A new system with the same <a class="reference internal" href="#baggianalysis.core.System.time" title="baggianalysis.core.System.time"><code class="xref py py-attr docutils literal notranslate"><span class="pre">time</span></code></a> and <a class="reference internal" href="#baggianalysis.core.System.box" title="baggianalysis.core.System.box"><code class="xref py py-attr docutils literal notranslate"><span class="pre">box</span></code></a> of this one.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="baggianalysis.core.System.molecules">
 <code class="sig-name descname">molecules</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; List[baggianalysis.core.ParticleSet]<a class="headerlink" href="#baggianalysis.core.System.molecules" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><blockquote>
+<div><p>Return all the molecules contained in the system in the form of a list of <a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParticleSet</span></code></a>.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The list of molecules contained in the system.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list(<a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParticleSet</span></code></a>)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="baggianalysis.core.System.time">

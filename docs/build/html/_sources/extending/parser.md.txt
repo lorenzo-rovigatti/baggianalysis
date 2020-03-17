@@ -46,9 +46,11 @@ Here is the code for the new parser:
 	                spl = [x.strip() for x in line.split()]
 	                if spl[1] == "OW1":
 	                    pos = [float(x) for x in spl[3:6]]
-	                    particle = ba.Particle("0", pos, [0., 0., 0.])
+	                    particle = ba.Particle(syst.available_index(), "0", pos)
 	                    syst.add_particle(particle)
 	                    
 	            syst.box = [float(x.strip()) for x in f.readline().split()]
 	            
 	        return syst
+
+Parsers are responsible for constructing valid [Particles](../core/particles.html#baggianalysis.core.Particle), which also means giving new particles valid indexes. Sometimes the indexes are stored in the file to be parsed, but if this is not the case then parsers can use the [System](../core/particles.html#baggianalysis.core.System)'s utility function `available_index()` to obtain a valid index. 

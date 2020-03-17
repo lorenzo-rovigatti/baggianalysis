@@ -67,6 +67,7 @@ void export_Particle(py::module &m) {
 
 	particle.def(py::init<int>());
 	particle.def(py::init<int, particle_type>());
+	particle.def(py::init<int, particle_type, vec3>());
 	particle.def(py::init<int, particle_type, vec3, vec3>());
 	particle.def("add_bonded_neighbour", &Particle::add_bonded_neighbour);
 	particle.def("add_neighbour", &Particle::add_neighbour);
