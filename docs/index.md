@@ -4,7 +4,7 @@ Baggianalysis is a library aimed at simplifying the analysis of particle-based s
 
 ## A simple example
 
-The following code imports the `baggianalysis` module, parse a single LAMMPS data file, initialises its topology and perform some computations:
+The following code imports the `baggianalysis` module, parses a single LAMMPS data file, initialises its topology and perform some computations:
 
 	import baggianalysis as ba
 	import numpy as np

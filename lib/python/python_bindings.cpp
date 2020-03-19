@@ -20,11 +20,12 @@
 #include "../neighbour_finders/NeighbourFinder.h"
 #include "../neighbour_finders/SANNFinder.h"
 
+#ifdef GSL_FOUND
 #include "../observables/BondOrderParameters.h"
+#endif
 #include "../observables/ConvexHull.h"
 #include "../observables/FormFactor.h"
 #include "../observables/MSD.h"
-
 #ifdef NLOPT_FOUND
 #include "../observables/PoreSize.h"
 #endif

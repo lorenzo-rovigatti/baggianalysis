@@ -12,7 +12,6 @@ SET(ba_lib_SOURCES
 	neighbour_finders/FixedNumberFinder.cpp
 	neighbour_finders/NeighbourFinder.cpp
 	neighbour_finders/SANNFinder.cpp
-	observables/BondOrderParameters.cpp
 	observables/ConvexHull.cpp
 	observables/FormFactor.cpp
 	observables/MSD.cpp
@@ -89,6 +88,22 @@ ELSE()
 	MESSAGE(WARNING "nlopt not found, the following modules will not be compiled: ${with_nlopt_SOURCES}")
 ENDIF()
 
+PKG_CHECK_MODULES(GSL gsl)
+
+SET(with_GSL_SOURCES
+	observables/BondOrderParameters.cpp
+)
+
+IF(GSL_FOUND)
+	ADD_DEFINITIONS(-DGSL_FOUND)
+	SET(ba_lib_SOURCES
+		${ba_lib_SOURCES}
+		${with_GSL_SOURCES}
+	)
+ELSE()
+	MESSAGE(WARNING "GSL not found, the following modules will not be compiled: ${with_nlopt_SOURCES}")
+ENDIF(GSL_FOUND)
+
 IF(Python)
 	ADD_LIBRARY(_baggianalysis STATIC ${ba_lib_SOURCES})
 	TARGET_LINK_LIBRARIES(_baggianalysis ${PYTHON_LIBRARIES})
@@ -125,6 +140,9 @@ ELSE(Python)
 ENDIF(Python)
 
 TARGET_LINK_LIBRARIES(_baggianalysis ${Boost_LIBRARIES})
+IF(GSL_FOUND)
+	TARGET_LINK_LIBRARIES(_baggianalysis ${GSL_LIBRARIES})
+ENDIF(GSL_FOUND)
 
 IF(NLOPT_FOUND)
 	INCLUDE_DIRECTORIES( ${NLOPT_INCLUDE_DIRS} )
