@@ -27,13 +27,15 @@ void FixedNumberFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> pa
 	}
 
 	_lists.init_cells(particles, box, _cutoff);
+	uint N_orders = _lists.cell_shifts().size();
 
 	for(auto p : particles) {
 		std::vector<Neighbour> possible_neighbours;
 
 		auto p_cell = _lists.get_cell(p->position());
-		int order = 0;
-		while(possible_neighbours.size() < _N) {
+		uint order = 0;
+		bool done = false;
+		while(!done) {
 			for(auto shift : _lists.cell_shifts()[order]) {
 				auto cell = p_cell + shift;
 				cell[0] = (cell[0] + _lists.N_cells_side[0]) % _lists.N_cells_side[0];
@@ -60,10 +62,11 @@ void FixedNumberFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> pa
 				}
 			}
 			order++;
+			done = possible_neighbours.size() == _N || order == N_orders;
 		}
 
 		std::sort(possible_neighbours.begin(), possible_neighbours.end());
-		for(uint i = 0; i < _N; i++) {
+		for(uint i = 0; i < _N && i < possible_neighbours.size(); i++) {
 			p->add_neighbour(possible_neighbours[i].q);
 		}
 	}

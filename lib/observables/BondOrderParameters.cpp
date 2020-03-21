@@ -88,7 +88,6 @@ void BondOrderParameters::analyse_system(std::shared_ptr<System> frame) {
 					}
 				}
 				wl_avg /= pow(ql_avg_sqr, 1.5);
-				wl /= pow(ql_sqr, 1.5);
 
 				if(_compute_avg_ws) {
 					res_it->push_back(wl_avg);
