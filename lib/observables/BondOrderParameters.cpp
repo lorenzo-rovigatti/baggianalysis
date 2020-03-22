@@ -35,8 +35,13 @@ void BondOrderParameters::analyse_system(std::shared_ptr<System> frame) {
 
 	_result.resize(frame->N());
 	auto res_it = _result.begin();
-
 	for(auto p : frame->particles()) {
+		vector_scalar avg_qs, qs, avg_ws, ws;
+
+		avg_qs.reserve(_orders_to_compute.size());
+		qs.reserve(_orders_to_compute.size());
+		avg_ws.reserve(_orders_to_compute.size());
+		ws.reserve(_orders_to_compute.size());
 		for(auto order : _orders_to_compute) {
 			double ql_avg_sqr = 0.;
 			double ql_sqr = 0.;
@@ -57,12 +62,12 @@ void BondOrderParameters::analyse_system(std::shared_ptr<System> frame) {
 
 			if(_compute_avg_qs) {
 				ql_avg_sqr *= (4. * M_PI) / (2. * order + 1.);
-				res_it->push_back(std::sqrt(ql_avg_sqr));
+				avg_qs.emplace_back(std::sqrt(ql_avg_sqr));
 			}
 
 			if(_compute_qs) {
 				ql_sqr *= (4. * M_PI) / (2. * order + 1.);
-				res_it->push_back(std::sqrt(ql_sqr));
+				qs.emplace_back(std::sqrt(ql_sqr));
 			}
 
 			if(_compute_avg_ws || _compute_ws) {
@@ -87,17 +92,22 @@ void BondOrderParameters::analyse_system(std::shared_ptr<System> frame) {
 						}
 					}
 				}
-				wl_avg /= pow(ql_avg_sqr, 1.5);
-
 				if(_compute_avg_ws) {
-					res_it->push_back(wl_avg);
+					wl_avg /= pow(ql_avg_sqr, 1.5);
+					avg_ws.emplace_back(wl_avg);
 				}
 
 				if(_compute_ws) {
-					res_it->push_back(wl);
+					ws.emplace_back(wl);
 				}
 			}
 		}
+
+		res_it->reserve(avg_qs.size() + qs.size() + avg_ws.size() + ws.size());
+		res_it->insert(res_it->begin(), avg_qs.begin(), avg_qs.end());
+		res_it->insert(res_it->end(), qs.begin(), qs.end());
+		res_it->insert(res_it->end(), avg_ws.begin(), avg_ws.end());
+		res_it->insert(res_it->end(), ws.begin(), ws.end());
 
 		res_it++;
 	}
