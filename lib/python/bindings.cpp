@@ -79,7 +79,9 @@ PYBIND11_MODULE(core, m) {
 	ba::export_LazyTrajectory(m);
 
 	// observables
+#ifdef GSL_FOUND
 	ba::export_BondOrderParameters(m);
+#endif
 	ba::export_ConvexHull(m);
 	ba::export_FormFactor(m);
 	ba::export_MSD(m);

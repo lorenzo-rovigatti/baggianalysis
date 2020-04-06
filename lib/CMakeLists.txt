@@ -101,14 +101,14 @@ IF(GSL_FOUND)
 		${with_GSL_SOURCES}
 	)
 ELSE()
-	MESSAGE(WARNING "GSL not found, the following modules will not be compiled: ${with_nlopt_SOURCES}")
+	MESSAGE(WARNING "GSL not found, the following modules will not be compiled: ${with_GSL_SOURCES}")
 ENDIF(GSL_FOUND)
 
 IF(Python)
 	ADD_LIBRARY(_baggianalysis STATIC ${ba_lib_SOURCES})
 	TARGET_LINK_LIBRARIES(_baggianalysis ${PYTHON_LIBRARIES})
 	SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES POSITION_INDEPENDENT_CODE ON)
-	pybind11_add_module(core SHARED python/python_bindings.cpp)
+	pybind11_add_module(core SHARED python/bindings.cpp)
 	TARGET_LINK_LIBRARIES(core PRIVATE _baggianalysis)
 	
 	# the library should be in a folder with the same name to make it easier to use Python's distutils
