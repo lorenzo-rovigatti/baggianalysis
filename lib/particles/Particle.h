@@ -46,6 +46,10 @@ public:
 		_position = np;
 	}
 
+	void shift(const vec3 &&delta) {
+		_position += delta;
+	}
+
 	const vec3 &velocity() const {
 		return _velocity;
 	}

@@ -22,9 +22,8 @@ NeighbourFinder::~NeighbourFinder() {
 void export_NeighbourFinder(py::module &m) {
 	py::class_<NeighbourFinder, PyNeighbourFinder, std::shared_ptr<NeighbourFinder>> finder(m, "NeighbourFinder");
 
-	finder
-		.def(py::init<>())
-		.def("set_neighbours", &NeighbourFinder::set_neighbours);
+	finder.def(py::init<>());
+	finder.def("set_neighbours", &NeighbourFinder::set_neighbours);
 }
 
 #endif

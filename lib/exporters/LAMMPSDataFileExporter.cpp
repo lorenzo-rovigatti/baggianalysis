@@ -103,7 +103,7 @@ void export_LAMMPSDataFileExporter(py::module &m) {
 	)pbdoc");
 
 	exporter.def(py::init<std::string>(), R"pbdoc(
-		This constructor takes one mandatory argument.
+		The constructor takes one mandatory argument.
 
         Parameters
         ----------

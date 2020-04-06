@@ -37,6 +37,9 @@ public:
 	void add_angle(int p, int q, int r);
 	void add_dihedral(int p, int q, int r, int s);
 
+	void enable_checks();
+	void disable_checks();
+
 	void apply(std::shared_ptr<System> system);
 
 	const std::set<Bond> &bonds() const;
@@ -45,7 +48,10 @@ protected:
 	Topology();
 	Topology(const Topology &) = delete;
 
+	void _raise_error(std::string msg);
 	void _fill_molecules(std::shared_ptr<System> system);
+
+	bool _disable_checks = false;
 
 	/// the number of particles contained in the system that this topology was initialised for
 	uint _N_in_system;

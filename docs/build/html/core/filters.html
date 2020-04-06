@@ -200,8 +200,21 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
 <dl class="method">
 <dt id="baggianalysis.core.BaseFilter.filter">
-<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseFilter</em>, <em class="sig-param">arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.BaseFilter.filter" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseFilter</em>, <em class="sig-param">system: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.BaseFilter.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of the given system, filtered according to some criterion. This method should be overridden by
+child classes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>system</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a>) – The input system.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A system that has the same timestep and box size of the input one but different particles, depending on the type of filter applied.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

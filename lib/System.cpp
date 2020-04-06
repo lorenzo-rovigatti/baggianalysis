@@ -46,6 +46,15 @@ const std::vector<std::shared_ptr<ParticleSet>> &System::molecules() const {
 	return _molecules;
 }
 
+void System::bring_particles_in_box(bool shift_by_half_box) {
+	vec3 origin = (shift_by_half_box) ? -box / 2. : vec3(0., 0., 0.);
+
+	for(auto p : _particles) {
+		vec3 delta = p->position() - origin;
+		p->shift(-glm::floor(delta / box) * box);
+	}
+}
+
 #ifdef PYTHON_BINDINGS
 
 void export_System(py::module &m) {
@@ -64,14 +73,17 @@ void export_System(py::module &m) {
         :class:`System`
             A new system with the same :attr:`time` and :attr:`box` of this one. 
 	)pbdoc");
+
 	system.def("available_index", &System::available_index, R"pbdoc(
-		Return a particle index that can be used in the context of this system (that is, that is not used by any of the particles already present in the system).
+        Return a particle index that can be used in the context of this system (that is, that is not used by any of the 
+        particles already present in the system).
 
         Returns
         -------
         int
             A number that can be used as a valid index for a new particle.
 	)pbdoc");
+
 	// here we tell pybind11 which of the two molecules() methods we want to have bindings for
 	system.def("molecules", (std::vector<std::shared_ptr<ParticleSet>> &(System::*)())(&System::molecules), R"pbdoc(
 		Return all the molecules contained in the system in the form of a list of :class:`ParticleSet`.
@@ -81,6 +93,17 @@ void export_System(py::module &m) {
         list(:class:`ParticleSet`)
             The list of molecules contained in the system.
 	)pbdoc");
+
+	system.def("bring_particles_in_box", &System::bring_particles_in_box, py::arg("shift_by_half_box") = false, R"pbdoc(
+        Bring the particles back into the box.
+
+        Parameters
+        ----------
+        shift_by_half_box : bool
+            If False (the default value) particles will have coordinates ranging from 0 to the length of the box side. If 
+            True, the coordinates will range between -box/2 and +box/2. 
+	)pbdoc");
+
 	system.def_readwrite("time", &System::time);
 	system.def_readwrite("box", &System::box);
 

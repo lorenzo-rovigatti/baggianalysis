@@ -33,9 +33,9 @@ void export_BaseExporter(py::module &m) {
 
          Parameters
          ----------
-             system: :class:`System`
+             system : :class:`System`
                  The :class:`System` to be printed.
-             filename: str
+             filename : str
                  The name of the output file. 
 	)pbdoc");
 }

@@ -28,6 +28,8 @@ public:
 	/// Return all the subsets stored in the set (const version)
 	const std::vector<std::shared_ptr<ParticleSet>> &molecules() const;
 
+	void bring_particles_in_box(bool shift_by_half_box = false);
+
 	ullint time = 0;
 	vec3 box = vec3(0., 0., 0.);
 
