@@ -97,10 +97,16 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 		if(line == "Angles") {
 			for(uint i = 0; i < N_angles; i++) {
 				std::getline(input, line);
+				line = ba::utils::trim(line);
 				// skip empty lines
 				if(line.size() == 0) {
 					i--;
 					continue;
+				}
+
+				if(split.size() < 5) {
+					std::string error = boost::str(boost::format("Invalid angle line '%s'") % line);
+					throw std::runtime_error(error);
 				}
 
 				auto split = utils::split(line);
@@ -113,6 +119,7 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 		else if(line == "Bonds") {
 			for(uint i = 0; i < N_bonds; i++) {
 				std::getline(input, line);
+				line = ba::utils::trim(line);
 				// skip empty lines
 				if(line.size() == 0) {
 					i--;
@@ -120,6 +127,12 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 				}
 
 				auto split = utils::split(line);
+
+				if(split.size() < 4) {
+					std::string error = boost::str(boost::format("Invalid bond line '%s'") % line);
+					throw std::runtime_error(error);
+				}
+
 				int id_1 = utils::lexical_cast<int>(split[2]);
 				int id_2 = utils::lexical_cast<int>(split[3]);
 				topology->add_bond(id_1, id_2);
@@ -128,10 +141,16 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 		else if(line == "Dihedrals") {
 			for(uint i = 0; i < N_dihedrals; i++) {
 				std::getline(input, line);
+				line = ba::utils::trim(line);
 				// skip empty lines
 				if(line.size() == 0) {
 					i--;
 					continue;
+				}
+
+				if(split.size() < 6) {
+					std::string error = boost::str(boost::format("Invalid dihedral line '%s'") % line);
+					throw std::runtime_error(error);
 				}
 
 				auto split = utils::split(line);
