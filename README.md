@@ -10,11 +10,12 @@ The documentation for the Python bindings can be found in `docs/build/html/index
 * make
 * A c++14-compliant compiler (tested with GCC >= 5.4)
 * A few Boost modules:
-    * Boost Log (libboost-log-dev) 
-    * Boost Signals2 (libboost-signals-dev)
-    * Boost Filesystem (libboost-filesystem-dev)
-    * Boost Math (libboost-math-dev)
-* If Python bindings are enabled, Python 3's header file are required (python3-dev)
+    * Boost Log (`libboost-log-dev`) 
+    * Boost Signals2 (`libboost-signals-dev`)
+    * Boost Filesystem (`libboost-filesystem-dev`)
+* If Python bindings are enabled, Python 3's header file are required (`python3-dev`)
+* The pore size observable requires the [NLopt](https://nlopt.readthedocs.io/en/latest/) library (`libnlopt-dev`)
+* The bond-order parameter observable requires the [GNU Scientific Library](https://www.gnu.org/software/gsl/) (`libgsl-dev`)
 * [Sphinx](https://www.sphinx-doc.org/en/master), [sphinx_rtd_theme](https://github.com/readthedocs/sphinx_rtd_theme) and [recommonmark](https://recommonmark.readthedocs.io/en/latest/) are required to generate the Python bindings' documentation
 
 ### Compilation
@@ -27,7 +28,7 @@ The code can be compiled with the following commands:
 	cmake ..           # here you can specify additional options, see next section
 	make -j4           # compile baggianalysis. The -jX make option makes it compile the code in parallel by using X threads.
 
-At the end of the compilation the final executable (baggianalysis) will be placed in the build/bin folder. If Python bindings are enabled, `make install` will run the `setup.py install --user` command to make the library accessible by the user.
+At the end of the compilation a test executable used for development (`test_feature`) will be placed in the build/bin folder. If Python bindings are enabled, `make install` will run the `setup.py install --user` command to make the library accessible by the user.
 
 ### cmake options
 
