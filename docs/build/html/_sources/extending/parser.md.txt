@@ -1,6 +1,8 @@
 # Writing a parser
 
-A new baggianalysis parser should inherit from [BaseParser](../core/parsers.html#baggianalysis.core.BaseParser) and overload its [_parse_file(str)](../core/parsers.html#baggianalysis.core.BaseParser._parse_file) method, which takes the name of the configuratin file as its only parameter. The new method should initialise a new [System](../core/particles.html#baggianalysis.core.System) and add [Particles](../core/particles.html#baggianalysis.core.Particle) to it. The parser should also set the [box](../core/particles.html#baggianalysis.core.System.box) and the [timestep](core/particles.html#baggianalysis.core.System.time), but this is not mandatory. 
+A new baggianalysis parser should inherit from [BaseParser](../core/parsers.html#baggianalysis.core.BaseParser) and overload its [_parse_file(str)](../core/parsers.html#baggianalysis.core.BaseParser._parse_file) method, which takes the name of the configuration file as its only parameter. The new method should initialise a new [System](../core/particles.html#baggianalysis.core.System) and add [Particles](../core/particles.html#baggianalysis.core.Particle) to it. The parser should also set the [box](../core/particles.html#baggianalysis.core.System.box) and the [timestep](core/particles.html#baggianalysis.core.System.time), but this is not mandatory. 
+
+**Nota Bene:** custom Python parsers cannot be used to generate trajectories from trajectory files through the [initialise_from_trajectory_file()](../core/trajectories.html#baggianalysis.core.BaseTrajectory.initialise_from_trajectory_file) method.
 
 We now write a parser that takes a GROMACS dump file of a [TIP4P/ICE](http://www.sklogwiki.org/SklogWiki/index.php/TIP4P/Ice_model_of_water) system. The system is composed of water molecules made of 4 atoms (one oxygen, two hydrogens and one additional charge site). A configuration file has the following format:
 
@@ -53,4 +55,4 @@ Here is the code for the new parser:
 	            
 	        return syst
 
-Parsers are responsible for constructing valid [Particles](../core/particles.html#baggianalysis.core.Particle), which also means giving new particles valid indexes. Sometimes the indexes are stored in the file to be parsed, but if this is not the case then parsers can use the [System](../core/particles.html#baggianalysis.core.System)'s utility function `available_index()` to obtain a valid index. 
+Parsers are responsible for constructing valid [Particles](../core/particles.html#baggianalysis.core.Particle), which also means giving new particles valid indexes. Sometimes the indexes are stored in the file to be parsed, but if this is not the case, or if the user does not care about setting indexes manually, parsers can use the [System](../core/particles.html#baggianalysis.core.System)'s utility function `available_index()` to obtain a valid index. 

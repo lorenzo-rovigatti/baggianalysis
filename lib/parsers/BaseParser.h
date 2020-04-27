@@ -50,7 +50,7 @@ public:
 	virtual std::shared_ptr<System> _parse_file(std::string conf_name);
 
 protected:
-	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration) = 0;
+	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration);
 
 	void _apply_topology(std::shared_ptr<System> system);
 
@@ -79,7 +79,7 @@ public:
 	}
 
 	std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override {
-		PYBIND11_OVERLOAD_PURE(
+		PYBIND11_OVERLOAD(
 			std::shared_ptr<System>,
 			BaseParser,
 			_parse_stream,
