@@ -38,6 +38,8 @@ Here is a list of options that can be passed to cmake during the pre-compilation
 * `-DDebug=On|Off` compiles with|without debug symbols and without|with optimisation flags (defaults to `Off`)
 * `-DG=On|Off` compiles with|without debug symbols and optimisation flags (defaults to `Off`)
 
+If `cmake` cannot find some of the libraries required, add their paths to the `CMAKE_FIND_ROOT_PATH` set command which can be found close to the top of the `CMakeLists.txt` file. 
+
 ### Test suite
 
 baggianalysis contains a very simple testing suite that checks whether the Python bindings and core functionalities work. The test suite is run by using the `make test_quick` command. 

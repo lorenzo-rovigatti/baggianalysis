@@ -5,7 +5,10 @@ OPTION(Debug "Set to ON to compile with debug symbols" OFF)
 OPTION(G "Set to ON to compile with optimisations and debug symbols" OFF)
 OPTION(MOSIX "Make baggianalysis compatible with MOSIX" OFF)
 
-PROJECT(baggianalysis)
+PROJECT(baggianalysis C CXX)
+
+# if cmake can't find python, nlopts or some of the other libraries add their paths to the following command
+SET(CMAKE_FIND_ROOT_PATH)
 
 # The default behaviour is to compile with optimisations
 SET(CMAKE_BUILD_TYPE Release)

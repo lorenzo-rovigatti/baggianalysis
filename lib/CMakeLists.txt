@@ -139,7 +139,9 @@ ELSE(Python)
 	ADD_LIBRARY(_baggianalysis SHARED ${ba_lib_SOURCES})
 ENDIF(Python)
 
-TARGET_LINK_LIBRARIES(_baggianalysis ${Boost_LIBRARIES})
+find_package(Threads)
+
+TARGET_LINK_LIBRARIES(_baggianalysis ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 IF(GSL_FOUND)
 	TARGET_LINK_LIBRARIES(_baggianalysis ${GSL_LIBRARIES})
 ENDIF(GSL_FOUND)
