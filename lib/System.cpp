@@ -28,13 +28,13 @@ std::shared_ptr<System> System::empty_copy() const {
 }
 
 int System::available_index() const {
-	auto idxs = indexes();
-	auto largest_idx_it = std::max_element(idxs.begin(), idxs.end());
-	if(largest_idx_it == idxs.end()) {
-		return 0;
-	}
-	else {
-		return *largest_idx_it + 1;
+	return _largest_idx + 1;
+}
+
+void System::add_particle(std::shared_ptr<Particle> p) {
+	ParticleSet::add_particle(p);
+	if(p->index() > _largest_idx) {
+		_largest_idx = p->index();
 	}
 }
 

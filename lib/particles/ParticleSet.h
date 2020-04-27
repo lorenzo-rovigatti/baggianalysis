@@ -81,7 +81,7 @@ public:
 	const std::vector<std::shared_ptr<Particle>> &particles() const;
 
 	/// Add a particle to the set
-	void add_particle(std::shared_ptr<Particle> p);
+	virtual void add_particle(std::shared_ptr<Particle> p);
 
 	/**
 	 * @brief Remove a particle from the set.

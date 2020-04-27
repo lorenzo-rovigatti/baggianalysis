@@ -22,6 +22,8 @@ public:
 
 	int available_index() const;
 
+	void add_particle(std::shared_ptr<Particle> p) override;
+
 	/// Return all the subsets stored in the set
 	std::vector<std::shared_ptr<ParticleSet>> &molecules();
 
@@ -35,6 +37,7 @@ public:
 
 private:
 	std::vector<std::shared_ptr<ParticleSet>> _molecules;
+	int _largest_idx = -1;
 };
 
 #ifdef PYTHON_BINDINGS
