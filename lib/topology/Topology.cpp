@@ -11,6 +11,7 @@
 #include "../particles/Particle.h"
 
 #include <algorithm>
+#include <queue>
 
 namespace ba {
 
@@ -136,24 +137,28 @@ void Topology::_fill_molecules(std::shared_ptr<System> system) {
 		index_to_cluster[index] = index;
 	}
 
-	// we have to use a std::function instead of a lambda because there is no way (I know of) to write a recursive lambda function.
-	std::function<void(std::shared_ptr<Particle>)> flip_neighs = [&](std::shared_ptr<Particle> p) -> void {
+	// this will contain the particles whose neighbours we have to loop on
+	std::queue<int> next;
+	auto curr_it = system->particles().begin();
+	next.push((*curr_it)->index());
+	bool done = false;
+	while(!done) {
+		auto p = system->particle_by_id(next.front());
+		next.pop();
 		for(auto neigh : p->bonded_neighbours()) {
 			if(index_to_cluster[neigh->index()] > index_to_cluster[p->index()]) {
 				index_to_cluster[neigh->index()] = index_to_cluster[p->index()];
-				flip_neighs(neigh);
+				next.push(neigh->index());
 			}
 		}
-	};
-
-	// assign the same cluster to particles connected by bonds and create new clusters for unpaired particles
-	for(auto particle : system->particles()) {
-		// if particle is not involved in any bonds it's the only particle contained in its associated molecule
-		if(particle->bonded_neighbours().size() == 0) {
-			index_to_cluster[particle->index()] = particle->index();
-		}
-		else {
-			flip_neighs(particle);
+		if(next.empty()) {
+			curr_it++;
+			if(curr_it == system->particles().end()) {
+				done = true;
+			}
+			else {
+				next.push((*curr_it)->index());
+			}
 		}
 	}
 
