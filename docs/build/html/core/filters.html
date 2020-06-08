@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Particle filters &mdash; baggianalysis 0.0.1-alpha documentation</title>
+  <title>Filters &mdash; baggianalysis 0.0.1-alpha documentation</title>
   
 
   
@@ -90,7 +90,7 @@
 <li class="toctree-l2"><a class="reference internal" href="topology.html">Topology-related classes and utility functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parsers.html">Configuration parsers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exporters.html">Configuration exporters</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Particle filters</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="trajectories.html">Trajectory classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="observables.html">Observables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
@@ -147,7 +147,7 @@
         
           <li><a href="core.html">The core module</a> &raquo;</li>
         
-      <li>Particle filters</li>
+      <li>Filters</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -166,8 +166,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="particle-filters">
-<h1>Particle filters<a class="headerlink" href="#particle-filters" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="filters">
+<h1>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h1>
+<p>Filters take a system as input and generate a new system according to some user-defined criteria. There are filters that remove particles of a given type (or types), filters that remove the centre-of-mass-position from the particles, filters that include or exclude particles according to a user-defined function and more.</p>
+<p>Once a filter has been created, it can be applied to single systems like this::</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_system</span> <span class="o">=</span> <span class="n">my_filter</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">old_system</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In addition, filters can be applied to whole trajectories by using the BaseTrajectory’s <a class="reference external" href="../core/trajectories.html#baggianalysis.core.BaseTrajectory.add_filter">add_filter()</a> method before these are parsed.</p>
 <table class="longtable docutils align-default">
 <colgroup>
 <col style="width: 10%" />
@@ -178,7 +184,7 @@
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.FilterByFunction" title="baggianalysis.core.FilterByFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterByFunction</span></code></a></p></td>
-<td><p>Filter that uses a user-provided callable to choose which particles will be included in the new system</p></td>
+<td><p>Filter that uses a user-provided callable to choose which particles will be included in the new system.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.FilterByReducingToCOM" title="baggianalysis.core.FilterByReducingToCOM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterByReducingToCOM</span></code></a></p></td>
 <td><p></p></td>
@@ -222,7 +228,19 @@ child classes.</p>
 <dt id="baggianalysis.core.FilterByFunction">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FilterByFunction</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FilterByFunction, arg0: Callable[[baggianalysis.core.Particle], bool]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.FilterByFunction" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseFilter</span></code></a></p>
-<p>Filter that uses a user-provided callable to choose which particles will be included in the new system</p>
+<p>Filter that uses a user-provided callable to choose which particles will be included in the new system.</p>
+<p>As an example, the following snippet creates a filter that will include in the new system only those particles whose type is
+different from “2” and whose position along the x coordinate is larger than 5:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_filter</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">FilterByFunction</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s2">&quot;2&quot;</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The same effect can be achieved without using a lambda function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">filter_func</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">p</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s2">&quot;2&quot;</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5</span>
+
+<span class="n">my_filter</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">FilterByFunction</span><span class="p">(</span><span class="n">filter_func</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>The constructor takes as a parameter a callable that will be used to decided which particles will be included in the new system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Observables" href="observables.html" />
-    <link rel="prev" title="Particle filters" href="filters.html" /> 
+    <link rel="prev" title="Filters" href="filters.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,7 +90,7 @@
 <li class="toctree-l2"><a class="reference internal" href="topology.html">Topology-related classes and utility functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="parsers.html">Configuration parsers</a></li>
 <li class="toctree-l2"><a class="reference internal" href="exporters.html">Configuration exporters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="filters.html">Particle filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html">Filters</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Trajectory classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="observables.html">Observables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
@@ -191,8 +191,16 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
 <dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.add_filter">
-<code class="sig-name descname">add_filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseTrajectory</em>, <em class="sig-param">arg0: baggianalysis.core.BaseFilter</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.add_filter" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">add_filter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseTrajectory</em>, <em class="sig-param">filter: baggianalysis.core.BaseFilter</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.add_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a filter to the list of filters that will be applied to each frame (system) that compose the trajectory.</p>
+<p>The order according to which filters are added to the trajectory is important, since they are applied
+to systems in a “first-in first-out” fashion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filter</strong> (<em>:class:BaseFilter</em>) – The new filter.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.initialise_from_filelist">
@@ -212,12 +220,22 @@
 <dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.next_frame">
 <code class="sig-name descname">next_frame</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseTrajectory</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.next_frame" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Return the next frame (system), or <code class="code docutils literal notranslate"><span class="pre">None</span></code> if we reached the end of the trajectory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Either the next system or <code class="code docutils literal notranslate"><span class="pre">None</span></code> if there are no more available frames.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.reset">
 <code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseTrajectory</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.reset" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Reset the trajectory so that a call to <a class="reference internal" href="#baggianalysis.core.BaseTrajectory.next_frame" title="baggianalysis.core.BaseTrajectory.next_frame"><code class="xref py py-meth docutils literal notranslate"><span class="pre">next_frame()</span></code></a> will return the first frame of the trajectory.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -251,7 +269,7 @@
         <a href="observables.html" class="btn btn-neutral float-right" title="Observables" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="filters.html" class="btn btn-neutral float-left" title="Particle filters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="filters.html" class="btn btn-neutral float-left" title="Filters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

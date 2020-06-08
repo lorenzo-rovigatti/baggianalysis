@@ -65,14 +65,38 @@ std::shared_ptr<System> BaseTrajectory::_filtered_system(std::shared_ptr<System>
 void export_BaseTrajectory(py::module &m) {
 	py::class_<BaseTrajectory, PyBaseTrajectory, std::shared_ptr<BaseTrajectory>> parser(m, "BaseTrajectory");
 
-	parser
-		.def(py::init<std::shared_ptr<BaseParser>>())
-		.def("initialise_from_folder", &BaseTrajectory::initialise_from_folder)
-		.def("initialise_from_filelist", &BaseTrajectory::initialise_from_filelist)
-		.def("initialise_from_trajectory_file", &BaseTrajectory::initialise_from_trajectory_file)
-		.def("next_frame", &BaseTrajectory::next_frame)
-		.def("reset", &BaseTrajectory::reset)
-		.def("add_filter", &BaseTrajectory::add_filter);
+	parser.def(py::init<std::shared_ptr<BaseParser>>());
+
+	parser.def("initialise_from_folder", &BaseTrajectory::initialise_from_folder);
+
+	parser.def("initialise_from_filelist", &BaseTrajectory::initialise_from_filelist);
+
+	parser.def("initialise_from_trajectory_file", &BaseTrajectory::initialise_from_trajectory_file);
+
+	parser.def("next_frame", &BaseTrajectory::next_frame, R"pbdoc(
+        Return the next frame (system), or :code:`None` if we reached the end of the trajectory.
+
+        Returns
+        -------
+            :class:`System`
+                Either the next system or :code:`None` if there are no more available frames.
+	)pbdoc");
+
+	parser.def("reset", &BaseTrajectory::reset, R"pbdoc(
+        Reset the trajectory so that a call to :meth:`next_frame` will return the first frame of the trajectory.
+	)pbdoc");
+
+	parser.def("add_filter", &BaseTrajectory::add_filter, py::arg("filter"), R"pbdoc(
+		Add a filter to the list of filters that will be applied to each frame (system) that compose the trajectory. 
+
+		The order according to which filters are added to the trajectory is important, since they are applied 
+		to systems in a "first-in first-out" fashion.
+
+		Parameters
+		----------
+		filter : :class:BaseFilter
+			The new filter.
+	)pbdoc");
 }
 
 #endif

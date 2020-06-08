@@ -36,8 +36,21 @@ std::shared_ptr<System> FilterByFunction::filter(std::shared_ptr<const System> s
 
 void export_FilterByFunction(py::module &m) {
 	py::class_<FilterByFunction, BaseFilter, std::shared_ptr<FilterByFunction>> filter(m, "FilterByFunction", R"pbdoc(
-        Filter that uses a user-provided callable to choose which particles will be included in the new system
-	)pbdoc");
+Filter that uses a user-provided callable to choose which particles will be included in the new system.
+
+As an example, the following snippet creates a filter that will include in the new system only those particles whose type is 
+different from "2" and whose position along the x coordinate is larger than 5::
+
+    my_filter = ba.FilterByFunction(lambda p: p.type != "2" and p.position[0] > 5)
+
+The same effect can be achieved without using a lambda function::
+
+    def filter_func(p):
+        return p.type != "2" and p.position[0] > 5
+    
+    my_filter = ba.FilterByFunction(filter_func)
+
+    )pbdoc");
 
 	filter.def(py::init<FilterType>(), R"pbdoc(
         The constructor takes as a parameter a callable that will be used to decided which particles will be included in the new system.
