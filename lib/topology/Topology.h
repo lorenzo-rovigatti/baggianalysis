@@ -42,6 +42,7 @@ public:
 
 	void apply(std::shared_ptr<System> system);
 
+	const std::vector<std::set<int>> &clusters() const;
 	const std::set<Bond> &bonds() const;
 
 protected:
@@ -49,7 +50,7 @@ protected:
 	Topology(const Topology &) = delete;
 
 	void _raise_error(std::string msg);
-	void _fill_molecules(std::shared_ptr<System> system);
+	void _fill_clusters(std::shared_ptr<System> system);
 
 	bool _disable_checks = false;
 
@@ -60,7 +61,7 @@ protected:
 	std::set<Angle> _angles;
 	std::set<Dihedral> _dihedrals;
 
-	std::vector<std::set<int>> _molecules;
+	std::vector<std::set<int>> _clusters;
 };
 
 #ifdef PYTHON_BINDINGS
