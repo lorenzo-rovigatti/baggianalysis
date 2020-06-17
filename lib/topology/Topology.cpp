@@ -195,7 +195,7 @@ void Topology::_fill_clusters(std::shared_ptr<System> system) {
 
 void export_Topology(py::module &m) {
 	py::class_<Topology, std::shared_ptr<Topology>> topology(m, "Topology", R"pbdoc(
-        A class that manages the connections and links between the particles of a system.
+        This class manages the connections and links between the particles of a system.
 
         Here the term ``topology`` refers to the way atoms/particles are partitioned into clusters. In its simplest form, a topology is just a list
         links between particles. These links can be shared between two, three, four or more particles. While the latter are pretty rare, the others 
@@ -209,6 +209,17 @@ void export_Topology(py::module &m) {
         apply the same topology to systems having different numbers of particles. This behaviour can be overridden by calling :meth:`disable_checks` 
         prior to :meth:`apply`. 
 	)pbdoc");
+
+	topology.def(py::init<std::shared_ptr<System>>(), R"pbdoc(
+Instances of this class can be either built with the :meth:`make_empty_topology` or :meth:`make_topology_from_file` static methods or by directly
+using a constructor that takes as its only parameter the :class:`System` instance whence the topology is extracted::
+
+    # here we build or parse a system
+    system = ...
+    # and then create a topology out of its bonding pattern
+    new_topology = ba.Topology(system)
+
+)pbdoc");
 
 	topology.def_static("make_empty_topology", &Topology::make_empty_topology, R"pbdoc(
         This static method builds an empty topology and returns it.

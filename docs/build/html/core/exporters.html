@@ -180,7 +180,10 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.Cogli1Exporter" title="baggianalysis.core.Cogli1Exporter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Cogli1Exporter</span></code></a></p></td>
 <td><p>Export configurations to the cogli1 file format, used for visualisation purposes.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.LAMMPSDataFileExporter" title="baggianalysis.core.LAMMPSDataFileExporter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDataFileExporter</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.GenericOxDNAExporter" title="baggianalysis.core.GenericOxDNAExporter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericOxDNAExporter</span></code></a></p></td>
+<td><p>Export configurations to the oxDNA file format.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.LAMMPSDataFileExporter" title="baggianalysis.core.LAMMPSDataFileExporter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDataFileExporter</span></code></a></p></td>
 <td><p>Export configurations to the LAMMPS data file format.</p></td>
 </tr>
 </tbody>
@@ -284,6 +287,21 @@ Particles with a y coordinate larger than 0 will be hidden. The other particles 
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="class">
+<dt id="baggianalysis.core.GenericOxDNAExporter">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">GenericOxDNAExporter</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.GenericOxDNAExporter</em>, <em class="sig-param">arg0: bool</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.GenericOxDNAExporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseExporter" title="baggianalysis.core.BaseExporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseExporter</span></code></a></p>
+<p>Export configurations to the oxDNA file format. The exporter will generate a topology and a configuration file.
+Note that the filename passed to the <a class="reference internal" href="#baggianalysis.core.BaseExporter.write" title="baggianalysis.core.BaseExporter.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method is used as-is for the
+configuration file and as a suffix, prefixed by <code class="docutils literal notranslate"><span class="pre">topology_</span></code>, for the topology file.</p>
+<p>The constructor takes one parameter which tells the exporter whether the topology line should also contain the number of particles of type A.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>also_print_N_A</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a>) – If True, the exporter will print the number of particles of type A in addition to the number of particles in the topology file.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="class">

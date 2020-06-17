@@ -8,6 +8,7 @@
 
     BaseExporter
     Cogli1Exporter
+    GenericOxDNAExporter
     LAMMPSDataFileExporter
     
 .. autoclass:: BaseExporter
@@ -19,6 +20,10 @@
     :undoc-members:
     
 .. autoclass:: Cogli1Particle
+    :members:
+    :undoc-members:
+
+.. autoclass:: GenericOxDNAExporter 
     :members:
     :undoc-members:
     

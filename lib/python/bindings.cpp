@@ -8,6 +8,7 @@
 #include "../exporters/BaseExporter.h"
 #include "../exporters/Cogli1Exporter.h"
 #include "../exporters/LAMMPSDataFileExporter.h"
+#include "../exporters/GenericOxDNAExporter.h"
 
 #include "../filters/FilterByFunction.h"
 #include "../filters/FilterByReducingToCOM.h"
@@ -64,6 +65,7 @@ PYBIND11_MODULE(core, m) {
 	ba::export_BaseExporter(m);
 	ba::export_Cogli1Exporter(m);
 	ba::export_LAMMPSDataFileExporter(m);
+	ba::export_GenericOxDNAExporter(m);
 
 	// filters
 	ba::export_BaseFilter(m);

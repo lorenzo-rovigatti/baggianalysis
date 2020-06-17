@@ -11,10 +11,37 @@
 
 namespace ba {
 
-GenericOxDNAParser::GenericOxDNAParser(std::string topology_file) :
-				BaseParser(),
-				_topology_file(topology_file) {
+OxDNATopologyParser::OxDNATopologyParser(std::string topology_file) {
+	std::ifstream topology(topology_file);
 
+	if(!topology.good()) {
+		std::string error = boost::str(boost::format("Topology file '%s' not found") % topology_file);
+		throw std::runtime_error(error);
+	}
+
+	topology >> _N;
+	topology >> _N_A;
+	if(!topology.good()) {
+		_N_A = 0;
+	}
+
+	topology.close();
+}
+
+particle_type OxDNATopologyParser::type(int p_idx) {
+	if(_N_A == 0 || (uint) p_idx < _N_A) {
+		return "0";
+	}
+	return "1";
+}
+
+GenericOxDNAParser::GenericOxDNAParser(std::string topology_file) :
+				BaseParser() {
+	_topology_parser = std::make_shared<OxDNATopologyParser>(topology_file);
+}
+
+GenericOxDNAParser::GenericOxDNAParser(std::shared_ptr<OxDNATopologyParser> topology_parser) {
+	_topology_parser = topology_parser;
 }
 
 GenericOxDNAParser::~GenericOxDNAParser() {
@@ -22,23 +49,13 @@ GenericOxDNAParser::~GenericOxDNAParser() {
 }
 
 std::shared_ptr<System> GenericOxDNAParser::_parse_stream(std::ifstream &configuration) {
-	std::ifstream topology(_topology_file);
-
-	if(!topology.good()) {
-		std::string error = boost::str(boost::format("Topology file '%s' not found") % _topology_file);
-		throw std::runtime_error(error);
-	}
-
-	uint N;
-	topology >> N;
-
-	topology.close();
-
 	std::string line;
 
 	// timestep line
 	std::getline(configuration, line);
-	if(!configuration.good()) return nullptr;
+	if(!configuration.good()) {
+		return nullptr;
+	}
 
 	std::shared_ptr<System> syst(std::make_shared<System>());
 
@@ -84,15 +101,16 @@ std::shared_ptr<System> GenericOxDNAParser::_parse_stream(std::ifstream &configu
 						utils::lexical_cast<double>(split[10]),
 						utils::lexical_cast<double>(split[11]));
 
-				std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(current_index, "0", position, velocity));
+				particle_type p_type = _topology_parser->type(current_index);
+				std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(current_index, p_type, position, velocity));
 				syst->add_particle(new_particle);
 				current_index++;
 			}
 		}
 	}
 
-	if(syst->N() != N) {
-		std::string error = boost::str(boost::format("The number of particles found in the configuration file (%d) is different from what specified in the topology file (%d)") % syst->N() % N);
+	if(syst->N() != _topology_parser->N()) {
+		std::string error = boost::str(boost::format("The number of particles found in the configuration file (%d) is different from what specified in the topology file (%d)") % syst->N() % _topology_parser->N());
 		throw std::runtime_error(error);
 	}
 
@@ -102,10 +120,14 @@ std::shared_ptr<System> GenericOxDNAParser::_parse_stream(std::ifstream &configu
 #ifdef PYTHON_BINDINGS
 
 void export_GenericOxDNAParser(py::module &m) {
+	py::class_<OxDNATopologyParser, std::shared_ptr<OxDNATopologyParser>> top_parser(m, "OxDNATopologyParser");
+
+	top_parser.def(py::init<std::string>());
+
 	py::class_<GenericOxDNAParser, BaseParser, std::shared_ptr<GenericOxDNAParser>> parser(m, "GenericOxDNAParser");
 
-	parser
-		.def(py::init<std::string>());
+	parser.def(py::init<std::string>());
+	parser.def(py::init<std::shared_ptr<OxDNATopologyParser>>());
 }
 
 #endif
