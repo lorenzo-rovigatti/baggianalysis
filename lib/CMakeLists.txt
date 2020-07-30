@@ -16,6 +16,7 @@ SET(ba_lib_SOURCES
 	observables/ConvexHull.cpp
 	observables/FormFactor.cpp
 	observables/MSD.cpp
+	observables/StructureFactor.cpp
 	parsers/BaseParser.cpp
 	parsers/GenericOxDNAParser.cpp
 	parsers/GroParser.cpp

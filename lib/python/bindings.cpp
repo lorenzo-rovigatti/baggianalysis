@@ -27,6 +27,7 @@
 #include "../observables/ConvexHull.h"
 #include "../observables/FormFactor.h"
 #include "../observables/MSD.h"
+#include "../observables/StructureFactor.h"
 #ifdef NLOPT_FOUND
 #include "../observables/PoreSize.h"
 #endif
@@ -87,6 +88,7 @@ PYBIND11_MODULE(core, m) {
 	ba::export_ConvexHull(m);
 	ba::export_FormFactor(m);
 	ba::export_MSD(m);
+	ba::export_StructureFactor(m);
 #ifdef NLOPT_FOUND
 	ba::export_PoreSize(m);
 #endif
