@@ -32,8 +32,6 @@ protected:
 	std::map<double, std::vector<vec3>> _q_vectors;
 	vec3 _last_box = vec3(0., 0., 0.);
 
-	vector_scalar _q_modules;
-	int _q_repetitions;
 	int _times_called = 0;
 };
 

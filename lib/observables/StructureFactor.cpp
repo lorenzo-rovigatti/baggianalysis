@@ -18,11 +18,6 @@ StructureFactor::StructureFactor(double largest_q, uint max_n_realisations, doub
 				_max_n_realisations(max_n_realisations),
 				_max_delta_q(max_delta_q) {
 
-
-
-	for(auto q_module: _q_modules) {
-		_result[q_module] = 0.;
-	}
 }
 
 StructureFactor::~StructureFactor() {
@@ -39,9 +34,9 @@ void StructureFactor::_init_qs(std::shared_ptr<System> system) {
 		vec3 delta_q(2. * M_PI / _last_box.x, 2. * M_PI / _last_box.y, 2. * M_PI / _last_box.z);
 
 		// we first generate all q vectors
-		for(int nx = 0; nx <= _largest_q / delta_q.x; nx++) {
-			for(int ny = 0; ny <= _largest_q / delta_q.y; ny++) {
-				for(int nz = 0; nz <= _largest_q / delta_q.z; nz++) {
+		for(int nx = -_largest_q / delta_q.x; nx <= _largest_q / delta_q.x; nx++) {
+			for(int ny = -_largest_q / delta_q.y; ny <= _largest_q / delta_q.y; ny++) {
+				for(int nz = -_largest_q / delta_q.z; nz <= _largest_q / delta_q.z; nz++) {
 					if(nx == 0 && ny == 0 && nz == 0) continue;
 
 					vec3 new_q(delta_q);
@@ -49,7 +44,7 @@ void StructureFactor::_init_qs(std::shared_ptr<System> system) {
 					new_q.y *= ny;
 					new_q.z *= nz;
 
-					if(glm::length2(new_q)  <= sqr_max_q) {
+					if(glm::dot(new_q, new_q)  <= sqr_max_q) {
 						all_qs.push_back(new_q);
 					}
 				}
@@ -58,7 +53,7 @@ void StructureFactor::_init_qs(std::shared_ptr<System> system) {
 
 		// sort them according to their length
 		auto sort_function = [](vec3 &q1, vec3 &q2) -> bool {
-			return glm::length2(q1) < glm::length2(q2);
+			return glm::dot(q1, q1) < glm::dot(q2, q2);
 		};
 		all_qs.sort(sort_function);
 
