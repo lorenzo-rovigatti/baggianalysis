@@ -11,6 +11,7 @@
     FormFactor
     PoreSize
     MSD
+    StructureFactor
     
 .. autoclass:: BondOrderParameters
     :members:
@@ -29,6 +30,10 @@
     :undoc-members:
     
 .. autoclass:: MSD
+    :members:
+    :undoc-members:
+    
+.. autoclass:: StructureFactor
     :members:
     :undoc-members:
 ```

@@ -18,6 +18,9 @@ public:
 	StructureFactor() = delete;
 	virtual ~StructureFactor();
 
+	void clear_b_factors();
+	void set_b_factors(vector_scalar b_factors);
+
 	void analyse_system(std::shared_ptr<System> system) override;
 
 protected:
@@ -31,6 +34,7 @@ protected:
 
 	std::map<double, std::vector<vec3>> _q_vectors;
 	vec3 _last_box = vec3(0., 0., 0.);
+	vector_scalar _b_factors;
 
 	int _times_called = 0;
 };

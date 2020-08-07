@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,18 @@
   
 
   
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -29,10 +34,6 @@
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Writing a parser" href="../extending/parser.html" />
@@ -50,7 +51,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> baggianalysis
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> baggianalysis
           
 
           
@@ -77,6 +78,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -105,6 +107,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -143,7 +146,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html">Docs</a> &raquo;</li>
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
           <li><a href="core.html">The core module</a> &raquo;</li>
         
@@ -188,22 +191,20 @@
 </tr>
 </tbody>
 </table>
-<dl class="class">
+<dl class="py class">
 <dt id="baggianalysis.core.NeighbourFinder">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">NeighbourFinder</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.NeighbourFinder</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.NeighbourFinder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
-<dl class="method">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">NeighbourFinder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.NeighbourFinder" title="baggianalysis.core.NeighbourFinder">baggianalysis.core.NeighbourFinder</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a><a class="headerlink" href="#baggianalysis.core.NeighbourFinder" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
 <dt id="baggianalysis.core.NeighbourFinder.set_neighbours">
-<code class="sig-name descname">set_neighbours</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.NeighbourFinder, arg0: List[baggianalysis.core.Particle], arg1: glm::tvec3&lt;scalar, P&gt;</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.NeighbourFinder.set_neighbours" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">set_neighbours</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.NeighbourFinder, arg0: List[baggianalysis.core.Particle], arg1: glm::tvec3&lt;scalar, P&gt;</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a><a class="headerlink" href="#baggianalysis.core.NeighbourFinder.set_neighbours" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="baggianalysis.core.FixedNumberFinder">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FixedNumberFinder</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.FixedNumberFinder</em>, <em class="sig-param">N: int</em>, <em class="sig-param">cutoff: float = 1.5</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.FixedNumberFinder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.NeighbourFinder" title="baggianalysis.core.NeighbourFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.NeighbourFinder</span></code></a></p>
-<p>Define as neighbours of a particle the N particles that are closest to it. By default, a cutoff of 1.5 is used to look for neighbours. If not enough neighbours are found, the cutoff is increased.</p>
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FixedNumberFinder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.FixedNumberFinder" title="baggianalysis.core.FixedNumberFinder">baggianalysis.core.FixedNumberFinder</a></span></em>, <em class="sig-param"><span class="n">N</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em>, <em class="sig-param"><span class="n">cutoff</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span> <span class="o">=</span> <span class="default_value">1.5</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a><a class="headerlink" href="#baggianalysis.core.FixedNumberFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define as neighbours of a particle the N particles that are closest to it. By default, a cutoff of 1.5 is used to look for neighbours. If not enough neighbours are found, the cutoff is increased.</p>
 <p>The constructor takes two mandatory arguments.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -215,11 +216,10 @@
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="baggianalysis.core.CutoffFinder">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">CutoffFinder</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.CutoffFinder</em>, <em class="sig-param">arg0: float</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.CutoffFinder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.NeighbourFinder" title="baggianalysis.core.NeighbourFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.NeighbourFinder</span></code></a></p>
-<p>Define as neighbours of a particle all those particles that are at closer than the given cutoff.</p>
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">CutoffFinder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.CutoffFinder" title="baggianalysis.core.CutoffFinder">baggianalysis.core.CutoffFinder</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)">float</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a><a class="headerlink" href="#baggianalysis.core.CutoffFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define as neighbours of a particle all those particles that are at closer than the given cutoff.</p>
 <p>Constructor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -228,49 +228,47 @@
 </dl>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="baggianalysis.core.SANNFinder">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">SANNFinder</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.SANNFinder</em>, <em class="sig-param">arg0: float</em>, <em class="sig-param">arg1: ba::SANNFinder::SymmetryPolicy</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.SANNFinder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.NeighbourFinder" title="baggianalysis.core.NeighbourFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.NeighbourFinder</span></code></a></p>
-<dl class="attribute">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">SANNFinder</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.SANNFinder</em>, <em class="sig-param">arg0: float</em>, <em class="sig-param">arg1: ba::SANNFinder::SymmetryPolicy</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a><a class="headerlink" href="#baggianalysis.core.SANNFinder" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
 <dt id="baggianalysis.core.SANNFinder.NO_ACTION">
 <code class="sig-name descname">NO_ACTION</code><em class="property"> = SymmetryPolicy.NO_ACTION</em><a class="headerlink" href="#baggianalysis.core.SANNFinder.NO_ACTION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="baggianalysis.core.SANNFinder.SYMMETRISE_BY_ADDING">
 <code class="sig-name descname">SYMMETRISE_BY_ADDING</code><em class="property"> = SymmetryPolicy.SYMMETRISE_BY_ADDING</em><a class="headerlink" href="#baggianalysis.core.SANNFinder.SYMMETRISE_BY_ADDING" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="baggianalysis.core.SANNFinder.SYMMETRISE_BY_REMOVING">
 <code class="sig-name descname">SYMMETRISE_BY_REMOVING</code><em class="property"> = SymmetryPolicy.SYMMETRISE_BY_REMOVING</em><a class="headerlink" href="#baggianalysis.core.SANNFinder.SYMMETRISE_BY_REMOVING" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="baggianalysis.core.SANNFinder.SymmetryPolicy">
-<em class="property">class </em><code class="sig-name descname">SymmetryPolicy</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.SANNFinder.SymmetryPolicy</em>, <em class="sig-param">arg0: int</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.SANNFinder.SymmetryPolicy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
-<p>Members:</p>
+<em class="property">class </em><code class="sig-name descname">SymmetryPolicy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.SANNFinder.SymmetryPolicy" title="baggianalysis.core.SANNFinder.SymmetryPolicy">baggianalysis.core.SANNFinder.SymmetryPolicy</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.8)">None</a><a class="headerlink" href="#baggianalysis.core.SANNFinder.SymmetryPolicy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Members:</p>
 <p>NO_ACTION</p>
 <p>SYMMETRISE_BY_ADDING</p>
 <p>SYMMETRISE_BY_REMOVING</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="baggianalysis.core.SANNFinder.SymmetryPolicy.NO_ACTION">
 <code class="sig-name descname">NO_ACTION</code><em class="property"> = SymmetryPolicy.NO_ACTION</em><a class="headerlink" href="#baggianalysis.core.SANNFinder.SymmetryPolicy.NO_ACTION" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="baggianalysis.core.SANNFinder.SymmetryPolicy.SYMMETRISE_BY_ADDING">
 <code class="sig-name descname">SYMMETRISE_BY_ADDING</code><em class="property"> = SymmetryPolicy.SYMMETRISE_BY_ADDING</em><a class="headerlink" href="#baggianalysis.core.SANNFinder.SymmetryPolicy.SYMMETRISE_BY_ADDING" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="baggianalysis.core.SANNFinder.SymmetryPolicy.SYMMETRISE_BY_REMOVING">
 <code class="sig-name descname">SYMMETRISE_BY_REMOVING</code><em class="property"> = SymmetryPolicy.SYMMETRISE_BY_REMOVING</em><a class="headerlink" href="#baggianalysis.core.SANNFinder.SymmetryPolicy.SYMMETRISE_BY_REMOVING" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="baggianalysis.core.SANNFinder.SymmetryPolicy.name">
 <em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#baggianalysis.core.SANNFinder.SymmetryPolicy.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>handle) -&gt; str</p>
@@ -307,11 +305,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2020, Lorenzo Rovigatti
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -322,7 +328,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
