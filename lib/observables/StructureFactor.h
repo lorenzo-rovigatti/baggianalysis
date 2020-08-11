@@ -12,6 +12,12 @@
 
 namespace ba {
 
+struct DestructuredStructureFactor {
+	vector_scalar q_modules;
+	std::vector<std::vector<vector_scalar>> cos_contribs;
+	std::vector<std::vector<vector_scalar>> sin_contribs;
+};
+
 class StructureFactor: public SystemObservable<std::map<double, double>> {
 public:
 	StructureFactor(double largest_q, uint max_n_realisations, double max_delta_q);
@@ -20,6 +26,8 @@ public:
 
 	void clear_b_factors();
 	void set_b_factors(vector_scalar b_factors);
+
+	DestructuredStructureFactor destructured_from_system(std::shared_ptr<System> system);
 
 	void analyse_system(std::shared_ptr<System> system) override;
 

@@ -36,4 +36,8 @@
 .. autoclass:: StructureFactor
     :members:
     :undoc-members:
+    
+.. autoclass:: DestructuredStructureFactor
+    :members:
+    :undoc-members:
 ```
