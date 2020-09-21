@@ -133,10 +133,9 @@ IF(Python)
 	CONFIGURE_FILE(python/setup.py
 		${SETUP_PY}
 	)
-	
+
 	# setup the make install target to run setup.py (in user mode, no root permissions required)
-	FIND_PROGRAM(PYTHON "python3")
-	INSTALL(CODE "execute_process(COMMAND ${PYTHON} ${SETUP_PY} install --user)")
+	INSTALL(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} ${SETUP_PY} install --user)")
 ELSE(Python)
 	ADD_LIBRARY(_baggianalysis SHARED ${ba_lib_SOURCES})
 ENDIF(Python)

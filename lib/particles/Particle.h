@@ -58,6 +58,22 @@ public:
 		_velocity = nv;
 	}
 
+	const std::vector<vec3> &orientation_vectors() const {
+		return _orientation_vectors;
+	}
+
+	void set_orientation_vectors(const std::vector<vec3> &no) {
+		_orientation_vectors = no;
+	}
+
+	void add_orientation_vector(const vec3 v) {
+		_orientation_vectors.emplace_back(v);
+	}
+
+	void clear_orientation_vectors() {
+		_orientation_vectors.clear();
+	}
+
 	const std::set<std::shared_ptr<Particle>> &bonded_neighbours() const {
 		return _bonded_neighbours;
 	}
@@ -84,6 +100,7 @@ protected:
 	particle_type _type = DEFAULT_PARTICLE_TYPE;
 	vec3 _position = vec3(0., 0., 0.);
 	vec3 _velocity = vec3(0., 0., 0.);
+	std::vector<vec3> _orientation_vectors;
 
 	std::set<std::shared_ptr<Particle>> _bonded_neighbours;
 	std::set<std::shared_ptr<Particle>> _neighbours;

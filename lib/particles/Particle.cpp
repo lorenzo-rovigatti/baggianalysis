@@ -102,19 +102,41 @@ index : int
             The new neighbour.
 	)pbdoc");
 
-	particle.def_property_readonly("molecule", &Particle::molecule);
+	particle.def_property_readonly("molecule", &Particle::molecule, R"pbdoc(
+		The molecule to which this particle belongs.
 
-	particle.def_property_readonly("bonded_neighbours", &Particle::bonded_neighbours);
+		:type: :class:`ParticleSet`
+	)pbdoc");
 
-	particle.def_property_readonly("neighbours", &Particle::neighbours);
+	particle.def_property_readonly("bonded_neighbours", &Particle::bonded_neighbours, R"pbdoc(
+		A list of this particle's bonded neighbours.
 
-	particle.def_property_readonly("index", &Particle::index);
+		:type: Set(:class:`Particle`)
+	)pbdoc");
 
-	particle.def_property("type", &Particle::type, &Particle::set_type);
+	particle.def_property_readonly("neighbours", &Particle::neighbours, R"pbdoc(
+		A list of this particle's neighbours.
+
+		:type: Set(:class:`Particle`)
+	)pbdoc");
+
+	particle.def_property_readonly("index", &Particle::index, R"pbdoc(
+		The particle index.
+
+		:type: int
+	)pbdoc");
+
+	particle.def_property("type", &Particle::type, &Particle::set_type, R"pbdoc(
+		The particle type.
+
+		:type: string
+	)pbdoc");
 
 	particle.def_property("position", &Particle::position, &Particle::set_position);
 
 	particle.def_property("velocity", &Particle::velocity, &Particle::set_velocity);
+
+	particle.def_property("orientation_vectors", &Particle::orientation_vectors, &Particle::set_orientation_vectors);
 }
 
 #endif

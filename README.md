@@ -6,7 +6,7 @@ The documentation for the Python bindings can be found in [docs/build/html/index
 
 ### Requirements
 
-* CMake >= 2.8
+* CMake >= 3.1
 * make
 * A c++14-compliant compiler (tested with GCC >= 5.4)
 * A few Boost modules:
