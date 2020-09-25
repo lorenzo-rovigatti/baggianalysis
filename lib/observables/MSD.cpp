@@ -134,8 +134,8 @@ double MSD::_conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System
 void export_MSD(py::module &m) {
 	py::class_<MSD, std::shared_ptr<MSD>> obs(m, "MSD");
 
-	obs.def(py::init<uint, bool>())
-			.def("analyse_and_print", &MSD::analyse_and_print);
+	obs.def(py::init<uint, bool>());
+	obs.def("analyse_and_print", &MSD::analyse_and_print);
 
 	PY_EXPORT_TRAJECTORY_OBS(obs, MSD);
 }

@@ -59,8 +59,7 @@ void ConvexHull::analyse_system(std::shared_ptr<System> system) {
 void export_ConvexHull(py::module &m) {
 	py::class_<ConvexHull, std::shared_ptr<ConvexHull>> obs(m, "ConvexHull");
 
-	obs
-		.def(py::init<>());
+	obs.def(py::init<>());
 
 	PY_EXPORT_SYSTEM_OBS(obs, ConvexHull);
 

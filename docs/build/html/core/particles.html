@@ -258,7 +258,7 @@ the current particle is <cite>not</cite> added to the list of <code class="docut
 <dl class="attribute">
 <dt id="baggianalysis.core.Particle.index">
 <code class="descname">index</code><a class="headerlink" href="#baggianalysis.core.Particle.index" title="Permalink to this definition">¶</a></dt>
-<dd><p>The particle index.</p>
+<dd><p>The particle’s index.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -300,17 +300,38 @@ the current particle is <cite>not</cite> added to the list of <code class="docut
 <dl class="attribute">
 <dt id="baggianalysis.core.Particle.orientation_vectors">
 <code class="descname">orientation_vectors</code><a class="headerlink" href="#baggianalysis.core.Particle.orientation_vectors" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>A list of vectors related to the particle’s orientation. Depending on the specific model it may contain the
+list of interaction centres or the components of the orientation matrix.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">type:</th><td class="field-body">List( numpy.ndarray )</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="baggianalysis.core.Particle.position">
 <code class="descname">position</code><a class="headerlink" href="#baggianalysis.core.Particle.position" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The particle’s position.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="attribute">
 <dt id="baggianalysis.core.Particle.type">
 <code class="descname">type</code><a class="headerlink" href="#baggianalysis.core.Particle.type" title="Permalink to this definition">¶</a></dt>
-<dd><p>The particle type.</p>
+<dd><p>The particle’s type.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -324,7 +345,16 @@ the current particle is <cite>not</cite> added to the list of <code class="docut
 <dl class="attribute">
 <dt id="baggianalysis.core.Particle.velocity">
 <code class="descname">velocity</code><a class="headerlink" href="#baggianalysis.core.Particle.velocity" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The particle’s velocity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)">numpy.ndarray</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 

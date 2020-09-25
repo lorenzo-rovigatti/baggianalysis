@@ -151,7 +151,6 @@ double constraint(unsigned n, const double *x, double *grad, void *f_data) {
 void export_PoreSize(py::module &m) {
 	py::class_<PoreSize, std::shared_ptr<PoreSize>> obs(m, "PoreSize");
 
-	// here we explicitly list all the arguments so that we can specify that the latter three take default values
 	obs.def(py::init<int, double, double, double>(), py::arg("N_attempts"), py::arg("r_cut") = 1.0, py::arg("particle_radius") = 0.5, py::arg("max_time") = 1.0);
 	obs.def("radius", &PoreSize::radius);
 

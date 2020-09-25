@@ -74,9 +74,8 @@ std::map<double, double> FormFactor::_finalised_result() {
 void export_FormFactor(py::module &m) {
 	py::class_<FormFactor, std::shared_ptr<FormFactor>> obs(m, "FormFactor");
 
-	obs
-		.def(py::init<vector_scalar, int, bool>())
-		.def("analyse_particle_set", &FormFactor::analyse_particle_set);
+	obs.def(py::init<vector_scalar, int, bool>());
+	obs.def("analyse_particle_set", &FormFactor::analyse_particle_set);
 
 	PY_EXPORT_SYSTEM_OBS(obs, FormFactor);
 }

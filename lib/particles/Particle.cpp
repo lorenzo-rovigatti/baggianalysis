@@ -121,22 +121,35 @@ index : int
 	)pbdoc");
 
 	particle.def_property_readonly("index", &Particle::index, R"pbdoc(
-		The particle index.
+		The particle's index.
 
 		:type: int
 	)pbdoc");
 
 	particle.def_property("type", &Particle::type, &Particle::set_type, R"pbdoc(
-		The particle type.
+		The particle's type.
 
 		:type: string
 	)pbdoc");
 
-	particle.def_property("position", &Particle::position, &Particle::set_position);
+	particle.def_property("position", &Particle::position, &Particle::set_position, R"pbdoc(
+		The particle's position.
 
-	particle.def_property("velocity", &Particle::velocity, &Particle::set_velocity);
+		:type: numpy.ndarray
+	)pbdoc");
 
-	particle.def_property("orientation_vectors", &Particle::orientation_vectors, &Particle::set_orientation_vectors);
+	particle.def_property("velocity", &Particle::velocity, &Particle::set_velocity, R"pbdoc(
+		The particle's velocity.
+
+		:type: numpy.ndarray
+	)pbdoc");
+
+	particle.def_property("orientation_vectors", &Particle::orientation_vectors, &Particle::set_orientation_vectors, R"pbdoc(
+        A list of vectors related to the particle's orientation. Depending on the specific model it may contain the 
+        list of interaction centres or the components of the orientation matrix.
+
+		:type: List(numpy.ndarray)
+	)pbdoc");
 }
 
 #endif

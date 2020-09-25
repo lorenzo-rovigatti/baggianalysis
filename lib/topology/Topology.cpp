@@ -197,7 +197,7 @@ void export_Topology(py::module &m) {
 	py::class_<Topology, std::shared_ptr<Topology>> topology(m, "Topology", R"pbdoc(
         This class manages the connections and links between the particles of a system.
 
-        Here the term ``topology`` refers to the way atoms/particles are partitioned into clusters. In its simplest form, a topology is just a list
+        Here the term ``topology`` refers to the way atoms/particles are partitioned into clusters. In its simplest form, a topology is just a list of
         links between particles. These links can be shared between two, three, four or more particles. While the latter are pretty rare, the others 
         are quite common. Connections between two, three and four particles are here called `bonds`, `angles` and `dihedrals`. As of now, although all
         three classes of links are supported and stored in the topology, the only useful concept is the bond, which is used by the code to partition

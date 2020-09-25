@@ -193,7 +193,7 @@
 <em class="property">class </em><code class="descclassname">baggianalysis.core.</code><code class="descname">Topology</code><span class="sig-paren">(</span><em>self: baggianalysis.core.Topology</em>, <em>arg0: baggianalysis.core.System</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.Topology" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
 <p>This class manages the connections and links between the particles of a system.</p>
-<p>Here the term <code class="docutils literal notranslate"><span class="pre">topology</span></code> refers to the way atoms/particles are partitioned into clusters. In its simplest form, a topology is just a list
+<p>Here the term <code class="docutils literal notranslate"><span class="pre">topology</span></code> refers to the way atoms/particles are partitioned into clusters. In its simplest form, a topology is just a list of
 links between particles. These links can be shared between two, three, four or more particles. While the latter are pretty rare, the others
 are quite common. Connections between two, three and four particles are here called <cite>bonds</cite>, <cite>angles</cite> and <cite>dihedrals</cite>. As of now, although all
 three classes of links are supported and stored in the topology, the only useful concept is the bond, which is used by the code to partition
