@@ -1,11 +1,13 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
+cmake_policy(SET CMP0054 NEW)
+
 OPTION(Python "Enable Python bindings" ON)
 OPTION(Debug "Set to ON to compile with debug symbols" OFF)
 OPTION(G "Set to ON to compile with optimisations and debug symbols" OFF)
 OPTION(MOSIX "Make baggianalysis compatible with MOSIX" OFF)
 
-PROJECT(baggianalysis C CXX)
+PROJECT(baggianalysis CXX)
 
 # if cmake can't find python, nlopts or some of the other libraries add their paths to the following command
 SET(CMAKE_FIND_ROOT_PATH)
@@ -26,7 +28,7 @@ ENDIF(Python)
 FIND_PACKAGE( Boost COMPONENTS log signals filesystem REQUIRED )
 
 IF(Debug)
-	SET(CMAKE_BUILD_TYPE Debug)
+	SET(CMAKE_BUILD_TYPE "Debug")
 	MESSAGE(STATUS "Compiling in Debug mode")
 ENDIF(Debug)
 
@@ -54,7 +56,7 @@ ENDIF()
 # the BOOST_LOG_DYN_LINK definition is required in order to build a python-readable dynamic library
 ADD_DEFINITIONS(-Wall -DBOOST_LOG_DYN_LINK -Wno-int-in-bool-context)
 
-IF(NOT CMAKE_BUILD_TYPE MATCHES Debug)
+IF(NOT Debug)
 	IF(INTEL)
 		ADD_DEFINITIONS(-fast)
 	ELSE()

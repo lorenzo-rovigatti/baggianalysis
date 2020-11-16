@@ -13,6 +13,7 @@ The documentation for the Python bindings can be found in [docs/build/html/index
     * Boost Log (`libboost-log-dev`) 
     * Boost Signals2 (`libboost-signals-dev`)
     * Boost Filesystem (`libboost-filesystem-dev`)
+    * Boost Thread (`libboost-thread-dev`)
 * If Python bindings are enabled, Python 3's header file are required (`python3-dev`)
 * The pore size observable requires the [NLopt](https://nlopt.readthedocs.io/en/latest/) library (`libnlopt-dev`)
 * The bond-order parameter observable requires the [GNU Scientific Library](https://www.gnu.org/software/gsl/) (`libgsl-dev`)
