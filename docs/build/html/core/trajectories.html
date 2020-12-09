@@ -215,8 +215,22 @@ to systems in a “first-in first-out” fashion.</p>
 
 <dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.initialise_from_folder">
-<code class="descname">initialise_from_folder</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseTrajectory</em>, <em>arg0: str</em>, <em>arg1: str</em>, <em>arg2: bool</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.initialise_from_folder" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="descname">initialise_from_folder</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseTrajectory</em>, <em>folder: str</em>, <em>pattern: str</em>, <em>natural_sorting: bool = True</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.initialise_from_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialise the trajectory by loading up frames stored in files contained in a folder according to a pattern.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>folder</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – the folder containing the files to be parsed</li>
+<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – a glob pattern used to select the files to be loaded. Examples are <em>confs*</em> or <em>conf?0000.dat</em>.</li>
+<li><strong>natural_sorting</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – sort the files alphabetically while, at the same time, attempting to handle multi-digit numbers.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.initialise_from_trajectory_file">

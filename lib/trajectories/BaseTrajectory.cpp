@@ -67,11 +67,36 @@ void export_BaseTrajectory(py::module &m) {
 
 	parser.def(py::init<std::shared_ptr<BaseParser>>());
 
-	parser.def("initialise_from_folder", &BaseTrajectory::initialise_from_folder);
+	parser.def("initialise_from_folder", &BaseTrajectory::initialise_from_folder, py::arg("folder"), py::arg("pattern"), py::arg("natural_sorting") = true, R"pbdoc(
+        Initialise the trajectory by loading up frames stored in files contained in a folder according to a pattern.
 
-	parser.def("initialise_from_filelist", &BaseTrajectory::initialise_from_filelist);
+        Parameters
+        ----------
+        folder : str
+            The folder containing the files to be parsed
+        pattern : str
+            A glob pattern used to select the files to be loaded. Examples are *confs\** or *conf?0000.dat*.
+        natural_sorting : bool
+            Sort the files alphabetically while, at the same time, attempting to handle multi-digit numbers.   
+	)pbdoc");
 
-	parser.def("initialise_from_trajectory_file", &BaseTrajectory::initialise_from_trajectory_file);
+	parser.def("initialise_from_filelist", &BaseTrajectory::initialise_from_filelist, py::arg("filelist"), R"pbdoc(
+        Initialise the trajectory out of a list of filenames.
+
+        Parameters
+        ----------
+        filelist : List(str)
+            The list of filenames that will be used to initialise the trajectory.
+	)pbdoc");
+
+	parser.def("initialise_from_trajectory_file", &BaseTrajectory::initialise_from_trajectory_file, py::arg("trajectory_file"), R"pbdoc(
+        Initialise the trajectory from a single file, which should contain all the frames, one after the other.
+
+        Parameters
+        ----------
+        trajectory_file : str
+            The name of the file containing the trajectory.
+	)pbdoc");
 
 	parser.def("next_frame", &BaseTrajectory::next_frame, R"pbdoc(
         Return the next frame (system), or :code:`None` if we reached the end of the trajectory.
