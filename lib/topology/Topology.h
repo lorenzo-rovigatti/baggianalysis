@@ -32,6 +32,7 @@ public:
 
 	static std::shared_ptr<Topology> make_empty_topology();
 	static std::shared_ptr<Topology> make_topology_from_file(std::string filename, TopologyParser parser);
+	static std::shared_ptr<Topology> make_topology_from_system(std::shared_ptr<System> system);
 
 	void add_bond(int p, int q);
 	void add_angle(int p, int q, int r);
