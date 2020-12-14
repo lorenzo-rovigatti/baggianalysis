@@ -12,12 +12,26 @@
 
 namespace ba {
 
-struct ConvexHullResult {
-	double volume = 0.;
-	double area = 0.;
+struct ConvexHullTriangle {
+	ConvexHullTriangle(vec3 &p1, vec3 &p2, vec3 &p3, vec3 &nnormal) {
+		v1 = p1;
+		v2 = p2;
+		v3 = p3;
+		normal = nnormal;
+	}
+
+	vec3 v1, v2, v3;
+	vec3 normal;
 };
 
-class ConvexHull: public SystemObservable<std::vector<ConvexHullResult>> {
+struct ConvexHullResult {
+	double volume;
+	double area;
+	std::vector<vec3> vertices;
+	std::vector<ConvexHullTriangle> triangles;
+};
+
+class ConvexHull: public SystemObservable<ConvexHullResult> {
 public:
 	ConvexHull();
 	virtual ~ConvexHull();
