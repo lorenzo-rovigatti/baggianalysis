@@ -48,6 +48,20 @@ std::shared_ptr<Topology> Topology::make_topology_from_file(std::string filename
 	return new_topology;
 }
 
+std::shared_ptr<Topology> Topology::make_topology_from_system(std::shared_ptr<System> system) {
+	std::shared_ptr<Topology> new_topology = std::shared_ptr<Topology>(new Topology());
+
+	for(auto p : system->particles()) {
+		for(auto neigh : p->bonded_neighbours()) {
+			if(p->index() > neigh->index()) {
+				new_topology->add_bond(p->index(), neigh->index());
+			}
+		}
+	}
+
+	return new_topology;
+}
+
 void Topology::add_bond(int p, int q) {
 	Bond new_bond( { p, q });
 	_bonds.emplace(new_bond);
@@ -241,6 +255,15 @@ using a constructor that takes as its only parameter the :class:`System` instanc
             A callable that takes a :obj:`str` and a :class:`Topology`. The former is the name of the file containing the topology details to be parsed, while
             the latter is the empty topology that will be initialised by the callable.
 	)pbdoc");
+
+	topology.def_static("make_topology_from_system", &Topology::make_topology_from_system, py::arg("system"), R"pbdoc(
+            This static method generates a topology out of a system by using the bonded neighbours of each particle to build the list of bonds. 
+
+            Parameters
+            ----------
+            system : :class:`System`
+                The input system.
+    )pbdoc");
 
 	topology.def("add_bond", &Topology::add_bond, py::arg("p"), py::arg("q"), R"pbdoc(
         Adds a bond between a pair of particles.
