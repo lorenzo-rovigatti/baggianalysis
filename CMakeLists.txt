@@ -25,7 +25,7 @@ IF(Python)
 	MESSAGE(STATUS "Enabling Python bindings")
 ENDIF(Python)
 
-FIND_PACKAGE( Boost COMPONENTS log signals filesystem REQUIRED )
+FIND_PACKAGE( Boost COMPONENTS log filesystem REQUIRED )
 
 IF(Debug)
 	SET(CMAKE_BUILD_TYPE "Debug")

@@ -11,7 +11,6 @@ The documentation for the Python bindings can be found in [docs/build/html/index
 * A c++14-compliant compiler (tested with GCC >= 5.4)
 * A few Boost modules:
     * Boost Log (`libboost-log-dev`) 
-    * Boost Signals2 (`libboost-signals-dev`)
     * Boost Filesystem (`libboost-filesystem-dev`)
     * Boost Thread (`libboost-thread-dev`)
 * If Python bindings are enabled, Python 3's header file are required (`python3-dev`)
