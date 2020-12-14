@@ -23,7 +23,7 @@ ConvexHull::~ConvexHull() {
 void ConvexHull::analyse_system(std::shared_ptr<System> system) {
 	quickhull::QuickHull<double> qh;
 	std::vector<quickhull::Vector3<double>> point_cloud;
-	_result.vertices.clear();
+	_result = ConvexHullResult();
 
 	for(auto pos: system->positions()) {
 		point_cloud.emplace_back(pos[0], pos[1], pos[2]);
