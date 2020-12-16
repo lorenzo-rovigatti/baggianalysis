@@ -37,6 +37,11 @@ public:
 	virtual ~ConvexHull();
 
 	void analyse_system(std::shared_ptr<System> system) override;
+	void analyse_trajectory(std::shared_ptr<BaseTrajectory>) override;
+
+private:
+	bool _average_over_trajectory = false;
+	int _N_frames = 0;
 };
 
 #ifdef PYTHON_BINDINGS

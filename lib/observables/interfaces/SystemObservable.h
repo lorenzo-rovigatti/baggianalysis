@@ -30,6 +30,7 @@ public:
 			analyse_system(frame);
 			frame = trajectory->next_frame();
 		}
+		trajectory->reset();
 	}
 
 	virtual void analyse_system(std::shared_ptr<System> system) = 0;
