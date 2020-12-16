@@ -20,6 +20,14 @@
 .. autoclass:: ConvexHull
     :members:
     :undoc-members:
+    
+.. autoclass:: ConvexHullResult
+    :members:
+    :undoc-members:
+    
+.. autoclass:: ConvexHullTriangle
+    :members:
+    :undoc-members:
 
 .. autoclass:: FormFactor
     :members:
