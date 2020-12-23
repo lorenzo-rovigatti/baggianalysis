@@ -1,5 +1,4 @@
-from distutils.core import setup
-from __version__ import __version__
+from setuptools import setup
 
 import sys
 if sys.version_info < (3,0):
@@ -7,7 +6,11 @@ if sys.version_info < (3,0):
 
 setup(
     name = 'baggianalysis',
-    version = __version__,
+    use_scm_version = {
+        "root": "${CMAKE_SOURCE_DIR}",
+        "fallback_version": "0.0.1",
+        },
+    setup_requires = ['setuptools_scm'],
     packages = [ 'baggianalysis' ],
     package_dir = {
         '': '${CMAKE_CURRENT_BINARY_DIR}'

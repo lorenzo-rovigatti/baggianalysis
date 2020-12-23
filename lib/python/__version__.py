@@ -1,8 +1,0 @@
-__title__ = 'baggianalysis'
-__description__ = 'A C++/Python library to facilitate the analysis of molecular simulations'
-__url__ = 'https://github.com/lorenzo-rovigatti/baggianalysis'
-__version__ = '0.0.1-alpha'
-__author__ = 'Lorenzo Rovigatti'
-__author_email__ = 'lorenzo.rovigatti@uniroma1.it'
-__license__ = 'GNU GPL 3.0'
-__copyright__ = 'Copyright 2020 Lorenzo Rovigatti'

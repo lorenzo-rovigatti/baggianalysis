@@ -120,22 +120,18 @@ IF(Python)
 			LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/baggianalysis"
 	)
 	
-	# copy the files required to install the library with Python's distutils
-	CONFIGURE_FILE(python/__version__.py
-		${CMAKE_CURRENT_BINARY_DIR}/baggianalysis/__version__.py
-	)
-	
+	# copy the files required to install the library with Python's setuptools
 	CONFIGURE_FILE(python/__init__.py
 		${CMAKE_CURRENT_BINARY_DIR}/baggianalysis/__init__.py
 	)
 
-	SET(SETUP_PY "${CMAKE_CURRENT_BINARY_DIR}/baggianalysis/setup.py")
 	CONFIGURE_FILE(python/setup.py
-		${SETUP_PY}
+		${CMAKE_CURRENT_BINARY_DIR}/baggianalysis/setup.py
 	)
 
 	# setup the make install target to run setup.py (in user mode, no root permissions required)
-	INSTALL(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} ${SETUP_PY} install --user)")
+	INSTALL(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install ${CMAKE_CURRENT_BINARY_DIR}/baggianalysis)")
+	
 ELSE(Python)
 	ADD_LIBRARY(_baggianalysis SHARED ${ba_lib_SOURCES})
 ENDIF(Python)
