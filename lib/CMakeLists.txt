@@ -125,11 +125,11 @@ IF(Python)
 		${CMAKE_CURRENT_BINARY_DIR}/baggianalysis/__init__.py
 	)
 
-	CONFIGURE_FILE(python/setup.py
+	CONFIGURE_FILE(python/make_install_setup.py
 		${CMAKE_CURRENT_BINARY_DIR}/baggianalysis/setup.py
 	)
 
-	# setup the make install target to run setup.py (in user mode, no root permissions required)
+	# setup the make install target to run make_install_setup.py (in user mode, no root permissions required)
 	INSTALL(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install ${CMAKE_CURRENT_BINARY_DIR}/baggianalysis)")
 	
 ELSE(Python)

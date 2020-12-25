@@ -4,16 +4,27 @@ Baggianalysis is a library aimed at simplifying the analysis of particle-based s
 
 The documentation for the Python bindings can be found in [docs/build/html/index.html](docs/build/html/index.html).
 
+### Install the `Python` package
+
+If all the requirements are met, the `baggianalysis` Python package can be compiled & installed by cloning and repo and using `pip` as follows:
+
+```bash
+$ git clone https://github.com/lorenzo-rovigatti/baggianalysis.git
+$ PIP_COMMAND install ./baggianalysis
+```
+
+where `PIP_COMMAND` should be either `pip`, `pip3`, `python -m pip` or `python3 -m pip`, depending on your local configuration.
+
 ### Requirements
 
-* CMake >= 3.1
+* CMake >= 3.12
 * make
 * A c++14-compliant compiler (tested with GCC >= 5.4)
 * A few Boost modules:
     * Boost Log (`libboost-log-dev`) 
     * Boost Filesystem (`libboost-filesystem-dev`)
     * Boost Thread (`libboost-thread-dev`)
-* If Python bindings are enabled, the `setuptools` and `setuptools-scm` packages and Python 3's header file are required (`python3-dev`)
+* If Python bindings are enabled, the `pip`, `setuptools` and `setuptools-scm` packages, as well as Python 3's header file are required (`python3-dev`)
 * The pore size observable requires the [NLopt](https://nlopt.readthedocs.io/en/latest/) library (`libnlopt-dev`)
 * The bond-order parameter observable requires the [GNU Scientific Library](https://www.gnu.org/software/gsl/) (`libgsl-dev`)
 * [Sphinx](https://www.sphinx-doc.org/en/master), [sphinx_rtd_theme](https://github.com/readthedocs/sphinx_rtd_theme) and [recommonmark](https://recommonmark.readthedocs.io/en/latest/) are required to generate the Python bindings' documentation. Those can all be installed by using `pip` (for instance with the command `pip3 install --user sphinx sphinx_rtd_theme recommonmark`)
@@ -28,7 +39,7 @@ The code can be compiled with the following commands:
 	cmake ..           # here you can specify additional options, see next section
 	make -j4           # compile baggianalysis. The -jX make option makes it compile the code in parallel by using X threads.
 
-At the end of the compilation a test executable used for development (`test_feature`) will be placed in the build/bin folder. If Python bindings are enabled, `make install` will run the `setup.py install --user` command to make the library accessible by the user.
+At the end of the compilation a test executable used for development (`test_feature`) will be placed in the build/bin folder. If Python bindings are enabled, `make install` will install the package through `pip` to make the library accessible by the user.
 
 ### cmake options
 
@@ -67,4 +78,3 @@ baggianalysis contains a very simple testing suite that checks whether the Pytho
 * The [glm 0.9.9](https://glm.g-truc.net/0.9.9/index.html) and [pybind 2.4.3](https://github.com/pybind/pybind11) libraries are included in the source tree.
 * Natural sorting of files is carried out with the [NaturalSort](https://github.com/scopeInfinity/NaturalSort) library.
 * [akuukka's quickhull](https://github.com/akuukka/quickhull) library is included in the source tree.
-
