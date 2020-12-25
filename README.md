@@ -6,18 +6,18 @@ The documentation for the Python bindings can be found in [docs/build/html/index
 
 ### Install the `Python` package
 
-If all the requirements are met, the `baggianalysis` Python package can be compiled & installed by cloning and repo and using `pip` as follows:
+If all the requirements are met, the `baggianalysis` Python package can be compiled & installed by cloning the repo and using `pip` as follows:
 
 ```bash
 $ git clone https://github.com/lorenzo-rovigatti/baggianalysis.git
 $ PIP_COMMAND install ./baggianalysis
 ```
 
-where `PIP_COMMAND` should be either `pip`, `pip3`, `python -m pip` or `python3 -m pip`, depending on your local configuration.
+where `PIP_COMMAND` should be `pip`, `pip3`, `python -m pip` or `python3 -m pip`, depending on your local configuration. Use `-v` for verbose output.
 
 ### Requirements
 
-* CMake >= 3.12
+* CMake >= 3.1 (>= 3.12 if installed through `pip`)
 * make
 * A c++14-compliant compiler (tested with GCC >= 5.4)
 * A few Boost modules:
