@@ -90,7 +90,7 @@ ELSE()
 	MESSAGE(WARNING "nlopt not found, the following modules will not be compiled: ${with_nlopt_SOURCES}")
 ENDIF()
 
-PKG_CHECK_MODULES(GSL gsl)
+find_package(GSL)
 
 SET(with_GSL_SOURCES
 	observables/BondOrderParameters.cpp
