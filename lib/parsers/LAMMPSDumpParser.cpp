@@ -131,7 +131,7 @@ LAMMPSDumpParser::HeaderData LAMMPSDumpParser::_parse_headers(std::ifstream &con
 void export_LAMMPSDumpParser(py::module &m) {
 	py::class_<LAMMPSDumpParser, BaseParser, std::shared_ptr<LAMMPSDumpParser>> parser(m, "LAMMPSDumpParser");
 
-	parser.def(py::init<bool>());
+	parser.def(py::init<bool>(), py::arg("rescaled_coords") = false);
 }
 
 #endif

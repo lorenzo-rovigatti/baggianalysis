@@ -26,9 +26,9 @@ public:
 	Cogli1Exporter(Cogli1Mapper);
 	virtual ~Cogli1Exporter();
 
-	void write(std::shared_ptr<System> system, std::string filename) override;
-
 private:
+	void _write_system_to_stream(std::shared_ptr<System> system, std::ostream &output) override;
+
 	Cogli1Mapper _mapper = [](Particle *p) {
 		return Cogli1Particle();
 	};

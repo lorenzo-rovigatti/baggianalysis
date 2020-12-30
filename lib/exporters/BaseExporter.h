@@ -12,6 +12,7 @@
 #include "../python_defs.h"
 
 #include "../System.h"
+#include "../trajectories/BaseTrajectory.h"
 
 namespace ba {
 
@@ -20,28 +21,16 @@ public:
 	BaseExporter();
 	virtual ~BaseExporter();
 
-	virtual void write(std::shared_ptr<System> system, std::string) = 0;
+	virtual void write(std::shared_ptr<System> system, std::string filename);
+	virtual void write_trajectory(std::shared_ptr<BaseTrajectory> trajectory, std::string filename);
+	virtual void write_topology(std::shared_ptr<System> system, std::string filename);
+
+private:
+	virtual void _write_system_to_stream(std::shared_ptr<System> system, std::ostream &output);
+	virtual std::string _topology_filename_from_output_filename(std::string filename);
 };
 
 #ifdef PYTHON_BINDINGS
-
-/**
- * @brief Trampoline class for BaseExporter.
- */
-class PyBaseExporter : public BaseExporter {
-public:
-	using BaseExporter::BaseExporter;
-
-	void write(std::shared_ptr<System> system, std::string str_param) override {
-		PYBIND11_OVERLOAD_PURE( // @suppress("Unused return value")
-			void,
-			BaseExporter,
-			write,
-			system,
-			str_param
-		);
-	}
-};
 
 void export_BaseExporter(py::module &m);
 

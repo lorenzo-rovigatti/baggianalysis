@@ -18,9 +18,9 @@ public:
 	LAMMPSDataFileExporter(std::string atom_style);
 	virtual ~LAMMPSDataFileExporter();
 
-	void write(std::shared_ptr<System> system, std::string filename) override;
-
 private:
+	void _write_system_to_stream(std::shared_ptr<System> system, std::ostream &output) override;
+
 	std::string _particle_line(std::shared_ptr<Particle> p);
 
 	std::string _atom_style;

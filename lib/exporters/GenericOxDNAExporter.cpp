@@ -20,13 +20,10 @@ GenericOxDNAExporter::~GenericOxDNAExporter() {
 
 }
 
-void GenericOxDNAExporter::write(std::shared_ptr<System> system, std::string filename) {
-	uint N = system->N();
+void GenericOxDNAExporter::write_topology(std::shared_ptr<System> system, std::string filename) {
+	std::ofstream topology(filename);
 
-	std::string topology_file = boost::str(boost::format("topology_%s") % filename);
-	std::ofstream topology(topology_file);
-
-	topology << N;
+	topology << system->N();
 	if(_also_print_N_A) {
 		int N_A = 0;
 		for(auto p : system->particles()) {
@@ -38,22 +35,20 @@ void GenericOxDNAExporter::write(std::shared_ptr<System> system, std::string fil
 	}
 
 	topology.close();
+}
 
-	std::ofstream configuration(filename);
-
-	configuration << boost::format("t = %llu\n") % system->time;
-	configuration << boost::format("b = %lf %lf %lf\n") % system->box[0] % system->box[1] % system->box[2];
-	configuration << boost::format("E = 0 0 0\n");
+void GenericOxDNAExporter::_write_system_to_stream(std::shared_ptr<System> system, std::ostream &output) {
+	output << boost::format("t = %llu\n") % system->time;
+	output << boost::format("b = %lf %lf %lf\n") % system->box[0] % system->box[1] % system->box[2];
+	output << boost::format("E = 0 0 0\n");
 	// TODO update with angular data
 	for(auto p : system->particles()) {
-		configuration << boost::format("%lf %lf %lf ") % p->position()[0] % p->position()[1] % p->position()[2];
-		configuration << boost::format("1 0 0 ");
-		configuration << boost::format("0 1 0 ");
-		configuration << boost::format("%lf %lf %lf ") % p->velocity()[0] % p->velocity()[1] % p->velocity()[2];
-		configuration << boost::format("0 0 0\n");
+		output << boost::format("%lf %lf %lf ") % p->position()[0] % p->position()[1] % p->position()[2];
+		output << boost::format("1 0 0 ");
+		output << boost::format("0 1 0 ");
+		output << boost::format("%lf %lf %lf ") % p->velocity()[0] % p->velocity()[1] % p->velocity()[2];
+		output << boost::format("0 0 0\n");
 	}
-
-	configuration.close();
 }
 
 #ifdef PYTHON_BINDINGS

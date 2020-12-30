@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration exporters &mdash; baggianalysis 0.0.1-alpha documentation</title>
+  <title>Configuration exporters &mdash; baggianalysis 0.0.1a1.dev44+g3120a90.d20201230 documentation</title>
   
 
   
@@ -29,7 +29,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -61,7 +60,7 @@
             
             
               <div class="version">
-                0.0.1-alpha
+                0.0.1a1.dev44+g3120a90.d20201230
               </div>
             
           
@@ -198,9 +197,9 @@
 <p>The default constructor does not take any parameters.</p>
 <dl class="py method">
 <dt id="baggianalysis.core.BaseExporter.write">
-<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseExporter" title="baggianalysis.core.BaseExporter">baggianalysis.core.BaseExporter</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em>, <em class="sig-param"><span class="n">arg1</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseExporter.write" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseExporter" title="baggianalysis.core.BaseExporter">baggianalysis.core.BaseExporter</a></span></em>, <em class="sig-param"><span class="n">system</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em>, <em class="sig-param"><span class="n">filename</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseExporter.write" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
-<div><p>Print out the configuration.</p>
+<div><p>Print out a single system.</p>
 </div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -208,6 +207,30 @@
 <li><p><strong>system</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a>) – The <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a> to be printed.</p></li>
 <li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the output file.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.BaseExporter.write_topology">
+<code class="sig-name descname">write_topology</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseExporter" title="baggianalysis.core.BaseExporter">baggianalysis.core.BaseExporter</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em>, <em class="sig-param"><span class="n">arg1</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseExporter.write_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Some formats have a topology file on top of configuration (and/or trajectory) files. By default this method is called
+by both <a class="reference internal" href="#baggianalysis.core.BaseExporter.write" title="baggianalysis.core.BaseExporter.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> and <a class="reference internal" href="#baggianalysis.core.BaseExporter.write_topology" title="baggianalysis.core.BaseExporter.write_topology"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write_topology()</span></code></a> and hence should be extended by child classes that export to formats that use
+topology files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>system</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.BaseExporter.write_trajectory">
+<code class="sig-name descname">write_trajectory</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.BaseExporter</em>, <em class="sig-param">arg0: ba::BaseTrajectory</em>, <em class="sig-param">arg1: str</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseExporter.write_trajectory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print out a trajectory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>trajectory</strong> – The trajectory to be printed.</p>
 </dd>
 </dl>
 </dd></dl>
