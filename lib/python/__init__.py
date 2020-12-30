@@ -12,7 +12,7 @@ __copyright__ = 'Copyright 2020 Lorenzo Rovigatti'
 from pkg_resources import get_distribution, DistributionNotFound
 
 try:
-    __version__ = get_distribution("package-name").version
+    __version__ = get_distribution("baggianalysis").version
 except DistributionNotFound:
      # package is not installed
     pass
