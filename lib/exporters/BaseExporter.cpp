@@ -28,6 +28,7 @@ void BaseExporter::write(std::shared_ptr<System> system, std::string filename) {
 void BaseExporter::write_trajectory(std::shared_ptr<BaseTrajectory> trajectory, std::string filename) {
 	std::ofstream output(filename);
 
+	trajectory->reset();
 	auto system = trajectory->next_frame();
 	write_topology(system, _topology_filename_from_output_filename(filename));
 
