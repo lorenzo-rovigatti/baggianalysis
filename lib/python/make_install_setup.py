@@ -1,7 +1,7 @@
 from setuptools import setup
 
 import sys
-if sys.version_info < (3,0):
+if sys.version_info < (3, 0):
     sys.exit('Error, Python < 3.0 is not supported')
 
 setup(
@@ -13,9 +13,9 @@ setup(
     setup_requires = ['setuptools_scm'],
     packages = [ 'baggianalysis' ],
     package_dir = {
-        '': '${CMAKE_CURRENT_BINARY_DIR}'
+        'baggianalysis': '${CMAKE_CURRENT_BINARY_DIR}'
     },
     package_data = {
-        '': ['core.so']
+        'baggianalysis': ['core.so']
     }
 )

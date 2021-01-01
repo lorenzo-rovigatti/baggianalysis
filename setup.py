@@ -10,12 +10,53 @@ from distutils.version import LooseVersion
 from setuptools import setup, find_packages, Extension
 from setuptools.command.build_ext import build_ext
 
+from distutils.command.install_data import install_data
+from setuptools.command.build_ext import build_ext
+from setuptools.command.install_lib import install_lib
+from setuptools.command.install_scripts import install_scripts
+
+PACKAGE_NAME = "baggianalysis"
+
 
 class CMakeExtension(Extension):
 
     def __init__(self, name, sourcedir=''):
         Extension.__init__(self, name, sources=[])
         self.sourcedir = os.path.abspath(sourcedir)
+        
+        
+class InstallCMakeLibs(install_lib):
+    """
+    Get the libraries from the parent distribution, use those as the outfiles
+
+    Skip building anything; everything is already built, forward libraries to
+    the installation step
+    """
+
+    def run(self):
+        """
+        Copy libraries from the bin directory and place them as appropriate
+        """
+
+        self.announce("Moving library files", level=3)
+
+        # We have already built the libraries in the previous build_ext step
+        self.skip_build = True
+
+        # Folder where the `baggianalysis` package has been placed by cmake. It is used by self.install
+        self.build_dir = self.distribution.lib_dir
+        self.outfiles = self.install()
+        
+        # I have copied this bit by the parent class
+        if self.outfiles is not None:
+            # always compile, in case we have any extension stubs to deal with
+            self.byte_compile(self.outfiles)
+            
+    def get_outputs(self):
+        """
+        Overrides the parent class' method. Returns a list of the files copied over by the `run` method 
+        """
+        return self.outfiles
 
 
 class CMakeBuild(build_ext):
@@ -35,17 +76,16 @@ class CMakeBuild(build_ext):
             self.build_extension(ext)
             
     def build_extension(self, ext):
-        extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
-        cmake_args = ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir, '-DPYTHON_EXECUTABLE=' + sys.executable]
+        
+        self.announce("Preparing the build environment", level=3)
+        
+        cmake_args = []
 
         cfg = 'Debug' if self.debug else 'Release'
         build_args = ['--config', cfg]
 
         if platform.system() == "Windows":
-            cmake_args += ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{}={}'.format(
-                cfg.upper(),
-                extdir)]
-            if sys.maxsize > 2**32:
+            if sys.maxsize > 2 ** 32:
                 cmake_args += ['-A', 'x64']
             build_args += ['--', '/m']
         else:
@@ -61,25 +101,36 @@ class CMakeBuild(build_ext):
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
             
+        self.distribution.lib_dir = os.path.join(self.build_temp, "lib/python")
+            
+        self.announce("Configuring cmake project", level=3)
         subprocess.check_call(['cmake', ext.sourcedir] + cmake_args, cwd=self.build_temp)
+        
+        self.announce("Building the library", level=3)
         subprocess.check_call(['cmake', '--build', '.'] + build_args, cwd=self.build_temp)
-        # Add an empty line for a cleaner output
-        print()
 
+        self.announce("Compilation done", level=3)
+        
 
 setup(
-    name = 'baggianalysis',
-    use_scm_version = {
+    name=PACKAGE_NAME,
+    use_scm_version={
         "fallback_version": "0.0.1",
         },
-    setup_requires = ['setuptools_scm'],
-    author = 'Lorenzo Rovigatti',
-    author_email = 'lorenzo.rovigatti@gmail.com',
-    description = 'A C++/Python library to facilitate the analysis of molecular simulations',
-    ext_modules = [CMakeExtension('baggianalysis')],
+    packages=find_packages(),
+    setup_requires=['setuptools_scm'],
+    author='Lorenzo Rovigatti',
+    author_email='lorenzo.rovigatti@uniroma1.it',
+    url='https://github.com/lorenzo-rovigatti/baggianalysis',
+    description='A C++/Python library to facilitate the analysis of molecular simulations',
+    long_description=open("./README.md", 'r').read(),
+    long_description_content_type="text/markdown",
+    license='GNU GPL 3.0',
+    ext_modules=[CMakeExtension('baggianalysis')],
     # add custom build_ext command
-    cmdclass = {
-        "build_ext": CMakeBuild
+    cmdclass={
+        'build_ext': CMakeBuild,
+        'install_lib': InstallCMakeLibs,
         },
-    zip_safe = False,
+    zip_safe=False,
 )
