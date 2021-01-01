@@ -9,11 +9,7 @@ import multiprocessing
 from distutils.version import LooseVersion
 from setuptools import setup, find_packages, Extension
 from setuptools.command.build_ext import build_ext
-
-from distutils.command.install_data import install_data
-from setuptools.command.build_ext import build_ext
 from setuptools.command.install_lib import install_lib
-from setuptools.command.install_scripts import install_scripts
 
 PACKAGE_NAME = "baggianalysis"
 
@@ -113,24 +109,24 @@ class CMakeBuild(build_ext):
         
 
 setup(
-    name=PACKAGE_NAME,
-    use_scm_version={
+    name = PACKAGE_NAME,
+    use_scm_version = {
         "fallback_version": "0.0.1",
         },
-    packages=find_packages(),
-    setup_requires=['setuptools_scm'],
-    author='Lorenzo Rovigatti',
-    author_email='lorenzo.rovigatti@uniroma1.it',
-    url='https://github.com/lorenzo-rovigatti/baggianalysis',
-    description='A C++/Python library to facilitate the analysis of molecular simulations',
-    long_description=open("./README.md", 'r').read(),
-    long_description_content_type="text/markdown",
-    license='GNU GPL 3.0',
-    ext_modules=[CMakeExtension('baggianalysis')],
+    packages = find_packages(),
+    setup_requires = ['setuptools_scm'],
+    author = 'Lorenzo Rovigatti',
+    author_email = 'lorenzo.rovigatti@uniroma1.it',
+    url = 'https://github.com/lorenzo-rovigatti/baggianalysis',
+    description = 'A C++/Python library to facilitate the analysis of molecular simulations',
+    long_description = open("./README.md", 'r').read(),
+    long_description_content_type = "text/markdown",
+    license = 'GNU GPL 3.0',
+    ext_modules = [CMakeExtension('baggianalysis')],
     # add custom build_ext command
-    cmdclass={
+    cmdclass = {
         'build_ext': CMakeBuild,
         'install_lib': InstallCMakeLibs,
         },
-    zip_safe=False,
+    zip_safe = False,
 )

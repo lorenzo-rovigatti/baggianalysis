@@ -13,7 +13,7 @@ setup(
     setup_requires = ['setuptools_scm'],
     packages = [ 'baggianalysis' ],
     package_dir = {
-        'baggianalysis': '${CMAKE_CURRENT_BINARY_DIR}'
+        'baggianalysis': '${BA_OUTPUT_DIR}'
     },
     package_data = {
         'baggianalysis': ['core.so']
