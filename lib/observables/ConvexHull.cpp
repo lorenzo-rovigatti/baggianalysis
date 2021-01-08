@@ -50,11 +50,11 @@ void ConvexHull::analyse_system(std::shared_ptr<System> system) {
 		vec3 &p3 = _result.vertices[index_buffer[i + 2]];
 
 		vec3 t_normal = glm::cross(p1 - p3, p2 - p3);
-
-		volume += (glm::dot(p1, (glm::cross(p2, p3)))) / 6.;
-		area += std::sqrt(glm::dot(t_normal, t_normal)) / 2.;
-
 		ConvexHullTriangle nt(p1, p2, p3, t_normal);
+
+		volume += nt.volume();
+		area += nt.area();
+
 		_result.triangles.emplace_back(nt);
 	}
 
@@ -133,6 +133,12 @@ void export_ConvexHull(py::module &m) {
 	)pbdoc");
 	triangle.def_readonly("normal", &ConvexHullTriangle::normal, R"pbdoc(
 		The unit vector orthogonal to the triangle surface which points towards the exterior of convex hull.
+	)pbdoc");
+	triangle.def("area", &ConvexHullTriangle::area, R"pbdoc(
+		Return the area of the triangle.
+	)pbdoc");
+	triangle.def("volume", &ConvexHullTriangle::volume, R"pbdoc(
+		Return the volume of the triangle.
 	)pbdoc");
 }
 

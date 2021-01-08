@@ -22,6 +22,14 @@ struct ConvexHullTriangle {
 
 	vec3 v1, v2, v3;
 	vec3 normal;
+
+	double volume() {
+		return (glm::dot(v1, (glm::cross(v2, v3)))) / 6.;
+	}
+
+	double area() {
+		return std::sqrt(glm::dot(normal, normal)) / 2.;
+	}
 };
 
 struct ConvexHullResult {
