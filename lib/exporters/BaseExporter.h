@@ -11,10 +11,10 @@
 #include "../defs.h"
 #include "../python_defs.h"
 
-#include "../System.h"
-#include "../trajectories/BaseTrajectory.h"
-
 namespace ba {
+
+class System;
+class BaseTrajectory;
 
 class BaseExporter {
 public:

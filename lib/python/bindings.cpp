@@ -32,7 +32,7 @@
 #include "../observables/PoreSize.h"
 #endif
 
-#include "../parsers/GenericOxDNAParser.h"
+#include "../parsers/OxDNAParser.h"
 #include "../parsers/GroParser.h"
 #include "../parsers/LAMMPSDataFileParser.h"
 #include "../parsers/LAMMPSDumpParser.h"
@@ -56,7 +56,7 @@ PYBIND11_MODULE(core, m) {
 
 	// parsers
 	ba::export_BaseParser(m);
-	ba::export_GenericOxDNAParser(m);
+	ba::export_OxDNAParser(m);
 	ba::export_GroParser(m);
 	ba::export_LAMMPSDataFileParser(m);
 	ba::export_LAMMPSDumpParser(m);

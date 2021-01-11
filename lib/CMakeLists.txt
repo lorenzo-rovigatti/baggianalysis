@@ -18,11 +18,13 @@ SET(ba_lib_SOURCES
 	observables/MSD.cpp
 	observables/StructureFactor.cpp
 	parsers/BaseParser.cpp
-	parsers/GenericOxDNAParser.cpp
+	parsers/OxDNAParser.cpp
 	parsers/GroParser.cpp
 	parsers/LJKAParser.cpp
 	parsers/LAMMPSDataFileParser.cpp
 	parsers/LAMMPSDumpParser.cpp
+	parsers/oxDNA_topology_parsers/Default.cpp
+	parsers/oxDNA_topology_parsers/TSP.cpp
 	particles/Particle.cpp
 	particles/ParticleSet.cpp
 	System.cpp

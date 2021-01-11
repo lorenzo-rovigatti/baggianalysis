@@ -7,6 +7,7 @@
 
 #include "Cogli1Exporter.h"
 
+#include "../System.h"
 #include "../utils/strings.h"
 
 #include <fstream>

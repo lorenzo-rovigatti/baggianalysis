@@ -7,6 +7,9 @@
 
 #include "BaseExporter.h"
 
+#include "../System.h"
+#include "../trajectories/BaseTrajectory.h"
+
 namespace ba {
 
 BaseExporter::BaseExporter() {

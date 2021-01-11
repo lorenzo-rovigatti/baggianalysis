@@ -9,8 +9,7 @@ All parsers inherit from [BaseParser](#baggianalysis.core.BaseParser) and overri
     :nosignatures:
 
     BaseParser
-    GenericOxDNAParser
-    OxDNATopologyParser
+    OxDNAParser
     GroParser
     LAMMPSDataFileParser
     LAMMPSDumpParser
@@ -21,14 +20,10 @@ All parsers inherit from [BaseParser](#baggianalysis.core.BaseParser) and overri
     :undoc-members:
     :private-members:
     
-.. autoclass:: GenericOxDNAParser
+.. autoclass:: OxDNAParser
     :members:
     :undoc-members:
     
-.. autoclass:: OxDNATopologyParser
-    :members:
-    :undoc-members:
-
 .. autoclass:: GroParser
     :members:
     :undoc-members:

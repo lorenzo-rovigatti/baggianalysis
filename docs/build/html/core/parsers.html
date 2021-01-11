@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration parsers &mdash; baggianalysis 0.0.1a1.dev44+g3120a90.d20201230 documentation</title>
+  <title>Configuration parsers &mdash; baggianalysis 0.0.1a1.dev51+g4785999.d20210111 documentation</title>
   
 
   
@@ -29,6 +29,7 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -60,7 +61,7 @@
             
             
               <div class="version">
-                0.0.1a1.dev44+g3120a90.d20201230
+                0.0.1a1.dev51+g4785999.d20210111
               </div>
             
           
@@ -180,22 +181,19 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseParser</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.GenericOxDNAParser" title="baggianalysis.core.GenericOxDNAParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericOxDNAParser</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.OxDNAParser" title="baggianalysis.core.OxDNAParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OxDNAParser</span></code></a></p></td>
 <td><p>Overloaded function.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.OxDNATopologyParser" title="baggianalysis.core.OxDNATopologyParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OxDNATopologyParser</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.GroParser" title="baggianalysis.core.GroParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GroParser</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.GroParser" title="baggianalysis.core.GroParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GroParser</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.LAMMPSDataFileParser" title="baggianalysis.core.LAMMPSDataFileParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDataFileParser</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.LAMMPSDataFileParser" title="baggianalysis.core.LAMMPSDataFileParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDataFileParser</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.LAMMPSDumpParser" title="baggianalysis.core.LAMMPSDumpParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDumpParser</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.LAMMPSDumpParser" title="baggianalysis.core.LAMMPSDumpParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDumpParser</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.LJKAParser" title="baggianalysis.core.LJKAParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LJKAParser</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.LJKAParser" title="baggianalysis.core.LJKAParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LJKAParser</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -221,19 +219,14 @@
 </dd></dl>
 
 <dl class="py class">
-<dt id="baggianalysis.core.GenericOxDNAParser">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">GenericOxDNAParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.GenericOxDNAParser" title="Permalink to this definition">¶</a></dt>
+<dt id="baggianalysis.core.OxDNAParser">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">OxDNAParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.OxDNAParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>__init__(self: baggianalysis.core.GenericOxDNAParser, arg0: str) -&gt; None</p></li>
-<li><p>__init__(self: baggianalysis.core.GenericOxDNAParser, arg0: baggianalysis.core.OxDNATopologyParser) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.OxDNAParser, arg0: str) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.OxDNAParser, arg0: baggianalysis.core.oxDNA_topology.Default) -&gt; None</p></li>
 </ol>
 </dd></dl>
-
-<dl class="py class">
-<dt id="baggianalysis.core.OxDNATopologyParser">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">OxDNATopologyParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.OxDNATopologyParser" title="baggianalysis.core.OxDNATopologyParser">baggianalysis.core.OxDNATopologyParser</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.OxDNATopologyParser" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py class">
 <dt id="baggianalysis.core.GroParser">

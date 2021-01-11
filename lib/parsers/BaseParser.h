@@ -85,9 +85,6 @@ public:
 			_parse_stream,
 			configuration
 		);
-
-		// suppress warnings
-		return std::shared_ptr<System>(std::make_shared<System>());
 	}
 };
 

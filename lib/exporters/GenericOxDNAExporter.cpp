@@ -7,6 +7,8 @@
 
 #include "GenericOxDNAExporter.h"
 
+#include "../System.h"
+
 #include <fstream>
 
 namespace ba {

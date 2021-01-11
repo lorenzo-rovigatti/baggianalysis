@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Observables &mdash; baggianalysis 0.0.1a1.dev44+g3120a90.d20201230 documentation</title>
+  <title>Observables &mdash; baggianalysis 0.0.1a1.dev51+g4785999.d20210111 documentation</title>
   
 
   
@@ -29,6 +29,7 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -60,7 +61,7 @@
             
             
               <div class="version">
-                0.0.1a1.dev44+g3120a90.d20201230
+                0.0.1a1.dev51+g4785999.d20210111
               </div>
             
           
@@ -272,6 +273,12 @@
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">ConvexHullTriangle</code><a class="headerlink" href="#baggianalysis.core.ConvexHullTriangle" title="Permalink to this definition">¶</a></dt>
 <dd><p>A triangle of the convex hull mesh. It contains its three vertices as well as its normal (<em>i.e.</em> the normal unit vector pointing outwards).</p>
 <dl class="py method">
+<dt id="baggianalysis.core.ConvexHullTriangle.area">
+<code class="sig-name descname">area</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ConvexHullTriangle" title="baggianalysis.core.ConvexHullTriangle">baggianalysis.core.ConvexHullTriangle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><a class="headerlink" href="#baggianalysis.core.ConvexHullTriangle.area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the area of the triangle.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="baggianalysis.core.ConvexHullTriangle.normal">
 <em class="property">property </em><code class="sig-name descname">normal</code><a class="headerlink" href="#baggianalysis.core.ConvexHullTriangle.normal" title="Permalink to this definition">¶</a></dt>
 <dd><p>The unit vector orthogonal to the triangle surface which points towards the exterior of convex hull.</p>
@@ -293,6 +300,12 @@
 <dt id="baggianalysis.core.ConvexHullTriangle.v3">
 <em class="property">property </em><code class="sig-name descname">v3</code><a class="headerlink" href="#baggianalysis.core.ConvexHullTriangle.v3" title="Permalink to this definition">¶</a></dt>
 <dd><p>The second vertex along the counter-clock-wise contour of the triangle.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.ConvexHullTriangle.volume">
+<code class="sig-name descname">volume</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ConvexHullTriangle" title="baggianalysis.core.ConvexHullTriangle">baggianalysis.core.ConvexHullTriangle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><a class="headerlink" href="#baggianalysis.core.ConvexHullTriangle.volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the volume of the triangle.</p>
 </dd></dl>
 
 </dd></dl>

@@ -12,6 +12,8 @@
 
 namespace ba {
 
+class Particle;
+
 class LAMMPSDataFileExporter: public BaseExporter {
 public:
 	LAMMPSDataFileExporter() = delete;

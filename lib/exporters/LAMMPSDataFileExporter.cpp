@@ -7,6 +7,7 @@
 
 #include "LAMMPSDataFileExporter.h"
 
+#include "../System.h"
 #include "../topology/Topology.h"
 #include "../utils/strings.h"
 

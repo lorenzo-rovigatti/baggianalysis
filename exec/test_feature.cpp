@@ -6,11 +6,11 @@
  */
 
 
-#include <parsers/GenericOxDNAParser.h>
 #include <trajectories/FullTrajectory.h>
 #include <trajectories/LazyTrajectory.h>
 #include <neighbour_finders/SANNFinder.h>
 #include <topology/TopologyParsers.h>
+#include "../lib/parsers/OxDNAParser.h"
 
 int main(int argc, char *argv[]) {
 	if(argc < 4) {
@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	std::shared_ptr<ba::BaseParser> parser(new ba::GenericOxDNAParser(argv[1]));
+	std::shared_ptr<ba::BaseParser> parser(new ba::OxDNAParser(argv[1]));
 	auto topology = ba::Topology::make_topology_from_file(argv[3], ba::parse_microgel_bondfile);
 	parser->set_topology(topology);
 

@@ -12,6 +12,8 @@
 
 namespace ba {
 
+class Particle;
+
 struct Cogli1Particle {
 	bool show = true;
 	double size = 0.5;
