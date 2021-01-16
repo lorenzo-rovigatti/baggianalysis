@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration exporters &mdash; baggianalysis 0.0.1a1.dev51+g4785999.d20210111 documentation</title>
+  <title>Configuration exporters &mdash; baggianalysis 0.0.1a1.dev54+gbdd6968.d20210116 documentation</title>
   
 
   
@@ -29,7 +29,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -61,7 +60,7 @@
             
             
               <div class="version">
-                0.0.1a1.dev51+g4785999.d20210111
+                0.0.1a1.dev54+gbdd6968.d20210116
               </div>
             
           
@@ -194,7 +193,8 @@
 <dl class="py class">
 <dt id="baggianalysis.core.BaseExporter">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">BaseExporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseExporter" title="baggianalysis.core.BaseExporter">baggianalysis.core.BaseExporter</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseExporter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Interface for configuration-exporting classes.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<p>Interface for configuration-exporting classes.</p>
 <p>The default constructor does not take any parameters.</p>
 <dl class="py method">
 <dt id="baggianalysis.core.BaseExporter.write">
@@ -241,7 +241,8 @@ topology files.</p>
 <dl class="py class">
 <dt id="baggianalysis.core.Cogli1Exporter">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">Cogli1Exporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Cogli1Exporter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export configurations to the cogli1 file format, used for visualisation purposes.</p>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseExporter" title="baggianalysis.core.BaseExporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseExporter</span></code></a></p>
+<p>Export configurations to the cogli1 file format, used for visualisation purposes.</p>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
 <li><p>__init__(self: baggianalysis.core.Cogli1Exporter) -&gt; None</p></li>
@@ -276,7 +277,8 @@ Particles with a y coordinate larger than 0 will be hidden. The other particles 
 <dl class="py class">
 <dt id="baggianalysis.core.Cogli1Particle">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">Cogli1Particle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Cogli1Particle" title="baggianalysis.core.Cogli1Particle">baggianalysis.core.Cogli1Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.Cogli1Particle" title="Permalink to this definition">¶</a></dt>
-<dd><p>A utility class used by <a class="reference internal" href="#baggianalysis.core.Cogli1Exporter" title="baggianalysis.core.Cogli1Exporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cogli1Exporter</span></code></a> to customise its output.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<p>A utility class used by <a class="reference internal" href="#baggianalysis.core.Cogli1Exporter" title="baggianalysis.core.Cogli1Exporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cogli1Exporter</span></code></a> to customise its output.</p>
 <p>By default, the particle is visible, has a size of 0.5 and a red color.</p>
 <dl class="py method">
 <dt id="baggianalysis.core.Cogli1Particle.color">
@@ -316,7 +318,8 @@ Particles with a y coordinate larger than 0 will be hidden. The other particles 
 <dl class="py class">
 <dt id="baggianalysis.core.GenericOxDNAExporter">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">GenericOxDNAExporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.GenericOxDNAExporter" title="baggianalysis.core.GenericOxDNAExporter">baggianalysis.core.GenericOxDNAExporter</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.GenericOxDNAExporter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export configurations to the oxDNA file format. The exporter will generate a topology and a configuration file.
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseExporter" title="baggianalysis.core.BaseExporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseExporter</span></code></a></p>
+<p>Export configurations to the oxDNA file format. The exporter will generate a topology and a configuration file.
 Note that the filename passed to the <a class="reference internal" href="#baggianalysis.core.BaseExporter.write" title="baggianalysis.core.BaseExporter.write"><code class="xref py py-meth docutils literal notranslate"><span class="pre">write()</span></code></a> method is used as-is for the
 configuration file and as a suffix, prefixed by <code class="docutils literal notranslate"><span class="pre">topology_</span></code>, for the topology file.</p>
 <p>The constructor takes one parameter which tells the exporter whether the topology line should also contain the number of particles of type A.</p>
@@ -330,7 +333,8 @@ configuration file and as a suffix, prefixed by <code class="docutils literal no
 <dl class="py class">
 <dt id="baggianalysis.core.LAMMPSDataFileExporter">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LAMMPSDataFileExporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.LAMMPSDataFileExporter" title="baggianalysis.core.LAMMPSDataFileExporter">baggianalysis.core.LAMMPSDataFileExporter</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.LAMMPSDataFileExporter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Export configurations to the LAMMPS data file format.</p>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseExporter" title="baggianalysis.core.BaseExporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseExporter</span></code></a></p>
+<p>Export configurations to the LAMMPS data file format.</p>
 <blockquote>
 <div><p>The constructor takes one mandatory argument.</p>
 </div></blockquote>

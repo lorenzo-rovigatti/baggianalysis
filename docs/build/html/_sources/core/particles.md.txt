@@ -11,14 +11,8 @@
     System
     
 .. autoclass:: Particle
-    :members:
-    :undoc-members:
     
 .. autoclass:: ParticleSet
-    :members:
-    :undoc-members:
     
 .. autoclass:: System
-    :members:
-    :undoc-members:
 ```

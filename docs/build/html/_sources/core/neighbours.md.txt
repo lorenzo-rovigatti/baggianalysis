@@ -12,18 +12,10 @@
     SANNFinder
     
 .. autoclass:: NeighbourFinder
-    :members:
-    :undoc-members:
     
 .. autoclass:: FixedNumberFinder
-    :members:
-    :undoc-members:
 
 .. autoclass:: CutoffFinder
-    :members:
-    :undoc-members:
     
 .. autoclass:: SANNFinder
-    :members:
-    :undoc-members:
 ```

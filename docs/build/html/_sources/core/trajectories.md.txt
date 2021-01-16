@@ -11,14 +11,8 @@
     LazyTrajectory
     
 .. autoclass:: BaseTrajectory
-    :members:
-    :undoc-members:
     
 .. autoclass:: FullTrajectory
-    :members:
-    :undoc-members:
 
 .. autoclass:: LazyTrajectory
-    :members:
-    :undoc-members:
 ```

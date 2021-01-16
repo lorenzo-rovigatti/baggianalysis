@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Particle-related classes &mdash; baggianalysis 0.0.1a1.dev51+g4785999.d20210111 documentation</title>
+  <title>Particle-related classes &mdash; baggianalysis 0.0.1a1.dev54+gbdd6968.d20210116 documentation</title>
   
 
   
@@ -29,7 +29,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -61,7 +60,7 @@
             
             
               <div class="version">
-                0.0.1a1.dev51+g4785999.d20210111
+                0.0.1a1.dev54+gbdd6968.d20210116
               </div>
             
           
@@ -191,7 +190,8 @@
 <dl class="py class">
 <dt id="baggianalysis.core.Particle">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">Particle</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Particle" title="Permalink to this definition">¶</a></dt>
-<dd><p>A simulation particle.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<p>A simulation particle.</p>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
 <li><p>__init__(self: baggianalysis.core.Particle, index: int) -&gt; None</p></li>
@@ -327,7 +327,8 @@ list of interaction centres or the components of the orientation matrix.</p>
 <dl class="py class">
 <dt id="baggianalysis.core.ParticleSet">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">ParticleSet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.ParticleSet" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.N">
 <code class="sig-name descname">N</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.N" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -402,7 +403,8 @@ list of interaction centres or the components of the orientation matrix.</p>
 <dl class="py class">
 <dt id="baggianalysis.core.System">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">System</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.System" title="Permalink to this definition">¶</a></dt>
-<dd><p>Store a configuration.</p>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.ParticleSet</span></code></a></p>
+<p>Store a configuration.</p>
 <p>The constructor takes no arguments.</p>
 <dl class="py method">
 <dt id="baggianalysis.core.System.available_index">

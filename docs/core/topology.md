@@ -11,8 +11,6 @@
     parse_LAMMPS_topology
     
 .. autoclass:: Topology
-    :members:
-    :undoc-members:
     
 .. autofunction:: parse_microgel_bondfile
 .. autofunction:: parse_LAMMPS_topology

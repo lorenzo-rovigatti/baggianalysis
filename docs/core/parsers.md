@@ -16,27 +16,15 @@ All parsers inherit from [BaseParser](#baggianalysis.core.BaseParser) and overri
     LJKAParser
     
 .. autoclass:: BaseParser
-    :members:
-    :undoc-members:
     :private-members:
     
 .. autoclass:: OxDNAParser
-    :members:
-    :undoc-members:
     
 .. autoclass:: GroParser
-    :members:
-    :undoc-members:
 
 .. autoclass:: LAMMPSDataFileParser
-    :members:
-    :undoc-members:
     
 .. autoclass:: LAMMPSDumpParser
-    :members:
-    :undoc-members:
     
 .. autoclass:: LJKAParser
-    :members:
-    :undoc-members:
 ```

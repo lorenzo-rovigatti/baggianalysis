@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Topology-related classes and utility functions &mdash; baggianalysis 0.0.1a1.dev51+g4785999.d20210111 documentation</title>
+  <title>Topology-related classes and utility functions &mdash; baggianalysis 0.0.1a1.dev54+gbdd6968.d20210116 documentation</title>
   
 
   
@@ -29,7 +29,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -61,7 +60,7 @@
             
             
               <div class="version">
-                0.0.1a1.dev51+g4785999.d20210111
+                0.0.1a1.dev54+gbdd6968.d20210116
               </div>
             
           
@@ -191,7 +190,8 @@
 <dl class="py class">
 <dt id="baggianalysis.core.Topology">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">Topology</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Topology" title="baggianalysis.core.Topology">baggianalysis.core.Topology</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.Topology" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class manages the connections and links between the particles of a system.</p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<p>This class manages the connections and links between the particles of a system.</p>
 <p>Here the term <code class="docutils literal notranslate"><span class="pre">topology</span></code> refers to the way atoms/particles are partitioned into clusters. In its simplest form, a topology is just a list of
 links between particles. These links can be shared between two, three, four or more particles. While the latter are pretty rare, the others
 are quite common. Connections between two, three and four particles are here called <cite>bonds</cite>, <cite>angles</cite> and <cite>dihedrals</cite>. As of now, although all

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Filters &mdash; baggianalysis 0.0.1a1.dev51+g4785999.d20210111 documentation</title>
+  <title>Filters &mdash; baggianalysis 0.0.1a1.dev54+gbdd6968.d20210116 documentation</title>
   
 
   
@@ -29,7 +29,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -61,7 +60,7 @@
             
             
               <div class="version">
-                0.0.1a1.dev51+g4785999.d20210111
+                0.0.1a1.dev54+gbdd6968.d20210116
               </div>
             
           
@@ -206,7 +205,8 @@
 <dl class="py class">
 <dt id="baggianalysis.core.BaseFilter">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">BaseFilter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter">baggianalysis.core.BaseFilter</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseFilter" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<dl class="py method">
 <dt id="baggianalysis.core.BaseFilter.filter">
 <code class="sig-name descname">filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter">baggianalysis.core.BaseFilter</a></span></em>, <em class="sig-param"><span class="n">system</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a><a class="headerlink" href="#baggianalysis.core.BaseFilter.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a copy of the given system, filtered according to some criterion. This method should be overridden by
@@ -229,7 +229,8 @@ child classes.</p>
 <dl class="py class">
 <dt id="baggianalysis.core.FilterByFunction">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FilterByFunction</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.FilterByFunction" title="baggianalysis.core.FilterByFunction">baggianalysis.core.FilterByFunction</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span><a class="reference internal" href="particles.html#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a><span class="p">]</span><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.FilterByFunction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filter that uses a user-provided callable to choose which particles will be included in the new system.</p>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseFilter</span></code></a></p>
+<p>Filter that uses a user-provided callable to choose which particles will be included in the new system.</p>
 <p>As an example, the following snippet creates a filter that will include in the new system only those particles whose type is
 different from “2” and whose position along the x coordinate is larger than 5:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_filter</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">FilterByFunction</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">type</span> <span class="o">!=</span> <span class="s2">&quot;2&quot;</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">)</span>
@@ -253,22 +254,26 @@ different from “2” and whose position along the x coordinate is larger than 
 <dl class="py class">
 <dt id="baggianalysis.core.FilterByReducingToCOM">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FilterByReducingToCOM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.FilterByReducingToCOM" title="baggianalysis.core.FilterByReducingToCOM">baggianalysis.core.FilterByReducingToCOM</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.FilterByReducingToCOM" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseFilter</span></code></a></p>
+</dd></dl>
 
 <dl class="py class">
 <dt id="baggianalysis.core.FilterByType">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FilterByType</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.FilterByType" title="baggianalysis.core.FilterByType">baggianalysis.core.FilterByType</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.FilterByType" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseFilter</span></code></a></p>
+</dd></dl>
 
 <dl class="py class">
 <dt id="baggianalysis.core.FixParticlePath">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FixParticlePath</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.FixParticlePath" title="baggianalysis.core.FixParticlePath">baggianalysis.core.FixParticlePath</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.FixParticlePath" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseFilter</span></code></a></p>
+</dd></dl>
 
 <dl class="py class">
 <dt id="baggianalysis.core.SubtractCOM">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">SubtractCOM</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.SubtractCOM" title="baggianalysis.core.SubtractCOM">baggianalysis.core.SubtractCOM</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.SubtractCOM" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseFilter</span></code></a></p>
+</dd></dl>
 
 </div>
 

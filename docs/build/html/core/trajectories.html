@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Trajectory classes &mdash; baggianalysis 0.0.1a1.dev51+g4785999.d20210111 documentation</title>
+  <title>Trajectory classes &mdash; baggianalysis 0.0.1a1.dev54+gbdd6968.d20210116 documentation</title>
   
 
   
@@ -29,7 +29,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -61,7 +60,7 @@
             
             
               <div class="version">
-                0.0.1a1.dev51+g4785999.d20210111
+                0.0.1a1.dev54+gbdd6968.d20210116
               </div>
             
           
@@ -191,7 +190,8 @@
 <dl class="py class">
 <dt id="baggianalysis.core.BaseTrajectory">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">BaseTrajectory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="parsers.html#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser">baggianalysis.core.BaseParser</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseTrajectory" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<dl class="py method">
 <dt id="baggianalysis.core.BaseTrajectory.add_filter">
 <code class="sig-name descname">add_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em>, <em class="sig-param"><span class="n">filter</span><span class="p">:</span> <span class="n"><a class="reference internal" href="filters.html#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter">baggianalysis.core.BaseFilter</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseTrajectory.add_filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a filter to the list of filters that will be applied to each frame (system) that compose the trajectory.</p>
@@ -266,7 +266,8 @@ to systems in a “first-in first-out” fashion.</p>
 <dl class="py class">
 <dt id="baggianalysis.core.FullTrajectory">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FullTrajectory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.FullTrajectory" title="baggianalysis.core.FullTrajectory">baggianalysis.core.FullTrajectory</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="parsers.html#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser">baggianalysis.core.BaseParser</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.FullTrajectory" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="py method">
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseTrajectory</span></code></a></p>
+<dl class="py method">
 <dt id="baggianalysis.core.FullTrajectory.frames">
 <em class="property">property </em><code class="sig-name descname">frames</code><a class="headerlink" href="#baggianalysis.core.FullTrajectory.frames" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -276,7 +277,8 @@ to systems in a “first-in first-out” fashion.</p>
 <dl class="py class">
 <dt id="baggianalysis.core.LazyTrajectory">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LazyTrajectory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory">baggianalysis.core.LazyTrajectory</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="parsers.html#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser">baggianalysis.core.BaseParser</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.LazyTrajectory" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseTrajectory</span></code></a></p>
+</dd></dl>
 
 </div>
 
