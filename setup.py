@@ -123,7 +123,7 @@ class CMakeBuild(build_ext):
 setup(
     name = PACKAGE_NAME,
     use_scm_version = {
-        "fallback_version": "0.0.1",
+        "fallback_version": "0.0.2",
         },
     packages = find_packages(),
     setup_requires = ['setuptools_scm'],

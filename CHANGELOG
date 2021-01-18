@@ -1,0 +1,14 @@
+v. 0.0.2
+	- Add a test that checks the LAMMPS conf and topology parser and exporter
+	- Add the write_topology and write_trajectory methods to BaseExporter
+	- Remove Boost's `signal` from the dependencies
+	- Fix compilation on Ubuntu 20.04 and add some documentation
+	- Add an observable that computes the structure factor (and can optionally return a "destructured" structure factor)
+	- Add an oxDNA exporter and improve the oxDNA parser
+	- Dramatically improve the performance of System::available_index()
+	- Add to the README updated info about the required libraries/packages
+	- Add a mechanism to manage the version number
+	- Bugfixing
+
+v. 0.0.1
+	- First release
