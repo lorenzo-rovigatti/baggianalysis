@@ -3,7 +3,7 @@
 import numpy as np
 import baggianalysis as ba
 
-parser = ba.GenericOxDNAParser("topology.dat")
+parser = ba.OxDNAParser("topology.dat")
 trajectory = ba.LazyTrajectory(parser)
 trajectory.initialise_from_trajectory_file("trajectory.dat")
 
