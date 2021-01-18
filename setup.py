@@ -141,4 +141,13 @@ setup(
         'install_lib': InstallCMakeLibs,
         },
     zip_safe = False,
+    classifiers = [
+        "Development Status :: 3 - Alpha",
+        "Environment :: Console",
+        "Intended Audience :: Science/Research",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+        "Operating System :: OS Independent",
+        "Programming Language :: C++",
+        "Topic :: Scientific/Engineering :: Physics"
+        ]
 )
