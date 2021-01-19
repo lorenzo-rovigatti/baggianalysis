@@ -126,7 +126,10 @@ setup(
         "fallback_version": "0.0.2",
         },
     packages = find_packages(),
-    setup_requires = ['setuptools_scm'],
+    setup_requires = [
+        'setuptools_scm',
+        'numpy'
+        ],
     author = 'Lorenzo Rovigatti',
     author_email = 'lorenzo.rovigatti@uniroma1.it',
     url = 'https://github.com/lorenzo-rovigatti/baggianalysis',

@@ -8,6 +8,7 @@ SET(ba_lib_SOURCES
 	filters/FilterByReducingToCOM.cpp
 	filters/FilterByType.cpp
 	filters/FixParticlePath.cpp
+	filters/MapParticles.cpp
 	filters/SubtractCOM.cpp
 	neighbour_finders/CutoffFinder.cpp
 	neighbour_finders/FixedNumberFinder.cpp

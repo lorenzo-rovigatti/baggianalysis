@@ -14,6 +14,7 @@
 #include "../filters/FilterByReducingToCOM.h"
 #include "../filters/FilterByType.h"
 #include "../filters/FixParticlePath.h"
+#include "../filters/MapParticles.h"
 #include "../filters/SubtractCOM.h"
 
 #include "../neighbour_finders/CutoffFinder.h"
@@ -74,6 +75,7 @@ PYBIND11_MODULE(core, m) {
 	ba::export_FilterByReducingToCOM(m);
 	ba::export_FilterByType(m);
 	ba::export_FixParticlePath(m);
+	ba::export_MapParticles(m);
 	ba::export_SubtractCOM(m);
 
 	// trajectories
