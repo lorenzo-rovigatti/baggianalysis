@@ -32,9 +32,14 @@ shared_ptr<System> FilterByReducingToCOM::filter(std::shared_ptr<const System> s
 #ifdef PYTHON_BINDINGS
 
 void export_FilterByReducingToCOM(py::module &m) {
-	py::class_<FilterByReducingToCOM, BaseFilter, std::shared_ptr<FilterByReducingToCOM>> filter(m, "FilterByReducingToCOM");
+	py::class_<FilterByReducingToCOM, BaseFilter, std::shared_ptr<FilterByReducingToCOM>> filter(m, "FilterByReducingToCOM", R"pbdoc(
+A filter that builds a new system containing a single particle whose position and velocity are the position and velocity of the 
+centre of mass of the input system.
+	)pbdoc");
 
-	filter.def(py::init<>());
+	filter.def(py::init<>(), R"pbdoc(
+    The constructor does not take any parameters.
+	)pbdoc");
 }
 
 #endif

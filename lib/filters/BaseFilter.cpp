@@ -20,7 +20,9 @@ BaseFilter::~BaseFilter() {
 #ifdef PYTHON_BINDINGS
 
 void export_BaseFilter(py::module &m) {
-	py::class_<BaseFilter, PyBaseFilter, std::shared_ptr<BaseFilter>> filter(m, "BaseFilter");
+	py::class_<BaseFilter, PyBaseFilter, std::shared_ptr<BaseFilter>> filter(m, "BaseFilter", R"pbdoc(
+The interface from which filters should inherit. This is a pure virtual class and child classes should overload the :meth:`filter` method.
+    )pbdoc");
 
 	filter.def(py::init<>());
 	filter.def("filter", &BaseFilter::filter, py::arg("system"), R"pbdoc(

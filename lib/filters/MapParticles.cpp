@@ -49,9 +49,25 @@ std::shared_ptr<System> MapParticles::filter(std::shared_ptr<const System> syst)
 #ifdef PYTHON_BINDINGS
 
 void export_MapParticles(py::module &m) {
-	py::class_<MapParticles, BaseFilter, std::shared_ptr<MapParticles>> filter(m, "MapParticles");
+	py::class_<MapParticles, BaseFilter, std::shared_ptr<MapParticles>> filter(m, "MapParticles", R"pbdoc(
+A filter that reduces the number of particles in a configuration by averaging the position and velocity of sets of particles.
 
-	filter.def(py::init<std::vector<std::vector<int>>>());
+As an example, the following snippet creates a filter that will include in the new system two particles whose position and
+velocity will be computed by averaging the positions and velocities of particles with index 0 and 3 and 2, 5 and 6, respectively::
+
+    id_lists = [[0, 3], [2, 5, 6]]
+    my_filter = ba.MapParticles(id_lists)
+
+	)pbdoc");
+
+	filter.def(py::init<std::vector<std::vector<int>>>(), R"pbdoc(
+        The constructor takes a list of index lists used to construct the new particles.
+
+        Parameters
+        ----------
+        id_lists : List(List(int))
+            A list of lists containing the indices of the particles that should be averaged over to build the new particles.
+    )pbdoc");
 }
 
 #endif

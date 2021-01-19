@@ -52,3 +52,5 @@ wheels/
 *.egg
 MANIFEST
 
+docs/build/doctrees
+

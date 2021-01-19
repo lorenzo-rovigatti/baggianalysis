@@ -40,9 +40,25 @@ shared_ptr<System> FilterByType::filter(std::shared_ptr<const System> syst) {
 #ifdef PYTHON_BINDINGS
 
 void export_FilterByType(py::module &m) {
-	py::class_<FilterByType, BaseFilter, std::shared_ptr<FilterByType>> filter(m, "FilterByType");
+	py::class_<FilterByType, BaseFilter, std::shared_ptr<FilterByType>> filter(m, "FilterByType", R"pbdoc(
+A filter that builds a new system by including only those particles whose type is in the list provided by the user.
 
-	filter.def(py::init<std::vector<particle_type>>());
+As an example, the following snippet creates a filter that will include in the new system only particles of type
+"0" and "3"::
+
+    allowed_types = ["0", "3"]
+    my_filter = ba.FilterByType(allowed_types)
+
+	)pbdoc");
+
+	filter.def(py::init<std::vector<particle_type>>(), R"pbdoc(
+        The constructor takes a list of particle types as its only parameter.
+
+        Parameters
+        ----------
+        allowed_types : List(str)
+            The list of particle types that should be included in the new system.
+	)pbdoc");
 }
 
 #endif

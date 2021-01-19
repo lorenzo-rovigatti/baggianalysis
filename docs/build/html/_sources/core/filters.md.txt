@@ -19,6 +19,7 @@ In addition, filters can be applied to whole trajectories by using the BaseTraje
     FilterByReducingToCOM
     FilterByType
     FixParticlePath
+    MapParticles
     SubtractCOM
     
 .. autoclass:: BaseFilter
@@ -30,6 +31,8 @@ In addition, filters can be applied to whole trajectories by using the BaseTraje
 .. autoclass:: FilterByType
     
 .. autoclass:: FixParticlePath
+
+.. autoclass:: MapParticles
     
 .. autoclass:: SubtractCOM
 ```

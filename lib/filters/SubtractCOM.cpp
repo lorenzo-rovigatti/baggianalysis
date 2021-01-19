@@ -38,9 +38,13 @@ shared_ptr<System> SubtractCOM::filter(std::shared_ptr<const System> syst) {
 #ifdef PYTHON_BINDINGS
 
 void export_SubtractCOM(py::module &m) {
-	py::class_<SubtractCOM, BaseFilter, std::shared_ptr<SubtractCOM>> filter(m, "SubtractCOM");
+	py::class_<SubtractCOM, BaseFilter, std::shared_ptr<SubtractCOM>> filter(m, "SubtractCOM", R"pbdoc(
+A filter that removes the centre of mass position and velocity from each particle.
+	)pbdoc");
 
-	filter.def(py::init<>());
+	filter.def(py::init<>(), R"pbdoc(
+		The constructor does not take any parameters.
+	)pbdoc");
 }
 
 #endif

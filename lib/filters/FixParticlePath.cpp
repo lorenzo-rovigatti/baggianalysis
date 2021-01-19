@@ -71,9 +71,16 @@ shared_ptr<System> FixParticlePath::filter(std::shared_ptr<const System> syst) {
 #ifdef PYTHON_BINDINGS
 
 void export_FixParticlePath(py::module &m) {
-	py::class_<FixParticlePath, BaseFilter, std::shared_ptr<FixParticlePath>> filter(m, "FixParticlePath");
+	py::class_<FixParticlePath, BaseFilter, std::shared_ptr<FixParticlePath>> filter(m, "FixParticlePath", R"pbdoc(
+A filter that attempts to reconstruct the trajectories of particles subject to periodic boundary conditions.
 
-	filter.def(py::init<>());
+This filter assumes that configurations are sorted in time and will silently fail its job if particles move more 
+than the length of a box side between two consecutive configurations.
+	)pbdoc");
+
+	filter.def(py::init<>(), R"pbdoc(
+        The constructor does not take any parameters.
+	)pbdoc");
 }
 
 #endif

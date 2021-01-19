@@ -1,13 +1,13 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration parsers &mdash; baggianalysis 0.0.1a1.dev54+gbdd6968.d20210116 documentation</title>
+  <title>Configuration parsers &mdash; baggianalysis 0.0.2a1.dev2+g49d0b5f.d20210119 documentation</title>
   
 
   
@@ -26,9 +26,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -60,7 +61,7 @@
             
             
               <div class="version">
-                0.0.1a1.dev54+gbdd6968.d20210116
+                0.0.2a1.dev2+g49d0b5f.d20210119
               </div>
             
           
@@ -171,85 +172,85 @@
   <div class="section" id="configuration-parsers">
 <h1>Configuration parsers<a class="headerlink" href="#configuration-parsers" title="Permalink to this headline">¶</a></h1>
 <p>All parsers inherit from <a class="reference external" href="#baggianalysis.core.BaseParser">BaseParser</a> and override the <code class="docutils literal notranslate"><span class="pre">_parse_stream</span></code> and, possibly, the <code class="docutils literal notranslate"><span class="pre">_parse_file</span></code> methods. After a parser has been initialised it can be used to build a single system through its <a class="reference external" href="#baggianalysis.core.BaseParser.make_system">make_system()</a> method or a whole trajectory by using it to initialise a <a class="reference internal" href="trajectories.html"><span class="doc">Trajectory</span></a> object.</p>
-<table class="longtable docutils align-default">
+<table border="1" class="longtable docutils">
 <colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
+<col width="10%" />
+<col width="90%" />
 </colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseParser</span></code></a></p></td>
-<td><p></p></td>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseParser</span></code></a></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.OxDNAParser" title="baggianalysis.core.OxDNAParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OxDNAParser</span></code></a></p></td>
-<td><p>Overloaded function.</p></td>
+<tr class="row-even"><td><a class="reference internal" href="#baggianalysis.core.OxDNAParser" title="baggianalysis.core.OxDNAParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OxDNAParser</span></code></a></td>
+<td>Overloaded function.</td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.GroParser" title="baggianalysis.core.GroParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GroParser</span></code></a></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><a class="reference internal" href="#baggianalysis.core.GroParser" title="baggianalysis.core.GroParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GroParser</span></code></a></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.LAMMPSDataFileParser" title="baggianalysis.core.LAMMPSDataFileParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDataFileParser</span></code></a></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><a class="reference internal" href="#baggianalysis.core.LAMMPSDataFileParser" title="baggianalysis.core.LAMMPSDataFileParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDataFileParser</span></code></a></td>
+<td></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.LAMMPSDumpParser" title="baggianalysis.core.LAMMPSDumpParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDumpParser</span></code></a></p></td>
-<td><p></p></td>
+<tr class="row-odd"><td><a class="reference internal" href="#baggianalysis.core.LAMMPSDumpParser" title="baggianalysis.core.LAMMPSDumpParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDumpParser</span></code></a></td>
+<td></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.LJKAParser" title="baggianalysis.core.LJKAParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LJKAParser</span></code></a></p></td>
-<td><p></p></td>
+<tr class="row-even"><td><a class="reference internal" href="#baggianalysis.core.LJKAParser" title="baggianalysis.core.LJKAParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LJKAParser</span></code></a></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<dl class="py class">
+<dl class="class">
 <dt id="baggianalysis.core.BaseParser">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">BaseParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser">baggianalysis.core.BaseParser</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">baggianalysis.core.</code><code class="descname">BaseParser</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseParser</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
-<dl class="py method">
+<dl class="method">
 <dt id="baggianalysis.core.BaseParser._parse_file">
-<code class="sig-name descname">_parse_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser">baggianalysis.core.BaseParser</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a><a class="headerlink" href="#baggianalysis.core.BaseParser._parse_file" title="Permalink to this definition">¶</a></dt>
+<code class="descname">_parse_file</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseParser</em>, <em>arg0: str</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.BaseParser._parse_file" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="baggianalysis.core.BaseParser.make_system">
-<code class="sig-name descname">make_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser">baggianalysis.core.BaseParser</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a><a class="headerlink" href="#baggianalysis.core.BaseParser.make_system" title="Permalink to this definition">¶</a></dt>
+<code class="descname">make_system</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseParser</em>, <em>arg0: str</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.BaseParser.make_system" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="baggianalysis.core.BaseParser.set_topology">
-<code class="sig-name descname">set_topology</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser">baggianalysis.core.BaseParser</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="topology.html#baggianalysis.core.Topology" title="baggianalysis.core.Topology">baggianalysis.core.Topology</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseParser.set_topology" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_topology</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseParser</em>, <em>arg0: baggianalysis.core.Topology</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseParser.set_topology" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
+<dl class="class">
 <dt id="baggianalysis.core.OxDNAParser">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">OxDNAParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.OxDNAParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">baggianalysis.core.</code><code class="descname">OxDNAParser</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.OxDNAParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseParser</span></code></a></p>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>__init__(self: baggianalysis.core.OxDNAParser, arg0: str) -&gt; None</p></li>
-<li><p>__init__(self: baggianalysis.core.OxDNAParser, arg0: baggianalysis.core.oxDNA_topology.Default) -&gt; None</p></li>
+<li>__init__(self: baggianalysis.core.OxDNAParser, arg0: str) -&gt; None</li>
+<li>__init__(self: baggianalysis.core.OxDNAParser, arg0: baggianalysis.core.oxDNA_topology.Default) -&gt; None</li>
 </ol>
 </dd></dl>
 
-<dl class="py class">
+<dl class="class">
 <dt id="baggianalysis.core.GroParser">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">GroParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.GroParser" title="baggianalysis.core.GroParser">baggianalysis.core.GroParser</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.GroParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">baggianalysis.core.</code><code class="descname">GroParser</code><span class="sig-paren">(</span><em>self: baggianalysis.core.GroParser</em>, <em>arg0: float</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.GroParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseParser</span></code></a></p>
 </dd></dl>
 
-<dl class="py class">
+<dl class="class">
 <dt id="baggianalysis.core.LAMMPSDataFileParser">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LAMMPSDataFileParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.LAMMPSDataFileParser" title="baggianalysis.core.LAMMPSDataFileParser">baggianalysis.core.LAMMPSDataFileParser</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.LAMMPSDataFileParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">baggianalysis.core.</code><code class="descname">LAMMPSDataFileParser</code><span class="sig-paren">(</span><em>self: baggianalysis.core.LAMMPSDataFileParser</em>, <em>arg0: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.LAMMPSDataFileParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseParser</span></code></a></p>
 </dd></dl>
 
-<dl class="py class">
+<dl class="class">
 <dt id="baggianalysis.core.LAMMPSDumpParser">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LAMMPSDumpParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.LAMMPSDumpParser" title="baggianalysis.core.LAMMPSDumpParser">baggianalysis.core.LAMMPSDumpParser</a></span></em>, <em class="sig-param"><span class="n">rescaled_coords</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.LAMMPSDumpParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">baggianalysis.core.</code><code class="descname">LAMMPSDumpParser</code><span class="sig-paren">(</span><em>self: baggianalysis.core.LAMMPSDumpParser</em>, <em>rescaled_coords: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.LAMMPSDumpParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseParser</span></code></a></p>
 </dd></dl>
 
-<dl class="py class">
+<dl class="class">
 <dt id="baggianalysis.core.LJKAParser">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LJKAParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.LJKAParser" title="baggianalysis.core.LJKAParser">baggianalysis.core.LJKAParser</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.LJKAParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">baggianalysis.core.</code><code class="descname">LJKAParser</code><span class="sig-paren">(</span><em>self: baggianalysis.core.LJKAParser</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.LJKAParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseParser</span></code></a></p>
 </dd></dl>
 
