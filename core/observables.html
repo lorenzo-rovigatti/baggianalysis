@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Observables &mdash; baggianalysis 0.0.2a1.dev33+gd522bb7 documentation</title>
+  <title>Observables &mdash; baggianalysis 0.0.2a1.dev34+gb1f6184 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.0.2a1.dev33+gd522bb7
+                0.0.2a1.dev34+gb1f6184
               </div>
             
           
@@ -176,47 +176,23 @@
 <col style="width: 90%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.BondOrderParameters" title="baggianalysis.core.BondOrderParameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BondOrderParameters</span></code></a></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.ConvexHull" title="baggianalysis.core.ConvexHull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConvexHull</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.ConvexHull" title="baggianalysis.core.ConvexHull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConvexHull</span></code></a></p></td>
 <td><p>Construct the a <a class="reference external" href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a> of the system, which is the smallest convex set that contains the set of points constituted by the particles’ coordinates of the given system.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.FormFactor" title="baggianalysis.core.FormFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormFactor</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.FormFactor" title="baggianalysis.core.FormFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormFactor</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.PoreSize" title="baggianalysis.core.PoreSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PoreSize</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.PoreSize" title="baggianalysis.core.PoreSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PoreSize</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.MSD" title="baggianalysis.core.MSD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MSD</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.MSD" title="baggianalysis.core.MSD"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MSD</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.StructureFactor" title="baggianalysis.core.StructureFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StructureFactor</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.StructureFactor" title="baggianalysis.core.StructureFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StructureFactor</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
 </table>
-<dl class="py class">
-<dt id="baggianalysis.core.BondOrderParameters">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">BondOrderParameters</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BondOrderParameters" title="baggianalysis.core.BondOrderParameters">baggianalysis.core.BondOrderParameters</a></span></em>, <em class="sig-param"><span class="n">orders_to_compute</span><span class="p">:</span> <span class="n">Set<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">compute_avg_qs</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em>, <em class="sig-param"><span class="n">compute_qs</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">compute_avg_ws</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">compute_ws</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BondOrderParameters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
-<dl class="py method">
-<dt id="baggianalysis.core.BondOrderParameters.analyse_system">
-<code class="sig-name descname">analyse_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BondOrderParameters" title="baggianalysis.core.BondOrderParameters">baggianalysis.core.BondOrderParameters</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BondOrderParameters.analyse_system" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="baggianalysis.core.BondOrderParameters.analyse_trajectory">
-<code class="sig-name descname">analyse_trajectory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BondOrderParameters" title="baggianalysis.core.BondOrderParameters">baggianalysis.core.BondOrderParameters</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="trajectories.html#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BondOrderParameters.analyse_trajectory" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="baggianalysis.core.BondOrderParameters.result">
-<code class="sig-name descname">result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BondOrderParameters" title="baggianalysis.core.BondOrderParameters">baggianalysis.core.BondOrderParameters</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.BondOrderParameters.result" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 <dl class="py class">
 <dt id="baggianalysis.core.ConvexHull">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">ConvexHull</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ConvexHull" title="baggianalysis.core.ConvexHull">baggianalysis.core.ConvexHull</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.ConvexHull" title="Permalink to this definition">¶</a></dt>
