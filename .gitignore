@@ -30,8 +30,11 @@
 *.exe
 *.out
 *.app
-/build/
-/pybuild/
+
+# Build directories
+build/
+pybuild/
+docs/oxpy/doctrees
 
 # Distribution / packaging
 .Python
@@ -51,6 +54,3 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
-
-docs/build/doctrees
-
