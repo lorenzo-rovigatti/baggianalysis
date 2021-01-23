@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Trajectory classes &mdash; baggianalysis 0.0.2a1.dev2+g49d0b5f.d20210119 documentation</title>
+  <title>Trajectory classes &mdash; baggianalysis 0.0.2a1.dev8+g4717d60.d20210123 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.0.2a1.dev2+g49d0b5f.d20210119
+                0.0.2a1.dev8+g4717d60.d20210123
               </div>
             
           
@@ -178,13 +178,13 @@
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseTrajectory</span></code></a></td>
-<td></td>
+<td>An interface that defines the method that can be used to initialise and manage trajectories.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#baggianalysis.core.FullTrajectory" title="baggianalysis.core.FullTrajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FullTrajectory</span></code></a></td>
-<td></td>
+<td>A trajectory that builds and loads in memory all the frames at once.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a></td>
-<td></td>
+<td>A trajectory that does not load up all the frames in memory at once but parses them one after the other.</td>
 </tr>
 </tbody>
 </table>
@@ -192,6 +192,10 @@
 <dt id="baggianalysis.core.BaseTrajectory">
 <em class="property">class </em><code class="descclassname">baggianalysis.core.</code><code class="descname">BaseTrajectory</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseTrajectory</em>, <em>arg0: baggianalysis.core.BaseParser</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<p>An interface that defines the method that can be used to initialise and manage trajectories.</p>
+<p>Child classes should at least implement <a class="reference internal" href="#baggianalysis.core.BaseTrajectory.initialise_from_filelist" title="baggianalysis.core.BaseTrajectory.initialise_from_filelist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">initialise_from_filelist()</span></code></a>, <a class="reference internal" href="#baggianalysis.core.BaseTrajectory.initialise_from_trajectory_file" title="baggianalysis.core.BaseTrajectory.initialise_from_trajectory_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">initialise_from_trajectory_file()</span></code></a>,
+<a class="reference internal" href="#baggianalysis.core.BaseTrajectory.next_frame" title="baggianalysis.core.BaseTrajectory.next_frame"><code class="xref py py-meth docutils literal notranslate"><span class="pre">next_frame()</span></code></a> and <a class="reference internal" href="#baggianalysis.core.BaseTrajectory.reset" title="baggianalysis.core.BaseTrajectory.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a>.</p>
+<p>The constructor takes a parser as its only parameter.</p>
 <dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.add_filter">
 <code class="descname">add_filter</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseTrajectory</em>, <em>filter: baggianalysis.core.BaseFilter</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.add_filter" title="Permalink to this definition">¶</a></dt>
@@ -202,7 +206,7 @@ to systems in a “first-in first-out” fashion.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filter</strong> (<em>:class:BaseFilter</em>) – The new filter.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filter</strong> (<a class="reference internal" href="filters.html#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseFilter</span></code></a>) – The new filter.</td>
 </tr>
 </tbody>
 </table>
@@ -277,16 +281,52 @@ to systems in a “first-in first-out” fashion.</p>
 <dd><p>Reset the trajectory so that a call to <a class="reference internal" href="#baggianalysis.core.BaseTrajectory.next_frame" title="baggianalysis.core.BaseTrajectory.next_frame"><code class="xref py py-meth docutils literal notranslate"><span class="pre">next_frame()</span></code></a> will return the first frame of the trajectory.</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="baggianalysis.core.BaseTrajectory.set_include_system">
+<code class="descname">set_include_system</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseTrajectory, system: Callable[[baggianalysis.core.System], bool]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.set_include_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an optional function that will be used to test whether a system should be included in the trajectory or not.
+The argument should be a callable that takes a system : <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a> as its single parameter and returns True
+if the system should be included, False otherwise.</p>
+<p>Here is an example that will include only those systems having timesteps larger than 1e4:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">include_system</span><span class="p">(</span><span class="n">system</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">system</span><span class="o">.</span><span class="n">time</span> <span class="o">&gt;</span> <span class="mf">1e4</span>
+
+<span class="n">trajectory</span><span class="o">.</span><span class="n">set_include_system</span><span class="p">(</span><span class="n">include_system</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The same result can be obtained with a lambda function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">trajectory</span><span class="o">.</span><span class="n">set_include_system</span><span class="p">(</span><span class="k">lambda</span> <span class="n">syst</span><span class="p">:</span> <span class="n">syst</span><span class="o">.</span><span class="n">time</span> <span class="o">&gt;</span> <span class="mf">1e4</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>system</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a>) – The system to be checked.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if the system should be included in the trajectory, False otherwise.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="baggianalysis.core.FullTrajectory">
 <em class="property">class </em><code class="descclassname">baggianalysis.core.</code><code class="descname">FullTrajectory</code><span class="sig-paren">(</span><em>self: baggianalysis.core.FullTrajectory</em>, <em>arg0: baggianalysis.core.BaseParser</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.FullTrajectory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseTrajectory</span></code></a></p>
+<p>A trajectory that builds and loads in memory all the frames at once.</p>
+<p>This trajectory is probably the one you should be using unless the memory footprint of the files that should be
+parsed becomes too large, in which case you should use a <a class="reference internal" href="#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a>.</p>
+<p>The constructor takes a parser as its only parameter.</p>
 <dl class="attribute">
 <dt id="baggianalysis.core.FullTrajectory.frames">
 <code class="descname">frames</code><a class="headerlink" href="#baggianalysis.core.FullTrajectory.frames" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The read-only list of <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a> objects making up the trajectory.</p>
+</dd></dl>
 
 </dd></dl>
 
@@ -294,6 +334,11 @@ to systems in a “first-in first-out” fashion.</p>
 <dt id="baggianalysis.core.LazyTrajectory">
 <em class="property">class </em><code class="descclassname">baggianalysis.core.</code><code class="descname">LazyTrajectory</code><span class="sig-paren">(</span><em>self: baggianalysis.core.LazyTrajectory</em>, <em>arg0: baggianalysis.core.BaseParser</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.LazyTrajectory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseTrajectory</span></code></a></p>
+<p>A trajectory that does not load up all the frames in memory at once but parses them one after the other.</p>
+<p>Use it if you need to analyse large trajectories that could fill up all the available memory. Be careful though:
+the file(s) on the disk will be read every time you loop over the trajectory. If you need to do it more than
+once it may be worth using a class:<cite>FullTrajectory</cite>.</p>
+<p>The constructor takes a parser as its only parameter.</p>
 </dd></dl>
 
 </div>
