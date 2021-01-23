@@ -73,6 +73,10 @@ shared_ptr<System> LazyTrajectory::next_frame() {
 		throw runtime_error(error);
 	}
 
+	if(new_system != nullptr && !_include_system(new_system)) {
+		return next_frame();
+	}
+
 	return new_system;
 }
 
@@ -89,10 +93,15 @@ void LazyTrajectory::reset() {
 #ifdef PYTHON_BINDINGS
 
 void export_LazyTrajectory(py::module &m) {
-	py::class_<LazyTrajectory, BaseTrajectory, std::shared_ptr<LazyTrajectory>> parser(m, "LazyTrajectory");
+	py::class_<LazyTrajectory, BaseTrajectory, std::shared_ptr<LazyTrajectory>> parser(m, "LazyTrajectory", R"pbdoc(
+        A trajectory that does not load up all the frames in memory at once but parses them one after the other.
 
-	parser
-		.def(py::init<shared_ptr<BaseParser>>());
+        Use it if you need to analyse large trajectories that could fill up all the available memory. Be careful though:
+        the file(s) on the disk will be read every time you loop over the trajectory. If you need to do it more than
+        once it may be worth using a class:`FullTrajectory`. 
+    )pbdoc");
+
+	parser.def(py::init<shared_ptr<BaseParser>>(), "The constructor takes a parser as its only parameter.");
 }
 
 #endif

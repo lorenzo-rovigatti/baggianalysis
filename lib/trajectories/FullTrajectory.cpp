@@ -50,7 +50,9 @@ void FullTrajectory::initialise_from_trajectory_file(string trajectory_file) {
 			done = true;
 		}
 		else {
-			frames.push_back(_filtered_system(new_system));
+			if(_include_system(new_system)) {
+				frames.push_back(_filtered_system(new_system));
+			}
 		}
 	}
 
@@ -69,16 +71,21 @@ void FullTrajectory::initialise_from_trajectory_file(string trajectory_file) {
 void FullTrajectory::initialise_from_filelist(std::vector<std::string> filelist) {
 	uint N_files = filelist.size();
 
+	uint parsed_files = 0;
 	for(auto f : filelist) {
 		auto new_system = _parser->make_system(f);
+		parsed_files++;
 
 		if(new_system == nullptr) {
 			string error = boost::str(boost::format("The '%s' configuration is either empty or invalid") % f);
 			throw runtime_error(error);
 		}
-		frames.push_back(_filtered_system(new_system));
-		uint N_frames = frames.size();
-		if(N_frames > 10 && N_frames % (N_files / 10) == 0) BOOST_LOG_TRIVIAL(info)<< "Parsed " << N_frames * 100 / N_files << "% of the configurations (" << N_frames << "/" << N_files << ")";
+
+		if(_include_system(new_system)) {
+			frames.push_back(_filtered_system(new_system));
+		}
+
+		if(parsed_files > 10 && parsed_files % (N_files / 10) == 0) BOOST_LOG_TRIVIAL(info)<< "Parsed " << parsed_files * 100 / N_files << "% of the configurations (" << parsed_files << "/" << N_files << ")";
 	}
 
 	// we sort the frames according to their timestep
@@ -110,10 +117,15 @@ void FullTrajectory::reset() {
 #ifdef PYTHON_BINDINGS
 
 void export_FullTrajectory(py::module &m) {
-	py::class_<FullTrajectory, BaseTrajectory, std::shared_ptr<FullTrajectory>> parser(m, "FullTrajectory");
+	py::class_<FullTrajectory, BaseTrajectory, std::shared_ptr<FullTrajectory>> parser(m, "FullTrajectory", R"pbdoc(
+        A trajectory that builds and loads in memory all the frames at once.
 
-	parser.def(py::init<shared_ptr<BaseParser>>());
-	parser.def_readonly("frames", &FullTrajectory::frames);
+        This trajectory is probably the one you should be using unless the memory footprint of the files that should be
+        parsed becomes too large, in which case you should use a :class:`LazyTrajectory`.
+    )pbdoc");
+
+	parser.def(py::init<shared_ptr<BaseParser>>(), "The constructor takes a parser as its only parameter.");
+	parser.def_readonly("frames", &FullTrajectory::frames, "The read-only list of :class:`System` objects making up the trajectory.");
 }
 
 #endif

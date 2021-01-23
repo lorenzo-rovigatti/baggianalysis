@@ -14,6 +14,8 @@
 
 namespace ba {
 
+using SystemIncluder = std::function<bool(std::shared_ptr<System>)>;
+
 class BaseTrajectory {
 public:
 	/**
@@ -58,12 +60,18 @@ public:
 	 */
 	virtual void initialise_from_trajectory_file(std::string trajectory_file) = 0;
 
+	void set_include_system(SystemIncluder func);
+
 	virtual std::shared_ptr<System> next_frame() = 0;
 	virtual void reset() = 0;
 
 protected:
 	std::shared_ptr<BaseParser> _parser;
 	std::vector<std::shared_ptr<BaseFilter>> _filters;
+
+	SystemIncluder _include_system = [](std::shared_ptr<System>) {
+		return true;
+	};
 
 	virtual std::shared_ptr<System> _filtered_system(std::shared_ptr<System> system);
 };
