@@ -5,6 +5,7 @@ SET(ba_lib_SOURCES
 	exporters/GenericOxDNAExporter.cpp
 	filters/BaseFilter.cpp
 	filters/FilterByFunction.cpp
+	filters/FilterById.cpp
 	filters/FilterByReducingToCOM.cpp
 	filters/FilterByType.cpp
 	filters/FixParticlePath.cpp

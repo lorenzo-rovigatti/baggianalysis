@@ -2,7 +2,6 @@
 
 This is a list of things that will have to be changed as soon as I have some time to spare
 
-* `FilterByType` can be implemented by using an *ad-hoc* `FilterByFunction`
 * Use getters and setters to incapsulate members
 
 ## Architectural changes

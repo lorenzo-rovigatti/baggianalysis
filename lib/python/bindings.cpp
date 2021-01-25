@@ -11,6 +11,7 @@
 #include "../exporters/GenericOxDNAExporter.h"
 
 #include "../filters/FilterByFunction.h"
+#include "../filters/FilterById.h"
 #include "../filters/FilterByReducingToCOM.h"
 #include "../filters/FilterByType.h"
 #include "../filters/FixParticlePath.h"
@@ -72,6 +73,7 @@ PYBIND11_MODULE(core, m) {
 	// filters
 	ba::export_BaseFilter(m);
 	ba::export_FilterByFunction(m);
+	ba::export_FilterById(m);
 	ba::export_FilterByReducingToCOM(m);
 	ba::export_FilterByType(m);
 	ba::export_FixParticlePath(m);

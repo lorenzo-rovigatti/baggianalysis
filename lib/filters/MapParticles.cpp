@@ -66,7 +66,7 @@ velocity will be computed by averaging the positions and velocities of particles
         Parameters
         ----------
         id_lists : List(List(int))
-            A list of lists containing the indices of the particles that should be averaged over to build the new particles.
+            A list of lists containing the indexes of the particles that should be averaged over to build the new particles.
     )pbdoc");
 }
 

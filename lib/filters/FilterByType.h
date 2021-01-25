@@ -8,9 +8,11 @@
 #ifndef FILTERS_FILTERBYTYPE_H_
 #define FILTERS_FILTERBYTYPE_H_
 
-#include "../filters/BaseFilter.h"
+#include "BaseFilter.h"
 
 namespace ba {
+
+class FilterByFunction;
 
 class FilterByType: public ba::BaseFilter {
 public:
@@ -20,7 +22,7 @@ public:
 	virtual std::shared_ptr<System> filter(std::shared_ptr<const System> syst) override;
 
 protected:
-	std::vector<particle_type> _allowed_types;
+	std::shared_ptr<FilterByFunction> _filter;
 };
 
 #ifdef PYTHON_BINDINGS

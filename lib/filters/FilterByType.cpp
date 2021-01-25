@@ -7,34 +7,27 @@
 
 #include "../filters/FilterByType.h"
 
-#include <algorithm>
+#include "FilterByFunction.h"
 
-using namespace std;
+#include <algorithm>
 
 namespace ba {
 
 FilterByType::FilterByType(std::vector<particle_type> allowed_types) :
-				BaseFilter(),
-				_allowed_types(allowed_types) {
+				BaseFilter() {
 
+	FilterType filter_func = [allowed_types](Particle *p) {
+		return std::find(allowed_types.begin(), allowed_types.end(), p->type()) != allowed_types.end();
+	};
+	_filter = std::make_shared<FilterByFunction>(filter_func);
 }
 
 FilterByType::~FilterByType() {
 
 }
 
-shared_ptr<System> FilterByType::filter(std::shared_ptr<const System> syst) {
-	shared_ptr<System> new_syst(syst->empty_copy());
-
-	for(auto p : syst->particles()) {
-		particle_type p_type = p->type();
-		if(find(_allowed_types.begin(), _allowed_types.end(), p_type) != _allowed_types.end()) {
-			shared_ptr<Particle> new_particle(std::make_shared<Particle>(*p.get()));
-			new_syst->add_particle(new_particle);
-		}
-	}
-
-	return new_syst;
+std::shared_ptr<System> FilterByType::filter(std::shared_ptr<const System> syst) {
+	return _filter->filter(syst);
 }
 
 #ifdef PYTHON_BINDINGS
