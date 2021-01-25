@@ -52,6 +52,10 @@ void BaseTrajectory::initialise_from_folder(std::string folder, std::string patt
 	initialise_from_filelist(files);
 }
 
+void BaseTrajectory::set_include_system(SystemIncluder func) {
+	_include_system = func;
+}
+
 std::shared_ptr<System> BaseTrajectory::_filtered_system(std::shared_ptr<System> system) {
 	for(auto filter : _filters) {
 		system = filter->filter(system);
@@ -63,9 +67,14 @@ std::shared_ptr<System> BaseTrajectory::_filtered_system(std::shared_ptr<System>
 #ifdef PYTHON_BINDINGS
 
 void export_BaseTrajectory(py::module &m) {
-	py::class_<BaseTrajectory, PyBaseTrajectory, std::shared_ptr<BaseTrajectory>> parser(m, "BaseTrajectory");
+	py::class_<BaseTrajectory, PyBaseTrajectory, std::shared_ptr<BaseTrajectory>> parser(m, "BaseTrajectory", R"pbdoc(
+        An interface that defines the method that can be used to initialise and manage trajectories.
 
-	parser.def(py::init<std::shared_ptr<BaseParser>>());
+        Child classes should at least implement :meth:`initialise_from_filelist`, :meth:`initialise_from_trajectory_file`,
+        :meth:`next_frame` and :meth:`reset`. 
+    )pbdoc");
+
+	parser.def(py::init<std::shared_ptr<BaseParser>>(), "The constructor takes a parser as its only parameter.");
 
 	parser.def("initialise_from_folder", &BaseTrajectory::initialise_from_folder, py::arg("folder"), py::arg("pattern"), py::arg("natural_sorting") = true, R"pbdoc(
         Initialise the trajectory by loading up frames stored in files contained in a folder according to a pattern.
@@ -119,8 +128,35 @@ void export_BaseTrajectory(py::module &m) {
 
 		Parameters
 		----------
-		filter : :class:BaseFilter
+		filter : :class:`BaseFilter`
 			The new filter.
+	)pbdoc");
+
+	parser.def("set_include_system", &BaseTrajectory::set_include_system, py::arg("system"), R"pbdoc(
+        Set an optional function that will be used to test whether a system should be included in the trajectory or not. 
+        The argument should be a callable that takes a system : :class:`System` as its single parameter and returns True 
+        if the system should be included, False otherwise.
+
+        Here is an example that will include only those systems having timesteps larger than 1e4::
+
+            def include_system(system):
+                return system.time > 1e4
+
+            trajectory.set_include_system(include_system)
+
+        The same result can be obtained with a lambda function::
+
+            trajectory.set_include_system(lambda syst: syst.time > 1e4)
+
+        Parameters
+        ----------
+        system : :class:`System`
+            The system to be checked.
+
+        Returns
+        -------
+        bool
+            True if the system should be included in the trajectory, False otherwise.
 	)pbdoc");
 }
 
