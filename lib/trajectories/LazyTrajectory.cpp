@@ -9,11 +9,8 @@
 
 #include "../utils/filesystem.h"
 
-#include <boost/filesystem.hpp>
-
 namespace ba {
 
-namespace bfs = boost::filesystem;
 using namespace std;
 
 LazyTrajectory::LazyTrajectory(shared_ptr<BaseParser> parser) :

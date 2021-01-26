@@ -9,11 +9,7 @@
 
 #include "../utils/filesystem.h"
 
-#include <boost/filesystem.hpp>
-
 namespace ba {
-
-namespace bfs = boost::filesystem;
 
 BaseTrajectory::BaseTrajectory(std::shared_ptr<BaseParser> parser) :
 				_parser(parser) {
@@ -29,23 +25,21 @@ void BaseTrajectory::add_filter(std::shared_ptr<BaseFilter> filter) {
 }
 
 void BaseTrajectory::initialise_from_folder(std::string folder, std::string pattern, bool natural_sorting) {
-	bfs::path path(folder);
-
-	if(!bfs::exists(path)) {
+	if(!utils::exists(folder)) {
 		std::string error = boost::str(boost::format("The '%s' folder does not exist") % folder);
 		throw std::runtime_error(error);
 	}
 
-	if(!bfs::is_directory(path)) {
+	if(!utils::is_directory(folder)) {
 		std::string error = boost::str(boost::format("'%s' is not a folder") % folder);
 		throw std::runtime_error(error);
 	}
 
-	bfs::path tot_path = bfs::path(folder) / bfs::path(pattern);
-	std::vector<std::string> files = utils::glob(tot_path.string(), natural_sorting);
+	std::string tot_path = utils::join_paths(folder, pattern);
+	std::vector<std::string> files = utils::glob(tot_path, natural_sorting);
 
 	if(files.size() == 0) {
-		std::string error = boost::str(boost::format("Pattern '%s' did not return any filename, cannot initialise a trajectory from an empty file list!") % tot_path.string());
+		std::string error = boost::str(boost::format("Pattern '%s' did not return any filename, cannot initialise a trajectory from an empty file list!") % tot_path);
 		throw std::runtime_error(error);
 	}
 

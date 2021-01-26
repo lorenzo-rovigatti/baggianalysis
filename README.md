@@ -22,7 +22,6 @@ where `PIP_COMMAND` should be `pip`, `pip3`, `python -m pip` or `python3 -m pip`
 * A c++14-compliant compiler (tested with GCC >= 5.4)
 * A few Boost modules:
     * Boost Log (`libboost-log-dev`) 
-    * Boost Filesystem (`libboost-filesystem-dev`)
     * Boost Thread (`libboost-thread-dev`)
 * If Python bindings are enabled, the `pip`, `setuptools` and `setuptools-scm` packages, as well as Python 3's header file are required (`python3-dev`)
 * The pore size observable requires the [NLopt](https://nlopt.readthedocs.io/en/latest/) library (`libnlopt-dev`)

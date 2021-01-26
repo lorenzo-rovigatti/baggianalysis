@@ -10,12 +10,10 @@
 #include "../System.h"
 #include "../utils/filesystem.h"
 
-#include <boost/filesystem.hpp>
 #include <fstream>
 
 namespace ba {
 
-namespace bfs = boost::filesystem;
 using namespace std;
 
 FullTrajectory::FullTrajectory(shared_ptr<BaseParser> parser) :

@@ -27,6 +27,12 @@ namespace utils {
  */
 std::vector<std::string> glob(const std::string& pattern, bool natural_sorting=false);
 
+std::string join_paths(std::string path1, std::string path2);
+
+bool exists(std::string path);
+
+bool is_directory(std::string path);
+
 }
 
 }
