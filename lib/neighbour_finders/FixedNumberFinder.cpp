@@ -22,7 +22,7 @@ FixedNumberFinder::~FixedNumberFinder() {
 
 void FixedNumberFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particles, const vec3 &box) {
 	if(particles.size() < _N + 1) {
-		std::string error = boost::str(boost::format("Cannot find %d neighbours per particle if there are only %d particles") % _N % particles.size());
+		std::string error = fmt::format("Cannot find %d neighbours per particle if there are only %d particles", _N, particles.size());
 		throw std::runtime_error(error);
 	}
 

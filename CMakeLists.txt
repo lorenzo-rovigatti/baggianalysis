@@ -5,7 +5,6 @@ cmake_policy(SET CMP0054 NEW)
 OPTION(Python "Enable Python bindings" ON)
 OPTION(Debug "Set to ON to compile with debug symbols" OFF)
 OPTION(G "Set to ON to compile with optimisations and debug symbols" OFF)
-OPTION(MOSIX "Make baggianalysis compatible with MOSIX" OFF)
 
 PROJECT(baggianalysis CXX)
 

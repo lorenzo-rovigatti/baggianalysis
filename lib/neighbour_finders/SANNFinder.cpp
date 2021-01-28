@@ -62,7 +62,7 @@ void SANNFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particles
 		size_t neigh_number;
 
 		if(possible_neighbours.size() < 3) {
-			std::string error = boost::str(boost::format("Particle %d has fewer than 3 neighbours (%d)") % p->index() % possible_neighbours.size());
+			std::string error = fmt::format("Particle {} has fewer than 3 neighbours ({})", p->index(), possible_neighbours.size());
 			BA_WARNING("Particle {} has fewer than 3 neighbours ({})", p->index(), possible_neighbours.size());
 			neigh_number = possible_neighbours.size();
 		}

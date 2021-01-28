@@ -24,11 +24,11 @@ shared_ptr<System> FixParticlePath::filter(std::shared_ptr<const System> syst) {
 
 	if(_previous_frame != nullptr) {
 		if(syst->time < _previous_frame->time) {
-			string error = boost::str(boost::format("The current frame's timestep (%llu) is smaller than the previous frame's timestep (%llu)") % syst->time % _previous_frame->time);
+			string error = fmt::format("The current frame's timestep ({}) is smaller than the previous frame's timestep ({})", syst->time, _previous_frame->time);
 			throw runtime_error(error);
 		}
 		if(syst->box != _previous_frame->box) {
-			string error = boost::str(boost::format("Fixing the particle path is available only when the box size does not change during the course of the trajectory (current time: %llu, previous time: %llu)") % syst->time % _previous_frame->time);
+			string error = fmt::format("Fixing the particle path is available only when the box size does not change during the course of the trajectory (current time: {}, previous time: {})", syst->time, _previous_frame->time);
 			throw runtime_error(error);
 		}
 

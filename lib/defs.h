@@ -19,6 +19,8 @@
 
 #include "utils/Logger.h"
 
+#include <spdlog/fmt/fmt.h>
+
 #include <glm/vec3.hpp>
 #include <glm/common.hpp>
 #include <glm/geometric.hpp>

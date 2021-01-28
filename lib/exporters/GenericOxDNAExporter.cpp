@@ -40,16 +40,16 @@ void GenericOxDNAExporter::write_topology(std::shared_ptr<System> system, std::s
 }
 
 void GenericOxDNAExporter::_write_system_to_stream(std::shared_ptr<System> system, std::ostream &output) {
-	output << boost::format("t = %llu\n") % system->time;
-	output << boost::format("b = %lf %lf %lf\n") % system->box[0] % system->box[1] % system->box[2];
-	output << boost::format("E = 0 0 0\n");
+	output << fmt::format("t = {}\n", system->time);
+	output << fmt::format("b = {} {} {}\n", system->box[0], system->box[1], system->box[2]);
+	output << fmt::format("E = 0 0 0\n");
 	// TODO update with angular data
 	for(auto p : system->particles()) {
-		output << boost::format("%lf %lf %lf ") % p->position()[0] % p->position()[1] % p->position()[2];
-		output << boost::format("1 0 0 ");
-		output << boost::format("0 1 0 ");
-		output << boost::format("%lf %lf %lf ") % p->velocity()[0] % p->velocity()[1] % p->velocity()[2];
-		output << boost::format("0 0 0\n");
+		output << fmt::format("{} {} {} ", p->position()[0], p->position()[1], p->position()[2]);
+		output << fmt::format("1 0 0 ");
+		output << fmt::format("0 1 0 ");
+		output << fmt::format("{} {} {} ", p->velocity()[0], p->velocity()[1], p->velocity()[2]);
+		output << fmt::format("0 0 0\n");
 	}
 }
 

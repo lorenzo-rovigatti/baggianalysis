@@ -31,7 +31,7 @@ std::shared_ptr<System> MapParticles::filter(std::shared_ptr<const System> syst)
 				com_vel += particle->velocity();
 			}
 			catch (std::exception &e) {
-				std::string error = boost::str(boost::format("Caught the following error while applying a MapParticles filter:\n\t%s") % e.what());
+				std::string error = fmt::format("Caught the following error while applying a MapParticles filter:\n\t{}", e.what());
 				throw std::runtime_error(error);
 			}
 		}

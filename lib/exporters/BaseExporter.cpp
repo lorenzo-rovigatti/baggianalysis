@@ -49,7 +49,7 @@ void BaseExporter::write_topology(std::shared_ptr<System> system, std::string fi
 }
 
 std::string BaseExporter::_topology_filename_from_output_filename(std::string filename) {
-	return boost::str(boost::format("topology_%s") % filename);
+	return fmt::format("topology_{}", filename);
 }
 
 void BaseExporter::_write_system_to_stream(std::shared_ptr<System> system, std::ostream &output) {
