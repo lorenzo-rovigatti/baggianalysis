@@ -15,6 +15,10 @@ SET(CMAKE_FIND_ROOT_PATH)
 # The default behaviour is to compile with optimisations
 SET(CMAKE_BUILD_TYPE Release)
 
+# build spdlog as a shared lib
+option(SPDLOG_BUILD_SHARED "" ON)
+add_subdirectory(extern/spdlog)
+
 IF(Python)
 	ADD_SUBDIRECTORY(extern/pybind11)
 	ADD_DEFINITIONS(-DPYTHON_BINDINGS)
@@ -24,7 +28,7 @@ IF(Python)
 	MESSAGE(STATUS "Enabling Python bindings")
 ENDIF(Python)
 
-FIND_PACKAGE( Boost COMPONENTS log REQUIRED )
+FIND_PACKAGE( Boost REQUIRED )
 
 IF(Debug)
 	SET(CMAKE_BUILD_TYPE "Debug")

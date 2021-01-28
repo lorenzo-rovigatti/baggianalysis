@@ -27,7 +27,7 @@ FullTrajectory::~FullTrajectory() {
 
 void FullTrajectory::add_filter(shared_ptr<BaseFilter> filter) {
 	if(frames.size() > 0) {
-		BOOST_LOG_TRIVIAL(warning)<<"Adding filters to trajectories that have been already initialised does not make much sense...";
+		BA_WARNING("Adding filters to trajectories that have been already initialised may result in unwanted behaviours");
 	}
 
 	BaseTrajectory::add_filter(filter);
@@ -59,10 +59,10 @@ void FullTrajectory::initialise_from_trajectory_file(string trajectory_file) {
 	_current_system = frames.begin();
 
 	if(frames.size() == 1) {
-		BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frame";
+		BA_INFO("Loaded 1 frame");
 	}
 	else {
-		BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
+		BA_INFO("Loaded {} frames", frames.size());
 	}
 }
 
@@ -83,7 +83,9 @@ void FullTrajectory::initialise_from_filelist(std::vector<std::string> filelist)
 			frames.push_back(_filtered_system(new_system));
 		}
 
-		if(parsed_files > 10 && parsed_files % (N_files / 10) == 0) BOOST_LOG_TRIVIAL(info)<< "Parsed " << parsed_files * 100 / N_files << "% of the configurations (" << parsed_files << "/" << N_files << ")";
+		if(parsed_files > 10 && parsed_files % (N_files / 10) == 0) {
+			BA_INFO("Parsed {}% of the configurations ({}/{})", parsed_files * 100 / N_files, parsed_files, N_files);
+		}
 	}
 
 	// we sort the frames according to their timestep
@@ -94,7 +96,12 @@ void FullTrajectory::initialise_from_filelist(std::vector<std::string> filelist)
 
 	_current_system = frames.begin();
 
-	BOOST_LOG_TRIVIAL(info)<<"Loaded " << frames.size() << " frames";
+	if(frames.size() == 1) {
+		BA_INFO("Loaded 1 frame");
+	}
+	else {
+		BA_INFO("Loaded {} frames", frames.size());
+	}
 }
 
 shared_ptr<System> FullTrajectory::next_frame() {

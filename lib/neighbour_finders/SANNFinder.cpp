@@ -63,9 +63,8 @@ void SANNFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particles
 
 		if(possible_neighbours.size() < 3) {
 			std::string error = boost::str(boost::format("Particle %d has fewer than 3 neighbours (%d)") % p->index() % possible_neighbours.size());
-			BOOST_LOG_TRIVIAL(warning) << error;
+			BA_WARNING("Particle {} has fewer than 3 neighbours ({})", p->index(), possible_neighbours.size());
 			neigh_number = possible_neighbours.size();
-//			throw std::runtime_error(error);
 		}
 		else {
 			// sort according to the relative distance between each neighbour and p
@@ -88,9 +87,7 @@ void SANNFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particles
 			}
 
 			if(neigh_number == possible_neighbours.size()) {
-				std::string error = boost::str(boost::format("The SANN radius of particle %d has not converged (%d neighbours are not enough)") % p->index() % neigh_number);
-				BOOST_LOG_TRIVIAL(warning) << error;
-				//throw std::runtime_error(error);
+				BA_WARNING("The SANN radius of particle {} has not converged ({} neighbours are not enough)", p->index(), neigh_number);
 			}
 		}
 

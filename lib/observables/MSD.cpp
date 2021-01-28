@@ -41,8 +41,7 @@ void MSD::analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) {
 		uint N_conf = frame->N();
 		if(N_first_conf == 0) {
 			N_first_conf = N_conf;
-			BOOST_LOG_TRIVIAL(info)
-			<< "Computing the MSD on configurations composed of " << N_conf << " particles";
+			BA_INFO("Computing the MSD on configurations composed of {} particles", N_conf);
 		}
 
 		if(N_conf != N_first_conf) {

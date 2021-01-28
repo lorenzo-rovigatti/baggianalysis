@@ -20,9 +20,7 @@ where `PIP_COMMAND` should be `pip`, `pip3`, `python -m pip` or `python3 -m pip`
 * CMake >= 3.1 (>= 3.12 if installed through `pip`)
 * make
 * A c++14-compliant compiler (tested with GCC >= 5.4)
-* A few Boost modules:
-    * Boost Log (`libboost-log-dev`) 
-    * Boost Thread (`libboost-thread-dev`)
+* Boost's `format` header (to be removed)
 * If Python bindings are enabled, the `pip`, `setuptools` and `setuptools-scm` packages, as well as Python 3's header file are required (`python3-dev`)
 * The pore size observable requires the [NLopt](https://nlopt.readthedocs.io/en/latest/) library (`libnlopt-dev`)
 * The bond-order parameter observable requires the [GNU Scientific Library](https://www.gnu.org/software/gsl/) (`libgsl-dev`)

@@ -17,14 +17,15 @@
 #define PYBIND11_EXPORT
 #endif
 
-#include <memory>
+#include "utils/Logger.h"
 
 #include <glm/vec3.hpp>
 #include <glm/common.hpp>
 #include <glm/geometric.hpp>
 
+#include <memory>
+
 #include <boost/format.hpp>
-#include <boost/log/trivial.hpp>
 #include <iostream>
 
 using vec3 = glm::dvec3;

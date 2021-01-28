@@ -37,6 +37,7 @@ SET(ba_lib_SOURCES
 	trajectories/FullTrajectory.cpp
 	utils/CellLists.cpp
 	utils/filesystem.cpp
+	utils/Logger.cpp
 	utils/Random.cpp
 	utils/strings.cpp
 )
@@ -110,8 +111,9 @@ ELSE()
 	MESSAGE(WARNING "GSL not found, the following modules will not be compiled: ${with_GSL_SOURCES}")
 ENDIF(GSL_FOUND)
 
+add_library(_baggianalysis STATIC ${ba_lib_SOURCES})
+
 IF(Python)
-	ADD_LIBRARY(_baggianalysis STATIC ${ba_lib_SOURCES})
 	TARGET_LINK_LIBRARIES(_baggianalysis ${PYTHON_LIBRARIES})
 	SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES POSITION_INDEPENDENT_CODE ON)
 	pybind11_add_module(core SHARED python/bindings.cpp)
@@ -138,13 +140,11 @@ IF(Python)
 	# setup the make install target to run make_install_setup.py (in user mode, no root permissions required)
 	INSTALL(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install ${BA_OUTPUT_DIR})")
 	
-ELSE(Python)
-	ADD_LIBRARY(_baggianalysis SHARED ${ba_lib_SOURCES})
 ENDIF(Python)
 
 find_package(Threads)
 
-TARGET_LINK_LIBRARIES(_baggianalysis ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+TARGET_LINK_LIBRARIES(_baggianalysis ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} spdlog::spdlog)
 IF(GSL_FOUND)
 	TARGET_LINK_LIBRARIES(_baggianalysis ${GSL_LIBRARIES})
 ENDIF(GSL_FOUND)

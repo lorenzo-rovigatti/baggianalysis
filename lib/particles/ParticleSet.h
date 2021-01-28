@@ -11,6 +11,8 @@
 #include "../defs.h"
 #include "../python_defs.h"
 
+#include <map>
+
 namespace ba {
 
 class Particle;

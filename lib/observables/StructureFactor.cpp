@@ -10,6 +10,8 @@
 #include "../utils/Random.h"
 #include <glm/gtx/norm.hpp>
 
+#include <list>
+
 namespace ba {
 
 StructureFactor::StructureFactor(double largest_q, uint max_n_realisations, double max_delta_q) :

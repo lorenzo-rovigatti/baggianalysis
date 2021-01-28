@@ -1,4 +1,5 @@
 v. 0.0.2
+	- Remove boost's `filesystem` and `log` libraries from the dependencies
 	- Add a test that checks the LAMMPS conf and topology parser and exporter
 	- Add the write_topology and write_trajectory methods to BaseExporter
 	- Remove Boost's `signal` from the dependencies

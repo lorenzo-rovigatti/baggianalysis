@@ -32,6 +32,8 @@ protected:
 	uint _N_A = 0;
 };
 
+#ifdef PYTHON_BINDINGS
+
 /**
  * @brief Trampoline class for Default.
  */
@@ -48,8 +50,6 @@ public:
 		);
 	}
 };
-
-#ifdef PYTHON_BINDINGS
 
 void export_Default(py::module &m);
 

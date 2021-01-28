@@ -45,7 +45,7 @@ void LazyTrajectory::initialise_from_filelist(std::vector<std::string> filelist)
 	_files = filelist;
 	_current_file = _files.begin();
 
-	BOOST_LOG_TRIVIAL(info)<<"Found " << _files.size() << " files";
+	BA_INFO("Found {} files", _files.size());
 }
 
 shared_ptr<System> LazyTrajectory::next_frame() {
