@@ -16,8 +16,8 @@ SET(CMAKE_FIND_ROOT_PATH)
 SET(CMAKE_BUILD_TYPE Release)
 
 # build spdlog as a shared lib
-option(SPDLOG_BUILD_SHARED "" ON)
 add_subdirectory(extern/spdlog)
+set_target_properties(spdlog PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 IF(Python)
 	ADD_SUBDIRECTORY(extern/pybind11)
