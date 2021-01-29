@@ -46,13 +46,18 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 
 	auto header_data = _parse_headers(configuration);
 
-	if(header_data.empty) {
-		return nullptr;
-	}
-
-	// there is time information in a LAMMPS data file
+	// there is no time information in a LAMMPS data file
 	syst->time = 0;
 	syst->box = header_data.box;
+
+	if(header_data.empty) {
+		throw std::runtime_error("The LAMMPS datafile did not contain any headers");
+	}
+
+	if(header_data.N_atoms == 0) {
+		BA_WARNING("The LAMMPS datafile seems to have non-empty headers but 0 atoms, be careful!");
+		return syst;
+	}
 
 	std::string line;
 	do {
@@ -148,6 +153,10 @@ LAMMPSDataFileParser::HeaderData LAMMPSDataFileParser::_parse_headers(std::ifstr
 				}
 			}
 		}
+	}
+
+	if(hd.N_atoms == 0 && hd.N_bonds == 0&& hd.atom_types == 0 && hd.bond_types == 0 && hd.box == vec3(1., 1., 1.)) {
+		hd.empty = true;
 	}
 
 	return hd;
