@@ -54,7 +54,12 @@ std::string trim_copy(std::string source);
  * @return
  */
 template<typename T> T lexical_cast(std::string source) {
-	return boost::lexical_cast<T>(trim_copy(source));
+	T var;
+	std::istringstream iss;
+	iss.str(source);
+	iss >> var;
+	// deal with any error bits that may have been set on the stream
+	return var;
 }
 
 }
