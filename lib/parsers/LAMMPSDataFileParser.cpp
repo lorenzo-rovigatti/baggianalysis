@@ -169,7 +169,7 @@ std::string LAMMPSDataFileParser::_read_line(std::ifstream &configuration) {
 	std::string line;
 	std::getline(configuration, line);
 	// remove possible comments and trim the resulting string
-	return utils::trim(utils::split(line, "#")[0]);
+	return utils::trim_copy(utils::split(line, "#")[0]);
 }
 
 #ifdef PYTHON_BINDINGS

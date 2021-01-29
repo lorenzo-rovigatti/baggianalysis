@@ -24,7 +24,7 @@ namespace utils {
  * @param separators list of separators that will be used to split the string
  * @return a vector of strings containing the tokens
  */
-std::vector<std::string> split(std::string line, std::string separators=" ");
+std::vector<std::string> split(std::string line, std::string separators = " ");
 
 /**
  * Use boost's lexical_cast to cast the given string to a numeric type. Trims the string before attempting to cast it.
@@ -36,13 +36,22 @@ template<typename T> T lexical_cast(std::string source) {
 	return boost::lexical_cast<T>(boost::trim_copy(source));
 }
 
+// trim from start (in place)
+void ltrim(std::string &s);
+
+// trim from end (in place)
+void rtrim(std::string &s);
+
+// trim from both ends (in place)
+void trim(std::string &s);
+
 /**
  * Return a copy of the given string, without trailing and leading spaces
  *
  * @param source
  * @return a new string
  */
-std::string trim(std::string source);
+std::string trim_copy(std::string source);
 
 }
 

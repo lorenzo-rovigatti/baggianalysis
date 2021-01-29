@@ -37,7 +37,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 	}
 
 	try {
-		std::string time_string = utils::trim(line.substr(time_pos + 2));
+		std::string time_string = utils::trim_copy(line.substr(time_pos + 2));
 		double time_double = utils::lexical_cast<double>(time_string);
 		syst->time = std::round(time_double / _dt);
 	}
@@ -50,7 +50,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 	std::getline(configuration, line);
 	uint N;
 	try {
-		N = utils::lexical_cast<uint>(utils::trim(line));
+		N = utils::lexical_cast<uint>(utils::trim_copy(line));
 	}
 	catch(boost::bad_lexical_cast &e) {
 		std::string error = fmt::format("The number of particles '{}' found in the .gro configuration cannot be cast to an integer", line);
@@ -70,9 +70,9 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(syst->available_index()));
 		new_particle->set_type(atom_name);
 
-		std::string x = utils::trim(line.substr(20, 8));
-		std::string y = utils::trim(line.substr(28, 8));
-		std::string z = utils::trim(line.substr(36, 8));
+		std::string x = utils::trim_copy(line.substr(20, 8));
+		std::string y = utils::trim_copy(line.substr(28, 8));
+		std::string z = utils::trim_copy(line.substr(36, 8));
 
 		try {
 			new_particle->set_position(vec3(utils::lexical_cast<double>(x), utils::lexical_cast<double>(y), utils::lexical_cast<double>(z)));
@@ -82,9 +82,9 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 			throw std::runtime_error(error);
 		}
 
-		std::string vx = utils::trim(line.substr(44, 8));
-		std::string vy = utils::trim(line.substr(52, 8));
-		std::string vz = utils::trim(line.substr(60, 8));
+		std::string vx = utils::trim_copy(line.substr(44, 8));
+		std::string vy = utils::trim_copy(line.substr(52, 8));
+		std::string vz = utils::trim_copy(line.substr(60, 8));
 
 		try {
 			new_particle->set_velocity(vec3(utils::lexical_cast<double>(vx), utils::lexical_cast<double>(vy), utils::lexical_cast<double>(vz)));
@@ -99,7 +99,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 
 	// box line
 	std::getline(configuration, line);
-	std::string to_split = utils::trim(line);
+	std::string to_split = utils::trim_copy(line);
 	auto split = utils::split(to_split);
 	try {
 		syst->box[0] = utils::lexical_cast<double>(split[0]);

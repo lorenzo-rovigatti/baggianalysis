@@ -41,7 +41,7 @@ std::shared_ptr<System> LAMMPSDumpParser::_parse_stream(std::ifstream &configura
 			throw std::runtime_error(error);
 		}
 
-		std::string to_split = utils::trim(line);
+		std::string to_split = utils::trim_copy(line);
 		auto split = utils::split(to_split);
 
 		if(split.size() < 5) {
@@ -88,12 +88,12 @@ LAMMPSDumpParser::HeaderData LAMMPSDumpParser::_parse_headers(std::ifstream &con
 		if(boost::starts_with(line, "ITEM:")) {
 			if(boost::contains(line, "TIMESTEP")) {
 				std::getline(configuration, line);
-				hd.time_step = utils::lexical_cast<ullint>(utils::trim(line));
+				hd.time_step = utils::lexical_cast<ullint>(utils::trim_copy(line));
 			}
 			else if(boost::contains(line, "NUMBER OF ATOMS")) {
 				std::getline(configuration, line);
 				try {
-					hd.N = utils::lexical_cast<uint>(utils::trim(line));
+					hd.N = utils::lexical_cast<uint>(utils::trim_copy(line));
 				}
 				catch(boost::bad_lexical_cast &e) {
 					std::string error = fmt::format("The number of particles '{}' found in the LAMMPS dump configuration cannot be cast to an integer", line);
@@ -104,7 +104,7 @@ LAMMPSDumpParser::HeaderData LAMMPSDumpParser::_parse_headers(std::ifstream &con
 				// the next three lines contains the box dimensions along the three axes
 				for(uint i = 0; i < 3; i++) {
 					std::getline(configuration, line);
-					std::string to_split = utils::trim(line);
+					std::string to_split = utils::trim_copy(line);
 					auto split = utils::split(to_split);
 					try {
 						double lower = utils::lexical_cast<double>(split[0]);

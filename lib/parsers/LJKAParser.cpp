@@ -32,9 +32,9 @@ std::shared_ptr<System> LJKAParser::_parse_stream(std::ifstream &configuration) 
 
 	auto split = utils::split(line);
 	try {
-		syst->time = utils::lexical_cast<ullint>(utils::trim(split[0]));
-		N = utils::lexical_cast<uint>(utils::trim(split[2]));
-		NA = utils::lexical_cast<uint>(utils::trim(split[3]));
+		syst->time = utils::lexical_cast<ullint>(utils::trim_copy(split[0]));
+		N = utils::lexical_cast<uint>(utils::trim_copy(split[2]));
+		NA = utils::lexical_cast<uint>(utils::trim_copy(split[3]));
 	}
 	catch(boost::bad_lexical_cast &e) {
 		std::string error = fmt::format("The timestep value '{}' found in the LJKA configuration cannot be cast to an integer", split[2]);
@@ -43,12 +43,12 @@ std::shared_ptr<System> LJKAParser::_parse_stream(std::ifstream &configuration) 
 
 	// box line
 	std::getline(configuration, line);
-	std::string to_split = utils::trim(line);
+	std::string to_split = utils::trim_copy(line);
 	split = utils::split(to_split);
 	try {
-		syst->box[0] = utils::lexical_cast<double>(utils::trim(split[0]));
-		syst->box[1] = utils::lexical_cast<double>(utils::trim(split[1]));
-		syst->box[2] = utils::lexical_cast<double>(utils::trim(split[2]));
+		syst->box[0] = utils::lexical_cast<double>(utils::trim_copy(split[0]));
+		syst->box[1] = utils::lexical_cast<double>(utils::trim_copy(split[1]));
+		syst->box[2] = utils::lexical_cast<double>(utils::trim_copy(split[2]));
 	}
 	catch(boost::bad_lexical_cast &e) {
 		std::string error = fmt::format("The box line '{}' found in the LJKA configuration is not valid", line);

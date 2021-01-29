@@ -28,7 +28,7 @@ void parse_microgel_bondfile(std::string filename, std::shared_ptr<Topology> top
 
 	while(input.good()) {
 		std::getline(input, line);
-		auto split = utils::split(utils::trim(line));
+		auto split = utils::split(utils::trim_copy(line));
 
 		if(split.size() == 2) {
 			// the first line contains idx n_neighs
@@ -38,7 +38,7 @@ void parse_microgel_bondfile(std::string filename, std::shared_ptr<Topology> top
 			if(n_neighs > 0) {
 				// the second line contains the indexes of all neighbours
 				std::getline(input, line);
-				split = utils::split(utils::trim(line));
+				split = utils::split(utils::trim_copy(line));
 				if(split.size() != n_neighs) {
 					std::string error = fmt::format("Particle {} seems to have {} neighbours, should be {}", p_idx, split.size(), n_neighs);
 					throw std::runtime_error(error);
@@ -81,7 +81,7 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 
 	while(input.good()) {
 		std::getline(input, line);
-		line = utils::trim(utils::split(line, "#")[0]);
+		line = utils::trim_copy(utils::split(line, "#")[0]);
 
 		auto split = utils::split(line);
 		if(boost::ends_with(line, "angles")) {
@@ -97,7 +97,7 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 		if(line == "Angles") {
 			for(uint i = 0; i < N_angles; i++) {
 				std::getline(input, line);
-				line = ba::utils::trim(line);
+				line = ba::utils::trim_copy(line);
 				// skip empty lines
 				if(line.size() == 0) {
 					i--;
@@ -119,7 +119,7 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 		else if(line == "Bonds") {
 			for(uint i = 0; i < N_bonds; i++) {
 				std::getline(input, line);
-				line = ba::utils::trim(line);
+				line = ba::utils::trim_copy(line);
 				// skip empty lines
 				if(line.size() == 0) {
 					i--;
@@ -141,7 +141,7 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 		else if(line == "Dihedrals") {
 			for(uint i = 0; i < N_dihedrals; i++) {
 				std::getline(input, line);
-				line = ba::utils::trim(line);
+				line = ba::utils::trim_copy(line);
 				// skip empty lines
 				if(line.size() == 0) {
 					i--;
