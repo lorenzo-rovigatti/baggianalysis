@@ -36,7 +36,7 @@ std::shared_ptr<System> LJKAParser::_parse_stream(std::ifstream &configuration) 
 		N = utils::lexical_cast<uint>(utils::trim_copy(split[2]));
 		NA = utils::lexical_cast<uint>(utils::trim_copy(split[3]));
 	}
-	catch(boost::bad_lexical_cast &e) {
+	catch(utils::bad_lexical_cast &e) {
 		std::string error = fmt::format("The timestep value '{}' found in the LJKA configuration cannot be cast to an integer", split[2]);
 		throw std::runtime_error(error);
 	}
@@ -50,7 +50,7 @@ std::shared_ptr<System> LJKAParser::_parse_stream(std::ifstream &configuration) 
 		syst->box[1] = utils::lexical_cast<double>(utils::trim_copy(split[1]));
 		syst->box[2] = utils::lexical_cast<double>(utils::trim_copy(split[2]));
 	}
-	catch(boost::bad_lexical_cast &e) {
+	catch(utils::bad_lexical_cast &e) {
 		std::string error = fmt::format("The box line '{}' found in the LJKA configuration is not valid", line);
 		throw std::runtime_error(error);
 	}

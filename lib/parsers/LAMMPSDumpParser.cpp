@@ -62,7 +62,7 @@ std::shared_ptr<System> LAMMPSDumpParser::_parse_stream(std::ifstream &configura
 			}
 			new_particle->set_position(pos);
 		}
-		catch(boost::bad_lexical_cast &e) {
+		catch(utils::bad_lexical_cast &e) {
 			std::string error = fmt::format("The position of the {}-th particle ({}, {}, {}) cannot be cast to a vector of floating-point numbers", i, split[2], split[3], split[4]);
 			throw std::runtime_error(error);
 		}
@@ -95,7 +95,7 @@ LAMMPSDumpParser::HeaderData LAMMPSDumpParser::_parse_headers(std::ifstream &con
 				try {
 					hd.N = utils::lexical_cast<uint>(utils::trim_copy(line));
 				}
-				catch(boost::bad_lexical_cast &e) {
+				catch(utils::bad_lexical_cast &e) {
 					std::string error = fmt::format("The number of particles '{}' found in the LAMMPS dump configuration cannot be cast to an integer", line);
 					throw std::runtime_error(error);
 				}
@@ -111,7 +111,7 @@ LAMMPSDumpParser::HeaderData LAMMPSDumpParser::_parse_headers(std::ifstream &con
 						double upper = utils::lexical_cast<double>(split[1]);
 						hd.box[i] = upper - lower;
 					}
-					catch(boost::bad_lexical_cast &e) {
+					catch(utils::bad_lexical_cast &e) {
 						std::string error = fmt::format("The box line '{}' found in the LAMMPS dump configuration is not valid", line);
 						throw std::runtime_error(error);
 					}

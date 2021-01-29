@@ -41,7 +41,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 		double time_double = utils::lexical_cast<double>(time_string);
 		syst->time = std::round(time_double / _dt);
 	}
-	catch(boost::bad_lexical_cast &e) {
+	catch(utils::bad_lexical_cast &e) {
 		std::string error = fmt::format("The timestep '{}' found in the .gro configuration cannot be cast to a double", line.substr(time_pos + 2));
 		throw std::runtime_error(error);
 	}
@@ -52,7 +52,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 	try {
 		N = utils::lexical_cast<uint>(utils::trim_copy(line));
 	}
-	catch(boost::bad_lexical_cast &e) {
+	catch(utils::bad_lexical_cast &e) {
 		std::string error = fmt::format("The number of particles '{}' found in the .gro configuration cannot be cast to an integer", line);
 		throw std::runtime_error(error);
 	}
@@ -77,7 +77,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 		try {
 			new_particle->set_position(vec3(utils::lexical_cast<double>(x), utils::lexical_cast<double>(y), utils::lexical_cast<double>(z)));
 		}
-		catch(boost::bad_lexical_cast &e) {
+		catch(utils::bad_lexical_cast &e) {
 			std::string error = fmt::format("The position of the {}-th particle ({}, {}, {}) cannot be cast to a vector of floating-point numbers", i, x, y, z);
 			throw std::runtime_error(error);
 		}
@@ -89,7 +89,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 		try {
 			new_particle->set_velocity(vec3(utils::lexical_cast<double>(vx), utils::lexical_cast<double>(vy), utils::lexical_cast<double>(vz)));
 		}
-		catch(boost::bad_lexical_cast &e) {
+		catch(utils::bad_lexical_cast &e) {
 			std::string error = fmt::format("The velocity of the {}-th particle ({}, {}, {}) cannot be cast to a vector of floating-point numbers", i, vx, vy, vz);
 			throw std::runtime_error(error);
 		}
@@ -106,7 +106,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 		syst->box[1] = utils::lexical_cast<double>(split[1]);
 		syst->box[2] = utils::lexical_cast<double>(split[2]);
 	}
-	catch(boost::bad_lexical_cast &e) {
+	catch(utils::bad_lexical_cast &e) {
 		std::string error = fmt::format("The box line '{}' found in the .gro configuration is not valid", line);
 		throw std::runtime_error(error);
 	}

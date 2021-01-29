@@ -142,9 +142,7 @@ IF(Python)
 	
 ENDIF(Python)
 
-find_package(Threads)
-
-TARGET_LINK_LIBRARIES(_baggianalysis ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} spdlog::spdlog)
+TARGET_LINK_LIBRARIES(_baggianalysis spdlog::spdlog)
 IF(GSL_FOUND)
 	TARGET_LINK_LIBRARIES(_baggianalysis ${GSL_LIBRARIES})
 ENDIF(GSL_FOUND)

@@ -56,7 +56,7 @@ if(CMAKE_VERSION VERSION_LESS "2.9")
 ENDIF()
 
 # the BOOST_LOG_DYN_LINK definition is required in order to build a python-readable dynamic library
-ADD_DEFINITIONS(-Wall -DBOOST_LOG_DYN_LINK -Wno-int-in-bool-context)
+ADD_DEFINITIONS(-Wall -Wno-int-in-bool-context)
 
 IF(NOT Debug)
 	IF(INTEL)

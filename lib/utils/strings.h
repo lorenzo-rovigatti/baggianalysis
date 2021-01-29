@@ -10,7 +10,7 @@
 
 #include "../defs.h"
 
-#include <boost/lexical_cast.hpp>
+#include <sstream>
 
 namespace ba {
 
@@ -47,18 +47,27 @@ void trim(std::string &s);
  */
 std::string trim_copy(std::string source);
 
+class bad_lexical_cast: public std::exception {
+	using std::exception::exception;
+};
+
 /**
- * Use boost's lexical_cast to cast the given string to a numeric type. Trims the string before attempting to cast it.
+ * Cast the given string to a numeric type. Trims the string before attempting to cast it.
  *
  * @param source
  * @return
  */
-template<typename T> T lexical_cast(std::string source) {
+template<typename T>
+T lexical_cast(std::string source) {
 	T var;
 	std::istringstream iss;
-	iss.str(source);
+	iss.str(trim_copy(source));
 	iss >> var;
-	// deal with any error bits that may have been set on the stream
+
+	if(iss.fail() || iss.bad()) {
+		throw bad_lexical_cast();
+	}
+
 	return var;
 }
 

@@ -40,7 +40,7 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 	try {
 		syst->time = utils::lexical_cast<ullint>(split[2]);
 	}
-	catch(boost::bad_lexical_cast &e) {
+	catch(utils::bad_lexical_cast &e) {
 		std::string error = fmt::format("The timestep value '{}' found in the oxDNA configuration cannot be cast to an integer", split[2]);
 		throw std::runtime_error(error);
 	}
@@ -53,7 +53,7 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 		syst->box[1] = utils::lexical_cast<double>(split[3]);
 		syst->box[2] = utils::lexical_cast<double>(split[4]);
 	}
-	catch(boost::bad_lexical_cast &e) {
+	catch(utils::bad_lexical_cast &e) {
 		std::string error = fmt::format("The box line '{}' found in the oxDNA configuration is not valid", line);
 		throw std::runtime_error(error);
 	}
