@@ -18,7 +18,7 @@ MSD::MSD(uint points_per_cycle, bool remove_com) :
 				_points_per_cycle(points_per_cycle),
 				_remove_com(remove_com) {
 	if(points_per_cycle < 1) {
-		string error = boost::str(boost::format("The MSD's points per cycle (%d) should larger than 0") % points_per_cycle);
+		string error = fmt::format("The MSD's points per cycle ({}) should larger than 0", points_per_cycle);
 		throw std::runtime_error(error);
 	}
 }
@@ -45,7 +45,7 @@ void MSD::analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) {
 		}
 
 		if(N_conf != N_first_conf) {
-			string error = boost::str(boost::format("The configurations at times 0 and %u contain different number of particles (%d != %d)") % frame->time % N_first_conf % N_conf);
+			string error = fmt::format("The configurations at times 0 and {} contain different number of particles (%d != {})", frame->time, N_first_conf, N_conf);
 			throw std::runtime_error(error);
 		}
 

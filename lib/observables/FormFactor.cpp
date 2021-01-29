@@ -28,7 +28,7 @@ FormFactor::~FormFactor() {
 void FormFactor::analyse_system(std::shared_ptr<System> system) {
 	if(_compute_on_molecules) {
 		if(system->molecules().size() == 0) {
-			std::string error = boost::str(boost::format("FormFactor: No molecules found, aborting"));
+			std::string error = fmt::format("FormFactor: No molecules found, aborting");
 			throw std::runtime_error(error);
 		}
 		for(auto molecule: system->molecules()) {

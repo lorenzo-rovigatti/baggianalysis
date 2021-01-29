@@ -100,7 +100,7 @@ void Topology::apply(std::shared_ptr<System> system) {
 			p->add_bonded_neighbour(q);
 		}
 		catch (std::runtime_error &e) {
-				std::string error = boost::str(boost::format("The following error occurred while applying the topology to a System:\n\t'%s'") % e.what());
+				std::string error = fmt::format("The following error occurred while applying the topology to a System:\n\t'{}'", e.what());
 				_raise_error(error);
 		}
 	}
@@ -111,7 +111,7 @@ void Topology::apply(std::shared_ptr<System> system) {
 	}
 
 	if(_N_in_system != system->N() && !_disable_checks) {
-		std::string error = boost::str(boost::format("The topology was initialised on a System containing %u particles and hence it cannot be applied to a System containing %u particles") % _N_in_system % system->N());
+		std::string error = fmt::format("The topology was initialised on a System containing {} particles and hence it cannot be applied to a System containing {} particles", _N_in_system, system->N());
 		_raise_error(error);
 	}
 
@@ -123,7 +123,7 @@ void Topology::apply(std::shared_ptr<System> system) {
 			particle->set_molecule(new_molecule);
 		}
 
-		std::string mol_name = boost::str(boost::format("mol_%u") % system->molecules().size());
+		std::string mol_name = fmt::format("mol_{}", system->molecules().size());
 		new_molecule->set_name(mol_name);
 		system->molecules().emplace_back(new_molecule);
 	}

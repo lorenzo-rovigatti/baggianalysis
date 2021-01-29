@@ -52,7 +52,7 @@ std::shared_ptr<System> BaseParser::_parse_file(std::string conf_name) {
 }
 
 std::shared_ptr<System> BaseParser::_parse_stream(std::ifstream &configuration) {
-	std::string error = boost::str(boost::format("Unimplemented 'BaseParser::_parse_stream' method invoked. The error may have been caused by trying to use a custom Python parser to initialise a trajectory through the 'initialise_from_trajectory_file()', which is forbidden"));
+	std::string error = fmt::format("Unimplemented 'BaseParser::_parse_stream' method invoked. The error may have been caused by trying to use a custom Python parser to initialise a trajectory through the 'initialise_from_trajectory_file()', which is forbidden");
 	throw std::runtime_error(error);
 
 	return nullptr;

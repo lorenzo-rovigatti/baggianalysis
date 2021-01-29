@@ -37,7 +37,7 @@ std::shared_ptr<System> LAMMPSDumpParser::_parse_stream(std::ifstream &configura
 		std::string line;
 		std::getline(configuration, line);
 		if(!configuration.good()) {
-			std::string error = boost::str(boost::format("The line relative to the %u-th particle cannot be read") % i);
+			std::string error = fmt::format("The line relative to the {}-th particle cannot be read", i);
 			throw std::runtime_error(error);
 		}
 
@@ -45,7 +45,7 @@ std::shared_ptr<System> LAMMPSDumpParser::_parse_stream(std::ifstream &configura
 		auto split = utils::split(to_split);
 
 		if(split.size() < 5) {
-			std::string error = boost::str(boost::format("The LAMMPS dump file should contain at least 5 columns (%u found") % split.size());
+			std::string error = fmt::format("The LAMMPS dump file should contain at least 5 columns ({} found", split.size());
 			throw std::runtime_error(error);
 		}
 
@@ -63,7 +63,7 @@ std::shared_ptr<System> LAMMPSDumpParser::_parse_stream(std::ifstream &configura
 			new_particle->set_position(pos);
 		}
 		catch(boost::bad_lexical_cast &e) {
-			std::string error = boost::str(boost::format("The position of the %u-th particle (%s, %s, %s) cannot be cast to a vector of floating-point numbers") % i % split[2] % split[3] % split[4]);
+			std::string error = fmt::format("The position of the {}-th particle ({}, {}, {}) cannot be cast to a vector of floating-point numbers", i, split[2], split[3], split[4]);
 			throw std::runtime_error(error);
 		}
 
@@ -96,7 +96,7 @@ LAMMPSDumpParser::HeaderData LAMMPSDumpParser::_parse_headers(std::ifstream &con
 					hd.N = utils::lexical_cast<uint>(utils::trim(line));
 				}
 				catch(boost::bad_lexical_cast &e) {
-					std::string error = boost::str(boost::format("The number of particles '%s' found in the LAMMPS dump configuration cannot be cast to an integer") % line);
+					std::string error = fmt::format("The number of particles '{}' found in the LAMMPS dump configuration cannot be cast to an integer", line);
 					throw std::runtime_error(error);
 				}
 			}
@@ -112,7 +112,7 @@ LAMMPSDumpParser::HeaderData LAMMPSDumpParser::_parse_headers(std::ifstream &con
 						hd.box[i] = upper - lower;
 					}
 					catch(boost::bad_lexical_cast &e) {
-						std::string error = boost::str(boost::format("The box line '%s' found in the LAMMPS dump configuration is not valid") % line);
+						std::string error = fmt::format("The box line '{}' found in the LAMMPS dump configuration is not valid", line);
 						throw std::runtime_error(error);
 					}
 				}

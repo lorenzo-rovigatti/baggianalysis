@@ -18,7 +18,7 @@ void parse_microgel_bondfile(std::string filename, std::shared_ptr<Topology> top
 	std::ifstream input(filename);
 
 	if(!input.good()) {
-		std::string error = boost::str(boost::format("The topology file '%s' is unreadable") % filename);
+		std::string error = fmt::format("The topology file '{}' is unreadable", filename);
 		throw std::runtime_error(error);
 	}
 
@@ -40,7 +40,7 @@ void parse_microgel_bondfile(std::string filename, std::shared_ptr<Topology> top
 				std::getline(input, line);
 				split = utils::split(utils::trim(line));
 				if(split.size() != n_neighs) {
-					std::string error = boost::str(boost::format("Particle %d seems to have %u neighbours, should be %u") % p_idx % split.size() % n_neighs);
+					std::string error = fmt::format("Particle {} seems to have {} neighbours, should be {}", p_idx, split.size(), n_neighs);
 					throw std::runtime_error(error);
 				}
 
@@ -59,7 +59,7 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 	std::ifstream input(filename);
 
 	if(!input.good()) {
-		std::string error = boost::str(boost::format("The topology file '%s' is unreadable") % filename);
+		std::string error = fmt::format("The topology file '{}' is unreadable", filename);
 		throw std::runtime_error(error);
 	}
 
@@ -105,7 +105,7 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 				}
 
 				if(split.size() < 5) {
-					std::string error = boost::str(boost::format("Invalid angle line '%s'") % line);
+					std::string error = fmt::format("Invalid angle line '{}'", line);
 					throw std::runtime_error(error);
 				}
 
@@ -129,7 +129,7 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 				auto split = utils::split(line);
 
 				if(split.size() < 4) {
-					std::string error = boost::str(boost::format("Invalid bond line '%s'") % line);
+					std::string error = fmt::format("Invalid bond line '{}'", line);
 					throw std::runtime_error(error);
 				}
 
@@ -149,7 +149,7 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 				}
 
 				if(split.size() < 6) {
-					std::string error = boost::str(boost::format("Invalid dihedral line '%s'") % line);
+					std::string error = fmt::format("Invalid dihedral line '{}'", line);
 					throw std::runtime_error(error);
 				}
 

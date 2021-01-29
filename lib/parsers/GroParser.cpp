@@ -32,7 +32,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 
 	auto time_pos = line.find("t=");
 	if(time_pos == std::string::npos) {
-		std::string error = boost::str(boost::format("Malformed first line '%s' (cannot find 't=')") % line);
+		std::string error =fmt::format("Malformed first line '{}' (cannot find 't=')", line);
 		throw std::runtime_error(error);
 	}
 
@@ -42,7 +42,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 		syst->time = std::round(time_double / _dt);
 	}
 	catch(boost::bad_lexical_cast &e) {
-		std::string error = boost::str(boost::format("The timestep '%s' found in the .gro configuration cannot be cast to a double") % line.substr(time_pos + 2));
+		std::string error = fmt::format("The timestep '{}' found in the .gro configuration cannot be cast to a double", line.substr(time_pos + 2));
 		throw std::runtime_error(error);
 	}
 
@@ -53,7 +53,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 		N = utils::lexical_cast<uint>(utils::trim(line));
 	}
 	catch(boost::bad_lexical_cast &e) {
-		std::string error = boost::str(boost::format("The number of particles '%s' found in the .gro configuration cannot be cast to an integer") % line);
+		std::string error = fmt::format("The number of particles '{}' found in the .gro configuration cannot be cast to an integer", line);
 		throw std::runtime_error(error);
 	}
 
@@ -78,7 +78,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 			new_particle->set_position(vec3(utils::lexical_cast<double>(x), utils::lexical_cast<double>(y), utils::lexical_cast<double>(z)));
 		}
 		catch(boost::bad_lexical_cast &e) {
-			std::string error = boost::str(boost::format("The position of the %u-th particle (%s, %s, %s) cannot be cast to a vector of floating-point numbers") % i % x % y % z);
+			std::string error = fmt::format("The position of the {}-th particle ({}, {}, {}) cannot be cast to a vector of floating-point numbers", i, x, y, z);
 			throw std::runtime_error(error);
 		}
 
@@ -90,7 +90,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 			new_particle->set_velocity(vec3(utils::lexical_cast<double>(vx), utils::lexical_cast<double>(vy), utils::lexical_cast<double>(vz)));
 		}
 		catch(boost::bad_lexical_cast &e) {
-			std::string error = boost::str(boost::format("The velocity of the %u-th particle (%s, %s, %s) cannot be cast to a vector of floating-point numbers") % i % vx % vy % vz);
+			std::string error = fmt::format("The velocity of the {}-th particle ({}, {}, {}) cannot be cast to a vector of floating-point numbers", i, vx, vy, vz);
 			throw std::runtime_error(error);
 		}
 
@@ -107,7 +107,7 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 		syst->box[2] = utils::lexical_cast<double>(split[2]);
 	}
 	catch(boost::bad_lexical_cast &e) {
-		std::string error = boost::str(boost::format("The box line '%s' found in the .gro configuration is not valid") % line);
+		std::string error = fmt::format("The box line '{}' found in the .gro configuration is not valid", line);
 		throw std::runtime_error(error);
 	}
 

@@ -37,7 +37,7 @@ void FullTrajectory::initialise_from_trajectory_file(string trajectory_file) {
 	ifstream trajectory(trajectory_file);
 
 	if(!trajectory.good()) {
-		string error = boost::str(boost::format("Unreadable trajectory file '%s'") % trajectory_file);
+		string error = fmt::format("Unreadable trajectory file '{}'", trajectory_file);
 		throw runtime_error(error);
 	}
 
@@ -75,7 +75,7 @@ void FullTrajectory::initialise_from_filelist(std::vector<std::string> filelist)
 		parsed_files++;
 
 		if(new_system == nullptr) {
-			string error = boost::str(boost::format("The '%s' configuration is either empty or invalid") % f);
+			string error = fmt::format("The '{}' configuration is either empty or invalid", f);
 			throw runtime_error(error);
 		}
 

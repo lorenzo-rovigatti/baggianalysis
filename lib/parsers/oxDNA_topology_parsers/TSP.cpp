@@ -14,7 +14,7 @@ TSP::TSP(std::string topology_file) {
 	std::ifstream topology(topology_file);
 
 	if(!topology.good()) {
-		std::string error = boost::str(boost::format("Topology file '%s' not found") % topology_file);
+		std::string error = fmt::format("Topology file '{}' not found", topology_file);
 		throw std::runtime_error(error);
 	}
 

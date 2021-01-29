@@ -25,7 +25,7 @@ void CellLists::init_cells(std::vector<std::shared_ptr<Particle>> particles, con
 	_curr_box = box;
 
 	if(box.x <= 0. || box.y <= 0. || box.z <= 0.) {
-		std::string error = boost::str(boost::format("Cannot build cells: invalid simulation box %lf, %lf, %lf") % box.x % box.y % box.z);
+		std::string error = fmt::format("Cannot build cells: invalid simulation box {}, {}, {}", box.x, box.y, box.z);
 		throw std::runtime_error(error);
 	}
 

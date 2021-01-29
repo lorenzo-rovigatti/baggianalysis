@@ -32,7 +32,7 @@ LAMMPSDataFileParser::LAMMPSDataFileParser(std::string atom_style) :
 		_pos_starting_index = 2;
 	}
 	else {
-		std::string error = boost::str(boost::format("Unsupported LAMMPS atom_style '%s'") % atom_style);
+		std::string error = fmt::format("Unsupported LAMMPS atom_style '{}'", atom_style);
 		throw std::runtime_error(error);
 	}
 }
@@ -62,7 +62,7 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 	for(uint i = 0; i < header_data.N_atoms; i++) {
 		line = _read_line(configuration);
 		if(!configuration.good()) {
-			std::string error = boost::str(boost::format("The line relative to the %u-th particle cannot be read") % i);
+			std::string error = fmt::format("The line relative to the {}-th particle cannot be read", i);
 			throw std::runtime_error(error);
 		}
 		// skip empty lines
@@ -88,7 +88,7 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 			new_particle->set_position(pos);
 		}
 		catch(boost::bad_lexical_cast &e) {
-			std::string error = boost::str(boost::format("The position of the %u-th particle (%s, %s, %s) cannot be cast to a vector of floating-point numbers") % i % split[2] % split[3] % split[4]);
+			std::string error = fmt::format("The position of the {}-th particle ({}, {}, {}) cannot be cast to a vector of floating-point numbers", i, split[2], split[3], split[4]);
 			throw std::runtime_error(error);
 		}
 
@@ -160,7 +160,7 @@ double LAMMPSDataFileParser::_parse_box_line(std::vector<std::string> split_line
 		return upper - lower;
 	}
 	catch(boost::bad_lexical_cast &e) {
-		std::string error = boost::str(boost::format("The box values '%s %s' found in the LAMMPS dump configuration are not valid") % split_line[0] % split_line[1]);
+		std::string error = fmt::format("The box values '{} {}' found in the LAMMPS dump configuration are not valid", split_line[0], split_line[1]);
 		throw std::runtime_error(error);
 	}
 }

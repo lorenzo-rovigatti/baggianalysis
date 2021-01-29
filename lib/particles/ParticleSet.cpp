@@ -88,7 +88,7 @@ const std::vector<std::shared_ptr<Particle>> &ParticleSet::particles() const {
 
 void ParticleSet::add_particle(std::shared_ptr<Particle> p) {
 	if(_particles_by_id.count(p->index()) > 0) {
-		std::string error = boost::str(boost::format("A particle with index '%d' has already been added to this System") % p->index());
+		std::string error = fmt::format("A particle with index '{}' has already been added to this System", p->index());
 		throw std::runtime_error(error);
 	}
 
@@ -112,7 +112,7 @@ void ParticleSet::remove_particle_by_id(int p_id) {
 
 std::shared_ptr<Particle> ParticleSet::particle_by_id(int index) const {
 	if(_particles_by_id.count(index) == 0) {
-		std::string error = boost::str(boost::format("A particle with index '%d' does not exist") % index);
+		std::string error = fmt::format("A particle with index '{}' does not exist", index);
 		throw std::runtime_error(error);
 	}
 

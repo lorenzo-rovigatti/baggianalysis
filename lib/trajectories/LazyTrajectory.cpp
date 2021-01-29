@@ -29,14 +29,14 @@ void LazyTrajectory::initialise_from_trajectory_file(string trajectory_file) {
 	_trajectory_file.open(trajectory_file);
 
 	if(!_trajectory_file.good()) {
-		string error = boost::str(boost::format("Unreadable trajectory file '%s'") % trajectory_file);
+		string error = fmt::format("Unreadable trajectory file '{}'", trajectory_file);
 		throw runtime_error(error);
 	}
 }
 
 void LazyTrajectory::initialise_from_filelist(std::vector<std::string> filelist) {
 	if(filelist.size() == 0) {
-		string error = boost::str(boost::format("Trying to initialise a trajectory from an empty filelist"));
+		string error = fmt::format("Trying to initialise a trajectory from an empty filelist");
 		throw runtime_error(error);
 	}
 
@@ -66,7 +66,7 @@ shared_ptr<System> LazyTrajectory::next_frame() {
 		}
 	}
 	else {
-		string error = boost::str(boost::format("Cannot access the next frame: trajectory uninitialised"));
+		string error = fmt::format("Cannot access the next frame: trajectory uninitialised");
 		throw runtime_error(error);
 	}
 

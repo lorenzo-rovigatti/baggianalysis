@@ -27,7 +27,6 @@
 
 #include <memory>
 
-#include <boost/format.hpp>
 #include <iostream>
 
 using vec3 = glm::dvec3;

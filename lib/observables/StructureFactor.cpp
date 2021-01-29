@@ -85,7 +85,7 @@ void StructureFactor::analyse_system(std::shared_ptr<System> system) {
 	bool has_b_factors = _b_factors.size() > 0;
 
 	if(has_b_factors && _b_factors.size() != system->N()) {
-		std::string error = boost::str(boost::format("StructureFactor: The size of the b-factor vector (%u) is different from the number of particles (%u)") % _b_factors.size() % system->N());
+		std::string error = fmt::format("StructureFactor: The size of the b-factor vector ({}) is different from the number of particles ({})", _b_factors.size(), system->N());
 		throw std::runtime_error(error);
 	}
 

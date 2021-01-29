@@ -26,12 +26,12 @@ void BaseTrajectory::add_filter(std::shared_ptr<BaseFilter> filter) {
 
 void BaseTrajectory::initialise_from_folder(std::string folder, std::string pattern, bool natural_sorting) {
 	if(!utils::exists(folder)) {
-		std::string error = boost::str(boost::format("The '%s' folder does not exist") % folder);
+		std::string error = fmt::format("The '{}' folder does not exist", folder);
 		throw std::runtime_error(error);
 	}
 
 	if(!utils::is_directory(folder)) {
-		std::string error = boost::str(boost::format("'%s' is not a folder") % folder);
+		std::string error = fmt::format("'{}' is not a folder", folder);
 		throw std::runtime_error(error);
 	}
 
@@ -39,7 +39,7 @@ void BaseTrajectory::initialise_from_folder(std::string folder, std::string patt
 	std::vector<std::string> files = utils::glob(tot_path, natural_sorting);
 
 	if(files.size() == 0) {
-		std::string error = boost::str(boost::format("Pattern '%s' did not return any filename, cannot initialise a trajectory from an empty file list!") % tot_path);
+		std::string error = fmt::format("Pattern '{}' did not return any filename, cannot initialise a trajectory from an empty file list!", tot_path);
 		throw std::runtime_error(error);
 	}
 
