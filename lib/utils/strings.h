@@ -10,7 +10,6 @@
 
 #include "../defs.h"
 
-#include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>
 
 namespace ba {
@@ -26,15 +25,10 @@ namespace utils {
  */
 std::vector<std::string> split(std::string line, std::string separators = " ");
 
-/**
- * Use boost's lexical_cast to cast the given string to a numeric type. Trims the string before attempting to cast it.
- *
- * @param source
- * @return
- */
-template<typename T> T lexical_cast(std::string source) {
-	return boost::lexical_cast<T>(boost::trim_copy(source));
-}
+// taken from https://stackoverflow.com/questions/874134/find-out-if-string-ends-with-another-string-in-c/2072890
+bool starts_with(const std::string &value, std::string beginning);
+bool ends_with(const std::string &value, std::string ending);
+bool contains(const std::string &value, std::string query);
 
 // trim from start (in place)
 void ltrim(std::string &s);
@@ -52,6 +46,16 @@ void trim(std::string &s);
  * @return a new string
  */
 std::string trim_copy(std::string source);
+
+/**
+ * Use boost's lexical_cast to cast the given string to a numeric type. Trims the string before attempting to cast it.
+ *
+ * @param source
+ * @return
+ */
+template<typename T> T lexical_cast(std::string source) {
+	return boost::lexical_cast<T>(trim_copy(source));
+}
 
 }
 

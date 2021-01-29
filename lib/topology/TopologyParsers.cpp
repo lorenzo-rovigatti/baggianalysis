@@ -84,13 +84,13 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 		line = utils::trim_copy(utils::split(line, "#")[0]);
 
 		auto split = utils::split(line);
-		if(boost::ends_with(line, "angles")) {
+		if(utils::ends_with(line, "angles")) {
 			N_angles = utils::lexical_cast<int>(split[0]);
 		}
-		else if(boost::ends_with(line, "bonds")) {
+		else if(utils::ends_with(line, "bonds")) {
 			N_bonds = utils::lexical_cast<int>(split[0]);
 		}
-		else if(boost::ends_with(line, "dihedrals")) {
+		else if(utils::ends_with(line, "dihedrals")) {
 			N_dihedrals = utils::lexical_cast<int>(split[0]);
 		}
 

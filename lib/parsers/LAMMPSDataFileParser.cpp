@@ -125,25 +125,25 @@ LAMMPSDataFileParser::HeaderData LAMMPSDataFileParser::_parse_headers(std::ifstr
 		else {
 			if(line.size() > 0) {
 				auto split = utils::split(line);
-				if(boost::ends_with(line, "atoms")) {
+				if(utils::ends_with(line, "atoms")) {
 					hd.N_atoms = utils::lexical_cast<int>(split[0]);
 				}
-				else if(boost::ends_with(line, "bonds")) {
+				else if(utils::ends_with(line, "bonds")) {
 					hd.N_bonds = utils::lexical_cast<int>(split[0]);
 				}
-				else if(boost::ends_with(line, "atom types")) {
+				else if(utils::ends_with(line, "atom types")) {
 					hd.atom_types = utils::lexical_cast<int>(split[0]);
 				}
-				else if(boost::ends_with(line, "bond types")) {
+				else if(utils::ends_with(line, "bond types")) {
 					hd.bond_types = utils::lexical_cast<int>(split[0]);
 				}
-				else if(boost::ends_with(line, "xlo xhi")) {
+				else if(utils::ends_with(line, "xlo xhi")) {
 					hd.box[0] = _parse_box_line(split);
 				}
-				else if(boost::ends_with(line, "ylo yhi")) {
+				else if(utils::ends_with(line, "ylo yhi")) {
 					hd.box[1] = _parse_box_line(split);
 				}
-				else if(boost::ends_with(line, "zlo zhi")) {
+				else if(utils::ends_with(line, "zlo zhi")) {
 					hd.box[2] = _parse_box_line(split);
 				}
 			}

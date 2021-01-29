@@ -85,12 +85,12 @@ LAMMPSDumpParser::HeaderData LAMMPSDumpParser::_parse_headers(std::ifstream &con
 			// early return
 			return hd;
 		}
-		if(boost::starts_with(line, "ITEM:")) {
-			if(boost::contains(line, "TIMESTEP")) {
+		if(utils::starts_with(line, "ITEM:")) {
+			if(utils::contains(line, "TIMESTEP")) {
 				std::getline(configuration, line);
 				hd.time_step = utils::lexical_cast<ullint>(utils::trim_copy(line));
 			}
-			else if(boost::contains(line, "NUMBER OF ATOMS")) {
+			else if(utils::contains(line, "NUMBER OF ATOMS")) {
 				std::getline(configuration, line);
 				try {
 					hd.N = utils::lexical_cast<uint>(utils::trim_copy(line));
@@ -100,7 +100,7 @@ LAMMPSDumpParser::HeaderData LAMMPSDumpParser::_parse_headers(std::ifstream &con
 					throw std::runtime_error(error);
 				}
 			}
-			else if(boost::contains(line, "BOX BOUNDS")) {
+			else if(utils::contains(line, "BOX BOUNDS")) {
 				// the next three lines contains the box dimensions along the three axes
 				for(uint i = 0; i < 3; i++) {
 					std::getline(configuration, line);
@@ -117,7 +117,7 @@ LAMMPSDumpParser::HeaderData LAMMPSDumpParser::_parse_headers(std::ifstream &con
 					}
 				}
 			}
-			else if(boost::contains(line, "ITEM: ATOMS")) {
+			else if(utils::contains(line, "ITEM: ATOMS")) {
 				done = true;
 			}
 		}
