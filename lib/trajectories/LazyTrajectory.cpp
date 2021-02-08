@@ -95,7 +95,7 @@ void export_LazyTrajectory(py::module &m) {
 
         Use it if you need to analyse large trajectories that could fill up all the available memory. Be careful though:
         the file(s) on the disk will be read every time you loop over the trajectory. If you need to do it more than
-        once it may be worth using a class:`FullTrajectory`. 
+        once it may be worth using a :class:`FullTrajectory`. 
     )pbdoc");
 
 	parser.def(py::init<shared_ptr<BaseParser>>(), "The constructor takes a parser as its only parameter.");

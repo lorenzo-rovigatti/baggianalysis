@@ -126,9 +126,9 @@ void export_BaseTrajectory(py::module &m) {
 			The new filter.
 	)pbdoc");
 
-	parser.def("set_include_system", &BaseTrajectory::set_include_system, py::arg("system"), R"pbdoc(
+	parser.def("set_include_system", &BaseTrajectory::set_include_system, py::arg("system_includer"), R"pbdoc(
         Set an optional function that will be used to test whether a system should be included in the trajectory or not. 
-        The argument should be a callable that takes a system : :class:`System` as its single parameter and returns True 
+        The argument should be a callable that takes a :class:`System` as its only parameter and returns True 
         if the system should be included, False otherwise.
 
         Here is an example that will include only those systems having timesteps larger than 1e4::
@@ -144,13 +144,9 @@ void export_BaseTrajectory(py::module &m) {
 
         Parameters
         ----------
-        system : :class:`System`
-            The system to be checked.
-
-        Returns
-        -------
-        bool
-            True if the system should be included in the trajectory, False otherwise.
+        system_includer : callable
+            A callable that takes the :class:`System` to be checked a returns a boolean that specifies whether the system should
+            be included in the trajectory or not.
 	)pbdoc");
 }
 
