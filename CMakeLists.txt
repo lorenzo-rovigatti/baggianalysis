@@ -27,8 +27,6 @@ IF(Python)
 	MESSAGE(STATUS "Enabling Python bindings")
 ENDIF(Python)
 
-FIND_PACKAGE( Boost REQUIRED )
-
 IF(Debug)
 	SET(CMAKE_BUILD_TYPE "Debug")
 	MESSAGE(STATUS "Compiling in Debug mode")
@@ -55,7 +53,6 @@ if(CMAKE_VERSION VERSION_LESS "2.9")
 	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 ENDIF()
 
-# the BOOST_LOG_DYN_LINK definition is required in order to build a python-readable dynamic library
 ADD_DEFINITIONS(-Wall -Wno-int-in-bool-context)
 
 IF(NOT Debug)
@@ -67,8 +64,6 @@ IF(NOT Debug)
 ENDIF()
 
 INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/extern )
-
-INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
 # get the current git revision, if git is installed. Avoid warnings if it isn't
 FIND_PACKAGE(Git)

@@ -20,10 +20,9 @@ where `PIP_COMMAND` should be `pip`, `pip3`, `python -m pip` or `python3 -m pip`
 * CMake >= 3.1 (>= 3.12 if installed through `pip`)
 * make
 * A c++14-compliant compiler (tested with GCC >= 5.4)
-* Boost's `format` header (to be removed)
 * If Python bindings are enabled, the `pip`, `setuptools` and `setuptools-scm` packages, as well as Python 3's header file are required (`python3-dev`)
 * The pore size observable requires the [NLopt](https://nlopt.readthedocs.io/en/latest/) library (`libnlopt-dev`)
-* The bond-order parameter observable requires the [GNU Scientific Library](https://www.gnu.org/software/gsl/) (`libgsl-dev`)
+* The bond-order parameter observable requires the [GNU Scientific Library](https://www.gnu.org/software/gsl/) and [Boost's math](https://github.com/boostorg/math) libraries (`libgsl-dev` and `libboost-math-dev`)
 * [Sphinx](https://www.sphinx-doc.org/en/master), [sphinx_rtd_theme](https://github.com/readthedocs/sphinx_rtd_theme) and [recommonmark](https://recommonmark.readthedocs.io/en/latest/) are required to generate the Python bindings' documentation. Those can all be installed by using `pip` (for instance with the command `pip3 install --user sphinx sphinx_rtd_theme recommonmark`)
 
 ### Compilation
@@ -64,7 +63,7 @@ baggianalysis contains a very simple testing suite that checks whether the Pytho
 ## Notes
 
 * By default, the core library is compiled dynamically. However, if Python bindings are enabled, the core library is compiled statically.
-* The timestep associated to a configuration **must** be an integer number. If your preferred format stores it as a floating-precision number, your parser will have to find a way of converting that to an integer. This is *by design*, as the time of a configuration is used as a key in several maps around the code, and floating-point numbers are not good at that. Moreover, integer numbers can be stored without losing any precision, in contrast with floats.
+* The timestep associated to a configuration **must** be an integer number. If your preferred format stores it as a floating-precision number, your parser will have to find a way of converting that to an integer. This is *by design*, as the time of a configuration is used as a key in several maps around the code, and floating-point numbers are not good at that. Moreover, integer numbers can be stored without losing any precision, in contrast to floats.
 * Normal trajectories need not load all the frames at once. Trajectories that do are called "full trajectories". Many observables, in general, do not require to have access to all frames at once, which means that frames can parsed (and hence loaded) one by one when needed (lazy loading). This allows to work on big trajectories without consuming up too much memory.
 * Lists of 3D vectors are copied when accessed from the Python's side. This means that their c++ counterparts (which are `std::vector`s) are not modified when `append` or similar Python methods are used.
 * Simple Python parsers can be used to either parse single `System`s or to initialise trajectories from file lists and folders only. In order to do so, parsers should inherit from `BaseParser` and override the `parse_file` method, which takes a string as its only argument.
@@ -72,6 +71,6 @@ baggianalysis contains a very simple testing suite that checks whether the Pytho
 
 ## Acknowledgements
 
-* The [glm 0.9.9](https://glm.g-truc.net/0.9.9/index.html) and [pybind 2.4.3](https://github.com/pybind/pybind11) libraries are included in the source tree.
+* The [glm 0.9.9](https://glm.g-truc.net/0.9.9/index.html), [pybind 2.4.3](https://github.com/pybind/pybind11) and [spdlog 1.8.2](https://github.com/gabime/spdlog) libraries are included in the source tree.
 * Natural sorting of files is carried out with the [NaturalSort](https://github.com/scopeInfinity/NaturalSort) library.
 * [akuukka's quickhull](https://github.com/akuukka/quickhull) library is included in the source tree.

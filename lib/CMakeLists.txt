@@ -102,7 +102,11 @@ SET(with_GSL_SOURCES
 )
 
 IF(GSL_FOUND)
-	ADD_DEFINITIONS(-DGSL_FOUND)
+	add_definitions(-DGSL_FOUND)
+	
+	find_package( Boost REQUIRED )
+	include_directories( ${Boost_INCLUDE_DIR} )
+	
 	SET(ba_lib_SOURCES
 		${ba_lib_SOURCES}
 		${with_GSL_SOURCES}
