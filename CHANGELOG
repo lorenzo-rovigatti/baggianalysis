@@ -1,5 +1,15 @@
+v. 0.0.3
+	- Add the MapParticle filter, which takes a list of lists that specify the ids
+	  of particles whose centre of mass will be used as a new particle
+	- Add the FilterById filter, which takes a list of indexes and build systems 
+	  where only those particles with a listed index are present
+	- Add the `set_include_system` method to BaseTrajectory to selectively include 
+	  systems in a trajectory 
+	- Remove boost from the dependencies. boost::math remains a requirement only for
+	  the BondOrderParameters observable
+	- Improve the documentation coverage
+	
 v. 0.0.2
-	- Remove boost's `filesystem` and `log` libraries from the dependencies
 	- Add a test that checks the LAMMPS conf and topology parser and exporter
 	- Add the write_topology and write_trajectory methods to BaseExporter
 	- Remove Boost's `signal` from the dependencies
