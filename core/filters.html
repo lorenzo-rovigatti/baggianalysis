@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Filters &mdash; baggianalysis 0.0.2a1.dev37+g8b45a7a documentation</title>
+  <title>Filters &mdash; baggianalysis 0.0.2a1.dev28+gb5dc92c documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.0.2a1.dev37+g8b45a7a
+                0.0.2a1.dev28+gb5dc92c
               </div>
             
           
@@ -188,19 +188,22 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.FilterByFunction" title="baggianalysis.core.FilterByFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterByFunction</span></code></a></p></td>
 <td><p>A filter that uses a user-provided callable to choose which particles will be included in the new system.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.FilterByReducingToCOM" title="baggianalysis.core.FilterByReducingToCOM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterByReducingToCOM</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.FilterById" title="baggianalysis.core.FilterById"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterById</span></code></a></p></td>
+<td><p>A filter that builds a new system by including only those particles whose index is in the list provided by the user.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.FilterByReducingToCOM" title="baggianalysis.core.FilterByReducingToCOM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterByReducingToCOM</span></code></a></p></td>
 <td><p>A filter that builds a new system containing a single particle whose position and velocity are the position and velocity of the centre of mass of the input system.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.FilterByType" title="baggianalysis.core.FilterByType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterByType</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.FilterByType" title="baggianalysis.core.FilterByType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FilterByType</span></code></a></p></td>
 <td><p>A filter that builds a new system by including only those particles whose type is in the list provided by the user.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.FixParticlePath" title="baggianalysis.core.FixParticlePath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FixParticlePath</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.FixParticlePath" title="baggianalysis.core.FixParticlePath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FixParticlePath</span></code></a></p></td>
 <td><p>A filter that attempts to reconstruct the trajectories of particles subject to periodic boundary conditions.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.MapParticles" title="baggianalysis.core.MapParticles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MapParticles</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.MapParticles" title="baggianalysis.core.MapParticles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MapParticles</span></code></a></p></td>
 <td><p>A filter that reduces the number of particles in a configuration by averaging the position and velocity of sets of particles.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.SubtractCOM" title="baggianalysis.core.SubtractCOM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SubtractCOM</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.SubtractCOM" title="baggianalysis.core.SubtractCOM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SubtractCOM</span></code></a></p></td>
 <td><p>A filter that removes the centre of mass position and velocity from each particle.</p></td>
 </tr>
 </tbody>
@@ -251,6 +254,25 @@ different from “2” and whose position along the x coordinate is larger than 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>function</strong> (<em>callable</em>) – A callable that takes a particle and returns True if the particle should be included in the new system, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="baggianalysis.core.FilterById">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FilterById</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.FilterById" title="baggianalysis.core.FilterById">baggianalysis.core.FilterById</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.FilterById" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseFilter</span></code></a></p>
+<p>A filter that builds a new system by including only those particles whose index is in the list provided by the user.</p>
+<p>As an example, the following snippet creates a filter that will include in the new system only particles with index
+1, 13 and 102:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">allowed_ids</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">102</span><span class="p">]</span>
+<span class="n">my_filter</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">FilterById</span><span class="p">(</span><span class="n">allowed_ids</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The constructor takes a list of indexes as its only parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>allowed_ids</strong> (<em>List</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>)</em>) – The list of particle indexes that should be included in the new system.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -307,7 +329,7 @@ velocity will be computed by averaging the positions and velocities of particles
 <p>The constructor takes a list of index lists used to construct the new particles.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>id_lists</strong> (<em>List</em><em>(</em><em>List</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>)</em><em>)</em>) – A list of lists containing the indices of the particles that should be averaged over to build the new particles.</p>
+<dd class="field-odd"><p><strong>id_lists</strong> (<em>List</em><em>(</em><em>List</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a><em>)</em><em>)</em>) – A list of lists containing the indexes of the particles that should be averaged over to build the new particles.</p>
 </dd>
 </dl>
 </dd></dl>
