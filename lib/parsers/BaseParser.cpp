@@ -45,6 +45,12 @@ std::shared_ptr<System> BaseParser::make_system(std::string conf_name) {
 
 std::shared_ptr<System> BaseParser::_parse_file(std::string conf_name) {
 	std::ifstream conf_file(conf_name);
+
+	if(!conf_file.good()) {
+		std::string error = fmt::format("Unreadable configuration file '{}'", conf_name);
+		throw std::runtime_error(error);
+	}
+
 	auto new_system = _parse_stream(conf_file);
 	conf_file.close();
 
