@@ -39,6 +39,7 @@
 #include "../parsers/LAMMPSDataFileParser.h"
 #include "../parsers/LAMMPSDumpParser.h"
 #include "../parsers/LJKAParser.h"
+#include "../parsers/PatchyParticlesParser.h"
 
 #include "../topology/Topology.h"
 #include "../topology/TopologyParsers.h"
@@ -63,6 +64,7 @@ PYBIND11_MODULE(core, m) {
 	ba::export_LAMMPSDataFileParser(m);
 	ba::export_LAMMPSDumpParser(m);
 	ba::export_LJKAParser(m);
+	ba::export_PatchyParticlesParser(m);
 
 	// exporters
 	ba::export_BaseExporter(m);

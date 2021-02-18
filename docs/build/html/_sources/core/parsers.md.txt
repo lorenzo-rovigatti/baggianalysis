@@ -14,6 +14,7 @@ All parsers inherit from [BaseParser](#baggianalysis.core.BaseParser) and overri
     LAMMPSDataFileParser
     LAMMPSDumpParser
     LJKAParser
+    PatchyParticlesParser
     
 .. autoclass:: BaseParser
     :private-members:
@@ -27,4 +28,6 @@ All parsers inherit from [BaseParser](#baggianalysis.core.BaseParser) and overri
 .. autoclass:: LAMMPSDumpParser
     
 .. autoclass:: LJKAParser
+
+.. autoclass:: PatchyParticlesParser
 ```

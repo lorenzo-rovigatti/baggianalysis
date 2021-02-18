@@ -68,6 +68,25 @@ void trim(std::string &s) {
 	rtrim(s);
 }
 
+vec3 vector_from_line(std::string &line) {
+	auto split_line = utils::split(line);
+	vec3 v;
+
+	try {
+		v = vec3(
+				lexical_cast<double>(utils::trim_copy(split_line[0])),
+				lexical_cast<double>(utils::trim_copy(split_line[1])),
+				lexical_cast<double>(utils::trim_copy(split_line[2]))
+				);
+	}
+	catch(utils::bad_lexical_cast &e) {
+		std::string error = fmt::format("The line '{}' cannot be converted to a three-dimensional vector", line);
+		throw std::runtime_error(error);
+	}
+
+	return v;
+}
+
 std::string trim_copy(std::string source) {
 	trim(source);
 	return source;

@@ -27,6 +27,7 @@ SET(ba_lib_SOURCES
 	parsers/LAMMPSDumpParser.cpp
 	parsers/oxDNA_topology_parsers/Default.cpp
 	parsers/oxDNA_topology_parsers/TSP.cpp
+	parsers/PatchyParticlesParser.cpp
 	particles/Particle.cpp
 	particles/ParticleSet.cpp
 	System.cpp

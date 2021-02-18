@@ -39,6 +39,8 @@ void rtrim(std::string &s);
 // trim from both ends (in place)
 void trim(std::string &s);
 
+vec3 vector_from_line(std::string &line);
+
 /**
  * Return a copy of the given string, without trailing and leading spaces
  *

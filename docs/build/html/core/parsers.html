@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration parsers &mdash; baggianalysis 0.0.2a1.dev24+gb8d84ed.d20210208 documentation</title>
+  <title>Configuration parsers &mdash; baggianalysis 0.0.3a1.dev1+g5253c83.d20210218 documentation</title>
   
 
   
@@ -29,6 +29,7 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -60,7 +61,7 @@
             
             
               <div class="version">
-                0.0.2a1.dev24+gb8d84ed.d20210208
+                0.0.3a1.dev1+g5253c83.d20210218
               </div>
             
           
@@ -195,6 +196,9 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.LJKAParser" title="baggianalysis.core.LJKAParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LJKAParser</span></code></a></p></td>
 <td><p></p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.PatchyParticlesParser" title="baggianalysis.core.PatchyParticlesParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PatchyParticlesParser</span></code></a></p></td>
+<td><p>Build systems out of <a class="reference external" href="https://github.com/lorenzo-rovigatti/PatchyParticles">PatchyParticles</a> configurations.</p></td>
+</tr>
 </tbody>
 </table>
 <dl class="py class">
@@ -251,6 +255,24 @@
 <dt id="baggianalysis.core.LJKAParser">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LJKAParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.LJKAParser" title="baggianalysis.core.LJKAParser">baggianalysis.core.LJKAParser</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.LJKAParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseParser</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="baggianalysis.core.PatchyParticlesParser">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">PatchyParticlesParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.PatchyParticlesParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseParser</span></code></a></p>
+<p>Build systems out of <a class="reference external" href="https://github.com/lorenzo-rovigatti/PatchyParticles">PatchyParticles</a> configurations. These files
+store the particles’ positios and orientation matrices.</p>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: baggianalysis.core.PatchyParticlesParser) -&gt; None</p></li>
+</ol>
+<p>Default constructor: the parser will assume that the particles have four patches arranged on a tetrahedron.</p>
+<ol class="arabic simple" start="2">
+<li><p>__init__(self: baggianalysis.core.PatchyParticlesParser, arg0: List[glm::tvec3&lt;scalar, P&gt;]) -&gt; None</p></li>
+</ol>
+<p>The object can also be built by providing a list of vectors storing the <em>base patches</em>, that is, those vectors that, when
+multiplied by the orientation matrix, yield the particles’ patches.</p>
 </dd></dl>
 
 </div>
