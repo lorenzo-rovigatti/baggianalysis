@@ -22,6 +22,7 @@ public:
 	virtual ~Default();
 
 	uint N();
+	uint N_A();
 
 	virtual particle_type type(int);
 

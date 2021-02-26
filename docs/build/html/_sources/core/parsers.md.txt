@@ -20,6 +20,10 @@ All parsers inherit from [BaseParser](#baggianalysis.core.BaseParser) and overri
     :private-members:
     
 .. autoclass:: OxDNAParser
+
+.. autoclass:: baggianalysis.core.oxDNA_topology.Default
+
+.. autoclass:: baggianalysis.core.oxDNA_topology.TSP
     
 .. autoclass:: GroParser
 

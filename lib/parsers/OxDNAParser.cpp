@@ -102,10 +102,25 @@ void export_OxDNAParser(py::module &m) {
 	oxDNA_topology::export_Default(sub_m);
 	oxDNA_topology::export_TSP(sub_m);
 
-	py::class_<OxDNAParser, BaseParser, std::shared_ptr<OxDNAParser>> parser(m, "OxDNAParser");
+	py::class_<OxDNAParser, BaseParser, std::shared_ptr<OxDNAParser>> parser(m, "OxDNAParser", "Use oxDNA/topology files to build systems.");
 
-	parser.def(py::init<std::string>());
-	parser.def(py::init<std::shared_ptr<oxDNA_topology::Default>>());
+	parser.def(py::init<std::string>(), py::arg("topology_file"), R"pbdoc(
+Initialise the parser by using the :class:`~baggianalysis.core.oxDNA_topology.Default` topology parser to parse the given topology file.
+
+Parameters
+----------
+    topology_file: str
+        The topology file to be used for initialisation.
+)pbdoc");
+
+	parser.def(py::init<std::shared_ptr<oxDNA_topology::Default>>(), py::arg("topology_parser"), R"pbdoc(
+Initialise the parser by using the given topology parser.
+
+Parameters
+----------
+	topology:
+		An oxDNA topology parser, which should be an instance of an object inheriting from the :class:`~baggianalysis.core.oxDNA_topology.Default` topology parser.
+)pbdoc");
 }
 
 #endif
