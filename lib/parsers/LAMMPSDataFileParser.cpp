@@ -12,22 +12,13 @@
 namespace ba {
 
 LAMMPSDataFileParser::LAMMPSDataFileParser(std::string atom_style) :
-				BaseParser(),
-				_atom_style(atom_style) {
+				BaseParser() {
 
-	_LAMMPS_section_keywords = std::vector<std::string>( {
-			"Atoms", "Velocities", "Masses", "Ellipsoids", "Lines", "Triangles", "Bodies",
-			"Bonds", "Angles", "Dihedrals", "Impropers",
-			"Pair Coeffs", "PairIJ Coeffs", "Bond Coeffs", "Angle Coeffs", "Dihedral Coeffs", "Improper Coeffs",
-			"BondBond Coeffs", "BondAngle Coeffs", "MiddleBondTorsion Coeffs", "EndBondTorsion Coeffs",
-			"AngleTorsion Coeffs", "AngleAngleTorsion Coeffs", "BondBond13 Coeffs", "AngleAngle Coeffs"
-	});
-
-	if(_atom_style == "bond") {
+	if(atom_style == "bond") {
 		_type_index = 2;
 		_pos_starting_index = 3;
 	}
-	else if(_atom_style == "atomic") {
+	else if(atom_style == "atomic") {
 		_type_index = 1;
 		_pos_starting_index = 2;
 	}
@@ -35,6 +26,12 @@ LAMMPSDataFileParser::LAMMPSDataFileParser(std::string atom_style) :
 		std::string error = fmt::format("Unsupported LAMMPS atom_style '{}'", atom_style);
 		throw std::runtime_error(error);
 	}
+}
+
+LAMMPSDataFileParser::LAMMPSDataFileParser(int type_index, int pos_starting_index) :
+				_type_index(type_index),
+				_pos_starting_index(pos_starting_index) {
+
 }
 
 LAMMPSDataFileParser::~LAMMPSDataFileParser() {
@@ -108,14 +105,6 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 LAMMPSDataFileParser::HeaderData LAMMPSDataFileParser::_parse_headers(std::ifstream &configuration) {
 	LAMMPSDataFileParser::HeaderData hd;
 
-	// this list (taken from LAMMPS docs) may turn out to be useful in the future
-	std::vector<std::string> header_entries = {
-			"atoms", "bonds", "angles", "dihedrals", "impropers", "atom types", "bond types", "angle types",
-			"dihedral types", "improper types", "extra bond per atom", "extra angle per atom", "extra dihedral per atom",
-			"extra improper per atom", "extra special per atom", "ellipsoids", "lines", "triangles", "bodies",
-			"xlo xhi", "ylo yhi", "zlo zhi", "xy xz yz"
-	};
-
 	std::string line;
 	// according to the docs, the first line of the header should be always skipped
 	std::getline(configuration, line);
@@ -155,7 +144,7 @@ LAMMPSDataFileParser::HeaderData LAMMPSDataFileParser::_parse_headers(std::ifstr
 		}
 	}
 
-	if(hd.N_atoms == 0 && hd.N_bonds == 0&& hd.atom_types == 0 && hd.bond_types == 0 && hd.box == vec3(1., 1., 1.)) {
+	if(hd.N_atoms == 0 && hd.N_bonds == 0 && hd.atom_types == 0 && hd.bond_types == 0 && hd.box == vec3(1., 1., 1.)) {
 		hd.empty = true;
 	}
 
@@ -187,6 +176,7 @@ void export_LAMMPSDataFileParser(py::module &m) {
 	py::class_<LAMMPSDataFileParser, BaseParser, std::shared_ptr<LAMMPSDataFileParser>> parser(m, "LAMMPSDataFileParser");
 
 	parser.def(py::init<std::string>());
+	parser.def(py::init<int, int>());
 }
 
 #endif

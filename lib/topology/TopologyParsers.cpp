@@ -104,12 +104,12 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 					continue;
 				}
 
+				auto split = utils::split(line);
 				if(split.size() < 5) {
 					std::string error = fmt::format("Invalid angle line '{}'", line);
 					throw std::runtime_error(error);
 				}
 
-				auto split = utils::split(line);
 				topology->add_angle(
 						utils::lexical_cast<int>(split[2]),
 						utils::lexical_cast<int>(split[3]),
@@ -127,7 +127,6 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 				}
 
 				auto split = utils::split(line);
-
 				if(split.size() < 4) {
 					std::string error = fmt::format("Invalid bond line '{}'", line);
 					throw std::runtime_error(error);
@@ -148,12 +147,12 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 					continue;
 				}
 
+				auto split = utils::split(line);
 				if(split.size() < 6) {
 					std::string error = fmt::format("Invalid dihedral line '{}'", line);
 					throw std::runtime_error(error);
 				}
 
-				auto split = utils::split(line);
 				topology->add_dihedral(
 						utils::lexical_cast<int>(split[2]),
 						utils::lexical_cast<int>(split[3]),
