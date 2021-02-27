@@ -105,9 +105,8 @@ void StructureFactor::analyse_system(std::shared_ptr<System> system) {
 				sq_sin += b_factor * std::sin(qr);
 			}
 
-			_result[q_module] += (SQR(sq_cos) + SQR(sq_sin)) / system->N();
+			_result[q_module] += (SQR(sq_cos) + SQR(sq_sin)) / (system->N() * q_vectors.size());
 		}
-		_result[q_module] /= q_vectors.size();
 	}
 
 	_times_called++;
