@@ -26,6 +26,35 @@ PatchyParticlesParser::PatchyParticlesParser() :
 	_set_base_patches(base_patches);
 }
 
+PatchyParticlesParser::PatchyParticlesParser(std::string patch_filename) {
+	std::ifstream patch_file(patch_filename);
+	if(!patch_file.good()) {
+		std::string error = fmt::format("Unreadable patch file '{}' ", patch_filename);
+		throw std::runtime_error(error);
+	}
+
+	std::string line;
+	std::getline(patch_file, line);
+
+	int N_patches;
+	try {
+		N_patches = utils::lexical_cast<int>(utils::trim_copy(line));
+	}
+	catch(utils::bad_lexical_cast &e) {
+		std::string error = fmt::format("Invalid number of patches '{}' found in the patch file", line);
+		throw std::runtime_error(error);
+	}
+
+	std::vector<vec3> base_patches;
+	for(int i = 0; i < N_patches; i++) {
+		std::getline(patch_file, line);
+		base_patches.emplace_back(utils::vector_from_line(line));
+	}
+	patch_file.close();
+
+	_set_base_patches(base_patches);
+}
+
 PatchyParticlesParser::PatchyParticlesParser(std::vector<vec3> base_patches) :
 				BaseParser() {
 	_set_base_patches(base_patches);
@@ -122,9 +151,13 @@ void export_PatchyParticlesParser(py::module &m) {
 Default constructor: the parser will assume that the particles have four patches arranged on a tetrahedron.
     )pbdoc");
 
-	parser.def(py::init<std::vector<vec3>>(), R"pbdoc(
+	parser.def(py::init<std::vector<vec3>>(), py::arg("base_patches"),  R"pbdoc(
 The object can also be built by providing a list of vectors storing the *base patches*, that is, those vectors that, when
-multiplied by the orientation matrix, yield the particles' patches.  
+multiplied by the orientation matrix, yield the particles' patches.
+	)pbdoc");
+
+	parser.def(py::init<std::string>(), py::arg("patch_filename"), R"pbdoc(
+Obtain the list of vectors storing the *base patches* from the given file.
 	)pbdoc");
 }
 

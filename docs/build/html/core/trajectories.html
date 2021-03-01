@@ -1,13 +1,13 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Trajectory classes &mdash; baggianalysis 0.0.3a1.dev2+g86f9976.d20210226 documentation</title>
+  <title>Trajectory classes &mdash; baggianalysis 0.0.3a1.dev5+gbbf749d.d20210301 documentation</title>
   
 
   
@@ -26,9 +26,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -60,7 +61,7 @@
             
             
               <div class="version">
-                0.0.3a1.dev2+g86f9976.d20210226
+                0.0.3a1.dev5+gbbf749d.d20210301
               </div>
             
           
@@ -170,104 +171,119 @@
             
   <div class="section" id="trajectory-classes">
 <h1>Trajectory classes<a class="headerlink" href="#trajectory-classes" title="Permalink to this headline">¶</a></h1>
-<table class="longtable docutils align-default">
+<table border="1" class="longtable docutils">
 <colgroup>
-<col style="width: 10%" />
-<col style="width: 90%" />
+<col width="10%" />
+<col width="90%" />
 </colgroup>
-<tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseTrajectory</span></code></a></p></td>
-<td><p>An interface that defines the method that can be used to initialise and manage trajectories.</p></td>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BaseTrajectory</span></code></a></td>
+<td>An interface that defines the method that can be used to initialise and manage trajectories.</td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.FullTrajectory" title="baggianalysis.core.FullTrajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FullTrajectory</span></code></a></p></td>
-<td><p>A trajectory that builds and loads in memory all the frames at once.</p></td>
+<tr class="row-even"><td><a class="reference internal" href="#baggianalysis.core.FullTrajectory" title="baggianalysis.core.FullTrajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FullTrajectory</span></code></a></td>
+<td>A trajectory that builds and loads in memory all the frames at once.</td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a></p></td>
-<td><p>A trajectory that does not load up all the frames in memory at once but parses them one after the other.</p></td>
+<tr class="row-odd"><td><a class="reference internal" href="#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a></td>
+<td>A trajectory that does not load up all the frames in memory at once but parses them one after the other.</td>
 </tr>
 </tbody>
 </table>
-<dl class="py class">
+<dl class="class">
 <dt id="baggianalysis.core.BaseTrajectory">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">BaseTrajectory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="parsers.html#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser">baggianalysis.core.BaseParser</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseTrajectory" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">baggianalysis.core.</code><code class="descname">BaseTrajectory</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseTrajectory</em>, <em>arg0: baggianalysis.core.BaseParser</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
 <p>An interface that defines the method that can be used to initialise and manage trajectories.</p>
 <p>Child classes should at least implement <a class="reference internal" href="#baggianalysis.core.BaseTrajectory.initialise_from_filelist" title="baggianalysis.core.BaseTrajectory.initialise_from_filelist"><code class="xref py py-meth docutils literal notranslate"><span class="pre">initialise_from_filelist()</span></code></a>, <a class="reference internal" href="#baggianalysis.core.BaseTrajectory.initialise_from_trajectory_file" title="baggianalysis.core.BaseTrajectory.initialise_from_trajectory_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">initialise_from_trajectory_file()</span></code></a>,
 <a class="reference internal" href="#baggianalysis.core.BaseTrajectory.next_frame" title="baggianalysis.core.BaseTrajectory.next_frame"><code class="xref py py-meth docutils literal notranslate"><span class="pre">next_frame()</span></code></a> and <a class="reference internal" href="#baggianalysis.core.BaseTrajectory.reset" title="baggianalysis.core.BaseTrajectory.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a>.</p>
 <p>The constructor takes a parser as its only parameter.</p>
-<dl class="py method">
+<dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.add_filter">
-<code class="sig-name descname">add_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em>, <em class="sig-param"><span class="n">filter</span><span class="p">:</span> <span class="n"><a class="reference internal" href="filters.html#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter">baggianalysis.core.BaseFilter</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseTrajectory.add_filter" title="Permalink to this definition">¶</a></dt>
+<code class="descname">add_filter</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseTrajectory</em>, <em>filter: baggianalysis.core.BaseFilter</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.add_filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a filter to the list of filters that will be applied to each frame (system) that compose the trajectory.</p>
 <p>The order according to which filters are added to the trajectory is important, since they are applied
 to systems in a “first-in first-out” fashion.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filter</strong> (<a class="reference internal" href="filters.html#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseFilter</span></code></a>) – The new filter.</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filter</strong> (<a class="reference internal" href="filters.html#baggianalysis.core.BaseFilter" title="baggianalysis.core.BaseFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseFilter</span></code></a>) – The new filter.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.initialise_from_filelist">
-<code class="sig-name descname">initialise_from_filelist</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em>, <em class="sig-param"><span class="n">filelist</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseTrajectory.initialise_from_filelist" title="Permalink to this definition">¶</a></dt>
+<code class="descname">initialise_from_filelist</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseTrajectory, filelist: List[str]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.initialise_from_filelist" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialise the trajectory out of a list of filenames.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>filelist</strong> (<em>List</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>)</em>) – The list of filenames that will be used to initialise the trajectory.</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filelist</strong> (<em>List</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>)</em>) – The list of filenames that will be used to initialise the trajectory.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.initialise_from_folder">
-<code class="sig-name descname">initialise_from_folder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em>, <em class="sig-param"><span class="n">folder</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">pattern</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em>, <em class="sig-param"><span class="n">natural_sorting</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">True</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseTrajectory.initialise_from_folder" title="Permalink to this definition">¶</a></dt>
+<code class="descname">initialise_from_folder</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseTrajectory</em>, <em>folder: str</em>, <em>pattern: str</em>, <em>natural_sorting: bool = True</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.initialise_from_folder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialise the trajectory by loading up frames stored in files contained in a folder according to a pattern.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>folder</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The folder containing the files to be parsed</p></li>
-<li><p><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – A glob pattern used to select the files to be loaded. Examples are <em>confs*</em> or <em>conf?0000.dat</em>.</p></li>
-<li><p><strong>natural_sorting</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Sort the files alphabetically while, at the same time, attempting to handle multi-digit numbers.</p></li>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>folder</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The folder containing the files to be parsed</li>
+<li><strong>pattern</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – A glob pattern used to select the files to be loaded. Examples are <em>confs*</em> or <em>conf?0000.dat</em>.</li>
+<li><strong>natural_sorting</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Sort the files alphabetically while, at the same time, attempting to handle multi-digit numbers.</li>
 </ul>
-</dd>
-</dl>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.initialise_from_trajectory_file">
-<code class="sig-name descname">initialise_from_trajectory_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em>, <em class="sig-param"><span class="n">trajectory_file</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseTrajectory.initialise_from_trajectory_file" title="Permalink to this definition">¶</a></dt>
+<code class="descname">initialise_from_trajectory_file</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseTrajectory</em>, <em>trajectory_file: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.initialise_from_trajectory_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialise the trajectory from a single file, which should contain all the frames, one after the other.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>trajectory_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the file containing the trajectory.</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>trajectory_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the file containing the trajectory.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.next_frame">
-<code class="sig-name descname">next_frame</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a><a class="headerlink" href="#baggianalysis.core.BaseTrajectory.next_frame" title="Permalink to this definition">¶</a></dt>
+<code class="descname">next_frame</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseTrajectory</em><span class="sig-paren">)</span> &#x2192; baggianalysis.core.System<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.next_frame" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the next frame (system), or <code class="code docutils literal notranslate"><span class="pre">None</span></code> if we reached the end of the trajectory.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Either the next system or <code class="code docutils literal notranslate"><span class="pre">None</span></code> if there are no more available frames.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a></p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Either the next system or <code class="code docutils literal notranslate"><span class="pre">None</span></code> if there are no more available frames.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a></td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.reset">
-<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseTrajectory.reset" title="Permalink to this definition">¶</a></dt>
+<code class="descname">reset</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseTrajectory</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.reset" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reset the trajectory so that a call to <a class="reference internal" href="#baggianalysis.core.BaseTrajectory.next_frame" title="baggianalysis.core.BaseTrajectory.next_frame"><code class="xref py py-meth docutils literal notranslate"><span class="pre">next_frame()</span></code></a> will return the first frame of the trajectory.</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="method">
 <dt id="baggianalysis.core.BaseTrajectory.set_include_system">
-<code class="sig-name descname">set_include_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em>, <em class="sig-param"><span class="n">system_includer</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a><span class="p">]</span><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.BaseTrajectory.set_include_system" title="Permalink to this definition">¶</a></dt>
+<code class="descname">set_include_system</code><span class="sig-paren">(</span><em>self: baggianalysis.core.BaseTrajectory, system_includer: Callable[[baggianalysis.core.System], bool]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.BaseTrajectory.set_include_system" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set an optional function that will be used to test whether a system should be included in the trajectory or not.
 The argument should be a callable that takes a <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a> as its only parameter and returns True
 if the system should be included, False otherwise.</p>
@@ -282,35 +298,38 @@ if the system should be included, False otherwise.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">trajectory</span><span class="o">.</span><span class="n">set_include_system</span><span class="p">(</span><span class="k">lambda</span> <span class="n">syst</span><span class="p">:</span> <span class="n">syst</span><span class="o">.</span><span class="n">time</span> <span class="o">&gt;</span> <span class="mf">1e4</span><span class="p">)</span>
 </pre></div>
 </div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>system_includer</strong> (<em>callable</em>) – A callable that takes the <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a> to be checked a returns a boolean that specifies whether the system should
-be included in the trajectory or not.</p>
-</dd>
-</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>system_includer</strong> (<em>callable</em>) – A callable that takes the <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a> to be checked a returns a boolean that specifies whether the system should
+be included in the trajectory or not.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
+<dl class="class">
 <dt id="baggianalysis.core.FullTrajectory">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FullTrajectory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.FullTrajectory" title="baggianalysis.core.FullTrajectory">baggianalysis.core.FullTrajectory</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="parsers.html#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser">baggianalysis.core.BaseParser</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.FullTrajectory" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">baggianalysis.core.</code><code class="descname">FullTrajectory</code><span class="sig-paren">(</span><em>self: baggianalysis.core.FullTrajectory</em>, <em>arg0: baggianalysis.core.BaseParser</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.FullTrajectory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseTrajectory</span></code></a></p>
 <p>A trajectory that builds and loads in memory all the frames at once.</p>
 <p>This trajectory is probably the one you should be using unless the memory footprint of the files that should be
 parsed becomes too large, in which case you should use a <a class="reference internal" href="#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a>.</p>
 <p>The constructor takes a parser as its only parameter.</p>
-<dl class="py method">
+<dl class="attribute">
 <dt id="baggianalysis.core.FullTrajectory.frames">
-<em class="property">property </em><code class="sig-name descname">frames</code><a class="headerlink" href="#baggianalysis.core.FullTrajectory.frames" title="Permalink to this definition">¶</a></dt>
+<code class="descname">frames</code><a class="headerlink" href="#baggianalysis.core.FullTrajectory.frames" title="Permalink to this definition">¶</a></dt>
 <dd><p>The read-only list of <a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a> objects making up the trajectory.</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="py class">
+<dl class="class">
 <dt id="baggianalysis.core.LazyTrajectory">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LazyTrajectory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory">baggianalysis.core.LazyTrajectory</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="parsers.html#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser">baggianalysis.core.BaseParser</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.LazyTrajectory" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">baggianalysis.core.</code><code class="descname">LazyTrajectory</code><span class="sig-paren">(</span><em>self: baggianalysis.core.LazyTrajectory</em>, <em>arg0: baggianalysis.core.BaseParser</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#baggianalysis.core.LazyTrajectory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseTrajectory</span></code></a></p>
 <p>A trajectory that does not load up all the frames in memory at once but parses them one after the other.</p>
 <p>Use it if you need to analyse large trajectories that could fill up all the available memory. Be careful though:

@@ -15,6 +15,7 @@ namespace ba {
 class PatchyParticlesParser: public BaseParser {
 public:
 	PatchyParticlesParser();
+	PatchyParticlesParser(std::string patch_filename);
 	PatchyParticlesParser(std::vector<vec3> base_patches);
 	virtual ~PatchyParticlesParser();
 

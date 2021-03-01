@@ -21,19 +21,19 @@ struct Cogli1Particle {
 };
 
 using Cogli1Mapper = std::function<Cogli1Particle(Particle *)>;
+using Cogli1Converter = std::function<std::string(Particle *)>;
 
 class Cogli1Exporter: public BaseExporter {
 public:
 	Cogli1Exporter();
-	Cogli1Exporter(Cogli1Mapper);
+	Cogli1Exporter(Cogli1Mapper mapper);
+	Cogli1Exporter(Cogli1Converter converter, bool);
 	virtual ~Cogli1Exporter();
 
 private:
 	void _write_system_to_stream(std::shared_ptr<System> system, std::ostream &output) override;
 
-	Cogli1Mapper _mapper = [](Particle *p) {
-		return Cogli1Particle();
-	};
+	Cogli1Converter _converter;
 };
 
 #ifdef PYTHON_BINDINGS

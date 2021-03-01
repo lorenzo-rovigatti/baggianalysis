@@ -14,11 +14,23 @@
 
 namespace ba {
 
-Cogli1Exporter::Cogli1Exporter() {
+Cogli1Exporter::Cogli1Exporter() : Cogli1Exporter([](Particle *p) {return Cogli1Particle();}) {
 
 }
 
-Cogli1Exporter::Cogli1Exporter(Cogli1Mapper mapper) : _mapper(mapper) {
+Cogli1Exporter::Cogli1Exporter(Cogli1Mapper mapper) {
+	_converter = [mapper](Particle *p) {
+		Cogli1Particle c_p = mapper(p);
+		if(c_p.show) {
+			return fmt::format("{} {} {} @ {} C[{}]", p->position()[0], p->position()[1], p->position()[2], 0.5, "red");
+		}
+		else {
+			return std::string();
+		}
+	};
+}
+
+Cogli1Exporter::Cogli1Exporter(Cogli1Converter converter, bool) : _converter(converter) {
 
 }
 
@@ -30,9 +42,8 @@ void Cogli1Exporter::_write_system_to_stream(std::shared_ptr<System> system, std
 	output << fmt::format(".Box:{},{},{}", system->box[0], system->box[1], system->box[2]) << std::endl;
 
 	for(auto p : system->particles()) {
-		auto c_p = _mapper(p.get());
-		if(c_p.show) {
-			std::string p_string = fmt::format("{} {} {} @ {} C[{}]", p->position()[0], p->position()[1], p->position()[2], c_p.size, c_p.color);
+		std::string p_string = _converter(p.get());
+		if(p_string.size() > 0) {
 			output << p_string << std::endl;
 		}
 	}
@@ -66,11 +77,11 @@ void export_Cogli1Exporter(py::module &m) {
 	)pbdoc");
 
 	exporter.def(py::init<>(), R"pbdoc(
-This constructor makes the exporter print each particle as a red sphere of radius 0.5.
+The default constructor makes the exporter print each particle as a red sphere of radius 0.5.
 	)pbdoc");
 
 	// docstrings of overloaded constructors need to be unindented or they won't be formatted correctly by sphinx
-	exporter.def(py::init<Cogli1Mapper>(), R"pbdoc(
+	exporter.def(py::init<Cogli1Mapper>(), py::arg("mapper"), R"pbdoc(
 This constructor takes as a parameter a callable that maps each particle into a :class:`Cogli1Particle` that will be 
 interpreted by the exporter and printed in cogli1 format.
 
@@ -91,8 +102,35 @@ Particles with a y coordinate larger than 0 will be hidden. The other particles 
 
 Parameters
 ----------
-mapper : callable
+mapper: callable
     A callable that takes a particle and returns a :class:`Cogli1Particle`.
+	)pbdoc");
+
+	exporter.def(py::init<Cogli1Converter, bool>(), py::arg("converter"), py::arg("dummy"), R"pbdoc(
+This constructor takes two parameters: a callable that maps each particle into a string and a dummy
+boolean required to make the c++->Python conversion work.
+It can be used to fully customise the output. The following example uses such flexibility to use cogli1 to visualise patchy particles::
+
+    delta = 0.24
+    cosmax = 0.98
+    theta = math.acos(cosmax)
+    def converter(p):
+        ret = "%lf %lf %lf @ 0.5 C[red] M " % (p.position[0], p.position[1], p.position[2])
+
+        for patch in p.orientation_vectors:
+            patch_pos = patch * (0.5 + delta)
+            ret += "%lf %lf %lf %lf C[blue] " % (patch_pos[0], patch_pos[1], patch_pos[2], theta)
+
+        return ret
+
+The function defined above will show the patches associated to the particles as blue cones of the given length and width in cogli1.
+
+Parameters
+----------
+converter: callable
+	A callable that takes a particle and returns a string.
+dummy: bool
+    A dummy boolean. Its value does not affect the behaviour of the exporter.
 	)pbdoc");
 }
 

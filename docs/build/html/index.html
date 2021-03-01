@@ -1,13 +1,13 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html4" lang="en" >
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Baggianalysis &mdash; baggianalysis 0.0.3a1.dev2+g86f9976.d20210226 documentation</title>
+  <title>Baggianalysis &mdash; baggianalysis 0.0.3a1.dev5+gbbf749d.d20210301 documentation</title>
   
 
   
@@ -26,9 +26,10 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -59,7 +60,7 @@
             
             
               <div class="version">
-                0.0.3a1.dev2+g86f9976.d20210226
+                0.0.3a1.dev5+gbbf749d.d20210301
               </div>
             
           
@@ -225,12 +226,11 @@
 <div class="section" id="main-classes">
 <h2>Main classes<a class="headerlink" href="#main-classes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Simulation snapshots are stored in <a class="reference external" href="core/particles.html#baggianalysis.core.System">System</a> objects that have several attributes that allow to retrieve the properties of the particles it contains.</p></li>
-<li><p>Each particle is an instance of the <a class="reference external" href="core/particles.html#baggianalysis.core.Particle">Particle</a> class.</p></li>
-<li><p>The <a class="reference external" href="core/topology.html#baggianalysis.core.Topology">Topology</a> class can be used to manage the topology of a configuration. Topologies can be initialised in two ways:</p>
-<ul>
-<li><p>by hand, using the <a class="reference external" href="core/topology.html#baggianalysis.core.Topology.make_empty_topology">make_empty_topology()</a> static method to create a new topology and then adding bonds one after the other with the <a class="reference external" href="core/topology.html#baggianalysis.core.Topology.add_bond">add_bond(p_index, q_index)</a> method</p></li>
-<li><p>by using an helper function to parse the topology out of a file through the <a class="reference external" href="core/topology.html#baggianalysis.core.Topology.make_topology_from_file">make_topology_from_file()</a> static method. Baggianalysis comes with some <a class="reference internal" href="core/topology.html"><span class="doc">ready-made</span></a> functions that can be used to parse topologies.</p></li>
+<li>Simulation snapshots are stored in <a class="reference external" href="core/particles.html#baggianalysis.core.System">System</a> objects that have several attributes that allow to retrieve the properties of the particles it contains.</li>
+<li>Each particle is an instance of the <a class="reference external" href="core/particles.html#baggianalysis.core.Particle">Particle</a> class.</li>
+<li>The <a class="reference external" href="core/topology.html#baggianalysis.core.Topology">Topology</a> class can be used to manage the topology of a configuration. Topologies can be initialised in two ways:<ul>
+<li>by hand, using the <a class="reference external" href="core/topology.html#baggianalysis.core.Topology.make_empty_topology">make_empty_topology()</a> static method to create a new topology and then adding bonds one after the other with the <a class="reference external" href="core/topology.html#baggianalysis.core.Topology.add_bond">add_bond(p_index, q_index)</a> method</li>
+<li>by using an helper function to parse the topology out of a file through the <a class="reference external" href="core/topology.html#baggianalysis.core.Topology.make_topology_from_file">make_topology_from_file()</a> static method. Baggianalysis comes with some <a class="reference internal" href="core/topology.html"><span class="doc">ready-made</span></a> functions that can be used to parse topologies.</li>
 </ul>
 </li>
 </ul>
