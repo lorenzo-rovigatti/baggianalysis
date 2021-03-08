@@ -1,3 +1,13 @@
+v. 0.1.0
+	- This is the first beta version
+	- Add a new parser to build systems out of PatchyParticles configurations
+	- Add a method to the oxDNA topology Default's class to get the number of particles of species A
+	- Add flexibility to the LAMMPS parser
+	- Improve the flexibility of the cogli2 exporter
+	- Fix a bug whereby parsers would not complain about unreadable files
+	- Fix a bug whereby the structure factor observable would not take averages in the right way
+	- Update the documentation
+
 v. 0.0.3
 	- Add the MapParticle filter, which takes a list of lists that specify the ids
 	  of particles whose centre of mass will be used as a new particle
