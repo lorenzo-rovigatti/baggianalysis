@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration exporters &mdash; baggianalysis 0.0.2a1.dev28+gb5dc92c documentation</title>
+  <title>Configuration exporters &mdash; baggianalysis 0.0.3a1.dev8+gc274d8b documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.0.2a1.dev28+gb5dc92c
+                0.0.3a1.dev8+gc274d8b
               </div>
             
           
@@ -247,9 +247,9 @@ topology files.</p>
 <ol class="arabic simple">
 <li><p>__init__(self: baggianalysis.core.Cogli1Exporter) -&gt; None</p></li>
 </ol>
-<p>This constructor makes the exporter print each particle as a red sphere of radius 0.5.</p>
+<p>The default constructor makes the exporter print each particle as a red sphere of radius 0.5.</p>
 <ol class="arabic simple" start="2">
-<li><p>__init__(self: baggianalysis.core.Cogli1Exporter, arg0: Callable[[baggianalysis.core.Particle], baggianalysis.core.Cogli1Particle]) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.Cogli1Exporter, mapper: Callable[[baggianalysis.core.Particle], baggianalysis.core.Cogli1Particle]) -&gt; None</p></li>
 </ol>
 <p>This constructor takes as a parameter a callable that maps each particle into a <a class="reference internal" href="#baggianalysis.core.Cogli1Particle" title="baggianalysis.core.Cogli1Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cogli1Particle</span></code></a> that will be
 interpreted by the exporter and printed in cogli1 format.</p>
@@ -270,6 +270,34 @@ Particles with a y coordinate larger than 0 will be hidden. The other particles 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>mapper</strong> (<em>callable</em>) – A callable that takes a particle and returns a <a class="reference internal" href="#baggianalysis.core.Cogli1Particle" title="baggianalysis.core.Cogli1Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cogli1Particle</span></code></a>.</p>
+</dd>
+</dl>
+<ol class="arabic simple" start="3">
+<li><p>__init__(self: baggianalysis.core.Cogli1Exporter, converter: Callable[[baggianalysis.core.Particle], str], dummy: bool) -&gt; None</p></li>
+</ol>
+<p>This constructor takes two parameters: a callable that maps each particle into a string and a dummy
+boolean required to make the c++-&gt;Python conversion work.
+It can be used to fully customise the output. The following example uses such flexibility to use cogli1 to visualise patchy particles:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span> <span class="o">=</span> <span class="mf">0.24</span>
+<span class="n">cosmax</span> <span class="o">=</span> <span class="mf">0.98</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">cosmax</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">converter</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%lf</span><span class="s2"> </span><span class="si">%lf</span><span class="s2"> </span><span class="si">%lf</span><span class="s2"> @ 0.5 C[red] M &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">p</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">patch</span> <span class="ow">in</span> <span class="n">p</span><span class="o">.</span><span class="n">orientation_vectors</span><span class="p">:</span>
+        <span class="n">patch_pos</span> <span class="o">=</span> <span class="n">patch</span> <span class="o">*</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">delta</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%lf</span><span class="s2"> </span><span class="si">%lf</span><span class="s2"> </span><span class="si">%lf</span><span class="s2"> </span><span class="si">%lf</span><span class="s2"> C[blue] &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">patch_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">patch_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">patch_pos</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">theta</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ret</span>
+</pre></div>
+</div>
+<p>The function defined above will show the patches associated to the particles as blue cones of the given length and width in cogli1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>converter</strong> (<em>callable</em>) – A callable that takes a particle and returns a string.</p></li>
+<li><p><strong>dummy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – A dummy boolean. Its value does not affect the behaviour of the exporter.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>

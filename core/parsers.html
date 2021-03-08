@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration parsers &mdash; baggianalysis 0.0.2a1.dev28+gb5dc92c documentation</title>
+  <title>Configuration parsers &mdash; baggianalysis 0.0.3a1.dev8+gc274d8b documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.0.2a1.dev28+gb5dc92c
+                0.0.3a1.dev8+gc274d8b
               </div>
             
           
@@ -181,19 +181,22 @@
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.OxDNAParser" title="baggianalysis.core.OxDNAParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OxDNAParser</span></code></a></p></td>
-<td><p>Overloaded function.</p></td>
+<td><p>Use oxDNA/topology files to build systems.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.GroParser" title="baggianalysis.core.GroParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GroParser</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.LAMMPSDataFileParser" title="baggianalysis.core.LAMMPSDataFileParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDataFileParser</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Overloaded function.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.LAMMPSDumpParser" title="baggianalysis.core.LAMMPSDumpParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDumpParser</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.LJKAParser" title="baggianalysis.core.LJKAParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LJKAParser</span></code></a></p></td>
 <td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.PatchyParticlesParser" title="baggianalysis.core.PatchyParticlesParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PatchyParticlesParser</span></code></a></p></td>
+<td><p>Build systems out of <a class="reference external" href="https://github.com/lorenzo-rovigatti/PatchyParticles">PatchyParticles</a> configurations.</p></td>
 </tr>
 </tbody>
 </table>
@@ -222,11 +225,100 @@
 <dt id="baggianalysis.core.OxDNAParser">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">OxDNAParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.OxDNAParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseParser</span></code></a></p>
+<p>Use oxDNA/topology files to build systems.</p>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>__init__(self: baggianalysis.core.OxDNAParser, arg0: str) -&gt; None</p></li>
-<li><p>__init__(self: baggianalysis.core.OxDNAParser, arg0: baggianalysis.core.oxDNA_topology.Default) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.OxDNAParser, topology_file: str) -&gt; None</p></li>
 </ol>
+<p>Initialise the parser by using the <a class="reference internal" href="#baggianalysis.core.oxDNA_topology.Default" title="baggianalysis.core.oxDNA_topology.Default"><code class="xref py py-class docutils literal notranslate"><span class="pre">Default</span></code></a> topology parser to parse the given topology file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>topology_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The topology file to be used for initialisation.</p>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>__init__(self: baggianalysis.core.OxDNAParser, topology_parser: baggianalysis.core.oxDNA_topology.Default) -&gt; None</p></li>
+</ol>
+<p>Initialise the parser by using the given topology parser.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>topology</strong> – An oxDNA topology parser, which should be an instance of an object inheriting from the <a class="reference internal" href="#baggianalysis.core.oxDNA_topology.Default" title="baggianalysis.core.oxDNA_topology.Default"><code class="xref py py-class docutils literal notranslate"><span class="pre">Default</span></code></a> topology parser.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="baggianalysis.core.oxDNA_topology.Default">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.oxDNA_topology.</code><code class="sig-name descname">Default</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.oxDNA_topology.Default" title="baggianalysis.core.oxDNA_topology.Default">baggianalysis.core.oxDNA_topology.Default</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.oxDNA_topology.Default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<dl class="py method">
+<dt id="baggianalysis.core.oxDNA_topology.Default.N">
+<code class="sig-name descname">N</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.oxDNA_topology.Default" title="baggianalysis.core.oxDNA_topology.Default">baggianalysis.core.oxDNA_topology.Default</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="headerlink" href="#baggianalysis.core.oxDNA_topology.Default.N" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the number of particles as specified in the topology file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The number of particles as specified in the topology file.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.oxDNA_topology.Default.N_A">
+<code class="sig-name descname">N_A</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.oxDNA_topology.Default" title="baggianalysis.core.oxDNA_topology.Default">baggianalysis.core.oxDNA_topology.Default</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="headerlink" href="#baggianalysis.core.oxDNA_topology.Default.N_A" title="Permalink to this definition">¶</a></dt>
+<dd><p>A default oxDNA topology contains either a single number (the total number of particles, <em>N</em>) or two numbers
+(<em>N</em> and the number of particles of the first species, <em>NA</em>). This method returns <em>N</em> in the former case and
+<em>NA</em> in the latter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The number of particles of species <em>A</em> as specified in the topology file.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.oxDNA_topology.Default.type">
+<code class="sig-name descname">type</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.oxDNA_topology.Default" title="baggianalysis.core.oxDNA_topology.Default">baggianalysis.core.oxDNA_topology.Default</a></span></em>, <em class="sig-param"><span class="n">p_idx</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><a class="headerlink" href="#baggianalysis.core.oxDNA_topology.Default.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The type of the particle with the given index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The index of the particle whose type one wants to know.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The type of the given particle.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="baggianalysis.core.oxDNA_topology.TSP">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.oxDNA_topology.</code><code class="sig-name descname">TSP</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.oxDNA_topology.TSP" title="baggianalysis.core.oxDNA_topology.TSP">baggianalysis.core.oxDNA_topology.TSP</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.oxDNA_topology.TSP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.oxDNA_topology.Default" title="baggianalysis.core.oxDNA_topology.Default"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.oxDNA_topology.Default</span></code></a></p>
+<dl class="py method">
+<dt id="baggianalysis.core.oxDNA_topology.TSP.N_arms">
+<code class="sig-name descname">N_arms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.oxDNA_topology.TSP" title="baggianalysis.core.oxDNA_topology.TSP">baggianalysis.core.oxDNA_topology.TSP</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="headerlink" href="#baggianalysis.core.oxDNA_topology.TSP.N_arms" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.oxDNA_topology.TSP.N_monomers_per_arm">
+<code class="sig-name descname">N_monomers_per_arm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.oxDNA_topology.TSP" title="baggianalysis.core.oxDNA_topology.TSP">baggianalysis.core.oxDNA_topology.TSP</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="headerlink" href="#baggianalysis.core.oxDNA_topology.TSP.N_monomers_per_arm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.oxDNA_topology.TSP.N_stars">
+<code class="sig-name descname">N_stars</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.oxDNA_topology.TSP" title="baggianalysis.core.oxDNA_topology.TSP">baggianalysis.core.oxDNA_topology.TSP</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="headerlink" href="#baggianalysis.core.oxDNA_topology.TSP.N_stars" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -237,8 +329,13 @@
 
 <dl class="py class">
 <dt id="baggianalysis.core.LAMMPSDataFileParser">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LAMMPSDataFileParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.LAMMPSDataFileParser" title="baggianalysis.core.LAMMPSDataFileParser">baggianalysis.core.LAMMPSDataFileParser</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.LAMMPSDataFileParser" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LAMMPSDataFileParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.LAMMPSDataFileParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseParser</span></code></a></p>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: baggianalysis.core.LAMMPSDataFileParser, arg0: str) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.LAMMPSDataFileParser, arg0: int, arg1: int) -&gt; None</p></li>
+</ol>
 </dd></dl>
 
 <dl class="py class">
@@ -251,6 +348,28 @@
 <dt id="baggianalysis.core.LJKAParser">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LJKAParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.LJKAParser" title="baggianalysis.core.LJKAParser">baggianalysis.core.LJKAParser</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.LJKAParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseParser</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="baggianalysis.core.PatchyParticlesParser">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">PatchyParticlesParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.PatchyParticlesParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseParser</span></code></a></p>
+<p>Build systems out of <a class="reference external" href="https://github.com/lorenzo-rovigatti/PatchyParticles">PatchyParticles</a> configurations. These files
+store the particles’ positios and orientation matrices.</p>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: baggianalysis.core.PatchyParticlesParser) -&gt; None</p></li>
+</ol>
+<p>Default constructor: the parser will assume that the particles have four patches arranged on a tetrahedron.</p>
+<ol class="arabic simple" start="2">
+<li><p>__init__(self: baggianalysis.core.PatchyParticlesParser, base_patches: List[glm::tvec3&lt;scalar, P&gt;]) -&gt; None</p></li>
+</ol>
+<p>The object can also be built by providing a list of vectors storing the <em>base patches</em>, that is, those vectors that, when
+multiplied by the orientation matrix, yield the particles’ patches.</p>
+<ol class="arabic simple" start="3">
+<li><p>__init__(self: baggianalysis.core.PatchyParticlesParser, patch_filename: str) -&gt; None</p></li>
+</ol>
+<p>Obtain the list of vectors storing the <em>base patches</em> from the given file.</p>
 </dd></dl>
 
 </div>

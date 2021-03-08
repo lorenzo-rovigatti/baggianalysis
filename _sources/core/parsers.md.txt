@@ -14,11 +14,16 @@ All parsers inherit from [BaseParser](#baggianalysis.core.BaseParser) and overri
     LAMMPSDataFileParser
     LAMMPSDumpParser
     LJKAParser
+    PatchyParticlesParser
     
 .. autoclass:: BaseParser
     :private-members:
     
 .. autoclass:: OxDNAParser
+
+.. autoclass:: baggianalysis.core.oxDNA_topology.Default
+
+.. autoclass:: baggianalysis.core.oxDNA_topology.TSP
     
 .. autoclass:: GroParser
 
@@ -27,4 +32,6 @@ All parsers inherit from [BaseParser](#baggianalysis.core.BaseParser) and overri
 .. autoclass:: LAMMPSDumpParser
     
 .. autoclass:: LJKAParser
+
+.. autoclass:: PatchyParticlesParser
 ```
