@@ -22,7 +22,7 @@ Cogli1Exporter::Cogli1Exporter(Cogli1Mapper mapper) {
 	_converter = [mapper](Particle *p) {
 		Cogli1Particle c_p = mapper(p);
 		if(c_p.show) {
-			return fmt::format("{} {} {} @ {} C[{}]", p->position()[0], p->position()[1], p->position()[2], 0.5, "red");
+			return fmt::format("{} {} {} @ {} C[{}]", p->position()[0], p->position()[1], p->position()[2], c_p.size, c_p.color);
 		}
 		else {
 			return std::string();
