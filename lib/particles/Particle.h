@@ -38,6 +38,22 @@ public:
 		_type = nt;
 	}
 
+	const double &mass() const {
+		return _mass;
+	}
+
+	void set_mass(double nm) {
+		_mass = nm;
+	}
+
+	const double &charge() const {
+		return _charge;
+	}
+
+	void set_charge(double nc) {
+		_charge = nc;
+	}
+
 	const vec3 &position() const {
 		return _position;
 	}
@@ -98,6 +114,8 @@ protected:
 
 	int _index;
 	particle_type _type = DEFAULT_PARTICLE_TYPE;
+	double _mass = 1.;
+	double _charge = 0.;
 	vec3 _position = vec3(0., 0., 0.);
 	vec3 _velocity = vec3(0., 0., 0.);
 	std::vector<vec3> _orientation_vectors;

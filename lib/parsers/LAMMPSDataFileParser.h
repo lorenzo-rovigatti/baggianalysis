@@ -10,6 +10,8 @@
 
 #include "BaseParser.h"
 
+#include "../topology/Topology.h"
+
 namespace ba {
 /**
  * Parses a LAMMPS data file. See here for info about the file format: https://lammps.sandia.gov/doc/read_data.html
@@ -18,7 +20,12 @@ class LAMMPSDataFileParser: public BaseParser {
 public:
 	LAMMPSDataFileParser(std::string atom_style);
 	LAMMPSDataFileParser(int type_index, int pos_starting_index);
+	LAMMPSDataFileParser(int type_index, int pos_starting_index, int charge_index);
 	virtual ~LAMMPSDataFileParser();
+
+	std::shared_ptr<Topology> topology() const {
+		return _topology;
+	}
 
 	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override;
 
@@ -26,6 +33,8 @@ private:
 	struct HeaderData {
 		uint N_atoms = 0;
 		uint N_bonds = 0;
+		uint N_angles = 0;
+		uint N_dihedrals = 0;
 		uint atom_types = 0;
 		uint bond_types = 0;
 		vec3 box = vec3(1., 1., 1.);
@@ -33,6 +42,9 @@ private:
 	};
 
 	HeaderData _parse_headers(std::ifstream &configuration);
+	void _parse_masses(std::ifstream &configuration);
+	void _parse_atoms_data(std::ifstream &configuration, std::shared_ptr<System> syst);
+	void _parse_velocities(std::ifstream &configuration, std::shared_ptr<System> syst);
 	double _parse_box_line(std::vector<std::string> split_line);
 	std::string _read_line(std::ifstream &configuration);
 
@@ -50,8 +62,13 @@ private:
 		"xlo xhi", "ylo yhi", "zlo zhi", "xy xz yz"
 	};
 
+	HeaderData _header_data;
+	std::map<particle_type, double> _masses;
+	std::shared_ptr<Topology> _topology = Topology::make_empty_topology();
+
 	int _type_index;
 	int _pos_starting_index;
+	int _charge_index = -1;
 };
 
 #ifdef PYTHON_BINDINGS

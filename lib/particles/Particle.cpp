@@ -132,6 +132,18 @@ index : int
 		:type: string
 	)pbdoc");
 
+	particle.def_property("mass", &Particle::mass, &Particle::set_mass, R"pbdoc(
+		The particle's mass.
+
+		:type: float
+	)pbdoc");
+
+	particle.def_property("charge", &Particle::charge, &Particle::set_charge, R"pbdoc(
+		The particle's charge.
+
+		:type: float
+	)pbdoc");
+
 	particle.def_property("position", &Particle::position, &Particle::set_position, R"pbdoc(
 		The particle's position.
 
