@@ -16,8 +16,11 @@
 namespace ba {
 
 LAMMPSDataFileExporter::LAMMPSDataFileExporter(std::string atom_style) :
-				_atom_style(atom_style) {
-
+		_atom_style(atom_style) {
+	if(std::find(_supported_atom_styles.begin(), _supported_atom_styles.end(), atom_style) == _supported_atom_styles.end()) {
+		std::string error = fmt::format("Exporting LAMMPS atom_style '{}' is not supported", atom_style);
+		throw std::runtime_error(error);
+	}
 }
 
 LAMMPSDataFileExporter::~LAMMPSDataFileExporter() {
@@ -54,8 +57,17 @@ void LAMMPSDataFileExporter::_write_system_to_stream(std::shared_ptr<System> sys
 	output << std::endl;
 	output << "Masses" << std::endl << std::endl;
 
+	std::map<particle_type, bool> printed;
 	for(auto type : types) {
-		output << fmt::format("{} 1 mass", type) << std::endl;
+		printed[type] = false;
+	}
+
+	for(auto p : system->particles()) {
+		auto &type = p->type();
+		if(!printed[type]) {
+			output << fmt::format("{} {} mass", type, p->mass()) << std::endl;
+			printed[type] = true;
+		}
 	}
 
 	output << std::endl;
@@ -79,27 +91,35 @@ void LAMMPSDataFileExporter::_write_system_to_stream(std::shared_ptr<System> sys
 std::string LAMMPSDataFileExporter::_particle_line(std::shared_ptr<Particle> p) {
 	int p_id = p->index();
 	particle_type p_type = p->type();
-	if(_atom_style == "bond") {
+	std::string line = fmt::format("{}", p_id);
+	if(_atom_style == "bond" || _atom_style == "full") {
 		int mol_id = ba::utils::lexical_cast<int>(ba::utils::split(p->molecule()->name(), "_")[1]) + 1;
-		return fmt::format("{} {} {} {} {} {}", p_id, mol_id, p_type, p->position()[0], p->position()[1], p->position()[2]);
+		line += fmt::format(" {}", mol_id);
 	}
-	else if(_atom_style == "atomic") {
-		return fmt::format("{} {} {} {} {}", p_id, p_type, p->position()[0], p->position()[1], p->position()[2]);
+
+	// print the type
+	line += fmt::format(" {}", p_type);
+
+	if(_atom_style == "full") {
+		line += fmt::format(" {}", p->charge());
 	}
-	else {
-		std::string error = fmt::format("Exporting LAMMPS atom_style '{}' is not supported", _atom_style);
-		throw std::runtime_error(error);
-	}
+
+	// print the position
+	line += fmt::format(" {} {} {}", p->position()[0], p->position()[1], p->position()[2]);
+
+	return line;
 }
 
 #ifdef PYTHON_BINDINGS
 
 void export_LAMMPSDataFileExporter(py::module &m) {
-	py::class_<LAMMPSDataFileExporter, BaseExporter, std::shared_ptr<LAMMPSDataFileExporter>> exporter(m, "LAMMPSDataFileExporter", R"pbdoc(
+	py::class_<LAMMPSDataFileExporter, BaseExporter, std::shared_ptr<LAMMPSDataFileExporter>> exporter(m, "LAMMPSDataFileExporter",
+			R"pbdoc(
 		 Export configurations to the LAMMPS data file format. 
 	)pbdoc");
 
-	exporter.def(py::init<std::string>(), R"pbdoc(
+	exporter.def(py::init<std::string>(),
+			R"pbdoc(
 		The constructor takes one mandatory argument.
 
         Parameters

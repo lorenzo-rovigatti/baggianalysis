@@ -53,6 +53,24 @@ public:
 	std::vector<particle_type> types() const;
 
 	/**
+	 * @brief Return a vector containing all particle masses
+	 *
+	 * The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios.
+	 *
+	 * @return a vector of particle masses
+	 */
+	std::vector<double> masses() const;
+
+	/**
+	 * @brief Return a vector containing all particle charges
+	 *
+	 * The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios.
+	 *
+	 * @return a vector of particle masses
+	 */
+	std::vector<double> charges() const;
+
+	/**
 	 * @brief Return a vector containing all particle positions
 	 *
 	 * The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios.

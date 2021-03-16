@@ -14,13 +14,19 @@ namespace ba {
 LAMMPSDataFileParser::LAMMPSDataFileParser(std::string atom_style) :
 				BaseParser() {
 
-	if(atom_style == "bond") {
+
+	if(atom_style == "atomic") {
+		_type_index = 1;
+		_pos_starting_index = 2;
+	}
+	else if(atom_style == "bond") {
 		_type_index = 2;
 		_pos_starting_index = 3;
 	}
-	else if(atom_style == "atomic") {
-		_type_index = 1;
-		_pos_starting_index = 2;
+	else if(atom_style == "full") {
+		_type_index = 2;
+		_charge_index = 3;
+		_pos_starting_index = 4;
 	}
 	else {
 		std::string error = fmt::format("Unsupported LAMMPS atom_style '{}'", atom_style);

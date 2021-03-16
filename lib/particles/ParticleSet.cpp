@@ -48,6 +48,18 @@ vector<particle_type> ParticleSet::types() const {
 	return ts;
 }
 
+vector<double> ParticleSet::masses() const {
+	vector<double> ms;
+	std::transform(_particles.begin(), _particles.end(), back_inserter(ms), [](const auto &p) {return p->mass();});
+	return ms;
+}
+
+vector<double> ParticleSet::charges() const {
+	vector<double> cs;
+	std::transform(_particles.begin(), _particles.end(), back_inserter(cs), [](const auto &p) {return p->charge();});
+	return cs;
+}
+
 vector_vec3 ParticleSet::positions() const {
 	vector_vec3 poss;
 	std::transform(_particles.begin(), _particles.end(), back_inserter(poss), [](const auto &p) {return p->position();});
@@ -137,6 +149,8 @@ void export_ParticleSet(py::module &m) {
 		.def("N", &ParticleSet::N)
 		.def("indexes", &ParticleSet::indexes)
 		.def("types", &ParticleSet::types)
+		.def("masses", &ParticleSet::masses)
+		.def("charges", &ParticleSet::charges)
 		.def("positions", &ParticleSet::positions)
 		.def("velocities", &ParticleSet::velocities)
 		.def("com", &ParticleSet::com)
