@@ -63,18 +63,15 @@ std::shared_ptr<Topology> Topology::make_topology_from_system(std::shared_ptr<Sy
 }
 
 void Topology::add_bond(int p, int q) {
-	Bond new_bond( { p, q });
-	_bonds.emplace(new_bond);
+	_bonds.insert(Bond({ p, q }));
 }
 
 void Topology::add_angle(int p, int q, int r) {
-	Angle new_angle( { p, q, r });
-	_angles.emplace(new_angle);
+	_angles.insert(Angle({ p, q, r }));
 }
 
 void Topology::add_dihedral(int p, int q, int r, int s) {
-	Dihedral new_dihedral( { p, q, r, s });
-	_dihedrals.emplace(new_dihedral);
+	_dihedrals.insert(Dihedral({ p, q, r, s }));
 }
 
 void Topology::enable_checks() {
@@ -295,8 +292,19 @@ using a constructor that takes as its only parameter the :class:`System` instanc
             The target system.
 	)pbdoc");
 
-	topology.def_property_readonly("bonds", &Topology::bonds, R"pbdoc(
-        List(List(int)): The list of bonds stored in the topology. Each bond is a two-element list storing the indexes of a pair of bonded particles.
+	topology.def_property_readonly("bonds", [](const Topology &t) {
+		auto bonds = t.bonds();
+		std::vector<Bond> v(bonds.size());
+		std::copy(bonds.begin(), bonds.end(), v.begin());
+		return v;
+	}, R"pbdoc(
+        List(List(int)): The list of bonds stored in the topology. Each bond is a two-element list storing the ids of a pair of bonded particles. 
+        Since Python does not support sets of lists, we internally turn the c++ std::set into a std::vector which is then returned and converted into 
+        a Python object. This may be a performance bottleneck. 
+	)pbdoc");
+
+	topology.def_property_readonly("clusters", &Topology::clusters, R"pbdoc(
+		List(Set(int)): The list of clusters stored in the topology. Each cluster is a set of particle ids that belong to that cluster.
 	)pbdoc");
 }
 
