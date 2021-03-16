@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Topology-related classes and utility functions &mdash; baggianalysis 0.0.3a1.dev6+g8591eec documentation</title>
+  <title>Topology-related classes and utility functions &mdash; baggianalysis 0.1.0b1.dev5+g4d1913c.d20210316 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.0.3a1.dev6+g8591eec
+                0.1.0b1.dev5+g4d1913c.d20210316
               </div>
             
           
@@ -248,10 +248,23 @@ using a constructor that takes as its only parameter the <a class="reference int
 <dl class="py method">
 <dt id="baggianalysis.core.Topology.bonds">
 <em class="property">property </em><code class="sig-name descname">bonds</code><a class="headerlink" href="#baggianalysis.core.Topology.bonds" title="Permalink to this definition">¶</a></dt>
-<dd><p>The list of bonds stored in the topology. Each bond is a two-element list storing the indexes of a pair of bonded particles.</p>
+<dd><p>The list of bonds stored in the topology. Each bond is a two-element list storing the ids of a pair of bonded particles.
+Since Python does not support sets of lists, we internally turn the c++ std::set into a std::vector which is then returned and converted into
+a Python object. This may be a performance bottleneck.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>List(List(<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>))</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.Topology.clusters">
+<em class="property">property </em><code class="sig-name descname">clusters</code><a class="headerlink" href="#baggianalysis.core.Topology.clusters" title="Permalink to this definition">¶</a></dt>
+<dd><p>The list of clusters stored in the topology. Each cluster is a set of particle ids that belong to that cluster.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>List(Set(<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>))</p>
 </dd>
 </dl>
 </dd></dl>

@@ -7,9 +7,24 @@
 
 #include "LAMMPSDumpParser.h"
 
+#include "LAMMPSDataFileParser.h"
 #include "../utils/strings.h"
 
 namespace ba {
+
+LAMMPSDumpParser::LAMMPSDumpParser(std::string data_file, std::string atom_style, bool rescaled_coords) :
+				BaseParser(),
+				_rescaled_coords(rescaled_coords) {
+	LAMMPSDataFileParser parser = LAMMPSDataFileParser(atom_style);
+	_data_file_system = parser.make_system(data_file);
+}
+
+LAMMPSDumpParser::LAMMPSDumpParser(std::shared_ptr<System> data_file_system, bool rescaled_coords) :
+				BaseParser(),
+				_rescaled_coords(rescaled_coords),
+				_data_file_system(data_file_system) {
+
+}
 
 LAMMPSDumpParser::LAMMPSDumpParser(bool rescaled_coords) :
 				BaseParser(),
@@ -45,7 +60,7 @@ std::shared_ptr<System> LAMMPSDumpParser::_parse_stream(std::ifstream &configura
 		auto split = utils::split(to_split);
 
 		if(split.size() < 5) {
-			std::string error = fmt::format("The LAMMPS dump file should contain at least 5 columns ({} found", split.size());
+			std::string error = fmt::format("The LAMMPS dump file should contain at least 5 columns ({} found)", split.size());
 			throw std::runtime_error(error);
 		}
 
@@ -68,6 +83,15 @@ std::shared_ptr<System> LAMMPSDumpParser::_parse_stream(std::ifstream &configura
 		}
 
 		syst->add_particle(new_particle);
+	}
+
+	// copy masses and charges from the system's data file
+	if(_data_file_system != nullptr) {
+		for(auto p : syst->particles()) {
+			auto other_p = _data_file_system->particle_by_id(p->index());
+			p->set_mass(other_p->mass());
+			p->set_charge(other_p->charge());
+		}
 	}
 
 	return syst;
@@ -132,6 +156,8 @@ void export_LAMMPSDumpParser(py::module &m) {
 	py::class_<LAMMPSDumpParser, BaseParser, std::shared_ptr<LAMMPSDumpParser>> parser(m, "LAMMPSDumpParser");
 
 	parser.def(py::init<bool>(), py::arg("rescaled_coords") = false);
+	parser.def(py::init<std::shared_ptr<System>, bool>(), py::arg("data_file_system"), py::arg("rescaled_coords") = false);
+	parser.def(py::init<std::string, std::string, bool>(), py::arg("data_file"), py::arg("atom_style"), py::arg("rescaled_coords") = false);
 }
 
 #endif
