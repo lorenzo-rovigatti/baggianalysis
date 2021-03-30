@@ -38,6 +38,28 @@ void System::add_particle(std::shared_ptr<Particle> p) {
 	}
 }
 
+void System::reindex_particles(int base_index) {
+	_particles_by_id.clear();
+
+	sort_particles_by_id();
+	for(uint i = 0; i < N(); i++) {
+		int new_id = base_index + i;
+		_particles[i]->set_index(new_id);
+		_particles_by_id[new_id] = _particles[i];
+	}
+
+	_largest_idx = base_index + N() - 1;
+}
+
+void System::rescale_lengths(double factor) {
+	for(auto p : _particles) {
+		p->set_position(p->position() * factor);
+		p->set_velocity(p->velocity() * factor);
+	}
+
+	box *= factor;
+}
+
 std::vector<std::shared_ptr<ParticleSet>> &System::molecules() {
 	return _molecules;
 }
@@ -82,6 +104,24 @@ void export_System(py::module &m) {
         -------
         int
             A number that can be used as a valid index for a new particle.
+	)pbdoc");
+
+	system.def("reindex_particles", &System::reindex_particles, py::arg("base_idx"), R"pbdoc(
+        Sort the particles by index and assign them new indexes so that the first and last ones are ``base_index`` and ``base_index + N() - 1``, respectively.
+
+        Parameters
+        ----------
+        base_index : int
+            The starting index that should be used.
+	)pbdoc");
+
+	system.def("rescale_lengths", &System::rescale_lengths, py::arg("factor"), R"pbdoc(
+		Rescale all lengths (positions, velocities, box sides, *etc.*) by the given factor.
+
+		Parameters
+		----------
+		factor : float
+			The rescaling factor.
 	)pbdoc");
 
 	// here we tell pybind11 which of the two molecules() methods we want to have bindings for

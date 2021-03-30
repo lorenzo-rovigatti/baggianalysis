@@ -24,6 +24,10 @@ public:
 
 	void add_particle(std::shared_ptr<Particle> p) override;
 
+	void reindex_particles(int base_index);
+
+	void rescale_lengths(double factor);
+
 	/// Return all the subsets stored in the set
 	std::vector<std::shared_ptr<ParticleSet>> &molecules();
 

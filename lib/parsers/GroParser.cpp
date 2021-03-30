@@ -62,10 +62,10 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 		std::getline(configuration, line);
 
 		// taken by http://manual.gromacs.org/archive/5.0.3/online/gro.html
-		std::string residue_number = line.substr(0, 5);
-		std::string residue_name = line.substr(5, 5);
-		std::string atom_name = line.substr(10, 5);
-		std::string atom_number = line.substr(15, 5);
+		std::string residue_number = utils::trim_copy(line.substr(0, 5));
+		std::string residue_name = utils::trim_copy(line.substr(5, 5));
+		std::string atom_name = utils::trim_copy(line.substr(10, 5));
+		std::string atom_number = utils::trim_copy(line.substr(15, 5));
 
 		std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(syst->available_index()));
 		new_particle->set_type(atom_name);

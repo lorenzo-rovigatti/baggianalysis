@@ -48,6 +48,51 @@ void Particle::remove_bonded_neighbour(std::shared_ptr<Particle> to_remove) {
 	_bonded_neighbours.erase(to_remove);
 }
 
+void Particle::add_bonded_angle(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3) {
+	auto new_angle = std::make_shared<ParticleSet>();
+	new_angle->add_particle(p1);
+	new_angle->add_particle(p2);
+	new_angle->add_particle(p3);
+
+	add_bonded_angle(new_angle);
+}
+
+void Particle::add_bonded_angle(std::shared_ptr<ParticleSet> new_angle) {
+	if(new_angle->N() != 3) {
+		std::string error = fmt::format("Bonded angles should contain 3 and only 3 particles ({} found)", new_angle->N());
+		throw std::runtime_error(error);
+	}
+
+	_bonded_angles.insert(new_angle);
+}
+
+void Particle::remove_bonded_angle(std::shared_ptr<ParticleSet> to_remove) {
+	_bonded_angles.erase(to_remove);
+}
+
+void Particle::add_bonded_dihedral(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3, std::shared_ptr<Particle> p4) {
+	auto new_dihedral = std::make_shared<ParticleSet>();
+	new_dihedral->add_particle(p1);
+	new_dihedral->add_particle(p2);
+	new_dihedral->add_particle(p3);
+	new_dihedral->add_particle(p4);
+
+	add_bonded_dihedral(new_dihedral);
+}
+
+void Particle::add_bonded_dihedral(std::shared_ptr<ParticleSet> new_dihedral) {
+	if(new_dihedral->N() != 4) {
+		std::string error = fmt::format("Bonded dihedrals should contain 4 and only 4 particles ({} found)", new_dihedral->N());
+		throw std::runtime_error(error);
+	}
+
+	_bonded_dihedrals.insert(new_dihedral);
+}
+
+void Particle::remove_bonded_dihedral(std::shared_ptr<ParticleSet> to_remove) {
+	_bonded_dihedrals.erase(to_remove);
+}
+
 void Particle::add_neighbour(std::shared_ptr<Particle> new_neighbour) {
 	_neighbours.insert(new_neighbour);
 }
@@ -92,6 +137,36 @@ index : int
             The new bonded neighbour.
 	)pbdoc");
 
+	particle.def("add_bonded_angle", (void (Particle::*)(std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>)) &Particle::add_bonded_angle,
+			py::arg("p1"), py::arg("p2"), py::arg("p3"), R"pbdoc(
+		Add an angle (defined by three particles) this particle is involved in. Note that the current particle must be one of the three particles given as parameters.
+
+		Parameters
+		----------
+		p1 : :class:`Particle`
+			The first particle participating in the angle.
+        p2 : :class:`Particle`
+			The second particle participating in the angle.
+        p3 : :class:`Particle`
+			The third particle participating in the angle.
+	)pbdoc");
+
+	particle.def("add_bonded_dihedral", (void (Particle::*)(std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>)) &Particle::add_bonded_dihedral,
+			py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"), R"pbdoc(
+		Add a dihedral (defined by four particles) this particle is involved in. Note that the current particle must be one of the four particles given as parameters.
+
+		Parameters
+		----------
+		p1 : :class:`Particle`
+			The first particle participating in the dihedral.
+		p2 : :class:`Particle`
+			The second particle participating in the dihedral.
+		p3 : :class:`Particle`
+			The third particle participating in the dihedral.
+        p4 : :class:`Particle`
+			The fourth particle participating in the dihedral.
+	)pbdoc");
+
 	particle.def("add_neighbour", &Particle::add_neighbour, py::arg("q"), R"pbdoc(
         Add particle ``q`` to the list of this particle's neighbours. Contrary to :meth:`add_bonded_neighbour`, 
         the current particle is `not` added to the list of ``q``'s neighbours.
@@ -114,6 +189,18 @@ index : int
 		:type: Set(:class:`Particle`)
 	)pbdoc");
 
+	particle.def_property_readonly("bonded_angles", &Particle::bonded_angles, R"pbdoc(
+		A list of the angles this particle is involved in.
+
+		:type: Set(:class:`ParticleSet`)
+	)pbdoc");
+
+	particle.def_property_readonly("bonded_dihedrals", &Particle::bonded_dihedrals, R"pbdoc(
+		A list of the dihedrals this particle is involved in.
+
+		:type: Set(:class:`ParticleSet`)
+	)pbdoc");
+
 	particle.def_property_readonly("neighbours", &Particle::neighbours, R"pbdoc(
 		A list of this particle's neighbours.
 
@@ -121,7 +208,8 @@ index : int
 	)pbdoc");
 
 	particle.def_property_readonly("index", &Particle::index, R"pbdoc(
-		The particle's index.
+		The particle's index. This is a read-only property because changing the index of the particle should be done with the methods provided by 
+        :class:`ParticleSet` and :class:`System` only.
 
 		:type: int
 	)pbdoc");

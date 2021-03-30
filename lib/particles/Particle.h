@@ -30,6 +30,10 @@ public:
 		return _index;
 	}
 
+	void set_index(int nidx) {
+		_index = nidx;
+	}
+
 	const particle_type &type() const {
 		return _type;
 	}
@@ -93,9 +97,22 @@ public:
 	const std::set<std::shared_ptr<Particle>> &bonded_neighbours() const {
 		return _bonded_neighbours;
 	}
-
 	void add_bonded_neighbour(std::shared_ptr<Particle> new_neighbour);
 	void remove_bonded_neighbour(std::shared_ptr<Particle> to_remove);
+
+	const std::set<std::shared_ptr<ParticleSet>> &bonded_angles() const {
+		return _bonded_angles;
+	}
+	void add_bonded_angle(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3);
+	void add_bonded_angle(std::shared_ptr<ParticleSet> new_angle);
+	void remove_bonded_angle(std::shared_ptr<ParticleSet> to_remove);
+
+	const std::set<std::shared_ptr<ParticleSet>> &bonded_dihedrals() const {
+		return _bonded_dihedrals;
+	}
+	void add_bonded_dihedral(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3, std::shared_ptr<Particle> p4);
+	void add_bonded_dihedral(std::shared_ptr<ParticleSet> new_dihedral);
+	void remove_bonded_dihedral(std::shared_ptr<ParticleSet> to_remove);
 
 	const std::set<std::shared_ptr<Particle>> &neighbours() const {
 		return _neighbours;
@@ -121,6 +138,9 @@ protected:
 	std::vector<vec3> _orientation_vectors;
 
 	std::set<std::shared_ptr<Particle>> _bonded_neighbours;
+	std::set<std::shared_ptr<ParticleSet>> _bonded_angles;
+	std::set<std::shared_ptr<ParticleSet>> _bonded_dihedrals;
+
 	std::set<std::shared_ptr<Particle>> _neighbours;
 
 	std::shared_ptr<ParticleSet> _molecule;

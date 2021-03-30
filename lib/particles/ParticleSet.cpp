@@ -139,6 +139,27 @@ void ParticleSet::sort_particles_by_id() {
 	std::sort(_particles.begin(), _particles.end(), comp_operator);
 }
 
+bool ParticleSet::operator<(const ParticleSet& rhs) const {
+		if(N() == rhs.N()) {
+			/*
+			 * here we compare the two sets particle by particle. We count the pairs of particles for which
+			 * the one in the current set has an index smaller than the other. If the total number of such pairs
+			 * is larger than N / 2 then this ParticleSet is "smaller" than the other
+			 */
+			uint N_less_than = 0;
+			for(uint i = 0; i < N(); i++) {
+				if(_particles[i]->index() < rhs._particles[i]->index()) {
+					N_less_than++;
+				}
+			}
+
+			return N_less_than > (N() / 2);
+		}
+		else {
+			return N() < rhs.N();
+		}
+	}
+
 #ifdef PYTHON_BINDINGS
 
 void export_ParticleSet(py::module &m) {

@@ -123,6 +123,8 @@ public:
 	/// Sort the particles according to their index.
 	void sort_particles_by_id();
 
+	bool operator<(const ParticleSet& rhs) const;
+
 protected:
 	std::string _name;
 

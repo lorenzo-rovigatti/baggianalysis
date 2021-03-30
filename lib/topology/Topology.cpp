@@ -24,9 +24,23 @@ Topology::Topology(std::shared_ptr<System> system) {
 	for(auto p : system->particles()) {
 		for(auto q : p->bonded_neighbours()) {
 			if(p->index() < q->index()) {
-				Bond new_bond( { p->index(), q->index() });
-				_bonds.emplace(new_bond);
+				add_bond(p->index(), q->index());
 			}
+		}
+
+		for(auto angle : p->bonded_angles()) {
+			int p = angle->particles()[0]->index();
+			int q = angle->particles()[1]->index();
+			int r = angle->particles()[2]->index();
+			add_angle(p, q, r);
+		}
+
+		for(auto dihedral : p->bonded_dihedrals()) {
+			int p = dihedral->particles()[0]->index();
+			int q = dihedral->particles()[1]->index();
+			int r = dihedral->particles()[2]->index();
+			int s = dihedral->particles()[3]->index();
+			add_dihedral(p, q, r, s);
 		}
 	}
 
@@ -42,28 +56,18 @@ std::shared_ptr<Topology> Topology::make_empty_topology() {
 }
 
 std::shared_ptr<Topology> Topology::make_topology_from_file(std::string filename, TopologyParser parser) {
-	std::shared_ptr<Topology> new_topology = std::shared_ptr<Topology>(new Topology());
+	std::shared_ptr<Topology> new_topology = make_empty_topology();
 	parser(filename, new_topology);
 
 	return new_topology;
 }
 
 std::shared_ptr<Topology> Topology::make_topology_from_system(std::shared_ptr<System> system) {
-	std::shared_ptr<Topology> new_topology = std::shared_ptr<Topology>(new Topology());
-
-	for(auto p : system->particles()) {
-		for(auto neigh : p->bonded_neighbours()) {
-			if(p->index() > neigh->index()) {
-				new_topology->add_bond(p->index(), neigh->index());
-			}
-		}
-	}
-
-	return new_topology;
+	return std::make_shared<Topology>(system);
 }
 
 void Topology::add_bond(int p, int q) {
-	_bonds.insert(Bond({ p, q }));
+	_bonds.emplace(Bond({ p, q }));
 }
 
 void Topology::add_angle(int p, int q, int r) {
@@ -97,8 +101,8 @@ void Topology::apply(std::shared_ptr<System> system) {
 			p->add_bonded_neighbour(q);
 		}
 		catch (std::runtime_error &e) {
-				std::string error = fmt::format("The following error occurred while applying the topology to a System:\n\t'{}'", e.what());
-				_raise_error(error);
+			std::string error = fmt::format("The following error occurred while applying the topology to a System:\n\t'{}'", e.what());
+			_raise_error(error);
 		}
 	}
 
@@ -124,6 +128,13 @@ void Topology::apply(std::shared_ptr<System> system) {
 		new_molecule->set_name(mol_name);
 		system->molecules().emplace_back(new_molecule);
 	}
+
+	for(auto &angle : _angles) {
+		std::array<std::shared_ptr<Particle>, 3> particles({system->particle_by_id(angle[0]), system->particle_by_id(angle[1]), system->particle_by_id(angle[2])});
+		for(auto particle : particles) {
+			particle->add_bonded_angle(particles[0], particles[1], particles[2]);
+		}
+	}
 }
 
 const std::vector<std::set<int>> &Topology::clusters() const {
@@ -132,6 +143,14 @@ const std::vector<std::set<int>> &Topology::clusters() const {
 
 const std::set<Bond> &Topology::bonds() const {
 	return _bonds;
+}
+
+const std::set<Angle> &Topology::angles() const {
+	return _angles;
+}
+
+const std::set<Dihedral> &Topology::dihedrals() const {
+	return _dihedrals;
 }
 
 void Topology::_raise_error(std::string msg) {
@@ -143,6 +162,10 @@ void Topology::_raise_error(std::string msg) {
 void Topology::_fill_clusters(std::shared_ptr<System> system) {
 	_N_in_system = system->N();
 	_clusters.clear();
+
+	if(_N_in_system == 0) {
+		return;
+	}
 
 	// these maps might be substituted by a single boost::bimap
 	std::map<int, int> index_to_cluster;
@@ -301,6 +324,28 @@ using a constructor that takes as its only parameter the :class:`System` instanc
         List(List(int)): The list of bonds stored in the topology. Each bond is a two-element list storing the ids of a pair of bonded particles. 
         Since Python does not support sets of lists, we internally turn the c++ std::set into a std::vector which is then returned and converted into 
         a Python object. This may be a performance bottleneck. 
+	)pbdoc");
+
+	topology.def_property_readonly("angles", [](const Topology &t) {
+		auto angles = t.angles();
+		std::vector<Angle> v(angles.size());
+		std::copy(angles.begin(), angles.end(), v.begin());
+		return v;
+	}, R"pbdoc(
+		List(List(int)): The list of angles stored in the topology. Each angle is a three-element list storing the ids of a triplet of particles involved in angle. 
+		Since Python does not support sets of lists, we internally turn the c++ std::set into a std::vector which is then returned and converted into 
+		a Python object. This may be a performance bottleneck. 
+	)pbdoc");
+
+	topology.def_property_readonly("dihedrals", [](const Topology &t) {
+		auto dihedrals = t.dihedrals();
+		std::vector<Dihedral> v(dihedrals.size());
+		std::copy(dihedrals.begin(), dihedrals.end(), v.begin());
+		return v;
+	}, R"pbdoc(
+		List(List(int)): The list of dihedrals stored in the topology. Each dihedral is a four-element list storing the ids of four particles involved in a dihedral. 
+		Since Python does not support sets of lists, we internally turn the c++ std::set into a std::vector which is then returned and converted into 
+		a Python object. This may be a performance bottleneck. 
 	)pbdoc");
 
 	topology.def_property_readonly("clusters", &Topology::clusters, R"pbdoc(

@@ -45,6 +45,8 @@ public:
 
 	const std::vector<std::set<int>> &clusters() const;
 	const std::set<Bond> &bonds() const;
+	const std::set<Angle> &angles() const;
+	const std::set<Dihedral> &dihedrals() const;
 
 protected:
 	Topology();
