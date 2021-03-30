@@ -275,12 +275,12 @@ using a constructor that takes as its only parameter the :class:`System` instanc
 	)pbdoc");
 
 	topology.def_static("make_topology_from_system", &Topology::make_topology_from_system, py::arg("system"), R"pbdoc(
-            This static method generates a topology out of a system by using the bonded neighbours of each particle to build the list of bonds. 
+		This static method generates a topology out of a system by using the bonded neighbours of each particle to build the list of bonds. 
 
-            Parameters
-            ----------
-            system : :class:`System`
-                The input system.
+		Parameters
+		----------
+		system : :class:`System`
+			The input system.
     )pbdoc");
 
 	topology.def("add_bond", &Topology::add_bond, py::arg("p"), py::arg("q"), R"pbdoc(
@@ -294,9 +294,33 @@ using a constructor that takes as its only parameter the :class:`System` instanc
 			The index of the second particle of the pair.
 	)pbdoc");
 
-	topology.def("add_angle", &Topology::add_angle);
+	topology.def("add_angle", &Topology::add_angle, py::arg("p"), py::arg("q"), py::arg("r"), R"pbdoc(
+        Adds an angle formed by a triplet of particles.
 
-	topology.def("add_dihedral", &Topology::add_dihedral);
+        Parameters
+        ----------
+        p : int
+            The index of the first particle of the triplet.
+        q : int
+            The index of the second (central) particle of the triplet.
+        r : int
+            The index of the third (and last) particle of the triplet.
+    )pbdoc");
+
+	topology.def("add_dihedral", &Topology::add_dihedral, py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"), R"pbdoc(
+        Adds a dihedral formed by four particles.
+
+        Parameters
+        ----------
+        p : int
+            The index of the first particle.
+        q : int
+            The index of the second particle.
+        r : int
+            The index of the third particle.
+        s : int
+            The index of the fourth particle.
+    )pbdoc");
 
 	topology.def("enable_checks", &Topology::enable_checks, R"pbdoc(
         Makes the topology throw exceptions whenever errors occur during application to a system.

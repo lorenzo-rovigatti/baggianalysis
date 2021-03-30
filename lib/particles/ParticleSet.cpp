@@ -163,7 +163,7 @@ bool ParticleSet::operator<(const ParticleSet& rhs) const {
 #ifdef PYTHON_BINDINGS
 
 void export_ParticleSet(py::module &m) {
-	py::class_<ParticleSet, std::shared_ptr<ParticleSet>> particle_set(m, "ParticleSet");
+	py::class_<ParticleSet, std::shared_ptr<ParticleSet>> particle_set(m, "ParticleSet", "A set of particles.");
 
 	particle_set
 		.def(py::init<>())

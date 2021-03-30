@@ -139,33 +139,33 @@ index : int
 
 	particle.def("add_bonded_angle", (void (Particle::*)(std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>)) &Particle::add_bonded_angle,
 			py::arg("p1"), py::arg("p2"), py::arg("p3"), R"pbdoc(
-		Add an angle (defined by three particles) this particle is involved in. Note that the current particle must be one of the three particles given as parameters.
+        Add an angle (defined by three particles) this particle is involved in. Note that the current particle must be one of the three particles given as parameters.
 
-		Parameters
-		----------
-		p1 : :class:`Particle`
-			The first particle participating in the angle.
+        Parameters
+        ----------
+        p1 : :class:`Particle`
+            The first particle participating in the angle.
         p2 : :class:`Particle`
-			The second particle participating in the angle.
+            The second particle participating in the angle.
         p3 : :class:`Particle`
-			The third particle participating in the angle.
-	)pbdoc");
+            The third particle participating in the angle.
+    )pbdoc");
 
 	particle.def("add_bonded_dihedral", (void (Particle::*)(std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>)) &Particle::add_bonded_dihedral,
 			py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"), R"pbdoc(
-		Add a dihedral (defined by four particles) this particle is involved in. Note that the current particle must be one of the four particles given as parameters.
+        Add a dihedral (defined by four particles) this particle is involved in. Note that the current particle must be one of the four particles given as parameters.
 
-		Parameters
-		----------
-		p1 : :class:`Particle`
-			The first particle participating in the dihedral.
-		p2 : :class:`Particle`
-			The second particle participating in the dihedral.
-		p3 : :class:`Particle`
-			The third particle participating in the dihedral.
+        Parameters
+        ----------
+        p1 : :class:`Particle`
+            The first particle participating in the dihedral.
+        p2 : :class:`Particle`
+            The second particle participating in the dihedral.
+        p3 : :class:`Particle`
+            The third particle participating in the dihedral.
         p4 : :class:`Particle`
-			The fourth particle participating in the dihedral.
-	)pbdoc");
+            The fourth particle participating in the dihedral.
+    )pbdoc");
 
 	particle.def("add_neighbour", &Particle::add_neighbour, py::arg("q"), R"pbdoc(
         Add particle ``q`` to the list of this particle's neighbours. Contrary to :meth:`add_bonded_neighbour`, 
@@ -190,15 +190,15 @@ index : int
 	)pbdoc");
 
 	particle.def_property_readonly("bonded_angles", &Particle::bonded_angles, R"pbdoc(
-		A list of the angles this particle is involved in.
+        A list of :class:`ParticleSet` s storing the angles (*i.e.* triplets of particles) this particle is involved in.
 
-		:type: Set(:class:`ParticleSet`)
+        :type: Set(:class:`ParticleSet`)
 	)pbdoc");
 
 	particle.def_property_readonly("bonded_dihedrals", &Particle::bonded_dihedrals, R"pbdoc(
-		A list of the dihedrals this particle is involved in.
+        A list of :class:`ParticleSet` s storing the dihedrals (*i.e.* list of four particles) this particle is involved in.
 
-		:type: Set(:class:`ParticleSet`)
+        :type: Set(:class:`ParticleSet`)
 	)pbdoc");
 
 	particle.def_property_readonly("neighbours", &Particle::neighbours, R"pbdoc(

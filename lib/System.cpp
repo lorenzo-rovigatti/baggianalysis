@@ -81,7 +81,7 @@ void System::bring_particles_in_box(bool shift_by_half_box) {
 
 void export_System(py::module &m) {
 	py::class_<System, ParticleSet, std::shared_ptr<System>> system(m, "System", R"pbdoc(
-		Store a configuration. 
+		A single configuration. 
 	)pbdoc");
 
 	system.def(py::init<>(), R"pbdoc(
