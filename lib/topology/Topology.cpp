@@ -22,25 +22,28 @@ Topology::Topology() :
 
 Topology::Topology(std::shared_ptr<System> system) {
 	for(auto p : system->particles()) {
-		for(auto q : p->bonded_neighbours()) {
+		for(auto link : p->bonded_neighbours()) {
+			auto q = link.first;
 			if(p->index() < q->index()) {
-				add_bond(p->index(), q->index());
+				add_bond(link.second, p->index(), q->index());
 			}
 		}
 
-		for(auto angle : p->bonded_angles()) {
+		for(auto link : p->bonded_angles()) {
+			auto angle = link.first;
 			int p = angle->particles()[0]->index();
 			int q = angle->particles()[1]->index();
 			int r = angle->particles()[2]->index();
-			add_angle(p, q, r);
+			add_angle(link.second, p, q, r);
 		}
 
-		for(auto dihedral : p->bonded_dihedrals()) {
+		for(auto link : p->bonded_dihedrals()) {
+			auto dihedral = link.first;
 			int p = dihedral->particles()[0]->index();
 			int q = dihedral->particles()[1]->index();
 			int r = dihedral->particles()[2]->index();
 			int s = dihedral->particles()[3]->index();
-			add_dihedral(p, q, r, s);
+			add_dihedral(link.second, p, q, r, s);
 		}
 	}
 
@@ -67,15 +70,30 @@ std::shared_ptr<Topology> Topology::make_topology_from_system(std::shared_ptr<Sy
 }
 
 void Topology::add_bond(int p, int q) {
-	_bonds.emplace(Bond({ p, q }));
+	_bonds.insert(TopologyBond(p, q));
+}
+
+void Topology::add_bond(std::string type, int p, int q) {
+	_bonds.insert(TopologyBond(type, p, q));
+	_bond_types.insert(type);
 }
 
 void Topology::add_angle(int p, int q, int r) {
-	_angles.insert(Angle({ p, q, r }));
+	_angles.insert(TopologyAngle(p, q, r));
+}
+
+void Topology::add_angle(std::string type, int p, int q, int r) {
+	_angles.insert(TopologyAngle(type, p, q, r));
+	_angle_types.insert(type);
 }
 
 void Topology::add_dihedral(int p, int q, int r, int s) {
-	_dihedrals.insert(Dihedral({ p, q, r, s }));
+	_dihedrals.insert(TopologyDihedral(p, q, r, s));
+}
+
+void Topology::add_dihedral(std::string type, int p, int q, int r, int s) {
+	_dihedrals.insert(TopologyDihedral(type, p, q, r, s));
+	_dihedral_types.insert(type);
 }
 
 void Topology::enable_checks() {
@@ -98,7 +116,7 @@ void Topology::apply(std::shared_ptr<System> system) {
 		try {
 			auto p = system->particle_by_id(p_idx);
 			auto q = system->particle_by_id(q_idx);
-			p->add_bonded_neighbour(q);
+			p->add_bonded_neighbour(bond.type, q);
 		}
 		catch (std::runtime_error &e) {
 			std::string error = fmt::format("The following error occurred while applying the topology to a System:\n\t'{}'", e.what());
@@ -129,17 +147,17 @@ void Topology::apply(std::shared_ptr<System> system) {
 		system->molecules().emplace_back(new_molecule);
 	}
 
-	for(auto &angle : _angles) {
+	for(const TopologyAngle &angle : _angles) {
 		std::array<std::shared_ptr<Particle>, 3> particles({system->particle_by_id(angle[0]), system->particle_by_id(angle[1]), system->particle_by_id(angle[2])});
 		for(auto particle : particles) {
-			particle->add_bonded_angle(particles[0], particles[1], particles[2]);
+			particle->add_bonded_angle(angle.type, particles[0], particles[1], particles[2]);
 		}
 	}
 
 	for(auto &dihedral : _dihedrals) {
 		std::array<std::shared_ptr<Particle>, 4> particles({system->particle_by_id(dihedral[0]), system->particle_by_id(dihedral[1]), system->particle_by_id(dihedral[2]), system->particle_by_id(dihedral[3])});
 		for(auto particle : particles) {
-			particle->add_bonded_dihedral(particles[0], particles[1], particles[2], particles[3]);
+			particle->add_bonded_dihedral(dihedral.type, particles[0], particles[1], particles[2], particles[3]);
 		}
 	}
 }
@@ -148,16 +166,28 @@ const std::vector<std::set<int>> &Topology::clusters() const {
 	return _clusters;
 }
 
-const std::set<Bond> &Topology::bonds() const {
+const std::set<TopologyBond> &Topology::bonds() const {
 	return _bonds;
 }
 
-const std::set<Angle> &Topology::angles() const {
+const std::set<std::string> &Topology::bond_types() const {
+	return _bond_types;
+}
+
+const std::set<TopologyAngle> &Topology::angles() const {
 	return _angles;
 }
 
-const std::set<Dihedral> &Topology::dihedrals() const {
+const std::set<std::string> &Topology::angle_types() const {
+	return _angle_types;
+}
+
+const std::set<TopologyDihedral> &Topology::dihedrals() const {
 	return _dihedrals;
+}
+
+const std::set<std::string> &Topology::dihedral_types() const {
+	return _dihedral_types;
 }
 
 void Topology::_raise_error(std::string msg) {
@@ -190,7 +220,8 @@ void Topology::_fill_clusters(std::shared_ptr<System> system) {
 	while(!done) {
 		auto p = system->particle_by_id(next.front());
 		next.pop();
-		for(auto neigh : p->bonded_neighbours()) {
+		for(auto link : p->bonded_neighbours()) {
+			auto neigh = link.first;
 			if(index_to_cluster[neigh->index()] > index_to_cluster[p->index()]) {
 				index_to_cluster[neigh->index()] = index_to_cluster[p->index()];
 				next.push(neigh->index());
@@ -234,19 +265,19 @@ void Topology::_fill_clusters(std::shared_ptr<System> system) {
 
 void export_Topology(py::module &m) {
 	py::class_<Topology, std::shared_ptr<Topology>> topology(m, "Topology", R"pbdoc(
-        This class manages the connections and links between the particles of a system.
+This class manages the connections and links between the particles of a system.
 
-        Here the term ``topology`` refers to the way atoms/particles are partitioned into clusters. In its simplest form, a topology is just a list of
-        links between particles. These links can be shared between two, three, four or more particles. While the latter are pretty rare, the others 
-        are quite common. Connections between two, three and four particles are here called `bonds`, `angles` and `dihedrals`. As of now, although all
-        three classes of links are supported and stored in the topology, the only useful concept is the bond, which is used by the code to partition
-        particles into clusters.
+Here the term ``topology`` refers to the way atoms/particles are partitioned into clusters. In its simplest form, a topology is just a list of
+links between particles. These links can be shared between two, three, four or more particles. While the latter are pretty rare, the others 
+are quite common. Connections between two, three and four particles are here called `bonds`, `angles` and `dihedrals`. Each link has also associated
+a link type, which is ``1`` by default.
 
-        It is important to remember that all the links in the topology are specified through using particle indexes, which are integer numbers. Once 
-        the links have been added (either manually to an empty topology generated by :meth:`make_empty_topology` or parsed from a file by 
-        :meth:`make_topology_from_file`) the topology can be applied to any system (see :meth:`apply`). Note that, by default, it is not possible to 
-        apply the same topology to systems having different numbers of particles. This behaviour can be overridden by calling :meth:`disable_checks` 
-        prior to :meth:`apply`. 
+
+It is important to remember that all the links in the topology are specified through using particle indexes, which are integer numbers. Once 
+the links have been added (either manually to an empty topology generated by :meth:`make_empty_topology` or parsed from a file by 
+:meth:`make_topology_from_file`) the topology can be applied to any system (see :meth:`apply`). Note that, by default, it is not possible to 
+apply the same topology to systems having different numbers of particles. This behaviour can be overridden by calling :meth:`disable_checks` 
+prior to :meth:`apply`. 
 	)pbdoc");
 
 	topology.def(py::init<std::shared_ptr<System>>(), R"pbdoc(
@@ -290,7 +321,7 @@ using a constructor that takes as its only parameter the :class:`System` instanc
 			The input system.
     )pbdoc");
 
-	topology.def("add_bond", &Topology::add_bond, py::arg("p"), py::arg("q"), R"pbdoc(
+	topology.def("add_bond", static_cast<void (Topology::*)(int, int)>(&Topology::add_bond), py::arg("p"), py::arg("q"), R"pbdoc(
         Adds a bond between a pair of particles.
 
         Parameters
@@ -301,7 +332,7 @@ using a constructor that takes as its only parameter the :class:`System` instanc
 			The index of the second particle of the pair.
 	)pbdoc");
 
-	topology.def("add_angle", &Topology::add_angle, py::arg("p"), py::arg("q"), py::arg("r"), R"pbdoc(
+	topology.def("add_angle", static_cast<void (Topology::*)(int, int, int)>(&Topology::add_angle), py::arg("p"), py::arg("q"), py::arg("r"), R"pbdoc(
         Adds an angle formed by a triplet of particles.
 
         Parameters
@@ -314,7 +345,7 @@ using a constructor that takes as its only parameter the :class:`System` instanc
             The index of the third (and last) particle of the triplet.
     )pbdoc");
 
-	topology.def("add_dihedral", &Topology::add_dihedral, py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"), R"pbdoc(
+	topology.def("add_dihedral", static_cast<void (Topology::*)(int, int, int, int)>(&Topology::add_dihedral), py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"), R"pbdoc(
         Adds a dihedral formed by four particles.
 
         Parameters
@@ -348,8 +379,7 @@ using a constructor that takes as its only parameter the :class:`System` instanc
 
 	topology.def_property_readonly("bonds", [](const Topology &t) {
 		auto bonds = t.bonds();
-		std::vector<Bond> v(bonds.size());
-		std::copy(bonds.begin(), bonds.end(), v.begin());
+		std::vector<TopologyBond> v(bonds.begin(), bonds.end());
 		return v;
 	}, R"pbdoc(
         List(List(int)): The list of bonds stored in the topology. Each bond is a two-element list storing the ids of a pair of bonded particles. 
@@ -359,8 +389,7 @@ using a constructor that takes as its only parameter the :class:`System` instanc
 
 	topology.def_property_readonly("angles", [](const Topology &t) {
 		auto angles = t.angles();
-		std::vector<Angle> v(angles.size());
-		std::copy(angles.begin(), angles.end(), v.begin());
+		std::vector<TopologyAngle> v(angles.begin(), angles.end());
 		return v;
 	}, R"pbdoc(
 		List(List(int)): The list of angles stored in the topology. Each angle is a three-element list storing the ids of a triplet of particles involved in angle. 
@@ -370,8 +399,7 @@ using a constructor that takes as its only parameter the :class:`System` instanc
 
 	topology.def_property_readonly("dihedrals", [](const Topology &t) {
 		auto dihedrals = t.dihedrals();
-		std::vector<Dihedral> v(dihedrals.size());
-		std::copy(dihedrals.begin(), dihedrals.end(), v.begin());
+		std::vector<TopologyDihedral> v(dihedrals.begin(), dihedrals.end());
 		return v;
 	}, R"pbdoc(
 		List(List(int)): The list of dihedrals stored in the topology. Each dihedral is a four-element list storing the ids of four particles involved in a dihedral. 

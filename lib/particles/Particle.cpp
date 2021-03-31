@@ -39,57 +39,69 @@ Particle::~Particle() {
 
 }
 
-void Particle::add_bonded_neighbour(std::shared_ptr<Particle> new_neighbour) {
-	_bonded_neighbours.insert(new_neighbour);
-	new_neighbour->_bonded_neighbours.insert(shared_from_this());
+void Particle::add_bonded_neighbour(std::string type, std::shared_ptr<Particle> new_neighbour) {
+	_bonded_neighbours.insert({new_neighbour, type});
+	new_neighbour->_bonded_neighbours.insert({shared_from_this(), type});
 }
 
-void Particle::remove_bonded_neighbour(std::shared_ptr<Particle> to_remove) {
+void Particle::add_bonded_neighbour(std::shared_ptr<Particle> new_neighbour) {
+	add_bonded_neighbour(DEFAULT_LINK_TYPE, new_neighbour);
+}
+
+void Particle::remove_bonded_neighbour(ParticleBond to_remove) {
 	_bonded_neighbours.erase(to_remove);
 }
 
-void Particle::add_bonded_angle(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3) {
+void Particle::add_bonded_angle(std::string type, std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3) {
 	auto new_angle = std::make_shared<ParticleSet>();
 	new_angle->add_particle(p1);
 	new_angle->add_particle(p2);
 	new_angle->add_particle(p3);
 
-	add_bonded_angle(new_angle);
+	add_bonded_angle({new_angle, type});
 }
 
-void Particle::add_bonded_angle(std::shared_ptr<ParticleSet> new_angle) {
-	if(new_angle->N() != 3) {
-		std::string error = fmt::format("Bonded angles should contain 3 and only 3 particles ({} found)", new_angle->N());
+void Particle::add_bonded_angle(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3) {
+	add_bonded_angle(DEFAULT_LINK_TYPE, p1, p2, p3);
+}
+
+void Particle::add_bonded_angle(ParticleAngle new_angle) {
+	if(new_angle.first->N() != 3) {
+		std::string error = fmt::format("Bonded angles should contain 3 and only 3 particles ({} found)", new_angle.first->N());
 		throw std::runtime_error(error);
 	}
 
 	_bonded_angles.insert(new_angle);
 }
 
-void Particle::remove_bonded_angle(std::shared_ptr<ParticleSet> to_remove) {
+void Particle::remove_bonded_angle(ParticleAngle to_remove) {
 	_bonded_angles.erase(to_remove);
 }
 
-void Particle::add_bonded_dihedral(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3, std::shared_ptr<Particle> p4) {
+void Particle::add_bonded_dihedral(std::string type, std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3, std::shared_ptr<Particle> p4) {
 	auto new_dihedral = std::make_shared<ParticleSet>();
 	new_dihedral->add_particle(p1);
 	new_dihedral->add_particle(p2);
 	new_dihedral->add_particle(p3);
 	new_dihedral->add_particle(p4);
 
-	add_bonded_dihedral(new_dihedral);
+	add_bonded_dihedral({new_dihedral, type});
 }
 
-void Particle::add_bonded_dihedral(std::shared_ptr<ParticleSet> new_dihedral) {
-	if(new_dihedral->N() != 4) {
-		std::string error = fmt::format("Bonded dihedrals should contain 4 and only 4 particles ({} found)", new_dihedral->N());
+void Particle::add_bonded_dihedral(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3, std::shared_ptr<Particle> p4) {
+	add_bonded_dihedral(DEFAULT_LINK_TYPE, p1, p2, p3, p4);
+}
+
+void Particle::add_bonded_dihedral(ParticleDihedral new_dihedral) {
+	if(new_dihedral.first->N() != 4) {
+		std::string error = fmt::format("Bonded dihedrals should contain 4 and only 4 particles ({} found)", new_dihedral.first->N());
 		throw std::runtime_error(error);
 	}
 
 	_bonded_dihedrals.insert(new_dihedral);
 }
 
-void Particle::remove_bonded_dihedral(std::shared_ptr<ParticleSet> to_remove) {
+void Particle::remove_bonded_dihedral(ParticleDihedral to_remove) {
 	_bonded_dihedrals.erase(to_remove);
 }
 
@@ -127,44 +139,87 @@ index : int
 
 	particle.def(py::init<int, particle_type, vec3, vec3>());
 
-	particle.def("add_bonded_neighbour", &Particle::add_bonded_neighbour, py::arg("q"), R"pbdoc(
-        Add particle ``q`` to the list of the current particle's bonded neighbours and the current particle to 
-        the list of ``q``'s bonded neighbours.
-
-        Parameters
-        ----------
-        q : :class:`Particle`
-            The new bonded neighbour.
+	particle.def("add_bonded_neighbour", static_cast<void (Particle::*)(std::string, std::shared_ptr<Particle>)>(&Particle::add_bonded_neighbour), py::arg("type"), py::arg("q"), R"pbdoc(
+Add a bond of the given type between the current particle and ``q``.
+Parameters
+----------
+type : str
+    The type of bond shared by the two particles.
+q : :class:`Particle`
+	The new bonded neighbour.
 	)pbdoc");
 
-	particle.def("add_bonded_angle", (void (Particle::*)(std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>)) &Particle::add_bonded_angle,
-			py::arg("p1"), py::arg("p2"), py::arg("p3"), R"pbdoc(
-        Add an angle (defined by three particles) this particle is involved in. Note that the current particle must be one of the three particles given as parameters.
+	particle.def("add_bonded_neighbour", static_cast<void (Particle::*)(std::shared_ptr<Particle>)>(&Particle::add_bonded_neighbour), py::arg("q"), R"pbdoc(
+Add a bond of the default type between the current particle and ``q``.
 
-        Parameters
-        ----------
-        p1 : :class:`Particle`
-            The first particle participating in the angle.
-        p2 : :class:`Particle`
-            The second particle participating in the angle.
-        p3 : :class:`Particle`
-            The third particle participating in the angle.
+Parameters
+----------
+q : :class:`Particle`
+	The new bonded neighbour.
+	)pbdoc");
+
+	particle.def("add_bonded_angle", static_cast<void (Particle::*)(std::string, std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>)>(&Particle::add_bonded_angle),
+			py::arg("type"), py::arg("p1"), py::arg("p2"), py::arg("p3"), R"pbdoc(
+Add an angle of the given type (defined by three particles) this particle is involved in. Note that the current particle must be one of the three particles given as parameters.
+
+Parameters
+----------
+type : str
+    The type of the angle.
+p1 : :class:`Particle`
+	The first particle participating in the angle.
+p2 : :class:`Particle`
+	The second particle participating in the angle.
+p3 : :class:`Particle`
+	The third particle participating in the angle.
     )pbdoc");
 
-	particle.def("add_bonded_dihedral", (void (Particle::*)(std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>)) &Particle::add_bonded_dihedral,
-			py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"), R"pbdoc(
-        Add a dihedral (defined by four particles) this particle is involved in. Note that the current particle must be one of the four particles given as parameters.
+	particle.def("add_bonded_angle", static_cast<void (Particle::*)(std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>)>(&Particle::add_bonded_angle),
+			py::arg("p1"), py::arg("p2"), py::arg("p3"), R"pbdoc(
+Add an angle of the default type (defined by three particles) this particle is involved in. Note that the current particle must be one of the three particles given as parameters.
 
-        Parameters
-        ----------
-        p1 : :class:`Particle`
-            The first particle participating in the dihedral.
-        p2 : :class:`Particle`
-            The second particle participating in the dihedral.
-        p3 : :class:`Particle`
-            The third particle participating in the dihedral.
-        p4 : :class:`Particle`
-            The fourth particle participating in the dihedral.
+Parameters
+----------
+p1 : :class:`Particle`
+	The first particle participating in the angle.
+p2 : :class:`Particle`
+	The second particle participating in the angle.
+p3 : :class:`Particle`
+	The third particle participating in the angle.
+    )pbdoc");
+
+	particle.def("add_bonded_dihedral", static_cast<void (Particle::*)(std::string, std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>)>(&Particle::add_bonded_dihedral),
+			py::arg("type"), py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"), R"pbdoc(
+Add a dihedral of the given type (defined by four particles) this particle is involved in. Note that the current particle must be one of the four particles given as parameters.
+
+Parameters
+----------
+type : str
+    The type of the dihedral.
+p1 : :class:`Particle`
+	The first particle participating in the dihedral.
+p2 : :class:`Particle`
+	The second particle participating in the dihedral.
+p3 : :class:`Particle`
+	The third particle participating in the dihedral.
+p4 : :class:`Particle`
+	The fourth particle participating in the dihedral.
+    )pbdoc");
+
+	particle.def("add_bonded_dihedral", static_cast<void (Particle::*)(std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>)>(&Particle::add_bonded_dihedral),
+			py::arg("p1"), py::arg("p2"), py::arg("p3"), py::arg("p4"), R"pbdoc(
+Add a dihedral of the default type (defined by four particles) this particle is involved in. Note that the current particle must be one of the four particles given as parameters.
+
+Parameters
+----------
+p1 : :class:`Particle`
+	The first particle participating in the dihedral.
+p2 : :class:`Particle`
+	The second particle participating in the dihedral.
+p3 : :class:`Particle`
+	The third particle participating in the dihedral.
+p4 : :class:`Particle`
+	The fourth particle participating in the dihedral.
     )pbdoc");
 
 	particle.def("add_neighbour", &Particle::add_neighbour, py::arg("q"), R"pbdoc(

@@ -12,6 +12,7 @@
 #define CUB(x) ((x) * (x) * (x))
 
 #define DEFAULT_PARTICLE_TYPE "0"
+#define DEFAULT_LINK_TYPE "1"
 
 #ifndef PYTHON_BINDINGS
 #define PYBIND11_EXPORT

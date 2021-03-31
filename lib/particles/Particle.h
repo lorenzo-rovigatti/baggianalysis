@@ -16,6 +16,11 @@
 namespace ba {
 
 class ParticleSet;
+class Particle;
+
+using ParticleBond = std::pair<std::shared_ptr<Particle>, std::string>;
+using ParticleAngle = std::pair<std::shared_ptr<ParticleSet>, std::string>;
+using ParticleDihedral = std::pair<std::shared_ptr<ParticleSet>, std::string>;
 
 class Particle: public std::enable_shared_from_this<Particle> {
 public:
@@ -94,25 +99,28 @@ public:
 		_orientation_vectors.clear();
 	}
 
-	const std::set<std::shared_ptr<Particle>> &bonded_neighbours() const {
+	const std::set<ParticleBond> &bonded_neighbours() const {
 		return _bonded_neighbours;
 	}
+	void add_bonded_neighbour(std::string type, std::shared_ptr<Particle> new_neighbour);
 	void add_bonded_neighbour(std::shared_ptr<Particle> new_neighbour);
-	void remove_bonded_neighbour(std::shared_ptr<Particle> to_remove);
+	void remove_bonded_neighbour(ParticleBond to_remove);
 
-	const std::set<std::shared_ptr<ParticleSet>> &bonded_angles() const {
+	const std::set<ParticleAngle> &bonded_angles() const {
 		return _bonded_angles;
 	}
+	void add_bonded_angle(std::string type, std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3);
 	void add_bonded_angle(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3);
-	void add_bonded_angle(std::shared_ptr<ParticleSet> new_angle);
-	void remove_bonded_angle(std::shared_ptr<ParticleSet> to_remove);
+	void add_bonded_angle(ParticleAngle new_angle);
+	void remove_bonded_angle(ParticleAngle to_remove);
 
-	const std::set<std::shared_ptr<ParticleSet>> &bonded_dihedrals() const {
+	const std::set<ParticleDihedral> &bonded_dihedrals() const {
 		return _bonded_dihedrals;
 	}
+	void add_bonded_dihedral(std::string type, std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3, std::shared_ptr<Particle> p4);
 	void add_bonded_dihedral(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3, std::shared_ptr<Particle> p4);
-	void add_bonded_dihedral(std::shared_ptr<ParticleSet> new_dihedral);
-	void remove_bonded_dihedral(std::shared_ptr<ParticleSet> to_remove);
+	void add_bonded_dihedral(ParticleDihedral new_dihedral);
+	void remove_bonded_dihedral(ParticleDihedral to_remove);
 
 	const std::set<std::shared_ptr<Particle>> &neighbours() const {
 		return _neighbours;
@@ -137,9 +145,9 @@ protected:
 	vec3 _velocity = vec3(0., 0., 0.);
 	std::vector<vec3> _orientation_vectors;
 
-	std::set<std::shared_ptr<Particle>> _bonded_neighbours;
-	std::set<std::shared_ptr<ParticleSet>> _bonded_angles;
-	std::set<std::shared_ptr<ParticleSet>> _bonded_dihedrals;
+	std::set<ParticleBond> _bonded_neighbours;
+	std::set<ParticleAngle> _bonded_angles;
+	std::set<ParticleDihedral> _bonded_dihedrals;
 
 	std::set<std::shared_ptr<Particle>> _neighbours;
 

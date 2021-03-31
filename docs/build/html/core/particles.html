@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Particle-related classes &mdash; baggianalysis 0.1.0b1.dev7+g71681aa.d20210330 documentation</title>
+  <title>Particle-related classes &mdash; baggianalysis 0.1.0b1.dev10+g0575546.d20210331 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.1.0b1.dev7+g71681aa.d20210330
+                0.1.0b1.dev10+g0575546.d20210331
               </div>
             
           
@@ -209,8 +209,26 @@
 </ol>
 <dl class="py method">
 <dt id="baggianalysis.core.Particle.add_bonded_angle">
-<code class="sig-name descname">add_bonded_angle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">p1</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">p2</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">p3</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.Particle.add_bonded_angle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add an angle (defined by three particles) this particle is involved in. Note that the current particle must be one of the three particles given as parameters.</p>
+<code class="sig-name descname">add_bonded_angle</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Particle.add_bonded_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>add_bonded_angle(self: baggianalysis.core.Particle, type: str, p1: baggianalysis.core.Particle, p2: baggianalysis.core.Particle, p3: baggianalysis.core.Particle) -&gt; None</p></li>
+</ol>
+<p>Add an angle of the given type (defined by three particles) this particle is involved in. Note that the current particle must be one of the three particles given as parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of the angle.</p></li>
+<li><p><strong>p1</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The first particle participating in the angle.</p></li>
+<li><p><strong>p2</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The second particle participating in the angle.</p></li>
+<li><p><strong>p3</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The third particle participating in the angle.</p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>add_bonded_angle(self: baggianalysis.core.Particle, p1: baggianalysis.core.Particle, p2: baggianalysis.core.Particle, p3: baggianalysis.core.Particle) -&gt; None</p></li>
+</ol>
+<p>Add an angle of the default type (defined by three particles) this particle is involved in. Note that the current particle must be one of the three particles given as parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -224,8 +242,27 @@
 
 <dl class="py method">
 <dt id="baggianalysis.core.Particle.add_bonded_dihedral">
-<code class="sig-name descname">add_bonded_dihedral</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">p1</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">p2</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">p3</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">p4</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.Particle.add_bonded_dihedral" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a dihedral (defined by four particles) this particle is involved in. Note that the current particle must be one of the four particles given as parameters.</p>
+<code class="sig-name descname">add_bonded_dihedral</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Particle.add_bonded_dihedral" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>add_bonded_dihedral(self: baggianalysis.core.Particle, type: str, p1: baggianalysis.core.Particle, p2: baggianalysis.core.Particle, p3: baggianalysis.core.Particle, p4: baggianalysis.core.Particle) -&gt; None</p></li>
+</ol>
+<p>Add a dihedral of the given type (defined by four particles) this particle is involved in. Note that the current particle must be one of the four particles given as parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of the dihedral.</p></li>
+<li><p><strong>p1</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The first particle participating in the dihedral.</p></li>
+<li><p><strong>p2</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The second particle participating in the dihedral.</p></li>
+<li><p><strong>p3</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The third particle participating in the dihedral.</p></li>
+<li><p><strong>p4</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The fourth particle participating in the dihedral.</p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>add_bonded_dihedral(self: baggianalysis.core.Particle, p1: baggianalysis.core.Particle, p2: baggianalysis.core.Particle, p3: baggianalysis.core.Particle, p4: baggianalysis.core.Particle) -&gt; None</p></li>
+</ol>
+<p>Add a dihedral of the default type (defined by four particles) this particle is involved in. Note that the current particle must be one of the four particles given as parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -240,9 +277,20 @@
 
 <dl class="py method">
 <dt id="baggianalysis.core.Particle.add_bonded_neighbour">
-<code class="sig-name descname">add_bonded_neighbour</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">q</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.Particle.add_bonded_neighbour" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add particle <code class="docutils literal notranslate"><span class="pre">q</span></code> to the list of the current particle’s bonded neighbours and the current particle to
-the list of <code class="docutils literal notranslate"><span class="pre">q</span></code>’s bonded neighbours.</p>
+<code class="sig-name descname">add_bonded_neighbour</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Particle.add_bonded_neighbour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>add_bonded_neighbour(self: baggianalysis.core.Particle, type: str, q: baggianalysis.core.Particle) -&gt; None</p></li>
+</ol>
+<p>Add a bond of the given type between the current particle and <code class="docutils literal notranslate"><span class="pre">q</span></code>.
+:param type: The type of bond shared by the two particles.
+:type type: str
+:param q: The new bonded neighbour.
+:type q: <a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a></p>
+<ol class="arabic simple" start="2">
+<li><p>add_bonded_neighbour(self: baggianalysis.core.Particle, q: baggianalysis.core.Particle) -&gt; None</p></li>
+</ol>
+<p>Add a bond of the default type between the current particle and <code class="docutils literal notranslate"><span class="pre">q</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>q</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The new bonded neighbour.</p>

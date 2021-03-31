@@ -46,17 +46,17 @@ void LAMMPSDataFileExporter::_write_system_to_stream(std::shared_ptr<System> sys
 	output << fmt::format("{} atom types", types.size()) << std::endl;
 	if(N_bonds > 0) {
 		output << fmt::format("{} bonds", N_bonds) << std::endl;
-		output << fmt::format("1 bond types") << std::endl;
+		output << fmt::format("{} bond types", topology.bond_types().size()) << std::endl;
 	}
 
 	if(N_angles > 0) {
 		output << fmt::format("{} angles", N_angles) << std::endl;
-		output << fmt::format("1 angle types") << std::endl;
+		output << fmt::format("{} angle types", topology.angle_types().size()) << std::endl;
 	}
 
 	if(N_dihedrals > 0) {
 		output << fmt::format("{} dihedrals", N_dihedrals) << std::endl;
-		output << fmt::format("1 dihedral types") << std::endl;
+		output << fmt::format("{} dihedral types", topology.dihedral_types().size()) << std::endl;
 	}
 
 	output << std::endl;
@@ -100,7 +100,7 @@ void LAMMPSDataFileExporter::_write_system_to_stream(std::shared_ptr<System> sys
 		// LAMMPS's ids start from 1
 		uint i = 1;
 		for(auto bond : topology.bonds()) {
-			output << fmt::format("{} {} {} {}", i, 1, bond[0], bond[1]) << std::endl;
+			output << fmt::format("{} {} {} {}", i, bond.type, bond[0], bond[1]) << std::endl;
 			i++;
 		}
 	}
@@ -112,7 +112,7 @@ void LAMMPSDataFileExporter::_write_system_to_stream(std::shared_ptr<System> sys
 		// LAMMPS's ids start from 1
 		uint i = 1;
 		for(auto angle : topology.angles()) {
-			output << fmt::format("{} {} {} {} {}", i, 1, angle[0], angle[1], angle[2]) << std::endl;
+			output << fmt::format("{} {} {} {} {}", i, angle.type, angle[0], angle[1], angle[2]) << std::endl;
 			i++;
 		}
 	}
@@ -124,7 +124,7 @@ void LAMMPSDataFileExporter::_write_system_to_stream(std::shared_ptr<System> sys
 		// LAMMPS's ids start from 1
 		uint i = 1;
 		for(auto dihedral : topology.dihedrals()) {
-			output << fmt::format("{} {} {} {} {} {}", i, 1, dihedral[0], dihedral[1], dihedral[2], dihedral[3]) << std::endl;
+			output << fmt::format("{} {} {} {} {} {}", i, dihedral.type, dihedral[0], dihedral[1], dihedral[2], dihedral[3]) << std::endl;
 			i++;
 		}
 	}

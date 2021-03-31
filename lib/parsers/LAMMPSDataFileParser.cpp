@@ -58,14 +58,6 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 
 	_header_data = _parse_headers(configuration);
 
-	if(_header_data.angle_types > 1) {
-		BA_WARNING("Baggianalysis does not support more than one angle type ({} detected)", _header_data.angle_types);
-	}
-
-	if(_header_data.dihedral_types > 1) {
-		BA_WARNING("Baggianalysis does not support more than one dihedral type ({} detected)", _header_data.dihedral_types);
-	}
-
 	// there is no time information in a LAMMPS data file
 	syst->time = 0;
 	syst->box = _header_data.box;
@@ -107,7 +99,9 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 					throw std::runtime_error(error);
 				}
 
+				std::string type = split[1];
 				_topology->add_angle(
+						type,
 						utils::lexical_cast<int>(split[2]),
 						utils::lexical_cast<int>(split[3]),
 						utils::lexical_cast<int>(split[4]));
@@ -129,9 +123,10 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 					throw std::runtime_error(error);
 				}
 
+				std::string type = split[1];
 				int id_1 = utils::lexical_cast<int>(split[2]);
 				int id_2 = utils::lexical_cast<int>(split[3]);
-				_topology->add_bond(id_1, id_2);
+				_topology->add_bond(type, id_1, id_2);
 			}
 		}
 		else if(line == "Dihedrals") {
@@ -150,7 +145,9 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 					throw std::runtime_error(error);
 				}
 
+				std::string type = split[1];
 				_topology->add_dihedral(
+						type,
 						utils::lexical_cast<int>(split[2]),
 						utils::lexical_cast<int>(split[3]),
 						utils::lexical_cast<int>(split[4]),

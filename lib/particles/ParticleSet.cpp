@@ -109,8 +109,9 @@ void ParticleSet::add_particle(std::shared_ptr<Particle> p) {
 }
 
 void ParticleSet::remove_particle(std::shared_ptr<Particle> p) {
-	for(auto neigh : p->bonded_neighbours()) {
-		neigh->remove_bonded_neighbour(p);
+	for(auto link : p->bonded_neighbours()) {
+		auto neigh = link.first;
+		neigh->remove_bonded_neighbour(link);
 	}
 
 	_particles_by_id.erase(p->index());

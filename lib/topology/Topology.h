@@ -18,9 +18,45 @@ namespace ba {
 
 class System;
 
-using Bond = std::array<int, 2>;
-using Angle = std::array<int, 3>;
-using Dihedral = std::array<int, 4>;
+template<int size>
+struct TopologyLink {
+	template<typename ... T>
+	TopologyLink(T&&... values) :
+					particles( { std::forward<T>(values)... }) {
+
+	}
+
+	template<typename ... T>
+	TopologyLink(std::string ntype, T&&... values) :
+					type(ntype),
+					particles( { std::forward<T>(values)... }) {
+
+	}
+
+	TopologyLink() = delete;
+
+	typename std::array<int, size>::value_type &operator[](std::size_t idx) {
+		return particles[idx];
+	}
+
+	const typename std::array<int, size>::value_type &operator[](std::size_t idx) const {
+		return particles[idx];
+	}
+
+	bool operator<(const TopologyLink& rhs) const {
+		if(type == rhs.type) {
+			return particles < rhs.particles;
+		}
+		return type < rhs.type;
+	}
+
+	std::string type = DEFAULT_LINK_TYPE;
+	std::array<int, size> particles;
+};
+
+using TopologyBond = TopologyLink<2>;
+using TopologyAngle = TopologyLink<3>;
+using TopologyDihedral = TopologyLink<4>;
 
 class Topology;
 using TopologyParser = std::function<void(std::string, std::shared_ptr<Topology>)>;
@@ -35,8 +71,11 @@ public:
 	static std::shared_ptr<Topology> make_topology_from_system(std::shared_ptr<System> system);
 
 	void add_bond(int p, int q);
+	void add_bond(std::string type, int p, int q);
 	void add_angle(int p, int q, int r);
+	void add_angle(std::string type, int p, int q, int r);
 	void add_dihedral(int p, int q, int r, int s);
+	void add_dihedral(std::string type, int p, int q, int r, int s);
 
 	void enable_checks();
 	void disable_checks();
@@ -44,9 +83,15 @@ public:
 	void apply(std::shared_ptr<System> system);
 
 	const std::vector<std::set<int>> &clusters() const;
-	const std::set<Bond> &bonds() const;
-	const std::set<Angle> &angles() const;
-	const std::set<Dihedral> &dihedrals() const;
+
+	const std::set<TopologyBond> &bonds() const;
+	const std::set<std::string> &bond_types() const;
+
+	const std::set<TopologyAngle> &angles() const;
+	const std::set<std::string> &angle_types() const;
+
+	const std::set<TopologyDihedral> &dihedrals() const;
+	const std::set<std::string> &dihedral_types() const;
 
 protected:
 	Topology();
@@ -60,9 +105,14 @@ protected:
 	/// the number of particles contained in the system that this topology was initialised for
 	uint _N_in_system;
 
-	std::set<Bond> _bonds;
-	std::set<Angle> _angles;
-	std::set<Dihedral> _dihedrals;
+	std::set<TopologyBond> _bonds;
+	std::set<std::string> _bond_types;
+
+	std::set<TopologyAngle> _angles;
+	std::set<std::string> _angle_types;
+
+	std::set<TopologyDihedral> _dihedrals;
+	std::set<std::string> _dihedral_types;
 
 	std::vector<std::set<int>> _clusters;
 };
