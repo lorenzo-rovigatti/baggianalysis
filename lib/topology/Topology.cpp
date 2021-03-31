@@ -135,6 +135,13 @@ void Topology::apply(std::shared_ptr<System> system) {
 			particle->add_bonded_angle(particles[0], particles[1], particles[2]);
 		}
 	}
+
+	for(auto &dihedral : _dihedrals) {
+		std::array<std::shared_ptr<Particle>, 4> particles({system->particle_by_id(dihedral[0]), system->particle_by_id(dihedral[1]), system->particle_by_id(dihedral[2]), system->particle_by_id(dihedral[3])});
+		for(auto particle : particles) {
+			particle->add_bonded_dihedral(particles[0], particles[1], particles[2], particles[3]);
+		}
+	}
 }
 
 const std::vector<std::set<int>> &Topology::clusters() const {

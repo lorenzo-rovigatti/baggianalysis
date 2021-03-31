@@ -58,6 +58,14 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 
 	_header_data = _parse_headers(configuration);
 
+	if(_header_data.angle_types > 1) {
+		BA_WARNING("Baggianalysis does not support more than one angle type ({} detected)", _header_data.angle_types);
+	}
+
+	if(_header_data.dihedral_types > 1) {
+		BA_WARNING("Baggianalysis does not support more than one dihedral type ({} detected)", _header_data.dihedral_types);
+	}
+
 	// there is no time information in a LAMMPS data file
 	syst->time = 0;
 	syst->box = _header_data.box;
@@ -193,6 +201,12 @@ LAMMPSDataFileParser::HeaderData LAMMPSDataFileParser::_parse_headers(std::ifstr
 				}
 				else if(utils::ends_with(line, "bond types")) {
 					hd.bond_types = utils::lexical_cast<int>(split[0]);
+				}
+				else if(utils::ends_with(line, "angle types")) {
+					hd.angle_types = utils::lexical_cast<int>(split[0]);
+				}
+				else if(utils::ends_with(line, "dihedral types")) {
+					hd.dihedral_types = utils::lexical_cast<int>(split[0]);
 				}
 				else if(utils::ends_with(line, "xlo xhi")) {
 					hd.box[0] = _parse_box_line(split);

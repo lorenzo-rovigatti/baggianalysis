@@ -85,13 +85,17 @@ std::shared_ptr<System> LAMMPSDumpParser::_parse_stream(std::ifstream &configura
 		syst->add_particle(new_particle);
 	}
 
-	// copy masses and charges from the system's data file
+	// copy masses, charges and topology from the system's data file
 	if(_data_file_system != nullptr) {
+		Topology topology(_data_file_system);
+
 		for(auto p : syst->particles()) {
 			auto other_p = _data_file_system->particle_by_id(p->index());
 			p->set_mass(other_p->mass());
 			p->set_charge(other_p->charge());
 		}
+
+		topology.apply(syst);
 	}
 
 	return syst;

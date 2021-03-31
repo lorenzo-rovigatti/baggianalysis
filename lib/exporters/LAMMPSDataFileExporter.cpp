@@ -118,6 +118,7 @@ void LAMMPSDataFileExporter::_write_system_to_stream(std::shared_ptr<System> sys
 	}
 
 	if(N_dihedrals > 0) {
+		output << std::endl;
 		output << "Dihedrals" << std::endl << std::endl;
 
 		// LAMMPS's ids start from 1

@@ -37,6 +37,8 @@ private:
 		uint N_dihedrals = 0;
 		uint atom_types = 0;
 		uint bond_types = 0;
+		uint angle_types = 0;
+		uint dihedral_types = 0;
 		vec3 box = vec3(1., 1., 1.);
 		bool empty = false;
 	};
