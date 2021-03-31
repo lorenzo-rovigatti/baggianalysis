@@ -216,10 +216,10 @@ void Topology::_fill_clusters(std::shared_ptr<System> system) {
 	}
 
 	if(_clusters.size() == 1) {
-		BA_INFO("Topology: Found 1 cluster");
+		BA_DEBUG("Topology: Found 1 cluster");
 	}
 	else {
-		BA_INFO("Topology: Found {} clusters", _clusters.size());
+		BA_DEBUG("Topology: Found {} clusters", _clusters.size());
 	}
 }
 
