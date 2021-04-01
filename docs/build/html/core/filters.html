@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Filters &mdash; baggianalysis 0.1.0b1.dev10+g0575546.d20210331 documentation</title>
+  <title>Filters &mdash; baggianalysis 0.1.0b1.dev11+gf63a852.d20210401 documentation</title>
   
 
   
@@ -29,6 +29,7 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -60,7 +61,7 @@
             
             
               <div class="version">
-                0.1.0b1.dev10+g0575546.d20210331
+                0.1.0b1.dev11+gf63a852.d20210401
               </div>
             
           
@@ -203,7 +204,10 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.MapParticles" title="baggianalysis.core.MapParticles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MapParticles</span></code></a></p></td>
 <td><p>A filter that reduces the number of particles in a configuration by averaging the position and velocity of sets of particles.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.SubtractCOM" title="baggianalysis.core.SubtractCOM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SubtractCOM</span></code></a></p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">MolecularCOMs</span></code></p></td>
+<td><p>A filter that takes each molecule of the given system and adds it as a particle in the new system using the molecule’s centre of mass, velocity, charge and mass.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.SubtractCOM" title="baggianalysis.core.SubtractCOM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SubtractCOM</span></code></a></p></td>
 <td><p>A filter that removes the centre of mass position and velocity from each particle.</p></td>
 </tr>
 </tbody>

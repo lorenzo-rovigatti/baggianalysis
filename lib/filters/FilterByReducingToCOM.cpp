@@ -23,7 +23,7 @@ shared_ptr<System> FilterByReducingToCOM::filter(std::shared_ptr<const System> s
 	shared_ptr<System> new_syst(syst->empty_copy());
 
 	// the new system will contain a single particle, so we give it index 0
-	shared_ptr<Particle> new_particle(std::make_shared<Particle>(0, DEFAULT_PARTICLE_TYPE, syst->com(), syst->average_velocity()));
+	shared_ptr<Particle> new_particle(std::make_shared<Particle>(0, DEFAULT_PARTICLE_TYPE, syst->com(), syst->velocity()));
 	new_syst->add_particle(new_particle);
 
 	return new_syst;

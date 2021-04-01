@@ -31,18 +31,18 @@ Topology::Topology(std::shared_ptr<System> system) {
 
 		for(auto link : p->bonded_angles()) {
 			auto angle = link.first;
-			int p = angle->particles()[0]->index();
-			int q = angle->particles()[1]->index();
-			int r = angle->particles()[2]->index();
+			int p = angle[0]->index();
+			int q = angle[1]->index();
+			int r = angle[2]->index();
 			add_angle(link.second, p, q, r);
 		}
 
 		for(auto link : p->bonded_dihedrals()) {
 			auto dihedral = link.first;
-			int p = dihedral->particles()[0]->index();
-			int q = dihedral->particles()[1]->index();
-			int r = dihedral->particles()[2]->index();
-			int s = dihedral->particles()[3]->index();
+			int p = dihedral[0]->index();
+			int q = dihedral[1]->index();
+			int r = dihedral[2]->index();
+			int s = dihedral[3]->index();
 			add_dihedral(link.second, p, q, r, s);
 		}
 	}

@@ -10,6 +10,7 @@ SET(ba_lib_SOURCES
 	filters/FilterByType.cpp
 	filters/FixParticlePath.cpp
 	filters/MapParticles.cpp
+	filters/MolecularCOMs.cpp
 	filters/SubtractCOM.cpp
 	neighbour_finders/CutoffFinder.cpp
 	neighbour_finders/FixedNumberFinder.cpp

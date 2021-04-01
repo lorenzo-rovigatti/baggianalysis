@@ -88,11 +88,17 @@ public:
 	 */
 	vector_vec3 velocities() const;
 
+	/// Return the sum of the masses of the particles contained in the set
+	double mass() const;
+
+	/// Return the total charge contained in the set
+	double charge() const;
+
 	/// Return the centre of mass of the set
 	vec3 com() const;
 
-	/// Return the average velocity of the set
-	vec3 average_velocity() const;
+	/// Return the velocity of the set
+	vec3 velocity() const;
 
 	/// Return all the particles stored in the set
 	std::vector<std::shared_ptr<Particle>> &particles();

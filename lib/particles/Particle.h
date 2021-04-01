@@ -19,8 +19,8 @@ class ParticleSet;
 class Particle;
 
 using ParticleBond = std::pair<std::shared_ptr<Particle>, std::string>;
-using ParticleAngle = std::pair<std::shared_ptr<ParticleSet>, std::string>;
-using ParticleDihedral = std::pair<std::shared_ptr<ParticleSet>, std::string>;
+using ParticleAngle = std::pair<std::array<std::shared_ptr<Particle>, 3>, std::string>;
+using ParticleDihedral = std::pair<std::array<std::shared_ptr<Particle>, 4>, std::string>;
 
 class Particle: public std::enable_shared_from_this<Particle> {
 public:

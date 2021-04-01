@@ -72,22 +72,31 @@ vector_vec3 ParticleSet::velocities() const {
 	return vels;
 }
 
+double ParticleSet::mass() const {
+	return std::accumulate(_particles.begin(), _particles.end(), 0., [](double tot, std::shared_ptr<Particle> p) { return tot + p->mass(); });
+}
+
+double ParticleSet::charge() const {
+	return std::accumulate(_particles.begin(), _particles.end(), 0., [](double tot, std::shared_ptr<Particle> p) { return tot + p->charge(); });
+}
+
 vec3 ParticleSet::com() const {
 	vec3 com(0., 0., 0.);
+	double tot_mass = 0.;
 	for(auto p : _particles) {
-		com += p->position();
+		com += p->mass() * p->position();
+		tot_mass += p->mass();
 	}
-	com /= this->N();
+	com /= tot_mass;
 	return com;
 }
 
-vec3 ParticleSet::average_velocity() const {
-	vec3 v_avg(0., 0., 0.);
+vec3 ParticleSet::velocity() const {
+	vec3 v(0., 0., 0.);
 	for(auto p : _particles) {
-		v_avg += p->velocity();
+		v += p->velocity();
 	}
-	v_avg /= this->N();
-	return v_avg;
+	return v;
 }
 
 std::vector<std::shared_ptr<Particle>> &ParticleSet::particles() {
@@ -140,51 +149,31 @@ void ParticleSet::sort_particles_by_id() {
 	std::sort(_particles.begin(), _particles.end(), comp_operator);
 }
 
-bool ParticleSet::operator<(const ParticleSet& rhs) const {
-		if(N() == rhs.N()) {
-			/*
-			 * here we compare the two sets particle by particle. We count the pairs of particles for which
-			 * the one in the current set has an index smaller than the other. If the total number of such pairs
-			 * is larger than N / 2 then this ParticleSet is "smaller" than the other
-			 */
-			uint N_less_than = 0;
-			for(uint i = 0; i < N(); i++) {
-				if(_particles[i]->index() < rhs._particles[i]->index()) {
-					N_less_than++;
-				}
-			}
-
-			return N_less_than > (N() / 2);
-		}
-		else {
-			return N() < rhs.N();
-		}
-	}
-
 #ifdef PYTHON_BINDINGS
 
 void export_ParticleSet(py::module &m) {
 	py::class_<ParticleSet, std::shared_ptr<ParticleSet>> particle_set(m, "ParticleSet", "A set of particles.");
 
-	particle_set
-		.def(py::init<>())
-		.def("N", &ParticleSet::N)
-		.def("indexes", &ParticleSet::indexes)
-		.def("types", &ParticleSet::types)
-		.def("masses", &ParticleSet::masses)
-		.def("charges", &ParticleSet::charges)
-		.def("positions", &ParticleSet::positions)
-		.def("velocities", &ParticleSet::velocities)
-		.def("com", &ParticleSet::com)
-		.def("average_velocity", &ParticleSet::average_velocity)
-		// here we tell pybind11 which of the two particles() methods we want to have bindings for
-		.def("particles", (std::vector<std::shared_ptr<Particle>> &(ParticleSet::*)())(&ParticleSet::particles))
-		.def("add_particle", &ParticleSet::add_particle)
-		.def("remove_particle", &ParticleSet::remove_particle)
-		.def("remove_particle_by_id", &ParticleSet::remove_particle_by_id)
-		.def("particle_by_id", &ParticleSet::particle_by_id)
-		.def("sort_particles_by_id", &ParticleSet::sort_particles_by_id)
-		.def_property("name", &ParticleSet::name, &ParticleSet::set_name);
+	particle_set.def(py::init<>());
+	particle_set.def("N", &ParticleSet::N);
+	particle_set.def("indexes", &ParticleSet::indexes);
+	particle_set.def("types", &ParticleSet::types);
+	particle_set.def("masses", &ParticleSet::masses);
+	particle_set.def("charges", &ParticleSet::charges);
+	particle_set.def("positions", &ParticleSet::positions);
+	particle_set.def("velocities", &ParticleSet::velocities);
+	particle_set.def("mass", &ParticleSet::mass);
+	particle_set.def("charge", &ParticleSet::charge);
+	particle_set.def("com", &ParticleSet::com);
+	particle_set.def("average_velocity", &ParticleSet::velocity);
+	// here we tell pybind11 which of the two particles() methods we want to have bindings for
+	particle_set.def("particles", (std::vector<std::shared_ptr<Particle>> &(ParticleSet::*)())(&ParticleSet::particles));
+	particle_set.def("add_particle", &ParticleSet::add_particle);
+	particle_set.def("remove_particle", &ParticleSet::remove_particle);
+	particle_set.def("remove_particle_by_id", &ParticleSet::remove_particle_by_id);
+	particle_set.def("particle_by_id", &ParticleSet::particle_by_id);
+	particle_set.def("sort_particles_by_id", &ParticleSet::sort_particles_by_id);
+	particle_set.def_property("name", &ParticleSet::name, &ParticleSet::set_name);
 }
 
 #endif

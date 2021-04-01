@@ -53,12 +53,9 @@ void Particle::remove_bonded_neighbour(ParticleBond to_remove) {
 }
 
 void Particle::add_bonded_angle(std::string type, std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3) {
-	auto new_angle = std::make_shared<ParticleSet>();
-	new_angle->add_particle(p1);
-	new_angle->add_particle(p2);
-	new_angle->add_particle(p3);
+	std::array<std::shared_ptr<Particle>, 3> particles({p1, p2, p3});
 
-	add_bonded_angle({new_angle, type});
+	add_bonded_angle({particles, type});
 }
 
 void Particle::add_bonded_angle(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3) {
@@ -66,11 +63,6 @@ void Particle::add_bonded_angle(std::shared_ptr<Particle> p1, std::shared_ptr<Pa
 }
 
 void Particle::add_bonded_angle(ParticleAngle new_angle) {
-	if(new_angle.first->N() != 3) {
-		std::string error = fmt::format("Bonded angles should contain 3 and only 3 particles ({} found)", new_angle.first->N());
-		throw std::runtime_error(error);
-	}
-
 	_bonded_angles.insert(new_angle);
 }
 
@@ -79,13 +71,9 @@ void Particle::remove_bonded_angle(ParticleAngle to_remove) {
 }
 
 void Particle::add_bonded_dihedral(std::string type, std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3, std::shared_ptr<Particle> p4) {
-	auto new_dihedral = std::make_shared<ParticleSet>();
-	new_dihedral->add_particle(p1);
-	new_dihedral->add_particle(p2);
-	new_dihedral->add_particle(p3);
-	new_dihedral->add_particle(p4);
+	std::array<std::shared_ptr<Particle>, 4> particles({p1, p2, p3, p4});
 
-	add_bonded_dihedral({new_dihedral, type});
+	add_bonded_dihedral({particles, type});
 }
 
 void Particle::add_bonded_dihedral(std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3, std::shared_ptr<Particle> p4) {
@@ -93,11 +81,6 @@ void Particle::add_bonded_dihedral(std::shared_ptr<Particle> p1, std::shared_ptr
 }
 
 void Particle::add_bonded_dihedral(ParticleDihedral new_dihedral) {
-	if(new_dihedral.first->N() != 4) {
-		std::string error = fmt::format("Bonded dihedrals should contain 4 and only 4 particles ({} found)", new_dihedral.first->N());
-		throw std::runtime_error(error);
-	}
-
 	_bonded_dihedrals.insert(new_dihedral);
 }
 
