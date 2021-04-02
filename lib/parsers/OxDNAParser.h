@@ -15,6 +15,8 @@
 
 namespace ba {
 
+using OxDNAOrientationInserter = std::function<void(std::shared_ptr<Particle>, glm::dmat3 &)>;
+
 class OxDNATopologyParser {
 public:
 	OxDNATopologyParser(std::string topology_file);
@@ -37,10 +39,14 @@ public:
 	OxDNAParser(std::shared_ptr<oxDNA_topology::Default> topology_parser);
 	virtual ~OxDNAParser();
 
-	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override;
+	void set_orientation_inserter(OxDNAOrientationInserter inserter);
+
+	std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override;
 
 protected:
 	std::shared_ptr<oxDNA_topology::Default> _topology_parser;
+
+	OxDNAOrientationInserter _orientation_inserter = [](std::shared_ptr<Particle>, glm::dmat3 &) {};
 };
 
 #ifdef PYTHON_BINDINGS

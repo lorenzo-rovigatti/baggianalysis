@@ -10,6 +10,8 @@
 #include "oxDNA_topology_parsers/TSP.h"
 #include "../utils/strings.h"
 
+#include <glm/gtx/orthonormalize.hpp>
+
 namespace ba {
 
 OxDNAParser::OxDNAParser(std::string topology_file) :
@@ -23,6 +25,10 @@ OxDNAParser::OxDNAParser(std::shared_ptr<oxDNA_topology::Default> topology_parse
 
 OxDNAParser::~OxDNAParser() {
 
+}
+
+void OxDNAParser::set_orientation_inserter(OxDNAOrientationInserter inserter) {
+	_orientation_inserter = inserter;
 }
 
 std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration) {
@@ -71,15 +77,34 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 			std::getline(configuration, line);
 			if(configuration.good() && line.size() > 0) {
 				split = utils::split(line);
-				vec3 position = vec3(utils::lexical_cast<double>(split[0]),
-						utils::lexical_cast<double>(split[1]),
-						utils::lexical_cast<double>(split[2]));
-				vec3 velocity = vec3(utils::lexical_cast<double>(split[9]),
-						utils::lexical_cast<double>(split[10]),
-						utils::lexical_cast<double>(split[11]));
+				vec3 position, velocity;
+				glm::dmat3 orientation_matrix;
+
+				try {
+					position = vec3(utils::lexical_cast<double>(split[0]), utils::lexical_cast<double>(split[1]), utils::lexical_cast<double>(split[2]));
+					velocity = vec3(utils::lexical_cast<double>(split[9]), utils::lexical_cast<double>(split[10]), utils::lexical_cast<double>(split[11]));
+
+					vec3 a1(utils::lexical_cast<double>(split[3]), utils::lexical_cast<double>(split[4]), utils::lexical_cast<double>(split[5]));
+					vec3 a3(utils::lexical_cast<double>(split[6]), utils::lexical_cast<double>(split[7]), utils::lexical_cast<double>(split[8]));
+
+					// build the orientation matrix
+					glm::normalize(a1);
+					glm::normalize(a3);
+					vec3 a2 = glm::cross(a3, a1);
+
+					orientation_matrix = glm::dmat3(a1, a2, a3);
+					orientation_matrix = glm::transpose(orientation_matrix);
+					glm::orthonormalize(orientation_matrix);
+				}
+				catch(utils::bad_lexical_cast &e) {
+					std::string error = fmt::format("The box line '{}' found in the configuration is not valid", line);
+					throw std::runtime_error(error);
+				}
 
 				particle_type p_type = _topology_parser->type(current_index);
 				std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(current_index, p_type, position, velocity));
+				_orientation_inserter(new_particle, orientation_matrix);
+
 				syst->add_particle(new_particle);
 				current_index++;
 			}
@@ -120,6 +145,10 @@ Parameters
 ----------
 	topology:
 		An oxDNA topology parser, which should be an instance of an object inheriting from the :class:`~baggianalysis.core.oxDNA_topology.Default` topology parser.
+)pbdoc");
+
+	parser.def("set_orientation_inserter", &OxDNAParser::set_orientation_inserter, py::arg("inserter"), R"pbdoc(
+
 )pbdoc");
 }
 
