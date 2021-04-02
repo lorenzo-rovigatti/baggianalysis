@@ -126,6 +126,15 @@ index : int
 
 	particle.def(py::init<int, particle_type, vec3, vec3>());
 
+	particle.def("add_orientation_vector", &Particle::add_orientation_vector, py::arg("v"), R"pbdoc(
+The molecule to which this particle belongs.
+
+Parameters
+----------
+v : numpy.ndarray
+    The new orientation vector.
+	)pbdoc");
+
 	particle.def("add_bonded_neighbour", static_cast<void (Particle::*)(std::string, std::shared_ptr<Particle>)>(&Particle::add_bonded_neighbour), py::arg("type"), py::arg("q"), R"pbdoc(
 Add a bond of the given type between the current particle and ``q``.
 Parameters
@@ -266,6 +275,12 @@ q : :class:`Particle`
         :class:`ParticleSet` and :class:`System` only.
 
 		:type: int
+	)pbdoc");
+
+	particle.def_property("orientation_vectors", &Particle::orientation_vectors, &Particle::set_orientation_vectors, R"pbdoc(
+		The particle's orientation vectors.
+
+		:type: List(numpy.ndarray)
 	)pbdoc");
 
 	particle.def_property("type", &Particle::type, &Particle::set_type, R"pbdoc(
