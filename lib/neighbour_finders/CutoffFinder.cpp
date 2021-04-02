@@ -14,8 +14,15 @@ namespace ba {
 CutoffFinder::CutoffFinder(double cutoff) :
 				NeighbourFinder(),
 				_cutoff(cutoff),
+				_cutoff_sqr(SQR(cutoff)) {
+
+}
+
+CutoffFinder::CutoffFinder(double cutoff, NeighbourFunction neigh_function) :
+				NeighbourFinder(),
+				_cutoff(cutoff),
 				_cutoff_sqr(SQR(cutoff)),
-				_lists(true) {
+				_neigh_function(neigh_function) {
 
 }
 
@@ -46,7 +53,7 @@ void CutoffFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particl
 						distance -= glm::round(distance / box) * box;
 						double distance_sqr = glm::dot(distance, distance);
 
-						if(distance_sqr < _cutoff_sqr) {
+						if(distance_sqr < _cutoff_sqr && _neigh_function(p.get(), q.get())) {
 							p->add_neighbour(q);
 							q->add_neighbour(p);
 						}
@@ -63,16 +70,27 @@ void CutoffFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particl
 
 void export_CutoffFinder(py::module &m) {
 	py::class_<CutoffFinder, NeighbourFinder, std::shared_ptr<CutoffFinder>> finder(m, "CutoffFinder", R"pbdoc(
-        Define as neighbours of a particle all those particles that are at closer than the given cutoff. 
+        Define as neighbours of a particle all those particles that are at closer than the given cutoff and, optionally, satisfy further conditions set by a custom function. 
     )pbdoc");
 
-	finder.def(py::init<double>(), R"pbdoc(
-        Constructor.
+	finder.def(py::init<double>(), py::arg("cutoff"), R"pbdoc(
+The default constructor takes a single parameter setting the cutoff.
 
-        Parameters
-        ----------
-        cutoff : double
-            The smallest cutoff that will be used to look for neighbours.
+Parameters
+----------
+cutoff : double
+	The cutoff used to define neighbours.
+    )pbdoc");
+
+	finder.def(py::init<double, NeighbourFunction>(), py::arg("cutoff"), py::arg("neighbour_function"), R"pbdoc(
+This constructor takes two parameters: the cutoff and a callable that can be used to enforce further conditions.
+
+Parameters
+----------
+cutoff : double
+	The cutoff used to define neighbours.
+mapper: callable
+    A callable that takes two particles and returns a boolean, which should be True if the two particles are neighbours, False otherwise.
     )pbdoc");
 }
 

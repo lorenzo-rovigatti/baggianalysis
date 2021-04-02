@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Particle-related classes &mdash; baggianalysis 0.1.0b1.dev11+gf63a852.d20210401 documentation</title>
+  <title>Particle-related classes &mdash; baggianalysis 0.1.0b1.dev15+g64dc1e0.d20210402 documentation</title>
   
 
   
@@ -29,7 +29,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -61,7 +60,7 @@
             
             
               <div class="version">
-                0.1.0b1.dev11+gf63a852.d20210401
+                0.1.0b1.dev15+g64dc1e0.d20210402
               </div>
             
           
@@ -301,8 +300,25 @@
 
 <dl class="py method">
 <dt id="baggianalysis.core.Particle.add_neighbour">
-<code class="sig-name descname">add_neighbour</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">q</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.Particle.add_neighbour" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add particle <code class="docutils literal notranslate"><span class="pre">q</span></code> to the list of this particle’s neighbours. Contrary to <a class="reference internal" href="#baggianalysis.core.Particle.add_bonded_neighbour" title="baggianalysis.core.Particle.add_bonded_neighbour"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_bonded_neighbour()</span></code></a>,
+<code class="sig-name descname">add_neighbour</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Particle.add_neighbour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>add_neighbour(self: baggianalysis.core.Particle, type: str, q: baggianalysis.core.Particle) -&gt; None</p></li>
+</ol>
+<p>Add particle <code class="docutils literal notranslate"><span class="pre">q</span></code> as a bond of the given type to the list of this particle’s neighbours. Contrary to <a class="reference internal" href="#baggianalysis.core.Particle.add_bonded_neighbour" title="baggianalysis.core.Particle.add_bonded_neighbour"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_bonded_neighbour()</span></code></a>,
+the current particle is <cite>not</cite> added to the list of <code class="docutils literal notranslate"><span class="pre">q</span></code>’s neighbours.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of bond shared by the two particles.</p></li>
+<li><p><strong>q</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The new neighbour.</p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>add_neighbour(self: baggianalysis.core.Particle, q: baggianalysis.core.Particle) -&gt; None</p></li>
+</ol>
+<p>Add particle <code class="docutils literal notranslate"><span class="pre">q</span></code> as a bond of the default type to the list of this particle’s neighbours. Contrary to <a class="reference internal" href="#baggianalysis.core.Particle.add_bonded_neighbour" title="baggianalysis.core.Particle.add_bonded_neighbour"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_bonded_neighbour()</span></code></a>,
 the current particle is <cite>not</cite> added to the list of <code class="docutils literal notranslate"><span class="pre">q</span></code>’s neighbours.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

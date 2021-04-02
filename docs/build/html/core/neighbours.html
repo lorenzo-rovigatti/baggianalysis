@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Neighbour finders &mdash; baggianalysis 0.1.0b1.dev11+gf63a852.d20210401 documentation</title>
+  <title>Neighbour finders &mdash; baggianalysis 0.1.0b1.dev15+g64dc1e0.d20210402 documentation</title>
   
 
   
@@ -29,7 +29,6 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -61,7 +60,7 @@
             
             
               <div class="version">
-                0.1.0b1.dev11+gf63a852.d20210401
+                0.1.0b1.dev15+g64dc1e0.d20210402
               </div>
             
           
@@ -184,7 +183,7 @@
 <td><p>Define as neighbours of a particle the N particles that are closest to it.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.CutoffFinder" title="baggianalysis.core.CutoffFinder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CutoffFinder</span></code></a></p></td>
-<td><p>Define as neighbours of a particle all those particles that are at closer than the given cutoff.</p></td>
+<td><p>Define as neighbours of a particle all those particles that are at closer than the given cutoff and, optionally, satisfy further conditions set by a custom function.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.SANNFinder" title="baggianalysis.core.SANNFinder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SANNFinder</span></code></a></p></td>
 <td><p></p></td>
@@ -220,13 +219,29 @@
 
 <dl class="py class">
 <dt id="baggianalysis.core.CutoffFinder">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">CutoffFinder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.CutoffFinder" title="baggianalysis.core.CutoffFinder">baggianalysis.core.CutoffFinder</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.CutoffFinder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">CutoffFinder</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.CutoffFinder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.NeighbourFinder" title="baggianalysis.core.NeighbourFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.NeighbourFinder</span></code></a></p>
-<p>Define as neighbours of a particle all those particles that are at closer than the given cutoff.</p>
-<p>Constructor.</p>
+<p>Define as neighbours of a particle all those particles that are at closer than the given cutoff and, optionally, satisfy further conditions set by a custom function.</p>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: baggianalysis.core.CutoffFinder, cutoff: float) -&gt; None</p></li>
+</ol>
+<p>The default constructor takes a single parameter setting the cutoff.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>cutoff</strong> (<em>double</em>) – The smallest cutoff that will be used to look for neighbours.</p>
+<dd class="field-odd"><p><strong>cutoff</strong> (<em>double</em>) – The cutoff used to define neighbours.</p>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>__init__(self: baggianalysis.core.CutoffFinder, cutoff: float, neighbour_function: Callable[[baggianalysis.core.Particle, baggianalysis.core.Particle], bool]) -&gt; None</p></li>
+</ol>
+<p>This constructor takes two parameters: the cutoff and a callable that can be used to enforce further conditions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cutoff</strong> (<em>double</em>) – The cutoff used to define neighbours.</p></li>
+<li><p><strong>mapper</strong> (<em>callable</em>) – A callable that takes two particles and returns a boolean.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
