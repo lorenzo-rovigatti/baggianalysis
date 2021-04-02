@@ -84,12 +84,20 @@ void Particle::remove_bonded_dihedral(ParticleDihedral to_remove) {
 	_bonded_dihedrals.erase(to_remove);
 }
 
-void Particle::add_neighbour(std::shared_ptr<Particle> new_neighbour) {
-	_neighbours.insert(new_neighbour);
+void Particle::add_neighbour(std::string type, std::shared_ptr<Particle> new_neighbour) {
+	_neighbours.emplace(type, new_neighbour);
 }
 
-void Particle::remove_neighbour(std::shared_ptr<Particle> to_remove) {
+void Particle::add_neighbour(std::shared_ptr<Particle> new_neighbour) {
+	add_neighbour(DEFAULT_PARTICLE_TYPE, new_neighbour);
+}
+
+void Particle::remove_neighbour(ParticleBond to_remove) {
 	_neighbours.erase(to_remove);
+}
+
+bool Particle::has_neighbour(std::shared_ptr<Particle> q) {
+	return std::find_if(_neighbours.begin(), _neighbours.end(), [q](const ParticleBond &pb) { return pb.other() == q; }) != _neighbours.end();
 }
 
 void Particle::set_molecule(std::shared_ptr<ParticleSet> new_molecule) {
@@ -201,14 +209,26 @@ p4 : :class:`Particle`
 	The fourth particle participating in the dihedral.
     )pbdoc");
 
-	particle.def("add_neighbour", &Particle::add_neighbour, py::arg("q"), R"pbdoc(
-        Add particle ``q`` to the list of this particle's neighbours. Contrary to :meth:`add_bonded_neighbour`, 
-        the current particle is `not` added to the list of ``q``'s neighbours.
+	particle.def("add_neighbour", static_cast<void (Particle::*)(std::string, std::shared_ptr<Particle>)>(&Particle::add_neighbour), py::arg("type"), py::arg("q"), R"pbdoc(
+Add particle ``q`` as a bond of the given type to the list of this particle's neighbours. Contrary to :meth:`add_bonded_neighbour`, 
+the current particle is `not` added to the list of ``q``'s neighbours.
 
-        Parameters
-        ----------
-        q : :class:`Particle`
-            The new neighbour.
+Parameters
+----------
+type : str
+    The type of bond shared by the two particles.
+q : :class:`Particle`
+	The new neighbour.
+	)pbdoc");
+
+	particle.def("add_neighbour", static_cast<void (Particle::*)(std::shared_ptr<Particle>)>(&Particle::add_neighbour), py::arg("q"), R"pbdoc(
+Add particle ``q`` as a bond of the default type to the list of this particle's neighbours. Contrary to :meth:`add_bonded_neighbour`, 
+the current particle is `not` added to the list of ``q``'s neighbours.
+
+Parameters
+----------
+q : :class:`Particle`
+	The new neighbour.
 	)pbdoc");
 
 	particle.def_property_readonly("molecule", &Particle::molecule, R"pbdoc(

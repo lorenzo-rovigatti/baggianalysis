@@ -92,7 +92,7 @@ void SANNFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particles
 		}
 
 		for(size_t i = 0; i < neigh_number; i++) {
-			p->add_neighbour(possible_neighbours[i].q);
+			p->add_neighbour(_bond_type, possible_neighbours[i].q);
 		}
 	}
 
@@ -111,11 +111,11 @@ void SANNFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particles
 
 void SANNFinder::_symmetrise_by_adding(std::vector<std::shared_ptr<Particle>> particles) {
 	for(auto p : particles) {
-		for(auto q : p->neighbours()) {
-			auto q_neighs = q->neighbours();
-			auto p_it = std::find(q_neighs.begin(), q_neighs.end(), p);
-			if(p_it == q_neighs.end()) {
-				q->add_neighbour(p);
+		ParticleBond p_bond(_bond_type, p);
+		for(auto neigh : p->neighbours()) {
+			auto q = neigh.other();
+			if(q->has_neighbour(p)) {
+				q->add_neighbour(_bond_type, p);
 			}
 		}
 	}
@@ -124,16 +124,15 @@ void SANNFinder::_symmetrise_by_adding(std::vector<std::shared_ptr<Particle>> pa
 void SANNFinder::_symmetrise_by_removing(std::vector<std::shared_ptr<Particle>> particles) {
 	for(auto p : particles) {
 		std::vector<std::shared_ptr<Particle>> to_remove;
-		for(auto q : p->neighbours()) {
-			auto q_neighs = q->neighbours();
-			auto p_it = std::find(q_neighs.begin(), q_neighs.end(), p);
-			if(p_it == q_neighs.end()) {
+		for(auto neigh : p->neighbours()) {
+			auto q = neigh.other();
+			if(q->has_neighbour(p)) {
 				to_remove.push_back(q);
 			}
 		}
 
 		for(auto q : to_remove) {
-			p->remove_neighbour(q);
+			p->remove_neighbour(ParticleBond(_bond_type, q));
 		}
 	}
 }

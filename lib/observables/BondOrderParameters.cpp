@@ -50,7 +50,8 @@ void BondOrderParameters::analyse_system(std::shared_ptr<System> frame) {
 				int m_idx = m + order;
 				qlm_avg[m_idx] = bops[p->index()][order][m_idx];
 
-				for(auto q : p->neighbours()) {
+				for(auto neigh : p->neighbours()) {
+					auto q = neigh.other();
 					qlm_avg[m_idx] += bops[q->index()][order][m_idx];
 				}
 
@@ -120,7 +121,8 @@ void BondOrderParameters::_set_particle_bops(std::shared_ptr<Particle> p, partic
 
 	int N_neighbours = p->neighbours().size();
 	if(N_neighbours > 0) {
-		for(auto q : p->neighbours()) {
+		for(auto neigh : p->neighbours()) {
+			auto q = neigh.other();
 			vec3 distance = p->position() - q->position();
 			// periodic boundary conditions
 			distance -= glm::round(distance / box) * box;

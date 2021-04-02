@@ -124,12 +124,14 @@ public:
 	void add_bonded_dihedral(ParticleDihedral new_dihedral);
 	void remove_bonded_dihedral(ParticleDihedral to_remove);
 
-	const std::set<std::shared_ptr<Particle>> &neighbours() const {
+	const std::set<ParticleBond> &neighbours() const {
 		return _neighbours;
 	}
 
+	void add_neighbour(std::string type, std::shared_ptr<Particle> new_neighbour);
 	void add_neighbour(std::shared_ptr<Particle> new_neighbour);
-	void remove_neighbour(std::shared_ptr<Particle> to_remove);
+	void remove_neighbour(ParticleBond to_remove);
+	bool has_neighbour(std::shared_ptr<Particle> q);
 
 	std::shared_ptr<ParticleSet> molecule() const {
 		return _molecule.lock();
@@ -151,7 +153,7 @@ protected:
 	std::set<ParticleAngle> _bonded_angles;
 	std::set<ParticleDihedral> _bonded_dihedrals;
 
-	std::set<std::shared_ptr<Particle>> _neighbours;
+	std::set<ParticleBond> _neighbours;
 
 	std::weak_ptr<ParticleSet> _molecule;
 };

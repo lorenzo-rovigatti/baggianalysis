@@ -31,6 +31,7 @@ private:
 	double _max_distance;
 	CellLists _lists;
 	SymmetryPolicy _policy;
+	const std::string _bond_type = "SANN";
 
 	// TODO: move the logic of making the neighbour lists symmetric to NeighbourFinder
 	void _symmetrise_by_adding(std::vector<std::shared_ptr<Particle>> particles);
