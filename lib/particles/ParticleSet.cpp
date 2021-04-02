@@ -118,8 +118,9 @@ void ParticleSet::add_particle(std::shared_ptr<Particle> p) {
 }
 
 void ParticleSet::remove_particle(std::shared_ptr<Particle> p) {
+	// TODO: we need to remove angles and dihedrals too
 	for(auto link : p->bonded_neighbours()) {
-		auto neigh = link.first;
+		auto neigh = link.other();
 		neigh->remove_bonded_neighbour(link);
 	}
 

@@ -56,6 +56,8 @@ LAMMPSDataFileParser::~LAMMPSDataFileParser() {
 std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &configuration) {
 	std::shared_ptr<System> syst(std::make_shared<System>());
 
+	_topology = Topology::make_empty_topology();
+
 	_header_data = _parse_headers(configuration);
 
 	// there is no time information in a LAMMPS data file

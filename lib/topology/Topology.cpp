@@ -23,27 +23,25 @@ Topology::Topology() :
 Topology::Topology(std::shared_ptr<System> system) {
 	for(auto p : system->particles()) {
 		for(auto link : p->bonded_neighbours()) {
-			auto q = link.first;
+			auto q = link.other();
 			if(p->index() < q->index()) {
-				add_bond(link.second, p->index(), q->index());
+				add_bond(link.type, p->index(), q->index());
 			}
 		}
 
 		for(auto link : p->bonded_angles()) {
-			auto angle = link.first;
-			int p = angle[0]->index();
-			int q = angle[1]->index();
-			int r = angle[2]->index();
-			add_angle(link.second, p, q, r);
+			int p = link[0]->index();
+			int q = link[1]->index();
+			int r = link[2]->index();
+			add_angle(link.type, p, q, r);
 		}
 
 		for(auto link : p->bonded_dihedrals()) {
-			auto dihedral = link.first;
-			int p = dihedral[0]->index();
-			int q = dihedral[1]->index();
-			int r = dihedral[2]->index();
-			int s = dihedral[3]->index();
-			add_dihedral(link.second, p, q, r, s);
+			int p = link[0]->index();
+			int q = link[1]->index();
+			int r = link[2]->index();
+			int s = link[3]->index();
+			add_dihedral(link.type, p, q, r, s);
 		}
 	}
 
@@ -221,7 +219,7 @@ void Topology::_fill_clusters(std::shared_ptr<System> system) {
 		auto p = system->particle_by_id(next.front());
 		next.pop();
 		for(auto link : p->bonded_neighbours()) {
-			auto neigh = link.first;
+			auto neigh = link.other();
 			if(index_to_cluster[neigh->index()] > index_to_cluster[p->index()]) {
 				index_to_cluster[neigh->index()] = index_to_cluster[p->index()];
 				next.push(neigh->index());
