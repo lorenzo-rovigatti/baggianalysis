@@ -38,6 +38,7 @@ SET(ba_lib_SOURCES
 	trajectories/LazyTrajectory.cpp
 	trajectories/FullTrajectory.cpp
 	utils/CellLists.cpp
+	utils/clusters.cpp
 	utils/filesystem.cpp
 	utils/Logger.cpp
 	utils/Random.cpp
