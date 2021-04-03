@@ -53,7 +53,7 @@ void CutoffFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particl
 						distance -= glm::round(distance / box) * box;
 						double distance_sqr = glm::dot(distance, distance);
 
-						if(distance_sqr < _cutoff_sqr && _neigh_function(p.get(), q.get())) {
+						if(distance_sqr < _cutoff_sqr && _neigh_function(p, q, distance)) {
 							p->add_neighbour(q);
 							q->add_neighbour(p);
 						}
@@ -90,7 +90,7 @@ Parameters
 cutoff : double
 	The cutoff used to define neighbours.
 mapper: callable
-    A callable that takes two particles and returns a boolean, which should be True if the two particles are neighbours, False otherwise.
+    A callable that takes two particles and a vector that is the distance between the two particles, and returns a boolean, which should be True if the two particles are neighbours, False otherwise.
     )pbdoc");
 }
 

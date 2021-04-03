@@ -14,7 +14,7 @@
 
 namespace ba {
 
-using NeighbourFunction = std::function<bool(Particle *, Particle *)>;
+using NeighbourFunction = std::function<bool(std::shared_ptr<Particle>, std::shared_ptr<Particle>, vec3)>;
 
 class CutoffFinder: public NeighbourFinder {
 public:
@@ -29,7 +29,7 @@ private:
 	double _cutoff_sqr;
 
 	CellLists _lists = CellLists(true);
-	NeighbourFunction _neigh_function = [](Particle *, Particle *) { return true; };
+	NeighbourFunction _neigh_function = [](std::shared_ptr<Particle>, std::shared_ptr<Particle>, vec3) { return true; };
 };
 
 #ifdef PYTHON_BINDINGS

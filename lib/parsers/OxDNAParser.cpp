@@ -93,7 +93,6 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 					vec3 a2 = glm::cross(a3, a1);
 
 					orientation_matrix = glm::dmat3(a1, a2, a3);
-					orientation_matrix = glm::transpose(orientation_matrix);
 					glm::orthonormalize(orientation_matrix);
 				}
 				catch(utils::bad_lexical_cast &e) {
