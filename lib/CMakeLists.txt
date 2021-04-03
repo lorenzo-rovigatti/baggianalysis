@@ -16,7 +16,7 @@ SET(ba_lib_SOURCES
 	neighbour_finders/FixedNumberFinder.cpp
 	neighbour_finders/NeighbourFinder.cpp
 	neighbour_finders/SANNFinder.cpp
-	observables/ClusterDistribution.cpp
+	observables/ClusterList.cpp
 	observables/ConvexHull.cpp
 	observables/FormFactor.cpp
 	observables/MSD.cpp

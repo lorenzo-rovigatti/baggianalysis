@@ -147,7 +147,21 @@ Parameters
 )pbdoc");
 
 	parser.def("set_orientation_inserter", &OxDNAParser::set_orientation_inserter, py::arg("inserter"), R"pbdoc(
+Set the callable that will be used to initialise the orientation vectors of each particle. The following example will correctly initialise two-patch particles out
+of oxDNA configurations::
 
+    P1 = np.array([0., 0.5, 0.])
+    P2 = np.array([0., -0.5, 0.])
+    def add_patches(p, orientation_matrix):
+        p.add_orientation_vector(orientation_matrix @ P1)
+        p.add_orientation_vector(orientation_matrix @ P2)
+
+    oxDNA_parser.set_orientation_inserter(add_patches)
+
+Parameters
+----------
+    inserter:
+        A callable that takes a particle and its orientation matrix and adds to the former the orientation vectors due to the latter.
 )pbdoc");
 }
 

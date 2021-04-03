@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Neighbour finders &mdash; baggianalysis 0.1.0b1.dev16+g8ba30c5.d20210402 documentation</title>
+  <title>Neighbour finders &mdash; baggianalysis 0.1.0b1.dev19+gfe6d89e.d20210403 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.1.0b1.dev16+g8ba30c5.d20210402
+                0.1.0b1.dev19+gfe6d89e.d20210403
               </div>
             
           
@@ -233,14 +233,14 @@
 </dd>
 </dl>
 <ol class="arabic simple" start="2">
-<li><p>__init__(self: baggianalysis.core.CutoffFinder, cutoff: float, neighbour_function: Callable[[baggianalysis.core.Particle, baggianalysis.core.Particle], bool]) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.CutoffFinder, cutoff: float, neighbour_function: Callable[[baggianalysis.core.Particle, baggianalysis.core.Particle, glm::tvec3&lt;scalar, P&gt;], bool]) -&gt; None</p></li>
 </ol>
 <p>This constructor takes two parameters: the cutoff and a callable that can be used to enforce further conditions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>cutoff</strong> (<em>double</em>) – The cutoff used to define neighbours.</p></li>
-<li><p><strong>mapper</strong> (<em>callable</em>) – A callable that takes two particles and returns a boolean, which should be True if the two particles are neighbours, False otherwise.</p></li>
+<li><p><strong>mapper</strong> (<em>callable</em>) – A callable that takes two particles and a vector that is the distance between the two particles, and returns a boolean, which should be True if the two particles are neighbours, False otherwise.</p></li>
 </ul>
 </dd>
 </dl>

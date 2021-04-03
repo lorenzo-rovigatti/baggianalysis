@@ -27,7 +27,7 @@
 #ifdef GSL_FOUND
 #include "../observables/BondOrderParameters.h"
 #endif
-#include "../observables/ClusterDistribution.h"
+#include "../observables/ClusterList.h"
 #include "../observables/ConvexHull.h"
 #include "../observables/FormFactor.h"
 #include "../observables/MSD.h"
@@ -94,7 +94,7 @@ PYBIND11_MODULE(core, m) {
 #ifdef GSL_FOUND
 	ba::export_BondOrderParameters(m);
 #endif
-	ba::export_ClusterDistribution(m);
+	ba::export_ClusterList(m);
 	ba::export_ConvexHull(m);
 	ba::export_FormFactor(m);
 	ba::export_MSD(m);
