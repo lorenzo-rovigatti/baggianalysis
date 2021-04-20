@@ -10,6 +10,7 @@
 #include "Particle.h"
 
 #include <algorithm>
+#include <numeric>
 
 namespace ba {
 

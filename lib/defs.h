@@ -23,6 +23,7 @@
 #include <spdlog/fmt/fmt.h>
 
 #include <glm/vec3.hpp>
+#include <glm/mat3x3.hpp>
 #include <glm/common.hpp>
 #include <glm/geometric.hpp>
 
