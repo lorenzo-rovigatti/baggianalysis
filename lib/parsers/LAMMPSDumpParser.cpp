@@ -17,13 +17,14 @@ LAMMPSDumpParser::LAMMPSDumpParser(std::string data_file, std::string atom_style
 				_rescaled_coords(rescaled_coords) {
 	LAMMPSDataFileParser parser = LAMMPSDataFileParser(atom_style);
 	_data_file_system = parser.make_system(data_file);
+	_data_file_topology = Topology::make_topology_from_system(_data_file_system);
 }
 
 LAMMPSDumpParser::LAMMPSDumpParser(std::shared_ptr<System> data_file_system, bool rescaled_coords) :
 				BaseParser(),
 				_rescaled_coords(rescaled_coords),
-				_data_file_system(data_file_system) {
-
+				_data_file_system(data_file_system),
+				_data_file_topology(std::make_shared<Topology>(data_file_system)) {
 }
 
 LAMMPSDumpParser::LAMMPSDumpParser(bool rescaled_coords) :
@@ -87,15 +88,13 @@ std::shared_ptr<System> LAMMPSDumpParser::_parse_stream(std::ifstream &configura
 
 	// copy masses, charges and topology from the system's data file
 	if(_data_file_system != nullptr) {
-		Topology topology(_data_file_system);
-
 		for(auto p : syst->particles()) {
 			auto other_p = _data_file_system->particle_by_id(p->index());
 			p->set_mass(other_p->mass());
 			p->set_charge(other_p->charge());
 		}
 
-		topology.apply(syst);
+		_data_file_topology->apply(syst);
 	}
 
 	return syst;

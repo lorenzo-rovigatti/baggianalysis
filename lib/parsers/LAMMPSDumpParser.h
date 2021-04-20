@@ -33,6 +33,7 @@ private:
 
 	bool _rescaled_coords;
 	std::shared_ptr<System> _data_file_system = nullptr;
+	std::shared_ptr<Topology> _data_file_topology = nullptr;
 };
 
 #ifdef PYTHON_BINDINGS
