@@ -135,12 +135,13 @@ void ParticleSet::remove_particle_by_id(int p_id) {
 }
 
 std::shared_ptr<Particle> ParticleSet::particle_by_id(int index) const {
-	if(_particles_by_id.count(index) == 0) {
+	try {
+		return _particles_by_id.at(index);
+	}
+	catch (std::out_of_range &) {
 		std::string error = fmt::format("A particle with index '{}' does not exist", index);
 		throw std::runtime_error(error);
 	}
-
-	return _particles_by_id.at(index);
 }
 
 void ParticleSet::sort_particles_by_id() {
