@@ -23,7 +23,7 @@ namespace utils {
  * @param separators list of separators that will be used to split the string
  * @return a vector of strings containing the tokens
  */
-std::vector<std::string> split(std::string line, std::string separators = " ");
+std::vector<std::string> split(const std::string &str, const std::string &delims=" ");
 
 // taken from https://stackoverflow.com/questions/874134/find-out-if-string-ends-with-another-string-in-c/2072890
 bool starts_with(const std::string &value, std::string beginning);
@@ -75,7 +75,36 @@ T lexical_cast(std::string source) {
 
 template<>
 inline double lexical_cast(std::string source) {
-	return std::stod(source);
+	double result;
+
+	try {
+		result = std::stod(source);
+	}
+	catch (std::invalid_argument &) {
+		throw bad_lexical_cast();
+	}
+	catch (std::out_of_range &) {
+		throw bad_lexical_cast();
+	}
+
+	return result;
+}
+
+template<>
+inline int lexical_cast(std::string source) {
+	int result;
+
+	try {
+		result = std::stoi(source);
+	}
+	catch (std::invalid_argument &) {
+		throw bad_lexical_cast();
+	}
+	catch (std::out_of_range &) {
+		throw bad_lexical_cast();
+	}
+
+	return result;
 }
 
 }

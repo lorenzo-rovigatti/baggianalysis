@@ -11,26 +11,30 @@ namespace ba {
 
 namespace utils {
 
-std::vector<std::string> split(std::string line, std::string separators) {
-	std::vector<std::string> split;
+// taken from https://www.bfilipek.com/2018/07/string-view-perf-followup.html
+std::vector<std::string> split(const std::string &str, const std::string &delims) {
+	std::vector<std::string> output;
+	auto first = std::cbegin(str);
 
-	std::size_t prev = 0, pos;
-	while((pos = line.find_first_of(separators, prev)) != std::string::npos) {
-		if(pos > prev) {
-			split.push_back(line.substr(prev, pos - prev));
+	while(first != std::cend(str)) {
+		const auto second = std::find_first_of(first, std::cend(str), std::cbegin(delims), std::cend(delims));
+
+		if(first != second) {
+			output.emplace_back(first, second);
 		}
-		prev = pos + 1;
+
+		if(second == std::cend(str)) {
+			break;
+		}
+
+		first = std::next(second);
 	}
 
-	if(prev < line.length()) {
-		split.push_back(line.substr(prev, std::string::npos));
+	if(output.size() == 0) {
+		output.emplace_back("");
 	}
 
-	if(split.size() == 0) {
-		split.push_back("");
-	}
-
-	return split;
+	return output;
 }
 
 bool starts_with(const std::string &value, std::string beginning) {
@@ -91,11 +95,6 @@ std::string trim_copy(std::string source) {
 	trim(source);
 	return source;
 }
-
-//template<>
-//double lexical_cast(std::string source) {
-//	return std::stod(source);
-//}
 
 }
 
