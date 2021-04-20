@@ -147,16 +147,16 @@ void Topology::apply(std::shared_ptr<System> system) {
 	}
 
 	for(const TopologyAngle &angle : _angles) {
-		std::array<std::shared_ptr<Particle>, 3> particles({system->particle_by_id(angle[0]), system->particle_by_id(angle[1]), system->particle_by_id(angle[2])});
-		for(auto particle : particles) {
-			particle->add_bonded_angle(angle.type, particles[0], particles[1], particles[2]);
+		ParticleAngle new_angle(angle.type, system->particle_by_id(angle[0]), system->particle_by_id(angle[1]), system->particle_by_id(angle[2]));
+		for(int i = 0; i < 3; i++) {
+			new_angle[i]->add_bonded_angle(new_angle);
 		}
 	}
 
 	for(auto &dihedral : _dihedrals) {
-		std::array<std::shared_ptr<Particle>, 4> particles({system->particle_by_id(dihedral[0]), system->particle_by_id(dihedral[1]), system->particle_by_id(dihedral[2]), system->particle_by_id(dihedral[3])});
-		for(auto particle : particles) {
-			particle->add_bonded_dihedral(dihedral.type, particles[0], particles[1], particles[2], particles[3]);
+		ParticleDihedral new_dihedral(dihedral.type, system->particle_by_id(dihedral[0]), system->particle_by_id(dihedral[1]), system->particle_by_id(dihedral[2]), system->particle_by_id(dihedral[3]));
+		for(int i = 0; i < 4; i++) {
+			new_dihedral[i]->add_bonded_dihedral(new_dihedral);
 		}
 	}
 }
