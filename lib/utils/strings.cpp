@@ -92,6 +92,11 @@ std::string trim_copy(std::string source) {
 	return source;
 }
 
+//template<>
+//double lexical_cast(std::string source) {
+//	return std::stod(source);
+//}
+
 }
 
 }

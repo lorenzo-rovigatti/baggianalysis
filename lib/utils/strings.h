@@ -54,7 +54,7 @@ class bad_lexical_cast: public std::exception {
 };
 
 /**
- * Cast the given string to a numeric type. Trims the string before attempting to cast it.
+ * Cast the given string to a numeric type. Trim the string before attempting to cast it.
  *
  * @param source
  * @return
@@ -71,6 +71,11 @@ T lexical_cast(std::string source) {
 	}
 
 	return var;
+}
+
+template<>
+inline double lexical_cast(std::string source) {
+	return std::stod(source);
 }
 
 }
