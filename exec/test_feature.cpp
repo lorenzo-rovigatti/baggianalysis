@@ -14,18 +14,17 @@
 #include "../lib/parsers/LAMMPSDumpParser.h"
 
 int main(int argc, char *argv[]) {
+	std::ios::sync_with_stdio(false);
+
 	if(argc < 3) {
 		std::cerr << "Usage is " << argv[0] << " data_file folder" << std::endl;
 		return 1;
 	}
 
-	std::shared_ptr<ba::LAMMPSDataFileParser> data_parser = std::make_shared<ba::LAMMPSDataFileParser>("full");
-	auto data_system = data_parser->make_system(argv[1]);
-
-
-//	std::shared_ptr<ba::LAMMPSDumpParser> parser = std::make_shared<ba::LAMMPSDumpParser>(data_system);
-//	std::shared_ptr<ba::FullTrajectory> trajectory = std::make_shared<ba::FullTrajectory>(parser);
-//	trajectory->initialise_from_folder(argv[2], "pvdf_0", true);
+	std::shared_ptr<ba::LAMMPSDumpParser> parser = std::make_shared<ba::LAMMPSDumpParser>(argv[1], "full");
+	parser->use_topology(false);
+	std::shared_ptr<ba::FullTrajectory> trajectory = std::make_shared<ba::FullTrajectory>(parser);
+	trajectory->initialise_from_folder(argv[2], "pvdf_*", true);
 
 	return 0;
 }

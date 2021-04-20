@@ -66,7 +66,6 @@ private:
 
 	HeaderData _header_data;
 	std::map<particle_type, double> _masses;
-	std::shared_ptr<Topology> _topology = Topology::make_empty_topology();
 
 	int _type_index;
 	int _pos_starting_index;

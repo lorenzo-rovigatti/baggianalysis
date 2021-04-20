@@ -159,7 +159,6 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 	}
 
 	syst->sort_particles_by_id();
-	_topology->apply(syst);
 
 	return syst;
 }

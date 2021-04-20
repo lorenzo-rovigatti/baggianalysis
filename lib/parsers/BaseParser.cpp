@@ -19,12 +19,16 @@ BaseParser::~BaseParser() {
 
 }
 
+void BaseParser::use_topology(bool use) {
+	_use_topology = use;
+}
+
 void BaseParser::set_topology(std::shared_ptr<Topology> new_topology) {
 	_topology = new_topology;
 }
 
 void BaseParser::_apply_topology(std::shared_ptr<System> system) {
-	if(_topology != nullptr && system != nullptr) {
+	if(_topology != nullptr && _use_topology && system != nullptr) {
 		_topology->apply(system);
 	}
 }
@@ -69,12 +73,12 @@ std::shared_ptr<System> BaseParser::_parse_stream(std::ifstream &configuration) 
 void export_BaseParser(py::module &m) {
 	py::class_<BaseParser, PyBaseParser, std::shared_ptr<BaseParser>> parser(m, "BaseParser");
 
-	parser
-		.def(py::init<>())
-		.def("set_topology", &BaseParser::set_topology)
-		// we export to python the version that takes the filename only
-		.def("make_system", (std::shared_ptr<System> (BaseParser::*)(std::string)) &BaseParser::make_system)
-		.def("_parse_file", (std::shared_ptr<System> (BaseParser::*)(std::string)) &BaseParser::_parse_file);
+	parser.def(py::init<>());
+	parser.def("set_topology", &BaseParser::set_topology);
+	parser.def("use_topology", &BaseParser::use_topology);
+	// we export to python the version that takes the filename only
+	parser.def("make_system", (std::shared_ptr<System> (BaseParser::*)(std::string)) &BaseParser::make_system);
+	parser.def("_parse_file", (std::shared_ptr<System> (BaseParser::*)(std::string)) &BaseParser::_parse_file);
 }
 
 #endif

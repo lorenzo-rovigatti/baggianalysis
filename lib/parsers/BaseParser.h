@@ -22,6 +22,7 @@ public:
 	virtual ~BaseParser();
 
 	void set_topology(std::shared_ptr<Topology> new_topology);
+	virtual void use_topology(bool use);
 
 	/**
 	 * @brief Build a new System by parsing an already open stream
@@ -55,6 +56,7 @@ protected:
 	void _apply_topology(std::shared_ptr<System> system);
 
 	std::shared_ptr<Topology> _topology = nullptr;
+	bool _use_topology = true;
 };
 
 #ifdef PYTHON_BINDINGS
