@@ -25,6 +25,7 @@ public:
 	}
 
 	void analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) override {
+		TrajectoryObservable<result_type>::reset();
 		auto frame = trajectory->next_frame();
 		while(frame != nullptr) {
 			analyse_system(frame);
@@ -42,6 +43,7 @@ public:
 															instance_name\
 																.def("analyse_trajectory", &class_name::analyse_trajectory)\
 																.def("analyse_system", &class_name::analyse_system)\
+																.def("reset", &class_name::reset)\
 																.def("result", &class_name::result);\
 														}\
 

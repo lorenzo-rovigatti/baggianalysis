@@ -49,21 +49,24 @@ void RDF::analyse_system(std::shared_ptr<System> system) {
 		auto p = system->particles()[i];
 		for(uint j = 0; j < i; j++) {
 			auto q = system->particles()[j];
+			n_pairs++;
+		}
+	}
+
+	double factor = (system->box[0] * system->box[1] * system->box[2]) / n_pairs;
+	for(uint i = 0; i < system->N(); i++) {
+		auto p = system->particles()[i];
+		for(uint j = 0; j < i; j++) {
+			auto q = system->particles()[j];
 			vec3 distance = q->position() - p->position();
 			// periodic boundary conditions
 			distance -= glm::round(distance / system->box) * system->box;
 			double distance_sqr = glm::dot(distance, distance);
 			if(distance_sqr < _max_value_sqr) {
 				int mybin = (int) (std::floor(std::sqrt(distance_sqr) / _bin_size) + 0.001);
-				_profile[mybin] += 1.;
+				_profile[mybin] += factor;
 			}
-			n_pairs++;
 		}
-	}
-
-	double factor = n_pairs / (system->box[0] * system->box[1] * system->box[2]);
-	for(auto &v : _profile) {
-		v /= factor;
 	}
 }
 
