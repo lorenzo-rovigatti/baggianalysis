@@ -15,13 +15,16 @@ namespace ba {
 class RDF: public SystemObservable<std::map<double, double>> {
 public:
 	RDF(double bin_size);
+	RDF(double bin_size, std::vector<particle_type> types_1, std::vector<particle_type> types_2);
 	RDF(double bin_size, double max_value);
+	RDF(double bin_size, double max_value, std::vector<particle_type> types_1, std::vector<particle_type> types_2);
 	RDF() = delete;
 	virtual ~RDF();
 
 	void analyse_system(std::shared_ptr<System> system) override;
 
 protected:
+	bool _include(std::shared_ptr<Particle> p, std::shared_ptr<Particle> q);
 	std::map<double, double> _finalised_result() override;
 
 	double _bin_size = 0.;
@@ -31,6 +34,7 @@ protected:
 	int _times_called = 0;
 
 	std::vector<long double> _profile;
+	std::pair<std::vector<particle_type>, std::vector<particle_type>> _allowed_types;
 };
 
 #ifdef PYTHON_BINDINGS

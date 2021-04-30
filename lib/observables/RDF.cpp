@@ -18,14 +18,48 @@ RDF::RDF(double bin_size) :
 				_bin_size(bin_size) {
 }
 
+RDF::RDF(double bin_size, std::vector<particle_type> types_1, std::vector<particle_type> types_2) :
+				SystemObservable<std::map<double, double>>(),
+				_bin_size(bin_size),
+				_allowed_types({types_1, types_2}) {
+}
+
 RDF::RDF(double bin_size, double max_value) :
 				SystemObservable<std::map<double, double>>(),
 				_bin_size(bin_size),
+				_max_value(max_value),
 				_max_value_sqr(SQR(max_value)) {
+}
+
+RDF::RDF(double bin_size, double max_value, std::vector<particle_type> types_1, std::vector<particle_type> types_2) :
+				SystemObservable<std::map<double, double>>(),
+				_bin_size(bin_size),
+				_max_value(max_value),
+				_max_value_sqr(SQR(max_value)),
+				_allowed_types({types_1, types_2}) {
 }
 
 RDF::~RDF() {
 
+}
+
+bool RDF::_include(std::shared_ptr<Particle> p, std::shared_ptr<Particle> q) {
+	bool first_empty = _allowed_types.first.size() == 0;
+	bool second_empty = _allowed_types.second.size() == 0;
+	bool p_in_first = first_empty || (std::find(_allowed_types.first.begin(), _allowed_types.first.end(), p->type()) != _allowed_types.first.end());
+	bool p_in_second = second_empty || (std::find(_allowed_types.second.begin(), _allowed_types.second.end(), p->type()) != _allowed_types.second.end());
+	bool q_in_first = first_empty || (std::find(_allowed_types.first.begin(), _allowed_types.first.end(), q->type()) != _allowed_types.first.end());
+	bool q_in_second = second_empty || (std::find(_allowed_types.second.begin(), _allowed_types.second.end(), q->type()) != _allowed_types.second.end());
+
+	if(p_in_first && q_in_second) {
+		return true;
+	}
+
+	if(q_in_first && p_in_second) {
+		return true;
+	}
+
+	return false;
 }
 
 void RDF::analyse_system(std::shared_ptr<System> system) {
@@ -49,7 +83,9 @@ void RDF::analyse_system(std::shared_ptr<System> system) {
 		auto p = system->particles()[i];
 		for(uint j = 0; j < i; j++) {
 			auto q = system->particles()[j];
-			n_pairs++;
+			if(_include(p, q)) {
+				n_pairs++;
+			}
 		}
 	}
 
@@ -59,12 +95,14 @@ void RDF::analyse_system(std::shared_ptr<System> system) {
 		for(uint j = 0; j < i; j++) {
 			auto q = system->particles()[j];
 			vec3 distance = q->position() - p->position();
-			// periodic boundary conditions
-			distance -= glm::round(distance / system->box) * system->box;
-			double distance_sqr = glm::dot(distance, distance);
-			if(distance_sqr < _max_value_sqr) {
-				int mybin = (int) (std::floor(std::sqrt(distance_sqr) / _bin_size) + 0.001);
-				_profile[mybin] += factor;
+			if(_include(p, q)) {
+				// periodic boundary conditions
+				distance -= glm::round(distance / system->box) * system->box;
+				double distance_sqr = glm::dot(distance, distance);
+				if(distance_sqr < _max_value_sqr) {
+					int mybin = (int) (std::floor(std::sqrt(distance_sqr) / _bin_size) + 0.001);
+					_profile[mybin] += factor;
+				}
 			}
 		}
 	}
@@ -88,8 +126,10 @@ std::map<double, double> RDF::_finalised_result() {
 void export_RDF(py::module &m) {
 	py::class_<RDF, std::shared_ptr<RDF>> obs(m, "RDF", "Compute the `radial distribution function <https://en.wikipedia.org/wiki/Radial_distribution_function>`_ of a system.");
 
+	obs.def(py::init<double, std::vector<particle_type>, std::vector<particle_type>>());
 	obs.def(py::init<double>());
 	obs.def(py::init<double, double>());
+	obs.def(py::init<double, double, std::vector<particle_type>, std::vector<particle_type>>());
 
 	PY_EXPORT_SYSTEM_OBS(obs, RDF);
 }
