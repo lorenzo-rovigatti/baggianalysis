@@ -194,7 +194,7 @@ void export_StructureFactor(py::module &m) {
 	destr_sf.def_readwrite("sin_contribs", &DestructuredStructureFactor::sin_contribs);
 	destr_sf.def_readwrite("cos_contribs", &DestructuredStructureFactor::cos_contribs);
 
-	py::class_<StructureFactor, std::shared_ptr<StructureFactor>> obs(m, "StructureFactor");
+	py::class_<StructureFactor, std::shared_ptr<StructureFactor>> obs(m, "StructureFactor", "Compute the `structure factor <https://en.wikipedia.org/wiki/Structure_factor>`_ of a system.");
 
 	obs.def(py::init<double, uint, double>());
 

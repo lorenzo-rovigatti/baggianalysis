@@ -35,7 +35,7 @@ void RDF::analyse_system(std::shared_ptr<System> system) {
 		_max_value = new_max_value;
 		_max_value_sqr = SQR(_max_value);
 		int nbins = (int) (floor(_max_value / _bin_size) + 0.01);
-		_bin_size = _max_value_sqr / nbins;
+		_bin_size = _max_value / nbins;
 		_profile.resize(nbins);
 	}
 	else if(_max_value != new_max_value) {
@@ -54,7 +54,7 @@ void RDF::analyse_system(std::shared_ptr<System> system) {
 			distance -= glm::round(distance / system->box) * system->box;
 			double distance_sqr = glm::dot(distance, distance);
 			if(distance_sqr < _max_value_sqr) {
-				int mybin = (int) (0.01 + std::floor(distance_sqr / _bin_size));
+				int mybin = (int) (std::floor(std::sqrt(distance_sqr) / _bin_size) + 0.001);
 				_profile[mybin] += 1.;
 			}
 			n_pairs++;
@@ -83,7 +83,7 @@ std::map<double, double> RDF::_finalised_result() {
 #ifdef PYTHON_BINDINGS
 
 void export_RDF(py::module &m) {
-	py::class_<RDF, std::shared_ptr<RDF>> obs(m, "RDF");
+	py::class_<RDF, std::shared_ptr<RDF>> obs(m, "RDF", "Compute the `radial distribution function <https://en.wikipedia.org/wiki/Radial_distribution_function>`_ of a system.");
 
 	obs.def(py::init<double>());
 	obs.def(py::init<double, double>());

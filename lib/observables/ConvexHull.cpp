@@ -95,7 +95,7 @@ void ConvexHull::analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) 
 
 void export_ConvexHull(py::module &m) {
 	py::class_<ConvexHull, std::shared_ptr<ConvexHull>> obs(m, "ConvexHull", R"pbdoc(
-        Construct the a `convex hull <https://en.wikipedia.org/wiki/Convex_hull>`_ of the system, which is the smallest convex set that contains the set of points constituted by the particles' coordinates of the given system.
+        Construct the `convex hull <https://en.wikipedia.org/wiki/Convex_hull>`_ of the system, which is the smallest convex set that contains the set of points constituted by the particles' coordinates of the given system.
 	)pbdoc");
 
 	obs.def(py::init<>());

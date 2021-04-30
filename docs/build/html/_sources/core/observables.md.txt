@@ -10,7 +10,7 @@
     ConvexHull
     FormFactor
     PoreSize
-    MSD
+    RDF
     StructureFactor
     
 .. autoclass:: BondOrderParameters
@@ -26,6 +26,8 @@
 .. autoclass:: PoreSize
     
 .. autoclass:: MSD
+
+.. autoclass:: RDF
     
 .. autoclass:: StructureFactor
     

@@ -131,10 +131,12 @@ double MSD::_conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System
 #ifdef PYTHON_BINDINGS
 
 void export_MSD(py::module &m) {
-	py::class_<MSD, std::shared_ptr<MSD>> obs(m, "MSD");
+	py::class_<MSD, std::shared_ptr<MSD>> obs(m, "MSD", "Compute the `mean-squared displacement <https://en.wikipedia.org/wiki/Mean_squared_displacement>`_ of a system.");
 
 	obs.def(py::init<uint, bool>());
-	obs.def("analyse_and_print", &MSD::analyse_and_print);
+	obs.def("analyse_and_print", &MSD::analyse_and_print, py::arg("trajectory"), py::arg("output_file"), R"pb(
+Analyse the trajectory and print the MSD directly to the given file.
+	)pb");
 
 	PY_EXPORT_TRAJECTORY_OBS(obs, MSD);
 }
