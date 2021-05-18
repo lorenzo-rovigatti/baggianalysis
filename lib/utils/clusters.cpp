@@ -25,7 +25,7 @@ std::vector<std::set<int>> make_clusters(std::shared_ptr<ParticleSet> ps, Cluste
 	switch(policy) {
 	case ClusterPolicy::BONDED:
 		neigh_function = [](std::shared_ptr<Particle> p) {
-			return p->neighbours();
+			return p->bonded_neighbours();
 		};
 		break;
 	case ClusterPolicy::NONBONDED:

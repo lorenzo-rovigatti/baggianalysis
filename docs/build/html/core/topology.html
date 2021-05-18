@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Topology-related classes and utility functions &mdash; baggianalysis 0.1.0b1.dev31+ga1fe56f.d20210430 documentation</title>
+  <title>Topology-related classes and utility functions &mdash; baggianalysis 0.1.0b1.dev32+g57d11ee.d20210518 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.1.0b1.dev31+ga1fe56f.d20210430
+                0.1.0b1.dev32+g57d11ee.d20210518
               </div>
             
           
@@ -179,10 +179,19 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.Topology" title="baggianalysis.core.Topology"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Topology</span></code></a></p></td>
 <td><p>This class manages the connections and links between the particles of a system.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.parse_microgel_bondfile" title="baggianalysis.core.parse_microgel_bondfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_microgel_bondfile</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.TopologyBond" title="baggianalysis.core.TopologyBond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TopologyBond</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.parse_LAMMPS_topology" title="baggianalysis.core.parse_LAMMPS_topology"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_LAMMPS_topology</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.TopologyAngle" title="baggianalysis.core.TopologyAngle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TopologyAngle</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.TopologyDihedral" title="baggianalysis.core.TopologyDihedral"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TopologyDihedral</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.parse_microgel_bondfile" title="baggianalysis.core.parse_microgel_bondfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_microgel_bondfile</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.parse_LAMMPS_topology" title="baggianalysis.core.parse_LAMMPS_topology"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_LAMMPS_topology</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -257,12 +266,10 @@ using a constructor that takes as its only parameter the <a class="reference int
 <dl class="py method">
 <dt id="baggianalysis.core.Topology.angles">
 <em class="property">property </em><code class="sig-name descname">angles</code><a class="headerlink" href="#baggianalysis.core.Topology.angles" title="Permalink to this definition">¶</a></dt>
-<dd><p>The list of angles stored in the topology. Each angle is a three-element list storing the ids of a triplet of particles involved in angle.
-Since Python does not support sets of lists, we internally turn the c++ std::set into a std::vector which is then returned and converted into
-a Python object. This may be a performance bottleneck.</p>
+<dd><p>The list of angles stored in the topology.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List(List(<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>))</p>
+<dd class="field-odd"><p>List(<a class="reference internal" href="#baggianalysis.core.TopologyAngle" title="baggianalysis.core.TopologyAngle"><code class="xref py py-class docutils literal notranslate"><span class="pre">TopologyAngle</span></code></a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -281,12 +288,10 @@ a Python object. This may be a performance bottleneck.</p>
 <dl class="py method">
 <dt id="baggianalysis.core.Topology.bonds">
 <em class="property">property </em><code class="sig-name descname">bonds</code><a class="headerlink" href="#baggianalysis.core.Topology.bonds" title="Permalink to this definition">¶</a></dt>
-<dd><p>The list of bonds stored in the topology. Each bond is a two-element list storing the ids of a pair of bonded particles.
-Since Python does not support sets of lists, we internally turn the c++ std::set into a std::vector which is then returned and converted into
-a Python object. This may be a performance bottleneck.</p>
+<dd><p>The list of bonds stored in the topology.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List(List(<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>))</p>
+<dd class="field-odd"><p>List(<a class="reference internal" href="#baggianalysis.core.TopologyBond" title="baggianalysis.core.TopologyBond"><code class="xref py py-class docutils literal notranslate"><span class="pre">TopologyBond</span></code></a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -305,12 +310,10 @@ a Python object. This may be a performance bottleneck.</p>
 <dl class="py method">
 <dt id="baggianalysis.core.Topology.dihedrals">
 <em class="property">property </em><code class="sig-name descname">dihedrals</code><a class="headerlink" href="#baggianalysis.core.Topology.dihedrals" title="Permalink to this definition">¶</a></dt>
-<dd><p>The list of dihedrals stored in the topology. Each dihedral is a four-element list storing the ids of four particles involved in a dihedral.
-Since Python does not support sets of lists, we internally turn the c++ std::set into a std::vector which is then returned and converted into
-a Python object. This may be a performance bottleneck.</p>
+<dd><p>The list of dihedrals stored in the topology.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>List(List(<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a>))</p>
+<dd class="field-odd"><p>List(<a class="reference internal" href="#baggianalysis.core.TopologyDihedral" title="baggianalysis.core.TopologyDihedral"><code class="xref py py-class docutils literal notranslate"><span class="pre">TopologyDihedral</span></code></a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -366,6 +369,54 @@ the latter is the empty topology that will be initialised by the callable.</p></
 </dd>
 </dl>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="baggianalysis.core.TopologyBond">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">TopologyBond</code><a class="headerlink" href="#baggianalysis.core.TopologyBond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<dl class="py method">
+<dt id="baggianalysis.core.TopologyBond.particles">
+<em class="property">property </em><code class="sig-name descname">particles</code><a class="headerlink" href="#baggianalysis.core.TopologyBond.particles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.TopologyBond.type">
+<em class="property">property </em><code class="sig-name descname">type</code><a class="headerlink" href="#baggianalysis.core.TopologyBond.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="baggianalysis.core.TopologyAngle">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">TopologyAngle</code><a class="headerlink" href="#baggianalysis.core.TopologyAngle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<dl class="py method">
+<dt id="baggianalysis.core.TopologyAngle.particles">
+<em class="property">property </em><code class="sig-name descname">particles</code><a class="headerlink" href="#baggianalysis.core.TopologyAngle.particles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.TopologyAngle.type">
+<em class="property">property </em><code class="sig-name descname">type</code><a class="headerlink" href="#baggianalysis.core.TopologyAngle.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="baggianalysis.core.TopologyDihedral">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">TopologyDihedral</code><a class="headerlink" href="#baggianalysis.core.TopologyDihedral" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<dl class="py method">
+<dt id="baggianalysis.core.TopologyDihedral.particles">
+<em class="property">property </em><code class="sig-name descname">particles</code><a class="headerlink" href="#baggianalysis.core.TopologyDihedral.particles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.TopologyDihedral.type">
+<em class="property">property </em><code class="sig-name descname">type</code><a class="headerlink" href="#baggianalysis.core.TopologyDihedral.type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

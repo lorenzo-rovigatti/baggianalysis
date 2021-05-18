@@ -7,10 +7,19 @@
     :nosignatures:
 
     Topology
+    TopologyBond
+    TopologyAngle
+    TopologyDihedral
     parse_microgel_bondfile
     parse_LAMMPS_topology
     
 .. autoclass:: Topology
+
+.. autoclass:: TopologyBond
+
+.. autoclass:: TopologyAngle
+
+.. autoclass:: TopologyDihedral
     
 .. autofunction:: parse_microgel_bondfile
 .. autofunction:: parse_LAMMPS_topology

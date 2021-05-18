@@ -210,6 +210,19 @@ void Topology::_fill_clusters(std::shared_ptr<System> system) {
 #ifdef PYTHON_BINDINGS
 
 void export_Topology(py::module &m) {
+	py::class_<TopologyBond, std::shared_ptr<TopologyBond>> topology_bond(m, "TopologyBond");
+	topology_bond.def_readonly("particles", &TopologyBond::particles);
+	topology_bond.def_readonly("type", &TopologyBond::type);
+
+	py::class_<TopologyAngle, std::shared_ptr<TopologyAngle>> topology_angle(m, "TopologyAngle");
+	topology_angle.def_readonly("particles", &TopologyAngle::particles);
+	topology_angle.def_readonly("type", &TopologyAngle::type);
+
+	py::class_<TopologyDihedral, std::shared_ptr<TopologyDihedral>> topology_dihedral(m, "TopologyDihedral");
+	topology_dihedral.def_readonly("particles", &TopologyDihedral::particles);
+	topology_dihedral.def_readonly("type", &TopologyDihedral::type);
+
+
 	py::class_<Topology, std::shared_ptr<Topology>> topology(m, "Topology", R"pbdoc(
 This class manages the connections and links between the particles of a system.
 
@@ -323,34 +336,16 @@ using a constructor that takes as its only parameter the :class:`System` instanc
             The target system.
 	)pbdoc");
 
-	topology.def_property_readonly("bonds", [](const Topology &t) {
-		auto bonds = t.bonds();
-		std::vector<TopologyBond> v(bonds.begin(), bonds.end());
-		return v;
-	}, R"pbdoc(
-        List(List(int)): The list of bonds stored in the topology. Each bond is a two-element list storing the ids of a pair of bonded particles. 
-        Since Python does not support sets of lists, we internally turn the c++ std::set into a std::vector which is then returned and converted into 
-        a Python object. This may be a performance bottleneck. 
+	topology.def_property_readonly("bonds", &Topology::bonds, R"pbdoc(
+        List(:class:`TopologyBond`): The list of bonds stored in the topology.
 	)pbdoc");
 
-	topology.def_property_readonly("angles", [](const Topology &t) {
-		auto angles = t.angles();
-		std::vector<TopologyAngle> v(angles.begin(), angles.end());
-		return v;
-	}, R"pbdoc(
-		List(List(int)): The list of angles stored in the topology. Each angle is a three-element list storing the ids of a triplet of particles involved in angle. 
-		Since Python does not support sets of lists, we internally turn the c++ std::set into a std::vector which is then returned and converted into 
-		a Python object. This may be a performance bottleneck. 
+	topology.def_property_readonly("angles", &Topology::angles, R"pbdoc(
+		List(:class:`TopologyAngle`): The list of angles stored in the topology.
 	)pbdoc");
 
-	topology.def_property_readonly("dihedrals", [](const Topology &t) {
-		auto dihedrals = t.dihedrals();
-		std::vector<TopologyDihedral> v(dihedrals.begin(), dihedrals.end());
-		return v;
-	}, R"pbdoc(
-		List(List(int)): The list of dihedrals stored in the topology. Each dihedral is a four-element list storing the ids of four particles involved in a dihedral. 
-		Since Python does not support sets of lists, we internally turn the c++ std::set into a std::vector which is then returned and converted into 
-		a Python object. This may be a performance bottleneck. 
+	topology.def_property_readonly("dihedrals", &Topology::dihedrals, R"pbdoc(
+		List(:class:`TopologyDihedral`): The list of dihedrals stored in the topology.
 	)pbdoc");
 
 	topology.def_property_readonly("clusters", &Topology::clusters, R"pbdoc(
