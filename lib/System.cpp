@@ -68,10 +68,27 @@ const std::vector<std::shared_ptr<ParticleSet>> &System::molecules() const {
 	return _molecules;
 }
 
+void System::normalise_molecules() {
+	for(auto molecule : molecules()) {
+		for(auto p : molecule->particles()) {
+			for(auto neigh : p->bonded_neighbours()) {
+				auto other = neigh.other();
+				//if(other->index() > p->index()) {
+					vec3 delta = other->position() - p->position();
+//					delta -= glm::round(delta / box) * box;
+					vec3 shift = -glm::round(delta / box) * box;
+					other->shift(shift);
+//					other->set_position(p->position() + delta);
+				//}
+			}
+		}
+	}
+}
+
 void System::bring_particles_in_box(bool shift_by_half_box) {
 	vec3 origin = (shift_by_half_box) ? -box / 2. : vec3(0., 0., 0.);
 
-	for(auto p : _particles) {
+	for(auto p : particles()) {
 		vec3 delta = p->position() - origin;
 		p->shift(-glm::floor(delta / box) * box);
 	}
@@ -132,6 +149,10 @@ void export_System(py::module &m) {
         -------
         list(:class:`ParticleSet`)
             The list of molecules contained in the system.
+	)pbdoc");
+
+	system.def("normalise_molecules", &System::normalise_molecules, R"pbdoc(
+		Use periodic boundary conditions to shift particle positions so that bonded neighbours are always as close as possible to each other and not separated by distances that are multiple of box sides.
 	)pbdoc");
 
 	system.def("bring_particles_in_box", &System::bring_particles_in_box, py::arg("shift_by_half_box") = false, R"pbdoc(

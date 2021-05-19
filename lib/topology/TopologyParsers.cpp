@@ -18,7 +18,7 @@ void parse_microgel_bondfile(std::string filename, std::shared_ptr<Topology> top
 	std::ifstream input(filename);
 
 	if(!input.good()) {
-		std::string error = fmt::format("The topology file '{}' is unreadable", filename);
+		std::string error = fmt::format("The microgel topology file '{}' is unreadable", filename);
 		throw std::runtime_error(error);
 	}
 
@@ -26,18 +26,29 @@ void parse_microgel_bondfile(std::string filename, std::shared_ptr<Topology> top
 	std::getline(input, line);
 	std::getline(input, line);
 
+	int curr_idx = 0;
 	while(input.good()) {
 		std::getline(input, line);
-		auto split = utils::split(utils::trim_copy(line));
+		utils::trim(line);
+		auto split = utils::split(line);
 
-		if(split.size() == 2) {
-			// the first line contains idx n_neighs
-			int p_idx = utils::lexical_cast<int>(split[0]) - 1;
-			uint n_neighs = utils::lexical_cast<uint>(split[1]);
+		if(line.size() > 0) {
+			int p_idx;
+			uint n_neighs;
 
+			if(split.size() == 2) {
+				// the first line contains idx n_neighs
+				p_idx = utils::lexical_cast<int>(split[0]) - 1;
+				n_neighs = utils::lexical_cast<uint>(split[1]);
+			}
+			else {
+				std::string error = fmt::format("The '{}' line found in the microgel bondfile should have two fields, not {}", line, split.size());
+				throw std::runtime_error(error);
+			}
+
+			// the second line contains the indexes of all neighbours
+			std::getline(input, line);
 			if(n_neighs > 0) {
-				// the second line contains the indexes of all neighbours
-				std::getline(input, line);
 				split = utils::split(utils::trim_copy(line));
 				if(split.size() != n_neighs) {
 					std::string error = fmt::format("Particle {} seems to have {} neighbours, should be {}", p_idx, split.size(), n_neighs);
@@ -49,6 +60,54 @@ void parse_microgel_bondfile(std::string filename, std::shared_ptr<Topology> top
 					topology->add_bond(p_idx, q_idx);
 				}
 			}
+			curr_idx++;
+		}
+	}
+
+	input.close();
+}
+
+void parse_polymer_bondfile(std::string filename, std::shared_ptr<Topology> topology) {
+	std::ifstream input(filename);
+
+	if(!input.good()) {
+		std::string error = fmt::format("The polymer topology file '{}' is unreadable", filename);
+		throw std::runtime_error(error);
+	}
+
+	int p_idx = 0;
+	while(input.good()) {
+		std::string line;
+		std::getline(input, line);
+		utils::trim(line);
+		auto split = utils::split(line);
+
+		if(line.size() > 0) {
+			uint n_neighs;
+
+			if(split.size() == 1) {
+				n_neighs = utils::lexical_cast<uint>(split[0]);
+			}
+			else {
+				std::string error = fmt::format("The '{}' line found in the polymer bondfile should have one field, not {}", line, split.size());
+				throw std::runtime_error(error);
+			}
+
+			// the second line contains the indexes of all neighbours
+			std::getline(input, line);
+			if(n_neighs > 0) {
+				split = utils::split(utils::trim_copy(line));
+				if(split.size() != n_neighs) {
+					std::string error = fmt::format("Particle {} seems to have {} neighbours, should be {}", p_idx, split.size(), n_neighs);
+					throw std::runtime_error(error);
+				}
+
+				for(uint i = 0; i < split.size(); i++) {
+					int q_idx = utils::lexical_cast<int>(split[i]) - 1;
+					topology->add_bond(p_idx, q_idx);
+				}
+			}
+			p_idx++;
 		}
 	}
 
@@ -175,6 +234,7 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 
 void export_TopologyParsers(py::module &m) {
 	m.def("parse_microgel_bondfile", &parse_microgel_bondfile);
+	m.def("parse_polymer_bondfile", &parse_polymer_bondfile);
 	m.def("parse_LAMMPS_topology", &parse_LAMMPS_topology);
 	m.def("topology_from_LAMMPS_data_file", &topology_from_LAMMPS_data_file);
 }

@@ -34,6 +34,8 @@ public:
 	/// Return all the subsets stored in the set (const version)
 	const std::vector<std::shared_ptr<ParticleSet>> &molecules() const;
 
+	void normalise_molecules();
+
 	void bring_particles_in_box(bool shift_by_half_box = false);
 
 	ullint time = 0;

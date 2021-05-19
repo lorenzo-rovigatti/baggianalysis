@@ -73,7 +73,7 @@ public:
 		_position = np;
 	}
 
-	void shift(const vec3 &&delta) {
+	void shift(const vec3 &delta) {
 		_position += delta;
 	}
 

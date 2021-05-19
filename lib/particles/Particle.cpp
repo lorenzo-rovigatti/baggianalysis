@@ -107,6 +107,13 @@ void Particle::set_molecule(std::shared_ptr<ParticleSet> new_molecule) {
 #ifdef PYTHON_BINDINGS
 
 void export_Particle(py::module &m) {
+	py::class_<ParticleBond, std::shared_ptr<ParticleBond>> particle_bond(m, "ParticleBond");
+	particle_bond.def("other", &ParticleBond::other);
+
+	py::class_<ParticleAngle, std::shared_ptr<ParticleAngle>> particle_angle(m, "ParticleAngle");
+
+	py::class_<ParticleDihedral, std::shared_ptr<ParticleDihedral>> particle_dihedral(m, "ParticleDihedral");
+
 	py::class_<Particle, std::shared_ptr<Particle>> particle(m, "Particle", R"pbdoc(
         A simulation particle.
 	)pbdoc");
