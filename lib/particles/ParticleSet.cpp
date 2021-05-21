@@ -109,6 +109,10 @@ const std::vector<std::shared_ptr<Particle>> &ParticleSet::particles() const {
 }
 
 void ParticleSet::add_particle(std::shared_ptr<Particle> p) {
+	if(p->index() == Particle::invalid_index) {
+		throw std::runtime_error("Particles with invalid indexes cannot be added to a System");
+	}
+
 	if(_particles_by_id.count(p->index()) > 0) {
 		std::string error = fmt::format("A particle with index '{}' has already been added to this System", p->index());
 		throw std::runtime_error(error);

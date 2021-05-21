@@ -26,12 +26,18 @@ using ParticleDihedral = ParticleLink<4>;
 
 class Particle: public std::enable_shared_from_this<Particle> {
 public:
+	static const int invalid_index = -1;
+
 	Particle() = delete;
 	Particle(int index);
 	Particle(int index, particle_type nt);
 	Particle(int index, particle_type nt, vec3 pos);
 	Particle(int index, particle_type nt, vec3 pos, vec3 vel);
+	Particle(const Particle &) = delete;
+	Particle &operator=(const Particle &) = delete;
 	virtual ~Particle();
+
+	std::shared_ptr<Particle> make_copy(int index);
 
 	int index() const {
 		return _index;

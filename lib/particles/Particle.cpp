@@ -35,6 +35,19 @@ Particle::Particle(int index, particle_type t, vec3 pos, vec3 vel) :
 				_velocity(vel) {
 }
 
+std::shared_ptr<Particle> Particle::make_copy(int index) {
+	auto new_particle = std::make_shared<Particle>(index);
+
+	new_particle->_type = _type;
+	new_particle->_mass = _mass;
+	new_particle->_charge = _charge;
+	new_particle->_position = _position;
+	new_particle->_velocity = _velocity;
+	new_particle->_orientation_vectors = _orientation_vectors;
+
+	return new_particle;
+}
+
 Particle::~Particle() {
 
 }
@@ -132,6 +145,10 @@ index : int
 	particle.def(py::init<int, particle_type, vec3>());
 
 	particle.def(py::init<int, particle_type, vec3, vec3>());
+
+	particle.def("make_copy", &Particle::make_copy, py::arg("index"), R"pbdoc(
+
+	)pbdoc");
 
 	particle.def("add_orientation_vector", &Particle::add_orientation_vector, py::arg("v"), R"pbdoc(
 The molecule to which this particle belongs.
