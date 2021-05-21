@@ -46,7 +46,11 @@ public:
 protected:
 	std::shared_ptr<oxDNA_topology::Default> _topology_parser;
 
-	OxDNAOrientationInserter _orientation_inserter = [](std::shared_ptr<Particle>, glm::dmat3 &) {};
+	OxDNAOrientationInserter _orientation_inserter = [](std::shared_ptr<Particle> p, glm::dmat3 &m) {
+		p->add_orientation_vector(m[0]);
+		p->add_orientation_vector(m[1]);
+		p->add_orientation_vector(m[2]);
+	};
 };
 
 #ifdef PYTHON_BINDINGS

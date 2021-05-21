@@ -132,7 +132,7 @@ void export_Particle(py::module &m) {
 	)pbdoc");
 
 	particle.def(py::init<int>(), py::arg("index"), R"pbdoc(
-This constructor takes the particle index as its only parameter.
+Build a new particle by specifying its index.
 
 Parameters
 ----------
@@ -140,14 +140,53 @@ index : int
     The index of the particle. Note that this value cannot be changed later on.
 	)pbdoc");
 
-	particle.def(py::init<int, particle_type>());
+	particle.def(py::init<int, particle_type>(), py::arg("index"), py::arg("type"), R"pbdoc(
+Build a new particle by specifying its index and type.
 
-	particle.def(py::init<int, particle_type, vec3>());
+Parameters
+----------
+index : int
+    The index of the particle. Note that this value cannot be changed later on.
+type : str
+    The type of the particle.
+type
+)pbdoc");
 
-	particle.def(py::init<int, particle_type, vec3, vec3>());
+	particle.def(py::init<int, particle_type, vec3>(), py::arg("index"), py::arg("type"), py::arg("position"), R"pbdoc(
+Build a new particle by specifying its index, type and position.
+
+Parameters
+----------
+index : int
+    The index of the particle. Note that this value cannot be changed later on.
+type : str
+    The type of the particle.
+position : numpy.ndarray
+    The position of the particle
+)pbdoc");
+
+	particle.def(py::init<int, particle_type, vec3, vec3>(), py::arg("index"), py::arg("type"), py::arg("position"), py::arg("velocity"), R"pbdoc(
+Build a new particle by specifying its index, type, position and velocity.
+
+Parameters
+----------
+index : int
+    The index of the particle. Note that this value cannot be changed later on.
+type : str
+    The type of the particle.
+position : numpy.ndarray
+    The position of the particle.
+velocity : numpy.ndarray
+    The velocity of the particle.
+)pbdoc");
 
 	particle.def("make_copy", &Particle::make_copy, py::arg("index"), R"pbdoc(
+Return a copy of this particle with the given index. Note that neighbours and bonded neighbours, angles and dihedrals are not copied.
 
+Parameters
+----------
+index : int
+    The index of the new particle. 
 	)pbdoc");
 
 	particle.def("add_orientation_vector", &Particle::add_orientation_vector, py::arg("v"), R"pbdoc(

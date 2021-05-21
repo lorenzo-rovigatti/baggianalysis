@@ -43,11 +43,20 @@ void GenericOxDNAExporter::_write_system_to_stream(std::shared_ptr<System> syste
 	output << fmt::format("t = {}\n", system->time);
 	output << fmt::format("b = {} {} {}\n", system->box[0], system->box[1], system->box[2]);
 	output << fmt::format("E = 0 0 0\n");
-	// TODO update with angular data
+
 	for(auto p : system->particles()) {
 		output << fmt::format("{} {} {} ", p->position()[0], p->position()[1], p->position()[2]);
-		output << fmt::format("1 0 0 ");
-		output << fmt::format("0 1 0 ");
+
+		if(p->orientation_vectors().size() == 3) {
+			vec3 a1 = p->orientation_vectors()[0];
+			vec3 a3 = p->orientation_vectors()[2];
+			output << fmt::format("{} {} {} ", a1[0], a1[1], a1[2]);
+			output << fmt::format("{} {} {} ", a3[0], a3[1], a3[2]);
+		}
+		else {
+			output << fmt::format("1 0 0 ");
+			output << fmt::format("0 1 0 ");
+		}
 		output << fmt::format("{} {} {} ", p->velocity()[0], p->velocity()[1], p->velocity()[2]);
 		output << fmt::format("0 0 0\n");
 	}

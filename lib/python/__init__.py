@@ -1,5 +1,7 @@
 from .core import *
 
+from . import utils
+
 __title__ = 'baggianalysis'
 __description__ = 'A C++/Python library to facilitate the analysis of molecular simulations'
 __url__ = 'https://github.com/lorenzo-rovigatti/baggianalysis'

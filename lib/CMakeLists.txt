@@ -141,6 +141,10 @@ IF(Python)
 	CONFIGURE_FILE(python/__init__.py
 		${BA_OUTPUT_DIR}/__init__.py
 	)
+	
+	CONFIGURE_FILE(python/utils.py
+		${BA_OUTPUT_DIR}/utils.py
+	)
 
 	CONFIGURE_FILE(python/make_install_setup.py
 		${BA_OUTPUT_DIR}/setup.py
