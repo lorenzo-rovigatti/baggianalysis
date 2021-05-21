@@ -24,7 +24,7 @@ std::shared_ptr<System> FilterByFunction::filter(std::shared_ptr<const System> s
 
 	for(auto p : syst->particles()) {
 		if(_filter_function(p.get())) {
-			std::shared_ptr<Particle> new_particle = p->make_copy(new_particle->index());
+			std::shared_ptr<Particle> new_particle = p->make_copy(p->index());
 			new_syst->add_particle(new_particle);
 		}
 	}
