@@ -7,6 +7,7 @@
     :nosignatures:
 
     BondOrderParameters
+    ClusterList
     ConvexHull
     FormFactor
     PoreSize
@@ -14,6 +15,8 @@
     StructureFactor
     
 .. autoclass:: BondOrderParameters
+
+.. autoclass:: ClusterList
     
 .. autoclass:: ConvexHull
     

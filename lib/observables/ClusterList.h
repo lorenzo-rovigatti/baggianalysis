@@ -18,6 +18,11 @@ public:
 	virtual ~ClusterList();
 
 	void analyse_system(std::shared_ptr<System> frame) override;
+
+	const std::vector<std::set<int>> &clusters() const;
+
+private:
+	std::vector<std::set<int>> _clusters;
 };
 
 #ifdef PYTHON_BINDINGS

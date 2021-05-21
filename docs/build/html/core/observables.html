@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Observables &mdash; baggianalysis 0.1.0b1.dev35+g7436c47.d20210521 documentation</title>
+  <title>Observables &mdash; baggianalysis 0.1.0b1.dev37+g6ac61d0.d20210521 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.1.0b1.dev35+g7436c47.d20210521
+                0.1.0b1.dev37+g6ac61d0.d20210521
               </div>
             
           
@@ -182,19 +182,22 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.BondOrderParameters" title="baggianalysis.core.BondOrderParameters"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BondOrderParameters</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.ConvexHull" title="baggianalysis.core.ConvexHull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConvexHull</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.ClusterList" title="baggianalysis.core.ClusterList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ClusterList</span></code></a></p></td>
+<td><p>Partition particles into clusters and return their size.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.ConvexHull" title="baggianalysis.core.ConvexHull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConvexHull</span></code></a></p></td>
 <td><p>Construct the <a class="reference external" href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a> of the system, which is the smallest convex set that contains the set of points constituted by the particles’ coordinates of the given system.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.FormFactor" title="baggianalysis.core.FormFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormFactor</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.FormFactor" title="baggianalysis.core.FormFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormFactor</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.PoreSize" title="baggianalysis.core.PoreSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PoreSize</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.PoreSize" title="baggianalysis.core.PoreSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PoreSize</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.RDF" title="baggianalysis.core.RDF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RDF</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.RDF" title="baggianalysis.core.RDF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RDF</span></code></a></p></td>
 <td><p>Compute the <a class="reference external" href="https://en.wikipedia.org/wiki/Radial_distribution_function">radial distribution function</a> of a system.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.StructureFactor" title="baggianalysis.core.StructureFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StructureFactor</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.StructureFactor" title="baggianalysis.core.StructureFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StructureFactor</span></code></a></p></td>
 <td><p>Compute the <a class="reference external" href="https://en.wikipedia.org/wiki/Structure_factor">structure factor</a> of a system.</p></td>
 </tr>
 </tbody>
@@ -221,6 +224,40 @@
 <dl class="py method">
 <dt id="baggianalysis.core.BondOrderParameters.result">
 <code class="sig-name descname">result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.BondOrderParameters" title="baggianalysis.core.BondOrderParameters">baggianalysis.core.BondOrderParameters</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span>List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><span class="p">]</span><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.BondOrderParameters.result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="baggianalysis.core.ClusterList">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">ClusterList</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ClusterList" title="baggianalysis.core.ClusterList">baggianalysis.core.ClusterList</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.ClusterList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<p>Partition particles into clusters and return their size.</p>
+<p>The default constructor takes no parameters</p>
+<dl class="py method">
+<dt id="baggianalysis.core.ClusterList.analyse_system">
+<code class="sig-name descname">analyse_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ClusterList" title="baggianalysis.core.ClusterList">baggianalysis.core.ClusterList</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.ClusterList.analyse_system" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.ClusterList.analyse_trajectory">
+<code class="sig-name descname">analyse_trajectory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ClusterList" title="baggianalysis.core.ClusterList">baggianalysis.core.ClusterList</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="trajectories.html#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.ClusterList.analyse_trajectory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.ClusterList.clusters">
+<em class="property">property </em><code class="sig-name descname">clusters</code><a class="headerlink" href="#baggianalysis.core.ClusterList.clusters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of clusters of the system analysed last.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.ClusterList.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ClusterList" title="baggianalysis.core.ClusterList">baggianalysis.core.ClusterList</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.ClusterList.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.ClusterList.result">
+<code class="sig-name descname">result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ClusterList" title="baggianalysis.core.ClusterList">baggianalysis.core.ClusterList</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.ClusterList.result" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
