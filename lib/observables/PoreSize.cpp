@@ -99,7 +99,7 @@ void PoreSize::analyse_system(std::shared_ptr<System> frame) {
 
 	for(int i = 0; i < _N_attempts; i++) {
 		if(i > 0 && (i % (_N_attempts / 10) == 0)) {
-			std::cerr << i << " steps completed" << std::endl;
+			BA_INFO("{} steps completed", i);
 		}
 		current_position = vec3(BARANDOM.uniform() * frame->box[0], BARANDOM.uniform() * frame->box[1], BARANDOM.uniform() * frame->box[2]);
 
@@ -115,7 +115,7 @@ void PoreSize::analyse_system(std::shared_ptr<System> frame) {
 				_opt.optimize(starting_position, maximum_radius);
 			}
 			catch(std::exception &e) {
-				std::cerr << "nlopt failed: " << e.what() << std::endl;
+				BA_CRITICAL("nlopt failed: {}", e.what());
 				exit(1);
 			}
 

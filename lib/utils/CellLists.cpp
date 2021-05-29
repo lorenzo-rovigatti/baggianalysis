@@ -47,8 +47,6 @@ void CellLists::init_cells(std::vector<std::shared_ptr<Particle>> particles, con
 	next.resize(particles.size(), -1);
 	heads.resize(N_cells, -1);
 
-	std::cerr << "Number of cells: " << N_cells << ", cells per box side: <" << N_cells_side[0] << ", " << N_cells_side[1] << ", " << N_cells_side[2] << ">" << std::endl;
-
 	for(size_t i = 0; i < particles.size(); i++) {
 		auto p = particles[i];
 		int cell_idx = get_cell_index(p->position());
@@ -74,11 +72,7 @@ void CellLists::init_cells(std::vector<std::shared_ptr<Particle>> particles, con
 			}
 		}
 
-		std::cerr << "Maximum shift order: " << max_shift << ", number of shifts per order:";
-		for(auto &shift : _cell_shifts) {
-			std::cerr << " " << shift.size();
-		}
-		std::cerr << std::endl;
+		BA_DEBUG("Number of cells: {}, cells per box side: <{}, {}, {}>, maximum shift order: {}", N_cells, N_cells_side[0], N_cells_side[1], N_cells_side[2], max_shift);
 	}
 }
 
