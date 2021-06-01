@@ -35,6 +35,9 @@ void GenericOxDNAExporter::write_topology(std::shared_ptr<System> system, std::s
 		}
 		topology << " " << N_A << std::endl;
 	}
+	else {
+		topology << std::endl;
+	}
 
 	topology.close();
 }
