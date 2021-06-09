@@ -86,7 +86,7 @@ void System::normalise_molecules() {
 }
 
 void System::bring_particles_in_box(bool shift_by_half_box) {
-	vec3 origin = (shift_by_half_box) ? -box / 2. : vec3(0., 0., 0.);
+	vec3 origin = (shift_by_half_box) ? box / 2. : vec3(0., 0., 0.);
 
 	for(auto p : particles()) {
 		vec3 delta = p->position() - origin;
