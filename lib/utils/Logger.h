@@ -15,6 +15,7 @@
 #define BA_DEBUG Logger::logger()->debug
 
 #include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_sinks.h>
 
 #include <memory>
 

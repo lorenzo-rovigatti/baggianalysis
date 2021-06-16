@@ -13,7 +13,7 @@ std::shared_ptr<spdlog::logger> Logger::_spd_logger = nullptr;
 
 std::shared_ptr<spdlog::logger> Logger::logger() {
 	if(Logger::_spd_logger == nullptr) {
-		Logger::_spd_logger = spdlog::default_logger();
+		Logger::_spd_logger = spdlog::stderr_logger_st("ba_logger");
 	}
 
 	return Logger::_spd_logger;
