@@ -11,6 +11,7 @@
 #include "../defs.h"
 
 #include <sstream>
+#include <fast_double_parser/fast_double_parser.h>
 
 namespace ba {
 
@@ -77,13 +78,9 @@ template<>
 inline double lexical_cast(std::string source) {
 	double result;
 
-	try {
-		result = std::stod(source);
-	}
-	catch (std::invalid_argument &) {
-		throw bad_lexical_cast();
-	}
-	catch (std::out_of_range &) {
+	const char *endptr = fast_double_parser::parse_number(source.c_str(), &result);
+
+	if(endptr == nullptr) {
 		throw bad_lexical_cast();
 	}
 

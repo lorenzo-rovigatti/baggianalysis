@@ -11,27 +11,24 @@ namespace ba {
 
 namespace utils {
 
-// taken from https://www.bfilipek.com/2018/07/string-view-perf-followup.html
 std::vector<std::string> split(const std::string &str, const std::string &delims) {
 	std::vector<std::string> output;
-	auto first = std::cbegin(str);
 
-	while(first != std::cend(str)) {
-		const auto second = std::find_first_of(first, std::cend(str), std::cbegin(delims), std::cend(delims));
-
-		if(first != second) {
-			output.emplace_back(first, second);
+	const char *ptr = str.c_str();
+	while(ptr) {
+		auto base = ptr;
+		ptr = std::strpbrk(ptr, delims.c_str());
+		if(ptr) {
+			output.emplace_back(base, ptr - base);
+			ptr++;
 		}
-
-		if(second == std::cend(str)) {
-			break;
+		else {
+			output.emplace_back(base);
 		}
-
-		first = std::next(second);
 	}
 
 	if(output.size() == 0) {
-		output.emplace_back("");
+		output.push_back("");
 	}
 
 	return output;
