@@ -1,4 +1,27 @@
-v. 0.1.0
+v. 0.2.0 [6dfcb24]
+	- Add the "mass" and "charge" fields to particles
+	- Add support for the "full" atom_style in LAMMPS-related classes
+	- Make it possible to use a data file to initialise a LAMMPS dump conf
+	- Add first class support for angles and dihedrals
+	- Add support for bonds, angles and dihedrals of different types
+	- Use a custom class to manage neighbours as done for bonded neighbours
+	- Add a method to init the orientation vectors of oxDNA confs
+	- Add a new observables that compute cluster sizes (ClusterList)
+	- Add an observable to compute the radial distribution function (RDF)
+	- Add a method to use PBC to reconstruct molecules
+	- Add a method to copy particles (Particle::make_copy)
+	- Make the logger use stderr instead of stdout
+	- Performance improvements (remove dependencies and use better algorithms all over the code), especially for parsing
+	- Add an example featuring parsing and analysis of a LAMMPS data file
+	- Add a method to the Topology class (`remove_unappliable_links`) to remove from an already-initialised topology all those links (bonds, angles and
+dihedrals) that involve particles that are not present in the given system
+	- Bugfixing
+		- Fix a bug whereby Topology::bonds would not work on Python
+		- Fix a bug of the cogli1 exporter
+		- Remove some huge memory leaks due to a circular dependency
+		- Fix a bug that would add particles with random indexes to a System
+
+v. 0.1.0 [f4f90ef]
 	- This is the first beta version
 	- Add a new parser to build systems out of PatchyParticles configurations
 	- Add a method to the oxDNA topology Default's class to get the number of particles of species A
@@ -8,7 +31,7 @@ v. 0.1.0
 	- Fix a bug whereby the structure factor observable would not take averages in the right way
 	- Update the documentation
 
-v. 0.0.3
+v. 0.0.3 [b5dc92c]
 	- Add the MapParticle filter, which takes a list of lists that specify the ids
 	  of particles whose centre of mass will be used as a new particle
 	- Add the FilterById filter, which takes a list of indexes and build systems 
@@ -19,7 +42,7 @@ v. 0.0.3
 	  the BondOrderParameters observable
 	- Improve the documentation coverage
 	
-v. 0.0.2
+v. 0.0.2 [31322e8]
 	- Add a test that checks the LAMMPS conf and topology parser and exporter
 	- Add the write_topology and write_trajectory methods to BaseExporter
 	- Remove Boost's `signal` from the dependencies
@@ -31,5 +54,5 @@ v. 0.0.2
 	- Add a mechanism to manage the version number
 	- Bugfixing
 
-v. 0.0.1
+v. 0.0.1 [19c49e8]
 	- First release
