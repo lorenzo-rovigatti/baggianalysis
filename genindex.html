@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; baggianalysis 0.0.3a1.dev9+gf4f90ef documentation</title>
+  <title>Index &mdash; baggianalysis 0.2.0b1.dev1+ge617fd1 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.0.3a1.dev9+gf4f90ef
+                0.2.0b1.dev1+ge617fd1
               </div>
             
           
@@ -93,6 +93,9 @@
 <li class="toctree-l2"><a class="reference internal" href="core/trajectories.html">Trajectory classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core/observables.html">Observables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core/neighbours.html">Neighbour finders</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">The utils module</a><ul class="simple">
 </ul>
 </li>
 </ul>
@@ -184,6 +187,7 @@
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
  | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
  
@@ -203,6 +207,10 @@
 </li>
       <li><a href="core/topology.html#baggianalysis.core.Topology.add_bond">add_bond() (baggianalysis.core.Topology method)</a>
 </li>
+      <li><a href="core/particles.html#baggianalysis.core.Particle.add_bonded_angle">add_bonded_angle() (baggianalysis.core.Particle method)</a>
+</li>
+      <li><a href="core/particles.html#baggianalysis.core.Particle.add_bonded_dihedral">add_bonded_dihedral() (baggianalysis.core.Particle method)</a>
+</li>
       <li><a href="core/particles.html#baggianalysis.core.Particle.add_bonded_neighbour">add_bonded_neighbour() (baggianalysis.core.Particle method)</a>
 </li>
       <li><a href="core/topology.html#baggianalysis.core.Topology.add_dihedral">add_dihedral() (baggianalysis.core.Topology method)</a>
@@ -210,6 +218,8 @@
       <li><a href="core/trajectories.html#baggianalysis.core.BaseTrajectory.add_filter">add_filter() (baggianalysis.core.BaseTrajectory method)</a>
 </li>
       <li><a href="core/particles.html#baggianalysis.core.Particle.add_neighbour">add_neighbour() (baggianalysis.core.Particle method)</a>
+</li>
+      <li><a href="core/particles.html#baggianalysis.core.Particle.add_orientation_vector">add_orientation_vector() (baggianalysis.core.Particle method)</a>
 </li>
       <li><a href="core/particles.html#baggianalysis.core.ParticleSet.add_particle">add_particle() (baggianalysis.core.ParticleSet method)</a>
 </li>
@@ -220,11 +230,15 @@
       <li><a href="core/observables.html#baggianalysis.core.BondOrderParameters.analyse_system">analyse_system() (baggianalysis.core.BondOrderParameters method)</a>
 
       <ul>
+        <li><a href="core/observables.html#baggianalysis.core.ClusterList.analyse_system">(baggianalysis.core.ClusterList method)</a>
+</li>
         <li><a href="core/observables.html#baggianalysis.core.ConvexHull.analyse_system">(baggianalysis.core.ConvexHull method)</a>
 </li>
         <li><a href="core/observables.html#baggianalysis.core.FormFactor.analyse_system">(baggianalysis.core.FormFactor method)</a>
 </li>
         <li><a href="core/observables.html#baggianalysis.core.PoreSize.analyse_system">(baggianalysis.core.PoreSize method)</a>
+</li>
+        <li><a href="core/observables.html#baggianalysis.core.RDF.analyse_system">(baggianalysis.core.RDF method)</a>
 </li>
         <li><a href="core/observables.html#baggianalysis.core.StructureFactor.analyse_system">(baggianalysis.core.StructureFactor method)</a>
 </li>
@@ -234,6 +248,8 @@
       <li><a href="core/observables.html#baggianalysis.core.BondOrderParameters.analyse_trajectory">analyse_trajectory() (baggianalysis.core.BondOrderParameters method)</a>
 
       <ul>
+        <li><a href="core/observables.html#baggianalysis.core.ClusterList.analyse_trajectory">(baggianalysis.core.ClusterList method)</a>
+</li>
         <li><a href="core/observables.html#baggianalysis.core.ConvexHull.analyse_trajectory">(baggianalysis.core.ConvexHull method)</a>
 </li>
         <li><a href="core/observables.html#baggianalysis.core.FormFactor.analyse_trajectory">(baggianalysis.core.FormFactor method)</a>
@@ -242,9 +258,13 @@
 </li>
         <li><a href="core/observables.html#baggianalysis.core.PoreSize.analyse_trajectory">(baggianalysis.core.PoreSize method)</a>
 </li>
+        <li><a href="core/observables.html#baggianalysis.core.RDF.analyse_trajectory">(baggianalysis.core.RDF method)</a>
+</li>
         <li><a href="core/observables.html#baggianalysis.core.StructureFactor.analyse_trajectory">(baggianalysis.core.StructureFactor method)</a>
 </li>
       </ul></li>
+      <li><a href="core/topology.html#baggianalysis.core.Topology.angles">angles() (baggianalysis.core.Topology property)</a>
+</li>
       <li><a href="core/topology.html#baggianalysis.core.Topology.apply">apply() (baggianalysis.core.Topology method)</a>
 </li>
       <li><a href="core/observables.html#baggianalysis.core.ConvexHullResult.area">area() (baggianalysis.core.ConvexHullResult property)</a>
@@ -271,8 +291,12 @@
 </li>
       <li><a href="core/trajectories.html#baggianalysis.core.BaseTrajectory">BaseTrajectory (class in baggianalysis.core)</a>
 </li>
+      <li><a href="core/particles.html#baggianalysis.core.Particle.bonded_angles">bonded_angles() (baggianalysis.core.Particle property)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core/particles.html#baggianalysis.core.Particle.bonded_dihedrals">bonded_dihedrals() (baggianalysis.core.Particle property)</a>
+</li>
       <li><a href="core/particles.html#baggianalysis.core.Particle.bonded_neighbours">bonded_neighbours() (baggianalysis.core.Particle property)</a>
 </li>
       <li><a href="core/observables.html#baggianalysis.core.BondOrderParameters">BondOrderParameters (class in baggianalysis.core)</a>
@@ -289,18 +313,34 @@
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core/particles.html#baggianalysis.core.Particle.charge">charge() (baggianalysis.core.Particle property)</a>
+
+      <ul>
+        <li><a href="core/particles.html#baggianalysis.core.ParticleSet.charge">(baggianalysis.core.ParticleSet method)</a>
+</li>
+      </ul></li>
+      <li><a href="core/particles.html#baggianalysis.core.ParticleSet.charges">charges() (baggianalysis.core.ParticleSet method)</a>
+</li>
       <li><a href="core/observables.html#baggianalysis.core.StructureFactor.clear_b_factors">clear_b_factors() (baggianalysis.core.StructureFactor method)</a>
 </li>
+      <li><a href="core/observables.html#baggianalysis.core.ClusterList">ClusterList (class in baggianalysis.core)</a>
+</li>
+      <li><a href="core/observables.html#baggianalysis.core.ClusterList.clusters">clusters() (baggianalysis.core.ClusterList property)</a>
+
+      <ul>
+        <li><a href="core/topology.html#baggianalysis.core.Topology.clusters">(baggianalysis.core.Topology property)</a>
+</li>
+      </ul></li>
       <li><a href="core/exporters.html#baggianalysis.core.Cogli1Exporter">Cogli1Exporter (class in baggianalysis.core)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core/exporters.html#baggianalysis.core.Cogli1Particle">Cogli1Particle (class in baggianalysis.core)</a>
 </li>
       <li><a href="core/exporters.html#baggianalysis.core.Cogli1Particle.color">color() (baggianalysis.core.Cogli1Particle property)</a>
 </li>
       <li><a href="core/particles.html#baggianalysis.core.ParticleSet.com">com() (baggianalysis.core.ParticleSet method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core/observables.html#baggianalysis.core.ConvexHull">ConvexHull (class in baggianalysis.core)</a>
 </li>
       <li><a href="core/observables.html#baggianalysis.core.ConvexHullResult">ConvexHullResult (class in baggianalysis.core)</a>
@@ -324,6 +364,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core/observables.html#baggianalysis.core.DestructuredStructureFactor">DestructuredStructureFactor (class in baggianalysis.core)</a>
+</li>
+      <li><a href="core/topology.html#baggianalysis.core.Topology.dihedrals">dihedrals() (baggianalysis.core.Topology property)</a>
 </li>
       <li><a href="core/topology.html#baggianalysis.core.Topology.disable_checks">disable_checks() (baggianalysis.core.Topology method)</a>
 </li>
@@ -385,6 +427,8 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core/particles.html#baggianalysis.core.ParticleSet.id_exists">id_exists() (baggianalysis.core.ParticleSet method)</a>
+</li>
       <li><a href="core/particles.html#baggianalysis.core.Particle.index">index() (baggianalysis.core.Particle property)</a>
 </li>
       <li><a href="core/particles.html#baggianalysis.core.ParticleSet.indexes">indexes() (baggianalysis.core.ParticleSet method)</a>
@@ -421,6 +465,8 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core/particles.html#baggianalysis.core.Particle.make_copy">make_copy() (baggianalysis.core.Particle method)</a>
+</li>
       <li><a href="core/topology.html#baggianalysis.core.Topology.make_empty_topology">make_empty_topology() (baggianalysis.core.Topology static method)</a>
 </li>
       <li><a href="core/parsers.html#baggianalysis.core.BaseParser.make_system">make_system() (baggianalysis.core.BaseParser method)</a>
@@ -429,9 +475,17 @@
 </li>
       <li><a href="core/topology.html#baggianalysis.core.Topology.make_topology_from_system">make_topology_from_system() (baggianalysis.core.Topology static method)</a>
 </li>
+      <li><a href="core/filters.html#baggianalysis.core.MapParticles">MapParticles (class in baggianalysis.core)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="core/filters.html#baggianalysis.core.MapParticles">MapParticles (class in baggianalysis.core)</a>
+      <li><a href="core/particles.html#baggianalysis.core.Particle.mass">mass() (baggianalysis.core.Particle property)</a>
+
+      <ul>
+        <li><a href="core/particles.html#baggianalysis.core.ParticleSet.mass">(baggianalysis.core.ParticleSet method)</a>
+</li>
+      </ul></li>
+      <li><a href="core/particles.html#baggianalysis.core.ParticleSet.masses">masses() (baggianalysis.core.ParticleSet method)</a>
 </li>
       <li><a href="core/particles.html#baggianalysis.core.Particle.molecule">molecule() (baggianalysis.core.Particle property)</a>
 </li>
@@ -481,6 +535,8 @@
       </ul></li>
       <li><a href="core/observables.html#baggianalysis.core.ConvexHullTriangle.normal">normal() (baggianalysis.core.ConvexHullTriangle property)</a>
 </li>
+      <li><a href="core/particles.html#baggianalysis.core.System.normalise_molecules">normalise_molecules() (baggianalysis.core.System method)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -508,7 +564,15 @@
       <li><a href="core/particles.html#baggianalysis.core.ParticleSet.particle_by_id">particle_by_id() (baggianalysis.core.ParticleSet method)</a>
 </li>
       <li><a href="core/particles.html#baggianalysis.core.ParticleSet.particles">particles() (baggianalysis.core.ParticleSet method)</a>
+
+      <ul>
+        <li><a href="core/topology.html#baggianalysis.core.TopologyAngle.particles">(baggianalysis.core.TopologyAngle property)</a>
 </li>
+        <li><a href="core/topology.html#baggianalysis.core.TopologyBond.particles">(baggianalysis.core.TopologyBond property)</a>
+</li>
+        <li><a href="core/topology.html#baggianalysis.core.TopologyDihedral.particles">(baggianalysis.core.TopologyDihedral property)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core/particles.html#baggianalysis.core.ParticleSet">ParticleSet (class in baggianalysis.core)</a>
@@ -520,6 +584,8 @@
       <li><a href="core/particles.html#baggianalysis.core.Particle.position">position() (baggianalysis.core.Particle property)</a>
 </li>
       <li><a href="core/particles.html#baggianalysis.core.ParticleSet.positions">positions() (baggianalysis.core.ParticleSet method)</a>
+</li>
+      <li><a href="utils.html#baggianalysis.utils.print_bondfile">print_bondfile() (in module baggianalysis.utils)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -537,15 +603,45 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core/observables.html#baggianalysis.core.PoreSize.radius">radius() (baggianalysis.core.PoreSize method)</a>
 </li>
+      <li><a href="core/observables.html#baggianalysis.core.RDF">RDF (class in baggianalysis.core)</a>
+</li>
+      <li><a href="core/particles.html#baggianalysis.core.System.reindex_particles">reindex_particles() (baggianalysis.core.System method)</a>
+</li>
       <li><a href="core/particles.html#baggianalysis.core.ParticleSet.remove_particle">remove_particle() (baggianalysis.core.ParticleSet method)</a>
 </li>
       <li><a href="core/particles.html#baggianalysis.core.ParticleSet.remove_particle_by_id">remove_particle_by_id() (baggianalysis.core.ParticleSet method)</a>
 </li>
-      <li><a href="core/trajectories.html#baggianalysis.core.BaseTrajectory.reset">reset() (baggianalysis.core.BaseTrajectory method)</a>
+      <li><a href="core/topology.html#baggianalysis.core.Topology.remove_unappliable_links">remove_unappliable_links() (baggianalysis.core.Topology method)</a>
 </li>
+      <li><a href="core/particles.html#baggianalysis.core.System.rescale_lengths">rescale_lengths() (baggianalysis.core.System method)</a>
+</li>
+      <li><a href="core/trajectories.html#baggianalysis.core.BaseTrajectory.reset">reset() (baggianalysis.core.BaseTrajectory method)</a>
+
+      <ul>
+        <li><a href="core/observables.html#baggianalysis.core.BondOrderParameters.reset">(baggianalysis.core.BondOrderParameters method)</a>
+</li>
+        <li><a href="core/observables.html#baggianalysis.core.ClusterList.reset">(baggianalysis.core.ClusterList method)</a>
+</li>
+        <li><a href="core/observables.html#baggianalysis.core.ConvexHull.reset">(baggianalysis.core.ConvexHull method)</a>
+</li>
+        <li><a href="core/observables.html#baggianalysis.core.FormFactor.reset">(baggianalysis.core.FormFactor method)</a>
+</li>
+        <li><a href="core/observables.html#baggianalysis.core.MSD.reset">(baggianalysis.core.MSD method)</a>
+</li>
+        <li><a href="core/observables.html#baggianalysis.core.PoreSize.reset">(baggianalysis.core.PoreSize method)</a>
+</li>
+        <li><a href="core/observables.html#baggianalysis.core.RDF.reset">(baggianalysis.core.RDF method)</a>
+</li>
+        <li><a href="core/observables.html#baggianalysis.core.StructureFactor.reset">(baggianalysis.core.StructureFactor method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core/observables.html#baggianalysis.core.BondOrderParameters.result">result() (baggianalysis.core.BondOrderParameters method)</a>
 
       <ul>
+        <li><a href="core/observables.html#baggianalysis.core.ClusterList.result">(baggianalysis.core.ClusterList method)</a>
+</li>
         <li><a href="core/observables.html#baggianalysis.core.ConvexHull.result">(baggianalysis.core.ConvexHull method)</a>
 </li>
         <li><a href="core/observables.html#baggianalysis.core.FormFactor.result">(baggianalysis.core.FormFactor method)</a>
@@ -553,6 +649,8 @@
         <li><a href="core/observables.html#baggianalysis.core.MSD.result">(baggianalysis.core.MSD method)</a>
 </li>
         <li><a href="core/observables.html#baggianalysis.core.PoreSize.result">(baggianalysis.core.PoreSize method)</a>
+</li>
+        <li><a href="core/observables.html#baggianalysis.core.RDF.result">(baggianalysis.core.RDF method)</a>
 </li>
         <li><a href="core/observables.html#baggianalysis.core.StructureFactor.result">(baggianalysis.core.StructureFactor method)</a>
 </li>
@@ -572,6 +670,8 @@
       <li><a href="core/trajectories.html#baggianalysis.core.BaseTrajectory.set_include_system">set_include_system() (baggianalysis.core.BaseTrajectory method)</a>
 </li>
       <li><a href="core/neighbours.html#baggianalysis.core.NeighbourFinder.set_neighbours">set_neighbours() (baggianalysis.core.NeighbourFinder method)</a>
+</li>
+      <li><a href="core/parsers.html#baggianalysis.core.OxDNAParser.set_orientation_inserter">set_orientation_inserter() (baggianalysis.core.OxDNAParser method)</a>
 </li>
       <li><a href="core/parsers.html#baggianalysis.core.BaseParser.set_topology">set_topology() (baggianalysis.core.BaseParser method)</a>
 </li>
@@ -613,6 +713,14 @@
 </li>
       <li><a href="core/topology.html#baggianalysis.core.Topology">Topology (class in baggianalysis.core)</a>
 </li>
+      <li><a href="core/parsers.html#baggianalysis.core.LAMMPSDataFileParser.topology">topology() (baggianalysis.core.LAMMPSDataFileParser property)</a>
+</li>
+      <li><a href="core/topology.html#baggianalysis.core.TopologyAngle">TopologyAngle (class in baggianalysis.core)</a>
+</li>
+      <li><a href="core/topology.html#baggianalysis.core.TopologyBond">TopologyBond (class in baggianalysis.core)</a>
+</li>
+      <li><a href="core/topology.html#baggianalysis.core.TopologyDihedral">TopologyDihedral (class in baggianalysis.core)</a>
+</li>
       <li><a href="core/observables.html#baggianalysis.core.ConvexHullResult.triangles">triangles() (baggianalysis.core.ConvexHullResult property)</a>
 </li>
   </ul></td>
@@ -624,8 +732,22 @@
       <ul>
         <li><a href="core/particles.html#baggianalysis.core.Particle.type">(baggianalysis.core.Particle property)</a>
 </li>
+        <li><a href="core/topology.html#baggianalysis.core.TopologyAngle.type">(baggianalysis.core.TopologyAngle property)</a>
+</li>
+        <li><a href="core/topology.html#baggianalysis.core.TopologyBond.type">(baggianalysis.core.TopologyBond property)</a>
+</li>
+        <li><a href="core/topology.html#baggianalysis.core.TopologyDihedral.type">(baggianalysis.core.TopologyDihedral property)</a>
+</li>
       </ul></li>
       <li><a href="core/particles.html#baggianalysis.core.ParticleSet.types">types() (baggianalysis.core.ParticleSet method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="core/parsers.html#baggianalysis.core.BaseParser.use_topology">use_topology() (baggianalysis.core.BaseParser method)</a>
 </li>
   </ul></td>
 </tr></table>

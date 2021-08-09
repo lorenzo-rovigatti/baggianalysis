@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search &mdash; baggianalysis 0.2.0b1.dev1+ge617fd1 documentation</title>
+  <title>The utils module &mdash; baggianalysis 0.2.0b1.dev1+ge617fd1 documentation</title>
   
 
   
@@ -20,7 +20,6 @@
   
 
   
-    
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -34,9 +33,10 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-    <script type="text/javascript" src="_static/searchtools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Writing a parser" href="extending/parser.html" />
+    <link rel="prev" title="Neighbour finders" href="core/neighbours.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -67,7 +67,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -85,7 +85,7 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="core/core.html">The core module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="core/particles.html">Particle-related classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core/topology.html">Topology-related classes and utility functions</a></li>
@@ -97,7 +97,7 @@
 <li class="toctree-l2"><a class="reference internal" href="core/neighbours.html">Neighbour finders</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="utils.html">The utils module</a><ul class="simple">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The utils module</a><ul class="simple">
 </ul>
 </li>
 </ul>
@@ -150,12 +150,14 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Search</li>
+      <li>The utils module</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
+            <a href="_sources/utils.md.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -167,23 +169,53 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search functionality.
-    </p>
-  </div>
-  </noscript>
+  <div class="section" id="the-utils-module">
+<h1>The utils module<a class="headerlink" href="#the-utils-module" title="Permalink to this headline">¶</a></h1>
+<p>This module contains some utility functions/classes that are directly written in Python. Every <code class="docutils literal notranslate"><span class="pre">object</span></code> described here is contained in the same module and can be accessed as <code class="docutils literal notranslate"><span class="pre">baggianalysis.utils.object</span></code>.</p>
+<div class="toctree-wrapper compound">
+</div>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.utils.print_bondfile" title="baggianalysis.utils.print_bondfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_bondfile</span></code></a></p></td>
+<td><p>Print the bondfile relative to the given system.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt id="baggianalysis.utils.print_bondfile">
+<code class="sig-prename descclassname">baggianalysis.utils.</code><code class="sig-name descname">print_bondfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">system</span></em>, <em class="sig-param"><span class="n">shift_indexes</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.utils.print_bondfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the bondfile relative to the given system. The bondfile will contain 2N lines, where N is the number of particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of the file that will be printed</p></li>
+<li><p><strong>system</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code>) – The system whose bonds will be printed</p></li>
+<li><p><strong>shift_indexes</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – Whether indexes should be shifted by one. This is used to transform zero-based indexes to one-based for e.g. Fortran compatibility. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
-  
-  <div id="search-results">
-  
-  </div>
+</div>
+
 
            </div>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="extending/parser.html" class="btn btn-neutral float-right" title="Writing a parser" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="core/neighbours.html" class="btn btn-neutral float-left" title="Neighbour finders" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -223,14 +255,7 @@
   
   
     
-  
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
    
-
 
 </body>
 </html>
