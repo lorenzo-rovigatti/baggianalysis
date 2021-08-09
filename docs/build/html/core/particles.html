@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Particle-related classes &mdash; baggianalysis 0.1.0b1.dev37+g6ac61d0.d20210521 documentation</title>
+  <title>Particle-related classes &mdash; baggianalysis 0.1.0b1.dev43+g8aca238.d20210809 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.1.0b1.dev37+g6ac61d0.d20210521
+                0.1.0b1.dev43+g8aca238.d20210809
               </div>
             
           
@@ -227,7 +227,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The index of the particle. Note that this value cannot be changed later on.</p></li>
 <li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of the particle.</p></li>
-<li><p><strong>position</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><em>numpy.ndarray</em></a>) – The position of the particle</p></li>
+<li><p><strong>position</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><em>numpy.ndarray</em></a>) – The position of the particle</p></li>
 </ul>
 </dd>
 </dl>
@@ -240,8 +240,8 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The index of the particle. Note that this value cannot be changed later on.</p></li>
 <li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of the particle.</p></li>
-<li><p><strong>position</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><em>numpy.ndarray</em></a>) – The position of the particle.</p></li>
-<li><p><strong>velocity</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><em>numpy.ndarray</em></a>) – The velocity of the particle.</p></li>
+<li><p><strong>position</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><em>numpy.ndarray</em></a>) – The position of the particle.</p></li>
+<li><p><strong>velocity</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><em>numpy.ndarray</em></a>) – The velocity of the particle.</p></li>
 </ul>
 </dd>
 </dl>
@@ -371,7 +371,7 @@ the current particle is <cite>not</cite> added to the list of <code class="docut
 <dd><p>The molecule to which this particle belongs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><em>numpy.ndarray</em></a>) – The new orientation vector.</p>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><em>numpy.ndarray</em></a>) – The new orientation vector.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -498,7 +498,7 @@ list of interaction centres or the components of the orientation matrix.</p>
 <dd><p>The particle’s position.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)">numpy.ndarray</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -520,7 +520,7 @@ list of interaction centres or the components of the orientation matrix.</p>
 <dd><p>The particle’s velocity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)">numpy.ndarray</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -560,6 +560,11 @@ list of interaction centres or the components of the orientation matrix.</p>
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.com">
 <code class="sig-name descname">com</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; glm::tvec3&lt;scalar, P&gt;<a class="headerlink" href="#baggianalysis.core.ParticleSet.com" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.ParticleSet.id_exists">
+<code class="sig-name descname">id_exists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.id_exists" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">

@@ -123,6 +123,8 @@ public:
 	 */
 	void remove_particle_by_id(int p_id);
 
+	bool id_exists(int index) const;
+
 	/// Return the particle with the given id. Throw an exception if the particle does not exist.
 	std::shared_ptr<Particle> particle_by_id(int index) const;
 

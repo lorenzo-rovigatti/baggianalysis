@@ -33,8 +33,8 @@ struct ConvexHullTriangle {
 };
 
 struct ConvexHullResult {
-	double volume;
-	double area;
+	double volume = 0.;
+	double area = 0.;
 	std::vector<vec3> vertices;
 	std::vector<ConvexHullTriangle> triangles;
 };

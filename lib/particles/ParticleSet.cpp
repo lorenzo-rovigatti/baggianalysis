@@ -138,6 +138,10 @@ void ParticleSet::remove_particle_by_id(int p_id) {
 	remove_particle(particle_by_id(p_id));
 }
 
+bool ParticleSet::id_exists(int index) const {
+	return _particles_by_id.find(index) != _particles_by_id.end();
+}
+
 std::shared_ptr<Particle> ParticleSet::particle_by_id(int index) const {
 	try {
 		return _particles_by_id.at(index);
@@ -178,6 +182,7 @@ void export_ParticleSet(py::module &m) {
 	particle_set.def("add_particle", &ParticleSet::add_particle);
 	particle_set.def("remove_particle", &ParticleSet::remove_particle);
 	particle_set.def("remove_particle_by_id", &ParticleSet::remove_particle_by_id);
+	particle_set.def("id_exists", &ParticleSet::id_exists);
 	particle_set.def("particle_by_id", &ParticleSet::particle_by_id);
 	particle_set.def("sort_particles_by_id", &ParticleSet::sort_particles_by_id);
 	particle_set.def_property("name", &ParticleSet::name, &ParticleSet::set_name);

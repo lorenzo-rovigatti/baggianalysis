@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Topology-related classes and utility functions &mdash; baggianalysis 0.1.0b1.dev37+g6ac61d0.d20210521 documentation</title>
+  <title>Topology-related classes and utility functions &mdash; baggianalysis 0.1.0b1.dev43+g8aca238.d20210809 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.1.0b1.dev37+g6ac61d0.d20210521
+                0.1.0b1.dev43+g8aca238.d20210809
               </div>
             
           
@@ -369,6 +369,19 @@ the latter is the empty topology that will be initialised by the callable.</p></
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>system</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a>) – The input system.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.Topology.remove_unappliable_links">
+<code class="sig-name descname">remove_unappliable_links</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Topology" title="baggianalysis.core.Topology">baggianalysis.core.Topology</a></span></em>, <em class="sig-param"><span class="n">system</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.Topology.remove_unappliable_links" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove from the current topology all those links (bonds, angles, dihedrals) that refer to particles that do not exist in the given system.
+This procedure makes it so the given system will contain the correct set of molecules once <a class="reference internal" href="#baggianalysis.core.Topology.apply" title="baggianalysis.core.Topology.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">apply()</span></code></a> is called on it. Note that this
+operation is <strong>irreversible</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>system</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a>) – The system whose particles will be used to identify the links to be removed.</p>
 </dd>
 </dl>
 </dd></dl>

@@ -69,28 +69,34 @@ std::shared_ptr<Topology> Topology::make_topology_from_system(std::shared_ptr<Sy
 }
 
 void Topology::add_bond(int p, int q) {
+	_build_clusters = true;
 	_bonds.insert(TopologyBond(p, q));
 }
 
 void Topology::add_bond(std::string type, int p, int q) {
+	_build_clusters = true;
 	_bonds.insert(TopologyBond(type, p, q));
 	_bond_types.insert(type);
 }
 
 void Topology::add_angle(int p, int q, int r) {
+	_build_clusters = true;
 	_angles.insert(TopologyAngle(p, q, r));
 }
 
 void Topology::add_angle(std::string type, int p, int q, int r) {
+	_build_clusters = true;
 	_angles.insert(TopologyAngle(type, p, q, r));
 	_angle_types.insert(type);
 }
 
 void Topology::add_dihedral(int p, int q, int r, int s) {
+	_build_clusters = true;
 	_dihedrals.insert(TopologyDihedral(p, q, r, s));
 }
 
 void Topology::add_dihedral(std::string type, int p, int q, int r, int s) {
+	_build_clusters = true;
 	_dihedrals.insert(TopologyDihedral(type, p, q, r, s));
 	_dihedral_types.insert(type);
 }
@@ -103,29 +109,43 @@ void Topology::disable_checks() {
 	_disable_checks = true;
 }
 
+void Topology::remove_unappliable_links(std::shared_ptr<System> system) {
+	auto all_indexes = system->indexes();
+
+	auto remover = [system](auto &link_set) {
+		for(auto it = link_set.begin(); it != link_set.end();) {
+			auto bond = *it;
+
+			bool remove = false;
+			for(auto p_idx : it->particles) {
+				if(!system->id_exists(p_idx)) {
+					remove = true;
+				}
+			}
+			if(remove) {
+				it = link_set.erase(it);
+			}
+			else {
+				++it;
+			}
+		}
+	};
+
+	remover(_bonds);
+	remover(_angles);
+	remover(_dihedrals);
+	_build_clusters = true;
+}
+
 void Topology::apply(std::shared_ptr<System> system) {
 	// reset all the molecules
 	system->molecules().clear();
 
-	// add all bonds between particles
-	for(auto bond : _bonds) {
-		auto p_idx = bond[0];
-		auto q_idx = bond[1];
+	_set_bonded_links(system);
 
-		try {
-			auto p = system->particle_by_id(p_idx);
-			auto q = system->particle_by_id(q_idx);
-			p->add_bonded_neighbour(bond.type, q);
-		}
-		catch (std::runtime_error &e) {
-			std::string error = fmt::format("The following error occurred while applying the topology to a System:\n\t'{}'", e.what());
-			_raise_error(error);
-		}
-	}
-
-	// we build the clusters only once
-	if(_clusters.size() == 0) {
+	if(_build_clusters) {
 		_fill_clusters(system);
+		_build_clusters = false;
 	}
 
 	if(_N_in_system != system->N() && !_disable_checks) {
@@ -136,28 +156,20 @@ void Topology::apply(std::shared_ptr<System> system) {
 	for(auto &cluster : _clusters) {
 		std::shared_ptr<ParticleSet> new_molecule = std::make_shared<ParticleSet>();
 		for(auto index : cluster) {
-			auto particle = system->particle_by_id(index);
-			new_molecule->add_particle(particle);
-			particle->set_molecule(new_molecule);
+			try {
+				auto particle = system->particle_by_id(index);
+				new_molecule->add_particle(particle);
+				particle->set_molecule(new_molecule);
+			}
+			catch (std::runtime_error &e) {
+				std::string error = fmt::format("The following error occurred while applying the topology to a System:\n\t'{}'", e.what());
+				_raise_error(error);
+			}
 		}
 
 		std::string mol_name = fmt::format("mol_{}", system->molecules().size());
 		new_molecule->set_name(mol_name);
-		system->molecules().emplace_back(new_molecule);
-	}
-
-	for(const TopologyAngle &angle : _angles) {
-		ParticleAngle new_angle(angle.type, system->particle_by_id(angle[0]), system->particle_by_id(angle[1]), system->particle_by_id(angle[2]));
-		for(int i = 0; i < 3; i++) {
-			new_angle[i]->add_bonded_angle(new_angle);
-		}
-	}
-
-	for(auto &dihedral : _dihedrals) {
-		ParticleDihedral new_dihedral(dihedral.type, system->particle_by_id(dihedral[0]), system->particle_by_id(dihedral[1]), system->particle_by_id(dihedral[2]), system->particle_by_id(dihedral[3]));
-		for(int i = 0; i < 4; i++) {
-			new_dihedral[i]->add_bonded_dihedral(new_dihedral);
-		}
+		system->molecules().push_back(new_molecule);
 	}
 }
 
@@ -204,6 +216,50 @@ void Topology::_fill_clusters(std::shared_ptr<System> system) {
 	}
 	else {
 		BA_DEBUG("Topology: Found {} clusters", _clusters.size());
+	}
+}
+
+void Topology::_set_bonded_links(std::shared_ptr<System> system) {
+	// add links (bonds, angles, dihedrals) to particles
+	for(auto bond : _bonds) {
+		auto p_idx = bond[0];
+		auto q_idx = bond[1];
+
+		try {
+			auto p = system->particle_by_id(p_idx);
+			auto q = system->particle_by_id(q_idx);
+			p->add_bonded_neighbour(bond.type, q);
+		}
+		catch (std::runtime_error &e) {
+			std::string error = fmt::format("The following error occurred while applying the topology to a System:\n\t'{}'", e.what());
+			_raise_error(error);
+		}
+	}
+
+	for(const TopologyAngle &angle : _angles) {
+		try {
+			ParticleAngle new_angle(angle.type, system->particle_by_id(angle[0]), system->particle_by_id(angle[1]), system->particle_by_id(angle[2]));
+			for(int i = 0; i < 3; i++) {
+				new_angle[i]->add_bonded_angle(new_angle);
+			}
+		}
+		catch (std::runtime_error &e) {
+			std::string error = fmt::format("The following error occurred while applying the topology to a System:\n\t'{}'", e.what());
+			_raise_error(error);
+		}
+	}
+
+	for(auto &dihedral : _dihedrals) {
+		try {
+			ParticleDihedral new_dihedral(dihedral.type, system->particle_by_id(dihedral[0]), system->particle_by_id(dihedral[1]), system->particle_by_id(dihedral[2]), system->particle_by_id(dihedral[3]));
+			for(int i = 0; i < 4; i++) {
+				new_dihedral[i]->add_bonded_dihedral(new_dihedral);
+			}
+		}
+		catch (std::runtime_error &e) {
+			std::string error = fmt::format("The following error occurred while applying the topology to a System:\n\t'{}'", e.what());
+			_raise_error(error);
+		}
 	}
 }
 
@@ -327,13 +383,24 @@ using a constructor that takes as its only parameter the :class:`System` instanc
         Disables exception throwing whenever errors occur during application to a system.
 	)pbdoc");
 
-	topology.def("apply", &Topology::apply, py::arg("system"), R"pbdoc(
-        Applies the current topology to the given system, adding the bonds to the particles and partitioning them into clusters.
+	topology.def("remove_unappliable_links", &Topology::remove_unappliable_links, py::arg("system"), R"pbdoc(
+Remove from the current topology all those links (bonds, angles, dihedrals) that refer to particles that do not exist in the given system. 
+This procedure makes it so the given system will contain the correct set of molecules once :meth:`apply` is called on it. Note that this 
+operation is **irreversible**.
 
-        Parameters
-        ----------
-        system : :class:`System`
-            The target system.
+Parameters
+----------
+system : :class:`System`
+	The system whose particles will be used to identify the links to be removed.
+	)pbdoc");
+
+	topology.def("apply", &Topology::apply, py::arg("system"), R"pbdoc(
+Applies the current topology to the given system, adding the bonds to the particles and partitioning them into clusters.
+
+Parameters
+----------
+system : :class:`System`
+	The target system.
 	)pbdoc");
 
 	topology.def_property_readonly("bonds", &Topology::bonds, R"pbdoc(

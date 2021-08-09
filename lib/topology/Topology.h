@@ -80,6 +80,8 @@ public:
 	void enable_checks();
 	void disable_checks();
 
+	void remove_unappliable_links(std::shared_ptr<System> system);
+
 	void apply(std::shared_ptr<System> system);
 
 	const std::vector<std::set<int>> &clusters() const;
@@ -99,8 +101,10 @@ protected:
 
 	void _raise_error(std::string msg);
 	void _fill_clusters(std::shared_ptr<System> system);
+	void _set_bonded_links(std::shared_ptr<System> system);
 
 	bool _disable_checks = false;
+	bool _build_clusters = true;
 
 	/// the number of particles contained in the system that this topology was initialised for
 	uint _N_in_system;

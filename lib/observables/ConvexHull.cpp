@@ -82,6 +82,7 @@ void ConvexHull::analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) 
 	_average_over_trajectory = true;
 
 	_N_frames = 0;
+	reset();
 	SystemObservable::analyse_trajectory(trajectory);
 	_result.triangles.clear();
 	_result.vertices.clear();
