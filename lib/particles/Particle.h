@@ -113,6 +113,7 @@ public:
 	void add_bonded_neighbour(std::string type, std::shared_ptr<Particle> new_neighbour);
 	void add_bonded_neighbour(std::shared_ptr<Particle> new_neighbour);
 	void remove_bonded_neighbour(ParticleBond to_remove);
+	bool has_bonded_neighbour(std::shared_ptr<Particle> q);
 
 	const std::set<ParticleAngle> &bonded_angles() const {
 		return _bonded_angles;

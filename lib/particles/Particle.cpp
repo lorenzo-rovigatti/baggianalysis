@@ -65,6 +65,10 @@ void Particle::remove_bonded_neighbour(ParticleBond to_remove) {
 	_bonded_neighbours.erase(to_remove);
 }
 
+bool Particle::has_bonded_neighbour(std::shared_ptr<Particle> q) {
+	return std::find_if(_bonded_neighbours.begin(), _bonded_neighbours.end(), [q](const ParticleBond &pb) { return pb.other() == q; }) != _bonded_neighbours.end();
+}
+
 void Particle::add_bonded_angle(std::string type, std::shared_ptr<Particle> p1, std::shared_ptr<Particle> p2, std::shared_ptr<Particle> p3) {
 	_bonded_angles.emplace(type, p1, p2, p3);
 }
@@ -200,6 +204,7 @@ v : numpy.ndarray
 
 	particle.def("add_bonded_neighbour", static_cast<void (Particle::*)(std::string, std::shared_ptr<Particle>)>(&Particle::add_bonded_neighbour), py::arg("type"), py::arg("q"), R"pbdoc(
 Add a bond of the given type between the current particle and ``q``.
+
 Parameters
 ----------
 type : str
@@ -215,6 +220,20 @@ Parameters
 ----------
 q : :class:`Particle`
 	The new bonded neighbour.
+	)pbdoc");
+
+	particle.def("has_bonded_neighbour", &Particle::has_bonded_neighbour, py::arg("q"), R"pbdoc(
+Check whether ``q`` is a bonded neighbour.
+
+Parameters
+----------
+q : :class:`Particle`
+	Another particle.
+
+Returns
+-------
+bool
+	True if ``q`` is a bonded neighbour, False otherwise.
 	)pbdoc");
 
 	particle.def("add_bonded_angle", static_cast<void (Particle::*)(std::string, std::shared_ptr<Particle>, std::shared_ptr<Particle>, std::shared_ptr<Particle>)>(&Particle::add_bonded_angle),
@@ -301,6 +320,20 @@ Parameters
 ----------
 q : :class:`Particle`
 	The new neighbour.
+	)pbdoc");
+
+	particle.def("has_neighbour", &Particle::has_neighbour, py::arg("q"), R"pbdoc(
+Check whether ``q`` is a neighbour.
+
+Parameters
+----------
+q : :class:`Particle`
+	Another particle.
+
+Returns
+-------
+bool
+    True if ``q`` is a neighbour, False otherwise.
 	)pbdoc");
 
 	particle.def_property_readonly("molecule", &Particle::molecule, R"pbdoc(
