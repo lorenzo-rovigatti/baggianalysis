@@ -35,7 +35,15 @@ public:
 	NeighbourFinder();
 	virtual ~NeighbourFinder();
 
+	void include_bonded_neighbours(bool include);
+
 	virtual void set_neighbours(std::vector<std::shared_ptr<Particle>> particles, const vec3 &box) = 0;
+
+protected:
+	bool _include_bonded_neighbours = false;
+
+	virtual void _add_neighbour(std::shared_ptr<Particle> add_to, std::shared_ptr<Particle> to_be_added);
+	virtual void _add_neighbour(std::shared_ptr<Particle> add_to, std::string type, std::shared_ptr<Particle> to_be_added);
 };
 
 #ifdef PYTHON_BINDINGS

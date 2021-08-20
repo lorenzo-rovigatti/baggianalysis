@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Neighbour finders &mdash; baggianalysis 0.1.0b1.dev43+g8aca238.d20210809 documentation</title>
+  <title>Neighbour finders &mdash; baggianalysis 0.2.0b1.dev2+gbbca9ba.d20210820 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.1.0b1.dev43+g8aca238.d20210809
+                0.2.0b1.dev2+gbbca9ba.d20210820
               </div>
             
           
@@ -180,7 +180,7 @@
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.NeighbourFinder" title="baggianalysis.core.NeighbourFinder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NeighbourFinder</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Interface for classes that set the neighbours of a given list of particles according to some criterium.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.FixedNumberFinder" title="baggianalysis.core.FixedNumberFinder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FixedNumberFinder</span></code></a></p></td>
 <td><p>Define as neighbours of a particle the N particles that are closest to it.</p></td>
@@ -189,7 +189,7 @@
 <td><p>Define as neighbours of a particle all those particles that are closer than the given cutoff and, optionally, satisfy further conditions set by a custom function.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.SANNFinder" title="baggianalysis.core.SANNFinder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SANNFinder</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Use the SANN algorithm to detect neighbours.</p></td>
 </tr>
 </tbody>
 </table>
@@ -197,10 +197,34 @@
 <dt id="baggianalysis.core.NeighbourFinder">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">NeighbourFinder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.NeighbourFinder" title="baggianalysis.core.NeighbourFinder">baggianalysis.core.NeighbourFinder</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.NeighbourFinder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<p>Interface for classes that set the neighbours of a given list of particles according to some criterium.</p>
+<dl class="py method">
+<dt id="baggianalysis.core.NeighbourFinder.include_bonded_neighbours">
+<code class="sig-name descname">include_bonded_neighbours</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.NeighbourFinder" title="baggianalysis.core.NeighbourFinder">baggianalysis.core.NeighbourFinder</a></span></em>, <em class="sig-param"><span class="n">include</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.NeighbourFinder.include_bonded_neighbours" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>include</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – True if bonded neighbours can also be regular neighbours, False otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="baggianalysis.core.NeighbourFinder.set_neighbours">
-<code class="sig-name descname">set_neighbours</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.NeighbourFinder, arg0: List[baggianalysis.core.Particle], arg1: glm::tvec3&lt;scalar, P&gt;</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.NeighbourFinder.set_neighbours" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">set_neighbours</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.NeighbourFinder, particles: List[baggianalysis.core.Particle], box: glm::tvec3&lt;scalar, P&gt;</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.NeighbourFinder.set_neighbours" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the neighbours of the given list of particles. Note that only particles that belong to the given list can be neighbours.
+The criterium according to which particles are defined as neighbours can be set by subclassing this interface and overriding
+this method.</p>
+<p>By default if particle <code class="docutils literal notranslate"><span class="pre">q</span></code> is already a bonded neighbour of particle <code class="docutils literal notranslate"><span class="pre">p</span></code>, <code class="docutils literal notranslate"><span class="pre">q</span></code> will not be added as a regular neighbour of <code class="docutils literal notranslate"><span class="pre">p</span></code>.
+This behaviour can be changed by invoking <a class="reference internal" href="#baggianalysis.core.NeighbourFinder.include_bonded_neighbours" title="baggianalysis.core.NeighbourFinder.include_bonded_neighbours"><code class="xref py py-meth docutils literal notranslate"><span class="pre">include_bonded_neighbours()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particles</strong> (List(<a class="reference internal" href="particles.html#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>)) – The particles whose neighbours will be set.</p></li>
+<li><p><strong>box</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><em>numpy.ndarray</em></a>) – The simulation box.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -251,8 +275,19 @@
 
 <dl class="py class">
 <dt id="baggianalysis.core.SANNFinder">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">SANNFinder</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.SANNFinder</em>, <em class="sig-param">arg0: float</em>, <em class="sig-param">arg1: ba::SANNFinder::SymmetryPolicy</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.SANNFinder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">SANNFinder</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.SANNFinder</em>, <em class="sig-param">max_distance: float</em>, <em class="sig-param">symmetry_policy: ba::SANNFinder::SymmetryPolicy</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.SANNFinder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.NeighbourFinder" title="baggianalysis.core.NeighbourFinder"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.NeighbourFinder</span></code></a></p>
+<p>Use the SANN algorithm to detect neighbours.</p>
+<p>SANN is a parameter-free, solid-angle based, nearest-neighbor algorithm described in <a class="reference external" href="https://doi.org/10.1063/1.4729313">this paper</a>.</p>
+<p>The constructor takes two mandatory arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_distance</strong> (<em>double</em>) – The maximum distance that will be used to look for neighbour candidates.</p></li>
+<li><p><strong>symmetry_policy</strong> (<a class="reference internal" href="#baggianalysis.core.SANNFinder.SymmetryPolicy" title="baggianalysis.core.SANNFinder.SymmetryPolicy"><code class="xref py py-class docutils literal notranslate"><span class="pre">SymmetryPolicy</span></code></a>) – The policy that will be applied to particles that have neighbours that don’t have them as neighbours.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt id="baggianalysis.core.SANNFinder.NO_ACTION">
 <code class="sig-name descname">NO_ACTION</code><em class="property"> = SymmetryPolicy.NO_ACTION</em><a class="headerlink" href="#baggianalysis.core.SANNFinder.NO_ACTION" title="Permalink to this definition">¶</a></dt>

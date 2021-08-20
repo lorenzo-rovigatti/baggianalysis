@@ -92,7 +92,7 @@ void SANNFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particles
 		}
 
 		for(size_t i = 0; i < neigh_number; i++) {
-			p->add_neighbour(_bond_type, possible_neighbours[i].q);
+			_add_neighbour(p, _bond_type, possible_neighbours[i].q);
 		}
 	}
 
@@ -115,7 +115,7 @@ void SANNFinder::_symmetrise_by_adding(std::vector<std::shared_ptr<Particle>> pa
 		for(auto neigh : p->neighbours()) {
 			auto q = neigh.other();
 			if(q->has_neighbour(p)) {
-				q->add_neighbour(_bond_type, p);
+				_add_neighbour(q, _bond_type, p);
 			}
 		}
 	}
@@ -140,9 +140,22 @@ void SANNFinder::_symmetrise_by_removing(std::vector<std::shared_ptr<Particle>> 
 #ifdef PYTHON_BINDINGS
 
 void export_SANNFinder(py::module &m) {
-	py::class_<SANNFinder, NeighbourFinder, std::shared_ptr<SANNFinder>> finder(m, "SANNFinder");
+	py::class_<SANNFinder, NeighbourFinder, std::shared_ptr<SANNFinder>> finder(m, "SANNFinder", R"pbdoc(
+Use the SANN algorithm to detect neighbours. 
 
-	finder.def(py::init<double, SANNFinder::SymmetryPolicy>());
+SANN is a parameter-free, solid-angle based, nearest-neighbor algorithm described in `this paper <https://doi.org/10.1063/1.4729313>`_.
+)pbdoc");
+
+	finder.def(py::init<double, SANNFinder::SymmetryPolicy>(), py::arg("max_distance"), py::arg("symmetry_policy"), R"pbdoc(
+The constructor takes two mandatory arguments.
+
+Parameters
+----------
+    max_distance : double
+        The maximum distance that will be used to look for neighbour candidates.
+    symmetry_policy : :class:`SymmetryPolicy`
+        The policy that will be applied to particles that have neighbours that don't have them as neighbours.
+)pbdoc");
 
 	py::enum_<SANNFinder::SymmetryPolicy>(finder, "SymmetryPolicy")
 	    .value("NO_ACTION", SANNFinder::SymmetryPolicy::NO_ACTION)

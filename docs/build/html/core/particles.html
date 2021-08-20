@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Particle-related classes &mdash; baggianalysis 0.1.0b1.dev43+g8aca238.d20210809 documentation</title>
+  <title>Particle-related classes &mdash; baggianalysis 0.2.0b1.dev2+gbbca9ba.d20210820 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.1.0b1.dev43+g8aca238.d20210809
+                0.2.0b1.dev2+gbbca9ba.d20210820
               </div>
             
           
@@ -320,11 +320,15 @@
 <ol class="arabic simple">
 <li><p>add_bonded_neighbour(self: baggianalysis.core.Particle, type: str, q: baggianalysis.core.Particle) -&gt; None</p></li>
 </ol>
-<p>Add a bond of the given type between the current particle and <code class="docutils literal notranslate"><span class="pre">q</span></code>.
-:param type: The type of bond shared by the two particles.
-:type type: str
-:param q: The new bonded neighbour.
-:type q: <a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a></p>
+<p>Add a bond of the given type between the current particle and <code class="docutils literal notranslate"><span class="pre">q</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of bond shared by the two particles.</p></li>
+<li><p><strong>q</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The new bonded neighbour.</p></li>
+</ul>
+</dd>
+</dl>
 <ol class="arabic simple" start="2">
 <li><p>add_bonded_neighbour(self: baggianalysis.core.Particle, q: baggianalysis.core.Particle) -&gt; None</p></li>
 </ol>
@@ -416,6 +420,40 @@ the current particle is <cite>not</cite> added to the list of <code class="docut
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.Particle.has_bonded_neighbour">
+<code class="sig-name descname">has_bonded_neighbour</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">q</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="headerlink" href="#baggianalysis.core.Particle.has_bonded_neighbour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether <code class="docutils literal notranslate"><span class="pre">q</span></code> is a bonded neighbour.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>q</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – Another particle.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if <code class="docutils literal notranslate"><span class="pre">q</span></code> is a bonded neighbour, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.Particle.has_neighbour">
+<code class="sig-name descname">has_neighbour</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">q</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="headerlink" href="#baggianalysis.core.Particle.has_neighbour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether <code class="docutils literal notranslate"><span class="pre">q</span></code> is a neighbour.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>q</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – Another particle.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if <code class="docutils literal notranslate"><span class="pre">q</span></code> is a neighbour, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>

@@ -67,7 +67,7 @@ void FixedNumberFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> pa
 
 		std::sort(possible_neighbours.begin(), possible_neighbours.end());
 		for(uint i = 0; i < _N && i < possible_neighbours.size(); i++) {
-			p->add_neighbour(possible_neighbours[i].q);
+			_add_neighbour(p, possible_neighbours[i].q);
 		}
 	}
 }

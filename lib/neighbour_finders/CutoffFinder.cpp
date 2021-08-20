@@ -54,8 +54,8 @@ void CutoffFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particl
 						double distance_sqr = glm::dot(distance, distance);
 
 						if(distance_sqr < _cutoff_sqr && _neigh_function(p, q, distance)) {
-							p->add_neighbour(q);
-							q->add_neighbour(p);
+							_add_neighbour(p, q);
+							_add_neighbour(q, p);
 						}
 					}
 
