@@ -28,6 +28,10 @@ LAMMPSDataFileParser::LAMMPSDataFileParser(std::string atom_style) :
 		_charge_index = 3;
 		_pos_starting_index = 4;
 	}
+	else if(atom_style == "molecular") {
+		_type_index = 3;
+		_pos_starting_index = 4;
+	}
 	else {
 		std::string error = fmt::format("Unsupported LAMMPS atom_style '{}'", atom_style);
 		throw std::runtime_error(error);

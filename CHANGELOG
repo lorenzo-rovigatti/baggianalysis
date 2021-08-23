@@ -1,3 +1,8 @@
+v. 0.3.0
+	- By default neighbour finders do not consider as "neighbours" particles that are bonded.
+	- Add a has_bonded_neighbour method to Particle  
+	- The LAMMPS data file parser now supports the "molecular" style
+
 v. 0.2.0 [6dfcb24]
 	- Add the "mass" and "charge" fields to particles
 	- Add support for the "full" atom_style in LAMMPS-related classes
@@ -56,3 +61,4 @@ v. 0.0.2 [31322e8]
 
 v. 0.0.1 [19c49e8]
 	- First release
+	
