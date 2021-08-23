@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration parsers &mdash; baggianalysis 0.2.0b1.dev1+ge617fd1 documentation</title>
+  <title>Configuration parsers &mdash; baggianalysis 0.2.0b1.dev11+gc8cbbb7 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.2.0b1.dev1+ge617fd1
+                0.2.0b1.dev11+gc8cbbb7
               </div>
             
           
@@ -190,10 +190,10 @@
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.LAMMPSDataFileParser" title="baggianalysis.core.LAMMPSDataFileParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDataFileParser</span></code></a></p></td>
-<td><p>Overloaded function.</p></td>
+<td><p>Parse LAMMPS data files.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.LAMMPSDumpParser" title="baggianalysis.core.LAMMPSDumpParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPSDumpParser</span></code></a></p></td>
-<td><p>Overloaded function.</p></td>
+<td><p>Parse LAMMPS dump files.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.LJKAParser" title="baggianalysis.core.LJKAParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LJKAParser</span></code></a></p></td>
 <td><p></p></td>
@@ -360,11 +360,12 @@ of oxDNA configurations:</p>
 <dt id="baggianalysis.core.LAMMPSDataFileParser">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LAMMPSDataFileParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.LAMMPSDataFileParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseParser</span></code></a></p>
+<p>Parse LAMMPS data files.</p>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>__init__(self: baggianalysis.core.LAMMPSDataFileParser, arg0: str) -&gt; None</p></li>
-<li><p>__init__(self: baggianalysis.core.LAMMPSDataFileParser, arg0: int, arg1: int) -&gt; None</p></li>
-<li><p>__init__(self: baggianalysis.core.LAMMPSDataFileParser, arg0: int, arg1: int, arg2: int) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.LAMMPSDataFileParser, atom_style: str) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.LAMMPSDataFileParser, type_index: int, pos_starting_index: int) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.LAMMPSDataFileParser, type_index: int, pos_starting_index: int, charge_index: int) -&gt; None</p></li>
 </ol>
 <dl class="py method">
 <dt id="baggianalysis.core.LAMMPSDataFileParser.topology">
@@ -377,11 +378,17 @@ of oxDNA configurations:</p>
 <dt id="baggianalysis.core.LAMMPSDumpParser">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LAMMPSDumpParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.LAMMPSDumpParser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseParser" title="baggianalysis.core.BaseParser"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseParser</span></code></a></p>
+<p>Parse LAMMPS dump files.</p>
+<p>It uses the “ITEM: ATOMS” line to automatically map fields to atom/particle properties (type, index, mass, charge, coordinates, velocities).
+It can optionally use a LAMMPS data file to also initialise the system topology.</p>
 <p>Overloaded function.</p>
 <ol class="arabic simple">
-<li><p>__init__(self: baggianalysis.core.LAMMPSDumpParser, rescaled_coords: bool = False) -&gt; None</p></li>
-<li><p>__init__(self: baggianalysis.core.LAMMPSDumpParser, data_file_system: baggianalysis.core.System, rescaled_coords: bool = False) -&gt; None</p></li>
-<li><p>__init__(self: baggianalysis.core.LAMMPSDumpParser, data_file: str, atom_style: str, rescaled_coords: bool = False) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.LAMMPSDumpParser) -&gt; None</p></li>
+</ol>
+<p>The default constructor takes no arguments</p>
+<ol class="arabic simple" start="2">
+<li><p>__init__(self: baggianalysis.core.LAMMPSDumpParser, data_file_system: baggianalysis.core.System) -&gt; None</p></li>
+<li><p>__init__(self: baggianalysis.core.LAMMPSDumpParser, data_file: str, atom_style: str) -&gt; None</p></li>
 </ol>
 </dd></dl>
 
