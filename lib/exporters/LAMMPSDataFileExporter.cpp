@@ -91,8 +91,6 @@ void LAMMPSDataFileExporter::_write_system_to_stream(std::shared_ptr<System> sys
 		output << _particle_line(p) << std::endl;
 	}
 
-	output << std::endl;
-
 	if(N_bonds > 0) {
 		output << std::endl;
 		output << "Bonds" << std::endl << std::endl;

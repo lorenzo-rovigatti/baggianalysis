@@ -38,9 +38,9 @@ to_be_added = 2
 crosslinkers = list(filter(lambda p: p.type == CL_TYPE, system.particles()))
 chains = set()
 for cl in crosslinkers:
-    for neigh in cl.bonded_neighbours:
+    for bond in cl.bonded_neighbours:
         prev_neigh = cl
-        curr_neigh = neigh
+        curr_neigh = bond.other()
         chain = Chain(cl.index)
         chain.append(curr_neigh.index)
         while curr_neigh.type != "2":
@@ -48,9 +48,10 @@ for cl in crosslinkers:
                 print("Crosslinker %d has a chain containing a monomer with %d != 2 neighbour(s)" % (cl.index, len(curr_neigh.bonded_neighbours)))
                 break
             for b in curr_neigh.bonded_neighbours:
-                if b != prev_neigh:
+                other_neigh = b.other()
+                if other_neigh != prev_neigh:
                     prev_neigh = curr_neigh
-                    curr_neigh = b
+                    curr_neigh = other_neigh
                     chain.append(curr_neigh.index)
                     break
 
