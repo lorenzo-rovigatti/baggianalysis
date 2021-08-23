@@ -26,7 +26,7 @@ private:
 	std::string _particle_line(std::shared_ptr<Particle> p);
 
 	std::string _atom_style;
-	std::vector<std::string> _supported_atom_styles = {"atomic", "bond", "full"};
+	std::vector<std::string> _supported_atom_styles = {"atomic", "bond", "full", "molecular"};
 };
 
 #ifdef PYTHON_BINDINGS

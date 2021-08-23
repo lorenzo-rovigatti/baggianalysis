@@ -19,7 +19,7 @@ LAMMPSDataFileParser::LAMMPSDataFileParser(std::string atom_style) :
 		_type_index = 1;
 		_pos_starting_index = 2;
 	}
-	else if(atom_style == "bond") {
+	else if(atom_style == "bond" || atom_style == "molecular") {
 		_type_index = 2;
 		_pos_starting_index = 3;
 	}
@@ -27,10 +27,6 @@ LAMMPSDataFileParser::LAMMPSDataFileParser(std::string atom_style) :
 		_type_index = 2;
 		_charge_index = 3;
 		_pos_starting_index = 4;
-	}
-	else if(atom_style == "molecular") {
-		_type_index = 2;
-		_pos_starting_index = 3;
 	}
 	else {
 		std::string error = fmt::format("Unsupported LAMMPS atom_style '{}'", atom_style);

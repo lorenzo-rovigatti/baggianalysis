@@ -134,7 +134,7 @@ std::string LAMMPSDataFileExporter::_particle_line(std::shared_ptr<Particle> p) 
 	int p_id = p->index();
 	particle_type p_type = p->type();
 	std::string line = fmt::format("{}", p_id);
-	if(_atom_style == "bond" || _atom_style == "full") {
+	if(_atom_style == "bond" || _atom_style == "full" || _atom_style == "molecular") {
 		int mol_id = ba::utils::lexical_cast<int>(ba::utils::split(p->molecule()->name(), "_")[1]) + 1;
 		line += fmt::format(" {}", mol_id);
 	}
