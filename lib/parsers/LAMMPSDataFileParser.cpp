@@ -359,11 +359,11 @@ std::string LAMMPSDataFileParser::_read_line(std::ifstream &configuration) {
 #ifdef PYTHON_BINDINGS
 
 void export_LAMMPSDataFileParser(py::module &m) {
-	py::class_<LAMMPSDataFileParser, BaseParser, std::shared_ptr<LAMMPSDataFileParser>> parser(m, "LAMMPSDataFileParser");
+	py::class_<LAMMPSDataFileParser, BaseParser, std::shared_ptr<LAMMPSDataFileParser>> parser(m, "LAMMPSDataFileParser", "Parse LAMMPS data files.");
 
-	parser.def(py::init<std::string>());
-	parser.def(py::init<int, int>());
-	parser.def(py::init<int, int, int>());
+	parser.def(py::init<std::string>(), py::arg("atom_style"));
+	parser.def(py::init<int, int>(), py::arg("type_index"), py::arg("pos_starting_index"));
+	parser.def(py::init<int, int, int>(), py::arg("type_index"), py::arg("pos_starting_index"), py::arg("charge_index"));
 
 	parser.def_property_readonly("topology", &LAMMPSDataFileParser::topology);
 }

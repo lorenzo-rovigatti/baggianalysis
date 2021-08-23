@@ -14,24 +14,34 @@ namespace ba {
 
 class LAMMPSDumpParser: public BaseParser {
 public:
-	LAMMPSDumpParser(std::string data_file, std::string atom_style, bool rescaled_coords=false);
-	LAMMPSDumpParser(bool rescaled_coords=false);
-	LAMMPSDumpParser(std::shared_ptr<System> data_file_system, bool rescaled_coords=false);
+	LAMMPSDumpParser(std::string data_file, std::string atom_style);
+	LAMMPSDumpParser();
+	LAMMPSDumpParser(std::shared_ptr<System> data_file_system);
 	virtual ~LAMMPSDumpParser();
 
 	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override;
 
 private:
-	struct HeaderData {
-		uint N = 0;
-		vec3 box = vec3(0., 0., 0.);
-		ullint time_step = 0;
-		bool empty = false;
+	struct CoordField {
+		int idx = Fields::UNSET;
+		bool scaled = false;
+		bool wrapped = true;
 	};
 
-	HeaderData _parse_headers(std::ifstream &configuration, std::shared_ptr<System> syst);
+	struct Fields {
+		static const int UNSET = -1;
 
-	bool _rescaled_coords;
+		int idx = UNSET;
+		int type= UNSET;
+		int charge = UNSET;
+		int mass = UNSET;
+		std::array<int, 3> vel = { UNSET, UNSET, UNSET };
+		std::array<CoordField, 3> coords;
+	};
+
+	int _parse_headers(std::ifstream &configuration, std::shared_ptr<System> syst);
+
+	Fields _atom_fields;
 	std::shared_ptr<System> _data_file_system = nullptr;
 };
 
