@@ -7,6 +7,8 @@
 
 #include "strings.h"
 
+#include <bitset>
+
 namespace ba {
 
 namespace utils {
@@ -14,17 +16,29 @@ namespace utils {
 std::vector<std::string> split(const std::string &str, const std::string &delims) {
 	std::vector<std::string> output;
 
-	const char *ptr = str.c_str();
-	while(ptr) {
-		auto base = ptr;
-		ptr = std::strpbrk(ptr, delims.c_str());
-		if(ptr) {
-			output.emplace_back(base, ptr - base);
-			ptr++;
+	std::bitset<255> b_delims;
+	char const *d = delims.data();
+	while(*d) {
+		unsigned char code = *d++;
+		b_delims[code] = true;
+	}
+	typedef std::string::const_iterator iter;
+	iter beg;
+	bool in_token = false;
+	for(std::string::const_iterator it = str.begin(), end = str.end(); it != end; ++it) {
+		if(b_delims[*it]) {
+			if(in_token) {
+				output.emplace_back(beg, it);
+				in_token = false;
+			}
 		}
-		else {
-			output.emplace_back(base);
+		else if(!in_token) {
+			beg = it;
+			in_token = true;
 		}
+	}
+	if(in_token) {
+		output.emplace_back(beg, str.end());
 	}
 
 	if(output.size() == 0) {
@@ -33,6 +47,29 @@ std::vector<std::string> split(const std::string &str, const std::string &delims
 
 	return output;
 }
+
+//std::vector<std::string> split(const std::string &str, const std::string &delims) {
+//	std::vector<std::string> output;
+//
+//	const char *ptr = str.c_str();
+//	while(ptr) {
+//		auto base = ptr;
+//		ptr = std::strpbrk(ptr, delims.c_str());
+//		if(ptr) {
+//			output.emplace_back(base, ptr - base);
+//			ptr++;
+//		}
+//		else {
+//			output.emplace_back(base);
+//		}
+//	}
+//
+//	if(output.size() == 0) {
+//		output.push_back("");
+//	}
+//
+//	return output;
+//}
 
 bool starts_with(const std::string &value, std::string beginning) {
 	if(beginning.size() > value.size()) {
