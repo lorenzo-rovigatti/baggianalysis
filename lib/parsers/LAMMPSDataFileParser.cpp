@@ -257,7 +257,7 @@ void LAMMPSDataFileParser::_parse_atoms_data(std::ifstream &configuration, std::
 	std::string line;
 	for(uint i = 0; i < _header_data.N_atoms; i++) {
 		line = _read_line(configuration);
-		if(!configuration.good()) {
+		if(line.size() == 0 && !configuration.good()) {
 			std::string error = fmt::format("The line relative to the {}-th particle cannot be read", i);
 			throw std::runtime_error(error);
 		}
@@ -305,7 +305,7 @@ void LAMMPSDataFileParser::_parse_velocities(std::ifstream &configuration, std::
 	std::string line;
 	for(uint i = 0; i < _header_data.N_atoms; i++) {
 		line = _read_line(configuration);
-		if(!configuration.good()) {
+		if(line.size() == 0 && !configuration.good()) {
 			std::string error = fmt::format("The line relative to the velocity of the {}-th particle cannot be read", i);
 			throw std::runtime_error(error);
 		}

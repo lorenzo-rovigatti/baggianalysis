@@ -40,7 +40,6 @@ std::shared_ptr<System> LAMMPSDumpParser::_parse_stream(std::ifstream &configura
 	int N = _parse_headers(configuration, syst);
 
 	if(N == -1) {
-		BA_WARNING("Can't parse the headers of the dump data file");
 		return nullptr;
 	}
 
@@ -165,7 +164,7 @@ int LAMMPSDumpParser::_parse_headers(std::ifstream &configuration, std::shared_p
 				std::vector<std::string> unused_fields;
 				for(uint i = 2; i < spl.size(); i++) {
 					int idx = i - 2;
-					std::string attribute = spl[i];
+					std::string attribute = utils::trim_copy(spl[i]);
 					if(attribute.size() > 0) {
 						if(attribute == "id") {
 							_atom_fields.idx = idx;
@@ -246,12 +245,14 @@ int LAMMPSDumpParser::_parse_headers(std::ifstream &configuration, std::shared_p
 					}
 				}
 
-				std::string warning = "The -->";
-				for(auto &f: unused_fields) {
-					warning += " " + f;
+				if(unused_fields.size() > 0) {
+					std::string warning = "The -->";
+					for(auto &f: unused_fields) {
+						warning += " " + f;
+					}
+					warning += " <-- field(s) found in the dump file relative to time = {} will not be used";
+					BA_WARNING(warning, syst->time);
 				}
-				warning += " <-- field(s) found in the dump file relative to time = {} will not be used";
-				BA_WARNING(warning, syst->time);
 
 				done = true;
 			}

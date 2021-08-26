@@ -1,6 +1,8 @@
 v. 0.3.1
 	- Fix one of the tests
 	- Strengthen the LAMMPS data file exporter so that it can manage systems with non-integer types and non-positive-defined indexes
+	- Make the LAMMPS data file parser handle the case of a data file not having an empty line at the end
+	- Make the LAMMPS dump parser not print a warning when it encounters an empty dump file (which always happens when initialising a trajectory from a file) 
 	- Remove the compiled documentation from the source tree
 
 v. 0.3.0 [c8cbbb7]
