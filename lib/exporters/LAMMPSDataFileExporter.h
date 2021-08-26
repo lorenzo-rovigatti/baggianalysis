@@ -23,8 +23,11 @@ public:
 private:
 	void _write_system_to_stream(std::shared_ptr<System> system, std::ostream &output) override;
 
-	std::string _particle_line(std::shared_ptr<Particle> p);
+	void _set_id_shift(std::shared_ptr<System> system);
+	std::map<particle_type, int> _ba_LAMMPS_type_map(std::shared_ptr<System> system);
+	std::string _particle_line(std::shared_ptr<Particle> p, int int_type);
 
+	int _id_shift = 0;
 	std::string _atom_style;
 	std::vector<std::string> _supported_atom_styles = {"atomic", "bond", "full", "molecular"};
 };
