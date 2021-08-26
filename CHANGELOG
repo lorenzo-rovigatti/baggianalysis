@@ -1,6 +1,7 @@
 v. 0.3.1
 	- Fix one of the tests
 	- Strengthen the LAMMPS data file exporter so that it can manage systems with non-integer types and non-positive-defined indexes
+	- Remove the compiled documentation from the source tree
 
 v. 0.3.0 [c8cbbb7]
 	- By default neighbour finders will not consider neighbours particles that share bonds (i.e. that are bonded neighbours).
