@@ -165,27 +165,112 @@ void ParticleSet::sort_particles_by_id() {
 void export_ParticleSet(py::module &m) {
 	py::class_<ParticleSet, std::shared_ptr<ParticleSet>> particle_set(m, "ParticleSet", "A set of particles.");
 
-	particle_set.def(py::init<>());
-	particle_set.def("N", &ParticleSet::N);
-	particle_set.def("indexes", &ParticleSet::indexes);
-	particle_set.def("types", &ParticleSet::types);
-	particle_set.def("masses", &ParticleSet::masses);
-	particle_set.def("charges", &ParticleSet::charges);
-	particle_set.def("positions", &ParticleSet::positions);
-	particle_set.def("velocities", &ParticleSet::velocities);
-	particle_set.def("mass", &ParticleSet::mass);
-	particle_set.def("charge", &ParticleSet::charge);
-	particle_set.def("com", &ParticleSet::com);
-	particle_set.def("average_velocity", &ParticleSet::velocity);
+	particle_set.def(py::init<>(), "The constructor takes no parameters.");
+
+	particle_set.def("N", &ParticleSet::N, "The number of particles stored in the set.");
+
+	particle_set.def("indexes", &ParticleSet::indexes, R"pbdoc(
+Return a vector containing the index of all the particles.
+
+The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios (or cache the result).
+)pbdoc");
+	particle_set.def("types", &ParticleSet::types, R"pbdoc(
+Return a vector containing the type of all the particles.
+
+The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios (or cache the result).
+)pbdoc");
+	particle_set.def("masses", &ParticleSet::masses, R"pbdoc(
+Return a vector containing the mass of all the particles.
+
+The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios (or cache the result).
+)pbdoc");
+	particle_set.def("charges", &ParticleSet::charges, R"pbdoc(
+Return a vector containing the charge of all the particles.
+
+The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios (or cache the result).
+)pbdoc");
+	particle_set.def("positions", &ParticleSet::positions, R"pbdoc(
+Return a vector containing the position of all the particles.
+
+The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios (or cache the result).
+)pbdoc");
+	particle_set.def("velocities", &ParticleSet::velocities, R"pbdoc(
+Return a vector containing the velocity of all the particles.
+
+The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios (or cache the result).
+)pbdoc");
+
+	particle_set.def("mass", &ParticleSet::mass, "The total mass stored in the set");
+
+	particle_set.def("charge", &ParticleSet::charge, "The total charge stored in the set");
+
+	particle_set.def("com", &ParticleSet::com, "The centre of mass of the set");
+
+	particle_set.def("velocity", &ParticleSet::velocity, "The total velocity of the set");
+
 	// here we tell pybind11 which of the two particles() methods we want to have bindings for
-	particle_set.def("particles", (std::vector<std::shared_ptr<Particle>> &(ParticleSet::*)())(&ParticleSet::particles));
-	particle_set.def("add_particle", &ParticleSet::add_particle);
-	particle_set.def("remove_particle", &ParticleSet::remove_particle);
-	particle_set.def("remove_particle_by_id", &ParticleSet::remove_particle_by_id);
-	particle_set.def("id_exists", &ParticleSet::id_exists);
-	particle_set.def("particle_by_id", &ParticleSet::particle_by_id);
-	particle_set.def("sort_particles_by_id", &ParticleSet::sort_particles_by_id);
-	particle_set.def_property("name", &ParticleSet::name, &ParticleSet::set_name);
+	particle_set.def("particles", (std::vector<std::shared_ptr<Particle>> &(ParticleSet::*)())(&ParticleSet::particles),
+			"The list of particles stored in the set");
+
+	particle_set.def("add_particle", &ParticleSet::add_particle, py::arg("p"), R"pbdoc(
+Add ``p`` to the set.
+
+Parameters
+----------
+p: :class:`Particle`
+    The particle to be added to the set.
+)pbdoc");
+
+	particle_set.def("remove_particle", &ParticleSet::remove_particle, py::arg("p"), R"pbdoc(
+Remove ``p`` from the set.
+
+Parameters
+----------
+p: :class:`Particle`
+	The particle to be removed from the set.
+)pbdoc");
+
+	particle_set.def("remove_particle_by_id", &ParticleSet::remove_particle_by_id, py::arg("p_id"), R"pbdoc(
+Remove the particle with given index from the set.
+
+Parameters
+----------
+p_idx: int
+	The index of the particle to be removed from the set.
+)pbdoc");
+
+	particle_set.def("id_exists", &ParticleSet::id_exists, py::arg("p_idx"), R"pbdoc(
+Check whether a particle with the given index is stored in the set.
+
+Parameters
+----------
+p_idx: int
+	The index to be checked.
+
+Returns
+-------
+bool
+    True if the particle is stored in the set, False otherwise.
+)pbdoc");
+
+	particle_set.def("particle_by_id", &ParticleSet::particle_by_id, py::arg("p_idx"), R"pbdoc(
+Retrieve the particle with the given index.
+
+Parameters
+----------
+p_idx: int
+	The index of the particle to be retrieved.
+
+Returns
+-------
+:class:`Particle`
+	The particle with the given index.
+)pbdoc");
+
+	particle_set.def("sort_particles_by_id", &ParticleSet::sort_particles_by_id, "Sort the particles according to their index");
+	particle_set.def_property("name", &ParticleSet::name, &ParticleSet::set_name, R"pbdoc(
+The name of the object. This can be used to keep track of particular particle sets (*e.g.* when dealing with :meth:`System.molecules()`).
+)pbdoc");
 }
 
 #endif

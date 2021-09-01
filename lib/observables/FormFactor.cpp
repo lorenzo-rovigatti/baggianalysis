@@ -16,13 +16,17 @@ FormFactor::FormFactor(vector_scalar q_modules, int q_repetitions, bool compute_
 				_q_modules(q_modules),
 				_q_repetitions(q_repetitions),
 				_compute_on_molecules(compute_on_molecules) {
-	for(auto q_module: _q_modules) {
-		_result[q_module] = 0.;
-	}
 }
 
 FormFactor::~FormFactor() {
 
+}
+
+void FormFactor::reset() {
+	_result.clear();
+	for(auto q_module: _q_modules) {
+		_result[q_module] = 0.;
+	}
 }
 
 void FormFactor::analyse_system(std::shared_ptr<System> system) {
@@ -72,10 +76,33 @@ std::map<double, double> FormFactor::_finalised_result() {
 #ifdef PYTHON_BINDINGS
 
 void export_FormFactor(py::module &m) {
-	py::class_<FormFactor, std::shared_ptr<FormFactor>> obs(m, "FormFactor");
+	py::class_<FormFactor, std::shared_ptr<FormFactor>> obs(m, "FormFactor", R"pbdoc(
+Compute the form factor of a system or the average form factor of the molecules contained in the system.
 
-	obs.def(py::init<vector_scalar, int, bool>());
-	obs.def("analyse_particle_set", &FormFactor::analyse_particle_set);
+The mathematical definition of the form factor is the same as `structure factor <https://en.wikipedia.org/wiki/Structure_factor>`_,
+with the difference that the form factor is to be intended as the scattering response of single objects.
+As a result, the size of the simulation box does not set the smallest wave vector that can be used in its computation.
+)pbdoc");
+
+	obs.def(py::init<vector_scalar, int, bool>(), py::arg("q_modules"), py::arg("q_repetitions"), py::arg("compute_on_molecules"), R"pbdoc(
+Parameters
+----------
+q_modules: List(float)
+    The modules of the wave vectors that will be used to compute the form factor.
+q_repetitions: int
+    The number of random realisations of each wave vector module that will be used to compute the form factor.
+compute_on_molecules: bool
+    If True, the final form factor will be computed as the average form factor of the molecules composing the system.
+	)pbdoc");
+
+	obs.def("analyse_particle_set", &FormFactor::analyse_particle_set, py::arg("p_set"), R"pbdoc(
+Compute the form factor of the given :class:`ParticleSet`.
+
+Parameters
+----------
+p_set: :class:`ParticleSet`
+    The object containing the input particles.
+)pbdoc");
 
 	PY_EXPORT_SYSTEM_OBS(obs, FormFactor);
 }

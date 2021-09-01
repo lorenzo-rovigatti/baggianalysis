@@ -18,6 +18,8 @@ public:
 	FormFactor() = delete;
 	virtual ~FormFactor();
 
+	virtual void reset() override;
+
 	void analyse_system(std::shared_ptr<System> system) override;
 	void analyse_particle_set(std::shared_ptr<ParticleSet> p_set);
 
