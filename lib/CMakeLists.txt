@@ -145,6 +145,10 @@ IF(Python)
 	CONFIGURE_FILE(python/utils.py
 		${BA_OUTPUT_DIR}/utils.py
 	)
+	
+	CONFIGURE_FILE(python/traj.py
+		${BA_OUTPUT_DIR}/traj.py
+	)
 
 	CONFIGURE_FILE(python/make_install_setup.py
 		${BA_OUTPUT_DIR}/setup.py

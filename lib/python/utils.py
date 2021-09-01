@@ -7,12 +7,13 @@ def print_bondfile(filename, system, shift_indexes=False):
     
     Parameters
     ----------
-        filename : str
-            The name of the file that will be printed
-        system : :class:`System`
-            The system whose bonds will be printed
-        shift_indexes : bool
-            Whether indexes should be shifted by one. This is used to transform zero-based indexes to one-based for e.g. Fortran compatibility. Defaults to False.
+    filename : str
+        The name of the file that will be printed.
+    system : :class:`~.System`
+        The system whose bonds will be printed.
+    shift_indexes : bool
+        Whether indexes should be shifted by one. This is used to transform zero-based indexes to one-based for *e.g.* 
+        Fortran compatibility. Defaults to False.
     '''
     system.sort_particles_by_id()
 

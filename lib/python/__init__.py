@@ -1,6 +1,6 @@
 from .core import *
 
-from . import utils
+from . import utils, traj
 
 __title__ = 'baggianalysis'
 __description__ = 'A C++/Python library to facilitate the analysis of molecular simulations'

@@ -58,12 +58,14 @@ Note that baggianalysis provides a [LazyTrajectory](core/trajectories.html#baggi
 
 ## Main classes
 
-* Simulation snapshots are stored in [System](core/particles.html#baggianalysis.core.System) objects that have several attributes that allow to retrieve the properties of the particles it contains. 
 * Each particle is an instance of the [Particle](core/particles.html#baggianalysis.core.Particle) class.
+* Simulation snapshots are stored in [System](core/particles.html#baggianalysis.core.System) objects that have several attributes that allow to retrieve the properties of the particles they contain.
+* Multiple systems (also called *frames* in this context) can be stored in a [trajectory object](core/trajectories.html).
+* The library provides a set of built-in [observables](core/observables.html) that can be used to analyse both single systems and whole trajectories.
 * The [Topology](core/topology.html#baggianalysis.core.Topology) class can be used to manage the topology of a configuration. Topologies can be initialised in two ways:
 	* by hand, using the [make_empty_topology()](core/topology.html#baggianalysis.core.Topology.make_empty_topology) static method to create a new topology and then adding bonds one after the other with the [add_bond(p_index, q_index)](core/topology.html#baggianalysis.core.Topology.add_bond) method
 	* by using an helper function to parse the topology out of a file through the [make_topology_from_file()](core/topology.html#baggianalysis.core.Topology.make_topology_from_file) static method. Baggianalysis comes with some [ready-made](core/topology.md) functions that can be used to parse topologies.
-	
+
 ## Library API
 
 ```eval_rst
@@ -71,6 +73,7 @@ Note that baggianalysis provides a [LazyTrajectory](core/trajectories.html#baggi
    :maxdepth: 2
    
    core/core.md
+   traj.md
    utils.md
 ```
 
