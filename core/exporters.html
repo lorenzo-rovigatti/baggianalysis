@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Configuration exporters &mdash; baggianalysis 0.2.0b1.dev11+gc8cbbb7 documentation</title>
+  <title>Configuration exporters &mdash; baggianalysis 0.3.0b1.dev4+gf604419 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.2.0b1.dev11+gc8cbbb7
+                0.3.0b1.dev4+gf604419
               </div>
             
           
@@ -366,9 +366,11 @@ configuration file and as a suffix, prefixed by <code class="docutils literal no
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">LAMMPSDataFileExporter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.LAMMPSDataFileExporter" title="baggianalysis.core.LAMMPSDataFileExporter">baggianalysis.core.LAMMPSDataFileExporter</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.LAMMPSDataFileExporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.BaseExporter" title="baggianalysis.core.BaseExporter"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.BaseExporter</span></code></a></p>
 <p>Export configurations to the LAMMPS data file format.</p>
-<blockquote>
-<div><p>The constructor takes one mandatory argument.</p>
-</div></blockquote>
+<p>Note that LAMMPS requires particle indexes and types to be positive-definite integers. By contrast, baggianalysis uses
+zero-based indexes and string types. If the system to be printed does not contain LAMMPS-valid values (which is common if
+baggianalysis is being used to convert between different formats) then the exporter will try to fix them either
+by shifting values so they start from 1 or, in the case of string types, by using 1-based sequences.</p>
+<p>The constructor takes one mandatory argument.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>atom_style</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The atom style to be used in printing the data file (see <a class="reference external" href="https://lammps.sandia.gov/doc/atom_style.html">here</a> for details). As of now, only the “atomic” and “bond” styles are supported.</p>
