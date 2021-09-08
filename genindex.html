@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; baggianalysis 0.3.0b1.dev4+gf604419 documentation</title>
+  <title>Index &mdash; baggianalysis 0.3.2.dev3+g69cf27f documentation</title>
   
 
   
@@ -29,6 +29,7 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -58,7 +59,7 @@
             
             
               <div class="version">
-                0.3.0b1.dev4+gf604419
+                0.3.2.dev3+g69cf27f
               </div>
             
           
@@ -93,6 +94,9 @@
 <li class="toctree-l2"><a class="reference internal" href="core/trajectories.html">Trajectory classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core/observables.html">Observables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core/neighbours.html">Neighbour finders</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="traj.html">The traj module</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="utils.html">The utils module</a><ul class="simple">
@@ -275,8 +279,6 @@
 </li>
       </ul></li>
       <li><a href="core/particles.html#baggianalysis.core.System.available_index">available_index() (baggianalysis.core.System method)</a>
-</li>
-      <li><a href="core/particles.html#baggianalysis.core.ParticleSet.average_velocity">average_velocity() (baggianalysis.core.ParticleSet method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -466,9 +468,11 @@
 </li>
       <li><a href="core/parsers.html#baggianalysis.core.LAMMPSDataFileParser">LAMMPSDataFileParser (class in baggianalysis.core)</a>
 </li>
+      <li><a href="core/parsers.html#baggianalysis.core.LAMMPSDumpParser">LAMMPSDumpParser (class in baggianalysis.core)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="core/parsers.html#baggianalysis.core.LAMMPSDumpParser">LAMMPSDumpParser (class in baggianalysis.core)</a>
+      <li><a href="traj.html#baggianalysis.traj.LAMMPSTrajectory">LAMMPSTrajectory() (in module baggianalysis.traj)</a>
 </li>
       <li><a href="core/trajectories.html#baggianalysis.core.LazyTrajectory">LazyTrajectory (class in baggianalysis.core)</a>
 </li>
@@ -563,6 +567,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core/parsers.html#baggianalysis.core.OxDNAParser">OxDNAParser (class in baggianalysis.core)</a>
+</li>
+      <li><a href="traj.html#baggianalysis.traj.OxDNATrajectory">OxDNATrajectory() (in module baggianalysis.traj)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -781,7 +787,11 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="core/particles.html#baggianalysis.core.Particle.velocity">velocity() (baggianalysis.core.Particle property)</a>
+
+      <ul>
+        <li><a href="core/particles.html#baggianalysis.core.ParticleSet.velocity">(baggianalysis.core.ParticleSet method)</a>
 </li>
+      </ul></li>
       <li><a href="core/observables.html#baggianalysis.core.ConvexHullResult.vertices">vertices() (baggianalysis.core.ConvexHullResult property)</a>
 </li>
       <li><a href="core/observables.html#baggianalysis.core.ConvexHullResult.volume">volume() (baggianalysis.core.ConvexHullResult property)</a>

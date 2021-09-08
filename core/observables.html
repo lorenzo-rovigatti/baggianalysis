@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Observables &mdash; baggianalysis 0.3.0b1.dev4+gf604419 documentation</title>
+  <title>Observables &mdash; baggianalysis 0.3.2.dev3+g69cf27f documentation</title>
   
 
   
@@ -29,6 +29,7 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -60,7 +61,7 @@
             
             
               <div class="version">
-                0.3.0b1.dev4+gf604419
+                0.3.2.dev3+g69cf27f
               </div>
             
           
@@ -95,6 +96,9 @@
 <li class="toctree-l2"><a class="reference internal" href="trajectories.html">Trajectory classes</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Observables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../traj.html">The traj module</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../utils.html">The utils module</a><ul class="simple">
@@ -186,13 +190,13 @@
 <td><p>Partition particles into clusters and return their size.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.ConvexHull" title="baggianalysis.core.ConvexHull"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConvexHull</span></code></a></p></td>
-<td><p>Construct the <a class="reference external" href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a> of the system, which is the smallest convex set that contains the set of points constituted by the particles’ coordinates of the given system.</p></td>
+<td><p>Construct the <a class="reference external" href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a> of the system, which is the smallest convex set that contains the particles’ coordinates.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.FormFactor" title="baggianalysis.core.FormFactor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FormFactor</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Compute the form factor of a system or the average form factor of the molecules contained in the system.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.PoreSize" title="baggianalysis.core.PoreSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PoreSize</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Find the pore sizes of a system.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.RDF" title="baggianalysis.core.RDF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RDF</span></code></a></p></td>
 <td><p>Compute the <a class="reference external" href="https://en.wikipedia.org/wiki/Radial_distribution_function">radial distribution function</a> of a system.</p></td>
@@ -266,7 +270,7 @@
 <dt id="baggianalysis.core.ConvexHull">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">ConvexHull</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ConvexHull" title="baggianalysis.core.ConvexHull">baggianalysis.core.ConvexHull</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.ConvexHull" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
-<p>Construct the <a class="reference external" href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a> of the system, which is the smallest convex set that contains the set of points constituted by the particles’ coordinates of the given system.</p>
+<p>Construct the <a class="reference external" href="https://en.wikipedia.org/wiki/Convex_hull">convex hull</a> of the system, which is the smallest convex set that contains the particles’ coordinates.</p>
 <dl class="py method">
 <dt id="baggianalysis.core.ConvexHull.analyse_system">
 <code class="sig-name descname">analyse_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ConvexHull" title="baggianalysis.core.ConvexHull">baggianalysis.core.ConvexHull</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.ConvexHull.analyse_system" title="Permalink to this definition">¶</a></dt>
@@ -365,12 +369,31 @@
 
 <dl class="py class">
 <dt id="baggianalysis.core.FormFactor">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FormFactor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.FormFactor" title="baggianalysis.core.FormFactor">baggianalysis.core.FormFactor</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">arg1</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em>, <em class="sig-param"><span class="n">arg2</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.FormFactor" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FormFactor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.FormFactor" title="baggianalysis.core.FormFactor">baggianalysis.core.FormFactor</a></span></em>, <em class="sig-param"><span class="n">q_modules</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">q_repetitions</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em>, <em class="sig-param"><span class="n">compute_on_molecules</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.FormFactor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<p>Compute the form factor of a system or the average form factor of the molecules contained in the system.</p>
+<p>The mathematical definition of the form factor is the same as <a class="reference external" href="https://en.wikipedia.org/wiki/Structure_factor">structure factor</a>,
+with the difference that the form factor is to be intended as the scattering response of single objects.
+As a result, the size of the simulation box does not set the smallest wave vector that can be used in its computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q_modules</strong> (<em>List</em><em>(</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a><em>)</em>) – The modules of the wave vectors that will be used to compute the form factor.</p></li>
+<li><p><strong>q_repetitions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The number of random realisations of each wave vector module that will be used to compute the form factor.</p></li>
+<li><p><strong>compute_on_molecules</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – If True, the final form factor will be computed as the average form factor of the molecules composing the system.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="baggianalysis.core.FormFactor.analyse_particle_set">
-<code class="sig-name descname">analyse_particle_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.FormFactor" title="baggianalysis.core.FormFactor">baggianalysis.core.FormFactor</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.FormFactor.analyse_particle_set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">analyse_particle_set</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.FormFactor" title="baggianalysis.core.FormFactor">baggianalysis.core.FormFactor</a></span></em>, <em class="sig-param"><span class="n">p_set</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.FormFactor.analyse_particle_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the form factor of the given <a class="reference internal" href="particles.html#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParticleSet</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p_set</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParticleSet</span></code></a>) – The object containing the input particles.</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.FormFactor.analyse_system">
@@ -398,6 +421,44 @@
 <dt id="baggianalysis.core.PoreSize">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">PoreSize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.PoreSize" title="baggianalysis.core.PoreSize">baggianalysis.core.PoreSize</a></span></em>, <em class="sig-param"><span class="n">N_attempts</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em>, <em class="sig-param"><span class="n">r_cut</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></span> <span class="o">=</span> <span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">particle_radius</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></span> <span class="o">=</span> <span class="default_value">0.5</span></em>, <em class="sig-param"><span class="n">max_time</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></span> <span class="o">=</span> <span class="default_value">1.0</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.PoreSize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<p>Find the pore sizes of a system. Requires <a class="reference external" href="https://nlopt.readthedocs.io/en/latest/">NLopt</a>.</p>
+<p>The pore size distribution <span class="math notranslate nohighlight">\(P_G(r)\)</span> is defined as in
+<a class="reference external" href="https://doi.org/10.1021/la052651k">Bhattacharya and Gubbins (2006)</a>. The
+algorithm is schematically represented in the following figure
+(taken from <a class="reference external" href="https://doi.org/10.1021/acs.macromol.9b02166">Sorichetti, Hugovieux and Kob (2020)</a>:</p>
+<a class="reference internal image-reference" href="../_images/pore_size.png"><img alt="../_images/pore_size.png" src="../_images/pore_size.png" style="width: 400px;" /></a>
+<p>Given a randomly chosen point <span class="math notranslate nohighlight">\(\mathbf r_p\)</span> in the void phase, one has to
+find the sphere with the largest radius <span class="math notranslate nohighlight">\(r\)</span> containing <span class="math notranslate nohighlight">\(\mathbf r_p\)</span> and
+which does not overlap with any monomer. This problem can be reformulated
+as that of maximizing the function</p>
+<div class="math notranslate nohighlight">
+\[r(\mathbf r_c) \equiv \min_{i=1,\dots M} \{|\mathbf r_c - \mathbf r_i|\} - \sigma/2,
+\label{obj_function}\]</div>
+<p>subject to the constraint</p>
+<div class="math notranslate nohighlight">
+\[|\mathbf r_c-\mathbf r_p| - r(\mathbf r_c) \leq 0,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf r_c\)</span> is the position of the sphere’s center and
+<span class="math notranslate nohighlight">\(\mathbf r_i\)</span> are the positions of the centers of the monomers. If the
+maximization of the function above is carried out for a
+large enough number of points <span class="math notranslate nohighlight">\(\mathbf r_p\)</span>, the resulting (normalized)
+histogram of <span class="math notranslate nohighlight">\(r\)</span> values will converge to <span class="math notranslate nohighlight">\(P_G(r)\)</span>.</p>
+<p>The problem of calculating <span class="math notranslate nohighlight">\(P_G(r)\)</span> reduces therefore to a nonlinear
+optimization problem, which can be solved with a standard algorithm.
+Here we use the open-source Sbplx algorithm of
+the <a class="reference external" href="https://nlopt.readthedocs.io/en/latest/">NLopt library</a>, which can handle discontinuous
+objective functions.</p>
+<p>The constructur builds an observable that computes <code class="docutils literal notranslate"><span class="pre">N_attempts</span></code> different pore sizes by applying the algorithm described above
+for <code class="docutils literal notranslate"><span class="pre">N_attempts</span></code> random values of <span class="math notranslate nohighlight">\(r_p\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N_attempts</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The number of pore size evaluation that will be carried out per system.</p></li>
+<li><p><strong>r_cut</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – The characteristic size of the particle-particle repulsion. Using the right number will speed up the computation but does not impact the quality of the results.</p></li>
+<li><p><strong>particle_radius</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – The radius of the particles stored in the system. This is usually half <code class="docutils literal notranslate"><span class="pre">r_cut</span></code>.</p></li>
+<li><p><strong>max_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – The timeout (in seconds) beyond which NLopt will stop looking for a solution to the optimisation problem.</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="baggianalysis.core.PoreSize.analyse_system">
 <code class="sig-name descname">analyse_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.PoreSize" title="baggianalysis.core.PoreSize">baggianalysis.core.PoreSize</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.PoreSize.analyse_system" title="Permalink to this definition">¶</a></dt>
@@ -410,8 +471,20 @@
 
 <dl class="py method">
 <dt id="baggianalysis.core.PoreSize.radius">
-<code class="sig-name descname">radius</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.PoreSize</em>, <em class="sig-param">arg0: glm::tvec3&lt;scalar</em>, <em class="sig-param">P&gt;</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><a class="headerlink" href="#baggianalysis.core.PoreSize.radius" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<code class="sig-name descname">radius</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.PoreSize</em>, <em class="sig-param">centre: glm::tvec3&lt;scalar</em>, <em class="sig-param">P&gt;</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><a class="headerlink" href="#baggianalysis.core.PoreSize.radius" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the radius of the largest sphere centred in <code class="docutils literal notranslate"><span class="pre">centre</span></code> that does not overlap with any of the particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>centre</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><em>numpy.ndarray</em></a>) – The reference position</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The radius of the largest sphere centred in <code class="docutils literal notranslate"><span class="pre">centre</span></code> that does not overlap with any of the particles.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.PoreSize.reset">
