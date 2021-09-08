@@ -149,10 +149,75 @@ double constraint(unsigned n, const double *x, double *grad, void *f_data) {
 #ifdef PYTHON_BINDINGS
 
 void export_PoreSize(py::module &m) {
-	py::class_<PoreSize, std::shared_ptr<PoreSize>> obs(m, "PoreSize");
+	py::class_<PoreSize, std::shared_ptr<PoreSize>> obs(m, "PoreSize", R"pbdoc(
+Find the pore sizes of a system. Requires `NLopt <https://nlopt.readthedocs.io/en/latest/>`_.
 
-	obs.def(py::init<int, double, double, double>(), py::arg("N_attempts"), py::arg("r_cut") = 1.0, py::arg("particle_radius") = 0.5, py::arg("max_time") = 1.0);
-	obs.def("radius", &PoreSize::radius);
+The pore size distribution :math:`P_G(r)` is defined as in
+`Bhattacharya and Gubbins (2006) <https://doi.org/10.1021/la052651k>`_. The
+algorithm is schematically represented in the following figure 
+(taken from `Sorichetti, Hugovieux and Kob (2020) <https://doi.org/10.1021/acs.macromol.9b02166>`_:
+
+.. image:: images/pore_size.png
+  :width: 400
+
+Given a randomly chosen point :math:`\mathbf r_p` in the void phase, one has to
+find the sphere with the largest radius :math:`r` containing :math:`\mathbf r_p` and
+which does not overlap with any monomer. This problem can be reformulated
+as that of maximizing the function
+
+.. math::
+
+	r(\mathbf r_c) \equiv \min_{i=1,\dots M} \{|\mathbf r_c - \mathbf r_i|\} - \sigma/2,
+	\label{obj_function}
+
+subject to the constraint 
+
+.. math::
+	|\mathbf r_c-\mathbf r_p| - r(\mathbf r_c) \leq 0,
+
+where :math:`\mathbf r_c` is the position of the sphere's center and
+:math:`\mathbf r_i` are the positions of the centers of the monomers. If the
+maximization of the function above is carried out for a
+large enough number of points :math:`\mathbf r_p`, the resulting (normalized)
+histogram of :math:`r` values will converge to :math:`P_G(r)`.
+
+The problem of calculating :math:`P_G(r)` reduces therefore to a nonlinear
+optimization problem, which can be solved with a standard algorithm. 
+Here we use the open-source Sbplx algorithm of
+the `NLopt library <https://nlopt.readthedocs.io/en/latest/>`_, which can handle discontinuous
+objective functions.
+)pbdoc");
+
+	obs.def(py::init<int, double, double, double>(), py::arg("N_attempts"), py::arg("r_cut") = 1.0, py::arg("particle_radius") = 0.5, py::arg("max_time") = 1.0, R"pbdoc(
+The constructur builds an observable that computes ``N_attempts`` different pore sizes by applying the algorithm described above 
+for ``N_attempts`` random values of :math:`r_p`.
+
+Parameters
+----------
+N_attempts: int
+    The number of pore size evaluation that will be carried out per system.
+r_cut: float
+    The characteristic size of the particle-particle repulsion. Using the right number will speed up the computation but does not impact the quality of the results.
+particle_radius: float
+    The radius of the particles stored in the system. This is usually half ``r_cut``.
+max_time: float
+    The timeout (in seconds) beyond which NLopt will stop looking for a solution to the optimisation problem.
+ 
+)pbdoc");
+	obs.def("radius", &PoreSize::radius, py::arg("centre"), R"pbdoc(
+Calculates the radius of the largest sphere centred in ``centre`` that does not overlap with any of the particles.
+
+Parameters
+----------
+centre: numpy.ndarray
+    The reference position
+
+Returns
+-------
+float
+    The radius of the largest sphere centred in ``centre`` that does not overlap with any of the particles.
+
+)pbdoc");
 
 	PY_EXPORT_SYSTEM_OBS(obs, PoreSize);
 }
