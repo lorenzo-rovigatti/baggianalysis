@@ -155,14 +155,15 @@ Find the pore sizes of a system. Requires `NLopt <https://nlopt.readthedocs.io/e
 The pore size distribution :math:`P_G(r)` is defined as in
 `Bhattacharya and Gubbins (2006) <https://doi.org/10.1021/la052651k>`_. The
 algorithm is schematically represented in the following figure 
-(taken from `Sorichetti, Hugovieux and Kob (2020) <https://doi.org/10.1021/acs.macromol.9b02166>`_:
+(taken from `Sorichetti, Hugovieux and Kob (2020) <https://doi.org/10.1021/acs.macromol.9b02166>`_, 
+where the algorithm was applied to a polymeric system):
 
 .. image:: images/pore_size.png
   :width: 400
 
 Given a randomly chosen point :math:`\mathbf r_p` in the void phase, one has to
 find the sphere with the largest radius :math:`r` containing :math:`\mathbf r_p` and
-which does not overlap with any monomer. This problem can be reformulated
+which does not overlap with any particle. This problem can be reformulated
 as that of maximizing the function
 
 .. math::
@@ -176,7 +177,7 @@ subject to the constraint
 	|\mathbf r_c-\mathbf r_p| - r(\mathbf r_c) \leq 0,
 
 where :math:`\mathbf r_c` is the position of the sphere's center and
-:math:`\mathbf r_i` are the positions of the centers of the monomers. If the
+:math:`\mathbf r_i` are the positions of the centers of the particles. If the
 maximization of the function above is carried out for a
 large enough number of points :math:`\mathbf r_p`, the resulting (normalized)
 histogram of :math:`r` values will converge to :math:`P_G(r)`.
