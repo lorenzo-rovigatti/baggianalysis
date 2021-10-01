@@ -73,6 +73,7 @@ Note that baggianalysis provides a [LazyTrajectory](core/trajectories.html#baggi
    :maxdepth: 2
    
    core/core.md
+   converters.md
    traj.md
    utils.md
 ```

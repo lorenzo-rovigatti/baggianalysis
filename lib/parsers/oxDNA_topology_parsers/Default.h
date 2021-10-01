@@ -21,6 +21,10 @@ public:
 	Default(std::string topology_file);
 	virtual ~Default();
 
+	virtual bool has_N() {
+		return true;
+	}
+
 	uint N();
 	uint N_A();
 

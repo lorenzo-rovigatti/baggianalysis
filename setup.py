@@ -152,5 +152,8 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: C++",
         "Topic :: Scientific/Engineering :: Physics"
-        ]
+        ],
+    entry_points = {
+        'console_scripts': ['oxDNA_cogli=baggianalysis.converters:oxDNA_cogli1_command_line'],
+    },
 )

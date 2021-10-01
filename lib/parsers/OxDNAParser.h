@@ -17,27 +17,16 @@ namespace ba {
 
 using OxDNAOrientationInserter = std::function<void(std::shared_ptr<Particle>, glm::dmat3 &)>;
 
-class OxDNATopologyParser {
-public:
-	OxDNATopologyParser(std::string topology_file);
-	virtual ~OxDNATopologyParser() {}
-
-	uint N() {
-		return _N;
-	}
-
-	virtual particle_type type(int);
-
-private:
-	uint _N = 0;
-	uint _N_A = 0;
-};
-
 class OxDNAParser: public BaseParser {
 public:
+	OxDNAParser();
 	OxDNAParser(std::string topology_file);
 	OxDNAParser(std::shared_ptr<oxDNA_topology::Default> topology_parser);
 	virtual ~OxDNAParser();
+
+	std::shared_ptr<oxDNA_topology::Default> topology_parser() const {
+		return _topology_parser;
+	}
 
 	void set_orientation_inserter(OxDNAOrientationInserter inserter);
 

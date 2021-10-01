@@ -7,12 +7,18 @@
 
 #include "OxDNAParser.h"
 
+#include "oxDNA_topology_parsers/NoTopology.h"
 #include "oxDNA_topology_parsers/TSP.h"
 #include "../utils/strings.h"
 
 #include <glm/gtx/orthonormalize.hpp>
 
 namespace ba {
+
+OxDNAParser::OxDNAParser() :
+				BaseParser() {
+	_topology_parser = std::make_shared<oxDNA_topology::NoTopology>();
+}
 
 OxDNAParser::OxDNAParser(std::string topology_file) :
 				BaseParser() {
@@ -110,7 +116,7 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 		}
 	}
 
-	if(syst->N() != _topology_parser->N()) {
+	if(_topology_parser->has_N() && syst->N() != _topology_parser->N()) {
 		std::string error = fmt::format("The number of particles found in the configuration file ({}) is different from what specified in the topology file ({})", syst->N(), _topology_parser->N());
 		throw std::runtime_error(error);
 	}
@@ -125,8 +131,13 @@ void export_OxDNAParser(py::module &m) {
 
 	oxDNA_topology::export_Default(sub_m);
 	oxDNA_topology::export_TSP(sub_m);
+	oxDNA_topology::export_NoTopology(sub_m);
 
 	py::class_<OxDNAParser, BaseParser, std::shared_ptr<OxDNAParser>> parser(m, "OxDNAParser", "Use oxDNA/topology files to build systems.");
+
+	parser.def(py::init<>(), R"pbdoc(
+Initialise the parser without any topology file.
+)pbdoc");
 
 	parser.def(py::init<std::string>(), py::arg("topology_file"), R"pbdoc(
 Initialise the parser by using the :class:`~baggianalysis.core.oxDNA_topology.Default` topology parser to parse the given topology file.
@@ -163,6 +174,8 @@ Parameters
     inserter:
         A callable that takes a particle and its orientation matrix and adds to the former the orientation vectors due to the latter.
 )pbdoc");
+
+	parser.def("topology_parser", &OxDNAParser::topology_parser, "Return the topology parser associated to this parser.");
 }
 
 #endif

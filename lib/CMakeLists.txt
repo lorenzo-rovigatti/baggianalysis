@@ -29,6 +29,7 @@ SET(ba_lib_SOURCES
 	parsers/LAMMPSDataFileParser.cpp
 	parsers/LAMMPSDumpParser.cpp
 	parsers/oxDNA_topology_parsers/Default.cpp
+	parsers/oxDNA_topology_parsers/NoTopology.cpp
 	parsers/oxDNA_topology_parsers/TSP.cpp
 	parsers/PatchyParticlesParser.cpp
 	particles/Particle.cpp
@@ -148,6 +149,10 @@ IF(Python)
 	
 	CONFIGURE_FILE(python/traj.py
 		${BA_OUTPUT_DIR}/traj.py
+	)
+	
+	CONFIGURE_FILE(python/converters.py
+		${BA_OUTPUT_DIR}/converters.py
 	)
 
 	CONFIGURE_FILE(python/make_install_setup.py

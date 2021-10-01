@@ -17,5 +17,8 @@ setup(
     },
     package_data = {
         'baggianalysis': ['core.so']
-    }
+    },
+    entry_points = {
+        'console_scripts': ['oxDNA_cogli=baggianalysis.converters:oxDNA_cogli1_command_line'],
+    },
 )
