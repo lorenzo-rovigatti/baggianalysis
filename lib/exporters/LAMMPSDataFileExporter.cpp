@@ -95,7 +95,8 @@ void LAMMPSDataFileExporter::_write_system_to_stream(std::shared_ptr<System> sys
 		// LAMMPS's ids start from 1
 		uint i = 1;
 		for(auto bond : topology.bonds()) {
-			output << fmt::format("{} {} {} {}", i, bond.type, bond[0], bond[1]) << std::endl;
+			output << fmt::format("{} {} {} {}", i, bond.type,
+					_shifted(bond[0]), _shifted(bond[1])) << std::endl;
 			i++;
 		}
 	}
@@ -107,7 +108,8 @@ void LAMMPSDataFileExporter::_write_system_to_stream(std::shared_ptr<System> sys
 		// LAMMPS's ids start from 1
 		uint i = 1;
 		for(auto angle : topology.angles()) {
-			output << fmt::format("{} {} {} {} {}", i, angle.type, angle[0], angle[1], angle[2]) << std::endl;
+			output << fmt::format("{} {} {} {} {}", i, angle.type,
+					_shifted(angle[0]), _shifted(angle[1]), _shifted(angle[2])) << std::endl;
 			i++;
 		}
 	}
@@ -119,7 +121,8 @@ void LAMMPSDataFileExporter::_write_system_to_stream(std::shared_ptr<System> sys
 		// LAMMPS's ids start from 1
 		uint i = 1;
 		for(auto dihedral : topology.dihedrals()) {
-			output << fmt::format("{} {} {} {} {} {}", i, dihedral.type, dihedral[0], dihedral[1], dihedral[2], dihedral[3]) << std::endl;
+			output << fmt::format("{} {} {} {} {} {}", i, dihedral.type,
+					_shifted(dihedral[0]), _shifted(dihedral[1]), _shifted(dihedral[2]), _shifted(dihedral[3])) << std::endl;
 			i++;
 		}
 	}
@@ -129,6 +132,10 @@ void LAMMPSDataFileExporter::_set_id_shift(std::shared_ptr<System> system) {
 	auto indexes = system->indexes();
 	std::sort(indexes.begin(), indexes.end());
 	_id_shift = 1 - indexes[0];
+}
+
+int LAMMPSDataFileExporter::_shifted(int idx) {
+	return idx + _id_shift;
 }
 
 std::map<particle_type, int> LAMMPSDataFileExporter::_ba_LAMMPS_type_map(std::shared_ptr<System> system) {
@@ -182,7 +189,7 @@ std::map<particle_type, int> LAMMPSDataFileExporter::_ba_LAMMPS_type_map(std::sh
 }
 
 std::string LAMMPSDataFileExporter::_particle_line(std::shared_ptr<Particle> p, int int_type) {
-	int p_id = p->index() + _id_shift;
+	int p_id = _shifted(p->index());
 	particle_type p_type = p->type();
 	std::string line = fmt::format("{}", p_id);
 	if(_atom_style == "bond" || _atom_style == "full" || _atom_style == "molecular") {
