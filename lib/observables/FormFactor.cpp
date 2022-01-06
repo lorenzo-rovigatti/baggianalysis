@@ -22,11 +22,12 @@ FormFactor::~FormFactor() {
 
 }
 
-void FormFactor::reset() {
-	_result.clear();
-	for(auto q_module: _q_modules) {
-		_result[q_module] = 0.;
-	}
+void FormFactor::clear_b_factors() {
+	_b_factors.clear();
+}
+
+void FormFactor::set_b_factors(vector_scalar b_factors) {
+	_b_factors = b_factors;
 }
 
 void FormFactor::analyse_system(std::shared_ptr<System> system) {
@@ -47,16 +48,26 @@ void FormFactor::analyse_system(std::shared_ptr<System> system) {
 void FormFactor::analyse_particle_set(std::shared_ptr<ParticleSet> p_set) {
 	vec3 com = p_set->com();
 
+	bool has_b_factors = _b_factors.size() > 0;
+
+	if(has_b_factors && _b_factors.size() != p_set->N()) {
+		std::string error = fmt::format("FormFactor: The size of the b-factor vector ({}) is different from the number of particles ({})", _b_factors.size(), p_set->N());
+		throw std::runtime_error(error);
+	}
+
 	for(auto q_module: _q_modules) {
 		for(int i = 0; i < _q_repetitions; i++) {
 			vec3 new_q = BARANDOM.random_vector_on_sphere() * q_module;
 			double sq_cos = 0.;
 			double sq_sin = 0.;
-			for(auto p: p_set->particles()) {
+			for(uint p_idx = 0; p_idx < p_set->N(); p_idx++) {
+				auto p = p_set->particles()[p_idx];
 				vec3 r = p->position() - com;
+				double b_factor = (has_b_factors) ? _b_factors[p_idx] : 1;
+
 				double qr = glm::dot(new_q, r);
-				sq_cos += std::cos(qr);
-				sq_sin += std::sin(qr);
+				sq_cos += b_factor * std::cos(qr);
+				sq_sin += b_factor * std::sin(qr);
 			}
 			_result[q_module] += (SQR(sq_cos) + SQR(sq_sin)) / p_set->N();
 		}
@@ -102,6 +113,19 @@ Parameters
 ----------
 p_set: :class:`ParticleSet`
     The object containing the input particles.
+)pbdoc");
+
+	obs.def("clear_b_factors", &FormFactor::clear_b_factors, R"pbdoc(
+	Reset the b-factors to their default values (b = 1 for each particle).
+)pbdoc");
+
+	obs.def("set_b_factors", &FormFactor::set_b_factors, py::arg("b_factors"), R"pbdoc(
+	Set the particles' b-factors (that is, the scattering amplitudes) that will be used to compute the form factor.
+
+	Parameters
+	----------
+	b_factors : List(float)
+		The vector of b-factors to be used in the calculation of the P(q). The length of the vector should be equal to the number of particles in the system.
 )pbdoc");
 
 	PY_EXPORT_SYSTEM_OBS(obs, FormFactor);

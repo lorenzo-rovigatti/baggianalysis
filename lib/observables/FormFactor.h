@@ -18,7 +18,8 @@ public:
 	FormFactor() = delete;
 	virtual ~FormFactor();
 
-	virtual void reset() override;
+	void clear_b_factors();
+	void set_b_factors(vector_scalar b_factors);
 
 	void analyse_system(std::shared_ptr<System> system) override;
 	void analyse_particle_set(std::shared_ptr<ParticleSet> p_set);
@@ -30,6 +31,7 @@ protected:
 	int _q_repetitions;
 	bool _compute_on_molecules;
 	int _times_called = 0;
+	vector_scalar _b_factors;
 };
 
 #ifdef PYTHON_BINDINGS
