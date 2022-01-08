@@ -154,6 +154,10 @@ setup(
         "Topic :: Scientific/Engineering :: Physics"
         ],
     entry_points = {
-        'console_scripts': ['oxDNA_cogli=baggianalysis.converters:oxDNA_cogli_command_line'],
+        'console_scripts': 
+            [
+                'oxDNA_cogli=baggianalysis.converters:oxDNA_cogli_command_line', 
+                'LAMMPS_cogli=baggianalysis.converters:LAMMPS_cogli_command_line'
+            ],
     },
 )

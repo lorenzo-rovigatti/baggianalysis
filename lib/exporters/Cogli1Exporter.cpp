@@ -20,13 +20,23 @@ Cogli1Exporter::Cogli1Exporter() : Cogli1Exporter([](Particle *p) {return Cogli1
 
 Cogli1Exporter::Cogli1Exporter(Cogli1Mapper mapper) {
 	_converter = [mapper](Particle *p) {
+		std::string output;
 		Cogli1Particle c_p = mapper(p);
 		if(c_p.show) {
-			return fmt::format("{} {} {} @ {} C[{}]", p->position()[0], p->position()[1], p->position()[2], c_p.size, c_p.color);
+			const vec3 &pos = p->position();
+
+			for(auto bond : p->bonded_neighbours()) {
+				auto other = bond.other();
+				if(other->index() > p->index()) {
+					vec3 axis = other->position() - pos;
+
+					output += fmt::format("{} {} {} @ {} C[{}] C {} {} {}\n",
+							pos[0], pos[1], pos[2], c_p.size / 3, c_p.color, axis[0], axis[1], axis[2]);
+				}
+			}
+			output += fmt::format("{} {} {} @ {} C[{}]", pos[0], pos[1], pos[2], c_p.size, c_p.color);
 		}
-		else {
-			return std::string();
-		}
+		return output;
 	};
 }
 
@@ -73,7 +83,11 @@ void export_Cogli1Exporter(py::module &m) {
 	)pbdoc");
 
 	py::class_<Cogli1Exporter, BaseExporter, std::shared_ptr<Cogli1Exporter>> exporter(m, "Cogli1Exporter", R"pbdoc(
-		Export configurations to the cogli1 file format, used for visualisation purposes.
+Export configurations to the `cogli <https://sourceforge.net/projects/cogli1/>`_ file format, used for visualisation purposes.
+
+The appearance of particles can be controlled *via* callback functions, while a bond connecting two particles is drawn 
+as a cylinder. The size and the colour of the cylinder is a third of the size and the colour of the particle having 
+the smallest index in the pair.
 	)pbdoc");
 
 	exporter.def(py::init<>(), R"pbdoc(
