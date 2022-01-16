@@ -21,6 +21,7 @@ setup(
     entry_points = {
         'console_scripts': 
             [
+                'oxDNA_LAMMPS=baggianalysis.converters:oxDNA_LAMMPS_command_line',
                 'oxDNA_cogli=baggianalysis.converters:oxDNA_cogli_command_line', 
                 'LAMMPS_cogli=baggianalysis.converters:LAMMPS_cogli_command_line'
             ],
