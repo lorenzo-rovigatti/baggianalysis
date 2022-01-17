@@ -20,21 +20,21 @@ namespace utils {
 std::vector<std::set<int>> make_clusters(std::shared_ptr<ParticleSet> ps, ClusterPolicy policy) {
 	std::vector<std::set<int>> clusters;
 
-	std::function<std::set<ParticleBond>(std::shared_ptr<Particle>)> neigh_function;
+	std::function<std::set<ParticleBond>(std::shared_ptr<Particle>)> neighbours_getter;
 
 	switch(policy) {
 	case ClusterPolicy::BONDED:
-		neigh_function = [](std::shared_ptr<Particle> p) {
+		neighbours_getter = [](std::shared_ptr<Particle> p) {
 			return p->bonded_neighbours();
 		};
 		break;
 	case ClusterPolicy::NONBONDED:
-		neigh_function = [](std::shared_ptr<Particle> p) {
+		neighbours_getter = [](std::shared_ptr<Particle> p) {
 			return p->neighbours();
 		};
 		break;
 	case ClusterPolicy::BOTH:
-		neigh_function = [](std::shared_ptr<Particle> p) {
+		neighbours_getter = [](std::shared_ptr<Particle> p) {
 			auto neighbours = p->neighbours();
 			auto bonded_neighbours = p->bonded_neighbours();
 			std::set<ParticleBond> all_neighs;
@@ -67,7 +67,7 @@ std::vector<std::set<int>> make_clusters(std::shared_ptr<ParticleSet> ps, Cluste
 	while(!done) {
 		auto p = ps->particle_by_id(next.front());
 		next.pop();
-		for(auto link : neigh_function(p)) {
+		for(auto link : neighbours_getter(p)) {
 			auto neigh = link.other();
 			if(index_to_cluster[neigh->index()] > index_to_cluster[p->index()]) {
 				index_to_cluster[neigh->index()] = index_to_cluster[p->index()];

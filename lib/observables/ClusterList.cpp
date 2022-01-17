@@ -35,7 +35,7 @@ const std::vector<std::set<int>> &ClusterList::clusters() const {
 #ifdef PYTHON_BINDINGS
 
 void export_ClusterList(py::module &m) {
-	py::class_<ClusterList, std::shared_ptr<ClusterList>> obs(m, "ClusterList", "Partition particles into clusters and return their size.");
+	py::class_<ClusterList, std::shared_ptr<ClusterList>> obs(m, "ClusterList", "Partition particles into clusters. The ``result`` of the computation is a list of the sizes of all clusters.");
 
 	obs.def(py::init<>(), "The default constructor takes no parameters");
 	obs.def_property_readonly("clusters", &ClusterList::clusters, "Return the list of clusters of the system analysed last.");
