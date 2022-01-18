@@ -1,6 +1,10 @@
 v. 0.4.0
+	- Add a few converter executables (oxDNA -> cogli, oxDNA -> LAMMPS, LAMMPS -> cogli)
+	- Add the new `converters` module, which contains utility functions that can be used to easily convert between different formats
 	- Add the new `traj` module, which contains some utility functions that speed up the creation of trajectory objects
 	- Improve the documentation coverage
+	- Add the possibility of using b-factors to compute form factors
+	- Fix a bug in the LAMMPS exporter whereby topology links were sometimes written with wrong indexes 
 
 v. 0.3.1 [f604419]
 	- Fix one of the tests
