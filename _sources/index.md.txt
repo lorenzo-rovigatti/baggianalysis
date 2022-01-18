@@ -73,6 +73,7 @@ Note that baggianalysis provides a [LazyTrajectory](core/trajectories.html#baggi
    :maxdepth: 2
    
    core/core.md
+   converters.md
    traj.md
    utils.md
 ```
@@ -86,3 +87,7 @@ Note that baggianalysis provides a [LazyTrajectory](core/trajectories.html#baggi
    extending/parser.md
    extending/topology.md
 ```
+
+## Common issues
+
+* Sometimes the compilation fails with the following error `fatal error: Python.h: No such file or directory`: this either means that the Python header files are not installed (`python3-dev` on Ubuntu) or that there is a mismatch between the version of the Python headers and shared library detected by CMake. Make sure that the two match before re-running CMake.

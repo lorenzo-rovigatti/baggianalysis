@@ -1,0 +1,342 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>The converters module &mdash; baggianalysis 0.3.2.dev12+g8d97eb3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The traj module" href="traj.html" />
+    <link rel="prev" title="Neighbour finders" href="core/neighbours.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> baggianalysis
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.2.dev12+g8d97eb3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="core/core.html">The core module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core/particles.html">Particle-related classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/topology.html">Topology-related classes and utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/parsers.html">Configuration parsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/exporters.html">Configuration exporters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/trajectories.html">Trajectory classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/observables.html">Observables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/neighbours.html">Neighbour finders</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The converters module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="traj.html">The traj module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">The utils module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="extending/parser.html">Writing a parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending/topology.html">Writing a function to parse custom topologies</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">baggianalysis</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>The converters module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/converters.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="the-converters-module">
+<h1>The converters module<a class="headerlink" href="#the-converters-module" title="Permalink to this headline">¶</a></h1>
+<p>This module contains some high-level utility functions to interconvert between different file formats. When installed
+it also creates the following standalone executable scripts:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">oxDNA_LAMMS</span> <span class="pre">input_file</span> <span class="pre">[bond_file]</span></code>, which calls <a class="reference external" href="#baggianalysis.converters.oxDNA_LAMMPS_command_line">oxDNA_LAMMPS_command_line</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">oxDNA_cogli</span> <span class="pre">input_file</span></code>, which calls <a class="reference external" href="#baggianalysis.converters.oxDNA_cogli_command_line">oxDNA_cogli_command_line</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LAMMPS_cogli</span> <span class="pre">input_file</span></code>, which calls <a class="reference external" href="#baggianalysis.converters.LAMMPS_cogli_command_line">LAMMPS_cogli_command_line</a>.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.converters.oxDNA_LAMMPS" title="baggianalysis.converters.oxDNA_LAMMPS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oxDNA_LAMMPS</span></code></a></p></td>
+<td><p>Convert an oxDNA configuration into a LAMMPS data file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.converters.oxDNA_LAMMPS_command_line" title="baggianalysis.converters.oxDNA_LAMMPS_command_line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oxDNA_LAMMPS_command_line</span></code></a></p></td>
+<td><p>Convert the command-line supplied oxDNA configuration into a LAMMPS data file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.converters.oxDNA_cogli" title="baggianalysis.converters.oxDNA_cogli"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oxDNA_cogli</span></code></a></p></td>
+<td><p>Convert an oxDNA configuration into a <a class="reference external" href="https://sourceforge.net/projects/cogli1/">cogli</a> file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.converters.oxDNA_cogli_command_line" title="baggianalysis.converters.oxDNA_cogli_command_line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">oxDNA_cogli_command_line</span></code></a></p></td>
+<td><p><p>Convert the command-line supplied oxDNA configuration into a <a class="reference external" href="https://sourceforge.net/projects/cogli1/">cogli</a> file.</p>
+</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.converters.LAMMPS_cogli" title="baggianalysis.converters.LAMMPS_cogli"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPS_cogli</span></code></a></p></td>
+<td><p><p>Convert a LAMMPS data file into a <a class="reference external" href="https://sourceforge.net/projects/cogli1/">cogli</a> file.</p>
+</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.converters.LAMMPS_cogli_command_line" title="baggianalysis.converters.LAMMPS_cogli_command_line"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LAMMPS_cogli_command_line</span></code></a></p></td>
+<td><p><p>Convert the command-line supplied LAMMPS data file into a <a class="reference external" href="https://sourceforge.net/projects/cogli1/">cogli</a> file.</p>
+</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt id="baggianalysis.converters.oxDNA_LAMMPS">
+<code class="sig-prename descclassname">baggianalysis.converters.</code><code class="sig-name descname">oxDNA_LAMMPS</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_file</span></em>, <em class="sig-param"><span class="n">output_file</span></em>, <em class="sig-param"><span class="n">bond_file</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">datafile_type</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.converters.oxDNA_LAMMPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an oxDNA configuration into a LAMMPS data file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the input oxDNA configuration</p></li>
+<li><p><strong>output_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the output LAMMPS data file</p></li>
+<li><p><strong>bond_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the bond file that contains the system’s topology</p></li>
+<li><p><strong>datafile_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The type of the LAMMPS data file, which by default is “atomic”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="baggianalysis.converters.oxDNA_LAMMPS_command_line">
+<code class="sig-prename descclassname">baggianalysis.converters.</code><code class="sig-name descname">oxDNA_LAMMPS_command_line</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.converters.oxDNA_LAMMPS_command_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the command-line supplied oxDNA configuration into a LAMMPS data file.</p>
+<p>The name of the output file is the same as the input file plus ‘.lammps’.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="baggianalysis.converters.oxDNA_cogli">
+<code class="sig-prename descclassname">baggianalysis.converters.</code><code class="sig-name descname">oxDNA_cogli</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_file</span></em>, <em class="sig-param"><span class="n">output_file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.converters.oxDNA_cogli" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an oxDNA configuration into a <a class="reference external" href="https://sourceforge.net/projects/cogli1/">cogli</a> file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the input oxDNA configuration</p></li>
+<li><p><strong>output_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the output cogli file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="baggianalysis.converters.oxDNA_cogli_command_line">
+<code class="sig-prename descclassname">baggianalysis.converters.</code><code class="sig-name descname">oxDNA_cogli_command_line</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.converters.oxDNA_cogli_command_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the command-line supplied oxDNA configuration into a <a class="reference external" href="https://sourceforge.net/projects/cogli1/">cogli</a> file.</p>
+<p>The name of the output file is the same as the input file plus ‘.mgl’.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="baggianalysis.converters.LAMMPS_cogli">
+<code class="sig-prename descclassname">baggianalysis.converters.</code><code class="sig-name descname">LAMMPS_cogli</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_file</span></em>, <em class="sig-param"><span class="n">output_file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.converters.LAMMPS_cogli" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a LAMMPS data file into a <a class="reference external" href="https://sourceforge.net/projects/cogli1/">cogli</a> file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the LAMMPS data file</p></li>
+<li><p><strong>output_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of the output cogli file</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="baggianalysis.converters.LAMMPS_cogli_command_line">
+<code class="sig-prename descclassname">baggianalysis.converters.</code><code class="sig-name descname">LAMMPS_cogli_command_line</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.converters.LAMMPS_cogli_command_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the command-line supplied LAMMPS data file into a <a class="reference external" href="https://sourceforge.net/projects/cogli1/">cogli</a> file.</p>
+<p>The name of the output file is the same as the input file plus ‘.mgl’.</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="traj.html" class="btn btn-neutral float-right" title="The traj module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="core/neighbours.html" class="btn btn-neutral float-left" title="Neighbour finders" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Lorenzo Rovigatti
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

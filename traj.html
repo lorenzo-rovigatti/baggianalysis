@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>The traj module &mdash; baggianalysis 0.3.2.dev3+g69cf27f documentation</title>
+  <title>The traj module &mdash; baggianalysis 0.3.2.dev12+g8d97eb3 documentation</title>
   
 
   
@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="The utils module" href="utils.html" />
-    <link rel="prev" title="Neighbour finders" href="core/neighbours.html" /> 
+    <link rel="prev" title="The converters module" href="converters.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.3.2.dev3+g69cf27f
+                0.3.2.dev12+g8d97eb3
               </div>
             
           
@@ -96,6 +96,9 @@
 <li class="toctree-l2"><a class="reference internal" href="core/trajectories.html">Trajectory classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core/observables.html">Observables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="core/neighbours.html">Neighbour finders</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="converters.html">The converters module</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">The traj module</a><ul class="simple">
@@ -201,13 +204,13 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The name of an optional data file that will be used to initialise the trajectory’s frames. This is
+<li><p><strong>data_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of an optional data file that will be used to initialise the trajectory’s frames. This is
 useful if the LAMMPS dump files do not contain all the information (<em>e.g.</em> charges) or if you want
 frames to also store the particle connectivity (<em>e.g.</em> bonds, angles and dihedrals).</p></li>
-<li><p><strong>atom_tyle</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The atom style of the data file. Note that this parameter is required if data_file is not None.</p></li>
-<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of trajectory, which should be either “Lazy” or “Full” (for <a class="reference internal" href="core/trajectories.html#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a> and
+<li><p><strong>atom_tyle</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The atom style of the data file. Note that this parameter is required if data_file is not None.</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The type of trajectory, which should be either “Lazy” or “Full” (for <a class="reference internal" href="core/trajectories.html#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a> and
 <a class="reference internal" href="core/trajectories.html#baggianalysis.core.FullTrajectory" title="baggianalysis.core.FullTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">FullTrajectory</span></code></a>, respectively)’.</p></li>
-<li><p><strong>filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – A list of filters that should be added to the trajectory. Note that the order counts, since filters
+<li><p><strong>filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – A list of filters that should be added to the trajectory. Note that the order counts, since filters
 are applied on a first-come first-served basis.</p></li>
 </ul>
 </dd>
@@ -230,10 +233,10 @@ through one of <a class="reference internal" href="core/trajectories.html#baggia
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>topology_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The topology file associated to the oxDNA trajectory.</p></li>
-<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of trajectory, which should be either “Lazy” or “Full” (for <a class="reference internal" href="core/trajectories.html#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a> and
+<li><p><strong>topology_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The topology file associated to the oxDNA trajectory.</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The type of trajectory, which should be either “Lazy” or “Full” (for <a class="reference internal" href="core/trajectories.html#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a> and
 <a class="reference internal" href="core/trajectories.html#baggianalysis.core.FullTrajectory" title="baggianalysis.core.FullTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">FullTrajectory</span></code></a>, respectively)’.</p></li>
-<li><p><strong>filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><em>list</em></a>) – A list of filters that should be added to the trajectory. Note that the order counts, since filters
+<li><p><strong>filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – A list of filters that should be added to the trajectory. Note that the order counts, since filters
 are applied on a first-come first-served basis.</p></li>
 </ul>
 </dd>
@@ -260,7 +263,7 @@ through one of <a class="reference internal" href="core/trajectories.html#baggia
         <a href="utils.html" class="btn btn-neutral float-right" title="The utils module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="core/neighbours.html" class="btn btn-neutral float-left" title="Neighbour finders" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="converters.html" class="btn btn-neutral float-left" title="The converters module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

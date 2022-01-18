@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Particle-related classes &mdash; baggianalysis 0.3.2.dev3+g69cf27f documentation</title>
+  <title>Particle-related classes &mdash; baggianalysis 0.3.2.dev12+g8d97eb3 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.3.2.dev3+g69cf27f
+                0.3.2.dev12+g8d97eb3
               </div>
             
           
@@ -96,6 +96,9 @@
 <li class="toctree-l2"><a class="reference internal" href="trajectories.html">Trajectory classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="observables.html">Observables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../converters.html">The converters module</a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../traj.html">The traj module</a><ul class="simple">
@@ -206,7 +209,7 @@
 <p>Build a new particle by specifying its index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The index of the particle. Note that this value cannot be changed later on.</p>
+<dd class="field-odd"><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the particle. Note that this value cannot be changed later on.</p>
 </dd>
 </dl>
 <ol class="arabic simple" start="2">
@@ -216,8 +219,8 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The index of the particle. Note that this value cannot be changed later on.</p></li>
-<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of the particle.</p></li>
+<li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the particle. Note that this value cannot be changed later on.</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The type of the particle.</p></li>
 <li><p><strong>type</strong> – </p></li>
 </ul>
 </dd>
@@ -229,9 +232,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The index of the particle. Note that this value cannot be changed later on.</p></li>
-<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of the particle.</p></li>
-<li><p><strong>position</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><em>numpy.ndarray</em></a>) – The position of the particle</p></li>
+<li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the particle. Note that this value cannot be changed later on.</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The type of the particle.</p></li>
+<li><p><strong>position</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – The position of the particle</p></li>
 </ul>
 </dd>
 </dl>
@@ -242,10 +245,10 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The index of the particle. Note that this value cannot be changed later on.</p></li>
-<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of the particle.</p></li>
-<li><p><strong>position</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><em>numpy.ndarray</em></a>) – The position of the particle.</p></li>
-<li><p><strong>velocity</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><em>numpy.ndarray</em></a>) – The velocity of the particle.</p></li>
+<li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the particle. Note that this value cannot be changed later on.</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The type of the particle.</p></li>
+<li><p><strong>position</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – The position of the particle.</p></li>
+<li><p><strong>velocity</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – The velocity of the particle.</p></li>
 </ul>
 </dd>
 </dl>
@@ -260,7 +263,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of the angle.</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The type of the angle.</p></li>
 <li><p><strong>p1</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The first particle participating in the angle.</p></li>
 <li><p><strong>p2</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The second particle participating in the angle.</p></li>
 <li><p><strong>p3</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The third particle participating in the angle.</p></li>
@@ -293,7 +296,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of the dihedral.</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The type of the dihedral.</p></li>
 <li><p><strong>p1</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The first particle participating in the dihedral.</p></li>
 <li><p><strong>p2</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The second particle participating in the dihedral.</p></li>
 <li><p><strong>p3</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The third particle participating in the dihedral.</p></li>
@@ -328,7 +331,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of bond shared by the two particles.</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The type of bond shared by the two particles.</p></li>
 <li><p><strong>q</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The new bonded neighbour.</p></li>
 </ul>
 </dd>
@@ -356,7 +359,7 @@ the current particle is <cite>not</cite> added to the list of <code class="docut
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – The type of bond shared by the two particles.</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The type of bond shared by the two particles.</p></li>
 <li><p><strong>q</strong> (<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The new neighbour.</p></li>
 </ul>
 </dd>
@@ -375,11 +378,11 @@ the current particle is <cite>not</cite> added to the list of <code class="docut
 
 <dl class="py method">
 <dt id="baggianalysis.core.Particle.add_orientation_vector">
-<code class="sig-name descname">add_orientation_vector</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.Particle</em>, <em class="sig-param">v: glm::tvec3&lt;scalar</em>, <em class="sig-param">P&gt;</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.Particle.add_orientation_vector" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_orientation_vector</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.Particle</em>, <em class="sig-param">v: glm::tvec3&lt;scalar</em>, <em class="sig-param">P&gt;</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.Particle.add_orientation_vector" title="Permalink to this definition">¶</a></dt>
 <dd><p>The molecule to which this particle belongs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><em>numpy.ndarray</em></a>) – The new orientation vector.</p>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – The new orientation vector.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -423,14 +426,14 @@ the current particle is <cite>not</cite> added to the list of <code class="docut
 <dd><p>The particle’s charge.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.Particle.has_bonded_neighbour">
-<code class="sig-name descname">has_bonded_neighbour</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">q</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="headerlink" href="#baggianalysis.core.Particle.has_bonded_neighbour" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">has_bonded_neighbour</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">q</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><a class="headerlink" href="#baggianalysis.core.Particle.has_bonded_neighbour" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check whether <code class="docutils literal notranslate"><span class="pre">q</span></code> is a bonded neighbour.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -440,14 +443,14 @@ the current particle is <cite>not</cite> added to the list of <code class="docut
 <dd class="field-even"><p>True if <code class="docutils literal notranslate"><span class="pre">q</span></code> is a bonded neighbour, False otherwise.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.Particle.has_neighbour">
-<code class="sig-name descname">has_neighbour</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">q</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="headerlink" href="#baggianalysis.core.Particle.has_neighbour" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">has_neighbour</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">q</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><a class="headerlink" href="#baggianalysis.core.Particle.has_neighbour" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check whether <code class="docutils literal notranslate"><span class="pre">q</span></code> is a neighbour.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -457,7 +460,7 @@ the current particle is <cite>not</cite> added to the list of <code class="docut
 <dd class="field-even"><p>True if <code class="docutils literal notranslate"><span class="pre">q</span></code> is a neighbour, False otherwise.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -478,11 +481,11 @@ the current particle is <cite>not</cite> added to the list of <code class="docut
 
 <dl class="py method">
 <dt id="baggianalysis.core.Particle.make_copy">
-<code class="sig-name descname">make_copy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a><a class="headerlink" href="#baggianalysis.core.Particle.make_copy" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">make_copy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">index</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a><a class="headerlink" href="#baggianalysis.core.Particle.make_copy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a copy of this particle with the given index. Note that neighbours and bonded neighbours, angles and dihedrals are not copied.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The index of the new particle.</p>
+<dd class="field-odd"><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the new particle.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -493,7 +496,7 @@ the current particle is <cite>not</cite> added to the list of <code class="docut
 <dd><p>The particle’s mass.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -540,7 +543,7 @@ list of interaction centres or the components of the orientation matrix.</p>
 <dd><p>The particle’s position.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)">numpy.ndarray</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -562,7 +565,7 @@ list of interaction centres or the components of the orientation matrix.</p>
 <dd><p>The particle’s velocity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)">numpy.ndarray</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)">numpy.ndarray</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -571,19 +574,19 @@ list of interaction centres or the components of the orientation matrix.</p>
 
 <dl class="py class">
 <dt id="baggianalysis.core.ParticleSet">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">ParticleSet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.ParticleSet" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">ParticleSet</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.ParticleSet" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
 <p>A set of particles.</p>
 <p>The constructor takes no parameters.</p>
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.N">
-<code class="sig-name descname">N</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.N" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">N</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.N" title="Permalink to this definition">¶</a></dt>
 <dd><p>The number of particles stored in the set.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.add_particle">
-<code class="sig-name descname">add_particle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em>, <em class="sig-param"><span class="n">p</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.add_particle" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_particle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em>, <em class="sig-param"><span class="n">p</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.add_particle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add <code class="docutils literal notranslate"><span class="pre">p</span></code> to the set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -594,13 +597,13 @@ list of interaction centres or the components of the orientation matrix.</p>
 
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.charge">
-<code class="sig-name descname">charge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.charge" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">charge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.charge" title="Permalink to this definition">¶</a></dt>
 <dd><p>The total charge stored in the set</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.charges">
-<code class="sig-name descname">charges</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.ParticleSet.charges" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">charges</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.ParticleSet.charges" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a vector containing the charge of all the particles.</p>
 <p>The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios (or cache the result).</p>
 </dd></dl>
@@ -613,37 +616,37 @@ list of interaction centres or the components of the orientation matrix.</p>
 
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.id_exists">
-<code class="sig-name descname">id_exists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em>, <em class="sig-param"><span class="n">p_idx</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.id_exists" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">id_exists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em>, <em class="sig-param"><span class="n">p_idx</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.id_exists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check whether a particle with the given index is stored in the set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>p_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The index to be checked.</p>
+<dd class="field-odd"><p><strong>p_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index to be checked.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>True if the particle is stored in the set, False otherwise.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.indexes">
-<code class="sig-name descname">indexes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.ParticleSet.indexes" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">indexes</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.ParticleSet.indexes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a vector containing the index of all the particles.</p>
 <p>The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios (or cache the result).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.mass">
-<code class="sig-name descname">mass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.mass" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">mass</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.mass" title="Permalink to this definition">¶</a></dt>
 <dd><p>The total mass stored in the set</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.masses">
-<code class="sig-name descname">masses</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.ParticleSet.masses" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">masses</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.ParticleSet.masses" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a vector containing the mass of all the particles.</p>
 <p>The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios (or cache the result).</p>
 </dd></dl>
@@ -656,11 +659,11 @@ list of interaction centres or the components of the orientation matrix.</p>
 
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.particle_by_id">
-<code class="sig-name descname">particle_by_id</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em>, <em class="sig-param"><span class="n">p_idx</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.particle_by_id" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">particle_by_id</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em>, <em class="sig-param"><span class="n">p_idx</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.particle_by_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Retrieve the particle with the given index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>p_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The index of the particle to be retrieved.</p>
+<dd class="field-odd"><p><strong>p_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the particle to be retrieved.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The particle with the given index.</p>
@@ -686,7 +689,7 @@ list of interaction centres or the components of the orientation matrix.</p>
 
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.remove_particle">
-<code class="sig-name descname">remove_particle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em>, <em class="sig-param"><span class="n">p</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.remove_particle" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove_particle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em>, <em class="sig-param"><span class="n">p</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.remove_particle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove <code class="docutils literal notranslate"><span class="pre">p</span></code> from the set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -697,24 +700,24 @@ list of interaction centres or the components of the orientation matrix.</p>
 
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.remove_particle_by_id">
-<code class="sig-name descname">remove_particle_by_id</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em>, <em class="sig-param"><span class="n">p_id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.remove_particle_by_id" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove_particle_by_id</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em>, <em class="sig-param"><span class="n">p_id</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.remove_particle_by_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove the particle with given index from the set.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>p_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The index of the particle to be removed from the set.</p>
+<dd class="field-odd"><p><strong>p_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the particle to be removed from the set.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.sort_particles_by_id">
-<code class="sig-name descname">sort_particles_by_id</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.sort_particles_by_id" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">sort_particles_by_id</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.ParticleSet.sort_particles_by_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort the particles according to their index</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.ParticleSet.types">
-<code class="sig-name descname">types</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.ParticleSet.types" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">types</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.ParticleSet.types" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a vector containing the type of all the particles.</p>
 <p>The vector is created ex novo every time this method is called. Do not use in performance-critical scenarios (or cache the result).</p>
 </dd></dl>
@@ -736,13 +739,13 @@ list of interaction centres or the components of the orientation matrix.</p>
 
 <dl class="py class">
 <dt id="baggianalysis.core.System">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">System</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.System" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">System</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.System" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">baggianalysis.core.ParticleSet</span></code></a></p>
 <p>A single configuration.</p>
 <p>The constructor takes no arguments.</p>
 <dl class="py method">
 <dt id="baggianalysis.core.System.available_index">
-<code class="sig-name descname">available_index</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a><a class="headerlink" href="#baggianalysis.core.System.available_index" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">available_index</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a><a class="headerlink" href="#baggianalysis.core.System.available_index" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a particle index that can be used in the context of this system (that is, that is not used by any of the
 particles already present in the system).</p>
 <dl class="field-list simple">
@@ -750,7 +753,7 @@ particles already present in the system).</p>
 <dd class="field-odd"><p>A number that can be used as a valid index for a new particle.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -762,11 +765,11 @@ particles already present in the system).</p>
 
 <dl class="py method">
 <dt id="baggianalysis.core.System.bring_particles_in_box">
-<code class="sig-name descname">bring_particles_in_box</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em>, <em class="sig-param"><span class="n">shift_by_half_box</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.System.bring_particles_in_box" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">bring_particles_in_box</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em>, <em class="sig-param"><span class="n">shift_by_half_box</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.System.bring_particles_in_box" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bring the particles back into the box.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>shift_by_half_box</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – If False (the default value) particles will have coordinates ranging from 0 to the length of the box side. If
+<dd class="field-odd"><p><strong>shift_by_half_box</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – If False (the default value) particles will have coordinates ranging from 0 to the length of the box side. If
 True, the coordinates will range between -box/2 and +box/2.</p>
 </dd>
 </dl>
@@ -806,28 +809,28 @@ True, the coordinates will range between -box/2 and +box/2.</p>
 
 <dl class="py method">
 <dt id="baggianalysis.core.System.normalise_molecules">
-<code class="sig-name descname">normalise_molecules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.System.normalise_molecules" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">normalise_molecules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.System.normalise_molecules" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use periodic boundary conditions to shift particle positions so that bonded neighbours are always as close as possible to each other and not separated by distances that are multiple of box sides.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.System.reindex_particles">
-<code class="sig-name descname">reindex_particles</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em>, <em class="sig-param"><span class="n">base_idx</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.System.reindex_particles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">reindex_particles</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em>, <em class="sig-param"><span class="n">base_idx</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.System.reindex_particles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort the particles by index and assign them new indexes so that the first and last ones are <code class="docutils literal notranslate"><span class="pre">base_index</span></code> and <code class="docutils literal notranslate"><span class="pre">base_index</span> <span class="pre">+</span> <span class="pre">N()</span> <span class="pre">-</span> <span class="pre">1</span></code>, respectively.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>base_index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><em>int</em></a>) – The starting index that should be used.</p>
+<dd class="field-odd"><p><strong>base_index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The starting index that should be used.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.System.rescale_lengths">
-<code class="sig-name descname">rescale_lengths</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em>, <em class="sig-param"><span class="n">factor</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="headerlink" href="#baggianalysis.core.System.rescale_lengths" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">rescale_lengths</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em>, <em class="sig-param"><span class="n">factor</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.System.rescale_lengths" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rescale all lengths (positions, velocities, box sides, <em>etc.</em>) by the given factor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>factor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><em>float</em></a>) – The rescaling factor.</p>
+<dd class="field-odd"><p><strong>factor</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – The rescaling factor.</p>
 </dd>
 </dl>
 </dd></dl>
