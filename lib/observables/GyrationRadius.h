@@ -21,6 +21,8 @@ public:
 	void analyse_system(std::shared_ptr<System> system) override;
 	void analyse_particle_set(std::shared_ptr<ParticleSet> p_set);
 
+	virtual void reset() override;
+
 protected:
 	double _finalised_result() override;
 
