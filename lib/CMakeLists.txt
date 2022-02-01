@@ -19,6 +19,7 @@ SET(ba_lib_SOURCES
 	observables/ClusterList.cpp
 	observables/ConvexHull.cpp
 	observables/FormFactor.cpp
+	observables/GyrationRadius.cpp
 	observables/MSD.cpp
 	observables/RDF.cpp
 	observables/StructureFactor.cpp

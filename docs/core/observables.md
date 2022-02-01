@@ -24,12 +24,14 @@
     
 .. autoclass:: ConvexHullTriangle
 
+.. autoclass:: GyrationRadius
+
 .. autoclass:: FormFactor
+
+.. autoclass:: MSD
     
 .. autoclass:: PoreSize
     
-.. autoclass:: MSD
-
 .. autoclass:: RDF
     
 .. autoclass:: StructureFactor
