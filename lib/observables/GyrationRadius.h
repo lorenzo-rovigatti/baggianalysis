@@ -19,7 +19,7 @@ public:
 	virtual ~GyrationRadius();
 
 	void analyse_system(std::shared_ptr<System> system) override;
-	void analyse_particle_set(std::shared_ptr<ParticleSet> p_set);
+	void analyse_particle_set(std::shared_ptr<ParticleSet> p_set, const vec3 &box);
 
 	virtual void reset() override;
 

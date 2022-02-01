@@ -22,21 +22,20 @@ GyrationRadius::~GyrationRadius() {
 
 void GyrationRadius::analyse_system(std::shared_ptr<System> system) {
 	if(_compute_on_molecules) {
-		system->normalise_molecules();
 		if(system->molecules().size() == 0) {
 			std::string error = fmt::format("GyrationRadius: No molecules found, aborting");
 			throw std::runtime_error(error);
 		}
 		for(auto molecule: system->molecules()) {
-			analyse_particle_set(molecule);
+			analyse_particle_set(molecule, system->box);
 		}
 	}
 	else {
-		analyse_particle_set(system);
+		analyse_particle_set(system, system->box);
 	}
 }
 
-void GyrationRadius::analyse_particle_set(std::shared_ptr<ParticleSet> p_set) {
+void GyrationRadius::analyse_particle_set(std::shared_ptr<ParticleSet> p_set, const vec3 &box) {
 	double rg2 = 0;
 
 	for(uint i = 0; i < p_set->N(); i++) {
@@ -45,6 +44,7 @@ void GyrationRadius::analyse_particle_set(std::shared_ptr<ParticleSet> p_set) {
 			auto q = p_set->particles()[j];
 
 			vec3 distance = p->position() - q->position();
+			distance -= glm::round(distance / box) * box;
 			rg2 += glm::dot(distance, distance);
 		}
 	}
@@ -76,13 +76,15 @@ compute_on_molecules: bool
     If True, the final gyration radius will be computed as the average gyration radius of the molecules composing the system.
 	)pbdoc");
 
-	obs.def("analyse_particle_set", &GyrationRadius::analyse_particle_set, py::arg("p_set"), R"pbdoc(
+	obs.def("analyse_particle_set", &GyrationRadius::analyse_particle_set, py::arg("p_set"), py::arg("box"), R"pbdoc(
 Compute the gyration radius of the given :class:`ParticleSet`.
 
 Parameters
 ----------
 p_set: :class:`ParticleSet`
     The object containing the input particles.
+box: numpy.ndarray
+        The simulation box.
 )pbdoc");
 
 	PY_EXPORT_SYSTEM_OBS(obs, GyrationRadius);
