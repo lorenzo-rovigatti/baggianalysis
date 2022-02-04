@@ -31,7 +31,8 @@ class Logger():
 
     @staticmethod
     def log(msg, level, prepend=""):
-        if level < Logger.debug_level: return
+        if level < Logger.debug_level: 
+            return
 
         Logger.log_lock.acquire()
         print("%s%s: %s" % (prepend, Logger.messages[level], msg), file=sys.stderr)
@@ -160,7 +161,7 @@ class ColumnAverage(BaseTest):
             Logger.log("%s ColumnAverage test on file '%s', column %d passed. Compute value: %f, Reference value: %f (+- %f)" % (self.log_prefix, self.filename, self.column, avg, self.true_avg, self.tolerance), Logger.DEBUG)
             return True
         
-        Logger.log("%s ColumnAverage test on file '%s', column %d failed. Compute value: %f, Reference value: %f (+- %f)" % (self.log_prefix, self.filename, self.column, avg, self.true_avg, self.tolerance), Logger.WARNING)
+        Logger.log("%s ColumnAverage test on file '%s', column %d passed. Compute value: %f, Reference value: %f (+- %f)" % (self.log_prefix, self.filename, self.column, avg, self.true_avg, self.tolerance), Logger.WARNING)
         
         return False
     
@@ -216,12 +217,13 @@ class Analyser(object):
     
     def test(self):
         n_tests = len(self.tests)
-        n_failed = 0
+        n_passed = 0
         
         for test in self.tests:
-            if not test.test(): n_failed += 1
+            if test.test(): 
+                n_passed += 1
         
-        return (n_tests, n_failed)
+        return (n_tests, n_passed)
 
 
 class System(object):
@@ -235,8 +237,9 @@ class System(object):
         
         self.analyser = Analyser(folder, compare_file)
         
+        self.error = False
         self.n_tests = 0
-        self.n_failed = 0
+        self.n_passed = 0
     
     def simulation_done(self, p, do_tests=True):
         error = False
@@ -248,21 +251,21 @@ class System(object):
                 Logger.log("%s %s returned %d and the following output:" % (self.log_prefix, self.executable, p.returncode), Logger.WARNING)
                 for line in p.stderr:
                     print("\t" + line.strip("\n"))
-            error = True
+            self.error = True
 
         # we don't run tests if the simulation was not successful. We put this here so that all
         # above messages can be printed independently of each other
-        if error: 
+        if self.error: 
             return
         
         Logger.log("%s %s run completed and successful" % (self.log_prefix, self.executable), Logger.DEBUG)
         
         if do_tests:
-            (n_tests, n_failed) = self.analyser.test()
-            Logger.log("%s\n\tFailed/Total: %d/%d" % (self.log_prefix, n_failed, n_tests), Logger.RESULTS)
+            (n_tests, n_passed) = self.analyser.test()
+            Logger.log("%s\n\tPassed/Total: %d/%d" % (self.log_prefix, n_passed, n_tests), Logger.RESULTS)
             
             self.n_tests = n_tests
-            self.n_failed = n_failed
+            self.n_passed = n_passed
         
     
 class TestManager(object):
@@ -311,14 +314,24 @@ class TestManager(object):
         Runner.queue.join()
         
     def finalise(self):
-        n_failed = 0
+        n_passed = 0
         n_tests = 0
+        n_errors = 0
         for system in self.systems:
-            n_failed += system.n_failed
+            n_passed += system.n_passed
             n_tests += system.n_tests
-            
-        Logger.log("Summary:\n\tFAILED/TOTAL: %d/%d\n" % (n_failed, n_tests), Logger.RESULTS, "\n")
+            if system.error:
+                n_errors += 1
+
+        if n_errors == 1:
+            Logger.log("The analysis in %d folder failed" % n_errors, Logger.CRITICAL, "\n")
+        elif n_errors > 1:
+            Logger.log("The analysis in %d folders failed" % n_errors, Logger.CRITICAL, "\n")
+        
+        Logger.log("Test summary:\n\tPassed/Total: %d/%d\n" % (n_passed, n_tests), Logger.RESULTS, "\n")
     
+        if n_tests != n_passed or n_errors > 0:
+            Logger.log("Not all tests passed successfully", Logger.CRITICAL)
     
 def main():
     def print_usage():

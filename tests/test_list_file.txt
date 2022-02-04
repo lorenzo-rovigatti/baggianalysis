@@ -1,2 +1,3 @@
 oxDNA/MSD ./msd.py:msd_test_list.txt
+oxDNA/csd ./csd.py:csd_test_list.txt
 LAMMPS/topology ./add_particles_to_network_chains.py:add_test_list.txt

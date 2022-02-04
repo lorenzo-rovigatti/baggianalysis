@@ -78,7 +78,7 @@ The default constructor takes a single parameter setting the cutoff.
 
 Parameters
 ----------
-cutoff : double
+cutoff : float
 	The cutoff used to define neighbours.
     )pbdoc");
 
@@ -87,7 +87,7 @@ This constructor takes two parameters: the cutoff and a callable that can be use
 
 Parameters
 ----------
-cutoff : double
+cutoff : float
 	The cutoff used to define neighbours.
 mapper: callable
     A callable that takes two particles and a vector that is the distance between the two particles, and returns a boolean, which should be True if the two particles are neighbours, False otherwise.
