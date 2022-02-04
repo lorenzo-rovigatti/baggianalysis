@@ -49,7 +49,6 @@ public:
 
 private:
 	bool _average_over_trajectory = false;
-	int _N_frames = 0;
 };
 
 #ifdef PYTHON_BINDINGS

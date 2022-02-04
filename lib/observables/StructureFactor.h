@@ -43,8 +43,6 @@ protected:
 	std::map<double, std::vector<vec3>> _q_vectors;
 	vec3 _last_box = vec3(0., 0., 0.);
 	vector_scalar _b_factors;
-
-	int _times_called = 0;
 };
 
 #ifdef PYTHON_BINDINGS

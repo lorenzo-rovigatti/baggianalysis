@@ -35,6 +35,14 @@ public:
 	}
 
 	virtual void analyse_system(std::shared_ptr<System> system) = 0;
+
+	void reset() override {
+		TrajectoryObservable<result_type>::reset();
+		_times_called = 0;
+	}
+
+protected:
+	int _times_called = 0;
 };
 
 #ifdef PYTHON_BINDINGS

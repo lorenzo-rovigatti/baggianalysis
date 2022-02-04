@@ -76,11 +76,6 @@ void FormFactor::analyse_particle_set(std::shared_ptr<ParticleSet> p_set) {
 	_times_called++;
 }
 
-void FormFactor::reset() {
-	SystemObservable::reset();
-	_times_called = 0;
-}
-
 std::map<double, double> FormFactor::_finalised_result() {
 	std::map<double, double> result(_result);
 	for(auto &p: result) {

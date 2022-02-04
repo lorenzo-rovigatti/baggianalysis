@@ -53,11 +53,6 @@ void GyrationRadius::analyse_particle_set(std::shared_ptr<ParticleSet> p_set, co
 	_times_called++;
 }
 
-void GyrationRadius::reset() {
-	SystemObservable::reset();
-	_times_called = 0;
-}
-
 double GyrationRadius::_finalised_result() {
 	return _result / _times_called;
 }

@@ -21,13 +21,10 @@ public:
 	void analyse_system(std::shared_ptr<System> system) override;
 	void analyse_particle_set(std::shared_ptr<ParticleSet> p_set, const vec3 &box);
 
-	virtual void reset() override;
-
 protected:
 	double _finalised_result() override;
 
 	bool _compute_on_molecules;
-	int _times_called = 0;
 };
 
 #ifdef PYTHON_BINDINGS

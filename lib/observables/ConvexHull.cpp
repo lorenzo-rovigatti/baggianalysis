@@ -70,7 +70,7 @@ void ConvexHull::analyse_system(std::shared_ptr<System> system) {
 	if(_average_over_trajectory) {
 		_result.area += area;
 		_result.volume += volume;
-		_N_frames++;
+		_times_called++;
 	}
 	else {
 		_result.area = area;
@@ -81,13 +81,11 @@ void ConvexHull::analyse_system(std::shared_ptr<System> system) {
 void ConvexHull::analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) {
 	_average_over_trajectory = true;
 
-	_N_frames = 0;
-	reset();
 	SystemObservable::analyse_trajectory(trajectory);
 	_result.triangles.clear();
 	_result.vertices.clear();
-	_result.volume /= _N_frames;
-	_result.area /= _N_frames;
+	_result.volume /= _times_called;
+	_result.area /= _times_called;
 
 	_average_over_trajectory = false;
 }

@@ -31,8 +31,6 @@ protected:
 	double _max_value = 0.;
 	double _max_value_sqr = 0.;
 
-	int _times_called = 0;
-
 	std::vector<long double> _profile;
 	std::pair<std::vector<particle_type>, std::vector<particle_type>> _allowed_types;
 };

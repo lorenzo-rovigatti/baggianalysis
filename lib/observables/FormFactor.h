@@ -24,15 +24,12 @@ public:
 	void analyse_system(std::shared_ptr<System> system) override;
 	void analyse_particle_set(std::shared_ptr<ParticleSet> p_set);
 
-	virtual void reset() override;
-
 protected:
 	std::map<double, double> _finalised_result() override;
 
 	vector_scalar _q_modules;
 	int _q_repetitions;
 	bool _compute_on_molecules;
-	int _times_called = 0;
 	vector_scalar _b_factors;
 };
 
