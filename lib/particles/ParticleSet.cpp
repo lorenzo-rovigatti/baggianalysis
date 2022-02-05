@@ -160,6 +160,14 @@ void ParticleSet::sort_particles_by_id() {
 	std::sort(_particles.begin(), _particles.end(), comp_operator);
 }
 
+std::vector<std::shared_ptr<Particle>> ParticleSet::select(std::function<bool(std::shared_ptr<Particle>)> pred) const {
+	std::vector<std::shared_ptr<Particle>> res;
+
+	std::copy_if(_particles.begin(), _particles.end(), std::back_inserter(res), pred);
+
+	return res;
+}
+
 #ifdef PYTHON_BINDINGS
 
 void export_ParticleSet(py::module &m) {
@@ -265,6 +273,22 @@ Returns
 -------
 :class:`Particle`
 	The particle with the given index.
+)pbdoc");
+
+	particle_set.def("select", &ParticleSet::select, py::arg("predicate"), R"pbdoc(
+Return all those particles for which the given predicate evaluates to True.
+
+Note that the returned list contains references to and not copies of the particles stored in this set.
+
+Parameters
+----------
+predicate: callable
+	A callable that takes a particle and returns True if the particle should be returned, False otherwise.
+
+Returns
+-------
+List(:class:`Particle`)
+	The list of particles for which the predicate evaluates to True.
 )pbdoc");
 
 	particle_set.def("sort_particles_by_id", &ParticleSet::sort_particles_by_id, "Sort the particles according to their index");

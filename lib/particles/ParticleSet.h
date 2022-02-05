@@ -131,6 +131,8 @@ public:
 	/// Sort the particles according to their index.
 	void sort_particles_by_id();
 
+	std::vector<std::shared_ptr<Particle>> select(std::function<bool(std::shared_ptr<Particle>)>) const;
+
 protected:
 	std::string _name;
 
