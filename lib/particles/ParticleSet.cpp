@@ -278,6 +278,10 @@ Returns
 	particle_set.def("select", &ParticleSet::select, py::arg("predicate"), R"pbdoc(
 Return all those particles for which the given predicate evaluates to True.
 
+Here is an example that creates a list of particles having a non-negative position along the x axis::
+
+	selected = system.select(lambda p: p.position[0] > 0)  
+
 Note that the returned list contains references to and not copies of the particles stored in this set.
 
 Parameters
