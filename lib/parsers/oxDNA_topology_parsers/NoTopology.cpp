@@ -27,7 +27,7 @@ particle_type NoTopology::type(int p_idx) {
 #ifdef PYTHON_BINDINGS
 
 void export_NoTopology(py::module &m) {
-	py::class_<NoTopology, std::shared_ptr<NoTopology>> parser(m, "NoTopology");
+	py::class_<NoTopology, std::shared_ptr<NoTopology>, Default> parser(m, "NoTopology");
 
 	parser.def(py::init<>());
 }

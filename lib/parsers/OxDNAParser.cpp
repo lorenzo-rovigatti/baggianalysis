@@ -9,6 +9,7 @@
 
 #include "oxDNA_topology_parsers/NoTopology.h"
 #include "oxDNA_topology_parsers/TSP.h"
+#include "oxDNA_topology_parsers/DetailedPolymer.h"
 #include "../utils/strings.h"
 
 #include <glm/gtx/orthonormalize.hpp>
@@ -132,6 +133,7 @@ void export_OxDNAParser(py::module &m) {
 	oxDNA_topology::export_Default(sub_m);
 	oxDNA_topology::export_TSP(sub_m);
 	oxDNA_topology::export_NoTopology(sub_m);
+	oxDNA_topology::export_DetailedPolymer(sub_m);
 
 	py::class_<OxDNAParser, BaseParser, std::shared_ptr<OxDNAParser>> parser(m, "OxDNAParser", "Use oxDNA/topology files to build systems.");
 

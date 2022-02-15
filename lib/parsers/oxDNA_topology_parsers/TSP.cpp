@@ -55,7 +55,7 @@ uint TSP::N_arms(int star) const {
 #ifdef PYTHON_BINDINGS
 
 void export_TSP(py::module &m) {
-	py::class_<TSP, Default, std::shared_ptr<TSP>> parser(m, "TSP");
+	py::class_<TSP, Default, std::shared_ptr<TSP>, Default> parser(m, "TSP");
 
 	parser.def(py::init<std::string>());
 	parser.def("N_stars", &TSP::N_stars);

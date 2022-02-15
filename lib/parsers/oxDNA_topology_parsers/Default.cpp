@@ -48,6 +48,10 @@ particle_type Default::type(int p_idx) {
 	return "1";
 }
 
+std::vector<int> Default::bonded_neighbours(int) {
+	return std::vector<int>();
+}
+
 #ifdef PYTHON_BINDINGS
 
 void export_Default(py::module &m) {

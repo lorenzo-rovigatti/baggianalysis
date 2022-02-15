@@ -29,6 +29,7 @@ public:
 	uint N_A();
 
 	virtual particle_type type(int);
+	virtual std::vector<int> bonded_neighbours(int);
 
 protected:
 	Default() {}
