@@ -25,16 +25,19 @@ Cogli1Exporter::Cogli1Exporter(Cogli1Mapper mapper) {
 		if(c_p.show) {
 			const vec3 &pos = p->position();
 
+			output += fmt::format("{} {} {} @ {} C[{}]", pos[0], pos[1], pos[2], c_p.size, c_p.color);
+
 			for(auto bond : p->bonded_neighbours()) {
 				auto other = bond.other();
 				if(other->index() > p->index()) {
 					vec3 axis = other->position() - pos;
 
-					output += fmt::format("{} {} {} @ {} C[{}] C {} {} {}\n",
+					output += fmt::format("G {} {} {} @ {} C[{}] C {} {} {}",
 							pos[0], pos[1], pos[2], c_p.size / 3, c_p.color, axis[0], axis[1], axis[2]);
 				}
 			}
-			output += fmt::format("{} {} {} @ {} C[{}]", pos[0], pos[1], pos[2], c_p.size, c_p.color);
+
+			output += "\n";
 		}
 		return output;
 	};
