@@ -29,13 +29,15 @@ public:
 	uint N_A();
 
 	virtual particle_type type(int);
-	virtual std::vector<int> bonded_neighbours(int);
+	virtual const std::vector<std::vector<int>> &bonded_neighbours() const;
 
 protected:
 	Default() {}
 
 	uint _N = 0;
 	uint _N_A = 0;
+
+	std::vector<std::vector<int>> _bonded_neighbours;
 };
 
 #ifdef PYTHON_BINDINGS

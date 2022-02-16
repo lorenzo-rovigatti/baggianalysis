@@ -19,11 +19,10 @@ public:
 	virtual ~DetailedPolymer();
 
 	particle_type type(int) override;
-	std::vector<int> bonded_neighbours(int) override;
+	const std::vector<std::vector<int>> &bonded_neighbours() const override;
 
 protected:
 	std::vector<particle_type> _types;
-	std::vector<std::vector<int>> _neighbours;
 };
 
 #ifdef PYTHON_BINDINGS

@@ -24,7 +24,7 @@ DetailedPolymer::DetailedPolymer(std::string topology_file) {
 	topology >> N_chains;
 
 	_types.resize(_N, "0");
-	_neighbours.resize(_N);
+	_bonded_neighbours.resize(_N);
 
 	for(unsigned int i = 0; i < _N; i++) {
 		unsigned int p_idx, n_bonds;
@@ -54,7 +54,7 @@ DetailedPolymer::DetailedPolymer(std::string topology_file) {
 				throw std::runtime_error(error);
 			}
 
-			_neighbours[p_idx].push_back(n_idx);
+			_bonded_neighbours[p_idx].push_back(n_idx);
 		}
 	}
 
@@ -69,8 +69,8 @@ particle_type DetailedPolymer::type(int idx) {
 	return _types[idx];
 }
 
-std::vector<int> DetailedPolymer::bonded_neighbours(int idx) {
-	return _neighbours[idx];
+const std::vector<std::vector<int>> &DetailedPolymer::bonded_neighbours() const {
+	return _bonded_neighbours;
 }
 
 #ifdef PYTHON_BINDINGS

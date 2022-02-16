@@ -117,6 +117,12 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 		}
 	}
 
+	for(auto p : syst->particles()) {
+		for(auto neigh : _topology_parser->bonded_neighbours()[p->index()]) {
+			p->add_bonded_neighbour(syst->particle_by_id(neigh));
+		}
+	}
+
 	if(_topology_parser->has_N() && syst->N() != _topology_parser->N()) {
 		std::string error = fmt::format("The number of particles found in the configuration file ({}) is different from what specified in the topology file ({})", syst->N(), _topology_parser->N());
 		throw std::runtime_error(error);

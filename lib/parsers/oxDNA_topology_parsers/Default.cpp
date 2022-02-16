@@ -48,8 +48,8 @@ particle_type Default::type(int p_idx) {
 	return "1";
 }
 
-std::vector<int> Default::bonded_neighbours(int) {
-	return std::vector<int>();
+const std::vector<std::vector<int>> &Default::bonded_neighbours() const {
+	return _bonded_neighbours;
 }
 
 #ifdef PYTHON_BINDINGS
