@@ -117,9 +117,12 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 		}
 	}
 
-	for(auto p : syst->particles()) {
-		for(auto neigh : _topology_parser->bonded_neighbours()[p->index()]) {
-			p->add_bonded_neighbour(syst->particle_by_id(neigh));
+	auto bonded_neighbours = _topology_parser->bonded_neighbours();
+	if(bonded_neighbours.size() == syst->N()) {
+		for(auto p : syst->particles()) {
+			for(auto neigh : bonded_neighbours[p->index()]) {
+				p->add_bonded_neighbour(syst->particle_by_id(neigh));
+			}
 		}
 	}
 
