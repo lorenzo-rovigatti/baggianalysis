@@ -331,7 +331,7 @@ class TestManager(object):
         Logger.log("Test summary:\n\tPassed/Total: %d/%d\n" % (n_passed, n_tests), Logger.RESULTS, "\n")
     
         if n_tests != n_passed or n_errors > 0:
-            Logger.log("Not all tests passed successfully", Logger.CRITICAL)
+            Logger.log("Not all tests have passed successfully", Logger.CRITICAL)
     
 def main():
     def print_usage():
