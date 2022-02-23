@@ -43,6 +43,12 @@ public:
 	 */
 	std::vector<int> heads;
 
+	/**
+	 * @brief Add a particle to the cells
+	 *
+	 * @param p
+	 * @param next_idx
+	 */
 	void add_particle(std::shared_ptr<Particle> p, size_t next_idx);
 
 	/**
@@ -81,9 +87,20 @@ public:
 	 */
 	const std::vector<std::vector<glm::ivec3>> &cell_shifts() const;
 
+	/**
+	 * @brief Check whether the given position is closer than the given cutoff to any particle indexed in the cells.
+	 * @param particles
+	 * @param pos
+	 * @param cutoff
+	 * @return
+	 */
+	bool is_overlap(const std::vector<std::shared_ptr<Particle>> &particles, const vec3 &pos, double cutoff) const;
+
 private:
-	vec3 _curr_box;
 	bool _init_shifts;
+	vec3 _curr_box;
+	vec3 _cell_size;
+	double _smallest_cell_size;
 	std::vector<std::vector<glm::ivec3>> _cell_shifts;
 };
 

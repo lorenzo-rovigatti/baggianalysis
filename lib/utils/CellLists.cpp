@@ -47,6 +47,8 @@ void CellLists::init_cells(const std::vector<std::shared_ptr<Particle>> &particl
 	_cell_shifts.clear();
 
 	N_cells_side = glm::floor(box / rc);
+	_cell_size = box / vec3(N_cells_side);
+	_smallest_cell_size = glm::min(glm::min(_cell_size[0], _cell_size[1]), _cell_size[2]);
 	for(int i = 0; i < 3; i++) {
 		// if shifts are required, everything becomes easier if the number of cells per side is odd
 		if(_init_shifts && ( N_cells_side[i] % 2) == 0) {
@@ -108,6 +110,40 @@ const std::vector<std::vector<glm::ivec3>> &CellLists::cell_shifts() const {
 	return _cell_shifts;
 }
 
+bool CellLists::is_overlap(const std::vector<std::shared_ptr<Particle>> &particles, const vec3 &pos, double cutoff) const {
+	int largest_order = std::ceil(cutoff / _smallest_cell_size);
+
+	double cutoff_sqr = SQR(cutoff);
+	auto p_cell = get_cell(pos);
+	for(int order = 0; order <= largest_order; order++) {
+		for(auto shift : cell_shifts()[order]) {
+			auto cell = p_cell + shift;
+			cell[0] = (cell[0] + N_cells_side[0]) % N_cells_side[0];
+			cell[1] = (cell[1] + N_cells_side[1]) % N_cells_side[1];
+			cell[2] = (cell[2] + N_cells_side[2]) % N_cells_side[2];
+			int cell_idx = cell[0] + N_cells_side[0] * (cell[1] + cell[2] * N_cells_side[1]);
+
+			int current = heads[cell_idx];
+			while(current != -1) {
+				auto q = particles[current];
+
+				vec3 distance = pos - q->position();
+				// periodic boundary conditions
+				distance -= glm::round(distance / _curr_box) * _curr_box;
+				double distance_sqr = glm::dot(distance, distance);
+
+				if(distance_sqr < cutoff_sqr) {
+					return true;
+				}
+
+				current = next[current];
+			}
+		}
+	}
+
+	return false;
+}
+
 #ifdef PYTHON_BINDINGS
 
 void export_CellLists(py::module &m) {
@@ -146,6 +182,38 @@ box : numpy.ndarray
 	The sizes of the box edges.
 rc : float
 	The smallest size of the cells.
+)pbdoc");
+
+	cells.def("get_cell", &CellLists::get_cell, py::arg("pos"), R"pbdoc(
+Return the cell corresponding to the given position. 
+
+Parameters
+----------
+pos : numpy.ndarray
+	The position whose corresponding cell should be returned.
+
+Returns
+-------
+np.ndarray
+    The three integer coordinates of the cell corresponding to the given position.
+)pbdoc");
+
+	cells.def("is_overlap", &CellLists::is_overlap, py::arg("particles"), py::arg("pos"), py::arg("cutoff"), R"pbdoc(
+Check whether the given position is closer than the given cutoff to any particle indexed in the cells.
+
+Parameters
+----------
+particles : List(:class:`Particle`)
+	.The particles used to build the cells
+pos : numpy.ndarray
+	The position to be checked.
+cutoff : float
+	The cutoff to be used in the computation.
+
+Returns
+-------
+bool
+	True if there is an overlap, False otherwise.
 )pbdoc");
 
 }
