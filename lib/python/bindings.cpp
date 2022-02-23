@@ -51,6 +51,8 @@
 #include "../trajectories/FullTrajectory.h"
 #include "../trajectories/LazyTrajectory.h"
 
+#include "../utils/CellLists.h"
+
 #include "../python_defs.h"
 
 PYBIND11_MODULE(core, m) {
@@ -112,4 +114,6 @@ PYBIND11_MODULE(core, m) {
 	ba::export_FixedNumberFinder(m);
 	ba::export_CutoffFinder(m);
 	ba::export_SANNFinder(m);
+
+	ba::export_CellLists(m);
 }

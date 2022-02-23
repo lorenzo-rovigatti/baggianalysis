@@ -21,7 +21,20 @@ CellLists::~CellLists() {
 
 }
 
-void CellLists::init_cells(std::vector<std::shared_ptr<Particle>> particles, const vec3 &box, double rc) {
+void CellLists::add_particle(std::shared_ptr<Particle> p, size_t next_idx) {
+	if(next_idx > next.size()) {
+		if(next.size() == next.capacity()) {
+			next.reserve(next.capacity() * 2);
+		}
+		next.resize(next.size() + 1, -1);
+	}
+
+	int cell_idx = get_cell_index(p->position());
+	next[next_idx] = heads[cell_idx];
+	heads[cell_idx] = next_idx;
+}
+
+void CellLists::init_cells(const std::vector<std::shared_ptr<Particle>> &particles, const vec3 &box, double rc) {
 	_curr_box = box;
 
 	if(box.x <= 0. || box.y <= 0. || box.z <= 0.) {
@@ -44,14 +57,14 @@ void CellLists::init_cells(std::vector<std::shared_ptr<Particle>> particles, con
 		}
 	}
 	int N_cells = N_cells_side[0] * N_cells_side[1] * N_cells_side[2];
+	// this wastes a bit of memory but makes subsequent additions less expensive
+	next.reserve(particles.size() * 2);
 	next.resize(particles.size(), -1);
 	heads.resize(N_cells, -1);
 
 	for(size_t i = 0; i < particles.size(); i++) {
 		auto p = particles[i];
-		int cell_idx = get_cell_index(p->position());
-		next[i] = heads[cell_idx];
-		heads[cell_idx] = i;
+		add_particle(p, i);
 	}
 
 	// if the user asked for it, here we generate lists of all possible shifts according to their order (the shell around the central cell they belong to)
@@ -94,5 +107,49 @@ const std::vector<std::vector<glm::ivec3>> &CellLists::cell_shifts() const {
 	}
 	return _cell_shifts;
 }
+
+#ifdef PYTHON_BINDINGS
+
+void export_CellLists(py::module &m) {
+	py::class_<CellLists, std::shared_ptr<CellLists>> cells(m, "CellLists", R"pbdoc(
+A data structure to manage cell lists of particles in a cubic box.
+)pbdoc");
+
+	cells.def(py::init<bool>(), py::arg("init_shifts"), R"pbdoc(
+The constructor takes one mandatory arguments.
+
+Parameters
+----------
+    init_shifts : bool
+        Initialise the cell shifts. Defaults to False.
+)pbdoc");
+
+	cells.def("add_particle", &CellLists::add_particle, py::arg("p"), py::arg("next_idx"), R"pbdoc(
+Add a particle to the cells.
+
+Parameters
+----------
+p : :class:`Particle`
+	The particle to be added.
+next_idx: int
+	The id used to index the particle internally. In most cases this is just the index of the particle.
+)pbdoc");
+
+	cells.def("init_cells", &CellLists::init_cells, py::arg("particles"), py::arg("box"), py::arg("rc"), R"pbdoc(
+Add a particle to the cells.
+
+Parameters
+----------
+particles : List(:class:`Particle`)
+	The particles that will be used to build the cells.
+box : numpy.ndarray
+	The sizes of the box edges.
+rc : float
+	The smallest size of the cells.
+)pbdoc");
+
+}
+
+#endif
 
 } /* namespace ba */

@@ -26,7 +26,6 @@ void parse_microgel_bondfile(std::string filename, std::shared_ptr<Topology> top
 	std::getline(input, line);
 	std::getline(input, line);
 
-	int curr_idx = 0;
 	while(input.good()) {
 		std::getline(input, line);
 		utils::trim(line);
@@ -40,27 +39,22 @@ void parse_microgel_bondfile(std::string filename, std::shared_ptr<Topology> top
 				// the first line contains idx n_neighs
 				p_idx = utils::lexical_cast<int>(split[0]) - 1;
 				n_neighs = utils::lexical_cast<uint>(split[1]);
-			}
-			else {
-				std::string error = fmt::format("The '{}' line found in the microgel bondfile should have two fields, not {}", line, split.size());
-				throw std::runtime_error(error);
-			}
 
-			// the second line contains the indexes of all neighbours
-			std::getline(input, line);
-			if(n_neighs > 0) {
-				split = utils::split(utils::trim_copy(line));
-				if(split.size() != n_neighs) {
-					std::string error = fmt::format("Particle {} seems to have {} neighbours, should be {}", p_idx, split.size(), n_neighs);
-					throw std::runtime_error(error);
-				}
+				// the second line contains the indexes of all neighbours
+				std::getline(input, line);
+				if(n_neighs > 0) {
+					split = utils::split(utils::trim_copy(line));
+					if(split.size() != n_neighs) {
+						std::string error = fmt::format("Particle {} seems to have {} neighbours, should be {}", p_idx, split.size(), n_neighs);
+						throw std::runtime_error(error);
+					}
 
-				for(uint i = 0; i < split.size(); i++) {
-					int q_idx = utils::lexical_cast<int>(split[i]) - 1;
-					topology->add_bond(p_idx, q_idx);
+					for(uint i = 0; i < split.size(); i++) {
+						int q_idx = utils::lexical_cast<int>(split[i]) - 1;
+						topology->add_bond(p_idx, q_idx);
+					}
 				}
 			}
-			curr_idx++;
 		}
 	}
 

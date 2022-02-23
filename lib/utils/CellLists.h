@@ -43,6 +43,8 @@ public:
 	 */
 	std::vector<int> heads;
 
+	void add_particle(std::shared_ptr<Particle> p, size_t next_idx);
+
 	/**
 	 * @brief Initialise the cell machinery for the given particles, box size and cell edge length
 	 *
@@ -52,7 +54,7 @@ public:
 	 * @param box the length of the box's sides
 	 * @param rc the minimum size of a cell's edge
 	 */
-	void init_cells(std::vector<std::shared_ptr<Particle>> particles, const vec3 &box, double rc);
+	void init_cells(const std::vector<std::shared_ptr<Particle>> &particles, const vec3 &box, double rc);
 
 	/**
 	 * @brief Returns the index of the cell associated to the given position.
@@ -84,6 +86,12 @@ private:
 	bool _init_shifts;
 	std::vector<std::vector<glm::ivec3>> _cell_shifts;
 };
+
+#ifdef PYTHON_BINDINGS
+
+void export_CellLists(py::module &m);
+
+#endif
 
 } /* namespace ba */
 
