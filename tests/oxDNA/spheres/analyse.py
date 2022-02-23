@@ -16,3 +16,6 @@ with open("csd.dat", "w") as f:
     histogram = Counter(sizes)
     for k, v in sorted(histogram.items()):
         print(k, v, file=f)
+
+exporter = ba.Cogli1Exporter()
+exporter.write(system, "configuration.mgl")
