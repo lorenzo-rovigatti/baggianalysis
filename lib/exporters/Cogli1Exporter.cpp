@@ -36,8 +36,6 @@ Cogli1Exporter::Cogli1Exporter(Cogli1Mapper mapper) {
 							pos[0], pos[1], pos[2], c_p.size / 3, c_p.color, axis[0], axis[1], axis[2]);
 				}
 			}
-
-			output += "\n";
 		}
 		return output;
 	};
