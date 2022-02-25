@@ -100,7 +100,7 @@ private:
 	bool _init_shifts;
 	vec3 _curr_box;
 	vec3 _cell_size;
-	double _smallest_cell_size;
+	double _smallest_cell_size = -1.0;
 	std::vector<std::vector<glm::ivec3>> _cell_shifts;
 };
 
