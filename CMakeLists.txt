@@ -19,6 +19,8 @@ add_subdirectory(extern/spdlog)
 set_target_properties(spdlog PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 IF(Python)
+	# tell pybind11 to use python3
+	set(PYBIND11_PYTHON_VERSION 3 CACHE STRING "Python version to use for compiling modules")
 	ADD_SUBDIRECTORY(extern/pybind11)
 	ADD_DEFINITIONS(-DPYTHON_BINDINGS)
 	
