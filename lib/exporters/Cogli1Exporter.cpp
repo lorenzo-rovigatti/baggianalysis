@@ -64,23 +64,23 @@ void Cogli1Exporter::_write_system_to_stream(std::shared_ptr<System> system, std
 
 void export_Cogli1Exporter(py::module &m) {
 	py::class_<Cogli1Particle> particle(m, "Cogli1Particle", R"pbdoc(
-        A utility class used by :class:`Cogli1Exporter` to customise its output.
+        A utility class that encapsulates a sphere. It is used by :class:`Cogli1Exporter` to customise its output.
 	)pbdoc");
 
 	particle.def(py::init<>(), R"pbdoc(
-		By default, the particle is visible, has a size of 0.5 and a red color.
+		By default, the sphere is visible, has a size of 0.5 and a red color.
 	)pbdoc");
 
 	particle.def_readwrite("show", &Cogli1Particle::show, R"pbdoc(
-        bool : If true, the particle will be printed by the exporter. Defaults to True.
+        bool : If true, the sphere will be printed by the exporter. Defaults to True.
 	)pbdoc");
 
 	particle.def_readwrite("size", &Cogli1Particle::size, R"pbdoc(
-		float : The size of the particle. For spheres this corresponds to the radius. Defaults to 0.5.
+		float : The size of the sphere. For spheres this corresponds to the radius. Defaults to 0.5.
 	)pbdoc");
 
 	particle.def_readwrite("color", &Cogli1Particle::color, R"pbdoc(
-		str : The color of the particle. It can be a name ("red") or an RGB string ("1,0,0"). Defaults to "red".
+		str : The color of the sphere. It can be a name ("red") or an RGB string ("1,0,0"). Defaults to "red".
 	)pbdoc");
 
 	py::class_<Cogli1Exporter, BaseExporter, std::shared_ptr<Cogli1Exporter>> exporter(m, "Cogli1Exporter", R"pbdoc(
@@ -97,7 +97,7 @@ The default constructor makes the exporter print each particle as a red sphere o
 
 	// docstrings of overloaded constructors need to be unindented or they won't be formatted correctly by sphinx
 	exporter.def(py::init<Cogli1Mapper>(), py::arg("mapper"), R"pbdoc(
-This constructor takes as a parameter a callable that maps each particle into a :class:`Cogli1Particle` that will be 
+This constructor takes as a parameter a callable that maps each particle into a :class:`Cogli1Particle` sphere that will be 
 interpreted by the exporter and printed in cogli1 format.
 
 An example of such a callable is the following::
