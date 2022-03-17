@@ -12,7 +12,9 @@ This module contains some utility functions/classes that are directly written in
     :nosignatures:
 
     print_bondfile
+    print_detailed_polymer_topology
     
 .. autofunction:: print_bondfile
+.. autofunction:: print_detailed_polymer_topology
     
 ```

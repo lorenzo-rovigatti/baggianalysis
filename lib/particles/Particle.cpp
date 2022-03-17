@@ -336,6 +336,16 @@ bool
     True if ``q`` is a neighbour, False otherwise.
 	)pbdoc");
 
+	particle.def("shift", &Particle::shift, py::arg("delta"), R"pbdoc(
+Add ``delta`` to the particle coordinates.
+
+Parameters
+----------
+delta : numpy.ndarray
+    The shift to be added to the particle's coordinates. 
+
+)pbdoc");
+
 	particle.def_property_readonly("molecule", &Particle::molecule, R"pbdoc(
 		The molecule to which this particle belongs.
 
