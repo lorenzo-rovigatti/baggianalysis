@@ -1,4 +1,20 @@
-v. 0.4.0
+v. 0.5.0
+	- Add heuristics to help determining the file type in the LAMMPS -> cogli1 converter
+	- Add an observable to compute the gyration radius of molecules (GyrationRadius)
+	- Reorganise the test folder and add new tests
+	- Add the `select` method to obtain a list of particles from a set or a System
+	- Add a way to automatically set up the topology in oxDNA-based parsers
+	- Add support for Groups to the cogli exporter
+	- Add bindings for add a method to check for overlaps to the CellLists class
+	- Add `print_detailed_polymer_topology` to the utils module
+	- Export more Topology methods
+	- Add documentation to many undocumented bindings
+	- Bugfixing
+		- Fix a bug that affected oxDNA parsers that didn't set bonded neighbours
+		- Fix the behaviour of the `reset()` method of two observables
+		- Fix a bug that prevented compilation when both python2 and 3 are present
+
+v. 0.4.0 [8d97eb3]
 	- Add a few converter executables (oxDNA -> cogli, oxDNA -> LAMMPS, LAMMPS -> cogli)
 	- Add the new `converters` module, which contains utility functions that can be used to easily convert between different formats
 	- Add the new `traj` module, which contains some utility functions that speed up the creation of trajectory objects
