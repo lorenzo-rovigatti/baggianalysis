@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Particle-related classes &mdash; baggianalysis 0.3.2.dev12+g8d97eb3 documentation</title>
+  <title>Particle-related classes &mdash; baggianalysis 0.5.1.dev1+g8d19a7a documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.3.2.dev12+g8d97eb3
+                0.5.1.dev1+g8d19a7a
               </div>
             
           
@@ -549,6 +549,17 @@ list of interaction centres or the components of the orientation matrix.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="baggianalysis.core.Particle.shift">
+<code class="sig-name descname">shift</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.Particle</em>, <em class="sig-param">delta: glm::tvec3&lt;scalar</em>, <em class="sig-param">P&gt;</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.Particle.shift" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add <code class="docutils literal notranslate"><span class="pre">delta</span></code> to the particle coordinates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>delta</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – The shift to be added to the particle’s coordinates.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="baggianalysis.core.Particle.type">
 <em class="property">property </em><code class="sig-name descname">type</code><a class="headerlink" href="#baggianalysis.core.Particle.type" title="Permalink to this definition">¶</a></dt>
 <dd><p>The particle’s type.</p>
@@ -705,6 +716,28 @@ list of interaction centres or the components of the orientation matrix.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>p_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the particle to be removed from the set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.ParticleSet.select">
+<code class="sig-name descname">select</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet">baggianalysis.core.ParticleSet</a></span></em>, <em class="sig-param"><span class="n">predicate</span><span class="p">:</span> <span class="n">Callable<span class="p">[</span><span class="p">[</span><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a><span class="p">]</span><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a><span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.ParticleSet.select" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all those particles for which the given predicate evaluates to True.</p>
+<p>Here is an example that creates a list of particles having a non-negative position along the x axis:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">selected</span> <span class="o">=</span> <span class="n">system</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that the returned list contains references to and not copies of the particles stored in this set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>predicate</strong> (<em>callable</em>) – A callable that takes a particle and returns True if the particle should be returned, False otherwise.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The list of particles for which the predicate evaluates to True.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List(<a class="reference internal" href="#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>)</p>
 </dd>
 </dl>
 </dd></dl>

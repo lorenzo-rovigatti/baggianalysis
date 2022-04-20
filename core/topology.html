@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Topology-related classes and utility functions &mdash; baggianalysis 0.3.2.dev12+g8d97eb3 documentation</title>
+  <title>Topology-related classes and utility functions &mdash; baggianalysis 0.5.1.dev1+g8d19a7a documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.3.2.dev12+g8d97eb3
+                0.5.1.dev1+g8d19a7a
               </div>
             
           
@@ -201,7 +201,13 @@
 <tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.parse_microgel_bondfile" title="baggianalysis.core.parse_microgel_bondfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_microgel_bondfile</span></code></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.parse_LAMMPS_topology" title="baggianalysis.core.parse_LAMMPS_topology"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_LAMMPS_topology</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.parse_polymer_bondfile" title="baggianalysis.core.parse_polymer_bondfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_polymer_bondfile</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.parse_LAMMPS_topology" title="baggianalysis.core.parse_LAMMPS_topology"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_LAMMPS_topology</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.topology_from_LAMMPS_data_file" title="baggianalysis.core.topology_from_LAMMPS_data_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">topology_from_LAMMPS_data_file</span></code></a></p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -230,47 +236,112 @@ using a constructor that takes as its only parameter the <a class="reference int
 </div>
 <dl class="py method">
 <dt id="baggianalysis.core.Topology.add_angle">
-<code class="sig-name descname">add_angle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Topology" title="baggianalysis.core.Topology">baggianalysis.core.Topology</a></span></em>, <em class="sig-param"><span class="n">p</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em>, <em class="sig-param"><span class="n">q</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em>, <em class="sig-param"><span class="n">r</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.Topology.add_angle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds an angle formed by a triplet of particles.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the first particle of the triplet.</p></li>
-<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the second (central) particle of the triplet.</p></li>
-<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the third (and last) particle of the triplet.</p></li>
-</ul>
+<code class="sig-name descname">add_angle</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Topology.add_angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic">
+<li><p>add_angle(self: baggianalysis.core.Topology, p: int, q: int, r: int) -&gt; None</p>
+<blockquote>
+<div><p>Adds an angle formed by a triplet of particles.</p>
+<dl class="simple">
+<dt>p<span class="classifier">int</span></dt><dd><p>The index of the first particle of the triplet.</p>
+</dd>
+<dt>q<span class="classifier">int</span></dt><dd><p>The index of the second (central) particle of the triplet.</p>
+</dd>
+<dt>r<span class="classifier">int</span></dt><dd><p>The index of the third (and last) particle of the triplet.</p>
 </dd>
 </dl>
+</div></blockquote>
+</li>
+<li><p>add_angle(self: baggianalysis.core.Topology, angle_type: str, p: int, q: int, r: int) -&gt; None</p>
+<blockquote>
+<div><p>Adds a typed angle formed by a triplet of particles.</p>
+<dl class="simple">
+<dt>angle_type<span class="classifier">str</span></dt><dd><p>The type of the angle.</p>
+</dd>
+<dt>p<span class="classifier">int</span></dt><dd><p>The index of the first particle of the triplet.</p>
+</dd>
+<dt>q<span class="classifier">int</span></dt><dd><p>The index of the second (central) particle of the triplet.</p>
+</dd>
+<dt>r<span class="classifier">int</span></dt><dd><p>The index of the third (and last) particle of the triplet.</p>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+</ol>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.Topology.add_bond">
-<code class="sig-name descname">add_bond</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Topology" title="baggianalysis.core.Topology">baggianalysis.core.Topology</a></span></em>, <em class="sig-param"><span class="n">p</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em>, <em class="sig-param"><span class="n">q</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.Topology.add_bond" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a bond between a pair of particles.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the first particle of the pair.</p></li>
-<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the second particle of the pair.</p></li>
-</ul>
+<code class="sig-name descname">add_bond</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Topology.add_bond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic">
+<li><p>add_bond(self: baggianalysis.core.Topology, p: int, q: int) -&gt; None</p>
+<blockquote>
+<div><p>Adds a bond between a pair of particles.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>p<span class="classifier">int</span></dt><dd><p>The index of the first particle of the pair.</p>
+</dd>
+<dt>q<span class="classifier">int</span></dt><dd><p>The index of the second particle of the pair.</p>
 </dd>
 </dl>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>add_bond(self: baggianalysis.core.Topology, bond_type: str, p: int, q: int) -&gt; None</p>
+<blockquote>
+<div><p>Adds a typed bond between a pair of particles.</p>
+<dl class="simple">
+<dt>bond_type<span class="classifier">str</span></dt><dd><p>The bond type.</p>
+</dd>
+<dt>p<span class="classifier">int</span></dt><dd><p>The index of the first particle of the pair.</p>
+</dd>
+<dt>q<span class="classifier">int</span></dt><dd><p>The index of the second particle of the pair.</p>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+</ol>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.Topology.add_dihedral">
-<code class="sig-name descname">add_dihedral</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Topology" title="baggianalysis.core.Topology">baggianalysis.core.Topology</a></span></em>, <em class="sig-param"><span class="n">p</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em>, <em class="sig-param"><span class="n">q</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em>, <em class="sig-param"><span class="n">r</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em>, <em class="sig-param"><span class="n">s</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.Topology.add_dihedral" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a dihedral formed by four particles.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the first particle.</p></li>
-<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the second particle.</p></li>
-<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the third particle.</p></li>
-<li><p><strong>s</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The index of the fourth particle.</p></li>
-</ul>
+<code class="sig-name descname">add_dihedral</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Topology.add_dihedral" title="Permalink to this definition">¶</a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic">
+<li><p>add_dihedral(self: baggianalysis.core.Topology, p: int, q: int, r: int, s: int) -&gt; None</p>
+<blockquote>
+<div><p>Adds a dihedral formed by four particles.</p>
+<dl class="simple">
+<dt>p<span class="classifier">int</span></dt><dd><p>The index of the first particle.</p>
+</dd>
+<dt>q<span class="classifier">int</span></dt><dd><p>The index of the second particle.</p>
+</dd>
+<dt>r<span class="classifier">int</span></dt><dd><p>The index of the third particle.</p>
+</dd>
+<dt>s<span class="classifier">int</span></dt><dd><p>The index of the fourth particle.</p>
 </dd>
 </dl>
+</div></blockquote>
+</li>
+<li><p>add_dihedral(self: baggianalysis.core.Topology, dihedral_type: str, p: int, q: int, r: int, s: int) -&gt; None</p>
+<blockquote>
+<div><p>Adds a typed dihedral formed by four particles.</p>
+<dl class="simple">
+<dt>dihedral_type<span class="classifier">str</span></dt><dd><p>The type of the dyhedral.</p>
+</dd>
+<dt>p<span class="classifier">int</span></dt><dd><p>The index of the first particle.</p>
+</dd>
+<dt>q<span class="classifier">int</span></dt><dd><p>The index of the second particle.</p>
+</dd>
+<dt>r<span class="classifier">int</span></dt><dd><p>The index of the third particle.</p>
+</dd>
+<dt>s<span class="classifier">int</span></dt><dd><p>The index of the fourth particle.</p>
+</dd>
+</dl>
+</div></blockquote>
+</li>
+</ol>
 </dd></dl>
 
 <dl class="py method">
@@ -449,8 +520,18 @@ operation is <strong>irreversible</strong>.</p>
 <dd></dd></dl>
 
 <dl class="py function">
+<dt id="baggianalysis.core.parse_polymer_bondfile">
+<code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">parse_polymer_bondfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></span></em>, <em class="sig-param"><span class="n">arg1</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Topology" title="baggianalysis.core.Topology">baggianalysis.core.Topology</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.parse_polymer_bondfile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt id="baggianalysis.core.parse_LAMMPS_topology">
 <code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">parse_LAMMPS_topology</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></span></em>, <em class="sig-param"><span class="n">arg1</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Topology" title="baggianalysis.core.Topology">baggianalysis.core.Topology</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.parse_LAMMPS_topology" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="baggianalysis.core.topology_from_LAMMPS_data_file">
+<code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">topology_from_LAMMPS_data_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#baggianalysis.core.Topology" title="baggianalysis.core.Topology">baggianalysis.core.Topology</a><a class="headerlink" href="#baggianalysis.core.topology_from_LAMMPS_data_file" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Observables &mdash; baggianalysis 0.3.2.dev12+g8d97eb3 documentation</title>
+  <title>Observables &mdash; baggianalysis 0.5.1.dev1+g8d19a7a documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.3.2.dev12+g8d97eb3
+                0.5.1.dev1+g8d19a7a
               </div>
             
           
@@ -371,6 +371,52 @@
 </dd></dl>
 
 <dl class="py class">
+<dt id="baggianalysis.core.GyrationRadius">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">GyrationRadius</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.GyrationRadius" title="baggianalysis.core.GyrationRadius">baggianalysis.core.GyrationRadius</a></span></em>, <em class="sig-param"><span class="n">compute_on_molecules</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.GyrationRadius" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<p>Compute the gyration radius of a system or the average gyration radius of the molecules contained in the system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>compute_on_molecules</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – If True, the final gyration radius will be computed as the average gyration radius of the molecules composing the system.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="baggianalysis.core.GyrationRadius.analyse_particle_set">
+<code class="sig-name descname">analyse_particle_set</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.GyrationRadius</em>, <em class="sig-param">p_set: baggianalysis.core.ParticleSet</em>, <em class="sig-param">box: glm::tvec3&lt;scalar</em>, <em class="sig-param">P&gt;</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.GyrationRadius.analyse_particle_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the gyration radius of the given <a class="reference internal" href="particles.html#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParticleSet</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_set</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.ParticleSet" title="baggianalysis.core.ParticleSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParticleSet</span></code></a>) – The object containing the input particles.</p></li>
+<li><p><strong>box</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.22)"><em>numpy.ndarray</em></a>) – The simulation box.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.GyrationRadius.analyse_system">
+<code class="sig-name descname">analyse_system</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.GyrationRadius" title="baggianalysis.core.GyrationRadius">baggianalysis.core.GyrationRadius</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.GyrationRadius.analyse_system" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.GyrationRadius.analyse_trajectory">
+<code class="sig-name descname">analyse_trajectory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.GyrationRadius" title="baggianalysis.core.GyrationRadius">baggianalysis.core.GyrationRadius</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="trajectories.html#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.GyrationRadius.analyse_trajectory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.GyrationRadius.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.GyrationRadius" title="baggianalysis.core.GyrationRadius">baggianalysis.core.GyrationRadius</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.GyrationRadius.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.GyrationRadius.result">
+<code class="sig-name descname">result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.GyrationRadius" title="baggianalysis.core.GyrationRadius">baggianalysis.core.GyrationRadius</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a><a class="headerlink" href="#baggianalysis.core.GyrationRadius.result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="baggianalysis.core.FormFactor">
 <em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">FormFactor</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.FormFactor" title="baggianalysis.core.FormFactor">baggianalysis.core.FormFactor</a></span></em>, <em class="sig-param"><span class="n">q_modules</span><span class="p">:</span> <span class="n">List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a><span class="p">]</span></span></em>, <em class="sig-param"><span class="n">q_repetitions</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em>, <em class="sig-param"><span class="n">compute_on_molecules</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.FormFactor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
@@ -434,6 +480,34 @@ As a result, the size of the simulation box does not set the smallest wave vecto
 </dd>
 </dl>
 </dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="baggianalysis.core.MSD">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">MSD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.MSD" title="baggianalysis.core.MSD">baggianalysis.core.MSD</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em>, <em class="sig-param"><span class="n">arg1</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.MSD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<p>Compute the <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_squared_displacement">mean-squared displacement</a> of a system.</p>
+<dl class="py method">
+<dt id="baggianalysis.core.MSD.analyse_and_print">
+<code class="sig-name descname">analyse_and_print</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.MSD" title="baggianalysis.core.MSD">baggianalysis.core.MSD</a></span></em>, <em class="sig-param"><span class="n">trajectory</span><span class="p">:</span> <span class="n"><a class="reference internal" href="trajectories.html#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em>, <em class="sig-param"><span class="n">output_file</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.MSD.analyse_and_print" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyse the trajectory and print the MSD directly to the given file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.MSD.analyse_trajectory">
+<code class="sig-name descname">analyse_trajectory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.MSD" title="baggianalysis.core.MSD">baggianalysis.core.MSD</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="trajectories.html#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.MSD.analyse_trajectory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.MSD.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.MSD" title="baggianalysis.core.MSD">baggianalysis.core.MSD</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.MSD.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.MSD.result">
+<code class="sig-name descname">result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.MSD" title="baggianalysis.core.MSD">baggianalysis.core.MSD</a></span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.MSD.result" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -515,34 +589,6 @@ for <code class="docutils literal notranslate"><span class="pre">N_attempts</spa
 <dl class="py method">
 <dt id="baggianalysis.core.PoreSize.result">
 <code class="sig-name descname">result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.PoreSize" title="baggianalysis.core.PoreSize">baggianalysis.core.PoreSize</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.PoreSize.result" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt id="baggianalysis.core.MSD">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">MSD</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.MSD" title="baggianalysis.core.MSD">baggianalysis.core.MSD</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></span></em>, <em class="sig-param"><span class="n">arg1</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.MSD" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
-<p>Compute the <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_squared_displacement">mean-squared displacement</a> of a system.</p>
-<dl class="py method">
-<dt id="baggianalysis.core.MSD.analyse_and_print">
-<code class="sig-name descname">analyse_and_print</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.MSD" title="baggianalysis.core.MSD">baggianalysis.core.MSD</a></span></em>, <em class="sig-param"><span class="n">trajectory</span><span class="p">:</span> <span class="n"><a class="reference internal" href="trajectories.html#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em>, <em class="sig-param"><span class="n">output_file</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.MSD.analyse_and_print" title="Permalink to this definition">¶</a></dt>
-<dd><p>Analyse the trajectory and print the MSD directly to the given file.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="baggianalysis.core.MSD.analyse_trajectory">
-<code class="sig-name descname">analyse_trajectory</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.MSD" title="baggianalysis.core.MSD">baggianalysis.core.MSD</a></span></em>, <em class="sig-param"><span class="n">arg0</span><span class="p">:</span> <span class="n"><a class="reference internal" href="trajectories.html#baggianalysis.core.BaseTrajectory" title="baggianalysis.core.BaseTrajectory">baggianalysis.core.BaseTrajectory</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.MSD.analyse_trajectory" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="baggianalysis.core.MSD.reset">
-<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.MSD" title="baggianalysis.core.MSD">baggianalysis.core.MSD</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)">None</a><a class="headerlink" href="#baggianalysis.core.MSD.reset" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="baggianalysis.core.MSD.result">
-<code class="sig-name descname">result</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.MSD" title="baggianalysis.core.MSD">baggianalysis.core.MSD</a></span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.MSD.result" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
