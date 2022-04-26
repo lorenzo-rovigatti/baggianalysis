@@ -1,8 +1,8 @@
 # Writing a parser
 
-A new baggianalysis parser should inherit from [BaseParser](../core/parsers.html#baggianalysis.core.BaseParser) and overload its [_parse_file(str)](../core/parsers.html#baggianalysis.core.BaseParser._parse_file) method, which takes the name of the configuration file as its only parameter. The new method should initialise a new [System](../core/particles.html#baggianalysis.core.System) and add [Particles](../core/particles.html#baggianalysis.core.Particle) to it. The parser should also set the [box](../core/particles.html#baggianalysis.core.System.box) and the [timestep](../core/particles.html#baggianalysis.core.System.time), but this is not mandatory. 
+A new baggianalysis parser should inherit from {class}`~baggianalysis.core.BaseParser` and overload its {meth}`~baggianalysis.core.BaseParser._parse_file` method, which takes the name of the configuration file as its only parameter. The new method should initialise a new {class}`~baggianalysis.core.System` and add {class}`~baggianalysis.core.Particle` to it. The parser should also set the {attr}`~baggianalysis.core.System.box` and the {attr}`~baggianalysis.core.System.time`, but this is not mandatory. 
 
-**Nota Bene:** custom Python parsers cannot be used to generate trajectories from trajectory files through the [initialise_from_trajectory_file()](../core/trajectories.html#baggianalysis.core.BaseTrajectory.initialise_from_trajectory_file) method.
+**Nota Bene:** custom Python parsers cannot be used to generate trajectories from trajectory files through the {meth}`~baggianalysis.core.BaseTrajectory.initialise_from_trajectory_file` method.
 
 We now write a parser that takes a GROMACS dump file of a [TIP4P/ICE](http://www.sklogwiki.org/SklogWiki/index.php/TIP4P/Ice_model_of_water) system. The system is composed of water molecules made of 4 atoms (one oxygen, two hydrogens and one additional charge site). A configuration file has the following format:
 
@@ -26,33 +26,35 @@ In this particular file, the time at which the configuration was printed is not 
 
 Here is the code for the new parser:
 
-	class Tip4pIceParser(ba.BaseParser):
-	    def __init__(self):
-	        ba.BaseParser.__init__(self)
-	    
-	    def _parse_file(self, conf):
-	        syst = ba.System()
-	        
-	        with open(conf) as f:
-	            # we use the first line to check whether we reached the EOF
-	            first_line = f.readline()
-	            
-	            if len(first_line) == 0:
-	                return None
-	            
-	            syst.time = int(conf.split("t")[1])
-	            
-	            N_atoms = int(f.readline().strip())
-	            for _ in range(N_atoms):
-	                line = f.readline()
-	                spl = [x.strip() for x in line.split()]
-	                if spl[1] == "OW1":
-	                    pos = [float(x) for x in spl[3:6]]
-	                    particle = ba.Particle(syst.available_index(), "0", pos)
-	                    syst.add_particle(particle)
-	                    
-	            syst.box = [float(x.strip()) for x in f.readline().split()]
-	            
-	        return syst
+```python
+class Tip4pIceParser(ba.BaseParser):
+    def __init__(self):
+        ba.BaseParser.__init__(self)
+    
+    def _parse_file(self, conf):
+        syst = ba.System()
+        
+        with open(conf) as f:
+            # we use the first line to check whether we reached the EOF
+            first_line = f.readline()
+            
+            if len(first_line) == 0:
+                return None
+            
+            syst.time = int(conf.split("t")[1])
+            
+            N_atoms = int(f.readline().strip())
+            for _ in range(N_atoms):
+                line = f.readline()
+                spl = [x.strip() for x in line.split()]
+                if spl[1] == "OW1":
+                    pos = [float(x) for x in spl[3:6]]
+                    particle = ba.Particle(syst.available_index(), "0", pos)
+                    syst.add_particle(particle)
+                    
+            syst.box = [float(x.strip()) for x in f.readline().split()]
+            
+        return syst
+```
 
-Parsers are responsible for constructing valid [Particles](../core/particles.html#baggianalysis.core.Particle), which also means giving new particles valid indexes. Sometimes the indexes are stored in the file to be parsed, but if this is not the case, or if the user does not care about setting indexes manually, parsers can use the [System](../core/particles.html#baggianalysis.core.System)'s utility function `available_index()` to obtain a valid index. 
+Parsers are responsible for constructing valid {class}`~baggianalysis.core.Particle`s, which also means giving new particles valid indexes. Sometimes the indexes are stored in the file to be parsed, but if this is not the case, or if the user does not care about setting indexes manually, parsers can use the {class}`~baggianalysis.core.System`'s utility function {meth}`~baggianalysis.core.System.available_index()` to obtain a valid index. 

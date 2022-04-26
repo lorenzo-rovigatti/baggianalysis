@@ -4,9 +4,11 @@ Filters take a system as input and generate a new system according to some user-
 
 Once a filter has been created, it can be applied to single systems like this::
 
-    new_system = my_filter.filter(old_system)
+```python
+new_system = my_filter.filter(old_system)
+```
     
-In addition, filters can be applied to whole trajectories by using the BaseTrajectory's [add_filter()](../core/trajectories.html#baggianalysis.core.BaseTrajectory.add_filter) method before these are parsed.
+In addition, filters can be applied to whole trajectories by using BaseTrajectory's {meth}`~baggianalysis.core.BaseTrajectory.add_filter` method before these are parsed.
 
 ```eval_rst
 .. currentmodule:: baggianalysis.core
