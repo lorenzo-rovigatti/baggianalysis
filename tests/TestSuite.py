@@ -10,8 +10,6 @@ import difflib
 
 from multiprocessing import Lock
 
-SUFFIX_INPUT = "_input"
-SUFFIX_COMPARE = "_compare"
 SUFFIX_LOG = "_log.dat"
 
 def get_log_name(level):

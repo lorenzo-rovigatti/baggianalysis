@@ -42,6 +42,11 @@ void CellLists::init_cells(const std::vector<std::shared_ptr<Particle>> &particl
 		throw std::runtime_error(error);
 	}
 
+	if(particles.size() == 0) {
+		std::string error = fmt::format("Cannot build cells: the particle vector cannot be empty");
+		throw std::runtime_error(error);
+	}
+
 	next.clear();
 	heads.clear();
 	_cell_shifts.clear();
@@ -112,11 +117,15 @@ const std::vector<std::vector<glm::ivec3>> &CellLists::cell_shifts() const {
 
 bool CellLists::is_overlap(const std::vector<std::shared_ptr<Particle>> &particles, const vec3 &pos, double cutoff) const {
 	int largest_order = std::ceil(cutoff / _smallest_cell_size);
+	auto shifts = cell_shifts();
+	if((uint) largest_order >= shifts.size()) {
+		largest_order = shifts.size() - 1;
+	}
 
 	double cutoff_sqr = SQR(cutoff);
 	auto p_cell = get_cell(pos);
 	for(int order = 0; order <= largest_order; order++) {
-		for(auto shift : cell_shifts()[order]) {
+		for(auto shift : shifts[order]) {
 			auto cell = p_cell + shift;
 			cell[0] = (cell[0] + N_cells_side[0]) % N_cells_side[0];
 			cell[1] = (cell[1] + N_cells_side[1]) % N_cells_side[1];
@@ -172,7 +181,7 @@ next_idx: int
 )pbdoc");
 
 	cells.def("init_cells", &CellLists::init_cells, py::arg("particles"), py::arg("box"), py::arg("rc"), R"pbdoc(
-Add a particle to the cells.
+Initial the cells data structures.
 
 Parameters
 ----------
@@ -204,7 +213,7 @@ Check whether the given position is closer than the given cutoff to any particle
 Parameters
 ----------
 particles : List(:class:`Particle`)
-	.The particles used to build the cells
+	The particles used to build the cells
 pos : numpy.ndarray
 	The position to be checked.
 cutoff : float

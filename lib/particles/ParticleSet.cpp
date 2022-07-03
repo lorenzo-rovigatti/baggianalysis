@@ -25,6 +25,48 @@ ParticleSet::~ParticleSet() {
 
 }
 
+std::shared_ptr<ParticleSet> ParticleSet::make_copy(int indexes_shift) {
+	std::shared_ptr<ParticleSet> new_set = std::make_shared<ParticleSet>();
+
+	// we first copy the individual particle details (but no bonds, dihedrals, etc.)
+	for(auto p : _particles) {
+		auto new_p = p->make_copy(p->index() + indexes_shift);
+		new_set->add_particle(new_p);
+	}
+
+	// now we can update the topology
+	for(uint i = 0; i < N(); i++) {
+		auto original_p = this->particles()[i];
+		auto new_p = new_set->particles()[i];
+
+		// bonds
+		for(auto b: original_p->bonded_neighbours()) {
+			int other_new_index = b.other()->index() + indexes_shift;
+			auto other = new_set->particle_by_id(other_new_index);
+			new_p->add_bonded_neighbour(b.type, other);
+		}
+
+		// angles
+		for(auto a: original_p->bonded_angles()) {
+			auto a0 = new_set->particle_by_id(a[0]->index() + indexes_shift);
+			auto a1 = new_set->particle_by_id(a[1]->index() + indexes_shift);
+			auto a2 = new_set->particle_by_id(a[2]->index() + indexes_shift);
+			new_p->add_bonded_angle(a.type, a0, a1, a2);
+		}
+
+		// dihedrals
+		for(auto d: original_p->bonded_angles()) {
+			auto d0 = new_set->particle_by_id(d[0]->index() + indexes_shift);
+			auto d1 = new_set->particle_by_id(d[1]->index() + indexes_shift);
+			auto d2 = new_set->particle_by_id(d[2]->index() + indexes_shift);
+			auto d3 = new_set->particle_by_id(d[3]->index() + indexes_shift);
+			new_p->add_bonded_dihedral(d.type, d0, d1, d2, d3);
+		}
+	}
+
+	return new_set;
+}
+
 std::string ParticleSet::name() const {
 	return _name;
 }
@@ -92,6 +134,15 @@ vec3 ParticleSet::com() const {
 	return com;
 }
 
+void ParticleSet::set_com(vec3 new_com) {
+	vec3 curr_com = com();
+	vec3 shift = new_com - curr_com;
+
+	for(auto p : _particles) {
+		p->shift(shift);
+	}
+}
+
 vec3 ParticleSet::velocity() const {
 	vec3 v(0., 0., 0.);
 	for(auto p : _particles) {
@@ -110,11 +161,11 @@ const std::vector<std::shared_ptr<Particle>> &ParticleSet::particles() const {
 
 void ParticleSet::add_particle(std::shared_ptr<Particle> p) {
 	if(p->index() == Particle::invalid_index) {
-		throw std::runtime_error("Particles with invalid indexes cannot be added to a System");
+		throw std::runtime_error("Particles with invalid indexes cannot be added to a ParticleSet");
 	}
 
 	if(_particles_by_id.count(p->index()) > 0) {
-		std::string error = fmt::format("A particle with index '{}' has already been added to this System", p->index());
+		std::string error = fmt::format("A particle with index '{}' has already been added to this ParticleSet", p->index());
 		throw std::runtime_error(error);
 	}
 
@@ -175,6 +226,15 @@ void export_ParticleSet(py::module &m) {
 
 	particle_set.def(py::init<>(), "The constructor takes no parameters.");
 
+	particle_set.def("make_copy", &ParticleSet::make_copy, py::arg("indexes_shift"), R"pbdoc(
+Make a copy of the set and of the particles therein, shifting all the particle indexes by the given value.
+
+Parameters
+----------
+indexes_shift: int
+    The shift to be added to the index of each particle.
+)pbdoc");
+
 	particle_set.def("N", &ParticleSet::N, "The number of particles stored in the set.");
 
 	particle_set.def("indexes", &ParticleSet::indexes, R"pbdoc(
@@ -213,6 +273,15 @@ The vector is created ex novo every time this method is called. Do not use in pe
 	particle_set.def("charge", &ParticleSet::charge, "The total charge stored in the set");
 
 	particle_set.def("com", &ParticleSet::com, "The centre of mass of the set");
+
+	particle_set.def("set_com", &ParticleSet::set_com, py::arg("new_com"), R"pbdoc(
+Set the centre of mass of the set to a new value.
+
+Parameters
+----------
+new_com: numpy.ndarray
+	The new centre of mass of the set.
+)pbdoc");
 
 	particle_set.def("velocity", &ParticleSet::velocity, "The total velocity of the set");
 

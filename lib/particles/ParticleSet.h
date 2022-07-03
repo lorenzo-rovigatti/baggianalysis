@@ -25,6 +25,9 @@ public:
 	ParticleSet();
 	virtual ~ParticleSet();
 
+	/// Make a copy of the set and of the particles therein, shifting all the particle indexes by the given value
+	std::shared_ptr<ParticleSet> make_copy(int indexes_shift);
+
 	/// Return the name of the set
 	std::string name() const;
 
@@ -96,6 +99,9 @@ public:
 
 	/// Return the centre of mass of the set
 	vec3 com() const;
+
+	/// Set the centre of mass of the set
+	void set_com(vec3 new_com);
 
 	/// Return the velocity of the set
 	vec3 velocity() const;
