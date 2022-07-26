@@ -27,6 +27,26 @@ MSD::~MSD() {
 
 }
 
+void MSD::_add_value(ullint time_diff, double cc_MSD, std::map<ullint, uint> &n_conf) {
+	// in some cases rounding issues will make time differences differ by 1 when instead they should coincide.
+	// The following predicate looks for time differences that are equal or smaller than 1
+	auto pred = [time_diff](const auto &other_diff) {
+		return std::abs((long long int) time_diff - (long long int) other_diff.first) <= 1;
+	};
+
+	// we apply the above predicate to the map
+	auto it = std::find_if(_result.begin(), _result.end(), pred);
+	if(it == _result.end()) {
+		_result[time_diff] = cc_MSD;
+		n_conf[time_diff] = 1;
+	}
+	// if a compatible time difference (i.e. the same or one that differs by 1) is found then we use that to update the data structures
+	else {
+		_result[it->first] += cc_MSD;
+		n_conf[it->first]++;
+	}
+}
+
 void MSD::analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) {
 	map<ullint, uint> n_conf;
 
@@ -61,15 +81,8 @@ void MSD::analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) {
 			for(auto past_base : past_cycle_bases) {
 				double cc_MSD = _conf_conf_MSD(current_cycle_base, past_base, _remove_com);
 				ullint time_diff = current_cycle_base->time - past_base->time;
-				auto it = _result.find(time_diff);
-				if(it == _result.end()) {
-					_result[time_diff] = cc_MSD;
-					n_conf[time_diff] = 1;
-				}
-				else {
-					_result[time_diff] += cc_MSD;
-					n_conf[time_diff]++;
-				}
+
+				_add_value(time_diff, cc_MSD, n_conf);
 			}
 		}
 
@@ -77,15 +90,8 @@ void MSD::analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) {
 		if(current_cycle_base != frame) {
 			double cc_MSD = _conf_conf_MSD(current_cycle_base, frame, _remove_com);
 			ullint time_diff = frame->time - current_cycle_base->time;
-			auto it = _result.find(time_diff);
-			if(it == _result.end()) {
-				_result[time_diff] = cc_MSD;
-				n_conf[time_diff] = 1;
-			}
-			else {
-				_result[time_diff] += cc_MSD;
-				n_conf[time_diff]++;
-			}
+
+			_add_value(time_diff, cc_MSD, n_conf);
 		}
 
 		idx++;
@@ -131,9 +137,26 @@ double MSD::_conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System
 #ifdef PYTHON_BINDINGS
 
 void export_MSD(py::module &m) {
-	py::class_<MSD, std::shared_ptr<MSD>> obs(m, "MSD", "Compute the `mean-squared displacement <https://en.wikipedia.org/wiki/Mean_squared_displacement>`_ of a system.");
+	py::class_<MSD, std::shared_ptr<MSD>> obs(m, "MSD", R"pb(
+Compute the `mean-squared displacement <https://en.wikipedia.org/wiki/Mean_squared_displacement>`_ of a trajectory.
 
-	obs.def(py::init<uint, bool>());
+The trajectory is split up in chunks of size `points_per_cycle`, and the mean squared displacement is computed between configurations in each chunk and
+between the initial configurations of pairs of chunks.
+
+The mean squared displacement between two configurations is associated to their time delta (*i.e.* to the difference between the times at
+which they have been printed) and averaged with all the other pairs that share the same time delta. Note that in same cases (*i.e.* log or log-linear 
+spacing), there might be time deltas that differ by one: in this case the code consider those pairs to share the same time delta.   
+)pb");
+
+	obs.def(py::init<uint, bool>(), py::arg("points_per_cycle"), py::arg("remove_com") = true, R"pb(
+Parameters
+----------
+points_per_cycle: int
+    The number of configurations contained in each chunk in which the trajectory is split up.
+remove_com: bool
+    Remove the centre of mass' position from each configuration.
+)pb");
+
 	obs.def("analyse_and_print", &MSD::analyse_and_print, py::arg("trajectory"), py::arg("output_file"), R"pb(
 Analyse the trajectory and print the MSD directly to the given file.
 	)pb");
