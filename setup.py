@@ -127,7 +127,7 @@ setup(
         },
     packages = find_packages(),
     setup_requires = [
-        'setuptools_scm',
+        'setuptools-scm',
         'numpy'
         ],
     author = 'Lorenzo Rovigatti',

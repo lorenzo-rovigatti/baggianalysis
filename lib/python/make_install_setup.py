@@ -10,7 +10,7 @@ setup(
         "root": "${CMAKE_SOURCE_DIR}",
         "fallback_version": "0.0.1",
         },
-    setup_requires = ['setuptools_scm'],
+    setup_requires = ['setuptools-scm'],
     packages = [ 'baggianalysis' ],
     package_dir = {
         'baggianalysis': '${BA_OUTPUT_DIR}'

@@ -1,4 +1,4 @@
-v. 0.5.0
+v. 0.5.0 [213b13a]
 	- Add heuristics to help determining the file type in the LAMMPS -> cogli1 converter
 	- Add an observable to compute the gyration radius of molecules (GyrationRadius)
 	- Reorganise the test folder and add new tests
