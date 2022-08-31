@@ -89,7 +89,9 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 
 				try {
 					position = vec3(utils::lexical_cast<double>(split[0]), utils::lexical_cast<double>(split[1]), utils::lexical_cast<double>(split[2]));
-					velocity = vec3(utils::lexical_cast<double>(split[9]), utils::lexical_cast<double>(split[10]), utils::lexical_cast<double>(split[11]));
+					if(split.size() > 9) {
+						velocity = vec3(utils::lexical_cast<double>(split[9]), utils::lexical_cast<double>(split[10]), utils::lexical_cast<double>(split[11]));
+					}
 
 					vec3 a1(utils::lexical_cast<double>(split[3]), utils::lexical_cast<double>(split[4]), utils::lexical_cast<double>(split[5]));
 					vec3 a3(utils::lexical_cast<double>(split[6]), utils::lexical_cast<double>(split[7]), utils::lexical_cast<double>(split[8]));
