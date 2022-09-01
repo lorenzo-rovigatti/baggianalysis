@@ -82,6 +82,7 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 		}
 		else {
 			std::getline(configuration, line);
+			utils::trim(line);
 			if(configuration.good() && line.size() > 0) {
 				split = utils::split(line);
 				vec3 position, velocity;
