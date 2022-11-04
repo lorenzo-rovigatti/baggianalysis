@@ -23,6 +23,7 @@ public:
 	 * @brief Construct the object
 	 */
 	ParticleSet();
+	ParticleSet(ParticleSet *source, int indexes_shift);
 	virtual ~ParticleSet();
 
 	/// Make a copy of the set and of the particles therein, shifting all the particle indexes by the given value

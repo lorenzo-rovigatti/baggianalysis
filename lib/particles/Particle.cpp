@@ -65,6 +65,13 @@ void Particle::remove_bonded_neighbour(ParticleBond to_remove) {
 	_bonded_neighbours.erase(to_remove);
 }
 
+void Particle::remove_bonded_neighbour(std::shared_ptr<Particle> q) {
+	auto link_it = std::find_if(_bonded_neighbours.begin(), _bonded_neighbours.end(), [q](const ParticleBond &pb) { return pb.other() == q; });
+	if(link_it != _bonded_neighbours.end()) {
+		remove_bonded_neighbour(*link_it);
+	}
+}
+
 bool Particle::has_bonded_neighbour(std::shared_ptr<Particle> q) {
 	return std::find_if(_bonded_neighbours.begin(), _bonded_neighbours.end(), [q](const ParticleBond &pb) { return pb.other() == q; }) != _bonded_neighbours.end();
 }
@@ -124,12 +131,12 @@ void Particle::set_molecule(std::shared_ptr<ParticleSet> new_molecule) {
 #ifdef PYTHON_BINDINGS
 
 void export_Particle(py::module &m) {
-	py::class_<ParticleBond, std::shared_ptr<ParticleBond>> particle_bond(m, "ParticleBond");
+	py::class_<ParticleBond, std::shared_ptr<ParticleBond>> particle_bond(m, "ParticleBond", "A bond between two particles.");
 	particle_bond.def("other", &ParticleBond::other);
 
-	py::class_<ParticleAngle, std::shared_ptr<ParticleAngle>> particle_angle(m, "ParticleAngle");
+	py::class_<ParticleAngle, std::shared_ptr<ParticleAngle>> particle_angle(m, "ParticleAngle", "A bond involving three particles.");
 
-	py::class_<ParticleDihedral, std::shared_ptr<ParticleDihedral>> particle_dihedral(m, "ParticleDihedral");
+	py::class_<ParticleDihedral, std::shared_ptr<ParticleDihedral>> particle_dihedral(m, "ParticleDihedral", "A bond involving four particles.");
 
 	py::class_<Particle, std::shared_ptr<Particle>> particle(m, "Particle", R"pbdoc(
         A simulation particle.

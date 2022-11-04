@@ -21,48 +21,50 @@ ParticleSet::ParticleSet() :
 
 }
 
-ParticleSet::~ParticleSet() {
-
-}
-
-std::shared_ptr<ParticleSet> ParticleSet::make_copy(int indexes_shift) {
-	std::shared_ptr<ParticleSet> new_set = std::make_shared<ParticleSet>();
-
+ParticleSet::ParticleSet(ParticleSet *source, int indexes_shift) {
 	// we first copy the individual particle details (but no bonds, dihedrals, etc.)
-	for(auto p : _particles) {
+	for(auto p : source->_particles) {
 		auto new_p = p->make_copy(p->index() + indexes_shift);
-		new_set->add_particle(new_p);
+		this->add_particle(new_p);
 	}
 
 	// now we can update the topology
-	for(uint i = 0; i < N(); i++) {
-		auto original_p = this->particles()[i];
-		auto new_p = new_set->particles()[i];
+	for(uint i = 0; i < source->N(); i++) {
+		auto original_p = source->particles()[i];
+		auto new_p = this->particles()[i];
 
 		// bonds
 		for(auto b: original_p->bonded_neighbours()) {
 			int other_new_index = b.other()->index() + indexes_shift;
-			auto other = new_set->particle_by_id(other_new_index);
+			auto other = this->particle_by_id(other_new_index);
 			new_p->add_bonded_neighbour(b.type, other);
 		}
 
 		// angles
 		for(auto a: original_p->bonded_angles()) {
-			auto a0 = new_set->particle_by_id(a[0]->index() + indexes_shift);
-			auto a1 = new_set->particle_by_id(a[1]->index() + indexes_shift);
-			auto a2 = new_set->particle_by_id(a[2]->index() + indexes_shift);
+			auto a0 = this->particle_by_id(a[0]->index() + indexes_shift);
+			auto a1 = this->particle_by_id(a[1]->index() + indexes_shift);
+			auto a2 = this->particle_by_id(a[2]->index() + indexes_shift);
 			new_p->add_bonded_angle(a.type, a0, a1, a2);
 		}
 
 		// dihedrals
 		for(auto d: original_p->bonded_angles()) {
-			auto d0 = new_set->particle_by_id(d[0]->index() + indexes_shift);
-			auto d1 = new_set->particle_by_id(d[1]->index() + indexes_shift);
-			auto d2 = new_set->particle_by_id(d[2]->index() + indexes_shift);
-			auto d3 = new_set->particle_by_id(d[3]->index() + indexes_shift);
+			auto d0 = this->particle_by_id(d[0]->index() + indexes_shift);
+			auto d1 = this->particle_by_id(d[1]->index() + indexes_shift);
+			auto d2 = this->particle_by_id(d[2]->index() + indexes_shift);
+			auto d3 = this->particle_by_id(d[3]->index() + indexes_shift);
 			new_p->add_bonded_dihedral(d.type, d0, d1, d2, d3);
 		}
 	}
+}
+
+ParticleSet::~ParticleSet() {
+
+}
+
+std::shared_ptr<ParticleSet> ParticleSet::make_copy(int indexes_shift) {
+	std::shared_ptr<ParticleSet> new_set = std::make_shared<ParticleSet>(this, indexes_shift);
 
 	return new_set;
 }
@@ -177,7 +179,7 @@ void ParticleSet::remove_particle(std::shared_ptr<Particle> p) {
 	// TODO: we need to remove angles and dihedrals too
 	for(auto link : p->bonded_neighbours()) {
 		auto neigh = link.other();
-		neigh->remove_bonded_neighbour(link);
+		neigh->remove_bonded_neighbour(p);
 	}
 
 	_particles_by_id.erase(p->index());

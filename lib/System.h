@@ -16,6 +16,7 @@ namespace ba {
 class System : public ParticleSet {
 public:
 	System();
+	System(System *);
 	virtual ~System();
 
 	std::shared_ptr<System> empty_copy() const;

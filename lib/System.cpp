@@ -14,6 +14,12 @@ System::System() :
 	set_name("system");
 }
 
+System::System(System *source) : ParticleSet(source, 0) {
+	time = source->time;
+	box = source->box;
+	set_name(source->name());
+}
+
 System::~System() {
 
 }
@@ -102,8 +108,13 @@ void export_System(py::module &m) {
 	)pbdoc");
 
 	system.def(py::init<>(), R"pbdoc(
-		The constructor takes no arguments. 
+The default constructor, which takes no arguments. 
 	)pbdoc");
+
+	system.def(py::init<System *>(), R"pbdoc(
+The copy constructor.
+	)pbdoc");
+
 	system.def("empty_copy", &System::empty_copy, R"pbdoc(
 		Return a copy of this system (same time and box, no particles).
 
