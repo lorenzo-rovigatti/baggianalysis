@@ -229,6 +229,24 @@ q : :class:`Particle`
 	The new bonded neighbour.
 	)pbdoc");
 
+	particle.def("remove_bonded_neighbour", static_cast<void (Particle::*)(ParticleBond)>(&Particle::remove_bonded_neighbour), py::arg("link"), R"pbdoc(
+Remove the given :class:`ParticleBond` ``link`` from the list of current particle's bonds.
+
+Parameters
+----------
+link : :class:`ParticleBond`
+	The bond that should be removed.
+	)pbdoc");
+
+	particle.def("remove_bonded_neighbour", static_cast<void (Particle::*)(std::shared_ptr<Particle>)>(&Particle::remove_bonded_neighbour), py::arg("q"), R"pbdoc(
+Remove ``q`` from the list of current particle's bonded neighbours.
+
+Parameters
+----------
+q : :class:`Particle`
+	The particle whose bond with the current particle should be removed.
+	)pbdoc");
+
 	particle.def("has_bonded_neighbour", &Particle::has_bonded_neighbour, py::arg("q"), R"pbdoc(
 Check whether ``q`` is a bonded neighbour.
 
