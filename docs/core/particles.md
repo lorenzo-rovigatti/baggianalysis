@@ -7,10 +7,19 @@
     :nosignatures:
 
     Particle
+    ParticleBond
+    ParticleAngle
+    ParticleDihedral
     ParticleSet
     System
     
 .. autoclass:: Particle
+
+.. autoclass:: ParticleBond
+
+.. autoclass:: ParticleAngle
+
+.. autoclass:: ParticleDihedral
     
 .. autoclass:: ParticleSet
     

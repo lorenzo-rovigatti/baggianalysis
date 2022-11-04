@@ -355,25 +355,25 @@ delta : numpy.ndarray
 	particle.def_property_readonly("bonded_neighbours", &Particle::bonded_neighbours, R"pbdoc(
 		A list of this particle's bonded neighbours.
 
-		:type: Set(:class:`Particle`)
+		:type: Set(:class:`ParticleBond`)
 	)pbdoc");
 
 	particle.def_property_readonly("bonded_angles", &Particle::bonded_angles, R"pbdoc(
-        A list of :class:`ParticleSet` s storing the angles (*i.e.* triplets of particles) this particle is involved in.
+        A list of :class:`ParticleAngle` s storing the angles (*i.e.* triplets of particles) this particle is involved in.
 
-        :type: Set(:class:`ParticleSet`)
+        :type: Set(:class:`ParticleAngle`)
 	)pbdoc");
 
 	particle.def_property_readonly("bonded_dihedrals", &Particle::bonded_dihedrals, R"pbdoc(
-        A list of :class:`ParticleSet` s storing the dihedrals (*i.e.* list of four particles) this particle is involved in.
+        A list of :class:`ParticleDihedral` s storing the dihedrals (*i.e.* list of four particles) this particle is involved in.
 
-        :type: Set(:class:`ParticleSet`)
+        :type: Set(:class:`ParticleDihedral`)
 	)pbdoc");
 
 	particle.def_property_readonly("neighbours", &Particle::neighbours, R"pbdoc(
 		A list of this particle's neighbours.
 
-		:type: Set(:class:`Particle`)
+		:type: Set(:class:`ParticleBond`)
 	)pbdoc");
 
 	particle.def_property_readonly("index", &Particle::index, R"pbdoc(
