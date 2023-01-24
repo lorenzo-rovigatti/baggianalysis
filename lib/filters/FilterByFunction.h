@@ -19,7 +19,7 @@ public:
 	FilterByFunction(FilterType);
 	virtual ~FilterByFunction();
 
-	virtual std::shared_ptr<System> filter(std::shared_ptr<const System> syst) override;
+	virtual std::shared_ptr<System> filter(std::shared_ptr<System> syst) override;
 
 private:
 	FilterType _filter_function;

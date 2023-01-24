@@ -18,7 +18,7 @@ MapParticles::~MapParticles() {
 
 }
 
-std::shared_ptr<System> MapParticles::filter(std::shared_ptr<const System> syst) {
+std::shared_ptr<System> MapParticles::filter(std::shared_ptr<System> syst) {
 	std::shared_ptr<System> new_syst(syst->empty_copy());
 
 	for(auto id_list : _id_lists) {

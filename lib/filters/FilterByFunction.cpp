@@ -7,6 +7,8 @@
 
 #include "FilterByFunction.h"
 
+#include "../topology/Topology.h"
+
 namespace ba {
 
 FilterByFunction::FilterByFunction(FilterType f) :
@@ -19,15 +21,22 @@ FilterByFunction::~FilterByFunction() {
 
 }
 
-std::shared_ptr<System> FilterByFunction::filter(std::shared_ptr<const System> syst) {
+std::shared_ptr<System> FilterByFunction::filter(std::shared_ptr<System> syst) {
 	std::shared_ptr<System> new_syst(syst->empty_copy());
 
+	// we start by copying all the particles that should be in the new system according
+	// to the filtering function
 	for(auto p : syst->particles()) {
 		if(_filter_function(p.get())) {
 			std::shared_ptr<Particle> new_particle = p->make_copy(p->index());
 			new_syst->add_particle(new_particle);
 		}
 	}
+
+	// and then we copy the topology of the old system to the new one
+	Topology topology(syst);
+	topology.remove_unappliable_links(new_syst);
+	topology.apply(new_syst);
 
 	return new_syst;
 }

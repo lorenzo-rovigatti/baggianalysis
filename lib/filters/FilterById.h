@@ -19,7 +19,7 @@ public:
 	FilterById(std::vector<int> ids);
 	virtual ~FilterById();
 
-	virtual std::shared_ptr<System> filter(std::shared_ptr<const System> syst) override;
+	virtual std::shared_ptr<System> filter(std::shared_ptr<System> syst) override;
 
 protected:
 	std::shared_ptr<FilterByFunction> _filter;

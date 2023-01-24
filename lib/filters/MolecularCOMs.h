@@ -17,7 +17,7 @@ public:
 	MolecularCOMs();
 	virtual ~MolecularCOMs();
 
-	std::shared_ptr<System> filter(std::shared_ptr<const System> syst) override;
+	std::shared_ptr<System> filter(std::shared_ptr<System> syst) override;
 };
 
 #ifdef PYTHON_BINDINGS

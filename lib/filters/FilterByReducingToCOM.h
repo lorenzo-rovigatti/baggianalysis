@@ -17,7 +17,7 @@ public:
 	FilterByReducingToCOM();
 	virtual ~FilterByReducingToCOM();
 
-	virtual std::shared_ptr<System> filter(std::shared_ptr<const System> syst) override;
+	virtual std::shared_ptr<System> filter(std::shared_ptr<System> syst) override;
 };
 
 #ifdef PYTHON_BINDINGS

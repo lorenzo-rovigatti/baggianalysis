@@ -26,7 +26,7 @@ FilterById::~FilterById() {
 
 }
 
-std::shared_ptr<System> FilterById::filter(std::shared_ptr<const System> syst) {
+std::shared_ptr<System> FilterById::filter(std::shared_ptr<System> syst) {
 	return _filter->filter(syst);
 }
 

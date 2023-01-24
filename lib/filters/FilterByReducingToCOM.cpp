@@ -19,7 +19,7 @@ FilterByReducingToCOM::~FilterByReducingToCOM() {
 
 }
 
-shared_ptr<System> FilterByReducingToCOM::filter(std::shared_ptr<const System> syst) {
+shared_ptr<System> FilterByReducingToCOM::filter(std::shared_ptr<System> syst) {
 	shared_ptr<System> new_syst(syst->empty_copy());
 
 	// the new system will contain a single particle, so we give it index 0

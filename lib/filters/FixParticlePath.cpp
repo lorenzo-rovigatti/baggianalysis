@@ -19,7 +19,7 @@ FixParticlePath::~FixParticlePath() {
 
 }
 
-shared_ptr<System> FixParticlePath::filter(std::shared_ptr<const System> syst) {
+shared_ptr<System> FixParticlePath::filter(std::shared_ptr<System> syst) {
 	shared_ptr<System> new_syst(syst->empty_copy());
 
 	if(_previous_frame != nullptr) {

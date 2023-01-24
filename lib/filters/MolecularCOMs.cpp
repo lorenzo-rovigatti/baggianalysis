@@ -17,7 +17,7 @@ MolecularCOMs::~MolecularCOMs() {
 
 }
 
-std::shared_ptr<System> MolecularCOMs::filter(std::shared_ptr<const System> syst) {
+std::shared_ptr<System> MolecularCOMs::filter(std::shared_ptr<System> syst) {
 	std::shared_ptr<System> new_syst(syst->empty_copy());
 
 	for(auto molecule : syst->molecules()) {

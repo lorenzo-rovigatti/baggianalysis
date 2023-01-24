@@ -23,7 +23,7 @@ public:
 	 * @param syst the System the filter will be applied to
 	 * @return a copy of the System, filtered according to some procedure
 	 */
-	virtual std::shared_ptr<System> filter(std::shared_ptr<const System> syst) = 0;
+	virtual std::shared_ptr<System> filter(std::shared_ptr<System> syst) = 0;
 };
 
 #ifdef PYTHON_BINDINGS
@@ -35,7 +35,7 @@ class PyBaseFilter : public BaseFilter {
 public:
 	using BaseFilter::BaseFilter;
 
-	std::shared_ptr<System> filter(std::shared_ptr<const System> syst) override {
+	std::shared_ptr<System> filter(std::shared_ptr<System> syst) override {
 		PYBIND11_OVERLOAD_PURE(
 				std::shared_ptr<System>,
 				BaseFilter,

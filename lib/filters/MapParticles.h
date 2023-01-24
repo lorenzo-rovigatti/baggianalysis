@@ -17,7 +17,7 @@ public:
 	MapParticles(std::vector<std::vector<int>> id_lists);
 	virtual ~MapParticles();
 
-	virtual std::shared_ptr<System> filter(std::shared_ptr<const System> syst) override;
+	virtual std::shared_ptr<System> filter(std::shared_ptr<System> syst) override;
 
 private:
 	std::vector<std::vector<int>> _id_lists;

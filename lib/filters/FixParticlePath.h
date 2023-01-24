@@ -19,10 +19,10 @@ public:
 	FixParticlePath();
 	virtual ~FixParticlePath();
 
-	virtual std::shared_ptr<System> filter(std::shared_ptr<const System> syst) override;
+	virtual std::shared_ptr<System> filter(std::shared_ptr<System> syst) override;
 
 protected:
-	std::shared_ptr<const System> _previous_frame = nullptr;
+	std::shared_ptr<System> _previous_frame = nullptr;
 	std::vector<particle_shift> _shifts;
 };
 
