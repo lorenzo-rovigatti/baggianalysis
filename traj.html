@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>The traj module &mdash; baggianalysis 0.5.1.dev1+g8d19a7a documentation</title>
+  <title>The traj module &mdash; baggianalysis 0.5.1.dev18+g5d9dcc6 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.5.1.dev1+g8d19a7a
+                0.5.1.dev18+g5d9dcc6
               </div>
             
           
@@ -204,13 +204,13 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The name of an optional data file that will be used to initialise the trajectory’s frames. This is
+<li><p><strong>data_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The name of an optional data file that will be used to initialise the trajectory’s frames. This is
 useful if the LAMMPS dump files do not contain all the information (<em>e.g.</em> charges) or if you want
 frames to also store the particle connectivity (<em>e.g.</em> bonds, angles and dihedrals).</p></li>
-<li><p><strong>atom_tyle</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The atom style of the data file. Note that this parameter is required if data_file is not None.</p></li>
-<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The type of trajectory, which should be either “Lazy” or “Full” (for <a class="reference internal" href="core/trajectories.html#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a> and
+<li><p><strong>atom_tyle</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The atom style of the data file. Note that this parameter is required if data_file is not None.</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The type of trajectory, which should be either “Lazy” or “Full” (for <a class="reference internal" href="core/trajectories.html#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a> and
 <a class="reference internal" href="core/trajectories.html#baggianalysis.core.FullTrajectory" title="baggianalysis.core.FullTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">FullTrajectory</span></code></a>, respectively)’.</p></li>
-<li><p><strong>filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – A list of filters that should be added to the trajectory. Note that the order counts, since filters
+<li><p><strong>filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – A list of filters that should be added to the trajectory. Note that the order counts, since filters
 are applied on a first-come first-served basis.</p></li>
 </ul>
 </dd>
@@ -233,10 +233,10 @@ through one of <a class="reference internal" href="core/trajectories.html#baggia
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>topology_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The topology file associated to the oxDNA trajectory.</p></li>
-<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The type of trajectory, which should be either “Lazy” or “Full” (for <a class="reference internal" href="core/trajectories.html#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a> and
+<li><p><strong>topology_file</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The topology file associated to the oxDNA trajectory.</p></li>
+<li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The type of trajectory, which should be either “Lazy” or “Full” (for <a class="reference internal" href="core/trajectories.html#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a> and
 <a class="reference internal" href="core/trajectories.html#baggianalysis.core.FullTrajectory" title="baggianalysis.core.FullTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">FullTrajectory</span></code></a>, respectively)’.</p></li>
-<li><p><strong>filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a>) – A list of filters that should be added to the trajectory. Note that the order counts, since filters
+<li><p><strong>filters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a>) – A list of filters that should be added to the trajectory. Note that the order counts, since filters
 are applied on a first-come first-served basis.</p></li>
 </ul>
 </dd>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Baggianalysis &mdash; baggianalysis 0.5.1.dev1+g8d19a7a documentation</title>
+  <title>Baggianalysis &mdash; baggianalysis 0.5.1.dev18+g5d9dcc6 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.1.dev1+g8d19a7a
+                0.5.1.dev18+g5d9dcc6
               </div>
             
           
@@ -181,7 +181,7 @@
 <div class="section" id="a-simple-example">
 <h2>A simple example<a class="headerlink" href="#a-simple-example" title="Permalink to this headline">¶</a></h2>
 <p>The following code imports the <code class="docutils literal notranslate"><span class="pre">baggianalysis</span></code> module, parses a single LAMMPS data file, initialises its topology and perform some computations:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">baggianalysis</span> <span class="k">as</span> <span class="nn">ba</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">baggianalysis</span> <span class="k">as</span> <span class="nn">ba</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
@@ -206,7 +206,7 @@
 </pre></div>
 </div>
 <p>The library makes it straightforward to work with whole trajectories. Here is an example where we compute the centre of mass of the first molecule of the system averaged over a whole trajectory:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">baggianalysis</span> <span class="k">as</span> <span class="nn">ba</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">baggianalysis</span> <span class="k">as</span> <span class="nn">ba</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
@@ -230,19 +230,19 @@
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The average COM is: </span><span class="si">%lf</span><span class="s2"> </span><span class="si">%lf</span><span class="s2"> </span><span class="si">%lf</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">com</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">trajectory</span><span class="o">.</span><span class="n">frames</span><span class="p">)))</span>
 </pre></div>
 </div>
-<p>Note that baggianalysis provides a <a class="reference external" href="core/trajectories.html#baggianalysis.core.LazyTrajectory">LazyTrajectory</a> class that parses files one by one to avoid taking up too much memory. This can be useful when dealing with very large trajectories.</p>
+<p>Note that baggianalysis provides a <a class="reference internal" href="core/trajectories.html#baggianalysis.core.LazyTrajectory" title="baggianalysis.core.LazyTrajectory"><code class="xref py py-class docutils literal notranslate"><span class="pre">LazyTrajectory</span></code></a> class that parses files one by one to avoid taking up too much memory. This can be useful when dealing with very large trajectories.</p>
 </div>
 <div class="section" id="main-classes">
 <h2>Main classes<a class="headerlink" href="#main-classes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Each particle is an instance of the <a class="reference external" href="core/particles.html#baggianalysis.core.Particle">Particle</a> class.</p></li>
-<li><p>Simulation snapshots are stored in <a class="reference external" href="core/particles.html#baggianalysis.core.System">System</a> objects that have several attributes that allow to retrieve the properties of the particles they contain.</p></li>
-<li><p>Multiple systems (also called <em>frames</em> in this context) can be stored in a <a class="reference external" href="core/trajectories.html">trajectory object</a>.</p></li>
-<li><p>The library provides a set of built-in <a class="reference external" href="core/observables.html">observables</a> that can be used to analyse both single systems and whole trajectories.</p></li>
-<li><p>The <a class="reference external" href="core/topology.html#baggianalysis.core.Topology">Topology</a> class can be used to manage the topology of a configuration. Topologies can be initialised in two ways:</p>
+<li><p>Each particle is an instance of the <a class="reference internal" href="core/particles.html#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a> class.</p></li>
+<li><p>Simulation snapshots are stored in <a class="reference internal" href="core/particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a> objects that have several attributes that allow to retrieve the properties of the particles they contain.</p></li>
+<li><p>Multiple systems (also called <em>frames</em> in this context) can be stored in a <a class="reference internal" href="core/trajectories.html"><span class="doc std std-doc">trajectory object</span></a>.</p></li>
+<li><p>The library provides a set of built-in <a class="reference internal" href="core/observables.html"><span class="doc std std-doc">observables</span></a> that can be used to analyse both single systems and whole trajectories.</p></li>
+<li><p>The <a class="reference internal" href="core/topology.html#baggianalysis.core.Topology" title="baggianalysis.core.Topology"><code class="xref py py-class docutils literal notranslate"><span class="pre">Topology</span></code></a> class can be used to manage the topology of a configuration. Topologies can be initialised in two ways:</p>
 <ul>
-<li><p>by hand, using the <a class="reference external" href="core/topology.html#baggianalysis.core.Topology.make_empty_topology">make_empty_topology()</a> static method to create a new topology and then adding bonds one after the other with the <a class="reference external" href="core/topology.html#baggianalysis.core.Topology.add_bond">add_bond(p_index, q_index)</a> method</p></li>
-<li><p>by using an helper function to parse the topology out of a file through the <a class="reference external" href="core/topology.html#baggianalysis.core.Topology.make_topology_from_file">make_topology_from_file()</a> static method. Baggianalysis comes with some <a class="reference internal" href="core/topology.html"><span class="doc">ready-made</span></a> functions that can be used to parse topologies.</p></li>
+<li><p>by hand, using the <a class="reference internal" href="core/topology.html#baggianalysis.core.Topology.make_empty_topology" title="baggianalysis.core.Topology.make_empty_topology"><code class="xref py py-meth docutils literal notranslate"><span class="pre">make_empty_topology()</span></code></a> static method to create a new topology and then adding bonds one after the other with the <a class="reference internal" href="core/topology.html#baggianalysis.core.Topology.add_bond" title="baggianalysis.core.Topology.add_bond"><code class="xref py py-class docutils literal notranslate"><span class="pre">add_bond</span></code></a> method</p></li>
+<li><p>by using an helper function to parse the topology out of a file through the <a class="reference internal" href="core/topology.html#baggianalysis.core.Topology.make_topology_from_file" title="baggianalysis.core.Topology.make_topology_from_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">make_topology_from_file()</span></code></a> static method. Baggianalysis comes with some <a class="reference internal" href="core/topology.html"><span class="doc std std-doc">ready-made</span></a> functions that can be used to parse topologies.</p></li>
 </ul>
 </li>
 </ul>

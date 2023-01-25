@@ -3,9 +3,9 @@
 This module contains some high-level utility functions to interconvert between different file formats. When installed
 it also creates the following standalone executable scripts:
 
-* `oxDNA_LAMMS input_file [bond_file]`, which calls [oxDNA_LAMMPS_command_line](#baggianalysis.converters.oxDNA_LAMMPS_command_line).
-* `oxDNA_cogli input_file`, which calls [oxDNA_cogli_command_line](#baggianalysis.converters.oxDNA_cogli_command_line).
-* `LAMMPS_cogli input_file`, which calls [LAMMPS_cogli_command_line](#baggianalysis.converters.LAMMPS_cogli_command_line).
+* `oxDNA_LAMMS input_file [bond_file]`, which calls {func}`~baggianalysis.converters.oxDNA_LAMMPS_command_line()`.
+* `oxDNA_cogli input_file`, which calls {func}`~baggianalysis.converters.oxDNA_cogli_command_line()`.
+* `LAMMPS_cogli input_file`, which calls {func}`~baggianalysis.converters.LAMMPS_cogli_command_line()`.
 
 ```eval_rst
 .. toctree::

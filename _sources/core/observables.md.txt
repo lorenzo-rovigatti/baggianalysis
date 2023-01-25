@@ -10,6 +10,7 @@
     ClusterList
     ConvexHull
     FormFactor
+    MSD
     PoreSize
     RDF
     StructureFactor
