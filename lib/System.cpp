@@ -133,6 +133,15 @@ The copy constructor.
             A new system with the same :attr:`time` and :attr:`box` of this one. 
 	)pbdoc");
 
+	system.def("copy_topology_from", &System::copy_topology_from, py::arg("other"), R"pbdoc(
+		Copy the topology details (bonds, angles, dihedrals) from another system.
+
+		Parameters
+		----------
+		other : :class:`System`
+			The system whence the topology should be copied. 
+	)pbdoc");
+
 	system.def("available_index", &System::available_index, R"pbdoc(
         Return a particle index that can be used in the context of this system (that is, that is not used by any of the 
         particles already present in the system).
