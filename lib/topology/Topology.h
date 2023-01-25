@@ -63,12 +63,12 @@ using TopologyParser = std::function<void(std::string, std::shared_ptr<Topology>
 
 class Topology: public std::enable_shared_from_this<Topology> {
 public:
-	Topology(std::shared_ptr<System> system);
+	Topology(System *system);
 	virtual ~Topology();
 
 	static std::shared_ptr<Topology> make_empty_topology();
 	static std::shared_ptr<Topology> make_topology_from_file(std::string filename, TopologyParser parser);
-	static std::shared_ptr<Topology> make_topology_from_system(std::shared_ptr<System> system);
+	static std::shared_ptr<Topology> make_topology_from_system(System *system);
 
 	void add_bond(int p, int q);
 	void add_bond(std::string type, int p, int q);
@@ -80,9 +80,9 @@ public:
 	void enable_checks();
 	void disable_checks();
 
-	void remove_unappliable_links(std::shared_ptr<System> system);
+	void remove_unappliable_links(System *system);
 
-	void apply(std::shared_ptr<System> system);
+	void apply(System *system);
 
 	const std::vector<std::set<int>> &clusters() const;
 
@@ -100,8 +100,8 @@ protected:
 	Topology(const Topology &) = delete;
 
 	void _raise_error(std::string msg);
-	void _fill_clusters(std::shared_ptr<System> system);
-	void _set_bonded_links(std::shared_ptr<System> system);
+	void _fill_clusters(System *system);
+	void _set_bonded_links(System *system);
 
 	bool _disable_checks = false;
 	bool _build_clusters = true;

@@ -16,13 +16,13 @@ LAMMPSDumpParser::LAMMPSDumpParser(std::string data_file, std::string atom_style
 				BaseParser() {
 	LAMMPSDataFileParser parser = LAMMPSDataFileParser(atom_style);
 	_data_file_system = parser.make_system(data_file);
-	set_topology(Topology::make_topology_from_system(_data_file_system));
+	set_topology(Topology::make_topology_from_system(_data_file_system.get()));
 }
 
 LAMMPSDumpParser::LAMMPSDumpParser(std::shared_ptr<System> data_file_system) :
 				BaseParser(),
 				_data_file_system(data_file_system) {
-	set_topology(std::make_shared<Topology>(data_file_system));
+	set_topology(std::make_shared<Topology>(data_file_system.get()));
 }
 
 LAMMPSDumpParser::LAMMPSDumpParser() :

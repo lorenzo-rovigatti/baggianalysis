@@ -24,7 +24,7 @@ enum ClusterPolicy {
 	BOTH
 };
 
-std::vector<std::set<int>> make_clusters(std::shared_ptr<ParticleSet> ps, ClusterPolicy policy);
+std::vector<std::set<int>> make_clusters(ParticleSet *ps, ClusterPolicy policy);
 
 }
 

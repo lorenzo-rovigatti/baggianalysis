@@ -17,7 +17,7 @@ namespace ba {
 
 namespace utils {
 
-std::vector<std::set<int>> make_clusters(std::shared_ptr<ParticleSet> ps, ClusterPolicy policy) {
+std::vector<std::set<int>> make_clusters(ParticleSet *ps, ClusterPolicy policy) {
 	std::vector<std::set<int>> clusters;
 
 	std::function<std::set<ParticleBond>(std::shared_ptr<Particle>)> neighbours_getter;

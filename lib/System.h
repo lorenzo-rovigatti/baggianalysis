@@ -21,6 +21,8 @@ public:
 
 	std::shared_ptr<System> empty_copy() const;
 
+	void copy_topology_from(std::shared_ptr<System>);
+
 	int available_index() const;
 
 	void add_particle(std::shared_ptr<Particle> p) override;

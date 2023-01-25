@@ -7,6 +7,8 @@
 
 #include "System.h"
 
+#include "topology/Topology.h"
+
 namespace ba {
 
 System::System() :
@@ -31,6 +33,13 @@ std::shared_ptr<System> System::empty_copy() const {
 	new_syst->box = this->box;
 
 	return new_syst;
+}
+
+void System::copy_topology_from(std::shared_ptr<System> other) {
+	// and then we copy the topology of the old system to the new one
+	Topology topology(other.get());
+	topology.remove_unappliable_links(this);
+	topology.apply(this);
 }
 
 int System::available_index() const {

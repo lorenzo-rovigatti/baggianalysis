@@ -20,7 +20,7 @@ ClusterList::~ClusterList() {
 }
 
 void ClusterList::analyse_system(std::shared_ptr<System> frame) {
-	_clusters = utils::make_clusters(frame, utils::ClusterPolicy::NONBONDED);
+	_clusters = utils::make_clusters(frame.get(), utils::ClusterPolicy::NONBONDED);
 
 	_result.clear();
 	for(const auto &cluster : _clusters) {

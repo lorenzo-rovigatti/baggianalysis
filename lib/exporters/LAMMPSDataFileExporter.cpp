@@ -31,8 +31,8 @@ void LAMMPSDataFileExporter::_write_system_to_stream(std::shared_ptr<System> sys
 	auto type_map = _ba_LAMMPS_type_map(system);
 	_set_id_shift(system);
 
-	Topology topology(system);
-	topology.apply(system);
+	Topology topology(system.get());
+	topology.apply(system.get());
 	uint N_bonds = topology.bonds().size();
 	uint N_angles = topology.angles().size();
 	uint N_dihedrals = topology.dihedrals().size();

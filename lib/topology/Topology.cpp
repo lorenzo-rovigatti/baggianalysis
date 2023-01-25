@@ -21,7 +21,7 @@ Topology::Topology() :
 
 }
 
-Topology::Topology(std::shared_ptr<System> system) {
+Topology::Topology(System *system) {
 	for(auto p : system->particles()) {
 		for(auto link : p->bonded_neighbours()) {
 			auto q = link.other();
@@ -64,7 +64,7 @@ std::shared_ptr<Topology> Topology::make_topology_from_file(std::string filename
 	return new_topology;
 }
 
-std::shared_ptr<Topology> Topology::make_topology_from_system(std::shared_ptr<System> system) {
+std::shared_ptr<Topology> Topology::make_topology_from_system(System *system) {
 	return std::make_shared<Topology>(system);
 }
 
@@ -109,7 +109,7 @@ void Topology::disable_checks() {
 	_disable_checks = true;
 }
 
-void Topology::remove_unappliable_links(std::shared_ptr<System> system) {
+void Topology::remove_unappliable_links(System *system) {
 	auto all_indexes = system->indexes();
 
 	auto remover = [system](auto &link_set) {
@@ -137,7 +137,7 @@ void Topology::remove_unappliable_links(std::shared_ptr<System> system) {
 	_build_clusters = true;
 }
 
-void Topology::apply(std::shared_ptr<System> system) {
+void Topology::apply(System *system) {
 	// reset all the molecules
 	system->molecules().clear();
 
@@ -207,7 +207,7 @@ void Topology::_raise_error(std::string msg) {
 	}
 }
 
-void Topology::_fill_clusters(std::shared_ptr<System> system) {
+void Topology::_fill_clusters(System *system) {
 	_N_in_system = system->N();
 	_clusters = utils::make_clusters(system, utils::ClusterPolicy::BONDED);
 
@@ -219,7 +219,7 @@ void Topology::_fill_clusters(std::shared_ptr<System> system) {
 	}
 }
 
-void Topology::_set_bonded_links(std::shared_ptr<System> system) {
+void Topology::_set_bonded_links(System *system) {
 	// add links (bonds, angles, dihedrals) to particles
 	for(auto bond : _bonds) {
 		auto p_idx = bond[0];
@@ -295,7 +295,7 @@ apply the same topology to systems having different numbers of particles. This b
 prior to :meth:`apply`. 
 	)pbdoc");
 
-	topology.def(py::init<std::shared_ptr<System>>(), R"pbdoc(
+	topology.def(py::init<System *>(), R"pbdoc(
 Instances of this class can be either built with the :meth:`make_empty_topology` or :meth:`make_topology_from_file` static methods or by directly
 using a constructor that takes as its only parameter the :class:`System` instance whence the topology is extracted::
 
