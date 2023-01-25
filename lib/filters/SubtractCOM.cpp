@@ -32,6 +32,8 @@ shared_ptr<System> SubtractCOM::filter(std::shared_ptr<System> syst) {
 		new_syst->add_particle(new_particle);
 	}
 
+	new_syst->copy_topology_from(syst);
+
 	return new_syst;
 }
 

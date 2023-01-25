@@ -33,10 +33,7 @@ std::shared_ptr<System> FilterByFunction::filter(std::shared_ptr<System> syst) {
 		}
 	}
 
-	// and then we copy the topology of the old system to the new one
-	Topology topology(syst);
-	topology.remove_unappliable_links(new_syst);
-	topology.apply(new_syst);
+	new_syst->copy_topology_from(syst);
 
 	return new_syst;
 }

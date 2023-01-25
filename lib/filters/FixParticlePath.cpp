@@ -63,6 +63,7 @@ shared_ptr<System> FixParticlePath::filter(std::shared_ptr<System> syst) {
 		}
 	}
 
+	new_syst->copy_topology_from(syst);
 	_previous_frame = new_syst;
 
 	return new_syst;
