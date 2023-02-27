@@ -101,6 +101,12 @@ void Topology::add_dihedral(std::string type, int p, int q, int r, int s) {
 	_dihedral_types.insert(type);
 }
 
+void Topology::add_chain_bonds(int first_idx, int last_idx) {
+	for(int i = first_idx; i < last_idx; i++) {
+		add_bond(i, i + 1);
+	}
+}
+
 void Topology::enable_checks() {
 	_disable_checks = false;
 }
@@ -418,6 +424,17 @@ using a constructor that takes as its only parameter the :class:`System` instanc
 			The index of the third particle.
 		s : int
 			The index of the fourth particle.
+	)pbdoc");
+
+	topology.def("add_chain_bonds", static_cast<void (Topology::*)(int, int)>(&Topology::add_chain_bonds), py::arg("first_idx"), py::arg("last_idx"), R"pbdoc(
+		Add bonds between consecutive pairs of particles in the given index range. Note that both indexes will be included.
+
+		Parameters
+		----------
+		first_idx : int
+			The index of the particle at the beginning of the chain.
+		last_idx : int
+			The index of the particle at the end of the chain.
 	)pbdoc");
 
 	topology.def("enable_checks", &Topology::enable_checks, R"pbdoc(

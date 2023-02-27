@@ -77,6 +77,8 @@ public:
 	void add_dihedral(int p, int q, int r, int s);
 	void add_dihedral(std::string type, int p, int q, int r, int s);
 
+	void add_chain_bonds(int first_idx, int last_idx);
+
 	void enable_checks();
 	void disable_checks();
 
