@@ -22,6 +22,7 @@ SET(ba_lib_SOURCES
 	observables/GyrationRadius.cpp
 	observables/MSD.cpp
 	observables/RDF.cpp
+	observables/SelfISF.cpp
 	observables/StructureFactor.cpp
 	parsers/BaseParser.cpp
 	parsers/OxDNAParser.cpp

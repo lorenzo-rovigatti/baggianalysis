@@ -34,6 +34,7 @@
 #include "../observables/MSD.h"
 #include "../observables/RDF.h"
 #include "../observables/StructureFactor.h"
+#include "../observables/SelfISF.h"
 #ifdef NLOPT_FOUND
 #include "../observables/PoreSize.h"
 #endif
@@ -107,6 +108,7 @@ PYBIND11_MODULE(core, m) {
 	ba::export_PoreSize(m);
 #endif
 	ba::export_RDF(m);
+	ba::export_SelfISF(m);
 	ba::export_StructureFactor(m);
 
 	// neighbour finders

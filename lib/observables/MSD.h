@@ -27,7 +27,6 @@ protected:
 	void _add_value(ullint time_diff, double cc_MSD, std::map<ullint, uint> &n_conf);
 	double _conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System> second, bool remove_com);
 
-protected:
 	uint _points_per_cycle;
 	bool _remove_com;
 };
