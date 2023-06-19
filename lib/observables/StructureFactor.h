@@ -9,6 +9,7 @@
 #define OBSERVABLES_STRUCTUREFACTOR_H_
 
 #include "interfaces/SystemObservable.h"
+#include "../utils/WaveVectorList.h"
 
 namespace ba {
 
@@ -40,7 +41,7 @@ protected:
 	uint _max_n_realisations;
 	double _max_delta_q;
 
-	std::map<double, std::vector<vec3>> _q_vectors;
+	WaveVectorList _q_vectors;
 	vec3 _last_box = vec3(0., 0., 0.);
 	vector_scalar _b_factors;
 };

@@ -114,64 +114,9 @@ void StructureFactor::analyse_system(std::shared_ptr<System> system) {
 
 void StructureFactor::_init_qs(std::shared_ptr<System> system) {
 	if(_last_box != system->box) {
-		_q_vectors.clear();
 		_last_box = system->box;
 
-		std::list<vec3> all_qs;
-		double sqr_max_q = SQR(_largest_q);
-		vec3 delta_q(2. * M_PI / _last_box.x, 2. * M_PI / _last_box.y, 2. * M_PI / _last_box.z);
-
-		// we first generate all q vectors
-		for(int nx = 0; nx <= _largest_q / delta_q.x; nx++) {
-			for(int ny = -_largest_q / delta_q.y; ny <= _largest_q / delta_q.y; ny++) {
-				for(int nz = -_largest_q / delta_q.z; nz <= _largest_q / delta_q.z; nz++) {
-					// the following two conditions (together with the nx >= 0 conditions specified above)
-					// make sure that we don't include pairs of q-vectors that differ only by a factor of -1
-					if(nx == 0 && ny < 0) {
-						continue;
-					}
-					if(nx == 0 && ny == 0 && nz <= 0) {
-						continue;
-					}
-
-					vec3 new_q(delta_q);
-					new_q.x *= nx;
-					new_q.y *= ny;
-					new_q.z *= nz;
-
-					if(glm::dot(new_q, new_q)  <= sqr_max_q) {
-						all_qs.push_back(new_q);
-					}
-				}
-			}
-		}
-
-		// sort them according to their length
-		auto sort_function = [](vec3 &q1, vec3 &q2) -> bool {
-			return glm::dot(q1, q1) < glm::dot(q2, q2);
-		};
-		all_qs.sort(sort_function);
-
-		// and then group them
-		double first_q = -1;
-		for(auto q_vector : all_qs) {
-			double q_mod = glm::length(q_vector);
-
-			if(fabs(q_mod - first_q) > _max_delta_q) {
-				first_q = q_mod;
-			}
-
-			_q_vectors[first_q].push_back(q_vector);
-		}
-	}
-
-	for(auto &q_pair : _q_vectors) {
-		if(q_pair.second.size() > _max_n_realisations) {
-			// we randomly shuffle its contents
-			std::random_shuffle(q_pair.second.begin(), q_pair.second.end());
-			// and throw away the last (size - _max_n_realisations) elements
-			q_pair.second.erase(q_pair.second.begin() + _max_n_realisations, q_pair.second.end());
-		}
+		_q_vectors.init_from_system(system, _largest_q, _max_n_realisations, _max_delta_q);
 	}
 }
 

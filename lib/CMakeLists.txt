@@ -49,6 +49,7 @@ SET(ba_lib_SOURCES
 	utils/Logger.cpp
 	utils/Random.cpp
 	utils/strings.cpp
+	utils/WaveVectorList.cpp
 )
 
 # The lines that follow the following variables:
