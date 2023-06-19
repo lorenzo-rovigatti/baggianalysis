@@ -158,20 +158,19 @@ void StructureFactor::_init_qs(std::shared_ptr<System> system) {
 			double q_mod = glm::length(q_vector);
 
 			if(fabs(q_mod - first_q) > _max_delta_q) {
-				if(first_q != -1) {
-					std::vector<vec3> &curr_q_list = _q_vectors[first_q];
-					if(curr_q_list.size() > _max_n_realisations) {
-						// we randomly shuffle its contents
-						std::random_shuffle(curr_q_list.begin(), curr_q_list.end());
-						// and throw away the last (size - _max_n_realisations) elements
-						curr_q_list.erase(curr_q_list.begin() + _max_n_realisations, curr_q_list.end());
-					}
-				}
-
 				first_q = q_mod;
 			}
 
 			_q_vectors[first_q].push_back(q_vector);
+		}
+	}
+
+	for(auto &q_pair : _q_vectors) {
+		if(q_pair.second.size() > _max_n_realisations) {
+			// we randomly shuffle its contents
+			std::random_shuffle(q_pair.second.begin(), q_pair.second.end());
+			// and throw away the last (size - _max_n_realisations) elements
+			q_pair.second.erase(q_pair.second.begin() + _max_n_realisations, q_pair.second.end());
 		}
 	}
 }
