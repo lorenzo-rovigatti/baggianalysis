@@ -14,5 +14,6 @@ This module contains the Python bindings of the C++ code. The documentation for 
    trajectories.md
    observables.md
    neighbours.md
+   utils.md
 
 ```

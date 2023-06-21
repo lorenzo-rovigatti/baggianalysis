@@ -13,6 +13,7 @@
     MSD
     PoreSize
     RDF
+    SelfISF
     StructureFactor
     
 .. autoclass:: BondOrderParameters
@@ -34,6 +35,8 @@
 .. autoclass:: PoreSize
     
 .. autoclass:: RDF
+
+.. autoclass:: SelfISF
     
 .. autoclass:: StructureFactor
     

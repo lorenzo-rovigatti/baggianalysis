@@ -16,9 +16,12 @@ namespace ba {
 
 StructureFactor::StructureFactor(double largest_q, uint max_n_realisations, double max_delta_q) :
 				SystemObservable<std::map<double, double>>(),
-				_largest_q(largest_q),
-				_max_n_realisations(max_n_realisations),
-				_max_delta_q(max_delta_q) {
+				_q_vectors(largest_q, max_n_realisations, max_delta_q) {
+
+}
+
+StructureFactor::StructureFactor(const WaveVectorList &q_vectors) :
+	_q_vectors(q_vectors) {
 
 }
 
@@ -116,7 +119,7 @@ void StructureFactor::_init_qs(std::shared_ptr<System> system) {
 	if(_last_box != system->box) {
 		_last_box = system->box;
 
-		_q_vectors.init_from_system(system, _largest_q, _max_n_realisations, _max_delta_q);
+		_q_vectors.init(system);
 	}
 }
 
@@ -140,34 +143,52 @@ void export_StructureFactor(py::module &m) {
 
 	py::class_<StructureFactor, std::shared_ptr<StructureFactor>> obs(m, "StructureFactor", "Compute the `structure factor <https://en.wikipedia.org/wiki/Structure_factor>`_ of a system.");
 
-	obs.def(py::init<double, uint, double>());
+	obs.def(py::init<double, uint, double>(), py::arg("largest_q"), py::arg("max_n_realisations"), py::arg("max_delta_q"), R"pb(
+Parameters
+----------
+largest_q: float
+	The length of the largest q vector of interest
+max_n_realisations: int
+	Given a length :math:`q`, this is the maximum number of q vectors that will be averaged over to compute :math:`F_s(q, t)`
+max_delta_q: float
+	q-vectors that are separated by distances smaller than this value will be assigned to the same value of :math:`q`
+)pb");
+
+	obs.def(py::init<WaveVectorList &>(), py::arg("q_vectors"), R"pb(
+Parameters
+----------
+q_vectors: :class:`WaveVectorList`
+	The list of q vectors that will be used to compute the self ISF.
+points_per_cycle: int
+	The number of configurations contained in each chunk in which the trajectory is split up.
+)pb");
 
 	obs.def("clear_b_factors", &StructureFactor::clear_b_factors, R"pbdoc(
-		Reset the b-factors to their default values (b = 1 for each particle).
-	)pbdoc");
+	Reset the b-factors to their default values (b = 1 for each particle).
+)pbdoc");
 
 	obs.def("set_b_factors", &StructureFactor::set_b_factors, py::arg("b_factors"), R"pbdoc(
-		Set the particles' b-factors (that is, the scattering amplitudes) that will be used to compute the structure factor.
+Set the particles' b-factors (that is, the scattering amplitudes) that will be used to compute the structure factor.
 
-		Parameters
-		----------
-		b_factors : List(float)
-			The vector of b-factors to be used in the calculation of the S(q). The length of the vector should be equal to the number of particles in the system.
-	)pbdoc");
+Parameters
+----------
+b_factors : List(float)
+	The vector of b-factors to be used in the calculation of the S(q). The length of the vector should be equal to the number of particles in the system.
+)pbdoc");
 
 	obs.def("destructured_from_system", &StructureFactor::destructured_from_system, py::arg("system"), R"pbdoc(
-		Compute and return the single-particle contributions (splitted as cosine and sine contributions stored in a :class:`DestructuredStructureFactor` instance) that make up the structure factor.
+Compute and return the single-particle contributions (splitted as cosine and sine contributions stored in a :class:`DestructuredStructureFactor` instance) that make up the structure factor.
 
-        Parameters
-        ----------
-		system : :class:`System`
-			The input system.
+Parameters
+----------
+system : :class:`System`
+	The input system.
 
-        Returns
-        -------
-        :class:`DestructuredStructureFactor`
-            The final result of the computation.
-	)pbdoc");
+Returns
+-------
+:class:`DestructuredStructureFactor`
+	The final result of the computation.
+)pbdoc");
 
 	PY_EXPORT_SYSTEM_OBS(obs, StructureFactor);
 }

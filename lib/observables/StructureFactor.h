@@ -22,6 +22,7 @@ struct DestructuredStructureFactor {
 class StructureFactor: public SystemObservable<std::map<double, double>> {
 public:
 	StructureFactor(double largest_q, uint max_n_realisations, double max_delta_q);
+	StructureFactor(const WaveVectorList &q_vectors);
 	StructureFactor() = delete;
 	virtual ~StructureFactor();
 
@@ -36,10 +37,6 @@ protected:
 	std::map<double, double> _finalised_result() override;
 
 	void _init_qs(std::shared_ptr<System> system);
-
-	double _largest_q;
-	uint _max_n_realisations;
-	double _max_delta_q;
 
 	WaveVectorList _q_vectors;
 	vec3 _last_box = vec3(0., 0., 0.);

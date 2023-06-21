@@ -14,13 +14,17 @@ namespace ba {
 SelfISF::SelfISF(double largest_q, uint max_n_realisations, double max_delta_q, uint points_per_cycle) :
 		TrajectoryObservable<std::map<ullint, std::vector<double>>>(),
 		_points_per_cycle(points_per_cycle),
-		_largest_q(largest_q),
-		_max_n_realisations(max_n_realisations),
-		_max_delta_q(max_delta_q) {
+		_q_vectors(largest_q, max_n_realisations, max_delta_q) {
 	if(points_per_cycle < 1) {
 		std::string error = fmt::format("The number of points per cycle ({}) should larger than 0", points_per_cycle);
 		throw std::runtime_error(error);
 	}
+}
+
+SelfISF::SelfISF(const WaveVectorList &q_vectors, uint points_per_cycle) :
+	_points_per_cycle(points_per_cycle),
+	_q_vectors(q_vectors) {
+
 }
 
 SelfISF::~SelfISF() {
@@ -88,7 +92,7 @@ void SelfISF::analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) {
 	uint idx = 0;
 
 	auto frame = trajectory->next_frame();
-	_q_vectors.init_from_system(frame, _largest_q, _max_n_realisations, _max_delta_q);
+	_q_vectors.init(frame);
 	_add_value(0, std::vector<double>(_q_vectors.size(), 1.), n_conf); // at time t = 0 the correlation is always 1
 	while(frame != nullptr) {
 		uint N_conf = frame->N();
@@ -140,6 +144,29 @@ void SelfISF::analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) {
 	}
 }
 
+void SelfISF::analyse_and_print(std::shared_ptr<BaseTrajectory> trajectory, std::string output_file) {
+	analyse_trajectory(trajectory);
+
+	std::ofstream output(output_file);
+
+	auto q_modules = _q_vectors.q_modules();
+	output << "# time";
+	for(auto q : q_modules) {
+		output << " " << q;
+	}
+	output << std::endl;
+
+	for(auto &pair : _result) {
+		output << pair.first;
+		for(auto &cf : pair.second) {
+			output << " " << cf;
+		}
+		output << std::endl;
+	}
+
+	output.close();
+}
+
 #ifdef PYTHON_BINDINGS
 
 void export_SelfISF(py::module &m) {
@@ -165,6 +192,19 @@ max_delta_q: float
     q-vectors that are separated by distances smaller than this value will be assigned to the same value of :math:`q`
 points_per_cycle: int
     The number of configurations contained in each chunk in which the trajectory is split up.
+)pb");
+
+	obs.def(py::init<WaveVectorList &, uint>(), py::arg("q_vectors"), py::arg("max_n_realisations"), R"pb(
+Parameters
+----------
+q_vectors: :class:`WaveVectorList`
+	The list of q vectors that will be used to compute the self ISF.
+points_per_cycle: int
+	The number of configurations contained in each chunk in which the trajectory is split up.
+)pb");
+
+	obs.def("analyse_and_print", &SelfISF::analyse_and_print, py::arg("trajectory"), py::arg("output_file"), R"pb(
+Analyse the trajectory and print the self ISF directly to the given file.
 )pb");
 
 	PY_EXPORT_TRAJECTORY_OBS(obs, SelfISF);
