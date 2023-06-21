@@ -8,6 +8,7 @@
 
     BondOrderParameters
     ClusterList
+    CollectiveISF
     ConvexHull
     FormFactor
     MSD
@@ -19,6 +20,8 @@
 .. autoclass:: BondOrderParameters
 
 .. autoclass:: ClusterList
+
+.. autoclass:: CollectiveISF
     
 .. autoclass:: ConvexHull
     

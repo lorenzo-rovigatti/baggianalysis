@@ -17,6 +17,7 @@ SET(ba_lib_SOURCES
 	neighbour_finders/NeighbourFinder.cpp
 	neighbour_finders/SANNFinder.cpp
 	observables/ClusterList.cpp
+	observables/CollectiveISF.cpp
 	observables/ConvexHull.cpp
 	observables/FormFactor.cpp
 	observables/GyrationRadius.cpp

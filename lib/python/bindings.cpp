@@ -28,6 +28,7 @@
 #include "../observables/BondOrderParameters.h"
 #endif
 #include "../observables/ClusterList.h"
+#include "../observables/CollectiveISF.h"
 #include "../observables/ConvexHull.h"
 #include "../observables/FormFactor.h"
 #include "../observables/GyrationRadius.h"
@@ -101,6 +102,7 @@ PYBIND11_MODULE(core, m) {
 	ba::export_BondOrderParameters(m);
 #endif
 	ba::export_ClusterList(m);
+	ba::export_CollectiveISF(m);
 	ba::export_ConvexHull(m);
 	ba::export_FormFactor(m);
 	ba::export_GyrationRadius(m);
