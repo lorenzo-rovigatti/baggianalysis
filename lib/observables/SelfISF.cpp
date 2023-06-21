@@ -68,17 +68,12 @@ std::vector<double> SelfISF::_conf_conf_SelfISF(std::shared_ptr<System> first, s
 		for(auto q_vector : q_list) {
 			for(uint i = 0; i < first->N(); i++) {
 				double qr = glm::dot(q_vector, diffs[i]);
-//				q_self_isf += std::cos(qr);
 				q_self_isf += utils::cos(qr);
-
-				printf("%lf %lf %lf\n", qr, std::cos(qr), utils::cos(qr));
 			}
 		}
 		q_self_isf /= (first->N() * q_list.size());
 		values.push_back(q_self_isf);
 	}
-
-	exit(0);
 
 	return values;
 }

@@ -25,6 +25,16 @@ inline T cos(T x) noexcept {
 	return x;
 }
 
+template<typename T>
+inline T sin(T x) noexcept {
+	constexpr T tp = -1. / (2. * M_PI);
+	x *= tp;
+	x -= std::floor(x + T(.5));
+	x *= T(16.) * (std::abs(x) - T(.5));
+	x += T(.225) * x * (std::abs(x) - T(1.));
+	return x;
+}
+
 }
 
 }
