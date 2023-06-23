@@ -42,7 +42,7 @@ void WaveVectorList::init(std::shared_ptr<System> syst) {
 }
 
 void WaveVectorList::init(const vec3 box) {
-	this->clear();
+	q_vectors.clear();
 
 	std::list<vec3> all_qs;
 	double sqr_max_q = SQR(_q_max);
@@ -88,7 +88,7 @@ void WaveVectorList::init(const vec3 box) {
 			first_q = q_mod;
 		}
 
-		(*this)[first_q].push_back(q_vector);
+		q_vectors[first_q].push_back(q_vector);
 	}
 
 	// clean up the list so that only the q vectors that the user wants are retained
@@ -105,19 +105,19 @@ void WaveVectorList::init(const vec3 box) {
 				return std::abs(x - q) < std::abs(y - q);
 			});
 
-			filtered_q_vectors[closest_q] = this->at(closest_q);
+			filtered_q_vectors[closest_q] = q_vectors.at(closest_q);
 		}
 
-		this->clear();
-		this->insert(filtered_q_vectors.begin(), filtered_q_vectors.end());
+		q_vectors.clear();
+		q_vectors.insert(filtered_q_vectors.begin(), filtered_q_vectors.end());
 
 	}
 	else { // use q_min, q_max and _q_interval
 		double last_retained_q = -1.0;
-		for(auto q_pair = std::begin(*this); q_pair != std::end(*this);) {
+		for(auto q_pair = std::begin(q_vectors); q_pair != std::end(q_vectors);) {
 			// discard all those q vectors with q < _q_min
 			if(q_pair->first < _q_min) {
-				q_pair = this->erase(q_pair);
+				q_pair = q_vectors.erase(q_pair);
 				continue;
 			}
 
@@ -127,7 +127,7 @@ void WaveVectorList::init(const vec3 box) {
 			}
 			else if(_q_interval > 0.) {
 				if((q_pair->first - last_retained_q) < _q_interval) {
-					q_pair = this->erase(q_pair);
+					q_pair = q_vectors.erase(q_pair);
 					continue;
 				}
 				last_retained_q = q_pair->first;
@@ -137,7 +137,7 @@ void WaveVectorList::init(const vec3 box) {
 		}
 	}
 
-	for(auto &q_pair : *this) {
+	for(auto &q_pair : q_vectors) {
 		// randomly pick max_n_realisations for each surviving q
 		if(q_pair.second.size() > _max_n_realisations) {
 			// we randomly shuffle its contents
@@ -151,7 +151,7 @@ void WaveVectorList::init(const vec3 box) {
 std::vector<double> WaveVectorList::q_modules() {
 	std::vector<double> keys;
 
-	for(auto &q_pair: *this) {
+	for(auto &q_pair: q_vectors) {
 		keys.push_back(q_pair.first);
 	}
 
@@ -214,6 +214,8 @@ system : :class:`System`
 	obs.def("q_modules", &WaveVectorList::q_modules, R"pb(
 Analyse the trajectory and print the self ISF directly to the given file.
 )pb");
+
+	obs.def_readwrite("q_vectors", &WaveVectorList::q_vectors, "A dictionary storing all the q vectors associated to this instance.");
 }
 
 } /* namespace ba */

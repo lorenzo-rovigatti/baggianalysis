@@ -38,7 +38,7 @@ protected:
 
 	void _init_qs(std::shared_ptr<System> system);
 
-	WaveVectorList _q_vectors;
+	WaveVectorList _q_list;
 	vec3 _last_box = vec3(0., 0., 0.);
 	vector_scalar _b_factors;
 };

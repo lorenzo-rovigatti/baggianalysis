@@ -14,7 +14,7 @@ namespace ba {
 SelfISF::SelfISF(double largest_q, uint max_n_realisations, double max_delta_q, uint points_per_cycle) :
 		TrajectoryObservable<std::map<ullint, std::vector<double>>>(),
 		_points_per_cycle(points_per_cycle),
-		_q_vectors(largest_q, max_n_realisations, max_delta_q) {
+		_q_list(largest_q, max_n_realisations, max_delta_q) {
 	if(points_per_cycle < 1) {
 		std::string error = fmt::format("The number of points per cycle ({}) should larger than 0", points_per_cycle);
 		throw std::runtime_error(error);
@@ -23,7 +23,7 @@ SelfISF::SelfISF(double largest_q, uint max_n_realisations, double max_delta_q, 
 
 SelfISF::SelfISF(const WaveVectorList &q_vectors, uint points_per_cycle) :
 	_points_per_cycle(points_per_cycle),
-	_q_vectors(q_vectors) {
+	_q_list(q_vectors) {
 
 }
 
@@ -65,7 +65,7 @@ std::vector<double> SelfISF::_conf_conf_SelfISF(std::shared_ptr<System> first, s
 	};
 	std::transform(first->particles().begin(), first->particles().end(), second->particles().begin(), diffs.begin(), binary_op);
 
-	for(auto &pair : _q_vectors) {
+	for(auto &pair : _q_list.q_vectors) {
 		std::vector<vec3> &q_list = pair.second;
 
 		double q_self_isf = 0.;
@@ -92,8 +92,8 @@ void SelfISF::analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) {
 	uint idx = 0;
 
 	auto frame = trajectory->next_frame();
-	_q_vectors.init(frame);
-	_add_value(0, std::vector<double>(_q_vectors.size(), 1.), n_conf); // at time t = 0 the correlation is always 1
+	_q_list.init(frame);
+	_add_value(0, std::vector<double>(_q_list.q_vectors.size(), 1.), n_conf); // at time t = 0 the correlation is always 1
 	while(frame != nullptr) {
 		uint N_conf = frame->N();
 		if(N_first_conf == 0) {
@@ -149,7 +149,7 @@ void SelfISF::analyse_and_print(std::shared_ptr<BaseTrajectory> trajectory, std:
 
 	std::ofstream output(output_file);
 
-	auto q_modules = _q_vectors.q_modules();
+	auto q_modules = _q_list.q_modules();
 	output << "# time";
 	for(auto q : q_modules) {
 		output << " " << q;

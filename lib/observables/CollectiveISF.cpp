@@ -16,7 +16,7 @@ namespace ba {
 CollectiveISF::CollectiveISF(double largest_q, uint max_n_realisations, double max_delta_q, uint points_per_cycle) :
 				TrajectoryObservable<std::map<ullint, std::vector<double>>>(),
 				_points_per_cycle(points_per_cycle),
-				_q_vectors(largest_q, max_n_realisations, max_delta_q) {
+				_q_list(largest_q, max_n_realisations, max_delta_q) {
 	if(points_per_cycle < 1) {
 		std::string error = fmt::format("The number of points per cycle ({}) should larger than 0", points_per_cycle);
 		throw std::runtime_error(error);
@@ -25,7 +25,7 @@ CollectiveISF::CollectiveISF(double largest_q, uint max_n_realisations, double m
 
 CollectiveISF::CollectiveISF(const WaveVectorList &q_vectors, uint points_per_cycle) :
 				_points_per_cycle(points_per_cycle),
-				_q_vectors(q_vectors) {
+				_q_list(q_vectors) {
 
 }
 
@@ -62,7 +62,7 @@ std::vector<double> CollectiveISF::_conf_conf_CollectiveISF(std::shared_ptr<Syst
 	vec3 com_first = first->com();
 	vec3 com_second = second->com();
 
-	for(auto &pair : _q_vectors) {
+	for(auto &pair : _q_list.q_vectors) {
 		std::vector<vec3> &q_list = pair.second;
 
 		std::complex<double> q_collective_isf = 0.;
@@ -93,7 +93,7 @@ void CollectiveISF::analyse_trajectory(std::shared_ptr<BaseTrajectory> trajector
 	uint idx = 0;
 
 	auto frame = trajectory->next_frame();
-	_q_vectors.init(frame);
+	_q_list.init(frame);
 	while(frame != nullptr) {
 		uint N_conf = frame->N();
 		if(N_first_conf == 0) {
@@ -144,7 +144,7 @@ void CollectiveISF::analyse_and_print(std::shared_ptr<BaseTrajectory> trajectory
 
 	std::ofstream output(output_file);
 
-	auto q_modules = _q_vectors.q_modules();
+	auto q_modules = _q_list.q_modules();
 	output << "# time";
 	for(auto q : q_modules) {
 		output << " " << q;

@@ -29,7 +29,7 @@ protected:
 
 	int _points_per_cycle;
 
-	WaveVectorList _q_vectors;
+	WaveVectorList _q_list;
 };
 
 #ifdef PYTHON_BINDINGS

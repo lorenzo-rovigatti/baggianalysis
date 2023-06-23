@@ -16,12 +16,12 @@ namespace ba {
 
 StructureFactor::StructureFactor(double largest_q, uint max_n_realisations, double max_delta_q) :
 				SystemObservable<std::map<double, double>>(),
-				_q_vectors(largest_q, max_n_realisations, max_delta_q) {
+				_q_list(largest_q, max_n_realisations, max_delta_q) {
 
 }
 
 StructureFactor::StructureFactor(const WaveVectorList &q_vectors) :
-	_q_vectors(q_vectors) {
+	_q_list(q_vectors) {
 
 }
 
@@ -44,13 +44,13 @@ DestructuredStructureFactor StructureFactor::destructured_from_system(std::share
 
 	// find the q-module containing the largest number of q vectors
 	uint largest_q_size = 0;
-	for(auto pair : _q_vectors) {
+	for(auto pair : _q_list.q_vectors) {
 		if(pair.second.size() > largest_q_size) {
 			largest_q_size = pair.second.size();
 		}
 	}
 
-	for(auto pair : _q_vectors) {
+	for(auto pair : _q_list.q_vectors) {
 		double q_module = pair.first;
 		std::vector<vec3> &q_vectors = pair.second;
 		double norm = std::sqrt(q_vectors.size() * system->N());
@@ -92,7 +92,7 @@ void StructureFactor::analyse_system(std::shared_ptr<System> system) {
 		throw std::runtime_error(error);
 	}
 
-	for(auto pair : _q_vectors) {
+	for(auto pair : _q_list.q_vectors) {
 		double q_module = pair.first;
 		std::vector<vec3> &q_vectors = pair.second;
 		for(auto q_vector : q_vectors) {
@@ -119,7 +119,7 @@ void StructureFactor::_init_qs(std::shared_ptr<System> system) {
 	if(_last_box != system->box) {
 		_last_box = system->box;
 
-		_q_vectors.init(system);
+		_q_list.init(system);
 	}
 }
 

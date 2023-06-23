@@ -15,7 +15,7 @@
 
 namespace ba {
 
-struct WaveVectorList : public std::map<double, std::vector<vec3>> {
+struct WaveVectorList {
 public:
 	WaveVectorList(const std::vector<double> &pq_modules, uint pmax_n_realisations);
 	WaveVectorList(double pq_max, uint pmax_n_realisations, double pmax_delta_q);
@@ -26,6 +26,8 @@ public:
 
 	void init(std::shared_ptr<System> syst);
 	void init(const vec3 box);
+
+	std::map<double, std::vector<vec3>> q_vectors;
 
 protected:
 	bool _init_from_list = false;
