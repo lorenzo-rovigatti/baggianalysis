@@ -5,6 +5,7 @@ cmake_policy(SET CMP0054 NEW)
 OPTION(Python "Enable Python bindings" ON)
 OPTION(Debug "Set to ON to compile with debug symbols" OFF)
 OPTION(G "Set to ON to compile with optimisations and debug symbols" OFF)
+OPTION(COMPILER_EXTENSIONS "Set to ON to enable compiler (most likely GNU) C++ extensions" ON)
 
 PROJECT(baggianalysis CXX)
 
@@ -44,16 +45,9 @@ IF(MOSIX)
 	MESSAGE(STATUS "Compiling with Mosix support")
 ENDIF(MOSIX)
 
-IF(CMAKE_VERSION VERSION_LESS "3.1")
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
-ELSE()
-	SET(CMAKE_CXX_STANDARD 14)
-	SET(CMAKE_CXX_STANDARD_REQUIRED ON)
-ENDIF()
-
-if(CMAKE_VERSION VERSION_LESS "2.9")
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-ENDIF()
+SET(CMAKE_CXX_STANDARD 14)
+SET(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS ${COMPILER_EXTENSIONS})
 
 ADD_DEFINITIONS(-Wall -Wno-int-in-bool-context)
 

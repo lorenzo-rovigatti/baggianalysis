@@ -44,6 +44,7 @@ Here is a list of options that can be passed to cmake during the pre-compilation
 * `-DPython=On|Off` enables|disables Python bindings (defaults to `On`)
 * `-DDebug=On|Off` compiles with|without debug symbols and without|with optimisation flags (defaults to `Off`)
 * `-DG=On|Off` compiles with|without debug symbols and optimisation flags (defaults to `Off`)
+* `-DCOMPILER_EXTENSIONS=On|Off` enables|disables compiler (most likely GNU) C++ extensions (defaults to `On`). Disable it to compiler with older compilers (*e.g.* g++6).
 
 If `cmake` cannot find some of the libraries required, add their paths to the `CMAKE_FIND_ROOT_PATH` set command which can be found close to the top of the `CMakeLists.txt` file. 
 

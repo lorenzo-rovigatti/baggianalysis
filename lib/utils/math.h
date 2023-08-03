@@ -8,8 +8,6 @@
 #ifndef UTILS_MATH_H_
 #define UTILS_MATH_H_
 
-#include <cmath>
-
 namespace ba {
 
 namespace utils {
