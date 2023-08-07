@@ -343,88 +343,88 @@ using a constructor that takes as its only parameter the :class:`System` instanc
     )pbdoc");
 
 	topology.def("add_bond", static_cast<void (Topology::*)(int, int)>(&Topology::add_bond), py::arg("p"), py::arg("q"), R"pbdoc(
-        Adds a bond between a pair of particles.
+Adds a bond between a pair of particles.
 
-        Parameters
-        ----------
-		p : int
-			The index of the first particle of the pair.
-		q : int
-			The index of the second particle of the pair.
-	)pbdoc");
+Parameters
+----------
+p : int
+	The index of the first particle of the pair.
+q : int
+	The index of the second particle of the pair.
+)pbdoc");
 
 	topology.def("add_bond", static_cast<void (Topology::*)(std::string, int, int)>(&Topology::add_bond), py::arg("bond_type"), py::arg("p"), py::arg("q"), R"pbdoc(
-		Adds a typed bond between a pair of particles.
+Adds a typed bond between a pair of particles.
 
-		Parameters
-		----------
-		bond_type : str
-			The bond type.
-		p : int
-			The index of the first particle of the pair.
-		q : int
-			The index of the second particle of the pair.
-	)pbdoc");
+Parameters
+----------
+bond_type : str
+	The bond type.
+p : int
+	The index of the first particle of the pair.
+q : int
+	The index of the second particle of the pair.
+)pbdoc");
 
 	topology.def("add_angle", static_cast<void (Topology::*)(int, int, int)>(&Topology::add_angle), py::arg("p"), py::arg("q"), py::arg("r"), R"pbdoc(
-        Adds an angle formed by a triplet of particles.
+Adds an angle formed by a triplet of particles.
 
-        Parameters
-        ----------
-        p : int
-            The index of the first particle of the triplet.
-        q : int
-            The index of the second (central) particle of the triplet.
-        r : int
-            The index of the third (and last) particle of the triplet.
-    )pbdoc");
+Parameters
+----------
+p : int
+	The index of the first particle of the triplet.
+q : int
+	The index of the second (central) particle of the triplet.
+r : int
+	The index of the third (and last) particle of the triplet.
+)pbdoc");
 
 	topology.def("add_angle", static_cast<void (Topology::*)(std::string, int, int, int)>(&Topology::add_angle), py::arg("angle_type"), py::arg("p"), py::arg("q"), py::arg("r"), R"pbdoc(
-		Adds a typed angle formed by a triplet of particles.
+Adds a typed angle formed by a triplet of particles.
 
-		Parameters
-		----------
-		angle_type : str
-			The type of the angle.
-		p : int
-			The index of the first particle of the triplet.
-		q : int
-			The index of the second (central) particle of the triplet.
-		r : int
-			The index of the third (and last) particle of the triplet.
-	)pbdoc");
+Parameters
+----------
+angle_type : str
+	The type of the angle.
+p : int
+	The index of the first particle of the triplet.
+q : int
+	The index of the second (central) particle of the triplet.
+r : int
+	The index of the third (and last) particle of the triplet.
+)pbdoc");
 
 	topology.def("add_dihedral", static_cast<void (Topology::*)(int, int, int, int)>(&Topology::add_dihedral), py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"), R"pbdoc(
-        Adds a dihedral formed by four particles.
+Adds a dihedral formed by four particles.
 
-        Parameters
-        ----------
-        p : int
-            The index of the first particle.
-        q : int
-            The index of the second particle.
-        r : int
-            The index of the third particle.
-        s : int
-            The index of the fourth particle.
-    )pbdoc");
+Parameters
+----------
+p : int
+	The index of the first particle.
+q : int
+	The index of the second particle.
+r : int
+	The index of the third particle.
+s : int
+	The index of the fourth particle.
+)pbdoc");
 
 	topology.def("add_dihedral", static_cast<void (Topology::*)(std::string, int, int, int, int)>(&Topology::add_dihedral), py::arg("dihedral_type"), py::arg("p"), py::arg("q"), py::arg("r"), py::arg("s"), R"pbdoc(
-		Adds a typed dihedral formed by four particles.
+Adds a typed dihedral formed by four particles.
 
-		Parameters
-		----------
-		dihedral_type : str
-			The type of the dyhedral.
-		p : int
-			The index of the first particle.
-		q : int
-			The index of the second particle.
-		r : int
-			The index of the third particle.
-		s : int
-			The index of the fourth particle.
-	)pbdoc");
+Parameters
+----------
+dihedral_type : str
+	The type of the dyhedral.
+p : int
+	The index of the first particle.
+q : int
+	The index of the second particle.
+r : int
+	The index of the third particle.
+s : int
+	The index of the fourth particle.
+)pbdoc");
 
 	topology.def("add_chain_bonds", static_cast<void (Topology::*)(int, int)>(&Topology::add_chain_bonds), py::arg("first_idx"), py::arg("last_idx"), R"pbdoc(
 		Add bonds between consecutive pairs of particles in the given index range. Note that both indexes will be included.
