@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Particle-related classes &mdash; baggianalysis 0.5.1.dev18+g5d9dcc6 documentation</title>
+  <title>Particle-related classes &mdash; baggianalysis 0.5.1.dev30+g517a0d3 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.5.1.dev18+g5d9dcc6
+                0.5.1.dev30+g517a0d3
               </div>
             
           
@@ -86,7 +86,20 @@
               
             
             
-              <ul class="current">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install-with-pip">Install with <code class="docutils literal notranslate"><span class="pre">pip</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#manual-install">Manual install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#cmake-options">cmake options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#common-compilation-issues">Common compilation issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#test-suite">Test suite</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="core.html">The core module</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Particle-related classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="topology.html">Topology-related classes and utility functions</a></li>
@@ -96,6 +109,7 @@
 <li class="toctree-l2"><a class="reference internal" href="trajectories.html">Trajectory classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="observables.html">Observables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../converters.html">The converters module</a><ul class="simple">
@@ -243,7 +257,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the particle. Note that this value cannot be changed later on.</p></li>
 <li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The type of the particle.</p></li>
-<li><p><strong>position</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><em>numpy.ndarray</em></a>) – The position of the particle</p></li>
+<li><p><strong>position</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><em>numpy.ndarray</em></a>) – The position of the particle</p></li>
 </ul>
 </dd>
 </dl>
@@ -256,8 +270,8 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the particle. Note that this value cannot be changed later on.</p></li>
 <li><p><strong>type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The type of the particle.</p></li>
-<li><p><strong>position</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><em>numpy.ndarray</em></a>) – The position of the particle.</p></li>
-<li><p><strong>velocity</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><em>numpy.ndarray</em></a>) – The velocity of the particle.</p></li>
+<li><p><strong>position</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><em>numpy.ndarray</em></a>) – The position of the particle.</p></li>
+<li><p><strong>velocity</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><em>numpy.ndarray</em></a>) – The velocity of the particle.</p></li>
 </ul>
 </dd>
 </dl>
@@ -391,7 +405,7 @@ the current particle is <cite>not</cite> added to the list of <code class="docut
 <dd><p>The molecule to which this particle belongs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><em>numpy.ndarray</em></a>) – The new orientation vector.</p>
+<dd class="field-odd"><p><strong>v</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><em>numpy.ndarray</em></a>) – The new orientation vector.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -552,7 +566,7 @@ list of interaction centres or the components of the orientation matrix.</p>
 <dd><p>The particle’s position.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)">numpy.ndarray</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)">numpy.ndarray</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -587,7 +601,7 @@ list of interaction centres or the components of the orientation matrix.</p>
 <dd><p>Add <code class="docutils literal notranslate"><span class="pre">delta</span></code> to the particle coordinates.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>delta</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><em>numpy.ndarray</em></a>) – The shift to be added to the particle’s coordinates.</p>
+<dd class="field-odd"><p><strong>delta</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><em>numpy.ndarray</em></a>) – The shift to be added to the particle’s coordinates.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -609,7 +623,7 @@ list of interaction centres or the components of the orientation matrix.</p>
 <dd><p>The particle’s velocity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)">numpy.ndarray</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)">numpy.ndarray</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -818,7 +832,7 @@ list of interaction centres or the components of the orientation matrix.</p>
 <dd><p>Set the centre of mass of the set to a new value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>new_com</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.24)"><em>numpy.ndarray</em></a>) – The new centre of mass of the set.</p>
+<dd class="field-odd"><p><strong>new_com</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><em>numpy.ndarray</em></a>) – The new centre of mass of the set.</p>
 </dd>
 </dl>
 </dd></dl>

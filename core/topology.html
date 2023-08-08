@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Topology-related classes and utility functions &mdash; baggianalysis 0.5.1.dev18+g5d9dcc6 documentation</title>
+  <title>Topology-related classes and utility functions &mdash; baggianalysis 0.5.1.dev30+g517a0d3 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.5.1.dev18+g5d9dcc6
+                0.5.1.dev30+g517a0d3
               </div>
             
           
@@ -86,7 +86,20 @@
               
             
             
-              <ul class="current">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install-with-pip">Install with <code class="docutils literal notranslate"><span class="pre">pip</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#manual-install">Manual install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#cmake-options">cmake options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#common-compilation-issues">Common compilation issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#test-suite">Test suite</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="core.html">The core module</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="particles.html">Particle-related classes</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Topology-related classes and utility functions</a></li>
@@ -96,6 +109,7 @@
 <li class="toctree-l2"><a class="reference internal" href="trajectories.html">Trajectory classes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="observables.html">Observables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">Utilities</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../converters.html">The converters module</a><ul class="simple">
@@ -238,110 +252,113 @@ using a constructor that takes as its only parameter the <a class="reference int
 <dt id="baggianalysis.core.Topology.add_angle">
 <code class="sig-name descname">add_angle</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Topology.add_angle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overloaded function.</p>
-<ol class="arabic">
-<li><p>add_angle(self: baggianalysis.core.Topology, p: int, q: int, r: int) -&gt; None</p>
-<blockquote>
-<div><p>Adds an angle formed by a triplet of particles.</p>
-<dl class="simple">
-<dt>p<span class="classifier">int</span></dt><dd><p>The index of the first particle of the triplet.</p>
-</dd>
-<dt>q<span class="classifier">int</span></dt><dd><p>The index of the second (central) particle of the triplet.</p>
-</dd>
-<dt>r<span class="classifier">int</span></dt><dd><p>The index of the third (and last) particle of the triplet.</p>
-</dd>
-</dl>
-</div></blockquote>
-</li>
-<li><p>add_angle(self: baggianalysis.core.Topology, angle_type: str, p: int, q: int, r: int) -&gt; None</p>
-<blockquote>
-<div><p>Adds a typed angle formed by a triplet of particles.</p>
-<dl class="simple">
-<dt>angle_type<span class="classifier">str</span></dt><dd><p>The type of the angle.</p>
-</dd>
-<dt>p<span class="classifier">int</span></dt><dd><p>The index of the first particle of the triplet.</p>
-</dd>
-<dt>q<span class="classifier">int</span></dt><dd><p>The index of the second (central) particle of the triplet.</p>
-</dd>
-<dt>r<span class="classifier">int</span></dt><dd><p>The index of the third (and last) particle of the triplet.</p>
-</dd>
-</dl>
-</div></blockquote>
-</li>
+<ol class="arabic simple">
+<li><p>add_angle(self: baggianalysis.core.Topology, p: int, q: int, r: int) -&gt; None</p></li>
 </ol>
+<p>Adds an angle formed by a triplet of particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the first particle of the triplet.</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the second (central) particle of the triplet.</p></li>
+<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the third (and last) particle of the triplet.</p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>add_angle(self: baggianalysis.core.Topology, angle_type: str, p: int, q: int, r: int) -&gt; None</p></li>
+</ol>
+<p>Adds a typed angle formed by a triplet of particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>angle_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The type of the angle.</p></li>
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the first particle of the triplet.</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the second (central) particle of the triplet.</p></li>
+<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the third (and last) particle of the triplet.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.Topology.add_bond">
 <code class="sig-name descname">add_bond</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Topology.add_bond" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overloaded function.</p>
-<ol class="arabic">
-<li><p>add_bond(self: baggianalysis.core.Topology, p: int, q: int) -&gt; None</p>
-<blockquote>
-<div><p>Adds a bond between a pair of particles.</p>
-<blockquote>
-<div><dl class="simple">
-<dt>p<span class="classifier">int</span></dt><dd><p>The index of the first particle of the pair.</p>
-</dd>
-<dt>q<span class="classifier">int</span></dt><dd><p>The index of the second particle of the pair.</p>
-</dd>
-</dl>
-</div></blockquote>
-</div></blockquote>
-</li>
-<li><p>add_bond(self: baggianalysis.core.Topology, bond_type: str, p: int, q: int) -&gt; None</p>
-<blockquote>
-<div><p>Adds a typed bond between a pair of particles.</p>
-<dl class="simple">
-<dt>bond_type<span class="classifier">str</span></dt><dd><p>The bond type.</p>
-</dd>
-<dt>p<span class="classifier">int</span></dt><dd><p>The index of the first particle of the pair.</p>
-</dd>
-<dt>q<span class="classifier">int</span></dt><dd><p>The index of the second particle of the pair.</p>
-</dd>
-</dl>
-</div></blockquote>
-</li>
+<ol class="arabic simple">
+<li><p>add_bond(self: baggianalysis.core.Topology, p: int, q: int) -&gt; None</p></li>
 </ol>
+<p>Adds a bond between a pair of particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the first particle of the pair.</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the second particle of the pair.</p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>add_bond(self: baggianalysis.core.Topology, bond_type: str, p: int, q: int) -&gt; None</p></li>
+</ol>
+<p>Adds a typed bond between a pair of particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bond_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The bond type.</p></li>
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the first particle of the pair.</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the second particle of the pair.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.Topology.add_chain_bonds">
+<code class="sig-name descname">add_chain_bonds</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.Topology" title="baggianalysis.core.Topology">baggianalysis.core.Topology</a></span></em>, <em class="sig-param"><span class="n">first_idx</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></span></em>, <em class="sig-param"><span class="n">last_idx</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)">None</a><a class="headerlink" href="#baggianalysis.core.Topology.add_chain_bonds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add bonds between consecutive pairs of particles in the given index range. Note that both indexes will be included.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>first_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the particle at the beginning of the chain.</p></li>
+<li><p><strong>last_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the particle at the end of the chain.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="baggianalysis.core.Topology.add_dihedral">
 <code class="sig-name descname">add_dihedral</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.Topology.add_dihedral" title="Permalink to this definition">¶</a></dt>
 <dd><p>Overloaded function.</p>
-<ol class="arabic">
-<li><p>add_dihedral(self: baggianalysis.core.Topology, p: int, q: int, r: int, s: int) -&gt; None</p>
-<blockquote>
-<div><p>Adds a dihedral formed by four particles.</p>
-<dl class="simple">
-<dt>p<span class="classifier">int</span></dt><dd><p>The index of the first particle.</p>
-</dd>
-<dt>q<span class="classifier">int</span></dt><dd><p>The index of the second particle.</p>
-</dd>
-<dt>r<span class="classifier">int</span></dt><dd><p>The index of the third particle.</p>
-</dd>
-<dt>s<span class="classifier">int</span></dt><dd><p>The index of the fourth particle.</p>
-</dd>
-</dl>
-</div></blockquote>
-</li>
-<li><p>add_dihedral(self: baggianalysis.core.Topology, dihedral_type: str, p: int, q: int, r: int, s: int) -&gt; None</p>
-<blockquote>
-<div><p>Adds a typed dihedral formed by four particles.</p>
-<dl class="simple">
-<dt>dihedral_type<span class="classifier">str</span></dt><dd><p>The type of the dyhedral.</p>
-</dd>
-<dt>p<span class="classifier">int</span></dt><dd><p>The index of the first particle.</p>
-</dd>
-<dt>q<span class="classifier">int</span></dt><dd><p>The index of the second particle.</p>
-</dd>
-<dt>r<span class="classifier">int</span></dt><dd><p>The index of the third particle.</p>
-</dd>
-<dt>s<span class="classifier">int</span></dt><dd><p>The index of the fourth particle.</p>
-</dd>
-</dl>
-</div></blockquote>
-</li>
+<ol class="arabic simple">
+<li><p>add_dihedral(self: baggianalysis.core.Topology, p: int, q: int, r: int, s: int) -&gt; None</p></li>
 </ol>
+<p>Adds a dihedral formed by four particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the first particle.</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the second particle.</p></li>
+<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the third particle.</p></li>
+<li><p><strong>s</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the fourth particle.</p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>add_dihedral(self: baggianalysis.core.Topology, dihedral_type: str, p: int, q: int, r: int, s: int) -&gt; None</p></li>
+</ol>
+<p>Adds a typed dihedral formed by four particles.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dihedral_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The type of the dyhedral.</p></li>
+<li><p><strong>p</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the first particle.</p></li>
+<li><p><strong>q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the second particle.</p></li>
+<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the third particle.</p></li>
+<li><p><strong>s</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The index of the fourth particle.</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">

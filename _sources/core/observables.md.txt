@@ -8,16 +8,20 @@
 
     BondOrderParameters
     ClusterList
+    CollectiveISF
     ConvexHull
     FormFactor
     MSD
     PoreSize
     RDF
+    SelfISF
     StructureFactor
     
 .. autoclass:: BondOrderParameters
 
 .. autoclass:: ClusterList
+
+.. autoclass:: CollectiveISF
     
 .. autoclass:: ConvexHull
     
@@ -34,6 +38,8 @@
 .. autoclass:: PoreSize
     
 .. autoclass:: RDF
+
+.. autoclass:: SelfISF
     
 .. autoclass:: StructureFactor
     

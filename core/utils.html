@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Utilities &mdash; baggianalysis 0.5.1.dev30+g517a0d3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The converters module" href="../converters.html" />
+    <link rel="prev" title="Neighbour finders" href="neighbours.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> baggianalysis
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5.1.dev30+g517a0d3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install-with-pip">Install with <code class="docutils literal notranslate"><span class="pre">pip</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#manual-install">Manual install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#cmake-options">cmake options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../install.html#common-compilation-issues">Common compilation issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#test-suite">Test suite</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="core.html">The core module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="particles.html">Particle-related classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topology.html">Topology-related classes and utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parsers.html">Configuration parsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exporters.html">Configuration exporters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trajectories.html">Trajectory classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="observables.html">Observables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="neighbours.html">Neighbour finders</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../converters.html">The converters module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../traj.html">The traj module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../utils.html">The utils module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../extending/parser.html">Writing a parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extending/topology.html">Writing a function to parse custom topologies</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">baggianalysis</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="core.html">The core module</a> &raquo;</li>
+        
+      <li>Utilities</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/core/utils.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="utilities">
+<h1>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h1>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.CellLists" title="baggianalysis.core.CellLists"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CellLists</span></code></a></p></td>
+<td><p>A data structure to manage cell lists of particles in a cubic box.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.WaveVectorList" title="baggianalysis.core.WaveVectorList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WaveVectorList</span></code></a></p></td>
+<td><p>A class storing list of q-vectors that are used to compute correlation functions in Fourier space (see <em>e.g.</em> <a class="reference internal" href="observables.html#baggianalysis.core.StructureFactor" title="baggianalysis.core.StructureFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">StructureFactor</span></code></a> or <a class="reference internal" href="observables.html#baggianalysis.core.SelfISF" title="baggianalysis.core.SelfISF"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelfISF</span></code></a>).</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt id="baggianalysis.core.CellLists">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">CellLists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.CellLists" title="baggianalysis.core.CellLists">baggianalysis.core.CellLists</a></span></em>, <em class="sig-param"><span class="n">init_shifts</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)">None</a><a class="headerlink" href="#baggianalysis.core.CellLists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<p>A data structure to manage cell lists of particles in a cubic box.</p>
+<p>The constructor takes one mandatory arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>init_shifts</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – Initialise the cell shifts. Defaults to False.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="baggianalysis.core.CellLists.add_particle">
+<code class="sig-name descname">add_particle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.CellLists" title="baggianalysis.core.CellLists">baggianalysis.core.CellLists</a></span></em>, <em class="sig-param"><span class="n">p</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">next_idx</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)">None</a><a class="headerlink" href="#baggianalysis.core.CellLists.add_particle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a particle to the cells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The particle to be added.</p></li>
+<li><p><strong>next_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – The id used to index the particle internally. In most cases this is just the index of the particle.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.CellLists.get_cell">
+<code class="sig-name descname">get_cell</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.CellLists</em>, <em class="sig-param">pos: glm::tvec3&lt;scalar</em>, <em class="sig-param">P&gt;</em><span class="sig-paren">)</span> &#x2192; glm::tvec3&lt;scalar, P&gt;<a class="headerlink" href="#baggianalysis.core.CellLists.get_cell" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the cell corresponding to the given position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><em>numpy.ndarray</em></a>) – The position whose corresponding cell should be returned.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The three integer coordinates of the cell corresponding to the given position.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.CellLists.init_cells">
+<code class="sig-name descname">init_cells</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.CellLists, particles: List[baggianalysis.core.Particle], box: glm::tvec3&lt;scalar, P&gt;, rc: float</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)">None</a><a class="headerlink" href="#baggianalysis.core.CellLists.init_cells" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial the cells data structures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particles</strong> (List(<a class="reference internal" href="particles.html#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>)) – The particles that will be used to build the cells.</p></li>
+<li><p><strong>box</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><em>numpy.ndarray</em></a>) – The sizes of the box edges.</p></li>
+<li><p><strong>rc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The smallest size of the cells.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.CellLists.is_overlap">
+<code class="sig-name descname">is_overlap</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.CellLists, particles: List[baggianalysis.core.Particle], pos: glm::tvec3&lt;scalar, P&gt;, cutoff: float</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a><a class="headerlink" href="#baggianalysis.core.CellLists.is_overlap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether the given position is closer than the given cutoff to any particle indexed in the cells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>particles</strong> (List(<a class="reference internal" href="particles.html#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>)) – The particles used to build the cells</p></li>
+<li><p><strong>pos</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.25)"><em>numpy.ndarray</em></a>) – The position to be checked.</p></li>
+<li><p><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The cutoff to be used in the computation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if there is an overlap, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="baggianalysis.core.WaveVectorList">
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">WaveVectorList</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baggianalysis.core.WaveVectorList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
+<p>A class storing list of q-vectors that are used to compute correlation functions in Fourier space (see <em>e.g.</em> <a class="reference internal" href="observables.html#baggianalysis.core.StructureFactor" title="baggianalysis.core.StructureFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">StructureFactor</span></code></a> or <a class="reference internal" href="observables.html#baggianalysis.core.SelfISF" title="baggianalysis.core.SelfISF"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelfISF</span></code></a>).</p>
+<p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>__init__(self: baggianalysis.core.WaveVectorList, q_max: float, max_n_realisations: int, max_delta_q: float) -&gt; None</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q_max</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The length of the largest q vector of interest.</p></li>
+<li><p><strong>max_n_realisations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Given a length <span class="math notranslate nohighlight">\(q\)</span>, this is the maximum number of q vectors that will be averaged over to compute <span class="math notranslate nohighlight">\(F_s(q, t)\)</span>.</p></li>
+<li><p><strong>max_delta_q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – q-vectors that are separated by distances smaller than this value will be assigned to the same value of <span class="math notranslate nohighlight">\(q\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic simple" start="2">
+<li><p>__init__(self: baggianalysis.core.WaveVectorList, q_min: float, q_max: float, q_interval: float, max_n_realisations: int, max_delta_q: float) -&gt; None</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q_min</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The length of the smallest q vector of interest.</p></li>
+<li><p><strong>q_max</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The length of the largest q vector of interest.</p></li>
+<li><p><strong>q_interval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – The distance between two neighbouring q-vectors in the final list. All the q-vectors in-between will be discarded.</p></li>
+<li><p><strong>max_n_realisations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Given a length <span class="math notranslate nohighlight">\(q\)</span>, this is the maximum number of q vectors that will be averaged over to compute <span class="math notranslate nohighlight">\(F_s(q, t)\)</span>.</p></li>
+<li><p><strong>max_delta_q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a>) – q-vectors that are separated by distances smaller than this value will be assigned to the same value of <span class="math notranslate nohighlight">\(q\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<ol class="arabic simple" start="3">
+<li><p>__init__(self: baggianalysis.core.WaveVectorList, q_modules: List[float], max_n_realisations: int) -&gt; None</p></li>
+</ol>
+<p>Supply a list of q modules that will be used to initialise the list of q-vectors contained in this instance after initialisation.
+Note that the final q-vectors will depend on the box size of the system that will be used to initialise the instance, so that their
+modules will slightly differ from the ones contained in <a class="reference internal" href="#baggianalysis.core.WaveVectorList.q_modules" title="baggianalysis.core.WaveVectorList.q_modules"><code class="xref py py-attr docutils literal notranslate"><span class="pre">q_modules</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q_modules</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><em>float</em></a><em>)</em>) – The q modules that will be included in the final q-vector list.</p></li>
+<li><p><strong>max_n_realisations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Given a length <span class="math notranslate nohighlight">\(q\)</span>, this is the maximum number of q vectors that will be averaged over to compute <span class="math notranslate nohighlight">\(F_s(q, t)\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="baggianalysis.core.WaveVectorList.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.WaveVectorList" title="baggianalysis.core.WaveVectorList">baggianalysis.core.WaveVectorList</a></span></em>, <em class="sig-param"><span class="n">system</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)">None</a><a class="headerlink" href="#baggianalysis.core.WaveVectorList.init" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialise the list of q-vectors using the box size of the given system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>system</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a>) – The input system whose simulation box the q vectors will be based on.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.WaveVectorList.q_modules">
+<code class="sig-name descname">q_modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.WaveVectorList" title="baggianalysis.core.WaveVectorList">baggianalysis.core.WaveVectorList</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)">float</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.WaveVectorList.q_modules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Analyse the trajectory and print the self ISF directly to the given file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baggianalysis.core.WaveVectorList.q_vectors">
+<em class="property">property </em><code class="sig-name descname">q_vectors</code><a class="headerlink" href="#baggianalysis.core.WaveVectorList.q_vectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary storing all the q vectors associated to this instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../converters.html" class="btn btn-neutral float-right" title="The converters module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="neighbours.html" class="btn btn-neutral float-left" title="Neighbour finders" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Lorenzo Rovigatti
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

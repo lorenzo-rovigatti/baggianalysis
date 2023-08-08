@@ -1,0 +1,307 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; baggianalysis 0.5.1.dev30+g517a0d3 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The core module" href="core/core.html" />
+    <link rel="prev" title="Baggianalysis" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> baggianalysis
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.5.1.dev30+g517a0d3
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-with-pip">Install with <code class="docutils literal notranslate"><span class="pre">pip</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-install">Manual install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-options">cmake options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#common-compilation-issues">Common compilation issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-suite">Test suite</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="core/core.html">The core module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="core/particles.html">Particle-related classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/topology.html">Topology-related classes and utility functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/parsers.html">Configuration parsers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/exporters.html">Configuration exporters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/filters.html">Filters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/trajectories.html">Trajectory classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/observables.html">Observables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/neighbours.html">Neighbour finders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core/utils.html">Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="converters.html">The converters module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="traj.html">The traj module</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html">The utils module</a><ul class="simple">
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="extending/parser.html">Writing a parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extending/topology.html">Writing a function to parse custom topologies</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">baggianalysis</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/install.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>CMake &gt;= 3.12</p></li>
+<li><p>make</p></li>
+<li><p>A c++14-compliant compiler (tested with GCC &gt;= 5.4)</p></li>
+<li><p>If Python bindings are enabled, the <code class="docutils literal notranslate"><span class="pre">pip</span></code>, <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> and <code class="docutils literal notranslate"><span class="pre">setuptools-scm</span></code> packages, as well as Python 3’s header file are required (<code class="docutils literal notranslate"><span class="pre">python3-dev</span></code>)</p></li>
+<li><p>The pore size observable requires the <a class="reference external" href="https://nlopt.readthedocs.io/en/latest/">NLopt</a> library (<code class="docutils literal notranslate"><span class="pre">libnlopt-dev</span></code>)</p></li>
+<li><p>The bond-order parameter observable requires the <a class="reference external" href="https://www.gnu.org/software/gsl/">GNU Scientific Library</a> and <a class="reference external" href="https://github.com/boostorg/math">Boost’s math</a> libraries (<code class="docutils literal notranslate"><span class="pre">libgsl-dev</span></code> and <code class="docutils literal notranslate"><span class="pre">libboost-math-dev</span></code>)</p></li>
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/en/master">Sphinx</a>, <a class="reference external" href="https://github.com/readthedocs/sphinx_rtd_theme">sphinx_rtd_theme</a> and <a class="reference external" href="https://recommonmark.readthedocs.io/en/latest/">recommonmark</a> are required to generate the Python bindings’ documentation. Those can all be installed by using <code class="docutils literal notranslate"><span class="pre">pip</span></code> (for instance with the command <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">sphinx</span> <span class="pre">sphinx_rtd_theme</span> <span class="pre">recommonmark</span></code>)</p></li>
+</ul>
+</div>
+<div class="section" id="install-with-pip">
+<h2>Install with <code class="docutils literal notranslate"><span class="pre">pip</span></code><a class="headerlink" href="#install-with-pip" title="Permalink to this headline">¶</a></h2>
+<p>If all the requirements are met, the <code class="docutils literal notranslate"><span class="pre">baggianalysis</span></code> Python package can be compiled &amp; installed by cloning the repo and using <code class="docutils literal notranslate"><span class="pre">pip</span></code> as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/lorenzo-rovigatti/baggianalysis.git
+$<span class="w"> </span>PIP_COMMAND<span class="w"> </span>install<span class="w"> </span>./baggianalysis
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">PIP_COMMAND</span></code> should be <code class="docutils literal notranslate"><span class="pre">pip</span></code>, <code class="docutils literal notranslate"><span class="pre">pip3</span></code>, <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">pip</span></code> or <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">pip</span></code>, depending on your local configuration. Use <code class="docutils literal notranslate"><span class="pre">-v</span></code> for verbose output.</p>
+</div>
+<div class="section" id="manual-install">
+<h2>Manual install<a class="headerlink" href="#manual-install" title="Permalink to this headline">¶</a></h2>
+<p>The code can be compiled with the following commands:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd baggianalysis   # enter the baggianalysis folder
+mkdir build        # create a new build folder. It is good practice to compile out-of-source
+cd build
+cmake ..           # here you can specify additional options, see next section
+make -j4           # compile baggianalysis. The -jX make option makes it compile the code in parallel by using X threads.
+</pre></div>
+</div>
+<p>At the end of the compilation a test executable used for development (<code class="docutils literal notranslate"><span class="pre">test_feature</span></code>) will be placed in the build/bin folder. If Python bindings are enabled, <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">install</span></code> will install the package through <code class="docutils literal notranslate"><span class="pre">pip</span></code> to make the library accessible by the user.</p>
+<div class="section" id="cmake-options">
+<h3>cmake options<a class="headerlink" href="#cmake-options" title="Permalink to this headline">¶</a></h3>
+<p>Here is a list of options that can be passed to cmake during the pre-compilation stage:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-DPython=On|Off</span></code> enables|disables Python bindings (defaults to <code class="docutils literal notranslate"><span class="pre">On</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DDebug=On|Off</span></code> compiles with|without debug symbols and without|with optimisation flags (defaults to <code class="docutils literal notranslate"><span class="pre">Off</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DG=On|Off</span></code> compiles with|without debug symbols and optimisation flags (defaults to <code class="docutils literal notranslate"><span class="pre">Off</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-DCOMPILER_EXTENSIONS=On|Off</span></code> enables|disables compiler (most likely GNU) C++ extensions (defaults to <code class="docutils literal notranslate"><span class="pre">On</span></code>). Disable it to compiler with older compilers (<em>e.g.</em> g++6).</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">cmake</span></code> cannot find some of the libraries required, add their paths to the <code class="docutils literal notranslate"><span class="pre">CMAKE_FIND_ROOT_PATH</span></code> set command which can be found close to the top of the <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p>
+</div>
+<div class="section" id="common-compilation-issues">
+<h3>Common compilation issues<a class="headerlink" href="#common-compilation-issues" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Sometimes the compilation fails with the following error <code class="docutils literal notranslate"><span class="pre">fatal</span> <span class="pre">error:</span> <span class="pre">Python.h:</span> <span class="pre">No</span> <span class="pre">such</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">directory</span></code>: this either means that the Python header files are not installed (<code class="docutils literal notranslate"><span class="pre">python3-dev</span></code> on Ubuntu) or that there is a mismatch between the version of the Python headers and shared library detected by CMake. Make sure that the two match before re-running CMake.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="test-suite">
+<h2>Test suite<a class="headerlink" href="#test-suite" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">baggianalysis</span></code> contains a very simple testing suite that checks whether the Python bindings and core functionalities work. The test suite is run by using the <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test_quick</span></code> command.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="core/core.html" class="btn btn-neutral float-right" title="The core module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Baggianalysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Lorenzo Rovigatti
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
