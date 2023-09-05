@@ -65,7 +65,7 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 	syst->box = _header_data.box;
 
 	if(_header_data.empty) {
-		throw std::runtime_error("The LAMMPS datafile did not contain any headers");
+		return nullptr;
 	}
 
 	if(_header_data.N_atoms == 0) {
@@ -344,7 +344,7 @@ double LAMMPSDataFileParser::_parse_box_line(std::vector<std::string> split_line
 		return upper - lower;
 	}
 	catch(utils::bad_lexical_cast &e) {
-		std::string error = fmt::format("The box values '{} {}' found in the LAMMPS dump configuration are not valid", split_line[0], split_line[1]);
+		std::string error = fmt::format("The box values '{} {}' found in the LAMMPS data file are not valid", split_line[0], split_line[1]);
 		throw std::runtime_error(error);
 	}
 }

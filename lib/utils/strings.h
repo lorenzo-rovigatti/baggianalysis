@@ -24,7 +24,7 @@ namespace utils {
  * @param separators list of separators that will be used to split the string
  * @return a vector of strings containing the tokens
  */
-std::vector<std::string> split(const std::string &str, const std::string &delims=" ");
+std::vector<std::string> split(const std::string &str, const std::string &delims=" \t");
 
 // taken from https://stackoverflow.com/questions/874134/find-out-if-string-ends-with-another-string-in-c/2072890
 bool starts_with(const std::string &value, std::string beginning);

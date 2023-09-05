@@ -196,7 +196,7 @@ for ``N_attempts`` random values of :math:`r_p`.
 Parameters
 ----------
 N_attempts: int
-    The number of pore size evaluation that will be carried out per system.
+    The number of pore size evaluations that will be carried out per system.
 r_cut: float
     The characteristic size of the particle-particle repulsion. Using the right number will speed up the computation but does not impact the quality of the results.
 particle_radius: float
