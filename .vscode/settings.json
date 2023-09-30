@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "stdexcept": "cpp",
+        "tuple": "cpp",
+        "valarray": "cpp"
+    }
+}

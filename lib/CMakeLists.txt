@@ -33,6 +33,7 @@ SET(ba_lib_SOURCES
 	parsers/LAMMPSDumpParser.cpp
 	parsers/oxDNA_topology_parsers/Default.cpp
 	parsers/oxDNA_topology_parsers/DetailedPolymer.cpp
+	parsers/oxDNA_topology_parsers/DNA.cpp
 	parsers/oxDNA_topology_parsers/NoTopology.cpp
 	parsers/oxDNA_topology_parsers/TSP.cpp
 	parsers/PatchyParticlesParser.cpp

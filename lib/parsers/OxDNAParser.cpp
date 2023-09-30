@@ -7,9 +7,11 @@
 
 #include "OxDNAParser.h"
 
+#include "../topology/Topology.h"
 #include "oxDNA_topology_parsers/NoTopology.h"
 #include "oxDNA_topology_parsers/TSP.h"
 #include "oxDNA_topology_parsers/DetailedPolymer.h"
+#include "oxDNA_topology_parsers/DNA.h"
 #include "../utils/strings.h"
 
 #include <glm/gtx/orthonormalize.hpp>
@@ -120,19 +122,22 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 		}
 	}
 
-	auto bonded_neighbours = _topology_parser->bonded_neighbours();
-	if(bonded_neighbours.size() == syst->N()) {
-		for(auto p : syst->particles()) {
-			for(auto neigh : bonded_neighbours[p->index()]) {
-				p->add_bonded_neighbour(syst->particle_by_id(neigh));
-			}
-		}
-	}
-
 	if(_topology_parser->has_N() && syst->N() != _topology_parser->N()) {
 		std::string error = fmt::format("The number of particles found in the configuration file ({}) is different from what specified in the topology file ({})", syst->N(), _topology_parser->N());
 		throw std::runtime_error(error);
 	}
+
+	auto topology = Topology::make_empty_topology();
+	auto bonded_neighbours = _topology_parser->bonded_neighbours();
+	if(bonded_neighbours.size() == syst->N()) {
+		for(auto p : syst->particles()) {
+			for(auto neigh : bonded_neighbours[p->index()]) {
+				topology->add_bond(p->index(), neigh);
+			}
+		}
+	}
+
+	topology->apply(syst.get());
 
 	return syst;
 }
@@ -146,6 +151,7 @@ void export_OxDNAParser(py::module &m) {
 	oxDNA_topology::export_TSP(sub_m);
 	oxDNA_topology::export_NoTopology(sub_m);
 	oxDNA_topology::export_DetailedPolymer(sub_m);
+	oxDNA_topology::export_DNA(sub_m);
 
 	py::class_<OxDNAParser, BaseParser, std::shared_ptr<OxDNAParser>> parser(m, "OxDNAParser", "Use oxDNA/topology files to build systems.");
 

@@ -34,4 +34,4 @@ void export_NoTopology(py::module &m);
 } /* namespace oxDNA_topology */
 } /* namespace ba */
 
-#endif /* PARSERS_OXDNA_TOPOLOGY_PARSERS_DEFAULT_H_ */
+#endif /* PARSERS_OXDNA_TOPOLOGY_PARSERS_DNA_H_ */
