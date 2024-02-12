@@ -18,7 +18,7 @@ using AccessorType = std::function<vec3(Particle *)>;
 
 class ParticleAutocorrelation: public TrajectoryObservable<std::map<ullint, double>> {
 public:
-	ParticleAutocorrelation(uint points_per_cycle, AccessorType);
+	ParticleAutocorrelation(uint points_per_cycle, AccessorType, bool normalise);
 	ParticleAutocorrelation() = delete;
 	virtual ~ParticleAutocorrelation();
 
@@ -31,6 +31,7 @@ protected:
 
 	uint _points_per_cycle;
 	AccessorType _accessor_function;
+	bool _normalise;
 };
 
 #ifdef PYTHON_BINDINGS

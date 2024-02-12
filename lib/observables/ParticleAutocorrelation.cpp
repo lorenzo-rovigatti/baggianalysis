@@ -13,10 +13,11 @@ using namespace std;
 
 namespace ba {
 
-ParticleAutocorrelation::ParticleAutocorrelation(uint points_per_cycle, AccessorType func) :
+ParticleAutocorrelation::ParticleAutocorrelation(uint points_per_cycle, AccessorType func, bool normalise) :
 				TrajectoryObservable<std::map<ullint, double>>(),
 				_points_per_cycle(points_per_cycle),
-				_accessor_function(func) {
+				_accessor_function(func),
+				_normalise(normalise) {
 	if(points_per_cycle < 1) {
 		string error = fmt::format("The ParticleAutocorrelation's points per cycle ({}) should larger than 0", points_per_cycle);
 		throw std::runtime_error(error);
@@ -98,9 +99,12 @@ void ParticleAutocorrelation::analyse_trajectory(std::shared_ptr<BaseTrajectory>
 	for(auto &pair : _result) {
 		pair.second /= n_conf[pair.first];
 	}
-	double norm_by = _result[0];
-	for(auto &pair : _result) {
-		pair.second /= norm_by;
+
+	if(_normalise) {
+		double norm_by = _result[0];
+		for(auto &pair : _result) {
+			pair.second /= norm_by;
+		}
 	}
 }
 
@@ -140,16 +144,18 @@ As an example, the two observables defined below will compute the velocity and a
 	omega_obs = ba.ParticleAutocorrelation(30, lambda p: p.angular_velocity)
 
 The trajectory is split up in chunks of size `points_per_cycle`, and the autocorrelation is computed between configurations in each chunk and
-between the initial configurations of pairs of chunks. Note that the autocorrelation is normalised so that its value in 0 is 1.
+between the initial configurations of pairs of chunks.
 )pb");
 
-	obs.def(py::init<uint, AccessorType>(), py::arg("points_per_cycle"), py::arg("function"), R"pb(
+	obs.def(py::init<uint, AccessorType, bool>(), py::arg("points_per_cycle"), py::arg("function"), py::arg("normalise") = false, R"pb(
 Parameters
 ----------
 points_per_cycle: int
     The number of configurations contained in each chunk in which the trajectory is split up.
 function : callable
     A callable that takes a particle and returns the three-dimensional vector whose autocorrelation will be computed.
+normalise : bool
+    If True, the the autocorrelation will be normalised (i.e. its value in 0 will be 1). Defaults to False.
 )pb");
 
 	obs.def("analyse_and_print", &ParticleAutocorrelation::analyse_and_print, py::arg("trajectory"), py::arg("output_file"), R"pb(
