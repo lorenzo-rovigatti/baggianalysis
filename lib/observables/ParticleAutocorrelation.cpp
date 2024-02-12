@@ -86,22 +86,18 @@ void ParticleAutocorrelation::analyse_trajectory(std::shared_ptr<BaseTrajectory>
 			}
 		}
 
-		// don't compute the autocorrelation of a configuration with itself
-		if(current_cycle_base != frame) {
-			double value = _conf_conf_value(current_cycle_base, frame);
-			ullint time_diff = frame->time - current_cycle_base->time;
+		double value = _conf_conf_value(current_cycle_base, frame);
+		ullint time_diff = frame->time - current_cycle_base->time;
 
-			_add_value(time_diff, value, n_conf);
-		}
+		_add_value(time_diff, value, n_conf);
 
 		idx++;
 		frame = trajectory->next_frame();
 	}
 
 	for(auto &pair : _result) {
-		if(pair.first > 0) {
-			pair.second /= n_conf[pair.first];
-		}
+		pair.second /= n_conf[pair.first];
+		pair.second /= _result[0];
 	}
 }
 
@@ -111,9 +107,7 @@ void ParticleAutocorrelation::analyse_and_print(std::shared_ptr<BaseTrajectory> 
 	ofstream output(output_file);
 
 	for(auto pair : _result) {
-		if(pair.first > 0) {
-			output << pair.first << " " << pair.second << endl;
-		}
+		output << pair.first << " " << pair.second << endl;
 	}
 
 	output.close();
@@ -124,7 +118,6 @@ double ParticleAutocorrelation::_conf_conf_value(std::shared_ptr<System> first, 
 	uint N = first->N();
 	vec3 com_diff(0., 0., 0.);
 	for(uint i = 0; i < N; i++) {
-		// value += glm::dot(second->particles()[i]->angular_velocity(), first->particles()[i]->angular_velocity());
 		value += glm::dot(_accessor_function(second->particles()[i].get()), _accessor_function(first->particles()[i].get()));
 	}
 
@@ -135,7 +128,7 @@ double ParticleAutocorrelation::_conf_conf_value(std::shared_ptr<System> first, 
 
 void export_ParticleAutocorrelation(py::module &m) {
 	py::class_<ParticleAutocorrelation, std::shared_ptr<ParticleAutocorrelation>> obs(m, "ParticleAutocorrelation", R"pb(
-Compute the autocorrelation of particle-related three-dimensional vectors.
+Compute the normalised autocorrelation of particle-related three-dimensional vectors.
 
 The constructor takes a function that will be used on each particle to return the three-dimensional vector whose autocorrelation will be computed.
 As an example, the two observables defined below will compute the velocity and angular velocity autocorrelation functions::
@@ -144,11 +137,7 @@ As an example, the two observables defined below will compute the velocity and a
 	omega_obs = ba.ParticleAutocorrelation(30, lambda p: p.angular_velocity)
 
 The trajectory is split up in chunks of size `points_per_cycle`, and the autocorrelation is computed between configurations in each chunk and
-between the initial configurations of pairs of chunks.
-
-The mean squared displacement between two configurations is associated to their time delta (*i.e.* to the difference between the times at
-which they have been printed) and averaged with all the other pairs that share the same time delta. Note that in same cases (*i.e.* log or log-linear 
-spacing), there might be time deltas that differ by one: in this case the code consider those pairs to share the same time delta.   
+between the initial configurations of pairs of chunks. Note that the autocorrelation is normalised so that its value in 0 is 1.
 )pb");
 
 	obs.def(py::init<uint, AccessorType>(), py::arg("points_per_cycle"), py::arg("function"), R"pb(
