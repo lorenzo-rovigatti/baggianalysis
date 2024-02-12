@@ -97,7 +97,10 @@ void ParticleAutocorrelation::analyse_trajectory(std::shared_ptr<BaseTrajectory>
 
 	for(auto &pair : _result) {
 		pair.second /= n_conf[pair.first];
-		pair.second /= _result[0];
+	}
+	double norm_by = _result[0];
+	for(auto &pair : _result) {
+		pair.second /= norm_by;
 	}
 }
 
