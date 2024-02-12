@@ -91,6 +91,14 @@ public:
 		_velocity = nv;
 	}
 
+	const vec3 &angular_velocity() const {
+		return _angular_velocity;
+	}
+
+	void set_angular_velocity(const vec3 &nv) {
+		_angular_velocity = nv;
+	}
+
 	const std::vector<vec3> &orientation_vectors() const {
 		return _orientation_vectors;
 	}
@@ -155,6 +163,7 @@ protected:
 	double _charge = 0.;
 	vec3 _position = vec3(0., 0., 0.);
 	vec3 _velocity = vec3(0., 0., 0.);
+	vec3 _angular_velocity = vec3(0., 0., 0.);
 	std::vector<vec3> _orientation_vectors;
 
 	std::set<ParticleBond> _bonded_neighbours;

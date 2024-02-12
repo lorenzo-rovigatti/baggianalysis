@@ -43,6 +43,7 @@ std::shared_ptr<Particle> Particle::make_copy(int index) {
 	new_particle->_charge = _charge;
 	new_particle->_position = _position;
 	new_particle->_velocity = _velocity;
+	new_particle->_angular_velocity = _angular_velocity;
 	new_particle->_orientation_vectors = _orientation_vectors;
 
 	return new_particle;
@@ -440,6 +441,12 @@ delta : numpy.ndarray
 
 	particle.def_property("velocity", &Particle::velocity, &Particle::set_velocity, R"pbdoc(
 		The particle's velocity.
+
+		:type: numpy.ndarray
+	)pbdoc");
+
+	particle.def_property("angular_velocity", &Particle::angular_velocity, &Particle::set_angular_velocity, R"pbdoc(
+		The particle's angular velocity.
 
 		:type: numpy.ndarray
 	)pbdoc");

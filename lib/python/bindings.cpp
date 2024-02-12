@@ -33,6 +33,7 @@
 #include "../observables/FormFactor.h"
 #include "../observables/GyrationRadius.h"
 #include "../observables/MSD.h"
+#include "../observables/ParticleAutocorrelation.h"
 #include "../observables/RDF.h"
 #include "../observables/StructureFactor.h"
 #include "../observables/SelfISF.h"
@@ -107,6 +108,7 @@ PYBIND11_MODULE(core, m) {
 	ba::export_FormFactor(m);
 	ba::export_GyrationRadius(m);
 	ba::export_MSD(m);
+	ba::export_ParticleAutocorrelation(m);
 #ifdef NLOPT_FOUND
 	ba::export_PoreSize(m);
 #endif

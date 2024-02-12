@@ -87,13 +87,14 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 			utils::trim(line);
 			if(configuration.good() && line.size() > 0) {
 				split = utils::split(line);
-				vec3 position, velocity;
+				vec3 position, velocity, angular_velocity;
 				glm::dmat3 orientation_matrix;
 
 				try {
 					position = vec3(utils::lexical_cast<double>(split[0]), utils::lexical_cast<double>(split[1]), utils::lexical_cast<double>(split[2]));
 					if(split.size() > 9) {
 						velocity = vec3(utils::lexical_cast<double>(split[9]), utils::lexical_cast<double>(split[10]), utils::lexical_cast<double>(split[11]));
+						angular_velocity = vec3(utils::lexical_cast<double>(split[12]), utils::lexical_cast<double>(split[13]), utils::lexical_cast<double>(split[14]));
 					}
 
 					vec3 a1(utils::lexical_cast<double>(split[3]), utils::lexical_cast<double>(split[4]), utils::lexical_cast<double>(split[5]));
@@ -113,9 +114,8 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 				}
 
 				particle_type p_type = _topology_parser->type(current_index);
-				std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(current_index, p_type, position, velocity));
-				_orientation_inserter(new_particle, orientation_matrix);
-
+				std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(current_index, p_type, position, velocity));				_orientation_inserter(new_particle, orientation_matrix);
+				new_particle->set_angular_velocity(angular_velocity);
 				syst->add_particle(new_particle);
 				current_index++;
 			}
