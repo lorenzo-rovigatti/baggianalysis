@@ -212,7 +212,7 @@ system : :class:`System`
 )pb");
 
 	obs.def("q_modules", &WaveVectorList::q_modules, R"pb(
-Analyse the trajectory and print the self ISF directly to the given file.
+A list of numbers storing the modules of the q vectors.
 )pb");
 
 	obs.def_readwrite("q_vectors", &WaveVectorList::q_vectors, "A dictionary storing all the q vectors associated to this instance.");

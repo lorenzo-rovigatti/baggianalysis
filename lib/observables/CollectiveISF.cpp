@@ -195,7 +195,7 @@ points_per_cycle: int
     The number of configurations contained in each chunk in which the trajectory is split up.
 )pb");
 
-	obs.def(py::init<WaveVectorList&, uint>(), py::arg("q_vectors"), py::arg("max_n_realisations"),
+	obs.def(py::init<WaveVectorList&, uint>(), py::arg("q_vectors"), py::arg("points_per_cycle"),
 			R"pb(
 Parameters
 ----------
