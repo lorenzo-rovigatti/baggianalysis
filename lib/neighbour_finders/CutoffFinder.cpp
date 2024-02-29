@@ -89,8 +89,8 @@ Parameters
 ----------
 cutoff : float
 	The cutoff used to define neighbours.
-mapper: callable
-    A callable that takes two particles and a vector that is the distance between the two particles, and returns a boolean, which should be True if the two particles are neighbours, False otherwise.
+neighbour_function : callable
+    A callable that takes two particles and a vector that is the distance between the two particles (defined as :math:`\vec{r} = \vec{r}_1 - \vec{r}_2`), and returns a boolean, which should be True if the two particles are neighbours, False otherwise.
     )pbdoc");
 }
 
