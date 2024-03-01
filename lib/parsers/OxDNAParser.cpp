@@ -114,7 +114,8 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 				}
 
 				particle_type p_type = _topology_parser->type(current_index);
-				std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(current_index, p_type, position, velocity));				_orientation_inserter(new_particle, orientation_matrix);
+				std::shared_ptr<Particle> new_particle(std::make_shared<Particle>(current_index, p_type, position, velocity));
+				_orientation_inserter(new_particle, orientation_matrix);
 				new_particle->set_angular_velocity(angular_velocity);
 				syst->add_particle(new_particle);
 				current_index++;

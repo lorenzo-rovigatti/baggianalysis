@@ -121,6 +121,13 @@ void Particle::remove_neighbour(ParticleBond to_remove) {
 	_neighbours.erase(to_remove);
 }
 
+void Particle::remove_neighbour(std::shared_ptr<Particle> q) {
+	auto link_it = std::find_if(_neighbours.begin(), _neighbours.end(), [q](const ParticleBond &pb) { return pb.other() == q; });
+	if(link_it != _neighbours.end()) {
+		remove_neighbour(*link_it);
+	}
+}
+
 bool Particle::has_neighbour(std::shared_ptr<Particle> q) {
 	return std::find_if(_neighbours.begin(), _neighbours.end(), [q](const ParticleBond &pb) { return pb.other() == q; }) != _neighbours.end();
 }
@@ -231,7 +238,7 @@ q : :class:`Particle`
 	)pbdoc");
 
 	particle.def("remove_bonded_neighbour", static_cast<void (Particle::*)(ParticleBond)>(&Particle::remove_bonded_neighbour), py::arg("link"), R"pbdoc(
-Remove the given :class:`ParticleBond` ``link`` from the list of current particle's bonds.
+Remove the given :class:`ParticleBond` from the list of current particle's bonds.
 
 Parameters
 ----------
@@ -346,6 +353,24 @@ Parameters
 ----------
 q : :class:`Particle`
 	The new neighbour.
+	)pbdoc");
+
+	particle.def("remove_neighbour", static_cast<void (Particle::*)(ParticleBond)>(&Particle::remove_neighbour), py::arg("link"), R"pbdoc(
+Remove the given :class:`ParticleBond` from the list of this particle's neighbours.
+
+Parameters
+----------
+link : :class:`ParticleBond`
+	The link that should be removed.
+	)pbdoc");
+
+	particle.def("remove_neighbour", static_cast<void (Particle::*)(std::shared_ptr<Particle>)>(&Particle::remove_neighbour), py::arg("q"), R"pbdoc(
+Remove ``q`` from the list of this particle's neighbours.
+
+Parameters
+----------
+q : :class:`Particle`
+	The particle that should be removed from the list of neighbous.
 	)pbdoc");
 
 	particle.def("has_neighbour", &Particle::has_neighbour, py::arg("q"), R"pbdoc(

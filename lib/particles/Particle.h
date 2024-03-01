@@ -147,6 +147,7 @@ public:
 	void add_neighbour(std::string type, std::shared_ptr<Particle> new_neighbour);
 	void add_neighbour(std::shared_ptr<Particle> new_neighbour);
 	void remove_neighbour(ParticleBond to_remove);
+	void remove_neighbour(std::shared_ptr<Particle> q);
 	bool has_neighbour(std::shared_ptr<Particle> q);
 
 	std::shared_ptr<ParticleSet> molecule() const {
