@@ -1,3 +1,26 @@
+v. 0.6.0
+	- Phase out recommonmark in favour of myst to generate the documentation
+	- Improve the test suite
+	- Add a script that can be used to compute the S(q) of an oxDNA trajectory
+	- Improve the MSD computation and update the associated docs
+	- Add more methods to remove bonded neighbours [b1d541549b64fa0e06a648603f2096ef97496f0e]
+	- Add a method to quickly initialise the topology of chain systems [af5424ef386722c16a91bc36b74cea80fed8be31]
+	- Add an oxDNA-related example
+	- Add observables to compute the self and coherent intermediate scattering functions
+	- Add fast sin and cos functions
+	- Add an oxDNA topology parser for DNA/RNA
+	- Keep the topology info when filtering systems with FilterByFunction and use System's method to copy the topology from filtered systems
+	- Minor API changes to WaveVectorList [5f943fe7af484a06c861936250f5ad7295e7bdb6]
+	- Make the code compilable on older compilers [91f96878f201b0bc708a47cd4382ab67364b4c8c]
+	- Make the lib compatible with python >= 3.11
+	- Add a new observable to compute autocorrelations
+	- Add python bindings for Particle's remove_neighbour method
+	- Document some previously undocumented python bindings
+	- Strengthen the parsing of LAMMPS data files and fix a typo in the docs [a427f667a0c0ee6c269eb14cad39616efbec5328]
+	- Fix a bug whereby removing a particle wouldn't update its bonded neighs
+	- Fix issue #5
+	- Fix a minor bug in the structure factor observable [01a2c901ac6184ee347c0247644a05ad395de2b4]
+
 v. 0.5.0 [213b13a]
 	- Add heuristics to help determining the file type in the LAMMPS -> cogli1 converter
 	- Add an observable to compute the gyration radius of molecules (GyrationRadius)
