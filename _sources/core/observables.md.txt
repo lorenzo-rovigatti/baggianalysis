@@ -34,6 +34,8 @@
 .. autoclass:: FormFactor
 
 .. autoclass:: MSD
+
+.. autoclass:: ParticleAutocorrelation
     
 .. autoclass:: PoreSize
     
