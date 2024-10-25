@@ -20,11 +20,11 @@ Default::Default(std::string topology_file) {
 		throw std::runtime_error(error);
 	}
 
+	int N_B = 0;
+
 	topology >> _N;
-	topology >> _N_A;
-	if(!topology.good()) {
-		_N_A = 0;
-	}
+	topology >> N_B;
+	_N_A = _N - N_B;
 
 	topology.close();
 }
