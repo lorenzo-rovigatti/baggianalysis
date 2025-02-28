@@ -60,13 +60,14 @@ std::shared_ptr<System> LAMMPSDataFileParser::_parse_stream(std::ifstream &confi
 
 	_header_data = _parse_headers(configuration);
 
+	if(_header_data.empty) {
+		BA_WARNING("The LAMMPS datafile seems to lack headers, and therefore since no System can be built, a None (on Python) or nullptr (on C++) will be returned");
+		return nullptr;
+	}
+
 	// there is no time information in a LAMMPS data file
 	syst->time = 0;
 	syst->box = _header_data.box;
-
-	if(_header_data.empty) {
-		return nullptr;
-	}
 
 	if(_header_data.N_atoms == 0) {
 		BA_WARNING("The LAMMPS datafile seems to have non-empty headers but 0 atoms, be careful!");
