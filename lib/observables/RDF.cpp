@@ -124,12 +124,57 @@ std::map<double, double> RDF::_finalised_result() {
 #ifdef PYTHON_BINDINGS
 
 void export_RDF(py::module &m) {
-	py::class_<RDF, std::shared_ptr<RDF>> obs(m, "RDF", "Compute the `radial distribution function <https://en.wikipedia.org/wiki/Radial_distribution_function>`_ of a system.");
+	py::class_<RDF, std::shared_ptr<RDF>> obs(m, "RDF", "Compute the `radial distribution function <https://en.wikipedia.org/wiki/Radial_distribution_function>`_ (RDF) of a system.");
 
-	obs.def(py::init<double, std::vector<particle_type>, std::vector<particle_type>>());
-	obs.def(py::init<double>());
-	obs.def(py::init<double, double>());
-	obs.def(py::init<double, double, std::vector<particle_type>, std::vector<particle_type>>());
+	obs.def(py::init<double>(), R"pbdoc(
+Parameters
+----------
+bin_size : float
+    The width of the histogram bins
+)pbdoc");
+
+	obs.def(py::init<double, double>(), R"pbdoc(
+Parameters
+----------
+bin_size : float
+    The width of the histogram bins
+max_value : float
+    The largest distance that will be considered
+)pbdoc");
+
+	obs.def(py::init<double, std::vector<particle_type>, std::vector<particle_type>>(), R"pbdoc(
+This constructor makes it possible to select those pairs of particles that will contribute to the RDF, based on their types.
+
+The constuctor takes two additional parameters that specify the lists of types that should be included. A pair of particles `p` and `q`
+will be considered in the RDF only if the type of `p` is in the first list and the type of `q` is in the second list, or vice versa. For 
+instance, the following snippet will create an RDF observable that will take into account only A-A and A-B pairs::
+
+    RDF = ba.RDF(0.1, ["A"], ["A", "B"]) # equivalent to RDF = ba.RDF(0.1, ["A", "B"], ["A"])
+
+Parameters
+----------
+bin_size : float
+    The width of the histogram bins
+types_1 : List(str)
+    The first group of particle types
+types_2 : List(str)
+    The second group of particle types
+)pbdoc");
+
+	obs.def(py::init<double, double, std::vector<particle_type>, std::vector<particle_type>>(), R"pbdoc(
+Similar to the constructor above, with the difference that the largest distance that will be used in the computation can also be specified.
+
+Parameters
+----------
+bin_size : float
+    The width of the histogram bins
+max_value : float
+    The largest distance that will be considered
+types_1 : List(str)
+    The first group of particle types
+types_2 : List(str)
+    The second group of particle types
+)pbdoc");
 
 	PY_EXPORT_SYSTEM_OBS(obs, RDF);
 }

@@ -51,6 +51,7 @@ def print_detailed_polymer_topology(filename, system, shift_indexes=False):
     with open(filename, "w") as out:
         print(system.N(), len(system.molecules()), file=out)
         for p in system.particles():
-            print(p.index + shift, p.type, len(p.bonded_neighbours), file=out)
+            mol_id = p.molecule.name.split("_")[1]
+            print(p.index + shift, mol_id, p.type, len(p.bonded_neighbours), file=out)
             print(" ".join(str(bond.other().index + shift) for bond in p.bonded_neighbours), file=out)
             
