@@ -11,7 +11,9 @@
     CollectiveISF
     ConvexHull
     FormFactor
+    GyrationRadius
     MSD
+    ParticleAutocorrelation
     PoreSize
     RDF
     SelfISF
@@ -29,9 +31,9 @@
     
 .. autoclass:: ConvexHullTriangle
 
-.. autoclass:: GyrationRadius
-
 .. autoclass:: FormFactor
+
+.. autoclass:: GyrationRadius
 
 .. autoclass:: MSD
 

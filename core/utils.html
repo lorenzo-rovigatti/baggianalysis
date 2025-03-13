@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Utilities &mdash; baggianalysis 0.5.1.dev43+g75f1e95 documentation</title>
+  <title>Utilities &mdash; baggianalysis 0.6.1.dev8+g1a43384 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.5.1.dev43+g75f1e95
+                0.6.1.dev8+g1a43384
               </div>
             
           
@@ -206,28 +206,31 @@
 <tr class="row-even"><td><p><a class="reference internal" href="#baggianalysis.core.WaveVectorList" title="baggianalysis.core.WaveVectorList"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WaveVectorList</span></code></a></p></td>
 <td><p>A class storing list of q-vectors that are used to compute correlation functions in Fourier space (see <em>e.g.</em> <a class="reference internal" href="observables.html#baggianalysis.core.StructureFactor" title="baggianalysis.core.StructureFactor"><code class="xref py py-class docutils literal notranslate"><span class="pre">StructureFactor</span></code></a> or <a class="reference internal" href="observables.html#baggianalysis.core.SelfISF" title="baggianalysis.core.SelfISF"><code class="xref py py-class docutils literal notranslate"><span class="pre">SelfISF</span></code></a>).</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baggianalysis.core.set_logging_mode" title="baggianalysis.core.set_logging_mode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_logging_mode</span></code></a></p></td>
+<td><p>Set the logging mode (STDERR, FILE, or SILENT) and optionally specify a file path (used only if the FILE mode is chosen).</p></td>
+</tr>
 </tbody>
 </table>
 <dl class="py class">
 <dt id="baggianalysis.core.CellLists">
-<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">CellLists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.CellLists" title="baggianalysis.core.CellLists">baggianalysis.core.CellLists</a></span></em>, <em class="sig-param"><span class="n">init_shifts</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)">None</a><a class="headerlink" href="#baggianalysis.core.CellLists" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">CellLists</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.CellLists" title="baggianalysis.core.CellLists">baggianalysis.core.CellLists</a></span></em>, <em class="sig-param"><span class="n">init_shifts</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)">bool</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)">None</a><a class="headerlink" href="#baggianalysis.core.CellLists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">pybind11_builtins.pybind11_object</span></code></p>
 <p>A data structure to manage cell lists of particles in a cubic box.</p>
 <p>The constructor takes one mandatory arguments.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>init_shifts</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Initialise the cell shifts. Defaults to False.</p>
+<dd class="field-odd"><p><strong>init_shifts</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><em>bool</em></a>) – Initialise the cell shifts. Defaults to False.</p>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="baggianalysis.core.CellLists.add_particle">
-<code class="sig-name descname">add_particle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.CellLists" title="baggianalysis.core.CellLists">baggianalysis.core.CellLists</a></span></em>, <em class="sig-param"><span class="n">p</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">next_idx</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)">None</a><a class="headerlink" href="#baggianalysis.core.CellLists.add_particle" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_particle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.CellLists" title="baggianalysis.core.CellLists">baggianalysis.core.CellLists</a></span></em>, <em class="sig-param"><span class="n">p</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.Particle" title="baggianalysis.core.Particle">baggianalysis.core.Particle</a></span></em>, <em class="sig-param"><span class="n">next_idx</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)">int</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)">None</a><a class="headerlink" href="#baggianalysis.core.CellLists.add_particle" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a particle to the cells.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>p</strong> (<a class="reference internal" href="particles.html#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>) – The particle to be added.</p></li>
-<li><p><strong>next_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – The id used to index the particle internally. In most cases this is just the index of the particle.</p></li>
+<li><p><strong>next_idx</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – The id used to index the particle internally. In most cases this is just the index of the particle.</p></li>
 </ul>
 </dd>
 </dl>
@@ -239,7 +242,7 @@
 <dd><p>Return the cell corresponding to the given position.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>pos</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – The position whose corresponding cell should be returned.</p>
+<dd class="field-odd"><p><strong>pos</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – The position whose corresponding cell should be returned.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The three integer coordinates of the cell corresponding to the given position.</p>
@@ -252,14 +255,14 @@
 
 <dl class="py method">
 <dt id="baggianalysis.core.CellLists.init_cells">
-<code class="sig-name descname">init_cells</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.CellLists, particles: List[baggianalysis.core.Particle], box: glm::tvec3&lt;scalar, P&gt;, rc: float</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)">None</a><a class="headerlink" href="#baggianalysis.core.CellLists.init_cells" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">init_cells</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.CellLists, particles: List[baggianalysis.core.Particle], box: glm::tvec3&lt;scalar, P&gt;, rc: float</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)">None</a><a class="headerlink" href="#baggianalysis.core.CellLists.init_cells" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initial the cells data structures.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>particles</strong> (List(<a class="reference internal" href="particles.html#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>)) – The particles that will be used to build the cells.</p></li>
-<li><p><strong>box</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – The sizes of the box edges.</p></li>
-<li><p><strong>rc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – The smallest size of the cells.</p></li>
+<li><p><strong>box</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – The sizes of the box edges.</p></li>
+<li><p><strong>rc</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The smallest size of the cells.</p></li>
 </ul>
 </dd>
 </dl>
@@ -267,21 +270,21 @@
 
 <dl class="py method">
 <dt id="baggianalysis.core.CellLists.is_overlap">
-<code class="sig-name descname">is_overlap</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.CellLists, particles: List[baggianalysis.core.Particle], pos: glm::tvec3&lt;scalar, P&gt;, cutoff: float</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a><a class="headerlink" href="#baggianalysis.core.CellLists.is_overlap" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">is_overlap</code><span class="sig-paren">(</span><em class="sig-param">self: baggianalysis.core.CellLists, particles: List[baggianalysis.core.Particle], pos: glm::tvec3&lt;scalar, P&gt;, cutoff: float</em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)">bool</a><a class="headerlink" href="#baggianalysis.core.CellLists.is_overlap" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check whether the given position is closer than the given cutoff to any particle indexed in the cells.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>particles</strong> (List(<a class="reference internal" href="particles.html#baggianalysis.core.Particle" title="baggianalysis.core.Particle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Particle</span></code></a>)) – The particles used to build the cells</p></li>
-<li><p><strong>pos</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.26)"><em>numpy.ndarray</em></a>) – The position to be checked.</p></li>
-<li><p><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – The cutoff to be used in the computation.</p></li>
+<li><p><strong>pos</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.2)"><em>numpy.ndarray</em></a>) – The position to be checked.</p></li>
+<li><p><strong>cutoff</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The cutoff to be used in the computation.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>True if there is an overlap, False otherwise.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)">bool</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -300,9 +303,9 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>q_max</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – The length of the largest q vector of interest.</p></li>
-<li><p><strong>max_n_realisations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Given a length <span class="math notranslate nohighlight">\(q\)</span>, this is the maximum number of q vectors that will be averaged over to compute <span class="math notranslate nohighlight">\(F_s(q, t)\)</span>.</p></li>
-<li><p><strong>max_delta_q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – q-vectors that are separated by distances smaller than this value will be assigned to the same value of <span class="math notranslate nohighlight">\(q\)</span>.</p></li>
+<li><p><strong>q_max</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The length of the largest q vector of interest.</p></li>
+<li><p><strong>max_n_realisations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Given a length <span class="math notranslate nohighlight">\(q\)</span>, this is the maximum number of q vectors that will be averaged over to compute <span class="math notranslate nohighlight">\(F_s(q, t)\)</span>.</p></li>
+<li><p><strong>max_delta_q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – q-vectors that are separated by distances smaller than this value will be assigned to the same value of <span class="math notranslate nohighlight">\(q\)</span>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -312,11 +315,11 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>q_min</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – The length of the smallest q vector of interest.</p></li>
-<li><p><strong>q_max</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – The length of the largest q vector of interest.</p></li>
-<li><p><strong>q_interval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – The distance between two neighbouring q-vectors in the final list. All the q-vectors in-between will be discarded.</p></li>
-<li><p><strong>max_n_realisations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Given a length <span class="math notranslate nohighlight">\(q\)</span>, this is the maximum number of q vectors that will be averaged over to compute <span class="math notranslate nohighlight">\(F_s(q, t)\)</span>.</p></li>
-<li><p><strong>max_delta_q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a>) – q-vectors that are separated by distances smaller than this value will be assigned to the same value of <span class="math notranslate nohighlight">\(q\)</span>.</p></li>
+<li><p><strong>q_min</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The length of the smallest q vector of interest.</p></li>
+<li><p><strong>q_max</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The length of the largest q vector of interest.</p></li>
+<li><p><strong>q_interval</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – The distance between two neighbouring q-vectors in the final list. All the q-vectors in-between will be discarded.</p></li>
+<li><p><strong>max_n_realisations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Given a length <span class="math notranslate nohighlight">\(q\)</span>, this is the maximum number of q vectors that will be averaged over to compute <span class="math notranslate nohighlight">\(F_s(q, t)\)</span>.</p></li>
+<li><p><strong>max_delta_q</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a>) – q-vectors that are separated by distances smaller than this value will be assigned to the same value of <span class="math notranslate nohighlight">\(q\)</span>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -329,14 +332,14 @@ modules will slightly differ from the ones contained in <a class="reference inte
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>q_modules</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><em>float</em></a><em>)</em>) – The q modules that will be included in the final q-vector list.</p></li>
-<li><p><strong>max_n_realisations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Given a length <span class="math notranslate nohighlight">\(q\)</span>, this is the maximum number of q vectors that will be averaged over to compute <span class="math notranslate nohighlight">\(F_s(q, t)\)</span>.</p></li>
+<li><p><strong>q_modules</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><em>list</em></a><em>(</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)"><em>float</em></a><em>)</em>) – The q modules that will be included in the final q-vector list.</p></li>
+<li><p><strong>max_n_realisations</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Given a length <span class="math notranslate nohighlight">\(q\)</span>, this is the maximum number of q vectors that will be averaged over to compute <span class="math notranslate nohighlight">\(F_s(q, t)\)</span>.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt id="baggianalysis.core.WaveVectorList.init">
-<code class="sig-name descname">init</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.WaveVectorList" title="baggianalysis.core.WaveVectorList">baggianalysis.core.WaveVectorList</a></span></em>, <em class="sig-param"><span class="n">system</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)">None</a><a class="headerlink" href="#baggianalysis.core.WaveVectorList.init" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.WaveVectorList" title="baggianalysis.core.WaveVectorList">baggianalysis.core.WaveVectorList</a></span></em>, <em class="sig-param"><span class="n">system</span><span class="p">:</span> <span class="n"><a class="reference internal" href="particles.html#baggianalysis.core.System" title="baggianalysis.core.System">baggianalysis.core.System</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)">None</a><a class="headerlink" href="#baggianalysis.core.WaveVectorList.init" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initialise the list of q-vectors using the box size of the given system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -347,7 +350,7 @@ modules will slightly differ from the ones contained in <a class="reference inte
 
 <dl class="py method">
 <dt id="baggianalysis.core.WaveVectorList.q_modules">
-<code class="sig-name descname">q_modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.WaveVectorList" title="baggianalysis.core.WaveVectorList">baggianalysis.core.WaveVectorList</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)">float</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.WaveVectorList.q_modules" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">q_modules</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#baggianalysis.core.WaveVectorList" title="baggianalysis.core.WaveVectorList">baggianalysis.core.WaveVectorList</a></span></em><span class="sig-paren">)</span> &#x2192; List<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.13)">float</a><span class="p">]</span><a class="headerlink" href="#baggianalysis.core.WaveVectorList.q_modules" title="Permalink to this definition">¶</a></dt>
 <dd><p>A list of numbers storing the modules of the q vectors.</p>
 </dd></dl>
 
@@ -357,6 +360,12 @@ modules will slightly differ from the ones contained in <a class="reference inte
 <dd><p>A dictionary storing all the q vectors associated to this instance.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt id="baggianalysis.core.set_logging_mode">
+<code class="sig-prename descclassname">baggianalysis.core.</code><code class="sig-name descname">set_logging_mode</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">mode</span><span class="p">:</span> <span class="n">baggianalysis.core.LogMode</span></em>, <em class="sig-param"><span class="n">file_path</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></span> <span class="o">=</span> <span class="default_value">'ba_log.txt'</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)">None</a><a class="headerlink" href="#baggianalysis.core.set_logging_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the logging mode (STDERR, FILE, or SILENT) and optionally specify a file path (used only if the FILE mode is chosen).</p>
 </dd></dl>
 
 </div>

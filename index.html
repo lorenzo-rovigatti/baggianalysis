@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Baggianalysis &mdash; baggianalysis 0.5.1.dev43+g75f1e95 documentation</title>
+  <title>Baggianalysis &mdash; baggianalysis 0.6.1.dev8+g1a43384 documentation</title>
   
 
   
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.5.1.dev43+g75f1e95
+                0.6.1.dev8+g1a43384
               </div>
             
           
@@ -206,9 +206,9 @@
 <div class="section" id="a-simple-example">
 <h2>A simple example<a class="headerlink" href="#a-simple-example" title="Permalink to this headline">¶</a></h2>
 <p>The following code imports the <code class="docutils literal notranslate"><span class="pre">baggianalysis</span></code> module, parses a single LAMMPS data file, initialises its topology and perform some computations:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">baggianalysis</span> <span class="k">as</span> <span class="nn">ba</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">baggianalysis</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ba</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Usage is </span><span class="si">%s</span><span class="s2"> data_file&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -231,9 +231,9 @@
 </pre></div>
 </div>
 <p>The library makes it straightforward to work with whole trajectories. Here is an example where we compute the centre of mass of the first molecule of the system averaged over a whole trajectory:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">baggianalysis</span> <span class="k">as</span> <span class="nn">ba</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">baggianalysis</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ba</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Usage is </span><span class="si">%s</span><span class="s2"> topology_file dir&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -279,6 +279,21 @@
 </ul>
 </li>
 </ul>
+</div>
+<div class="section" id="logging">
+<h2>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h2>
+<p>Several library methods and functions output some logging information, which by default is printed to the standard error. This behaviour can be altered by using the <a class="reference internal" href="core/utils.html#baggianalysis.core.set_logging_mode" title="baggianalysis.core.set_logging_mode"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_logging_mode()</span></code></a> static method. Here are a few examples:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">baggianalysis</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ba</span>
+
+<span class="n">ba</span><span class="o">.</span><span class="n">set_logging_mode</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">STDERR</span><span class="p">)</span> <span class="c1"># this is the default</span>
+
+<span class="n">ba</span><span class="o">.</span><span class="n">set_logging_mode</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">SILENT</span><span class="p">)</span> <span class="c1"># switch off logging</span>
+
+<span class="n">ba</span><span class="o">.</span><span class="n">set_logging_mode</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">FILE</span><span class="p">)</span>   <span class="c1"># redirect logging to &quot;ba_log.txt&quot;</span>
+
+<span class="n">ba</span><span class="o">.</span><span class="n">set_logging_mode</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">FILE</span><span class="p">,</span> <span class="s2">&quot;my_log.txt&quot;</span><span class="p">)</span>   <span class="c1"># redirect logging to &quot;my_log.txt&quot;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="library-api">
 <h2>Library API<a class="headerlink" href="#library-api" title="Permalink to this headline">¶</a></h2>

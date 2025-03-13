@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Writing a parser &mdash; baggianalysis 0.5.1.dev43+g75f1e95 documentation</title>
+  <title>Writing a parser &mdash; baggianalysis 0.6.1.dev8+g1a43384 documentation</title>
   
 
   
@@ -61,7 +61,7 @@
             
             
               <div class="version">
-                0.5.1.dev43+g75f1e95
+                0.6.1.dev8+g1a43384
               </div>
             
           
@@ -212,11 +212,11 @@
 <p>where the first line should be skipped, the second line contains the number of atoms and then there are four lines for each molecule, with the three rightmost columns specifying that site’s x, y and z coordinates. The last line contains the size of the box edges.
 In this particular file, the time at which the configuration was printed is not stored in the file, but in the name of the file itself, which is sometime linke <code class="docutils literal notranslate"><span class="pre">QnfT188tXXX</span></code>, where <code class="docutils literal notranslate"><span class="pre">XXX</span></code> is the timestep.</p>
 <p>Here is the code for the new parser:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Tip4pIceParser</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">BaseParser</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Tip4pIceParser</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">BaseParser</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">ba</span><span class="o">.</span><span class="n">BaseParser</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="nf">_parse_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conf</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parse_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conf</span><span class="p">):</span>
         <span class="n">syst</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">System</span><span class="p">()</span>
         
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
