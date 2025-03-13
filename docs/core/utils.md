@@ -8,8 +8,12 @@
 
     CellLists
     WaveVectorList
+    set_logging_mode
     
 .. autoclass:: CellLists
 
 .. autoclass:: WaveVectorList
+
+.. autofunction:: set_logging_mode
+
 ```

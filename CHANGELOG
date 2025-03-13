@@ -1,4 +1,12 @@
-v. 0.6.0
+v. 0.6.1
+	- Add a new workflow to publish to pypi
+	- Add a way of controlling the logging behaviour
+	- Fix a bug whereby particles would not be brought back into the box when the user asked to set the axes origin in its centre
+	- Update the way the default oxDNA topology is read when two species are present
+	- Fix a bug whereby the code would silently fail when it was asked to build a system out of an invalid LAMMPS data file
+	- Fix several documentation issues
+
+v. 0.6.0 [75f1e95]
 	- Phase out recommonmark in favour of myst to generate the documentation
 	- Improve the test suite
 	- Add a script that can be used to compute the S(q) of an oxDNA trajectory

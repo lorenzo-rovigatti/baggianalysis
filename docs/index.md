@@ -83,6 +83,22 @@ Note that baggianalysis provides a {class}`~baggianalysis.core.LazyTrajectory` c
   * by hand, using the {meth}`~baggianalysis.core.Topology.make_empty_topology` static method to create a new topology and then adding bonds one after the other with the {class}`~baggianalysis.core.Topology.add_bond` method
   * by using an helper function to parse the topology out of a file through the {meth}`~baggianalysis.core.Topology.make_topology_from_file` static method. Baggianalysis comes with some [ready-made](core/topology.md) functions that can be used to parse topologies.
 
+## Logging
+
+Several library methods and functions output some logging information, which by default is printed to the standard error. This behaviour can be altered by using the {meth}`~baggianalysis.core.set_logging_mode` static method. Here are a few examples:
+
+```python
+import baggianalysis as ba
+
+ba.set_logging_mode(ba.STDERR) # this is the default
+
+ba.set_logging_mode(ba.SILENT) # switch off logging
+
+ba.set_logging_mode(ba.FILE)   # redirect logging to "ba_log.txt"
+
+ba.set_logging_mode(ba.FILE, "my_log.txt")   # redirect logging to "my_log.txt"
+```
+
 ## Library API
 
 ```eval_rst

@@ -55,6 +55,7 @@
 #include "../trajectories/LazyTrajectory.h"
 
 #include "../utils/CellLists.h"
+#include "../utils/Logger.h"
 #include "../utils/WaveVectorList.h"
 
 #include "../python_defs.h"
@@ -124,4 +125,16 @@ PYBIND11_MODULE(core, m) {
 
 	ba::export_CellLists(m);
 	ba::export_WaveVectorList(m);
+
+	// Here we bind Logger's set_logging_mode static method directly, since we can't do it 
+	// in the Logger class because of the way includes are (badlyt) organised in the project
+	py::enum_<ba::Logger::LogMode>(m, "LogMode")
+        .value("STDERR", ba::Logger::LogMode::STDERR)
+        .value("FILE", ba::Logger::LogMode::FILE)
+        .value("SILENT", ba::Logger::LogMode::SILENT)
+        .export_values();  // Allows direct access without `LogMode.` prefix
+
+    // Bind the Logger class (only static methods, as it is not instantiable)
+    m.def("set_logging_mode", &ba::Logger::set_logging_mode, py::arg("mode"), py::arg("file_path") = "ba_log.txt",
+		"Set the logging mode (STDERR, FILE, or SILENT) and optionally specify a file path (used only if the FILE mode is chosen).");
 }
