@@ -17,11 +17,11 @@ SET(CMAKE_BUILD_TYPE Release)
 # build spdlog as a shared lib
 add_subdirectory(extern/spdlog)
 set_target_properties(spdlog PROPERTIES POSITION_INDEPENDENT_CODE ON)
+include_directories(extern/spdlog/include)
 
 # tell pybind11 to use python3
 set(PYBIND11_PYTHON_VERSION 3 CACHE STRING "Python version to use for compiling modules")
 ADD_SUBDIRECTORY(extern/pybind11)
-
 INCLUDE_DIRECTORIES( ${PYTHON_INCLUDE_DIRS} )
 
 MESSAGE(STATUS "Enabling Python bindings")
@@ -91,4 +91,3 @@ ADD_CUSTOM_TARGET(test_quick
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
 ADD_SUBDIRECTORY(lib)
-ADD_SUBDIRECTORY(exec)

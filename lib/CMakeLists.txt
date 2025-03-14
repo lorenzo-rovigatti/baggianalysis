@@ -55,7 +55,7 @@ SET(ba_lib_SOURCES
 	utils/WaveVectorList.cpp
 )
 
-# The lines that follow the following variables:
+# The lines that follow define the following variables:
 #   NLOPT_FOUND
 #   NLOPT_INCLUDE_DIRS
 #   NLOPT_LIBRARIES
@@ -128,12 +128,7 @@ ELSE()
 	MESSAGE(WARNING "GSL not found, the following modules will not be compiled: ${with_GSL_SOURCES}")
 ENDIF(GSL_FOUND)
 
-add_library(_baggianalysis STATIC ${ba_lib_SOURCES})
-
-TARGET_LINK_LIBRARIES(_baggianalysis ${PYTHON_LIBRARIES})
-SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES POSITION_INDEPENDENT_CODE ON)
-pybind11_add_module(core SHARED python/bindings.cpp)
-TARGET_LINK_LIBRARIES(core PRIVATE _baggianalysis)
+pybind11_add_module(core SHARED python/bindings.cpp ${ba_lib_SOURCES})
 
 set(BA_OUTPUT_DIR "${CMAKE_CURRENT_BINARY_DIR}/python/baggianalysis")
 
@@ -168,17 +163,16 @@ CONFIGURE_FILE(python/make_install_setup.py
 # setup the make install target to run make_install_setup.py (in user mode, no root permissions required)
 INSTALL(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install ${BA_OUTPUT_DIR})")
 	
-TARGET_LINK_LIBRARIES(_baggianalysis spdlog::spdlog)
+TARGET_LINK_LIBRARIES(core PUBLIC spdlog::spdlog)
+
 IF(GSL_FOUND)
-	TARGET_LINK_LIBRARIES(_baggianalysis ${GSL_LIBRARIES})
+	TARGET_LINK_LIBRARIES(core PUBLIC ${GSL_LIBRARIES})
 ENDIF(GSL_FOUND)
 
 IF(NLOPT_FOUND)
 	INCLUDE_DIRECTORIES( ${NLOPT_INCLUDE_DIRS} )
-	TARGET_LINK_LIBRARIES(_baggianalysis ${NLOPT_LIBRARIES})
+	TARGET_LINK_LIBRARIES(core PUBLIC ${NLOPT_LIBRARIES})
 ENDIF()
-
-SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES PREFIX "")
 
 # by default, libraries have extension ".dylib" on Mac OS X, but these are
 # not recognized by python as modules
@@ -187,7 +181,7 @@ IF(APPLE)
 ENDIF(APPLE)
 
 ADD_CUSTOM_COMMAND(
-        TARGET _baggianalysis POST_BUILD
+        TARGET core POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_SOURCE_DIR}/tests
                 ${CMAKE_CURRENT_BINARY_DIR}
