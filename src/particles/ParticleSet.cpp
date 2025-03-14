@@ -49,7 +49,7 @@ ParticleSet::ParticleSet(ParticleSet *source, int indexes_shift) {
 		}
 
 		// dihedrals
-		for(auto d: original_p->bonded_angles()) {
+		for(auto d: original_p->bonded_dihedrals()) {
 			auto d0 = this->particle_by_id(d[0]->index() + indexes_shift);
 			auto d1 = this->particle_by_id(d[1]->index() + indexes_shift);
 			auto d2 = this->particle_by_id(d[2]->index() + indexes_shift);

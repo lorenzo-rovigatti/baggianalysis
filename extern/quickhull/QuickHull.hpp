@@ -175,7 +175,7 @@ public:
 
 template<typename T>
 std::unique_ptr<std::vector<size_t>> QuickHull<T>::getIndexVectorFromPool() {
-	auto r = std::move(m_indexVectorPool.get());
+	auto r = m_indexVectorPool.get();
 	r->clear();
 	return r;
 }
@@ -412,7 +412,7 @@ void QuickHull<T>::createConvexHalfEdgeMesh() {
 			}
 			// Disable the face, but retain pointer to the points that were on the positive side of it. We need to assign those points
 			// to the new faces we create shortly.
-			auto t = std::move(m_mesh.disableFace(faceIndex));
+			auto t = m_mesh.disableFace(faceIndex);
 			if(t) {
 				assert(t->size()); // Because we should not assign point vectors to faces unless needed...
 				m_disabledFacePointVectors.push_back(std::move(t));
