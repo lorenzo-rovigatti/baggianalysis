@@ -1,6 +1,33 @@
 [build-system]
-requires = ["setuptools", "wheel", "setuptools_scm"]
+requires = ["setuptools", "setuptools-scm", "wheel", "numpy", "cmake"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools_scm]
-write_to = "baggianalysis/_version.py"
+[project]
+name = "baggianalysis"
+dynamic = ["version"]
+description = "A C++/Python library to facilitate the analysis of molecular simulations"
+readme = "README.md"
+authors = [
+    {name = "Lorenzo Rovigatti", email = "lorenzo.rovigatti@uniroma1.it"}
+]
+license = {text = "GNU GPL 3.0"}
+dependencies = [
+    "numpy"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Programming Language :: C++",
+    "Topic :: Scientific/Engineering :: Physics"
+]
+
+[project.urls]
+homepage = "https://github.com/lorenzo-rovigatti/baggianalysis"
+
+[project.scripts]
+oxDNA_LAMMPS = "baggianalysis.converters:oxDNA_LAMMPS_command_line"
+oxDNA_cogli = "baggianalysis.converters:oxDNA_cogli_command_line"
+LAMMPS_cogli = "baggianalysis.converters:LAMMPS_cogli_command_line"

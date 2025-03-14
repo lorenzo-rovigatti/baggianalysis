@@ -124,9 +124,6 @@ setup(
     name = PACKAGE_NAME,
     use_scm_version = True,
     packages = find_packages(),
-    setup_requires = [
-        'setuptools-scm',
-        ],
     install_requires = [
         "numpy",
     ],
