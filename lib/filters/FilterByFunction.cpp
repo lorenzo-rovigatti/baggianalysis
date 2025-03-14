@@ -38,8 +38,6 @@ std::shared_ptr<System> FilterByFunction::filter(std::shared_ptr<System> syst) {
 	return new_syst;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_FilterByFunction(py::module &m) {
 	py::class_<FilterByFunction, BaseFilter, std::shared_ptr<FilterByFunction>> filter(m, "FilterByFunction", R"pbdoc(
 A filter that uses a user-provided callable to choose which particles will be included in the new system.
@@ -67,7 +65,5 @@ The same effect can be achieved without using a lambda function::
             A callable that takes a particle and returns True if the particle should be included in the new system, False otherwise.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

@@ -31,11 +31,7 @@ protected:
 	bool _remove_com;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_MSD(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

@@ -153,8 +153,6 @@ bool CellLists::is_overlap(const std::vector<std::shared_ptr<Particle>> &particl
 	return false;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_CellLists(py::module &m) {
 	py::class_<CellLists, std::shared_ptr<CellLists>> cells(m, "CellLists", R"pbdoc(
 A data structure to manage cell lists of particles in a cubic box.
@@ -226,7 +224,5 @@ bool
 )pbdoc");
 
 }
-
-#endif
 
 } /* namespace ba */

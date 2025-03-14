@@ -32,11 +32,7 @@ protected:
 	WaveVectorList _q_list;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_CollectiveISF(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

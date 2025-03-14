@@ -41,11 +41,7 @@ protected:
 	std::vector<double> _q_modules;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_WaveVectorList(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

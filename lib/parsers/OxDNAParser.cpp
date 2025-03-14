@@ -143,8 +143,6 @@ std::shared_ptr<System> OxDNAParser::_parse_stream(std::ifstream &configuration)
 	return syst;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_OxDNAParser(py::module &m) {
 	py::module sub_m = m.def_submodule("oxDNA_topology");
 
@@ -198,7 +196,5 @@ Parameters
 
 	parser.def("topology_parser", &OxDNAParser::topology_parser, "Return the topology parser associated to this parser.");
 }
-
-#endif
 
 } /* namespace ba */

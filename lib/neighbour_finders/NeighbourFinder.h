@@ -46,8 +46,6 @@ protected:
 	virtual void _add_neighbour(std::shared_ptr<Particle> add_to, std::string type, std::shared_ptr<Particle> to_be_added);
 };
 
-#ifdef PYTHON_BINDINGS
-
 class PyNeighbourFinder : public NeighbourFinder {
 public:
 	using NeighbourFinder::NeighbourFinder;
@@ -64,8 +62,6 @@ public:
 };
 
 void export_NeighbourFinder(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

@@ -30,8 +30,6 @@ std::shared_ptr<System> FilterById::filter(std::shared_ptr<System> syst) {
 	return _filter->filter(syst);
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_FilterById(py::module &m) {
 	py::class_<FilterById, BaseFilter, std::shared_ptr<FilterById>> filter(m, "FilterById", R"pbdoc(
 A filter that builds a new system by including only those particles whose index is in the list provided by the user.
@@ -53,7 +51,5 @@ As an example, the following snippet creates a filter that will include in the n
             The list of particle indexes that should be included in the new system.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ashell */

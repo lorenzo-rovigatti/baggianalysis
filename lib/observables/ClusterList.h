@@ -25,12 +25,7 @@ private:
 	std::vector<std::set<int>> _clusters;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_ClusterList(py::module &m);
-
-#endif
-
 
 } /* namespace ba */
 

@@ -68,15 +68,11 @@ std::shared_ptr<System> LJKAParser::_parse_stream(std::ifstream &configuration) 
 	return syst;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_LJKAParser(py::module &m) {
 	py::class_<LJKAParser, BaseParser, std::shared_ptr<LJKAParser>> parser(m, "LJKAParser");
 
 	parser
 		.def(py::init<>());
 }
-
-#endif
 
 } /* namespace ba */

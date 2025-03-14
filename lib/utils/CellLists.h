@@ -104,11 +104,7 @@ private:
 	std::vector<std::vector<glm::ivec3>> _cell_shifts;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_CellLists(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

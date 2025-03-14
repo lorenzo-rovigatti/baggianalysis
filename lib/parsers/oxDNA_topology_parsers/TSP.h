@@ -28,11 +28,7 @@ private:
 	std::vector<uint> _N_arms;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_TSP(py::module &m);
-
-#endif
 
 } /* namespace oxDNA_topology */
 } /* namespace ba */

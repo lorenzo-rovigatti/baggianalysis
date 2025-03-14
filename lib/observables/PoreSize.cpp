@@ -146,8 +146,6 @@ double constraint(unsigned n, const double *x, double *grad, void *f_data) {
 	return sqrt(glm::dot(distance, distance)) - R;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_PoreSize(py::module &m) {
 	py::class_<PoreSize, std::shared_ptr<PoreSize>> obs(m, "PoreSize", R"pbdoc(
 Find the pore sizes of a system. Requires `NLopt <https://nlopt.readthedocs.io/en/latest/>`_.
@@ -222,7 +220,5 @@ float
 
 	PY_EXPORT_SYSTEM_OBS(obs, PoreSize);
 }
-
-#endif
 
 } /* namespace ba */

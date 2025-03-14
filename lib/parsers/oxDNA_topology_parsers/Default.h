@@ -40,8 +40,6 @@ protected:
 	std::vector<std::vector<int>> _bonded_neighbours;
 };
 
-#ifdef PYTHON_BINDINGS
-
 /**
  * @brief Trampoline class for Default.
  */
@@ -60,8 +58,6 @@ public:
 };
 
 void export_Default(py::module &m);
-
-#endif
 
 } /* namespace oxDNA_topology */
 } /* namespace ba */

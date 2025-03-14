@@ -45,8 +45,6 @@ protected:
 	int _times_called = 0;
 };
 
-#ifdef PYTHON_BINDINGS
-
 #define PY_EXPORT_SYSTEM_OBS(instance_name, class_name) {\
 															instance_name\
 																.def("analyse_trajectory", &class_name::analyse_trajectory)\
@@ -54,8 +52,6 @@ protected:
 																.def("reset", &class_name::reset)\
 																.def("result", &class_name::result);\
 														}\
-
-#endif
 
 } /* namespace ba */
 

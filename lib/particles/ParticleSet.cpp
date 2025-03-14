@@ -221,8 +221,6 @@ std::vector<std::shared_ptr<Particle>> ParticleSet::select(std::function<bool(st
 	return res;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_ParticleSet(py::module &m) {
 	py::class_<ParticleSet, std::shared_ptr<ParticleSet>> particle_set(m, "ParticleSet", "A set of particles.");
 
@@ -371,7 +369,5 @@ List(:class:`Particle`)
 The name of the object. This can be used to keep track of particular particle sets (*e.g.* when dealing with :meth:`System.molecules()`).
 )pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

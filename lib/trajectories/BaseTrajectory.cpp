@@ -58,8 +58,6 @@ std::shared_ptr<System> BaseTrajectory::_filtered_system(std::shared_ptr<System>
 	return system;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_BaseTrajectory(py::module &m) {
 	py::class_<BaseTrajectory, PyBaseTrajectory, std::shared_ptr<BaseTrajectory>> parser(m, "BaseTrajectory", R"pbdoc(
         An interface that defines the method that can be used to initialise and manage trajectories.
@@ -149,7 +147,5 @@ void export_BaseTrajectory(py::module &m) {
             be included in the trajectory or not.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

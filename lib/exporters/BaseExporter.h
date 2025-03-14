@@ -30,11 +30,7 @@ private:
 	virtual std::string _topology_filename_from_output_filename(std::string filename);
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_BaseExporter(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

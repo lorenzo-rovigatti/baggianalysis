@@ -72,11 +72,7 @@ private:
 	int _charge_index = -1;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_LAMMPSDataFileParser(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

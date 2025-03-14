@@ -14,10 +14,6 @@
 #define DEFAULT_PARTICLE_TYPE "0"
 #define DEFAULT_LINK_TYPE "1"
 
-#ifndef PYTHON_BINDINGS
-#define PYBIND11_EXPORT
-#endif
-
 #include "utils/Logger.h"
 
 #include <spdlog/fmt/fmt.h>

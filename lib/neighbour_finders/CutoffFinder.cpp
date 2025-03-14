@@ -66,8 +66,6 @@ void CutoffFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> particl
 	}
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_CutoffFinder(py::module &m) {
 	py::class_<CutoffFinder, NeighbourFinder, std::shared_ptr<CutoffFinder>> finder(m, "CutoffFinder", R"pbdoc(
         Define as neighbours of a particle all those particles that are closer than the given cutoff and, optionally, satisfy further conditions set by a custom function. 
@@ -93,7 +91,5 @@ neighbour_function : callable
     A callable that takes two particles and a vector that is the distance between the two particles (defined as :math:`\vec{r} = \vec{r}_1 - \vec{r}_2`), and returns a boolean, which should be True if the two particles are neighbours, False otherwise.
     )pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

@@ -25,11 +25,7 @@ public:
 	particle_type type(int) override;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_NoTopology(py::module &m);
-
-#endif
 
 } /* namespace oxDNA_topology */
 } /* namespace ba */

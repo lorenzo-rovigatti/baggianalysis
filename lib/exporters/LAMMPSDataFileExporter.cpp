@@ -210,8 +210,6 @@ std::string LAMMPSDataFileExporter::_particle_line(std::shared_ptr<Particle> p, 
 	return line;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_LAMMPSDataFileExporter(py::module &m) {
 	py::class_<LAMMPSDataFileExporter, BaseExporter, std::shared_ptr<LAMMPSDataFileExporter>> exporter(m, "LAMMPSDataFileExporter",
 			R"pbdoc(
@@ -233,7 +231,5 @@ Parameters
 		The atom style to be used in printing the data file (see `here <https://lammps.sandia.gov/doc/atom_style.html>`_ for details). As of now, only the "atomic" and "bond" styles are supported.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

@@ -56,15 +56,11 @@ particle_type DNA::type(int idx) {
 	return _types[idx];
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_DNA(py::module &m) {
 	py::class_<DNA, std::shared_ptr<DNA>, Default> parser(m, "DNA");
 
 	parser.def(py::init<std::string>());
 }
-
-#endif
 
 } /* namespace oxDNA_topology */
 } /* namespace ba */

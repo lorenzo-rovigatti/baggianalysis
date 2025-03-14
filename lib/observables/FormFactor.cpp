@@ -84,8 +84,6 @@ std::map<double, double> FormFactor::_finalised_result() {
 	return result;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_FormFactor(py::module &m) {
 	py::class_<FormFactor, std::shared_ptr<FormFactor>> obs(m, "FormFactor", R"pbdoc(
 Compute the form factor of a system or the average form factor of the molecules contained in the system.
@@ -130,7 +128,5 @@ p_set: :class:`ParticleSet`
 
 	PY_EXPORT_SYSTEM_OBS(obs, FormFactor);
 }
-
-#endif
 
 } /* namespace ba */

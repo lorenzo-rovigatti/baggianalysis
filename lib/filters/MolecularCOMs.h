@@ -20,11 +20,7 @@ public:
 	std::shared_ptr<System> filter(std::shared_ptr<System> syst) override;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_MolecularCOMs(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

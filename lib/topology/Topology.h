@@ -123,11 +123,7 @@ protected:
 	std::vector<std::set<int>> _clusters;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_Topology(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

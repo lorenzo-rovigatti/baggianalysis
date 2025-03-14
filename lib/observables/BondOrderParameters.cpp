@@ -150,8 +150,6 @@ void BondOrderParameters::_set_particle_bops(std::shared_ptr<Particle> p, partic
 	}
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_BondOrderParameters(py::module &m) {
 	py::class_<BondOrderParameters, std::shared_ptr<BondOrderParameters>> obs(m, "BondOrderParameters");
 
@@ -164,7 +162,5 @@ void export_BondOrderParameters(py::module &m) {
 
 	PY_EXPORT_SYSTEM_OBS(obs, BondOrderParameters);
 }
-
-#endif
 
 } /* namespace ba */

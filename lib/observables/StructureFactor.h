@@ -43,11 +43,7 @@ protected:
 	vector_scalar _b_factors;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_StructureFactor(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

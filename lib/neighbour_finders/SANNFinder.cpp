@@ -137,8 +137,6 @@ void SANNFinder::_symmetrise_by_removing(std::vector<std::shared_ptr<Particle>> 
 	}
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_SANNFinder(py::module &m) {
 	py::class_<SANNFinder, NeighbourFinder, std::shared_ptr<SANNFinder>> finder(m, "SANNFinder", R"pbdoc(
 Use the SANN algorithm to detect neighbours. 
@@ -163,7 +161,5 @@ Parameters
 		.value("SYMMETRISE_BY_REMOVING", SANNFinder::SymmetryPolicy::SYMMETRISE_BY_REMOVING)
 	    .export_values();
 }
-
-#endif
 
 } /* namespace ba */

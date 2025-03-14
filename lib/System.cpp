@@ -109,8 +109,6 @@ void System::bring_particles_in_box(bool shift_by_half_box) {
 	}
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_System(py::module &m) {
 	py::class_<System, ParticleSet, std::shared_ptr<System>> system(m, "System", R"pbdoc(
 		A single configuration. 
@@ -198,7 +196,5 @@ The copy constructor.
 	system.def_readwrite("box", &System::box);
 
 }
-
-#endif
 
 } /* namespace ba */

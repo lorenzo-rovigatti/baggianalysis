@@ -2,7 +2,6 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.12)
 
 cmake_policy(SET CMP0054 NEW)
 
-OPTION(Python "Enable Python bindings" ON)
 OPTION(Debug "Set to ON to compile with debug symbols" OFF)
 OPTION(G "Set to ON to compile with optimisations and debug symbols" OFF)
 OPTION(COMPILER_EXTENSIONS "Set to ON to enable compiler (most likely GNU) C++ extensions" ON)
@@ -19,16 +18,13 @@ SET(CMAKE_BUILD_TYPE Release)
 add_subdirectory(extern/spdlog)
 set_target_properties(spdlog PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
-IF(Python)
-	# tell pybind11 to use python3
-	set(PYBIND11_PYTHON_VERSION 3 CACHE STRING "Python version to use for compiling modules")
-	ADD_SUBDIRECTORY(extern/pybind11)
-	ADD_DEFINITIONS(-DPYTHON_BINDINGS)
-	
-	INCLUDE_DIRECTORIES( ${PYTHON_INCLUDE_DIRS} )
-	
-	MESSAGE(STATUS "Enabling Python bindings")
-ENDIF(Python)
+# tell pybind11 to use python3
+set(PYBIND11_PYTHON_VERSION 3 CACHE STRING "Python version to use for compiling modules")
+ADD_SUBDIRECTORY(extern/pybind11)
+
+INCLUDE_DIRECTORIES( ${PYTHON_INCLUDE_DIRS} )
+
+MESSAGE(STATUS "Enabling Python bindings")
 
 IF(Debug)
 	SET(CMAKE_BUILD_TYPE "Debug")

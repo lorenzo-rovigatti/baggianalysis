@@ -90,8 +90,6 @@ void ConvexHull::analyse_trajectory(std::shared_ptr<BaseTrajectory> trajectory) 
 	_average_over_trajectory = false;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_ConvexHull(py::module &m) {
 	py::class_<ConvexHull, std::shared_ptr<ConvexHull>> obs(m, "ConvexHull", R"pbdoc(
         Construct the `convex hull <https://en.wikipedia.org/wiki/Convex_hull>`_ of the system, which is the smallest convex set that contains the particles' coordinates.
@@ -140,7 +138,5 @@ void export_ConvexHull(py::module &m) {
 		Return the volume of the triangle.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

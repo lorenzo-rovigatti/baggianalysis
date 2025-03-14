@@ -26,8 +26,6 @@ public:
 	virtual std::shared_ptr<System> filter(std::shared_ptr<System> syst) = 0;
 };
 
-#ifdef PYTHON_BINDINGS
-
 /**
  * @brief Trampoline class for BaseFilter.
  */
@@ -50,8 +48,6 @@ public:
 
 void export_BaseFilter(py::module &m);
 
-#endif
-
-} /* namespace ashell */
+} /* namespace ba */
 
 #endif /* FILTERS_BASEFILTER_H_ */

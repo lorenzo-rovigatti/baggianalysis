@@ -119,8 +119,6 @@ void FullTrajectory::reset() {
 	_current_system = frames.begin();
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_FullTrajectory(py::module &m) {
 	py::class_<FullTrajectory, BaseTrajectory, std::shared_ptr<FullTrajectory>> parser(m, "FullTrajectory", R"pbdoc(
         A trajectory that builds and loads in memory all the frames at once.
@@ -132,7 +130,5 @@ void export_FullTrajectory(py::module &m) {
 	parser.def(py::init<shared_ptr<BaseParser>>(), "The constructor takes a parser as its only parameter.");
 	parser.def_readonly("frames", &FullTrajectory::frames, "The read-only list of :class:`System` objects making up the trajectory.");
 }
-
-#endif
 
 } /* namespace ba */

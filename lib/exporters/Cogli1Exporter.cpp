@@ -60,8 +60,6 @@ void Cogli1Exporter::_write_system_to_stream(std::shared_ptr<System> system, std
 	}
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_Cogli1Exporter(py::module &m) {
 	py::class_<Cogli1Particle> particle(m, "Cogli1Particle", R"pbdoc(
         A utility class that encapsulates a sphere. It is used by :class:`Cogli1Exporter` to customise its output.
@@ -148,7 +146,5 @@ dummy: bool
     A dummy boolean. Its value does not affect the behaviour of the exporter.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

@@ -29,8 +29,6 @@ shared_ptr<System> FilterByReducingToCOM::filter(std::shared_ptr<System> syst) {
 	return new_syst;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_FilterByReducingToCOM(py::module &m) {
 	py::class_<FilterByReducingToCOM, BaseFilter, std::shared_ptr<FilterByReducingToCOM>> filter(m, "FilterByReducingToCOM", R"pbdoc(
 A filter that builds a new system containing a single particle whose position and velocity are the position and velocity of the 
@@ -41,7 +39,5 @@ centre of mass of the input system.
     The constructor does not take any parameters.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

@@ -130,47 +130,44 @@ ENDIF(GSL_FOUND)
 
 add_library(_baggianalysis STATIC ${ba_lib_SOURCES})
 
-IF(Python)
-	TARGET_LINK_LIBRARIES(_baggianalysis ${PYTHON_LIBRARIES})
-	SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES POSITION_INDEPENDENT_CODE ON)
-	pybind11_add_module(core SHARED python/bindings.cpp)
-	TARGET_LINK_LIBRARIES(core PRIVATE _baggianalysis)
-	
-	set(BA_OUTPUT_DIR "${CMAKE_CURRENT_BINARY_DIR}/python/baggianalysis")
-	
-	# the library should be in a folder with the same name to make it easier to use Python's distutils
-	SET_TARGET_PROPERTIES(core 
-		PROPERTIES 
-			SUFFIX ".so"
-			LIBRARY_OUTPUT_DIRECTORY ${BA_OUTPUT_DIR}
-	)
-	
-	# copy the files required to install the library with Python's setuptools
-	CONFIGURE_FILE(python/__init__.py
-		${BA_OUTPUT_DIR}/__init__.py
-	)
-	
-	CONFIGURE_FILE(python/utils.py
-		${BA_OUTPUT_DIR}/utils.py
-	)
-	
-	CONFIGURE_FILE(python/traj.py
-		${BA_OUTPUT_DIR}/traj.py
-	)
-	
-	CONFIGURE_FILE(python/converters.py
-		${BA_OUTPUT_DIR}/converters.py
-	)
+TARGET_LINK_LIBRARIES(_baggianalysis ${PYTHON_LIBRARIES})
+SET_TARGET_PROPERTIES(_baggianalysis PROPERTIES POSITION_INDEPENDENT_CODE ON)
+pybind11_add_module(core SHARED python/bindings.cpp)
+TARGET_LINK_LIBRARIES(core PRIVATE _baggianalysis)
 
-	CONFIGURE_FILE(python/make_install_setup.py
-		${BA_OUTPUT_DIR}/setup.py
-	)
+set(BA_OUTPUT_DIR "${CMAKE_CURRENT_BINARY_DIR}/python/baggianalysis")
 
-	# setup the make install target to run make_install_setup.py (in user mode, no root permissions required)
-	INSTALL(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install ${BA_OUTPUT_DIR})")
+# the library should be in a folder with the same name to make it easier to use Python's distutils
+SET_TARGET_PROPERTIES(core 
+	PROPERTIES 
+		SUFFIX ".so"
+		LIBRARY_OUTPUT_DIRECTORY ${BA_OUTPUT_DIR}
+)
+
+# copy the files required to install the library with Python's setuptools
+CONFIGURE_FILE(python/__init__.py
+	${BA_OUTPUT_DIR}/__init__.py
+)
+
+CONFIGURE_FILE(python/utils.py
+	${BA_OUTPUT_DIR}/utils.py
+)
+
+CONFIGURE_FILE(python/traj.py
+	${BA_OUTPUT_DIR}/traj.py
+)
+
+CONFIGURE_FILE(python/converters.py
+	${BA_OUTPUT_DIR}/converters.py
+)
+
+CONFIGURE_FILE(python/make_install_setup.py
+	${BA_OUTPUT_DIR}/setup.py
+)
+
+# setup the make install target to run make_install_setup.py (in user mode, no root permissions required)
+INSTALL(CODE "execute_process(COMMAND ${PYTHON_EXECUTABLE} -m pip install ${BA_OUTPUT_DIR})")
 	
-ENDIF(Python)
-
 TARGET_LINK_LIBRARIES(_baggianalysis spdlog::spdlog)
 IF(GSL_FOUND)
 	TARGET_LINK_LIBRARIES(_baggianalysis ${GSL_LIBRARIES})

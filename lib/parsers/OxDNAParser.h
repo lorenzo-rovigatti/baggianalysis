@@ -42,11 +42,7 @@ protected:
 	};
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_OxDNAParser(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

@@ -37,8 +37,6 @@ shared_ptr<System> SubtractCOM::filter(std::shared_ptr<System> syst) {
 	return new_syst;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_SubtractCOM(py::module &m) {
 	py::class_<SubtractCOM, BaseFilter, std::shared_ptr<SubtractCOM>> filter(m, "SubtractCOM", R"pbdoc(
 A filter that removes the centre of mass position and velocity from each particle.
@@ -48,7 +46,5 @@ A filter that removes the centre of mass position and velocity from each particl
 		The constructor does not take any parameters.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

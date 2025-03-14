@@ -30,11 +30,7 @@ private:
 	CellLists _lists;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_FixedNumberFinder(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

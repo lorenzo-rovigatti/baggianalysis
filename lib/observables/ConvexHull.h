@@ -51,11 +51,7 @@ private:
 	bool _average_over_trajectory = false;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_ConvexHull(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

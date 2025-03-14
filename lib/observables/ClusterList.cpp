@@ -32,8 +32,6 @@ const std::vector<std::set<int>> &ClusterList::clusters() const {
 	return _clusters;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_ClusterList(py::module &m) {
 	py::class_<ClusterList, std::shared_ptr<ClusterList>> obs(m, "ClusterList", "Partition particles into clusters. The ``result`` of the computation is a list of the sizes of all clusters.");
 
@@ -42,7 +40,5 @@ void export_ClusterList(py::module &m) {
 
 	PY_EXPORT_SYSTEM_OBS(obs, ClusterList);
 }
-
-#endif
 
 } /* namespace ba */

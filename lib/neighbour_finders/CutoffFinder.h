@@ -32,11 +32,7 @@ private:
 	NeighbourFunction _neigh_function = [](std::shared_ptr<Particle>, std::shared_ptr<Particle>, vec3) { return true; };
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_CutoffFinder(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

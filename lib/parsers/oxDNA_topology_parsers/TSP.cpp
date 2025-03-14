@@ -52,8 +52,6 @@ uint TSP::N_arms(int star) const {
 	return _N_arms[star];
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_TSP(py::module &m) {
 	py::class_<TSP, std::shared_ptr<TSP>, Default> parser(m, "TSP");
 
@@ -62,8 +60,6 @@ void export_TSP(py::module &m) {
 	parser.def("N_monomers_per_arm", &TSP::N_monomers_per_arm);
 	parser.def("N_arms", &TSP::N_arms);
 }
-
-#endif
 
 } /* namespace oxDNA_topology */
 } /* namespace ba */

@@ -30,8 +30,6 @@ std::shared_ptr<System> MolecularCOMs::filter(std::shared_ptr<System> syst) {
 	return new_syst;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_MolecularCOMs(py::module &m) {
 	py::class_<MolecularCOMs, BaseFilter, std::shared_ptr<MolecularCOMs>> filter(m, "MolecularCOMs", R"pbdoc(
 A filter that takes each molecule of the given system and adds it as a particle in the new system using the molecule's centre of mass, velocity, charge and mass.
@@ -41,7 +39,5 @@ A filter that takes each molecule of the given system and adds it as a particle 
 The constructor takes no parameters.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

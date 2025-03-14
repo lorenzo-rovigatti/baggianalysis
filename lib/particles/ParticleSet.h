@@ -147,11 +147,7 @@ protected:
 	std::map<int, std::shared_ptr<Particle>> _particles_by_id;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_ParticleSet(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

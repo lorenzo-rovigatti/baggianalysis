@@ -33,8 +33,6 @@ void NeighbourFinder::_add_neighbour(std::shared_ptr<Particle> add_to, std::stri
 	}
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_NeighbourFinder(py::module &m) {
 	py::class_<NeighbourFinder, PyNeighbourFinder, std::shared_ptr<NeighbourFinder>> finder(m, "NeighbourFinder",
 			"Interface for classes that set the neighbours of a given list of particles according to some criterium.");
@@ -65,7 +63,5 @@ Parameters
         True if bonded neighbours can also be regular neighbours, False otherwise.
 )pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

@@ -87,8 +87,6 @@ void LazyTrajectory::reset() {
 	}
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_LazyTrajectory(py::module &m) {
 	py::class_<LazyTrajectory, BaseTrajectory, std::shared_ptr<LazyTrajectory>> parser(m, "LazyTrajectory", R"pbdoc(
         A trajectory that does not load up all the frames in memory at once but parses them one after the other.
@@ -100,7 +98,5 @@ void export_LazyTrajectory(py::module &m) {
 
 	parser.def(py::init<shared_ptr<BaseParser>>(), "The constructor takes a parser as its only parameter.");
 }
-
-#endif
 
 } /* namespace ba */

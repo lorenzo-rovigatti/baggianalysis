@@ -131,8 +131,6 @@ double ParticleAutocorrelation::_conf_conf_value(std::shared_ptr<System> first, 
 	return value / N;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_ParticleAutocorrelation(py::module &m) {
 	py::class_<ParticleAutocorrelation, std::shared_ptr<ParticleAutocorrelation>> obs(m, "ParticleAutocorrelation", R"pb(
 Compute the normalised autocorrelation of particle-related three-dimensional vectors.
@@ -164,7 +162,5 @@ Analyse the trajectory and print the autocorrelation directly to the given file.
 
 	PY_EXPORT_TRAJECTORY_OBS(obs, ParticleAutocorrelation);
 }
-
-#endif
 
 } /* namespace ba */

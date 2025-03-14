@@ -224,15 +224,11 @@ void parse_LAMMPS_topology(std::string filename, std::shared_ptr<Topology> topol
 	input.close();
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_TopologyParsers(py::module &m) {
 	m.def("parse_microgel_bondfile", &parse_microgel_bondfile);
 	m.def("parse_polymer_bondfile", &parse_polymer_bondfile);
 	m.def("parse_LAMMPS_topology", &parse_LAMMPS_topology);
 	m.def("topology_from_LAMMPS_data_file", &topology_from_LAMMPS_data_file);
 }
-
-#endif
 
 } /* namespace ba */

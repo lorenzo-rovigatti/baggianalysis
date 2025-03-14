@@ -42,16 +42,12 @@ protected:
 	result_type _result;
 };
 
-#ifdef PYTHON_BINDINGS
-
 #define PY_EXPORT_TRAJECTORY_OBS(instance_name, class_name) {\
 																instance_name\
 																	.def("analyse_trajectory", &class_name::analyse_trajectory)\
 																	.def("reset", &class_name::reset)\
 																	.def("result", &class_name::result);\
 															}\
-
-#endif
 
 } /* namespace ba */
 

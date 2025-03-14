@@ -39,11 +39,7 @@ protected:
 	std::vector<std::string>::iterator _current_file;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_LazyTrajectory(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

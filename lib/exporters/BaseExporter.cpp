@@ -56,8 +56,6 @@ void BaseExporter::_write_system_to_stream(std::shared_ptr<System> system, std::
 	throw std::runtime_error("Unimplemented _write_system_to_stream method called!");
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_BaseExporter(py::module &m) {
 	py::class_<BaseExporter, std::shared_ptr<BaseExporter>> exporter(m, "BaseExporter", R"pbdoc(
 		 Interface for configuration-exporting classes. 
@@ -102,7 +100,5 @@ void export_BaseExporter(py::module &m) {
 			    The name of the output topology file. 
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

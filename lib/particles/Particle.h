@@ -254,11 +254,7 @@ private:
 	std::array<std::weak_ptr<Particle>, size> _particles;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_Particle(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

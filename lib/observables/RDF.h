@@ -35,11 +35,7 @@ protected:
 	std::pair<std::vector<particle_type>, std::vector<particle_type>> _allowed_types;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_RDF(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

@@ -262,8 +262,6 @@ int LAMMPSDumpParser::_parse_headers(std::ifstream &configuration, std::shared_p
 	return N;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_LAMMPSDumpParser(py::module &m) {
 	py::class_<LAMMPSDumpParser, BaseParser, std::shared_ptr<LAMMPSDumpParser>> parser(m, "LAMMPSDumpParser", R"pbdoc(
 Parse LAMMPS dump files.
@@ -276,7 +274,5 @@ It can optionally use a LAMMPS data file to also initialise the system topology.
 	parser.def(py::init<std::shared_ptr<System>>(), py::arg("data_file_system"));
 	parser.def(py::init<std::string, std::string>(), py::arg("data_file"), py::arg("atom_style"));
 }
-
-#endif
 
 } /* namespace ba */

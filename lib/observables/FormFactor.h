@@ -33,11 +33,7 @@ protected:
 	vector_scalar _b_factors;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_FormFactor(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

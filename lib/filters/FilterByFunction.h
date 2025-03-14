@@ -25,11 +25,7 @@ private:
 	FilterType _filter_function;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_FilterByFunction(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

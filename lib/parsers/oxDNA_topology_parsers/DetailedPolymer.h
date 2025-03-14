@@ -25,11 +25,7 @@ protected:
 	std::vector<particle_type> _types;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_DetailedPolymer(py::module &m);
-
-#endif
 
 } /* namespace oxDNA_topology */
 } /* namespace ba */

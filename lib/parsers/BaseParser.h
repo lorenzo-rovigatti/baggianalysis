@@ -59,8 +59,6 @@ protected:
 	bool _use_topology = true;
 };
 
-#ifdef PYTHON_BINDINGS
-
 /**
  * @brief Trampoline class for BaseParser.
  */
@@ -91,8 +89,6 @@ public:
 };
 
 void export_BaseParser(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

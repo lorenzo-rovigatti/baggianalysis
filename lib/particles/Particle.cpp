@@ -136,8 +136,6 @@ void Particle::set_molecule(std::shared_ptr<ParticleSet> new_molecule) {
 	_molecule = std::weak_ptr<ParticleSet>(new_molecule);
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_Particle(py::module &m) {
 	py::class_<ParticleBond, std::shared_ptr<ParticleBond>> particle_bond(m, "ParticleBond", "A bond between two particles.");
 	particle_bond.def("other", &ParticleBond::other, "The other particle involved in the bond.");
@@ -483,7 +481,5 @@ delta : numpy.ndarray
 		:type: List(numpy.ndarray)
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

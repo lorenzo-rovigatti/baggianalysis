@@ -25,11 +25,7 @@ protected:
 	std::shared_ptr<FilterByFunction> _filter;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_FilterById(py::module &m);
-
-#endif
 
 } /* namespace ashell */
 

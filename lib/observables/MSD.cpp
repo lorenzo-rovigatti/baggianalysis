@@ -134,8 +134,6 @@ double MSD::_conf_conf_MSD(std::shared_ptr<System> first, std::shared_ptr<System
 	return cc_MSD / N;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_MSD(py::module &m) {
 	py::class_<MSD, std::shared_ptr<MSD>> obs(m, "MSD", R"pb(
 Compute the `mean-squared displacement <https://en.wikipedia.org/wiki/Mean_squared_displacement>`_ of a trajectory.
@@ -163,7 +161,5 @@ Analyse the trajectory and print the MSD directly to the given file.
 
 	PY_EXPORT_TRAJECTORY_OBS(obs, MSD);
 }
-
-#endif
 
 } /* namespace ba */

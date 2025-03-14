@@ -27,11 +27,7 @@ protected:
 	bool _compute_on_molecules;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_GyrationRadius(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

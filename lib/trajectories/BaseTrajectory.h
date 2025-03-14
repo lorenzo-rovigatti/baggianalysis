@@ -76,8 +76,6 @@ protected:
 	virtual std::shared_ptr<System> _filtered_system(std::shared_ptr<System> system);
 };
 
-#ifdef PYTHON_BINDINGS
-
 class PyBaseTrajectory : public BaseTrajectory {
 public:
 	using BaseTrajectory::BaseTrajectory;
@@ -121,8 +119,6 @@ public:
 };
 
 void export_BaseTrajectory(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

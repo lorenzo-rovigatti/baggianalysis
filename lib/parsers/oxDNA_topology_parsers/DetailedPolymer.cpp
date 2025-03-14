@@ -73,15 +73,11 @@ const std::vector<std::vector<int>> &DetailedPolymer::bonded_neighbours() const 
 	return _bonded_neighbours;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_DetailedPolymer(py::module &m) {
 	py::class_<DetailedPolymer, std::shared_ptr<DetailedPolymer>, Default> parser(m, "DetailedPolymer");
 
 	parser.def(py::init<std::string>());
 }
-
-#endif
 
 } /* namespace oxDNA_topology */
 } /* namespace ba */

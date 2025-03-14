@@ -69,8 +69,6 @@ shared_ptr<System> FixParticlePath::filter(std::shared_ptr<System> syst) {
 	return new_syst;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_FixParticlePath(py::module &m) {
 	py::class_<FixParticlePath, BaseFilter, std::shared_ptr<FixParticlePath>> filter(m, "FixParticlePath", R"pbdoc(
 A filter that attempts to reconstruct the trajectories of particles subject to periodic boundary conditions.
@@ -83,7 +81,5 @@ than the length of a box side between two consecutive configurations.
         The constructor does not take any parameters.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

@@ -38,11 +38,7 @@ private:
 	bool _compute_ws = false;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_BondOrderParameters(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

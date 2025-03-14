@@ -269,8 +269,6 @@ void Topology::_set_bonded_links(System *system) {
 	}
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_Topology(py::module &m) {
 	py::class_<TopologyBond, std::shared_ptr<TopologyBond>> topology_bond(m, "TopologyBond");
 	topology_bond.def_readonly("particles", &TopologyBond::particles);
@@ -481,7 +479,5 @@ system : :class:`System`
 		List(Set(int)): The list of clusters stored in the topology. Each cluster is a set of particle ids that belong to that cluster.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

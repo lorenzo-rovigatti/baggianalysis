@@ -45,11 +45,7 @@ private:
 	std::shared_ptr<System> _data_file_system = nullptr;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_LAMMPSDumpParser(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

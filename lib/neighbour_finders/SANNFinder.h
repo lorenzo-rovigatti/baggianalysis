@@ -38,11 +38,7 @@ private:
 	void _symmetrise_by_removing(std::vector<std::shared_ptr<Particle>> particles);
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_SANNFinder(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

@@ -57,8 +57,6 @@ double GyrationRadius::_finalised_result() {
 	return _result / _times_called;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_GyrationRadius(py::module &m) {
 	py::class_<GyrationRadius, std::shared_ptr<GyrationRadius>> obs(m, "GyrationRadius", R"pbdoc(
 Compute the gyration radius of a system or the average gyration radius of the molecules contained in the system.
@@ -84,7 +82,5 @@ box: numpy.ndarray
 
 	PY_EXPORT_SYSTEM_OBS(obs, GyrationRadius);
 }
-
-#endif
 
 } /* namespace ba */

@@ -65,8 +65,6 @@ void GenericOxDNAExporter::_write_system_to_stream(std::shared_ptr<System> syste
 	}
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_GenericOxDNAExporter(py::module &m) {
 	py::class_<GenericOxDNAExporter, BaseExporter, std::shared_ptr<GenericOxDNAExporter>> exporter(m, "GenericOxDNAExporter", R"pbdoc(
         Export configurations to the oxDNA file format. The exporter will generate a topology and a configuration file.
@@ -83,7 +81,5 @@ Parameters
         If True, the exporter will print the number of particles of type A in addition to the number of particles in the topology file.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

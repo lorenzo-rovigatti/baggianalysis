@@ -357,8 +357,6 @@ std::string LAMMPSDataFileParser::_read_line(std::ifstream &configuration) {
 	return utils::trim_copy(utils::split(line, "#")[0]);
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_LAMMPSDataFileParser(py::module &m) {
 	py::class_<LAMMPSDataFileParser, BaseParser, std::shared_ptr<LAMMPSDataFileParser>> parser(m, "LAMMPSDataFileParser", "Parse LAMMPS data files.");
 
@@ -368,7 +366,5 @@ void export_LAMMPSDataFileParser(py::module &m) {
 
 	parser.def_property_readonly("topology", &LAMMPSDataFileParser::topology);
 }
-
-#endif
 
 } /* namespace ba */

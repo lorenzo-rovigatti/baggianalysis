@@ -25,11 +25,7 @@ private:
 	bool _also_print_N_A;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_GenericOxDNAExporter(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

@@ -23,11 +23,7 @@ private:
 	std::vector<std::vector<int>> _id_lists;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_MapParticles(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

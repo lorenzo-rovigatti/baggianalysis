@@ -34,11 +34,7 @@ protected:
 	bool _normalise;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_ParticleAutocorrelation(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

@@ -46,8 +46,6 @@ std::shared_ptr<System> MapParticles::filter(std::shared_ptr<System> syst) {
 	return new_syst;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_MapParticles(py::module &m) {
 	py::class_<MapParticles, BaseFilter, std::shared_ptr<MapParticles>> filter(m, "MapParticles", R"pbdoc(
 A filter that reduces the number of particles in a configuration by averaging the position and velocity of sets of particles.
@@ -69,7 +67,5 @@ velocity will be computed by averaging the positions and velocities of particles
             A list of lists containing the indexes of the particles that should be averaged over to build the new particles.
     )pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

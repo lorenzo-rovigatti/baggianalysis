@@ -139,8 +139,6 @@ std::shared_ptr<System> PatchyParticlesParser::_parse_stream(std::ifstream &conf
 	return syst;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_PatchyParticlesParser(py::module &m) {
 	py::class_<PatchyParticlesParser, BaseParser, std::shared_ptr<PatchyParticlesParser>> parser(m, "PatchyParticlesParser", R"pbdoc(
         Build systems out of `PatchyParticles <https://github.com/lorenzo-rovigatti/PatchyParticles>`_ configurations. These files
@@ -160,7 +158,5 @@ multiplied by the orientation matrix, yield the particles' patches.
 Obtain the list of vectors storing the *base patches* from the given file.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

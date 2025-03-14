@@ -121,8 +121,6 @@ std::map<double, double> RDF::_finalised_result() {
 	return _result;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_RDF(py::module &m) {
 	py::class_<RDF, std::shared_ptr<RDF>> obs(m, "RDF", "Compute the `radial distribution function <https://en.wikipedia.org/wiki/Radial_distribution_function>`_ (RDF) of a system.");
 
@@ -178,7 +176,5 @@ types_2 : List(str)
 
 	PY_EXPORT_SYSTEM_OBS(obs, RDF);
 }
-
-#endif
 
 } /* namespace ba */

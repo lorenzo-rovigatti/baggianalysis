@@ -33,11 +33,7 @@ private:
 	std::vector<std::string> _supported_atom_styles = {"atomic", "bond", "full", "molecular"};
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_LAMMPSDataFileExporter(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

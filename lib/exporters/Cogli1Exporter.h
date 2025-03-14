@@ -36,11 +36,7 @@ private:
 	Cogli1Converter _converter;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_Cogli1Exporter(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

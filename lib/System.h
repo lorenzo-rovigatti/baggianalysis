@@ -49,11 +49,7 @@ private:
 	int _largest_idx = -1;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_System(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

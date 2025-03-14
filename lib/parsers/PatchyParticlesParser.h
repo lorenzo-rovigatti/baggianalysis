@@ -27,11 +27,7 @@ protected:
 	void _set_base_patches(std::vector<vec3> base_patches);
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_PatchyParticlesParser(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

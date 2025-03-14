@@ -167,8 +167,6 @@ void SelfISF::analyse_and_print(std::shared_ptr<BaseTrajectory> trajectory, std:
 	output.close();
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_SelfISF(py::module &m) {
 	py::class_<SelfISF, std::shared_ptr<SelfISF>> obs(m, "SelfISF", R"pb(
 Compute the self part of the spatial Fourier transform of the van Hove function, also known as the intermediate scattering function (ISF) :math:`F_s(q, t)`, of a trajectory.
@@ -209,7 +207,5 @@ Analyse the trajectory and print the self ISF directly to the given file.
 
 	PY_EXPORT_TRAJECTORY_OBS(obs, SelfISF);
 }
-
-#endif
 
 } /* namespace ba */

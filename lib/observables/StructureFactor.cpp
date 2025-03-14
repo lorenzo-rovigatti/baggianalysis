@@ -131,8 +131,6 @@ std::map<double, double> StructureFactor::_finalised_result() {
 	return result;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_StructureFactor(py::module &m) {
 	py::class_<DestructuredStructureFactor, std::shared_ptr<DestructuredStructureFactor>> destr_sf(m, "DestructuredStructureFactor");
 
@@ -192,7 +190,5 @@ Returns
 
 	PY_EXPORT_SYSTEM_OBS(obs, StructureFactor);
 }
-
-#endif
 
 } /* namespace ba */

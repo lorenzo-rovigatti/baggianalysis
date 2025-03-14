@@ -72,8 +72,6 @@ void FixedNumberFinder::set_neighbours(std::vector<std::shared_ptr<Particle>> pa
 	}
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_FixedNumberFinder(py::module &m) {
 	py::class_<FixedNumberFinder, NeighbourFinder, std::shared_ptr<FixedNumberFinder>> finder(m, "FixedNumberFinder", R"pbdoc(
         Define as neighbours of a particle the N particles that are closest to it. By default, a cutoff of 1.5 is used to look for neighbours. If not enough neighbours are found, the cutoff is increased. 
@@ -90,7 +88,5 @@ void export_FixedNumberFinder(py::module &m) {
             The smallest cutoff that will be used to look for neighbours.
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace ba */

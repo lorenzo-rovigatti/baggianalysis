@@ -68,8 +68,6 @@ std::shared_ptr<System> BaseParser::_parse_stream(std::ifstream &configuration) 
 	return nullptr;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_BaseParser(py::module &m) {
 	py::class_<BaseParser, PyBaseParser, std::shared_ptr<BaseParser>> parser(m, "BaseParser");
 
@@ -80,7 +78,5 @@ void export_BaseParser(py::module &m) {
 	parser.def("make_system", (std::shared_ptr<System> (BaseParser::*)(std::string)) &BaseParser::make_system);
 	parser.def("_parse_file", (std::shared_ptr<System> (BaseParser::*)(std::string)) &BaseParser::_parse_file);
 }
-
-#endif
 
 } /* namespace ba */

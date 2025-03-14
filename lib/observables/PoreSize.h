@@ -61,11 +61,7 @@ private:
 	nlopt::opt _opt;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_PoreSize(py::module &m);
-
-#endif
 
 } /* namespace ba */
 

@@ -166,8 +166,6 @@ void CollectiveISF::analyse_and_print(std::shared_ptr<BaseTrajectory> trajectory
 	output.close();
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_CollectiveISF(py::module &m) {
 	py::class_<CollectiveISF, std::shared_ptr<CollectiveISF>> obs(m, "CollectiveISF",
 			R"pb(
@@ -221,7 +219,5 @@ normalise : bool
 
 	PY_EXPORT_TRAJECTORY_OBS(obs, CollectiveISF);
 }
-
-#endif
 
 } /* namespace ba */

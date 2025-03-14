@@ -52,8 +52,6 @@ const std::vector<std::vector<int>> &Default::bonded_neighbours() const {
 	return _bonded_neighbours;
 }
 
-#ifdef PYTHON_BINDINGS
-
 void export_Default(py::module &m) {
 	py::class_<Default, PyDefault, std::shared_ptr<Default>> parser(m, "Default");
 
@@ -95,8 +93,6 @@ void export_Default(py::module &m) {
 
 	)pbdoc");
 }
-
-#endif
 
 } /* namespace oxDNA_topology */
 } /* namespace ba */

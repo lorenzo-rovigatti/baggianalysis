@@ -23,12 +23,7 @@ protected:
 	double _dt;
 };
 
-#ifdef PYTHON_BINDINGS
-
 void export_GroParser(py::module &m);
-
-#endif
-
 
 } /* namespace ba */
 
