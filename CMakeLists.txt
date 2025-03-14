@@ -22,9 +22,6 @@ include_directories(extern/spdlog/include)
 # tell pybind11 to use python3
 set(PYBIND11_PYTHON_VERSION 3 CACHE STRING "Python version to use for compiling modules")
 ADD_SUBDIRECTORY(extern/pybind11)
-INCLUDE_DIRECTORIES( ${PYTHON_INCLUDE_DIRS} )
-
-MESSAGE(STATUS "Enabling Python bindings")
 
 IF(Debug)
 	SET(CMAKE_BUILD_TYPE "Debug")
@@ -57,14 +54,6 @@ ENDIF()
 
 INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/extern )
 
-# get the current git revision, if git is installed. Avoid warnings if it isn't
-FIND_PACKAGE(Git)
-IF(Git_FOUND)
-	EXECUTE_PROCESS(COMMAND "git rev-parse --short HEAD" WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} OUTPUT_VARIABLE revision OUTPUT_STRIP_TRAILING_WHITESPACE)
-ELSE()
-	SET(revision GIT_NOT_FOUND)
-ENDIF()
-
 # return the current date as day/month/year
 MACRO(CURRENT_DATE result)
     IF(WIN32)
@@ -78,9 +67,6 @@ MACRO(CURRENT_DATE result)
         SET(${result} 000000)
     ENDIF (WIN32)
 ENDMACRO(CURRENT_DATE)
-
-CURRENT_DATE(today)
-ADD_DEFINITIONS(-D'GIT_VERSION="${revision}"' -D'BUILD_TIME="${today}"')
 
 ADD_CUSTOM_TARGET(test_quick
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/TestSuite.py test_list_file.txt
