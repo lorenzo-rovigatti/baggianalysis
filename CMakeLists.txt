@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15...3.30)
+cmake_minimum_required(VERSION 3.12)
 project(${SKBUILD_PROJECT_NAME} LANGUAGES CXX)
 
 option(Debug "Set to ON to compile with debug symbols" OFF)
@@ -177,14 +177,20 @@ ELSE()
 	MESSAGE(WARNING "GSL not found, the following modules will not be compiled: ${with_GSL_SOURCES}")
 ENDIF(GSL_FOUND)
 
-find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
+find_package(Python COMPONENTS Interpreter Development REQUIRED)
 ADD_SUBDIRECTORY(extern/pybind11)
 
 Python_add_library(core MODULE src/bindings.cpp ${ba_lib_SOURCES} WITH_SOABI)
 target_link_libraries(core PUBLIC ${ba_link_libs})
 include_directories(${ba_includes})
 
-install(TARGETS core DESTINATION baggianalysis)
+set(PYTHON_SITE_PACKAGES ${Python_SITEARCH})
+install(TARGETS core
+        LIBRARY DESTINATION ${PYTHON_SITE_PACKAGES}/baggianalysis
+        ARCHIVE DESTINATION ${PYTHON_SITE_PACKAGES}/baggianalysis)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/baggianalysis/
+        DESTINATION ${PYTHON_SITE_PACKAGES}/baggianalysis
+        FILES_MATCHING PATTERN "*.py")
 
 add_custom_target(test_quick
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/TestSuite.py test_list_file.txt
