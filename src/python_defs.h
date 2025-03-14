@@ -12,7 +12,7 @@
 #include <pybind11/include/pybind11/stl.h>
 #include <pybind11/include/pybind11/functional.h>
 
-#include "python/python_glm.h"
+#include "python_glm.h"
 
 namespace py = pybind11;
 

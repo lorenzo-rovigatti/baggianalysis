@@ -10,7 +10,7 @@
 #ifndef PYTHON_PYTHON_GLM_H_
 #define PYTHON_PYTHON_GLM_H_
 
-#include "../defs.h"
+#include "defs.h"
 
 #include <pybind11/include/pybind11/numpy.h>
 #include <glm/gtc/type_ptr.hpp>

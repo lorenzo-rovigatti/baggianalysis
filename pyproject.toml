@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools", "setuptools-scm", "wheel", "numpy", "cmake"]
-build-backend = "setuptools.build_meta"
+requires = ["scikit-build-core", "numpy"]
+build-backend = "scikit_build_core.build"
 
 [project]
 name = "baggianalysis"
