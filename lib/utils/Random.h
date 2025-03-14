@@ -26,6 +26,8 @@ public:
 
 	static Random &instance();
 
+	std::mt19937 &generator();
+
 	void reset_seed(unsigned int);
 	double uniform();
 	vec3 random_vector_on_sphere();

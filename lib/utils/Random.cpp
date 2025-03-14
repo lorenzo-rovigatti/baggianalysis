@@ -23,6 +23,10 @@ Random &Random::instance() {
 	return random;
 }
 
+std::mt19937 &Random::generator() {
+	return _rng;
+}
+
 void Random::reset_seed(unsigned int seed) {
 	_rng = std::mt19937(seed);
 }

@@ -7,6 +7,8 @@
 
 #include "WaveVectorList.h"
 
+#include "Random.h"
+
 namespace ba {
 
 WaveVectorList::WaveVectorList(const std::vector<double> &pq_modules, uint pmax_n_realisations) :
@@ -141,7 +143,7 @@ void WaveVectorList::init(const vec3 box) {
 		// randomly pick max_n_realisations for each surviving q
 		if(q_pair.second.size() > _max_n_realisations) {
 			// we randomly shuffle its contents
-			std::random_shuffle(q_pair.second.begin(), q_pair.second.end());
+			std::shuffle(q_pair.second.begin(), q_pair.second.end(), Random::instance().generator());
 			// and throw away the last (size - _max_n_realisations) elements
 			q_pair.second.erase(q_pair.second.begin() + _max_n_realisations, q_pair.second.end());
 		}
