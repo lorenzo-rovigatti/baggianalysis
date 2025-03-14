@@ -57,6 +57,12 @@ jobs:
           python-version: ${{ matrix.python-version }}
         if: runner.os == 'Windows'
 
+      - name: Upgrade setuptools and wheel
+        run: pip install --upgrade pip setuptools wheel setuptools_scm
+
+      - name: Clean old build artifacts
+        run: rm -rf .eggs build dist *.egg-info
+
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.17.0
         env:

@@ -122,14 +122,14 @@ class CMakeBuild(build_ext):
 
 setup(
     name = PACKAGE_NAME,
-    use_scm_version = {
-        "fallback_version": "0.0.2",
-        },
+    use_scm_version = True,
     packages = find_packages(),
     setup_requires = [
         'setuptools-scm',
-        'numpy'
         ],
+    install_requires = [
+        "numpy",
+    ],
     author = 'Lorenzo Rovigatti',
     author_email = 'lorenzo.rovigatti@uniroma1.it',
     url = 'https://github.com/lorenzo-rovigatti/baggianalysis',
