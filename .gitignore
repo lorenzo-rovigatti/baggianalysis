@@ -53,3 +53,4 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+src/baggianalysis/_version.py

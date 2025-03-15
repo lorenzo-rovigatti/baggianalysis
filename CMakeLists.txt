@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(${SKBUILD_PROJECT_NAME} LANGUAGES CXX)
+project(baggianalysis LANGUAGES CXX)
 
 option(Debug "Set to ON to compile with debug symbols" OFF)
 option(G "Set to ON to compile with optimisations and debug symbols" OFF)
