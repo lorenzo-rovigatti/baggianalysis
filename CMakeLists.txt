@@ -178,10 +178,10 @@ ELSE()
 ENDIF(GSL_FOUND)
 
 find_package(Python COMPONENTS Interpreter Development REQUIRED)
-ADD_SUBDIRECTORY(extern/pybind11)
+add_subdirectory(extern/pybind11 EXCLUDE_FROM_ALL) # the EXCLUDE_FROM_ALL forces cmake to use the local pybind11 files
 
 Python_add_library(core MODULE src/bindings.cpp ${ba_lib_SOURCES} WITH_SOABI)
-target_link_libraries(core PUBLIC ${ba_link_libs})
+target_link_libraries(core PUBLIC ${ba_link_libs} pybind11::headers)
 include_directories(${ba_includes})
 
 set(PYTHON_SITE_PACKAGES ${Python_SITEARCH})
