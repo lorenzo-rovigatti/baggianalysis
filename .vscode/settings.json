@@ -66,6 +66,13 @@
         "typeindex": "cpp",
         "variant": "cpp",
         "complex": "cpp",
-        "numeric": "cpp"
+        "numeric": "cpp",
+        "*.ipp": "cpp",
+        "ranges": "cpp",
+        "__hash_table": "cpp",
+        "__split_buffer": "cpp",
+        "__tree": "cpp",
+        "queue": "cpp",
+        "stack": "cpp"
     }
 }
