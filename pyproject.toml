@@ -1,6 +1,6 @@
 [build-system]
-requires = ["setuptools", "setuptools-scm", "wheel", "numpy", "cmake"]
-build-backend = "setuptools.build_meta"
+requires = ["scikit-build-core", "numpy", "setuptools_scm"]
+build-backend = "scikit_build_core.build"
 
 [project]
 name = "baggianalysis"
@@ -31,3 +31,10 @@ homepage = "https://github.com/lorenzo-rovigatti/baggianalysis"
 oxDNA_LAMMPS = "baggianalysis.converters:oxDNA_LAMMPS_command_line"
 oxDNA_cogli = "baggianalysis.converters:oxDNA_cogli_command_line"
 LAMMPS_cogli = "baggianalysis.converters:LAMMPS_cogli_command_line"
+
+[tool.scikit-build]
+metadata.version.provider = "scikit_build_core.metadata.setuptools_scm"
+
+[tool.setuptools_scm]
+version_file = "src/baggianalysis/_version.py"
+fallback_version = "unknown"

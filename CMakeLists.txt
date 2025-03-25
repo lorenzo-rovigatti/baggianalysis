@@ -1,34 +1,16 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.12)
+cmake_minimum_required(VERSION 3.15)
+project(baggianalysis LANGUAGES CXX)
 
-cmake_policy(SET CMP0054 NEW)
+option(Debug "Set to ON to compile with debug symbols" OFF)
+option(G "Set to ON to compile with optimisations and debug symbols" OFF)
+option(COMPILER_EXTENSIONS "Set to ON to enable compiler (most likely GNU) C++ extensions" ON)
 
-OPTION(Python "Enable Python bindings" ON)
-OPTION(Debug "Set to ON to compile with debug symbols" OFF)
-OPTION(G "Set to ON to compile with optimisations and debug symbols" OFF)
-OPTION(COMPILER_EXTENSIONS "Set to ON to enable compiler (most likely GNU) C++ extensions" ON)
-
-PROJECT(baggianalysis CXX)
-
-# if cmake can't find python, nlopts or some of the other libraries add their paths to the following command
-SET(CMAKE_FIND_ROOT_PATH)
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS ${COMPILER_EXTENSIONS})
 
 # The default behaviour is to compile with optimisations
 SET(CMAKE_BUILD_TYPE Release)
-
-# build spdlog as a shared lib
-add_subdirectory(extern/spdlog)
-set_target_properties(spdlog PROPERTIES POSITION_INDEPENDENT_CODE ON)
-
-IF(Python)
-	# tell pybind11 to use python3
-	set(PYBIND11_PYTHON_VERSION 3 CACHE STRING "Python version to use for compiling modules")
-	ADD_SUBDIRECTORY(extern/pybind11)
-	ADD_DEFINITIONS(-DPYTHON_BINDINGS)
-	
-	INCLUDE_DIRECTORIES( ${PYTHON_INCLUDE_DIRS} ${PROJECT_SOURCE_DIR}/extern/pybind11/include)
-	
-	MESSAGE(STATUS "Enabling Python bindings")
-ENDIF(Python)
 
 IF(Debug)
 	SET(CMAKE_BUILD_TYPE "Debug")
@@ -45,54 +27,173 @@ IF(MOSIX)
 	MESSAGE(STATUS "Compiling with Mosix support")
 ENDIF(MOSIX)
 
-SET(CMAKE_CXX_STANDARD 14)
-SET(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS ${COMPILER_EXTENSIONS})
-
 ADD_DEFINITIONS(-Wall -Wno-int-in-bool-context)
 
-IF(NOT Debug)
-	IF(INTEL)
-		ADD_DEFINITIONS(-fast)
-	ELSE()
-		ADD_DEFINITIONS(-ffast-math)
-	ENDIF(INTEL)
-ENDIF()
+set(ba_includes
+    ${PROJECT_SOURCE_DIR}/extern
+    extern/spdlog/include
+)
 
-INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/extern )
+set(ba_link_libs
+    spdlog::spdlog
+)
 
-# get the current git revision, if git is installed. Avoid warnings if it isn't
-FIND_PACKAGE(Git)
-IF(Git_FOUND)
-	EXECUTE_PROCESS(COMMAND "git rev-parse --short HEAD" WORKING_DIRECTORY ${PROJECT_SOURCE_DIR} OUTPUT_VARIABLE revision OUTPUT_STRIP_TRAILING_WHITESPACE)
+# build spdlog as a shared lib
+add_subdirectory(extern/spdlog)
+set_target_properties(spdlog PROPERTIES POSITION_INDEPENDENT_CODE ON)
+
+SET(ba_lib_SOURCES
+	src/exporters/BaseExporter.cpp
+	src/exporters/Cogli1Exporter.cpp
+	src/exporters/LAMMPSDataFileExporter.cpp
+	src/exporters/GenericOxDNAExporter.cpp
+	src/filters/BaseFilter.cpp
+	src/filters/FilterByFunction.cpp
+	src/filters/FilterById.cpp
+	src/filters/FilterByReducingToCOM.cpp
+	src/filters/FilterByType.cpp
+	src/filters/FixParticlePath.cpp
+	src/filters/MapParticles.cpp
+	src/filters/MolecularCOMs.cpp
+	src/filters/SubtractCOM.cpp
+	src/neighbour_finders/CutoffFinder.cpp
+	src/neighbour_finders/FixedNumberFinder.cpp
+	src/neighbour_finders/NeighbourFinder.cpp
+	src/neighbour_finders/SANNFinder.cpp
+	src/observables/ClusterList.cpp
+	src/observables/CollectiveISF.cpp
+	src/observables/ConvexHull.cpp
+	src/observables/FormFactor.cpp
+	src/observables/GyrationRadius.cpp
+	src/observables/MSD.cpp
+	src/observables/ParticleAutocorrelation.cpp
+	src/observables/RDF.cpp
+	src/observables/SelfISF.cpp
+	src/observables/StructureFactor.cpp
+	src/parsers/BaseParser.cpp
+	src/parsers/OxDNAParser.cpp
+	src/parsers/GroParser.cpp
+	src/parsers/LJKAParser.cpp
+	src/parsers/LAMMPSDataFileParser.cpp
+	src/parsers/LAMMPSDumpParser.cpp
+	src/parsers/oxDNA_topology_parsers/Default.cpp
+	src/parsers/oxDNA_topology_parsers/DetailedPolymer.cpp
+	src/parsers/oxDNA_topology_parsers/DNA.cpp
+	src/parsers/oxDNA_topology_parsers/NoTopology.cpp
+	src/parsers/oxDNA_topology_parsers/TSP.cpp
+	src/parsers/PatchyParticlesParser.cpp
+	src/particles/Particle.cpp
+	src/particles/ParticleSet.cpp
+	src/System.cpp
+	src/topology/Topology.cpp
+	src/topology/TopologyParsers.cpp
+	src/trajectories/BaseTrajectory.cpp
+	src/trajectories/LazyTrajectory.cpp
+	src/trajectories/FullTrajectory.cpp
+	src/utils/CellLists.cpp
+	src/utils/clusters.cpp
+	src/utils/filesystem.cpp
+	src/utils/Logger.cpp
+	src/utils/Random.cpp
+	src/utils/strings.cpp
+	src/utils/WaveVectorList.cpp
+)
+
+# The lines that follow define the following variables:
+#   NLOPT_FOUND
+#   NLOPT_INCLUDE_DIRS
+#   NLOPT_LIBRARIES
+#   NLOPT_DEFINITIONS
+#   NLOPT_VERSION
+#
+# and the following targets:
+#   NLOPT::nlopt
+
+FIND_PACKAGE(PkgConfig QUIET)
+
+# Check to see if pkgconfig is installed.
+PKG_CHECK_MODULES(PC_NLOPT nlopt QUIET)
+
+# Definitions
+SET(NLOPT_DEFINITIONS ${PC_NLOPT_CFLAGS_OTHER})
+
+# Include directories
+FIND_PATH(NLOPT_INCLUDE_DIRS
+    NAMES nlopt.h
+    HINTS ${PC_NLOPT_INCLUDEDIR}
+    PATHS "${CMAKE_INSTALL_PREFIX}/include")
+
+# Libraries
+FIND_LIBRARY(NLOPT_LIBRARIES
+    NAMES nlopt nlopt_cxx
+    HINTS ${PC_NLOPT_LIBDIR})
+
+# Version
+SET(NLOPT_VERSION ${PC_NLOPT_VERSION})
+
+# Set (NAME)_FOUND if all the variables and the version are satisfied.
+INCLUDE(FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(NLOPT
+    FAIL_MESSAGE  DEFAULT_MSG
+    REQUIRED_VARS NLOPT_INCLUDE_DIRS NLOPT_LIBRARIES
+    VERSION_VAR   NLOPT_VERSION)
+
+SET(with_nlopt_SOURCES
+    src/observables/PoreSize.cpp
+)
+
+IF(NLOPT_FOUND)
+	ADD_DEFINITIONS(-DNLOPT_FOUND)
+	SET(ba_lib_SOURCES
+		${ba_lib_SOURCES}
+		${with_nlopt_SOURCES}
+	)
+
+    set(ba_includes ${ba_includes} ${NLOPT_INCLUDE_DIRS})
+    set(ba_link_libs ${ba_link_libs} ${NLOPT_LIBRARIES})
 ELSE()
-	SET(revision GIT_NOT_FOUND)
+	MESSAGE(WARNING "nlopt not found, the following modules will not be compiled: ${with_nlopt_SOURCES}")
 ENDIF()
 
-# return the current date as day/month/year
-MACRO(CURRENT_DATE result)
-    IF(WIN32)
-        EXECUTE_PROCESS(COMMAND "cmd" " /C date /T" OUTPUT_VARIABLE ${result})
-        string(REGEX REPLACE "(..)/(..)/..(..).*" "\\1/\\2/\\3" ${result} ${${result}})
-    ELSEIF(UNIX)
-        EXECUTE_PROCESS(COMMAND "date" "+%d/%m/%Y" OUTPUT_VARIABLE ${result})
-        string(REGEX REPLACE "(..)/(..)/..(..).*" "\\1/\\2/\\3" ${result} ${${result}})
-    ELSE(WIN32)
-        MESSAGE(SEND_ERROR "date not implemented")
-        SET(${result} 000000)
-    ENDIF (WIN32)
-ENDMACRO(CURRENT_DATE)
+find_package(GSL)
 
-CURRENT_DATE(today)
-ADD_DEFINITIONS(-D'GIT_VERSION="${revision}"' -D'BUILD_TIME="${today}"')
+SET(with_GSL_SOURCES
+    src/observables/BondOrderParameters.cpp
+)
 
-ADD_CUSTOM_TARGET(test_quick
+IF(GSL_FOUND)
+	add_definitions(-DGSL_FOUND)
+	
+	find_package( Boost REQUIRED )
+	
+	SET(ba_lib_SOURCES
+		${ba_lib_SOURCES}
+		${with_GSL_SOURCES}
+	)
+
+    set(ba_includes ${ba_includes} ${Boost_INCLUDE_DIR})
+    set(ba_link_libs ${ba_link_libs} ${GSL_LIBRARIES})
+ELSE()
+	MESSAGE(WARNING "GSL not found, the following modules will not be compiled: ${with_GSL_SOURCES}")
+ENDIF(GSL_FOUND)
+
+find_package(Python COMPONENTS Interpreter Development REQUIRED)
+add_subdirectory(extern/pybind11 EXCLUDE_FROM_ALL) # the EXCLUDE_FROM_ALL forces cmake to use the local pybind11 files
+
+Python_add_library(core MODULE src/bindings.cpp ${ba_lib_SOURCES} WITH_SOABI)
+target_link_libraries(core PUBLIC ${ba_link_libs} pybind11::headers)
+include_directories(${ba_includes})
+
+set(PYTHON_SITE_PACKAGES ${Python_SITEARCH})
+install(TARGETS core
+        LIBRARY DESTINATION ${PYTHON_SITE_PACKAGES}/baggianalysis
+        ARCHIVE DESTINATION ${PYTHON_SITE_PACKAGES}/baggianalysis)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/src/baggianalysis/
+        DESTINATION ${PYTHON_SITE_PACKAGES}/baggianalysis
+        FILES_MATCHING PATTERN "*.py")
+
+add_custom_target(test_quick
     ${CMAKE_CURRENT_SOURCE_DIR}/tests/TestSuite.py test_list_file.txt
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/tests
     COMMENT "Running build integration tests" VERBATIM
 )
-
-SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
-
-ADD_SUBDIRECTORY(lib)
-ADD_SUBDIRECTORY(exec)
