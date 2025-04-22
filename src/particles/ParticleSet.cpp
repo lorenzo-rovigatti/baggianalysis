@@ -8,9 +8,12 @@
 #include "ParticleSet.h"
 
 #include "Particle.h"
+#include "../utils/math.h"
 
 #include <algorithm>
 #include <numeric>
+
+#include <glm/gtx/string_cast.hpp>
 
 namespace ba {
 
@@ -142,6 +145,31 @@ void ParticleSet::set_com(vec3 new_com) {
 
 	for(auto p : _particles) {
 		p->shift(shift);
+	}
+}
+
+void ParticleSet::align_according_to_inertia_tensor() {
+	vec3 wrt = com();
+	mat3 inertia_tensor(0.f);
+
+	for(auto p : _particles) {
+		vec3 rel_pos = p->position() - wrt;
+		// https://en.wikipedia.org/wiki/Moment_of_inertia#The_inertia_tensor
+		inertia_tensor += mat3(1.0)*(glm::dot(rel_pos, rel_pos)) - glm::outerProduct(rel_pos, rel_pos);
+	}
+
+	vec3 i_moments;
+	mat3 R;
+	ba::utils::diagonalize_3x3(inertia_tensor, i_moments, R);
+
+	// enforce right handedness
+	R[2] = glm::cross(R[0], R[1]);
+
+	for(auto p : _particles) {
+		vec3 rel_pos = p->position() - wrt;
+    	vec3 new_pos = R * rel_pos + wrt;
+		p->set_position(new_pos);
+		p->rotate(R);
 	}
 }
 
@@ -281,6 +309,10 @@ Parameters
 ----------
 new_com: numpy.ndarray
 	The new centre of mass of the set.
+)pbdoc");
+
+particle_set.def("align_according_to_inertia_tensor", &ParticleSet::align_according_to_inertia_tensor, R"pbdoc(
+	Rotate the particle around its centre of mass set so that its three principal axes of inertia align along x, y, and z.
 )pbdoc");
 
 	particle_set.def("velocity", &ParticleSet::velocity, "The total velocity of the set");

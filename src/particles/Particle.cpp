@@ -395,6 +395,16 @@ delta : numpy.ndarray
 
 )pbdoc");
 
+	particle.def("rotate", &Particle::rotate, py::arg("R"), R"pbdoc(
+Rotate the internal degrees of freedom (as stored in :attr:`orientation_vectors`), by a 3x3 rotational matrix.
+
+Parameters
+----------
+R : numpy.ndarray
+	A 3x3 rotational matrix that will be used to multiply each orientation vector.
+
+)pbdoc");
+
 	particle.def_property_readonly("molecule", &Particle::molecule, R"pbdoc(
 		The molecule to which this particle belongs.
 

@@ -83,6 +83,12 @@ public:
 		_position += delta;
 	}
 
+	void rotate(const mat3 &R) {
+		for(auto &or_vector : _orientation_vectors) {
+			or_vector = R * or_vector;
+		}
+	}
+
 	const vec3 &velocity() const {
 		return _velocity;
 	}

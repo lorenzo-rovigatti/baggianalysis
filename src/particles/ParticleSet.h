@@ -104,6 +104,8 @@ public:
 	/// Set the centre of mass of the set
 	void set_com(vec3 new_com);
 
+	void align_according_to_inertia_tensor();
+
 	/// Return the velocity of the set
 	vec3 velocity() const;
 

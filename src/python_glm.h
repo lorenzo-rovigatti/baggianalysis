@@ -66,10 +66,11 @@ struct type_caster<glm::tmat3x3<scalar, P>> {
 	static constexpr std::size_t num_cols = 3;
 
 	bool load(handle src, bool) {
-		array_t<scalar> buf(src, true);
-		if(!buf.check())
-		return false;
+		if(!pybind11::isinstance<pybind11::array_t<scalar>>(src)) {
+			return false;
+		}
 
+		auto buf = pybind11::array_t<scalar>::ensure(src);
 		if(buf.ndim() == 2) { // a 2-dimensional matrix
 			if(buf.shape(0) != num_rows || buf.shape(1) != num_cols) {
 				return false; // not a 4x4 matrix

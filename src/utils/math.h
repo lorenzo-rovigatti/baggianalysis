@@ -8,9 +8,12 @@
 #ifndef UTILS_MATH_H_
 #define UTILS_MATH_H_
 
+#include "../defs.h"
 namespace ba {
 
 namespace utils {
+
+void diagonalize_3x3(mat3 &mat, vec3 &values, mat3 &vectors);
 
 // see https://stackoverflow.com/a/28050328/5140209 and https://github.com/AZHenley/cosine/pull/2/files#diff-d44422df098eaa7b32304c90397ee2994e1e0370a03c57b236de4afe0612ce21
 template<typename T>

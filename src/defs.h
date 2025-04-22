@@ -28,6 +28,7 @@
 #include <iostream>
 
 using vec3 = glm::dvec3;
+using mat3 = glm::dmat3;
 
 using vector_vec3 = std::vector<vec3>;
 using vector_scalar = std::vector<double>;

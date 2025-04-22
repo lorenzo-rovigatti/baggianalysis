@@ -94,6 +94,7 @@ SET(ba_lib_SOURCES
 	src/utils/clusters.cpp
 	src/utils/filesystem.cpp
 	src/utils/Logger.cpp
+	src/utils/math.cpp
 	src/utils/Random.cpp
 	src/utils/strings.cpp
 	src/utils/WaveVectorList.cpp
