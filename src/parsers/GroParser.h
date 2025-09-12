@@ -21,7 +21,7 @@ public:
 	virtual std::shared_ptr<System> _parse_stream(std::ifstream &configuration) override;
 
 protected:
-	double _dt;
+	double _dt = 1.0; // default time step in ps
 };
 
 void export_GroParser(py::module &m);
