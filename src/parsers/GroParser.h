@@ -14,6 +14,7 @@ namespace ba {
 
 class GroParser: public BaseParser {
 public:
+	GroParser();
 	GroParser(double dt);
 	virtual ~GroParser();
 

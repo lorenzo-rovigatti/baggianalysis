@@ -11,6 +11,11 @@
 
 namespace ba {
 
+GroParser::GroParser() :
+				BaseParser() {
+
+}
+
 GroParser::GroParser(double dt) :
 				BaseParser(),
 				_dt(dt) {
@@ -26,24 +31,24 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 
 	// timestep line
 	std::getline(configuration, line);
-	if(!configuration.good()) return nullptr;
+	if(!configuration.good()) {
+		return nullptr;
+	}
 
 	std::shared_ptr<System> syst(std::make_shared<System>());
 
+	syst->time = 0;
 	auto time_pos = line.find("t=");
-	if(time_pos == std::string::npos) {
-		std::string error =fmt::format("Malformed first line '{}' (cannot find 't=')", line);
-		throw std::runtime_error(error);
-	}
-
-	try {
-		std::string time_string = utils::trim_copy(line.substr(time_pos + 2));
-		double time_double = utils::lexical_cast<double>(time_string);
-		syst->time = std::round(time_double / _dt);
-	}
-	catch(utils::bad_lexical_cast &e) {
-		std::string error = fmt::format("The timestep '{}' found in the .gro configuration cannot be cast to a double", line.substr(time_pos + 2));
-		throw std::runtime_error(error);
+	if(time_pos != std::string::npos) {
+		try {
+			std::string time_string = utils::trim_copy(line.substr(time_pos + 2));
+			double time_double = utils::lexical_cast<double>(time_string);
+			syst->time = std::round(time_double / _dt);
+		}
+		catch(utils::bad_lexical_cast &e) {
+			std::string error = fmt::format("The timestep '{}' found in the .gro configuration cannot be cast to a double", line.substr(time_pos + 2));
+			throw std::runtime_error(error);
+		}
 	}
 
 	// number of particles line
@@ -82,16 +87,21 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 			throw std::runtime_error(error);
 		}
 
-		std::string vx = utils::trim_copy(line.substr(44, 8));
-		std::string vy = utils::trim_copy(line.substr(52, 8));
-		std::string vz = utils::trim_copy(line.substr(60, 8));
+		if(line.size() >= 68) { // sometimes the velocity is not specified, even though the documentation states it should be
+			std::string vx = utils::trim_copy(line.substr(44, 8));
+			std::string vy = utils::trim_copy(line.substr(52, 8));
+			std::string vz = utils::trim_copy(line.substr(60, 8));
 
-		try {
-			new_particle->set_velocity(vec3(utils::lexical_cast<double>(vx), utils::lexical_cast<double>(vy), utils::lexical_cast<double>(vz)));
+			try {
+				new_particle->set_velocity(vec3(utils::lexical_cast<double>(vx), utils::lexical_cast<double>(vy), utils::lexical_cast<double>(vz)));
+			}
+			catch(utils::bad_lexical_cast &e) {
+				std::string error = fmt::format("The velocity of the {}-th particle ({}, {}, {}) cannot be cast to a vector of floating-point numbers", i, vx, vy, vz);
+				throw std::runtime_error(error);
+			}
 		}
-		catch(utils::bad_lexical_cast &e) {
-			std::string error = fmt::format("The velocity of the {}-th particle ({}, {}, {}) cannot be cast to a vector of floating-point numbers", i, vx, vy, vz);
-			throw std::runtime_error(error);
+		else {
+			new_particle->set_velocity(vec3(0., 0., 0.));
 		}
 
 		syst->add_particle(new_particle);
@@ -115,10 +125,13 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 }
 
 void export_GroParser(py::module &m) {
-	py::class_<GroParser, BaseParser, std::shared_ptr<GroParser>> parser(m, "GroParser");
+	py::class_<GroParser, BaseParser, std::shared_ptr<GroParser>> parser(m, "GroParser", R"pbdoc(
+Parse .gro files with fixed column format. The timestep is read from the first line, if present, and the time unit is assumed to be ps. 
+If the time step used in the simulation is provided to the constructor, the time read from the file is converted to simulation steps accordingly.
+)pbdoc");
 
-	parser
-		.def(py::init<double>());
+	parser.def(py::init<double>());
+	parser.def(py::init());
 }
 
 } /* namespace ba */

@@ -74,6 +74,7 @@
         "__tree": "cpp",
         "queue": "cpp",
         "stack": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "cfenv": "cpp"
     }
 }
