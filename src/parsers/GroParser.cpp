@@ -42,8 +42,8 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 	if(time_pos != std::string::npos) {
 		try {
 			std::string time_string = utils::trim_copy(line.substr(time_pos + 2));
-			double time_double = utils::lexical_cast<double>(time_string);
-			syst->time = std::round(time_double / _dt);
+			double time_fs = 1000. * utils::lexical_cast<double>(time_string);
+			syst->time = std::round(time_fs / _dt);
 		}
 		catch(utils::bad_lexical_cast &e) {
 			std::string error = fmt::format("The timestep '{}' found in the .gro configuration cannot be cast to a double", line.substr(time_pos + 2));
@@ -127,7 +127,8 @@ std::shared_ptr<System> GroParser::_parse_stream(std::ifstream &configuration) {
 void export_GroParser(py::module &m) {
 	py::class_<GroParser, BaseParser, std::shared_ptr<GroParser>> parser(m, "GroParser", R"pbdoc(
 Parse .gro files with fixed column format. The timestep is read from the first line, if present, and the time unit is assumed to be ps. 
-If the time step used in the simulation is provided to the constructor, the time read from the file is converted to simulation steps accordingly.
+If the time step (specified in fs, as in gromacs) used in the simulation is provided to the constructor, the time read from the file is 
+converted to simulation steps accordingly.
 )pbdoc");
 
 	parser.def(py::init<double>());
