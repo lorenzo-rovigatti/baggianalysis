@@ -44,7 +44,6 @@ void GyrationRadius::analyse_particle_set(std::shared_ptr<ParticleSet> p_set, co
 			auto q = p_set->particles()[j];
 
 			vec3 distance = p->position() - q->position();
-			distance -= glm::round(distance / box) * box;
 			rg2 += glm::dot(distance, distance);
 		}
 	}
