@@ -62,12 +62,16 @@ public:
 
 	void set_include_system(SystemIncluder func);
 
+	void shift_starting_time();
+
 	virtual std::shared_ptr<System> next_frame() = 0;
 	virtual void reset() = 0;
 
 protected:
 	std::shared_ptr<BaseParser> _parser;
 	std::vector<std::shared_ptr<BaseFilter>> _filters;
+	bool _shift_starting_time = false;
+	int64_t _shift_time_by = -1;
 
 	SystemIncluder _include_system = [](std::shared_ptr<System>) {
 		return true;

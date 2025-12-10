@@ -74,10 +74,18 @@ shared_ptr<System> LazyTrajectory::next_frame() {
 		return next_frame();
 	}
 
+	if(_shift_starting_time && new_system != nullptr) {
+		if(_shift_time_by == -1) {
+			_shift_time_by = new_system->time;
+		}
+		new_system->time -= _shift_time_by;
+	}
+
 	return new_system;
 }
 
 void LazyTrajectory::reset() {
+	_shift_time_by = -1;
 	if(_type == TRAJECTORY_FILE) {
 		_trajectory_file.clear();
 		_trajectory_file.seekg(0, ios::beg);

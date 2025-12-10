@@ -50,6 +50,10 @@ void BaseTrajectory::set_include_system(SystemIncluder func) {
 	_include_system = func;
 }
 
+void BaseTrajectory::shift_starting_time() {
+	_shift_starting_time = true;
+}
+
 std::shared_ptr<System> BaseTrajectory::_filtered_system(std::shared_ptr<System> system) {
 	for(auto filter : _filters) {
 		system = filter->filter(system);
@@ -145,6 +149,10 @@ void export_BaseTrajectory(py::module &m) {
         system_includer : callable
             A callable that takes the :class:`System` to be checked a returns a boolean that specifies whether the system should
             be included in the trajectory or not.
+	)pbdoc");
+
+	parser.def("shift_starting_time", &BaseTrajectory::shift_starting_time, R"pbdoc(
+        Shift the time of the first frame to zero, and the times of all subsequent frames accordingly. 
 	)pbdoc");
 }
 

@@ -107,6 +107,12 @@ void FullTrajectory::initialise_from_filelist(std::vector<std::string> filelist)
 shared_ptr<System> FullTrajectory::next_frame() {
 	if(_current_system != frames.end()) {
 		auto syst = *_current_system;
+		if(_shift_starting_time) {
+			if(_shift_time_by == -1) {
+				_shift_time_by = syst->time;
+			}
+			syst->time -= _shift_time_by;
+		}
 		_current_system++;
 		return syst;
 	}
@@ -116,6 +122,7 @@ shared_ptr<System> FullTrajectory::next_frame() {
 }
 
 void FullTrajectory::reset() {
+	_shift_time_by = -1;
 	_current_system = frames.begin();
 }
 
