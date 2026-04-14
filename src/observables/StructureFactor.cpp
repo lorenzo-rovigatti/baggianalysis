@@ -100,7 +100,7 @@ void StructureFactor::analyse_system(std::shared_ptr<System> system) {
 			double sq_sin = 0.;
 			for(uint i = 0; i < system->N(); i++) {
 				auto p = system->particles()[i];
-				double b_factor = (has_b_factors) ? _b_factors[i] : 1;
+				double b_factor = (has_b_factors) ? _b_factors[i] : p->b_factor();
 
 				vec3 r = p->position();
 				double qr = glm::dot(q_vector, r);
@@ -162,7 +162,7 @@ points_per_cycle: int
 )pb");
 
 	obs.def("clear_b_factors", &StructureFactor::clear_b_factors, R"pbdoc(
-	Reset the b-factors to their default values (b = 1 for each particle).
+	Reset the explicit b-factors so the particles' own stored b-factors are used.
 )pbdoc");
 
 	obs.def("set_b_factors", &StructureFactor::set_b_factors, py::arg("b_factors"), R"pbdoc(

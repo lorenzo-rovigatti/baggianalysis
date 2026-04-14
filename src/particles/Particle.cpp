@@ -41,6 +41,7 @@ std::shared_ptr<Particle> Particle::make_copy(int index) {
 	new_particle->_type = _type;
 	new_particle->_mass = _mass;
 	new_particle->_charge = _charge;
+	new_particle->_b_factor = _b_factor;
 	new_particle->_position = _position;
 	new_particle->_velocity = _velocity;
 	new_particle->_angular_velocity = _angular_velocity;
@@ -462,6 +463,12 @@ R : numpy.ndarray
 
 	particle.def_property("charge", &Particle::charge, &Particle::set_charge, R"pbdoc(
 		The particle's charge.
+
+		:type: float
+	)pbdoc");
+
+	particle.def_property("b_factor", &Particle::b_factor, &Particle::set_b_factor, R"pbdoc(
+		The particle's scattering amplitude used in structure and form factor calculations.
 
 		:type: float
 	)pbdoc");

@@ -11,6 +11,7 @@ All parsers inherit from {class}`~baggianalysis.core.BaseParser` and override th
     BaseParser
     OxDNAParser
     GroParser
+    PDBParser
     LAMMPSDataFileParser
     LAMMPSDumpParser
     LJKAParser
@@ -26,6 +27,8 @@ All parsers inherit from {class}`~baggianalysis.core.BaseParser` and override th
 .. autoclass:: baggianalysis.core.oxDNA_topology.TSP
     
 .. autoclass:: GroParser
+
+.. autoclass:: PDBParser
 
 .. autoclass:: LAMMPSDataFileParser
     

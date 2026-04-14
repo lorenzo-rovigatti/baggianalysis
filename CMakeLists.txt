@@ -73,6 +73,7 @@ SET(ba_lib_SOURCES
 	src/parsers/BaseParser.cpp
 	src/parsers/OxDNAParser.cpp
 	src/parsers/GroParser.cpp
+	src/parsers/PDBParser.cpp
 	src/parsers/LJKAParser.cpp
 	src/parsers/LAMMPSDataFileParser.cpp
 	src/parsers/LAMMPSDumpParser.cpp

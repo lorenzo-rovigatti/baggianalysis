@@ -71,6 +71,14 @@ public:
 		_charge = nc;
 	}
 
+	const double &b_factor() const {
+		return _b_factor;
+	}
+
+	void set_b_factor(double nb) {
+		_b_factor = nb;
+	}
+
 	const vec3 &position() const {
 		return _position;
 	}
@@ -168,6 +176,7 @@ protected:
 	particle_type _type = DEFAULT_PARTICLE_TYPE;
 	double _mass = 1.;
 	double _charge = 0.;
+	double _b_factor = 1.;
 	vec3 _position = vec3(0., 0., 0.);
 	vec3 _velocity = vec3(0., 0., 0.);
 	vec3 _angular_velocity = vec3(0., 0., 0.);

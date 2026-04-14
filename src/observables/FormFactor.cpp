@@ -63,7 +63,7 @@ void FormFactor::analyse_particle_set(std::shared_ptr<ParticleSet> p_set) {
 			for(uint p_idx = 0; p_idx < p_set->N(); p_idx++) {
 				auto p = p_set->particles()[p_idx];
 				vec3 r = p->position() - com;
-				double b_factor = (has_b_factors) ? _b_factors[p_idx] : 1;
+				double b_factor = (has_b_factors) ? _b_factors[p_idx] : p->b_factor();
 
 				double qr = glm::dot(new_q, r);
 				sq_cos += b_factor * std::cos(qr);
@@ -114,7 +114,7 @@ p_set: :class:`ParticleSet`
 )pbdoc");
 
 	obs.def("clear_b_factors", &FormFactor::clear_b_factors, R"pbdoc(
-	Reset the b-factors to their default values (b = 1 for each particle).
+	Reset the explicit b-factors so the particles' own stored b-factors are used.
 )pbdoc");
 
 	obs.def("set_b_factors", &FormFactor::set_b_factors, py::arg("b_factors"), R"pbdoc(

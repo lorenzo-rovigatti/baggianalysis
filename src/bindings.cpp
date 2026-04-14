@@ -43,6 +43,7 @@
 
 #include "parsers/OxDNAParser.h"
 #include "parsers/GroParser.h"
+#include "parsers/PDBParser.h"
 #include "parsers/LAMMPSDataFileParser.h"
 #include "parsers/LAMMPSDumpParser.h"
 #include "parsers/LJKAParser.h"
@@ -72,6 +73,7 @@ PYBIND11_MODULE(core, m) {
 	ba::export_BaseParser(m);
 	ba::export_OxDNAParser(m);
 	ba::export_GroParser(m);
+	ba::export_PDBParser(m);
 	ba::export_LAMMPSDataFileParser(m);
 	ba::export_LAMMPSDumpParser(m);
 	ba::export_LJKAParser(m);
