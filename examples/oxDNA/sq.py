@@ -2,11 +2,18 @@ import baggianalysis as ba
 import sys
 
 if len(sys.argv) < 2:
-    print(f"Usage is {sys.argv[0]} trajectory", file=sys.stderr)
+    print(f"Usage is {sys.argv[0]} trajectory <from_step>", file=sys.stderr)
     exit(1)
     
 parser = ba.OxDNAParser()
 trajectory = ba.LazyTrajectory(parser)
+
+if len(sys.argv) == 3:
+    from_step = int(sys.argv[2])
+    def include_system(system):
+        return system.time > from_step
+    trajectory.set_include_system(include_system)
+
 trajectory.initialise_from_trajectory_file(sys.argv[1])
 
 sq_obs = ba.StructureFactor(20, 20, 0.01)
